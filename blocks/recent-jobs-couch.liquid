@@ -1,0 +1,153 @@
+{%- doc -%}
+  Recent jobs block for Couch Delivery Sydney page.
+  Filters recent_jobs metaobject for couch/sofa jobs and displays them.
+  Gracefully hides if no matching jobs found.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign all_jobs = shop.metaobjects.recent_jobs.values
+  assign couch_jobs = blank
+  assign couch_count = 0
+  
+  for job in all_jobs
+    assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | downcase
+    if haystack contains 'sofa' or haystack contains 'couch'
+      if couch_count == 0
+        assign couch_jobs = job
+      endif
+      assign couch_count = couch_count | plus: 1
+    endif
+  endfor
+%}
+
+{%- if couch_count > 0 -%}
+  <div
+    class="recent-jobs-couch recent-jobs-couch--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+    style="{% render 'spacing-style', settings: block_settings %}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="recent-jobs-couch__inner">
+      {%- if block_settings.heading != blank -%}
+        {{ block_settings.heading }}
+      {%- endif -%}
+      
+      <p class="recent-jobs-couch__intro">{{ block_settings.intro_text }}</p>
+      
+      <div class="recent-jobs-couch__grid">
+        {%- for job in all_jobs -%}
+          {%- assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | downcase -%}
+          {%- if haystack contains 'sofa' or haystack contains 'couch' -%}
+            <div class="recent-jobs-couch__card">
+              {%- if job.recent_job.value != blank -%}
+                <p class="recent-jobs-couch__job-title">{{ job.recent_job.value }}</p>
+              {%- endif -%}
+              {%- if job.item.value != blank -%}
+                <p class="recent-jobs-couch__item">Item: {{ job.item.value }}</p>
+              {%- endif -%}
+              {%- if job.rating.value != blank -%}
+                <p class="recent-jobs-couch__rating">⭐ {{ job.rating.value }} / 5</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .recent-jobs-couch__inner {
+    max-width: var(--page-width, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .recent-jobs-couch__intro {
+    font-size: var(--font-paragraph-medium--size, 1.0625rem);
+    margin-bottom: var(--margin-lg, 20px);
+  }
+
+  .recent-jobs-couch__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--gap-md, 16px);
+  }
+
+  .recent-jobs-couch__card {
+    background-color: var(--color-background-secondary, #f5f5f5);
+    padding: var(--padding-md, 16px);
+    border-radius: var(--style-border-radius-buttons-primary, 8px);
+  }
+
+  .recent-jobs-couch__job-title {
+    font-weight: var(--font-weight-semibold, 600);
+    margin: 0 0 var(--margin-sm, 12px);
+  }
+
+  .recent-jobs-couch__item,
+  .recent-jobs-couch__rating {
+    font-size: var(--font-paragraph-small--size, 0.875rem);
+    margin: 0 0 var(--margin-xs, 8px);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Recent jobs (couch)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Recent couch deliveries</h2>"
+    },
+    {
+      "type": "text",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Here are some recent couch and sofa delivery jobs we've completed in Sydney."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent jobs (couch)"
+    }
+  ]
+}
+{% endschema %}

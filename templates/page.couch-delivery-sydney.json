@@ -1,0 +1,265 @@
+{
+  "type": "page",
+  "sections": {
+    "hero": {
+      "type": "couch-delivery-hero",
+      "settings": {
+        "heading": "<h1>Couch Delivery Sydney</h1>",
+        "subheading": "Careful couch and sofa pickup and delivery across Sydney, including Marketplace purchases and single-item moves.",
+        "phone_number": "0469 717 535",
+        "call_button_text": "Call Now",
+        "quote_button_text": "Get a Free Quote",
+        "quote_anchor": "#main-quote",
+        "fallback_trust_text": "Trusted by Sydney households and Marketplace buyers for careful couch handling.",
+        "badge_1": "Oversized van",
+        "badge_2": "Protective blankets",
+        "badge_3": "Trolley and straps",
+        "badge_4": "Same-day availability",
+        "badge_5": "Sydney-wide service",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      }
+    },
+    "intro": {
+      "type": "couch-delivery-intro",
+      "settings": {
+        "heading": "<h2>Couch pickup and delivery, done the careful way</h2>",
+        "body": "<p>Titan Express picks up couches and sofas from homes, shops and Facebook Marketplace sellers, then delivers them to houses, apartments and offices across Sydney. Whether it is a one-off single seat or a large corner modular suite, our trained team handles every piece with care.</p>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 24
+      }
+    },
+    "couch_types": {
+      "type": "feature-grid",
+      "blocks": {
+        "type-2seater": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Two-seater sofas",
+            "text": "Compact and cosy, perfect for smaller living spaces.",
+            "icon": "sofa-2"
+          }
+        },
+        "type-3seater": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Three-seater sofas",
+            "text": "Full-size comfort for families and open-plan homes.",
+            "icon": "sofa-3"
+          }
+        },
+        "type-modular": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Modular lounges",
+            "text": "Flexible configurations that fit any corner.",
+            "icon": "modular"
+          }
+        },
+        "type-bed": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Sofa beds",
+            "text": "Multi-functional pieces for guest rooms and studios.",
+            "icon": "sofa-bed"
+          }
+        },
+        "type-recliner": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Recliners",
+            "text": "Motorised and manual options for maximum relaxation.",
+            "icon": "recliner"
+          }
+        },
+        "type-corner": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Corner lounges",
+            "text": "Large statement pieces handled with precision.",
+            "icon": "corner"
+          }
+        }
+      },
+      "settings": {
+        "heading": "<h2>Couch types we deliver</h2>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "how_it_works": {
+      "type": "process-steps",
+      "blocks": {
+        "step-1": {
+          "type": "_process-step-item",
+          "settings": {
+            "heading": "Get a free quote",
+            "text": "Tell us about your couch, pickup and delivery locations, and we'll provide a fixed price."
+          }
+        },
+        "step-2": {
+          "type": "_process-step-item",
+          "settings": {
+            "heading": "Schedule your delivery",
+            "text": "Choose your preferred date and time window. We're flexible and can often accommodate same-day requests."
+          }
+        },
+        "step-3": {
+          "type": "_process-step-item",
+          "settings": {
+            "heading": "We handle the heavy lifting",
+            "text": "Our experienced team arrives with protective equipment, loads your couch safely, and delivers it to your door."
+          }
+        }
+      },
+      "settings": {
+        "heading": "<h2>How it works</h2>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "why_us": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature-experience": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Years of experience",
+            "text": "Specialising in careful furniture moves since day one.",
+            "icon": "experience"
+          }
+        },
+        "feature-marketplace": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Facebook Marketplace experts",
+            "text": "We handle the logistics so you don't have to.",
+            "icon": "marketplace"
+          }
+        },
+        "feature-coverage": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Sydney-wide coverage",
+            "text": "From the beaches to the mountains, we've got you covered.",
+            "icon": "map"
+          }
+        },
+        "feature-protective": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Protective equipment",
+            "text": "Blankets, straps, and trolleys to keep your couch pristine.",
+            "icon": "blanket"
+          }
+        },
+        "feature-workers": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Professional team",
+            "text": "Trained, courteous and respectful of your home.",
+            "icon": "workers"
+          }
+        },
+        "feature-transparent": {
+          "type": "_feature-grid-item",
+          "settings": {
+            "heading": "Transparent pricing",
+            "text": "No surprises—fixed quotes before booking.",
+            "icon": "clock"
+          }
+        }
+      },
+      "settings": {
+        "heading": "<h2>Why choose Titan Express</h2>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "service_areas": {
+      "type": "service-areas",
+      "settings": {
+        "heading": "<h2>We service these Sydney areas</h2>",
+        "intro_text": "Couch delivery available across Sydney and surrounding regions.",
+        "areas": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney, Hills District",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "recent_jobs": {
+      "type": "recent-jobs-couch",
+      "settings": {
+        "heading": "<h2>Recent couch deliveries</h2>",
+        "intro_text": "Here are some recent couch and sofa delivery jobs we've completed across Sydney.",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "faq": {
+      "type": "couch-faq",
+      "blocks": {
+        "faq-1": {
+          "type": "_faq-item",
+          "settings": {
+            "question": "How much does couch delivery cost in Sydney?",
+            "answer": "<p>Get a free, fixed-price quote tailored to your specific pickup and delivery locations. Prices vary based on distance, couch size, and access.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "_faq-item",
+          "settings": {
+            "question": "Can you deliver from Facebook Marketplace?",
+            "answer": "<p>Yes! We specialise in collecting items from Marketplace sellers across Sydney and delivering them to your home. Just provide the pickup and delivery addresses.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "_faq-item",
+          "settings": {
+            "question": "How quickly can you deliver?",
+            "answer": "<p>We often offer same-day delivery in Sydney. For peak periods, we typically schedule within 48 hours. Contact us for your preferred date and time.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "_faq-item",
+          "settings": {
+            "question": "Is my couch protected during delivery?",
+            "answer": "<p>Absolutely. Our team uses protective blankets, straps, and padding. We're trained to handle all couch types—from delicate fabrics to leather and suede.</p>"
+          }
+        }
+      },
+      "settings": {
+        "heading": "<h2>Couch delivery FAQs</h2>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "final_cta": {
+      "type": "final-cta",
+      "settings": {
+        "heading": "<h2>Ready to move your couch?</h2>",
+        "text": "Get a free quote for professional couch and sofa delivery across Sydney.",
+        "button_text": "Get Your Free Quote",
+        "button_anchor": "#main-quote",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "schema": {
+      "type": "couch-delivery-schema",
+      "settings": {
+        "service_name": "Couch Delivery Sydney",
+        "service_type": "Furniture delivery",
+        "description": "Professional couch and sofa pickup and delivery across Sydney, including Facebook Marketplace collections, with protective equipment and experienced handling."
+      }
+    }
+  }
+}
