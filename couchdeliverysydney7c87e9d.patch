@@ -1,0 +1,2573 @@
+From 7c87e9d263ae2704472eecc31310b10110f18d29 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 14 Jul 2026 16:40:49 +0000
+Subject: [PATCH] Add Couch Delivery Sydney landing page
+
+New page template (templates/page.couch-delivery-sydney.json) built entirely
+from new, isolated theme blocks. No existing files were modified.
+
+- Hero, intro, couch types grid, how-it-works, why-choose-us, pricing
+  explainer, marketplace pickup, service areas, FAQ and final CTA are new
+  reusable blocks (feature-grid and process-steps are shared across
+  multiple sections to avoid duplicate CSS/markup).
+- Reuses the existing Main Quote Form (blocks/ai_gen_block_8e89168.liquid,
+  form id="main-quote") instead of creating a new form; hero and final CTA
+  buttons link to #main-quote.
+- Recent jobs section connects to the existing "recent_jobs" metaobject,
+  filtered to couch/sofa jobs with a graceful fallback/hide.
+- FAQ block renders FAQPage JSON-LD from the same nested block settings
+  used for the visible accordion, so schema can't drift from content.
+- Dedicated schema block adds only Service, WebPage and BreadcrumbList
+  JSON-LD; no new Organization/LocalBusiness/AggregateRating schema, since
+  Organization is already rendered sitewide by sections/header.liquid.
+- Only one H1 (hero heading); all other headings are H2/H3.
+- Internal links limited to pages confirmed to exist in the store
+  (/pages/furniture-delivery-ryde).
+---
+ blocks/_faq-item.liquid                   |  52 +++
+ blocks/_feature-grid-item.liquid          | 122 +++++
+ blocks/_process-step-item.liquid          |  45 ++
+ blocks/couch-delivery-hero.liquid         | 367 +++++++++++++++
+ blocks/couch-delivery-intro.liquid        |  98 ++++
+ blocks/couch-delivery-schema.liquid       | 110 +++++
+ blocks/couch-faq.liquid                   | 181 ++++++++
+ blocks/feature-grid.liquid                | 196 ++++++++
+ blocks/final-cta.liquid                   | 145 ++++++
+ blocks/process-steps.liquid               | 189 ++++++++
+ blocks/recent-jobs-couch.liquid           | 248 +++++++++++
+ blocks/service-areas.liquid               | 168 +++++++
+ templates/page.couch-delivery-sydney.json | 517 ++++++++++++++++++++++
+ 13 files changed, 2438 insertions(+)
+ create mode 100644 blocks/_faq-item.liquid
+ create mode 100644 blocks/_feature-grid-item.liquid
+ create mode 100644 blocks/_process-step-item.liquid
+ create mode 100644 blocks/couch-delivery-hero.liquid
+ create mode 100644 blocks/couch-delivery-intro.liquid
+ create mode 100644 blocks/couch-delivery-schema.liquid
+ create mode 100644 blocks/couch-faq.liquid
+ create mode 100644 blocks/feature-grid.liquid
+ create mode 100644 blocks/final-cta.liquid
+ create mode 100644 blocks/process-steps.liquid
+ create mode 100644 blocks/recent-jobs-couch.liquid
+ create mode 100644 blocks/service-areas.liquid
+ create mode 100644 templates/page.couch-delivery-sydney.json
+
+diff --git a/blocks/_faq-item.liquid b/blocks/_faq-item.liquid
+new file mode 100644
+index 0000000..8c39aea
+--- /dev/null
++++ b/blocks/_faq-item.liquid
+@@ -0,0 +1,52 @@
++{%- doc -%}
++  Nested item block for blocks/couch-faq.liquid.
++  Renders one accordion row (question/answer). The parent block reads
++  these same settings via {% for child in block.blocks %} to build the
++  FAQPage JSON-LD, so the visible copy and the structured data can never
++  drift apart.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++%}
++
++{% capture row %}
++  <details class="details" {{ block.shopify_attributes }}>
++    <summary class="details__header couch-faq__question">
++      {{ block_settings.question }}
++      <span class="svg-wrapper icon-caret icon-animated">
++        {{- 'icon-caret.svg' | inline_asset_content -}}
++      </span>
++    </summary>
++    <div class="details-content couch-faq__answer">
++      {{ block_settings.answer }}
++    </div>
++  </details>
++{% endcapture %}
++{% render 'accordion-custom-component', children: row %}
++
++{% schema %}
++{
++  "name": "FAQ item",
++  "tag": null,
++  "settings": [
++    {
++      "type": "text",
++      "id": "question",
++      "label": "Question",
++      "default": "Question"
++    },
++    {
++      "type": "richtext",
++      "id": "answer",
++      "label": "Answer",
++      "default": "<p>Answer</p>"
++    }
++  ],
++  "presets": [
++    {
++      "name": "FAQ item"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/_feature-grid-item.liquid b/blocks/_feature-grid-item.liquid
+new file mode 100644
+index 0000000..42259af
+--- /dev/null
++++ b/blocks/_feature-grid-item.liquid
+@@ -0,0 +1,122 @@
++{%- doc -%}
++  Nested item block for blocks/feature-grid.liquid.
++  Renders one icon + H3 heading + short description tile.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++%}
++
++<div
++  class="feature-grid__item"
++  {{ block.shopify_attributes }}
++>
++  {%- if block_settings.icon != blank -%}
++    <span class="feature-grid__icon" aria-hidden="true">
++      {%- case block_settings.icon -%}
++        {%- when 'van' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="10" rx="1"></rect><path d="M16 10h4l3 3v4h-7z"></path><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="19" r="2"></circle></svg>
++        {%- when 'blanket' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M9 4v16"></path></svg>
++        {%- when 'trolley' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="19" r="2"></circle><circle cx="17" cy="19" r="2"></circle><path d="M3 5h2l2.4 11.6a1 1 0 0 0 1 .9h7.2a1 1 0 0 0 1-.8L19 9H6"></path></svg>
++        {%- when 'experience' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3-5.5-3-5.5 3 1-6.3L3 8.9 9 8z"></path></svg>
++        {%- when 'single-item' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="9" rx="2"></rect><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
++        {%- when 'map' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-6-3V4l6 3 6-3 6 3v13l-6-3-6 3z"></path><path d="M9 7v13M15 4v13"></path></svg>
++        {%- when 'two-workers' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
++        {%- when 'location' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
++        {%- when 'size' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 3 21"></path><path d="M8 21l-5-5M13 21l-5-5M21 16l-5-5M21 11l-5-5"></path></svg>
++        {%- when 'stairs' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4v-4h4v-4h4V8h4V4"></path></svg>
++        {%- when 'parking' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path></svg>
++        {%- when 'workers' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
++        {%- when 'clock' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
++        {%- when 'marketplace' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"></path><path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path><path d="M9 13a3 3 0 0 0 6 0"></path></svg>
++        {%- when 'sofa-bed' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11v6h20v-6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path><path d="M4 15v4M20 15v4M2 11V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2"></path></svg>
++        {%- when 'recliner' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v7"></path><path d="M3 13h16l2 2v3a1 1 0 0 1-1 1H6l-3-3z"></path><path d="M6 19v2M17 19v2"></path></svg>
++        {%- when 'corner' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v4z"></path></svg>
++        {%- when 'leather' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="20" height="8" rx="2"></rect><path d="M4 10V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"></path><path d="M6 6l2 2M16 6l2 2"></path></svg>
++        {%- when 'modular' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="9" height="9" rx="1"></rect><rect x="13" y="9" width="9" height="9" rx="1"></rect></svg>
++        {%- when 'sofa-2' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4h4V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"></path><path d="M3 12h18v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path><path d="M5 18v2M19 18v2"></path></svg>
++        {%- when 'sofa-3' -%}
++          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v4h8V8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v4"></path><path d="M2 12h20v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"></path><path d="M4 18v2M20 18v2"></path></svg>
++      {%- endcase -%}
++    </span>
++  {%- endif -%}
++  <h3 class="feature-grid__item-heading">{{ block_settings.heading }}</h3>
++  {%- if block_settings.text != blank -%}
++    <p class="feature-grid__item-text">{{ block_settings.text }}</p>
++  {%- endif -%}
++</div>
++
++{% schema %}
++{
++  "name": "Feature item",
++  "tag": null,
++  "settings": [
++    {
++      "type": "text",
++      "id": "heading",
++      "label": "Heading (H3)",
++      "default": "Feature"
++    },
++    {
++      "type": "text",
++      "id": "text",
++      "label": "Short description",
++      "default": ""
++    },
++    {
++      "type": "select",
++      "id": "icon",
++      "label": "Icon",
++      "options": [
++        { "value": "", "label": "None" },
++        { "value": "sofa-2", "label": "Two-seater sofa" },
++        { "value": "sofa-3", "label": "Three-seater sofa" },
++        { "value": "modular", "label": "Modular sofa" },
++        { "value": "sofa-bed", "label": "Sofa bed" },
++        { "value": "recliner", "label": "Recliner" },
++        { "value": "corner", "label": "Corner lounge" },
++        { "value": "leather", "label": "Leather sofa" },
++        { "value": "marketplace", "label": "Marketplace" },
++        { "value": "van", "label": "Van" },
++        { "value": "blanket", "label": "Blanket" },
++        { "value": "trolley", "label": "Trolley" },
++        { "value": "experience", "label": "Experience" },
++        { "value": "single-item", "label": "Single item" },
++        { "value": "map", "label": "Map / coverage" },
++        { "value": "two-workers", "label": "One or two workers" },
++        { "value": "location", "label": "Location pin" },
++        { "value": "size", "label": "Size / ruler" },
++        { "value": "stairs", "label": "Stairs" },
++        { "value": "parking", "label": "Parking" },
++        { "value": "workers", "label": "Workers" },
++        { "value": "clock", "label": "Clock / urgency" }
++      ],
++      "default": ""
++    }
++  ],
++  "presets": [
++    {
++      "name": "Feature item"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/_process-step-item.liquid b/blocks/_process-step-item.liquid
+new file mode 100644
+index 0000000..7294f08
+--- /dev/null
++++ b/blocks/_process-step-item.liquid
+@@ -0,0 +1,45 @@
++{%- doc -%}
++  Nested item block for blocks/process-steps.liquid.
++  Renders one numbered step with an H3 heading and description.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++%}
++
++<div
++  class="process-steps__item"
++  {{ block.shopify_attributes }}
++>
++  <span class="process-steps__number" aria-hidden="true"></span>
++  <h3 class="process-steps__heading">{{ block_settings.heading }}</h3>
++  {%- if block_settings.text != blank -%}
++    <p class="process-steps__text">{{ block_settings.text }}</p>
++  {%- endif -%}
++</div>
++
++{% schema %}
++{
++  "name": "Step",
++  "tag": null,
++  "settings": [
++    {
++      "type": "text",
++      "id": "heading",
++      "label": "Step heading (H3)",
++      "default": "Step"
++    },
++    {
++      "type": "text",
++      "id": "text",
++      "label": "Step description",
++      "default": ""
++    }
++  ],
++  "presets": [
++    {
++      "name": "Step"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/couch-delivery-hero.liquid b/blocks/couch-delivery-hero.liquid
+new file mode 100644
+index 0000000..13e3d15
+--- /dev/null
++++ b/blocks/couch-delivery-hero.liquid
+@@ -0,0 +1,367 @@
++{%- doc -%}
++  Couch Delivery Sydney - hero block.
++
++  Renders the single visible H1 for the couch delivery landing page, a short
++  subheading, primary CTAs (call + scroll-to-quote-form) and a trust row.
++  The quote button links to the existing Main Quote Form (#main-quote) rather
++  than creating a new form.
++
++  @param {string} [heading] - block.settings.heading
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++  assign tel_digits = block_settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
++
++  assign matched_rating_total = 0
++  assign matched_rating_count = 0
++  for job in shop.metaobjects.recent_jobs.values
++    assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | downcase
++    if haystack contains 'sofa' or haystack contains 'couch'
++      if job.rating.value != blank
++        assign matched_rating_total = matched_rating_total | plus: 0.0 | plus: job.rating.value
++        assign matched_rating_count = matched_rating_count | plus: 1
++      endif
++    endif
++  endfor
++  if matched_rating_count > 0
++    assign trust_rating = matched_rating_total | divided_by: matched_rating_count | round: 1
++  endif
++%}
++
++<div
++  class="couch-hero couch-hero--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++  style="{% render 'spacing-style', settings: block_settings %}"
++  {{ block.shopify_attributes }}
++>
++  <div class="couch-hero__inner">
++    <div class="couch-hero__content">
++      {{ block_settings.heading }}
++
++      {%- if block_settings.subheading != blank -%}
++        <p class="couch-hero__subheading">{{ block_settings.subheading }}</p>
++      {%- endif -%}
++
++      <div class="couch-hero__ctas">
++        {%- if block_settings.phone_number != blank -%}
++          <a
++            href="tel:{{ tel_digits }}"
++            class="button-secondary couch-hero__cta"
++          >
++            {{- block_settings.call_button_text -}}
++          </a>
++        {%- endif -%}
++        <a
++          href="{{ block_settings.quote_anchor }}"
++          class="button couch-hero__cta"
++        >
++          {{- block_settings.quote_button_text -}}
++        </a>
++      </div>
++
++      {%- if trust_rating != blank -%}
++        <p class="couch-hero__rating">
++          <span aria-hidden="true">&#9733;</span>
++          {{ trust_rating }} rated on our most recent Sydney couch deliveries
++        </p>
++      {%- elsif block_settings.fallback_trust_text != blank -%}
++        <p class="couch-hero__rating">{{ block_settings.fallback_trust_text }}</p>
++      {%- endif -%}
++
++      <ul class="couch-hero__badges" role="list">
++        {%- if block_settings.badge_1 != blank -%}
++          <li class="couch-hero__badge">
++            <span class="couch-hero__badge-icon" aria-hidden="true">
++              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="10" rx="1"></rect><path d="M16 10h4l3 3v4h-7z"></path><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="19" r="2"></circle></svg>
++            </span>
++            {{ block_settings.badge_1 }}
++          </li>
++        {%- endif -%}
++        {%- if block_settings.badge_2 != blank -%}
++          <li class="couch-hero__badge">
++            <span class="couch-hero__badge-icon" aria-hidden="true">
++              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path></svg>
++            </span>
++            {{ block_settings.badge_2 }}
++          </li>
++        {%- endif -%}
++        {%- if block_settings.badge_3 != blank -%}
++          <li class="couch-hero__badge">
++            <span class="couch-hero__badge-icon" aria-hidden="true">
++              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="19" r="2"></circle><circle cx="17" cy="19" r="2"></circle><path d="M3 5h2l2.4 11.6a1 1 0 0 0 1 .9h7.2a1 1 0 0 0 1-.8L19 9H6"></path></svg>
++            </span>
++            {{ block_settings.badge_3 }}
++          </li>
++        {%- endif -%}
++        {%- if block_settings.badge_4 != blank -%}
++          <li class="couch-hero__badge">
++            <span class="couch-hero__badge-icon" aria-hidden="true">
++              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
++            </span>
++            {{ block_settings.badge_4 }}
++          </li>
++        {%- endif -%}
++        {%- if block_settings.badge_5 != blank -%}
++          <li class="couch-hero__badge">
++            <span class="couch-hero__badge-icon" aria-hidden="true">
++              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
++            </span>
++            {{ block_settings.badge_5 }}
++          </li>
++        {%- endif -%}
++      </ul>
++    </div>
++
++    {%- if block_settings.image != blank -%}
++      <div class="couch-hero__media">
++        <img
++          src="{{ block_settings.image | image_url: width: 1200 }}"
++          srcset="{{ block_settings.image | image_url: width: 600 }} 600w, {{ block_settings.image | image_url: width: 900 }} 900w, {{ block_settings.image | image_url: width: 1200 }} 1200w"
++          sizes="(min-width: 750px) 45vw, 100vw"
++          alt="{{ block_settings.image.alt | default: 'Titan Express van used for couch delivery in Sydney' | escape }}"
++          width="{{ block_settings.image.width }}"
++          height="{{ block_settings.image.height }}"
++          loading="eager"
++          fetchpriority="high"
++        >
++      </div>
++    {%- endif -%}
++  </div>
++</div>
++
++{% stylesheet %}
++  .couch-hero {
++    padding-block: var(--padding-2xl);
++  }
++
++  .couch-hero__inner {
++    max-width: var(--page-width, 1280px);
++    margin-inline: auto;
++    display: grid;
++    grid-template-columns: 1fr;
++    gap: var(--gap-xl, 32px);
++    align-items: center;
++    padding-inline: var(--padding-md, 16px);
++  }
++
++  @media screen and (min-width: 750px) {
++    .couch-hero__inner {
++      grid-template-columns: 1.1fr 0.9fr;
++    }
++  }
++
++  .couch-hero__content h1 {
++    margin: 0 0 var(--margin-sm, 12px);
++  }
++
++  .couch-hero__subheading {
++    font-size: var(--font-paragraph-medium--size, 1.125rem);
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++    margin: 0 0 var(--margin-lg, 20px);
++    max-width: 46ch;
++  }
++
++  .couch-hero__ctas {
++    display: flex;
++    flex-wrap: wrap;
++    gap: var(--gap-sm, 12px);
++    margin-bottom: var(--margin-lg, 20px);
++  }
++
++  .couch-hero__cta {
++    text-align: center;
++  }
++
++  .couch-hero__rating {
++    display: flex;
++    align-items: center;
++    gap: 6px;
++    font-weight: var(--font-weight-semibold, 600);
++    margin: 0 0 var(--margin-md, 16px);
++  }
++
++  .couch-hero__badges {
++    display: grid;
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++    gap: 10px 16px;
++    list-style: none;
++    margin: 0;
++    padding: 0;
++  }
++
++  @media screen and (min-width: 990px) {
++    .couch-hero__badges {
++      grid-template-columns: repeat(3, minmax(0, 1fr));
++    }
++  }
++
++  .couch-hero__badge {
++    display: flex;
++    align-items: center;
++    gap: 8px;
++    font-size: var(--font-paragraph-small--size, 0.875rem);
++  }
++
++  .couch-hero__badge-icon {
++    flex-shrink: 0;
++    width: 20px;
++    height: 20px;
++    color: var(--color-primary);
++  }
++
++  .couch-hero__badge-icon svg {
++    width: 100%;
++    height: 100%;
++  }
++
++  .couch-hero__media img {
++    width: 100%;
++    height: auto;
++    border-radius: var(--style-border-radius-buttons-primary, 8px);
++    display: block;
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Couch delivery hero",
++  "tag": null,
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading (H1)",
++      "default": "<h1>Couch Delivery Sydney</h1>",
++      "info": "Keep this the only H1 on the page."
++    },
++    {
++      "type": "text",
++      "id": "subheading",
++      "label": "Subheading",
++      "default": "Careful couch and sofa pickup and delivery across Sydney, including Marketplace purchases and single-item moves."
++    },
++    {
++      "type": "header",
++      "content": "Buttons"
++    },
++    {
++      "type": "text",
++      "id": "phone_number",
++      "label": "Phone number",
++      "default": "0469 717 535"
++    },
++    {
++      "type": "text",
++      "id": "call_button_text",
++      "label": "Call button label",
++      "default": "Call Now"
++    },
++    {
++      "type": "text",
++      "id": "quote_button_text",
++      "label": "Quote button label",
++      "default": "Get a Free Quote"
++    },
++    {
++      "type": "text",
++      "id": "quote_anchor",
++      "label": "Quote form anchor",
++      "default": "#main-quote",
++      "info": "Must match the ID of the existing Main Quote Form. Do not change unless the form ID changes."
++    },
++    {
++      "type": "header",
++      "content": "Trust signal"
++    },
++    {
++      "type": "text",
++      "id": "fallback_trust_text",
++      "label": "Fallback trust text",
++      "default": "Trusted by Sydney households and Marketplace buyers for careful couch handling.",
++      "info": "Shown only when no rated couch/sofa jobs are available yet. When rated jobs exist in the Recent Jobs metaobject, a real average rating is shown instead."
++    },
++    {
++      "type": "header",
++      "content": "Service badges"
++    },
++    {
++      "type": "text",
++      "id": "badge_1",
++      "label": "Badge 1",
++      "default": "Oversized van"
++    },
++    {
++      "type": "text",
++      "id": "badge_2",
++      "label": "Badge 2",
++      "default": "Protective blankets"
++    },
++    {
++      "type": "text",
++      "id": "badge_3",
++      "label": "Badge 3",
++      "default": "Trolley and straps"
++    },
++    {
++      "type": "text",
++      "id": "badge_4",
++      "label": "Badge 4",
++      "default": "Same-day availability where scheduling allows"
++    },
++    {
++      "type": "text",
++      "id": "badge_5",
++      "label": "Badge 5",
++      "default": "Sydney-wide service"
++    },
++    {
++      "type": "header",
++      "content": "Image"
++    },
++    {
++      "type": "image_picker",
++      "id": "image",
++      "label": "Hero image"
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 32
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 32
++    }
++  ],
++  "presets": [
++    {
++      "name": "Couch delivery hero"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/couch-delivery-intro.liquid b/blocks/couch-delivery-intro.liquid
+new file mode 100644
+index 0000000..1c481e4
+--- /dev/null
++++ b/blocks/couch-delivery-intro.liquid
+@@ -0,0 +1,98 @@
++{%- doc -%}
++  Couch Delivery Sydney - quick service introduction block.
++  Renders a single H2 and an editable richtext paragraph (~180-250 words).
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++%}
++
++<div
++  class="couch-intro couch-intro--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++  style="{% render 'spacing-style', settings: block_settings %}"
++  {{ block.shopify_attributes }}
++>
++  <div class="couch-intro__inner">
++    {{ block_settings.heading }}
++    <div class="couch-intro__body rte">
++      {{ block_settings.body }}
++    </div>
++  </div>
++</div>
++
++{% stylesheet %}
++  .couch-intro__inner {
++    max-width: var(--normal-content-width, 720px);
++    margin-inline: auto;
++    padding-inline: var(--padding-md, 16px);
++  }
++
++  .couch-intro__body {
++    font-size: var(--font-paragraph-medium--size, 1.0625rem);
++    line-height: 1.65;
++  }
++
++  .couch-intro__body p:first-child {
++    margin-block-start: 0;
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Couch delivery intro",
++  "tag": null,
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading (H2)",
++      "default": "<h2>Couch pickup and delivery, done the careful way</h2>"
++    },
++    {
++      "type": "richtext",
++      "id": "body",
++      "label": "Body copy",
++      "default": "<p>Titan Express picks up couches and sofas from homes, shops and Facebook Marketplace sellers, then delivers them to houses, apartments and offices across Sydney. Whether it is a compact two-seater or a heavy modular sofa, we bring the right van, protective blankets, a trolley and straps so the piece travels safely from pickup to drop-off.</p><p>Large, modular and fragile couches need extra care. Before we collect, we ask about access at both ends: stairs, lifts, hallway width, doorway clearances and where we can park. This lets us plan the safest route and bring the right number of people, rather than guessing on the day.</p><p>We handle marketplace purchases regularly, coordinating pickup times directly with the seller and checking the couch is as described before it leaves the property. From there it is wrapped, secured and delivered to your address at a time that works for you.</p><p>Our service covers Sydney-wide, from the Inner West and Eastern Suburbs through to Parramatta, the Hills District and Sutherland Shire, so most couch deliveries can be arranged within a day or two of getting in touch, with same-day delivery available where scheduling allows.</p>"
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 24
++    }
++  ],
++  "presets": [
++    {
++      "name": "Couch delivery intro"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/couch-delivery-schema.liquid b/blocks/couch-delivery-schema.liquid
+new file mode 100644
+index 0000000..60f3efd
+--- /dev/null
++++ b/blocks/couch-delivery-schema.liquid
+@@ -0,0 +1,110 @@
++{%- doc -%}
++  Couch Delivery Sydney - structured data block (no visible output).
++
++  Emits only page-specific JSON-LD: Service, WebPage and BreadcrumbList.
++
++  Deliberately does NOT add Organization or LocalBusiness schema, because
++  sections/header.liquid already renders a sitewide Organization JSON-LD
++  block on every page (see the theme SEO audit). Adding another one here
++  would duplicate that schema. Deliberately does NOT add AggregateRating -
++  the store has no verified review metafield/app data to source it from.
++
++  FAQPage schema is intentionally handled inside blocks/couch-faq.liquid
++  instead, so it is only emitted when FAQs are actually visible and always
++  matches the rendered questions/answers exactly.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++  assign service_name = block_settings.service_name | default: page.title
++  assign page_description = block_settings.description
++%}
++
++<script type="application/ld+json">
++  {
++    "@context": "https://schema.org",
++    "@type": "Service",
++    "name": {{ service_name | json }},
++    "serviceType": {{ block_settings.service_type | json }},
++    "description": {{ page_description | json }},
++    "areaServed": {
++      "@type": "City",
++      "name": "Sydney, New South Wales, Australia"
++    },
++    "provider": {
++      "@type": "Organization",
++      "name": {{ shop.name | json }},
++      "url": {{ shop.url | json }}
++    },
++    "url": {{ canonical_url | json }}
++  }
++</script>
++
++<script type="application/ld+json">
++  {
++    "@context": "https://schema.org",
++    "@type": "WebPage",
++    "name": {{ page.title | json }},
++    "url": {{ canonical_url | json }},
++    "description": {{ page_description | json }},
++    "inLanguage": {{ request.locale.iso_code | json }},
++    "isPartOf": {
++      "@type": "WebSite",
++      "name": {{ shop.name | json }},
++      "url": {{ shop.url | json }}
++    }
++  }
++</script>
++
++<script type="application/ld+json">
++  {
++    "@context": "https://schema.org",
++    "@type": "BreadcrumbList",
++    "itemListElement": [
++      {
++        "@type": "ListItem",
++        "position": 1,
++        "name": "Home",
++        "item": {{ shop.url | json }}
++      },
++      {
++        "@type": "ListItem",
++        "position": 2,
++        "name": {{ page.title | json }},
++        "item": {{ canonical_url | json }}
++      }
++    ]
++  }
++</script>
++
++{% schema %}
++{
++  "name": "Couch delivery structured data",
++  "tag": null,
++  "settings": [
++    {
++      "type": "text",
++      "id": "service_name",
++      "label": "Service name",
++      "default": "Couch Delivery Sydney"
++    },
++    {
++      "type": "text",
++      "id": "service_type",
++      "label": "Service type",
++      "default": "Furniture delivery"
++    },
++    {
++      "type": "textarea",
++      "id": "description",
++      "label": "Service / page description",
++      "default": "Couch and sofa pickup and delivery across Sydney, including Facebook Marketplace collections, with protective equipment and experienced handling."
++    }
++  ],
++  "presets": [
++    {
++      "name": "Couch delivery structured data"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/couch-faq.liquid b/blocks/couch-faq.liquid
+new file mode 100644
+index 0000000..e124de2
+--- /dev/null
++++ b/blocks/couch-faq.liquid
+@@ -0,0 +1,181 @@
++{%- doc -%}
++  Couch Delivery Sydney - FAQ block.
++
++  Renders an H2 plus an accordion of nested _faq-item blocks (reusing the
++  theme's existing accordion-custom-component snippet and .details/.accordion
++  CSS, so no new accordion behaviour or styling is duplicated).
++
++  Also emits FAQPage JSON-LD built from the exact same nested block settings
++  (via block.blocks), so the structured data can never go out of sync with
++  the visibly rendered questions and answers, and is only emitted when the
++  FAQs are actually visible on the page.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++%}
++
++<div
++  class="couch-faq couch-faq--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++  style="{% render 'spacing-style', settings: block_settings %}"
++  {{ block.shopify_attributes }}
++>
++  <div class="couch-faq__inner">
++    {{ block_settings.heading }}
++
++    <div class="accordion couch-faq__accordion">
++      {% content_for 'blocks' %}
++    </div>
++  </div>
++</div>
++
++{%- assign faq_entries = block.blocks | where: 'type', '_faq-item' -%}
++{%- if faq_entries.size > 0 -%}
++  <script type="application/ld+json">
++    {
++      "@context": "https://schema.org",
++      "@type": "FAQPage",
++      "mainEntity": [
++        {%- for item in faq_entries -%}
++          {
++            "@type": "Question",
++            "name": {{ item.settings.question | strip_html | json }},
++            "acceptedAnswer": {
++              "@type": "Answer",
++              "text": {{ item.settings.answer | strip_html | json }}
++            }
++          }{%- unless forloop.last -%},{%- endunless -%}
++        {%- endfor -%}
++      ]
++    }
++  </script>
++{%- endif -%}
++
++{% stylesheet %}
++  .couch-faq__inner {
++    max-width: var(--normal-content-width, 720px);
++    margin-inline: auto;
++    padding-inline: var(--padding-md, 16px);
++  }
++
++  .couch-faq__accordion {
++    margin-top: var(--margin-lg, 20px);
++  }
++
++  .couch-faq__question {
++    font-weight: var(--font-weight-semibold, 600);
++  }
++
++  .couch-faq__answer {
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Couch delivery FAQ",
++  "tag": null,
++  "blocks": [
++    { "type": "_faq-item" }
++  ],
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading (H2)",
++      "default": "<h2>Couch delivery FAQs</h2>"
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    }
++  ],
++  "presets": [
++    {
++      "name": "Couch delivery FAQ",
++      "blocks": {
++        "faq-1": {
++          "type": "_faq-item",
++          "settings": {
++            "question": "How much does couch delivery cost in Sydney?",
++            "answer": "<p>Couch delivery pricing depends on the pickup and delivery suburbs, the size and configuration of the couch, whether stairs or lift access is involved, parking distance, how many workers are needed, and how urgent the job is. Send us these details and we will give you an exact, upfront quote before booking.</p>"
++          }
++        },
++        "faq-2": {
++          "type": "_faq-item",
++          "settings": {
++            "question": "Can you collect a couch from Facebook Marketplace?",
++            "answer": "<p>Yes. We regularly collect couches and sofas from Facebook Marketplace and other online sellers across Sydney. Send us the listing details, the pickup and delivery suburbs and a photo of the couch, and we will coordinate pickup timing directly with the seller.</p>"
++          }
++        },
++        "faq-3": {
++          "type": "_faq-item",
++          "settings": {
++            "question": "Can you move a couch upstairs?",
++            "answer": "<p>Yes, we regularly deliver couches up and down stairs. Let us know about stairs, lift access or narrow hallways when you request your quote so we can bring the right number of workers and equipment on the day.</p>"
++          }
++        },
++        "faq-4": {
++          "type": "_faq-item",
++          "settings": {
++            "question": "Do you protect couches during delivery?",
++            "answer": "<p>Yes. Every couch is wrapped in protective blankets and secured with straps in our van, and we use a trolley to move it safely across floors, hallways and driveways.</p>"
++          }
++        },
++        "faq-5": {
++          "type": "_faq-item",
++          "settings": {
++            "question": "Can you deliver a sofa on the same day?",
++            "answer": "<p>Same-day couch delivery is available where scheduling allows. Contact us as early in the day as possible with your pickup and delivery suburbs so we can confirm whether a same-day slot is free.</p>"
++          }
++        },
++        "faq-6": {
++          "type": "_faq-item",
++          "settings": {
++            "question": "Do I need to help with lifting?",
++            "answer": "<p>No. Our team brings a trolley and straps and handles the lifting and carrying. If a job needs two workers because of the couch size or stairs, we will let you know when confirming your quote.</p>"
++          }
++        },
++        "faq-7": {
++          "type": "_faq-item",
++          "settings": {
++            "question": "Can you move modular and sofa-bed couches?",
++            "answer": "<p>Yes. We deliver modular sofas, sofa beds, corner lounges, recliners and other large or heavy configurations. Let us know the couch type and how many sections it has so we can plan the right van space and access.</p>"
++          }
++        }
++      },
++      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7"]
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/feature-grid.liquid b/blocks/feature-grid.liquid
+new file mode 100644
+index 0000000..75dde06
+--- /dev/null
++++ b/blocks/feature-grid.liquid
+@@ -0,0 +1,196 @@
++{%- doc -%}
++  Reusable icon feature grid.
++
++  Used on the Couch Delivery Sydney page for three different sections:
++  couch types, why choose Titan Express, and pricing factors. Reusing one
++  block keeps the CSS and markup for repeating icon/heading/text tiles in
++  one place instead of duplicating it per section.
++
++  Heading is rendered as H2. Each nested _feature-grid-item renders its own
++  H3, so heading hierarchy stays H1 > H2 > H3 with no extra H1s.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++  assign columns_desktop = block_settings.columns_desktop
++%}
++
++<div
++  class="feature-grid feature-grid--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++  style="{% render 'spacing-style', settings: block_settings %} --feature-grid-columns-desktop: {{ columns_desktop }};"
++  {{ block.shopify_attributes }}
++>
++  <div class="feature-grid__inner">
++    {%- if block_settings.heading != blank -%}
++      {{ block_settings.heading }}
++    {%- endif -%}
++    {%- if block_settings.intro != blank -%}
++      <p class="feature-grid__intro">{{ block_settings.intro }}</p>
++    {%- endif -%}
++
++    <div class="feature-grid__items">
++      {% content_for 'blocks' %}
++    </div>
++
++    {%- if block_settings.cta_label != blank and block_settings.cta_link != blank -%}
++      <div class="feature-grid__cta">
++        <a href="{{ block_settings.cta_link }}" class="button">{{ block_settings.cta_label }}</a>
++      </div>
++    {%- endif -%}
++  </div>
++</div>
++
++{% stylesheet %}
++  .feature-grid__inner {
++    max-width: var(--page-width, 1280px);
++    margin-inline: auto;
++    padding-inline: var(--padding-md, 16px);
++  }
++
++  .feature-grid__intro {
++    max-width: 65ch;
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++    margin-block: 0 var(--margin-lg, 20px);
++  }
++
++  .feature-grid__items {
++    display: grid;
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++    gap: 20px;
++    margin-top: var(--margin-lg, 20px);
++  }
++
++  @media screen and (min-width: 750px) {
++    .feature-grid__items {
++      grid-template-columns: repeat(var(--feature-grid-columns-desktop, 4), minmax(0, 1fr));
++    }
++  }
++
++  .feature-grid__item {
++    display: flex;
++    flex-direction: column;
++    gap: 8px;
++    padding: 20px;
++    border-radius: var(--style-border-radius-buttons-primary, 8px);
++    background: rgb(var(--color-foreground-rgb) / var(--opacity-5-15, 0.05));
++  }
++
++  .feature-grid__icon {
++    width: 32px;
++    height: 32px;
++    color: var(--color-primary);
++  }
++
++  .feature-grid__icon svg {
++    width: 100%;
++    height: 100%;
++  }
++
++  .feature-grid__item-heading {
++    margin: 0;
++    font-size: var(--font-h4--size, 1.125rem);
++  }
++
++  .feature-grid__item-text {
++    margin: 0;
++    font-size: var(--font-paragraph-small--size, 0.9rem);
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++  }
++
++  .feature-grid__cta {
++    margin-top: var(--margin-xl, 28px);
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Feature grid",
++  "tag": null,
++  "blocks": [
++    { "type": "_feature-grid-item" }
++  ],
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading (H2)",
++      "default": "<h2>Feature grid</h2>"
++    },
++    {
++      "type": "text",
++      "id": "intro",
++      "label": "Intro text (optional)",
++      "default": ""
++    },
++    {
++      "type": "range",
++      "id": "columns_desktop",
++      "label": "Columns (desktop)",
++      "min": 2,
++      "max": 4,
++      "step": 1,
++      "default": 4
++    },
++    {
++      "type": "header",
++      "content": "Optional CTA"
++    },
++    {
++      "type": "text",
++      "id": "cta_label",
++      "label": "CTA label",
++      "default": ""
++    },
++    {
++      "type": "url",
++      "id": "cta_link",
++      "label": "CTA link",
++      "info": "Leave both CTA fields blank to hide the button. Use #main-quote to link to the existing quote form."
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    }
++  ],
++  "presets": [
++    {
++      "name": "Feature grid",
++      "blocks": {
++        "item-1": { "type": "_feature-grid-item" },
++        "item-2": { "type": "_feature-grid-item" }
++      },
++      "block_order": ["item-1", "item-2"]
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/final-cta.liquid b/blocks/final-cta.liquid
+new file mode 100644
+index 0000000..2eea44d
+--- /dev/null
++++ b/blocks/final-cta.liquid
+@@ -0,0 +1,145 @@
++{%- doc -%}
++  Couch Delivery Sydney - final call to action block.
++  Renders an H2, a short trust statement, and Call Now / Get a Free Quote
++  buttons. The quote button links to the existing Main Quote Form anchor
++  rather than creating another form.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++  assign tel_digits = block_settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
++%}
++
++<div
++  class="couch-final-cta couch-final-cta--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++  style="{% render 'spacing-style', settings: block_settings %}"
++  {{ block.shopify_attributes }}
++>
++  <div class="couch-final-cta__inner">
++    {{ block_settings.heading }}
++    {%- if block_settings.trust_statement != blank -%}
++      <p class="couch-final-cta__trust">{{ block_settings.trust_statement }}</p>
++    {%- endif -%}
++    <div class="couch-final-cta__ctas">
++      {%- if block_settings.phone_number != blank -%}
++        <a href="tel:{{ tel_digits }}" class="button-secondary couch-final-cta__cta">
++          {{- block_settings.call_button_text -}}
++        </a>
++      {%- endif -%}
++      <a href="{{ block_settings.quote_anchor }}" class="button couch-final-cta__cta">
++        {{- block_settings.quote_button_text -}}
++      </a>
++    </div>
++  </div>
++</div>
++
++{% stylesheet %}
++  .couch-final-cta__inner {
++    max-width: var(--normal-content-width, 720px);
++    margin-inline: auto;
++    padding-inline: var(--padding-md, 16px);
++    text-align: center;
++  }
++
++  .couch-final-cta__trust {
++    max-width: 55ch;
++    margin: 0 auto var(--margin-lg, 20px);
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++  }
++
++  .couch-final-cta__ctas {
++    display: flex;
++    flex-wrap: wrap;
++    justify-content: center;
++    gap: var(--gap-sm, 12px);
++  }
++
++  .couch-final-cta__cta {
++    text-align: center;
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Couch delivery final CTA",
++  "tag": null,
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading (H2)",
++      "default": "<h2>Ready to book your couch delivery?</h2>"
++    },
++    {
++      "type": "text",
++      "id": "trust_statement",
++      "label": "Trust statement",
++      "default": "Sydney-wide couch and sofa delivery, handled carefully from pickup to drop-off."
++    },
++    {
++      "type": "text",
++      "id": "phone_number",
++      "label": "Phone number",
++      "default": "0469 717 535"
++    },
++    {
++      "type": "text",
++      "id": "call_button_text",
++      "label": "Call button label",
++      "default": "Call Now"
++    },
++    {
++      "type": "text",
++      "id": "quote_button_text",
++      "label": "Quote button label",
++      "default": "Get a Free Quote"
++    },
++    {
++      "type": "text",
++      "id": "quote_anchor",
++      "label": "Quote form anchor",
++      "default": "#main-quote",
++      "info": "Must match the ID of the existing Main Quote Form."
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 56
++    }
++  ],
++  "presets": [
++    {
++      "name": "Couch delivery final CTA"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/process-steps.liquid b/blocks/process-steps.liquid
+new file mode 100644
+index 0000000..3d33215
+--- /dev/null
++++ b/blocks/process-steps.liquid
+@@ -0,0 +1,189 @@
++{%- doc -%}
++  Reusable numbered process block.
++
++  Used twice on the Couch Delivery Sydney page: "How the service works"
++  (4 steps) and the Marketplace pickup process (5 steps). One component
++  keeps the numbered-step markup/CSS in one place instead of duplicating it.
++
++  Heading is rendered as H2, each nested _process-step-item renders its own
++  H3, so heading hierarchy stays H1 > H2 > H3.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++%}
++
++<div
++  class="process-steps process-steps--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++  style="{% render 'spacing-style', settings: block_settings %}"
++  {{ block.shopify_attributes }}
++>
++  <div class="process-steps__inner">
++    {%- if block_settings.heading != blank -%}
++      {{ block_settings.heading }}
++    {%- endif -%}
++    {%- if block_settings.intro != blank -%}
++      <p class="process-steps__intro">{{ block_settings.intro }}</p>
++    {%- endif -%}
++
++    <div class="process-steps__items">
++      {% content_for 'blocks' %}
++    </div>
++
++    {%- if block_settings.cta_label != blank and block_settings.cta_link != blank -%}
++      <div class="process-steps__cta">
++        <a href="{{ block_settings.cta_link }}" class="button">{{ block_settings.cta_label }}</a>
++      </div>
++    {%- endif -%}
++  </div>
++</div>
++
++{% stylesheet %}
++  .process-steps__inner {
++    max-width: var(--page-width, 1280px);
++    margin-inline: auto;
++    padding-inline: var(--padding-md, 16px);
++  }
++
++  .process-steps__intro {
++    max-width: 65ch;
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++    margin-block: 0 var(--margin-lg, 20px);
++  }
++
++  .process-steps__items {
++    counter-reset: process-step;
++    display: grid;
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++    gap: 24px;
++    margin-top: var(--margin-lg, 20px);
++  }
++
++  @media screen and (min-width: 990px) {
++    .process-steps__items {
++      grid-template-columns: repeat(4, minmax(0, 1fr));
++    }
++  }
++
++  .process-steps__item {
++    position: relative;
++    padding-top: 8px;
++  }
++
++  .process-steps__number {
++    counter-increment: process-step;
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    width: 36px;
++    height: 36px;
++    border-radius: 50%;
++    background: var(--color-primary);
++    color: var(--color-primary-button-text, #fff);
++    font-weight: var(--font-weight-bold, 700);
++    margin-bottom: 10px;
++  }
++
++  .process-steps__number::before {
++    content: counter(process-step);
++  }
++
++  .process-steps__heading {
++    margin: 0 0 6px;
++    font-size: var(--font-h4--size, 1.125rem);
++  }
++
++  .process-steps__text {
++    margin: 0;
++    font-size: var(--font-paragraph-small--size, 0.9rem);
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++  }
++
++  .process-steps__cta {
++    margin-top: var(--margin-xl, 28px);
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Process steps",
++  "tag": null,
++  "blocks": [
++    { "type": "_process-step-item" }
++  ],
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading (H2)",
++      "default": "<h2>How it works</h2>"
++    },
++    {
++      "type": "text",
++      "id": "intro",
++      "label": "Intro text (optional)",
++      "default": ""
++    },
++    {
++      "type": "header",
++      "content": "Optional CTA"
++    },
++    {
++      "type": "text",
++      "id": "cta_label",
++      "label": "CTA label",
++      "default": ""
++    },
++    {
++      "type": "url",
++      "id": "cta_link",
++      "label": "CTA link",
++      "info": "Leave both CTA fields blank to hide the button. Use #main-quote to link to the existing quote form."
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    }
++  ],
++  "presets": [
++    {
++      "name": "Process steps",
++      "blocks": {
++        "step-1": { "type": "_process-step-item" },
++        "step-2": { "type": "_process-step-item" }
++      },
++      "block_order": ["step-1", "step-2"]
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/recent-jobs-couch.liquid b/blocks/recent-jobs-couch.liquid
+new file mode 100644
+index 0000000..8bd1869
+--- /dev/null
++++ b/blocks/recent-jobs-couch.liquid
+@@ -0,0 +1,248 @@
++{%- doc -%}
++  Couch Delivery Sydney - recent jobs proof block.
++
++  Connects to the store's existing "Recent Jobs" metaobject (type:
++  recent_jobs) instead of hardcoding fake jobs. Prefers entries that
++  mention a couch/sofa; falls back to showing the most recent jobs of any
++  type if none match; renders nothing if the metaobject has no entries at
++  all, so no placeholder/fake content is ever shown.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++  assign all_jobs = shop.metaobjects.recent_jobs.values
++  assign max_jobs = block_settings.max_jobs
++
++  assign matched_count = 0
++  assign fallback_count = 0
++
++  for job in all_jobs
++    assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | append: ' ' | append: job.short_description.value | downcase
++    if haystack contains 'sofa' or haystack contains 'couch'
++      assign matched_count = matched_count | plus: 1
++    endif
++    assign fallback_count = fallback_count | plus: 1
++  endfor
++
++  if matched_count > 0
++    assign show_fallback = false
++  elsif fallback_count > 0
++    assign show_fallback = true
++  endif
++%}
++
++{%- if matched_count > 0 or show_fallback -%}
++  <div
++    class="recent-jobs recent-jobs--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++    style="{% render 'spacing-style', settings: block_settings %}"
++    {{ block.shopify_attributes }}
++  >
++    <div class="recent-jobs__inner">
++      {%- if matched_count > 0 -%}
++        {{ block_settings.heading }}
++      {%- else -%}
++        {{ block_settings.fallback_heading }}
++      {%- endif -%}
++
++      <div class="recent-jobs__grid">
++        {%- assign shown = 0 -%}
++        {%- for job in all_jobs -%}
++          {%- if shown >= max_jobs -%}
++            {%- break -%}
++          {%- endif -%}
++          {%- assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | append: ' ' | append: job.short_description.value | downcase -%}
++          {%- assign is_match = false -%}
++          {%- if haystack contains 'sofa' or haystack contains 'couch' -%}
++            {%- assign is_match = true -%}
++          {%- endif -%}
++
++          {%- assign should_render_card = false -%}
++          {%- if matched_count > 0 -%}
++            {%- if is_match -%}
++              {%- assign should_render_card = true -%}
++            {%- endif -%}
++          {%- else -%}
++            {%- assign should_render_card = true -%}
++          {%- endif -%}
++
++          {%- if should_render_card -%}
++            <article class="recent-jobs__card">
++              {%- if job.image.value != blank -%}
++                <img
++                  class="recent-jobs__image"
++                  src="{{ job.image.value | image_url: width: 500 }}"
++                  srcset="{{ job.image.value | image_url: width: 400 }} 400w, {{ job.image.value | image_url: width: 700 }} 700w"
++                  sizes="(min-width: 750px) 33vw, 100vw"
++                  alt="{{ job.recent_job.value | default: job.item.value | escape }}"
++                  width="{{ job.image.value.width }}"
++                  height="{{ job.image.value.height }}"
++                  loading="lazy"
++                >
++              {%- else -%}
++                <span class="recent-jobs__image recent-jobs__image--placeholder" aria-hidden="true">
++                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="10" rx="1"></rect><path d="M16 10h4l3 3v4h-7z"></path><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="19" r="2"></circle></svg>
++                </span>
++              {%- endif -%}
++
++              <div class="recent-jobs__card-body">
++                <h3 class="recent-jobs__job-title">{{ job.recent_job.value | default: job.item.value }}</h3>
++                {%- if job.pickup_suburb.value != blank and job.drop_off_suburb.value != blank -%}
++                  <p class="recent-jobs__route">{{ job.pickup_suburb.value | strip }} &rarr; {{ job.drop_off_suburb.value | strip }}</p>
++                {%- endif -%}
++                {%- if job.short_description.value != blank -%}
++                  <p class="recent-jobs__desc">{{ job.short_description.value }}</p>
++                {%- endif -%}
++                {%- if job.rating.value != blank -%}
++                  <p class="recent-jobs__rating"><span aria-hidden="true">&#9733;</span> {{ job.rating.value }}</p>
++                {%- endif -%}
++              </div>
++            </article>
++            {%- assign shown = shown | plus: 1 -%}
++          {%- endif -%}
++        {%- endfor -%}
++      </div>
++    </div>
++  </div>
++{%- endif -%}
++
++{% stylesheet %}
++  .recent-jobs__inner {
++    max-width: var(--page-width, 1280px);
++    margin-inline: auto;
++    padding-inline: var(--padding-md, 16px);
++  }
++
++  .recent-jobs__grid {
++    display: grid;
++    grid-template-columns: 1fr;
++    gap: 20px;
++    margin-top: var(--margin-lg, 20px);
++  }
++
++  @media screen and (min-width: 750px) {
++    .recent-jobs__grid {
++      grid-template-columns: repeat(3, minmax(0, 1fr));
++    }
++  }
++
++  .recent-jobs__card {
++    border-radius: var(--style-border-radius-buttons-primary, 8px);
++    overflow: hidden;
++    background: rgb(var(--color-foreground-rgb) / var(--opacity-5-15, 0.05));
++  }
++
++  .recent-jobs__image {
++    display: block;
++    width: 100%;
++    height: 180px;
++    object-fit: cover;
++  }
++
++  .recent-jobs__image--placeholder {
++    display: flex;
++    align-items: center;
++    justify-content: center;
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-35-55, 0.4));
++  }
++
++  .recent-jobs__image--placeholder svg {
++    width: 48px;
++    height: 48px;
++  }
++
++  .recent-jobs__card-body {
++    padding: 16px;
++  }
++
++  .recent-jobs__job-title {
++    margin: 0 0 4px;
++    font-size: var(--font-h4--size, 1.125rem);
++  }
++
++  .recent-jobs__route {
++    margin: 0 0 6px;
++    font-size: var(--font-paragraph-small--size, 0.9rem);
++    font-weight: var(--font-weight-medium, 500);
++  }
++
++  .recent-jobs__desc {
++    margin: 0 0 6px;
++    font-size: var(--font-paragraph-small--size, 0.9rem);
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++  }
++
++  .recent-jobs__rating {
++    margin: 0;
++    font-size: var(--font-paragraph-small--size, 0.9rem);
++    font-weight: var(--font-weight-semibold, 600);
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Couch delivery recent jobs",
++  "tag": null,
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading when couch/sofa jobs are found (H2)",
++      "default": "<h2>Recent couch deliveries</h2>"
++    },
++    {
++      "type": "richtext",
++      "id": "fallback_heading",
++      "label": "Heading when no couch/sofa jobs exist yet (H2)",
++      "default": "<h2>Recent Titan Express deliveries</h2>"
++    },
++    {
++      "type": "range",
++      "id": "max_jobs",
++      "label": "Maximum jobs to show",
++      "min": 1,
++      "max": 6,
++      "step": 1,
++      "default": 3
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    }
++  ],
++  "presets": [
++    {
++      "name": "Couch delivery recent jobs"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/blocks/service-areas.liquid b/blocks/service-areas.liquid
+new file mode 100644
+index 0000000..5fb990b
+--- /dev/null
++++ b/blocks/service-areas.liquid
+@@ -0,0 +1,168 @@
++{%- doc -%}
++  Couch Delivery Sydney - service areas block.
++
++  Renders an H2, a short intro, and a list of Sydney regions as plain text
++  chips (no links). Deliberately avoids generating dozens of per-suburb
++  links; only two known-existing internal pages are linked, both passed in
++  as explicit URL settings so no link can point to a page that does not
++  exist in the store.
++{%- enddoc -%}
++
++{% liquid
++  assign block_settings = block.settings
++  assign areas = block_settings.areas | newline_to_br | split: '<br />'
++%}
++
++<div
++  class="service-areas service-areas--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
++  style="{% render 'spacing-style', settings: block_settings %}"
++  {{ block.shopify_attributes }}
++>
++  <div class="service-areas__inner">
++    {{ block_settings.heading }}
++
++    {%- if block_settings.intro != blank -%}
++      <p class="service-areas__intro">{{ block_settings.intro }}</p>
++    {%- endif -%}
++
++    <ul class="service-areas__list" role="list">
++      {%- for area in areas -%}
++        {%- assign area_trimmed = area | strip -%}
++        {%- if area_trimmed != blank -%}
++          <li class="service-areas__chip">{{ area_trimmed }}</li>
++        {%- endif -%}
++      {%- endfor -%}
++    </ul>
++
++    {%- if block_settings.note != blank -%}
++      <p class="service-areas__note">
++        {{ block_settings.note }}
++        {%- if block_settings.related_link_text != blank and block_settings.related_link_url != blank -%}
++          <a href="{{ block_settings.related_link_url }}">{{ block_settings.related_link_text }}</a>.
++        {%- endif -%}
++      </p>
++    {%- endif -%}
++  </div>
++</div>
++
++{% stylesheet %}
++  .service-areas__inner {
++    max-width: var(--page-width, 1280px);
++    margin-inline: auto;
++    padding-inline: var(--padding-md, 16px);
++  }
++
++  .service-areas__intro {
++    max-width: 65ch;
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++    margin-block: 0 var(--margin-lg, 20px);
++  }
++
++  .service-areas__list {
++    display: flex;
++    flex-wrap: wrap;
++    gap: 10px;
++    list-style: none;
++    margin: 0 0 var(--margin-lg, 20px);
++    padding: 0;
++  }
++
++  .service-areas__chip {
++    padding: 8px 16px;
++    border-radius: 999px;
++    background: rgb(var(--color-foreground-rgb) / var(--opacity-5-15, 0.05));
++    font-size: var(--font-paragraph-small--size, 0.9rem);
++    font-weight: var(--font-weight-medium, 500);
++  }
++
++  .service-areas__note {
++    margin: 0;
++    font-size: var(--font-paragraph-small--size, 0.9rem);
++    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
++  }
++{% endstylesheet %}
++
++{% schema %}
++{
++  "name": "Couch delivery service areas",
++  "tag": null,
++  "settings": [
++    {
++      "type": "richtext",
++      "id": "heading",
++      "label": "Heading (H2)",
++      "default": "<h2>Couch delivery across Sydney</h2>"
++    },
++    {
++      "type": "text",
++      "id": "intro",
++      "label": "Intro text",
++      "default": "We deliver couches and sofas to homes and businesses throughout greater Sydney, including:"
++    },
++    {
++      "type": "textarea",
++      "id": "areas",
++      "label": "Service areas (one per line)",
++      "default": "Parramatta\nInner West\nRyde\nChatswood\nNorth Sydney\nEastern Suburbs\nLiverpool\nBankstown\nBlacktown\nHills District\nSt George\nSutherland Shire"
++    },
++    {
++      "type": "text",
++      "id": "note",
++      "label": "Note",
++      "default": "Not sure if we cover your suburb? Call us and we will confirm. See our"
++    },
++    {
++      "type": "text",
++      "id": "related_link_text",
++      "label": "Related page link text",
++      "default": "Ryde furniture delivery page"
++    },
++    {
++      "type": "url",
++      "id": "related_link_url",
++      "label": "Related page link URL",
++      "info": "Only link to a page that already exists in the store, e.g. /pages/furniture-delivery-ryde",
++      "default": "/pages/furniture-delivery-ryde"
++    },
++    {
++      "type": "header",
++      "content": "Appearance"
++    },
++    {
++      "type": "color_scheme",
++      "id": "color_scheme",
++      "label": "Color scheme",
++      "default": "scheme-1"
++    },
++    {
++      "type": "header",
++      "content": "Padding"
++    },
++    {
++      "type": "range",
++      "id": "padding-block-start",
++      "label": "Top",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    },
++    {
++      "type": "range",
++      "id": "padding-block-end",
++      "label": "Bottom",
++      "min": 0,
++      "max": 100,
++      "step": 1,
++      "unit": "px",
++      "default": 48
++    }
++  ],
++  "presets": [
++    {
++      "name": "Couch delivery service areas"
++    }
++  ]
++}
++{% endschema %}
+diff --git a/templates/page.couch-delivery-sydney.json b/templates/page.couch-delivery-sydney.json
+new file mode 100644
+index 0000000..3b136ff
+--- /dev/null
++++ b/templates/page.couch-delivery-sydney.json
+@@ -0,0 +1,517 @@
++{
++  "sections": {
++    "hero": {
++      "type": "_blocks",
++      "blocks": {
++        "hero-block": {
++          "type": "couch-delivery-hero",
++          "settings": {}
++        }
++      },
++      "block_order": ["hero-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "intro": {
++      "type": "_blocks",
++      "blocks": {
++        "intro-block": {
++          "type": "couch-delivery-intro",
++          "settings": {}
++        }
++      },
++      "block_order": ["intro-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "couch-types": {
++      "type": "_blocks",
++      "blocks": {
++        "grid-block": {
++          "type": "feature-grid",
++          "settings": {
++            "heading": "<h2>Couch Types We Deliver</h2>",
++            "intro": "",
++            "columns_desktop": 4,
++            "cta_label": "",
++            "cta_link": ""
++          }
++        },
++        "item-1": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Two-seater couches",
++            "text": "Compact two-seater sofas moved safely through tight doorways and stairwells.",
++            "icon": "sofa-2"
++          }
++        },
++        "item-2": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Three-seater couches",
++            "text": "Full-size three-seater lounges wrapped and secured for the trip.",
++            "icon": "sofa-3"
++          }
++        },
++        "item-3": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Modular sofas",
++            "text": "Multi-piece modular sofas broken down, protected and reassembled on delivery.",
++            "icon": "modular"
++          }
++        },
++        "item-4": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Sofa beds",
++            "text": "Heavier sofa beds handled with the right lifting technique and equipment.",
++            "icon": "sofa-bed"
++          }
++        },
++        "item-5": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Recliner couches",
++            "text": "Manual and powered recliners moved carefully to protect the reclining mechanism.",
++            "icon": "recliner"
++          }
++        },
++        "item-6": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Corner lounges",
++            "text": "Large corner and L-shaped lounges measured for access before pickup.",
++            "icon": "corner"
++          }
++        },
++        "item-7": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Leather sofas",
++            "text": "Leather sofas wrapped in protective blankets to avoid scuffs and scratches.",
++            "icon": "leather"
++          }
++        },
++        "item-8": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Marketplace purchases",
++            "text": "Couches bought on Facebook Marketplace or Gumtree collected straight from the seller.",
++            "icon": "marketplace"
++          }
++        }
++      },
++      "block_order": ["grid-block", "item-1", "item-2", "item-3", "item-4", "item-5", "item-6", "item-7", "item-8"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "how-it-works": {
++      "type": "_blocks",
++      "blocks": {
++        "steps-block": {
++          "type": "process-steps",
++          "settings": {
++            "heading": "<h2>How the Service Works</h2>",
++            "intro": "",
++            "cta_label": "Start Your Quote",
++            "cta_link": "#main-quote"
++          }
++        },
++        "step-1": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Send pickup and delivery suburbs",
++            "text": "Tell us where the couch is coming from and where it is going."
++          }
++        },
++        "step-2": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Send a couch photo and access details",
++            "text": "A quick photo plus stairs, lift or parking details helps us plan the job."
++          }
++        },
++        "step-3": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Receive a confirmed quote",
++            "text": "We confirm an upfront price and a pickup window before you book."
++          }
++        },
++        "step-4": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "We collect, protect and deliver",
++            "text": "Your couch is wrapped, secured and delivered safely to its new address."
++          }
++        }
++      },
++      "block_order": ["steps-block", "step-1", "step-2", "step-3", "step-4"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "main-quote-form": {
++      "type": "_blocks",
++      "blocks": {
++        "quote-form-block": {
++          "type": "ai_gen_block_8e89168",
++          "settings": {
++            "badge_text": "Quote in 2 minutes",
++            "heading": "Get Your Couch Delivery Quote",
++            "subheading": "Sofa & Couch Delivery • Marketplace Pickup • Sydney Wide",
++            "button_text": "Get My Quote Now",
++            "trust_item_1": "Same-Day Where Available",
++            "trust_item_2": "Protective Equipment Used",
++            "trust_item_3": "Sydney Wide",
++            "trust_item_4": "Experienced Handling",
++            "success_heading": "Quote Request Sent",
++            "success_message": "Thanks for contacting Titan Express. We have received your couch delivery quote request and will contact you shortly.",
++            "success_note": "We usually respond during business hours."
++          }
++        }
++      },
++      "block_order": ["quote-form-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "why-choose-us": {
++      "type": "_blocks",
++      "blocks": {
++        "grid-block": {
++          "type": "feature-grid",
++          "settings": {
++            "heading": "<h2>Why Choose Titan Express</h2>",
++            "intro": "",
++            "columns_desktop": 4,
++            "cta_label": "",
++            "cta_link": ""
++          }
++        },
++        "item-1": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Oversized high-roof van",
++            "text": "Built for large single items like couches, not squeezed in with other jobs.",
++            "icon": "van"
++          }
++        },
++        "item-2": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Furniture blankets",
++            "text": "Every couch is wrapped in protective blankets before it moves.",
++            "icon": "blanket"
++          }
++        },
++        "item-3": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Trolley and straps",
++            "text": "The right equipment for stairs, ramps and long driveways.",
++            "icon": "trolley"
++          }
++        },
++        "item-4": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Experienced furniture handling",
++            "text": "Our team handles awkward, heavy and fragile pieces regularly.",
++            "icon": "experience"
++          }
++        },
++        "item-5": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Single-item specialists",
++            "text": "We are set up for one-item jobs, not only full house removals.",
++            "icon": "single-item"
++          }
++        },
++        "item-6": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Sydney-wide pickup and delivery",
++            "text": "Pickup in one suburb, delivery in another, anywhere across Sydney.",
++            "icon": "map"
++          }
++        },
++        "item-7": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "One-man and two-man options",
++            "text": "The right number of workers for the couch size and access, confirmed with your quote.",
++            "icon": "two-workers"
++          }
++        }
++      },
++      "block_order": ["grid-block", "item-1", "item-2", "item-3", "item-4", "item-5", "item-6", "item-7"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "pricing": {
++      "type": "_blocks",
++      "blocks": {
++        "grid-block": {
++          "type": "feature-grid",
++          "settings": {
++            "heading": "<h2>What Affects Your Couch Delivery Price?</h2>",
++            "intro": "We do not publish fixed prices because every couch delivery is different. Your quote is based on:",
++            "columns_desktop": 3,
++            "cta_label": "Request an Exact Quote",
++            "cta_link": "#main-quote"
++          }
++        },
++        "item-1": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Pickup and delivery suburbs",
++            "text": "",
++            "icon": "location"
++          }
++        },
++        "item-2": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Couch size and configuration",
++            "text": "",
++            "icon": "size"
++          }
++        },
++        "item-3": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Stairs or lift access",
++            "text": "",
++            "icon": "stairs"
++          }
++        },
++        "item-4": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Parking distance",
++            "text": "",
++            "icon": "parking"
++          }
++        },
++        "item-5": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Number of workers required",
++            "text": "",
++            "icon": "workers"
++          }
++        },
++        "item-6": {
++          "type": "_feature-grid-item",
++          "settings": {
++            "heading": "Urgency and preferred time",
++            "text": "",
++            "icon": "clock"
++          }
++        }
++      },
++      "block_order": ["grid-block", "item-1", "item-2", "item-3", "item-4", "item-5", "item-6"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "marketplace-pickup": {
++      "type": "_blocks",
++      "blocks": {
++        "steps-block": {
++          "type": "process-steps",
++          "settings": {
++            "heading": "<h2>Facebook Marketplace Couch Pickup</h2>",
++            "intro": "Bought a couch through Facebook Marketplace or another online seller? We handle the pickup and delivery from start to finish.",
++            "cta_label": "Get Marketplace Pickup Quote",
++            "cta_link": "#main-quote"
++          }
++        },
++        "step-1": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Pickup directly from the seller",
++            "text": "We collect the couch straight from the seller's home or address."
++          }
++        },
++        "step-2": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Coordinating pickup timing",
++            "text": "We confirm a pickup time that works for the seller and for you."
++          }
++        },
++        "step-3": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Checking access before collection",
++            "text": "We check stairs, lifts and parking so the pickup goes smoothly."
++          }
++        },
++        "step-4": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Protecting the couch during transport",
++            "text": "The couch is wrapped in blankets and secured in our van for the trip."
++          }
++        },
++        "step-5": {
++          "type": "_process-step-item",
++          "settings": {
++            "heading": "Delivering to the buyer's address",
++            "text": "We deliver straight to your home, apartment or office."
++          }
++        }
++      },
++      "block_order": ["steps-block", "step-1", "step-2", "step-3", "step-4", "step-5"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "service-areas": {
++      "type": "_blocks",
++      "blocks": {
++        "areas-block": {
++          "type": "service-areas",
++          "settings": {}
++        }
++      },
++      "block_order": ["areas-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "recent-jobs": {
++      "type": "_blocks",
++      "blocks": {
++        "jobs-block": {
++          "type": "recent-jobs-couch",
++          "settings": {}
++        }
++      },
++      "block_order": ["jobs-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "faq": {
++      "type": "_blocks",
++      "blocks": {
++        "faq-block": {
++          "type": "couch-faq",
++          "settings": {
++            "heading": "<h2>Couch Delivery FAQs</h2>"
++          },
++          "blocks": {
++            "faq-1": {
++              "type": "_faq-item",
++              "settings": {
++                "question": "How much does couch delivery cost in Sydney?",
++                "answer": "<p>Couch delivery pricing depends on the pickup and delivery suburbs, the size and configuration of the couch, whether stairs or lift access is involved, parking distance, how many workers are needed, and how urgent the job is. Send us these details and we will give you an exact, upfront quote before booking.</p>"
++              }
++            },
++            "faq-2": {
++              "type": "_faq-item",
++              "settings": {
++                "question": "Can you collect a couch from Facebook Marketplace?",
++                "answer": "<p>Yes. We regularly collect couches and sofas from Facebook Marketplace and other online sellers across Sydney. Send us the listing details, the pickup and delivery suburbs and a photo of the couch, and we will coordinate pickup timing directly with the seller.</p>"
++              }
++            },
++            "faq-3": {
++              "type": "_faq-item",
++              "settings": {
++                "question": "Can you move a couch upstairs?",
++                "answer": "<p>Yes, we regularly deliver couches up and down stairs. Let us know about stairs, lift access or narrow hallways when you request your quote so we can bring the right number of workers and equipment on the day.</p>"
++              }
++            },
++            "faq-4": {
++              "type": "_faq-item",
++              "settings": {
++                "question": "Do you protect couches during delivery?",
++                "answer": "<p>Yes. Every couch is wrapped in protective blankets and secured with straps in our van, and we use a trolley to move it safely across floors, hallways and driveways.</p>"
++              }
++            },
++            "faq-5": {
++              "type": "_faq-item",
++              "settings": {
++                "question": "Can you deliver a sofa on the same day?",
++                "answer": "<p>Same-day couch delivery is available where scheduling allows. Contact us as early in the day as possible with your pickup and delivery suburbs so we can confirm whether a same-day slot is free.</p>"
++              }
++            },
++            "faq-6": {
++              "type": "_faq-item",
++              "settings": {
++                "question": "Do I need to help with lifting?",
++                "answer": "<p>No. Our team brings a trolley and straps and handles the lifting and carrying. If a job needs two workers because of the couch size or stairs, we will let you know when confirming your quote.</p>"
++              }
++            },
++            "faq-7": {
++              "type": "_faq-item",
++              "settings": {
++                "question": "Can you move modular and sofa-bed couches?",
++                "answer": "<p>Yes. We deliver modular sofas, sofa beds, corner lounges, recliners and other large or heavy configurations. Let us know the couch type and how many sections it has so we can plan the right van space and access.</p>"
++              }
++            }
++          },
++          "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7"]
++        }
++      },
++      "block_order": ["faq-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "final-cta": {
++      "type": "_blocks",
++      "blocks": {
++        "cta-block": {
++          "type": "final-cta",
++          "settings": {}
++        }
++      },
++      "block_order": ["cta-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    },
++    "schema": {
++      "type": "_blocks",
++      "blocks": {
++        "schema-block": {
++          "type": "couch-delivery-schema",
++          "settings": {
++            "service_name": "Couch Delivery Sydney",
++            "service_type": "Couch and sofa pickup and delivery",
++            "description": "Need a couch picked up and delivered in Sydney? Titan Express provides careful sofa and Marketplace couch delivery with the right van, equipment and experienced handling."
++          }
++        }
++      },
++      "block_order": ["schema-block"],
++      "settings": {
++        "section_width": "page-width"
++      }
++    }
++  },
++  "order": [
++    "hero",
++    "intro",
++    "couch-types",
++    "how-it-works",
++    "main-quote-form",
++    "why-choose-us",
++    "pricing",
++    "marketplace-pickup",
++    "service-areas",
++    "recent-jobs",
++    "faq",
++    "final-cta",
++    "schema"
++  ]
++}
+-- 
+2.43.0
+
