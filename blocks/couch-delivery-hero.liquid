@@ -1,0 +1,367 @@
+{%- doc -%}
+  Couch Delivery Sydney - hero block.
+
+  Renders the single visible H1 for the couch delivery landing page, a short
+  subheading, primary CTAs (call + scroll-to-quote-form) and a trust row.
+  The quote button links to the existing Main Quote Form (#main-quote) rather
+  than creating a new form.
+
+  @param {string} [heading] - block.settings.heading
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign tel_digits = block_settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
+
+  assign matched_rating_total = 0
+  assign matched_rating_count = 0
+  for job in shop.metaobjects.recent_jobs.values
+    assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | downcase
+    if haystack contains 'sofa' or haystack contains 'couch'
+      if job.rating.value != blank
+        assign matched_rating_total = matched_rating_total | plus: 0.0 | plus: job.rating.value
+        assign matched_rating_count = matched_rating_count | plus: 1
+      endif
+    endif
+  endfor
+  if matched_rating_count > 0
+    assign trust_rating = matched_rating_total | divided_by: matched_rating_count | round: 1
+  endif
+%}
+
+<div
+  class="couch-hero couch-hero--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="couch-hero__inner">
+    <div class="couch-hero__content">
+      {{ block_settings.heading }}
+
+      {%- if block_settings.subheading != blank -%}
+        <p class="couch-hero__subheading">{{ block_settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="couch-hero__ctas">
+        {%- if block_settings.phone_number != blank -%}
+          <a
+            href="tel:{{ tel_digits }}"
+            class="button-secondary couch-hero__cta"
+          >
+            {{- block_settings.call_button_text -}}
+          </a>
+        {%- endif -%}
+        <a
+          href="{{ block_settings.quote_anchor }}"
+          class="button couch-hero__cta"
+        >
+          {{- block_settings.quote_button_text -}}
+        </a>
+      </div>
+
+      {%- if trust_rating != blank -%}
+        <p class="couch-hero__rating">
+          <span aria-hidden="true">&#9733;</span>
+          {{ trust_rating }} rated on our most recent Sydney couch deliveries
+        </p>
+      {%- elsif block_settings.fallback_trust_text != blank -%}
+        <p class="couch-hero__rating">{{ block_settings.fallback_trust_text }}</p>
+      {%- endif -%}
+
+      <ul class="couch-hero__badges" role="list">
+        {%- if block_settings.badge_1 != blank -%}
+          <li class="couch-hero__badge">
+            <span class="couch-hero__badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="10" rx="1"></rect></svg>
+            </span>
+            {{ block_settings.badge_1 }}
+          </li>
+        {%- endif -%}
+        {%- if block_settings.badge_2 != blank -%}
+          <li class="couch-hero__badge">
+            <span class="couch-hero__badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect></svg>
+            </span>
+            {{ block_settings.badge_2 }}
+          </li>
+        {%- endif -%}
+        {%- if block_settings.badge_3 != blank -%}
+          <li class="couch-hero__badge">
+            <span class="couch-hero__badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="19" r="2"></circle><circle cx="17" cy="19" r="2"></circle></svg>
+            </span>
+            {{ block_settings.badge_3 }}
+          </li>
+        {%- endif -%}
+        {%- if block_settings.badge_4 != blank -%}
+          <li class="couch-hero__badge">
+            <span class="couch-hero__badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </span>
+            {{ block_settings.badge_4 }}
+          </li>
+        {%- endif -%}
+        {%- if block_settings.badge_5 != blank -%}
+          <li class="couch-hero__badge">
+            <span class="couch-hero__badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg>
+            </span>
+            {{ block_settings.badge_5 }}
+          </li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    {%- if block_settings.image != blank -%}
+      <div class="couch-hero__media">
+        <img
+          src="{{ block_settings.image | image_url: width: 1200 }}"
+          srcset="{{ block_settings.image | image_url: width: 600 }} 600w, {{ block_settings.image | image_url: width: 900 }} 900w, {{ block_settings.image | image_url: width: 1200 }} 1200w"
+          sizes="(min-width: 750px) 45vw, 100vw"
+          alt="{{ block_settings.image.alt | default: 'Titan Express van used for couch delivery in Sydney' | escape }}"
+          width="{{ block_settings.image.width }}"
+          height="{{ block_settings.image.height }}"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .couch-hero {
+    padding-block: var(--padding-2xl);
+  }
+
+  .couch-hero__inner {
+    max-width: var(--page-width, 1280px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-xl, 32px);
+    align-items: center;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .couch-hero__inner {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+
+  .couch-hero__content h1 {
+    margin: 0 0 var(--margin-sm, 12px);
+  }
+
+  .couch-hero__subheading {
+    font-size: var(--font-paragraph-medium--size, 1.125rem);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
+    margin: 0 0 var(--margin-lg, 20px);
+    max-width: 46ch;
+  }
+
+  .couch-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-sm, 12px);
+    margin-bottom: var(--margin-lg, 20px);
+  }
+
+  .couch-hero__cta {
+    text-align: center;
+  }
+
+  .couch-hero__rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: var(--font-weight-semibold, 600);
+    margin: 0 0 var(--margin-md, 16px);
+  }
+
+  .couch-hero__badges {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media screen and (min-width: 990px) {
+    .couch-hero__badges {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .couch-hero__badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--font-paragraph-small--size, 0.875rem);
+  }
+
+  .couch-hero__badge-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+  }
+
+  .couch-hero__badge-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .couch-hero__media img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--style-border-radius-buttons-primary, 8px);
+    display: block;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Couch delivery hero",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H1)",
+      "default": "<h1>Couch Delivery Sydney</h1>",
+      "info": "Keep this the only H1 on the page."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Careful couch and sofa pickup and delivery across Sydney, including Marketplace purchases and single-item moves."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469 717 535"
+    },
+    {
+      "type": "text",
+      "id": "call_button_text",
+      "label": "Call button label",
+      "default": "Call Now"
+    },
+    {
+      "type": "text",
+      "id": "quote_button_text",
+      "label": "Quote button label",
+      "default": "Get a Free Quote"
+    },
+    {
+      "type": "text",
+      "id": "quote_anchor",
+      "label": "Quote form anchor",
+      "default": "#main-quote",
+      "info": "Must match the ID of the existing Main Quote Form. Do not change unless the form ID changes."
+    },
+    {
+      "type": "header",
+      "content": "Trust signal"
+    },
+    {
+      "type": "text",
+      "id": "fallback_trust_text",
+      "label": "Fallback trust text",
+      "default": "Trusted by Sydney households and Marketplace buyers for careful couch handling.",
+      "info": "Shown only when no rated couch/sofa jobs are available yet. When rated jobs exist in the Recent Jobs metaobject, a real average rating is shown instead."
+    },
+    {
+      "type": "header",
+      "content": "Service badges"
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge 1",
+      "default": "Oversized van"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge 2",
+      "default": "Protective blankets"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Badge 3",
+      "default": "Trolley and straps"
+    },
+    {
+      "type": "text",
+      "id": "badge_4",
+      "label": "Badge 4",
+      "default": "Same-day availability where scheduling allows"
+    },
+    {
+      "type": "text",
+      "id": "badge_5",
+      "label": "Badge 5",
+      "default": "Sydney-wide service"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "Couch delivery hero"
+    }
+  ]
+}
+{% endschema %}
