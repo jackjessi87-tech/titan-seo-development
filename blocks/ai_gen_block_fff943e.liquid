@@ -1,0 +1,1304 @@
+{% doc %}
+  @prompt
+    Create a premium full-width hero section for Titan Express Removalist Sydney.
+    
+    STYLE:
+    
+    Modern removalist and logistics company
+    
+    White background with subtle gradients
+    
+    Premium corporate appearance
+    
+    Google Ads landing page optimized
+    
+    Mobile-first responsive design
+    
+    Fast loading and SEO friendly
+    
+    Professional SVG icons only
+    
+    Large visual image on the right side
+    
+    Content on the left side
+    
+    Glassmorphism and soft shadow effects
+    
+    High trust and conversion focused
+    
+    LEFT SIDE CONTENT:
+    
+    Main Heading:
+    SAME DAY
+    FURNITURE REMOVALIST
+    SYDNEY
+    
+    Heading Style:
+    
+    Bold uppercase
+    
+    Black and red colors
+    
+    Dynamic red speed arrow cutting through heading
+    
+    Similar style to professional transport company branding
+    
+    Modern typography
+    
+    Strong visual hierarchy
+    
+    Sub Heading:
+    Fast, Reliable and Affordable Furniture Delivery Across Sydney.
+    
+    Trust Points:
+    ✓ Same Day Service Available
+    ✓ Fully Insured Transport
+    ✓ Professional Removalist Team
+    ✓ Furniture Protected With Blankets & Straps
+    ✓ Marketplace Pickups & Deliveries
+    
+    Buttons:
+    Primary Button:
+    GET FREE QUOTE
+    
+    Secondary Button:
+    CALL NOW 0469 717 535
+    
+    Google Reviews Section:
+    ★★★★★ 5.0 Rating
+    Based on Verified Customer Reviews
+    
+    RIGHT SIDE VISUAL:
+    
+    Create a realistic hero image showing:
+    
+    White Renault Master van branded TITAN EXPRESS
+    
+    Professional mover wearing black uniform
+    
+    Hand trolley loaded with furniture cartons
+    
+    Van rear doors open
+    
+    Furniture blankets visible inside
+    
+    Residential Sydney home background
+    
+    Clean driveway
+    
+    Premium photography style
+    
+    Bright natural lighting
+    
+    High trust appearance
+    
+    BOTTOM TRUST CARDS:
+    
+    Card 1:
+    Same Day Delivery
+    
+    Card 2:
+    Fully Insured
+    
+    Card 3:
+    Experienced Team
+    
+    Card 4:
+    Affordable Pricing
+    
+    Card 5:
+    Furniture Protected
+    
+    ADVANCED FEATURES:
+    
+    Sticky mobile call button
+    
+    Sticky quote button
+    
+    Lazy load images
+    
+    WebP image support
+    
+    Optimized for Google Ads Quality Score
+    
+    Optimized for Core Web Vitals
+    
+    Optimized for mobile conversions
+    
+    Auto image compression
+    
+    Structured data ready
+    
+    KEYWORDS:
+    Furniture Removalist Sydney
+    Furniture Delivery Sydney
+    Man With A Van Sydney
+    Small Moves Sydney
+    Marketplace Pickup Sydney
+    Same Day Furniture Delivery Sydney
+    
+    Design must look like a premium national logistics company website, not a basic local tradesman website., allow Bacn=kground image Behind the Text , Ad a Small Photo infront of the Heading on mobile Keep Everyting same its like heading with Arrow Pointing towards phot givign glimpse of service, no need background image only Preview Image But infront of the Text on the Right side of the screen next to Text , Make It Mobile responsive Ad another image Infrom of  the subheading on right corner just below the Text  Remove Floating Buttons , Hide Preview phtoos On desktop Also Ad Seo Factors For the Preview Photos ad small Tags on Photos with small Text make it look like embeded photos with mergeing effects remove Get A Quote And Call Button  ad a Merging Effect to make look like to Images are connect , remove Padding from top or allow adjustable Moving the Whole Section up
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: {{ block.settings.background_color }};
+  }
+
+  .titan-hero-container-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: {{ block.settings.section_padding_top_mobile }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom_mobile }}px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .titan-hero-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .titan-hero-content-{{ ai_gen_id }} {
+    order: 1;
+  }
+
+  .titan-hero-heading-with-preview-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .titan-hero-preview-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    flex-shrink: 0;
+    order: 2;
+  }
+
+  .titan-hero-preview-image-{{ ai_gen_id }} {
+    width: {{ block.settings.preview_size_mobile }}px;
+    height: {{ block.settings.preview_size_mobile }}px;
+    border-radius: {{ block.settings.preview_radius }}px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: {{ block.settings.photo_border_width }}px solid {{ block.settings.photo_border_color }};
+    position: relative;
+  }
+
+  .titan-hero-preview-placeholder-{{ ai_gen_id }} {
+    width: {{ block.settings.preview_size_mobile }}px;
+    height: {{ block.settings.preview_size_mobile }}px;
+    border-radius: {{ block.settings.preview_radius }}px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: {{ block.settings.photo_border_width }}px solid {{ block.settings.photo_border_color }};
+  }
+
+  .titan-hero-preview-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .titan-hero-photo-tag-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: {{ block.settings.tag_bg_color }};
+    color: {{ block.settings.tag_text_color }};
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: {{ block.settings.tag_font_size }}px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+  }
+
+  .titan-hero-heading-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    flex: 1;
+    order: 1;
+  }
+
+  .titan-hero-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .titan-hero-heading-line-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .titan-hero-heading-accent-{{ ai_gen_id }} {
+    color: {{ block.settings.accent_color }};
+    position: relative;
+    display: inline-block;
+  }
+
+  .titan-hero-arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    right: -10px;
+    height: 8px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .titan-hero-arrow-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .titan-hero-subheading-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .titan-hero-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size_mobile }}px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .titan-hero-subheading-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    flex-shrink: 0;
+    order: 2;
+  }
+
+  .titan-hero-subheading-image-{{ ai_gen_id }} {
+    width: {{ block.settings.subheading_image_size_mobile }}px;
+    height: {{ block.settings.subheading_image_size_mobile }}px;
+    border-radius: {{ block.settings.subheading_image_radius }}px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: {{ block.settings.photo_border_width }}px solid {{ block.settings.photo_border_color }};
+  }
+
+  .titan-hero-subheading-image-placeholder-{{ ai_gen_id }} {
+    width: {{ block.settings.subheading_image_size_mobile }}px;
+    height: {{ block.settings.subheading_image_size_mobile }}px;
+    border-radius: {{ block.settings.subheading_image_radius }}px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: {{ block.settings.photo_border_width }}px solid {{ block.settings.photo_border_color }};
+  }
+
+  .titan-hero-subheading-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .titan-hero-trust-points-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+  }
+
+  .titan-hero-trust-point-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: {{ block.settings.trust_point_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+  }
+
+  .titan-hero-check-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+  }
+
+  .titan-hero-check-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.accent_color }};
+  }
+
+  .titan-hero-reviews-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: {{ block.settings.reviews_bg }};
+    border-radius: {{ block.settings.reviews_border_radius }}px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .titan-hero-stars-{{ ai_gen_id }} {
+    display: flex;
+    gap: 4px;
+  }
+
+  .titan-hero-star-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+    fill: {{ block.settings.star_color }};
+  }
+
+  .titan-hero-reviews-text-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .titan-hero-rating-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .titan-hero-reviews-count-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .titan-hero-image-wrapper-{{ ai_gen_id }} {
+    order: 2;
+    position: relative;
+  }
+
+  .titan-hero-image-container-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .titan-hero-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .titan-hero-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .titan-hero-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .titan-hero-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .titan-hero-merge-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, 
+      {{ block.settings.background_color }} 0%, 
+      transparent 50%, 
+      {{ block.settings.background_color }} 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .titan-hero-trust-cards-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 40px;
+  }
+
+  .titan-hero-trust-card-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 16px;
+    background: {{ block.settings.card_bg }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .titan-hero-trust-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .titan-hero-card-icon-{{ ai_gen_id }} {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+    fill: {{ block.settings.accent_color }};
+  }
+
+  .titan-hero-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .titan-hero-container-{{ ai_gen_id }} {
+      padding-top: {{ block.settings.section_padding_top_desktop }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_desktop }}px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .titan-hero-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .titan-hero-content-{{ ai_gen_id }} {
+      order: 1;
+    }
+
+    .titan-hero-image-wrapper-{{ ai_gen_id }} {
+      order: 2;
+    }
+
+    .titan-hero-heading-with-preview-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .titan-hero-preview-image-wrapper-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .titan-hero-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+
+    .titan-hero-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size_desktop }}px;
+    }
+
+    .titan-hero-subheading-image-{{ ai_gen_id }} {
+      width: {{ block.settings.subheading_image_size_desktop }}px;
+      height: {{ block.settings.subheading_image_size_desktop }}px;
+    }
+
+    .titan-hero-subheading-image-placeholder-{{ ai_gen_id }} {
+      width: {{ block.settings.subheading_image_size_desktop }}px;
+      height: {{ block.settings.subheading_image_size_desktop }}px;
+    }
+
+    .titan-hero-trust-cards-{{ ai_gen_id }} {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .titan-hero-merge-overlay-{{ ai_gen_id }} {
+      left: -60px;
+      width: 120px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .titan-hero-trust-cards-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .titan-hero-trust-cards-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<titan-hero-{{ ai_gen_id }} class="titan-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="titan-hero-container-{{ ai_gen_id }}">
+    <div class="titan-hero-grid-{{ ai_gen_id }}">
+      <div class="titan-hero-content-{{ ai_gen_id }}">
+        <div class="titan-hero-heading-with-preview-{{ ai_gen_id }}">
+          <div class="titan-hero-heading-wrapper-{{ ai_gen_id }}">
+            <h1 class="titan-hero-heading-{{ ai_gen_id }}">
+              <span class="titan-hero-heading-line-{{ ai_gen_id }}">{{ block.settings.heading_line_1 }}</span>
+              <span class="titan-hero-heading-line-{{ ai_gen_id }} titan-hero-heading-accent-{{ ai_gen_id }}">
+                {{ block.settings.heading_line_2 }}
+                {% if block.settings.show_arrow %}
+                  <span class="titan-hero-arrow-{{ ai_gen_id }}">
+                    <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 10 L180 10 M170 2 L190 10 L170 18" stroke="{{ block.settings.accent_color }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                {% endif %}
+              </span>
+              <span class="titan-hero-heading-line-{{ ai_gen_id }}">{{ block.settings.heading_line_3 }}</span>
+            </h1>
+          </div>
+
+          {% if block.settings.show_preview %}
+            <div class="titan-hero-preview-image-wrapper-{{ ai_gen_id }}">
+              {% if block.settings.preview_image %}
+                <img
+                  src="{{ block.settings.preview_image | image_url: width: 200 }}"
+                  alt="{{ block.settings.preview_image_alt }}"
+                  loading="eager"
+                  class="titan-hero-preview-image-{{ ai_gen_id }}"
+                >
+                {% if block.settings.preview_tag != blank %}
+                  <div class="titan-hero-photo-tag-{{ ai_gen_id }}">{{ block.settings.preview_tag }}</div>
+                {% endif %}
+              {% else %}
+                <div class="titan-hero-preview-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+                {% if block.settings.preview_tag != blank %}
+                  <div class="titan-hero-photo-tag-{{ ai_gen_id }}">{{ block.settings.preview_tag }}</div>
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        {% if block.settings.subheading != blank or block.settings.show_subheading_image %}
+          <div class="titan-hero-subheading-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.subheading != blank %}
+              <p class="titan-hero-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+            {% endif %}
+
+            {% if block.settings.show_subheading_image %}
+              <div class="titan-hero-subheading-image-wrapper-{{ ai_gen_id }}">
+                {% if block.settings.subheading_image %}
+                  <img
+                    src="{{ block.settings.subheading_image | image_url: width: 200 }}"
+                    alt="{{ block.settings.subheading_image_alt }}"
+                    loading="eager"
+                    class="titan-hero-subheading-image-{{ ai_gen_id }}"
+                  >
+                  {% if block.settings.subheading_tag != blank %}
+                    <div class="titan-hero-photo-tag-{{ ai_gen_id }}">{{ block.settings.subheading_tag }}</div>
+                  {% endif %}
+                {% else %}
+                  <div class="titan-hero-subheading-image-placeholder-{{ ai_gen_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                  {% if block.settings.subheading_tag != blank %}
+                    <div class="titan-hero-photo-tag-{{ ai_gen_id }}">{{ block.settings.subheading_tag }}</div>
+                  {% endif %}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <ul class="titan-hero-trust-points-{{ ai_gen_id }}">
+          {% if block.settings.trust_point_1 != blank %}
+            <li class="titan-hero-trust-point-{{ ai_gen_id }}">
+              <span class="titan-hero-check-{{ ai_gen_id }}">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.trust_point_1 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.trust_point_2 != blank %}
+            <li class="titan-hero-trust-point-{{ ai_gen_id }}">
+              <span class="titan-hero-check-{{ ai_gen_id }}">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.trust_point_2 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.trust_point_3 != blank %}
+            <li class="titan-hero-trust-point-{{ ai_gen_id }}">
+              <span class="titan-hero-check-{{ ai_gen_id }}">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.trust_point_3 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.trust_point_4 != blank %}
+            <li class="titan-hero-trust-point-{{ ai_gen_id }}">
+              <span class="titan-hero-check-{{ ai_gen_id }}">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.trust_point_4 }}</span>
+            </li>
+          {% endif %}
+          {% if block.settings.trust_point_5 != blank %}
+            <li class="titan-hero-trust-point-{{ ai_gen_id }}">
+              <span class="titan-hero-check-{{ ai_gen_id }}">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.trust_point_5 }}</span>
+            </li>
+          {% endif %}
+        </ul>
+
+        {% if block.settings.show_reviews %}
+          <div class="titan-hero-reviews-{{ ai_gen_id }}">
+            <div class="titan-hero-stars-{{ ai_gen_id }}">
+              {% for i in (1..5) %}
+                <svg class="titan-hero-star-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              {% endfor %}
+            </div>
+            <div class="titan-hero-reviews-text-{{ ai_gen_id }}">
+              <div class="titan-hero-rating-{{ ai_gen_id }}">{{ block.settings.rating_text }}</div>
+              <div class="titan-hero-reviews-count-{{ ai_gen_id }}">{{ block.settings.reviews_text }}</div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="titan-hero-image-wrapper-{{ ai_gen_id }}">
+        <div class="titan-hero-image-container-{{ ai_gen_id }}">
+          {% if block.settings.show_merge_effect %}
+            <div class="titan-hero-merge-overlay-{{ ai_gen_id }}"></div>
+          {% endif %}
+          {% if block.settings.hero_image %}
+            <img
+              src="{{ block.settings.hero_image | image_url: width: 1200 }}"
+              alt="{{ block.settings.hero_image_alt }}"
+              loading="eager"
+              width="{{ block.settings.hero_image.width }}"
+              height="{{ block.settings.hero_image.height }}"
+              class="titan-hero-image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="titan-hero-image-placeholder-{{ ai_gen_id }}">
+              {{ 'hero-apparel-1' | placeholder_svg_tag }}
+              <div class="titan-hero-empty-state-{{ ai_gen_id }}">
+                Add your hero image
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="titan-hero-trust-cards-{{ ai_gen_id }}">
+      {% if block.settings.card_1_title != blank %}
+        <div class="titan-hero-trust-card-{{ ai_gen_id }}">
+          <svg class="titan-hero-card-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+          </svg>
+          <h3 class="titan-hero-card-title-{{ ai_gen_id }}">{{ block.settings.card_1_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.card_2_title != blank %}
+        <div class="titan-hero-trust-card-{{ ai_gen_id }}">
+          <svg class="titan-hero-card-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+          </svg>
+          <h3 class="titan-hero-card-title-{{ ai_gen_id }}">{{ block.settings.card_2_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.card_3_title != blank %}
+        <div class="titan-hero-trust-card-{{ ai_gen_id }}">
+          <svg class="titan-hero-card-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+          </svg>
+          <h3 class="titan-hero-card-title-{{ ai_gen_id }}">{{ block.settings.card_3_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.card_4_title != blank %}
+        <div class="titan-hero-trust-card-{{ ai_gen_id }}">
+          <svg class="titan-hero-card-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+          </svg>
+          <h3 class="titan-hero-card-title-{{ ai_gen_id }}">{{ block.settings.card_4_title }}</h3>
+        </div>
+      {% endif %}
+      {% if block.settings.card_5_title != blank %}
+        <div class="titan-hero-trust-card-{{ ai_gen_id }}">
+          <svg class="titan-hero-card-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
+          </svg>
+          <h3 class="titan-hero-card-title-{{ ai_gen_id }}">{{ block.settings.card_5_title }}</h3>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</titan-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TitanHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupLazyLoad();
+      }
+
+      setupLazyLoad() {
+        const images = this.querySelectorAll('img[loading="lazy"]');
+        if ('IntersectionObserver' in window) {
+          const imageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                const image = entry.target;
+                image.src = image.dataset.src || image.src;
+                observer.unobserve(image);
+              }
+            });
+          });
+
+          images.forEach(function(img) {
+            imageObserver.observe(img);
+          });
+        }
+      }
+    }
+
+    customElements.define('titan-hero-{{ ai_gen_id }}', TitanHero{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Titan Express hero",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Preview photo"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_preview",
+      "label": "Show preview photo on mobile",
+      "default": true,
+      "info": "Hidden on desktop for cleaner layout"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image",
+      "label": "Preview image"
+    },
+    {
+      "type": "text",
+      "id": "preview_image_alt",
+      "label": "Preview image alt text",
+      "default": "Titan Express removalist service preview"
+    },
+    {
+      "type": "text",
+      "id": "preview_tag",
+      "label": "Preview photo tag",
+      "default": "Fast"
+    },
+    {
+      "type": "range",
+      "id": "preview_size_mobile",
+      "label": "Mobile size",
+      "min": 60,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "preview_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Main heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "SAME DAY"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "FURNITURE REMOVALIST"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading line 3",
+      "default": "SYDNEY"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show speed arrow",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Mobile heading size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Desktop heading size",
+      "min": 40,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Fast, Reliable and Affordable Furniture Delivery Across Sydney."
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Mobile size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "label": "Desktop size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Subheading image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subheading_image",
+      "label": "Show subheading image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "subheading_image",
+      "label": "Subheading image"
+    },
+    {
+      "type": "text",
+      "id": "subheading_image_alt",
+      "label": "Subheading image alt text",
+      "default": "Professional furniture removalist team"
+    },
+    {
+      "type": "text",
+      "id": "subheading_tag",
+      "label": "Subheading photo tag",
+      "default": "Pro"
+    },
+    {
+      "type": "range",
+      "id": "subheading_image_size_mobile",
+      "label": "Mobile size",
+      "min": 60,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "subheading_image_size_desktop",
+      "label": "Desktop size",
+      "min": 80,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "subheading_image_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Photo styling"
+    },
+    {
+      "type": "range",
+      "id": "photo_border_width",
+      "label": "Photo border width",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "photo_border_color",
+      "label": "Photo border color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "tag_bg_color",
+      "label": "Tag background",
+      "default": "#DC2626"
+    },
+    {
+      "type": "color",
+      "id": "tag_text_color",
+      "label": "Tag text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "tag_font_size",
+      "label": "Tag font size",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Trust points"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_1",
+      "label": "Trust point 1",
+      "default": "Same Day Service Available"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_2",
+      "label": "Trust point 2",
+      "default": "Fully Insured Transport"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_3",
+      "label": "Trust point 3",
+      "default": "Professional Removalist Team"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_4",
+      "label": "Trust point 4",
+      "default": "Furniture Protected With Blankets & Straps"
+    },
+    {
+      "type": "text",
+      "id": "trust_point_5",
+      "label": "Trust point 5",
+      "default": "Marketplace Pickups & Deliveries"
+    },
+    {
+      "type": "range",
+      "id": "trust_point_size",
+      "label": "Trust point size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Google reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show reviews section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "5.0 Rating"
+    },
+    {
+      "type": "text",
+      "id": "reviews_text",
+      "label": "Reviews text",
+      "default": "Based on Verified Customer Reviews"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#FFC107"
+    },
+    {
+      "type": "color",
+      "id": "reviews_bg",
+      "label": "Reviews background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "reviews_border_radius",
+      "label": "Reviews border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Titan Express removalist van and professional team in Sydney"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_merge_effect",
+      "label": "Show merge effect",
+      "default": true,
+      "info": "Creates a blending effect between content and image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Trust cards"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 title",
+      "default": "Same Day Delivery"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 title",
+      "default": "Fully Insured"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 title",
+      "default": "Experienced Team"
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Card 4 title",
+      "default": "Affordable Pricing"
+    },
+    {
+      "type": "text",
+      "id": "card_5_title",
+      "label": "Card 5 title",
+      "default": "Furniture Protected"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Card title size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#DC2626"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Mobile bottom padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_desktop",
+      "label": "Desktop top padding",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_desktop",
+      "label": "Desktop bottom padding",
+      "min": 40,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan Express hero"
+    }
+  ]
+}
+{% endschema %}

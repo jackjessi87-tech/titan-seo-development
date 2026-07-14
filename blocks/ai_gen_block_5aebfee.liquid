@@ -1,0 +1,1116 @@
+{% doc %}
+  @prompt
+    Fix and rebuild the Dynamic FAQ section.
+    
+    The current FAQ section is not functional. It is showing the FAQ title/question, but the answer/details are not opening or not displaying correctly.
+    
+    The section must load FAQs from the page metafield:
+    
+    custom.faqs
+    
+    This metafield is a List of FAQ metaobject references.
+    
+    Use this Liquid source:
+    
+    page.metafields.custom.faqs.value
+    
+    Each FAQ metaobject has these field keys:
+    
+    question
+    answer
+    category
+    display_order
+    target_service
+    target_suburb
+    target_item
+    seo_keywords
+    
+    Important:
+    The Answer field is a Rich Text field, so it must be rendered correctly using Shopify Liquid rich text output.
+    
+    Do not hardcode FAQ content.
+    Do not use manual blocks.
+    Loop through the selected FAQ metaobjects.
+    
+    If custom.faqs is empty, hide the full FAQ section.
+    
+    FAQ layout:
+    
+    - Display section heading: Frequently Asked Questions
+    - Display subheading: Helpful answers about our furniture delivery, marketplace pickup, pricing and same-day delivery services.
+    - Display Category as a small badge if it exists.
+    - Display Question as the accordion button.
+    - Display Answer inside the accordion panel.
+    - Hide empty fields.
+    - Sort FAQs by display_order if possible.
+    
+    Accordion behaviour:
+    
+    - First FAQ should be open by default.
+    - Clicking a question opens its answer.
+    - Clicking it again closes it.
+    - Only one FAQ should be open at a time.
+    - Each FAQ must have a unique ID.
+    - Use button elements for questions.
+    - Add aria-expanded and aria-controls.
+    - Make it keyboard accessible.
+    
+    Design:
+    
+    - Premium modern FAQ design.
+    - White rounded cards.
+    - Soft shadow.
+    - Clean spacing.
+    - Mobile friendly.
+    - Plus/minus SVG icon.
+    - Smooth open/close animation.
+    - Maximum width around 900px.
+    - Centered section.
+    
+    SEO:
+    
+    - Use semantic HTML.
+    - Use <section>.
+    - Heading should be <h2>.
+    - Each FAQ should be inside <article>.
+    - Generate FAQPage JSON-LD from the selected FAQ metaobjects.
+    - Use the same Question and Answer values in the schema.
+    - Strip HTML from Answer in schema.
+    - Do not generate schema if there are no FAQs.
+    - Do not generate duplicate schema.
+    
+    Performance:
+    
+    - Use Shopify Liquid.
+    - Use CSS.
+    - Use vanilla JavaScript only.
+    - No jQuery.
+    - No external libraries.
+    
+    Important debugging requirements:
+    
+    - Make sure the answer panel is not hidden permanently by CSS.
+    - Make sure JavaScript targets the correct FAQ buttons and panels.
+    - Make sure rich text answers display properly.
+    - Make sure the section works on both desktop and mobile.
+    - Make sure no answer content appears blank if the metaobject answer field has content.
+    
+    Final goal:
+    
+    A fully working dynamic FAQ accordion that automatically displays all FAQ metaobjects assigned to each page through custom.faqs., Fix the Dynamic FAQ section.
+    
+    The FAQ answer is currently showing raw rich text JSON like:
+    {"type":"root","children"...}
+    
+    This is wrong.
+    
+    The FAQ answer field is a Shopify Rich Text metafield/metaobject field.
+    
+    Render the answer properly as formatted HTML/text, not as raw JSON.
+    
+    Use Shopify Liquid rich text rendering.
+    
+    For each FAQ:
+    
+    {% assign answer_content = faq.answer | metafield_tag %}
+    
+    Display:
+    {{ answer_content }}
+    
+    Do not display:
+    {{ faq.answer }}
+    or
+    {{ faq.answer.value }}
+    
+    because that outputs raw JSON.
+    
+    Also update the FAQPage JSON-LD schema so the answer is converted to plain text by stripping HTML.
+    
+    Requirements:
+    
+    - Load FAQs from page.metafields.custom.faqs.value
+    - Loop through selected FAQ metaobjects
+    - Display category
+    - Display question
+    - Display rich text answer correctly
+    - Accordion must open and close
+    - First FAQ open by default
+    - Hide section if no FAQs exist
+    - Use Liquid, CSS, and vanilla JavaScript only, Make it Mobile Friendly , Create a Shopify section called Dynamic FAQ.
+    
+    Load FAQs from page.metafields.custom.faqs.value.
+    
+    This is a list of FAQ metaobject references.
+    
+    Each FAQ has these fields:
+    question
+    answer
+    category
+    display_order
+    icon
+    helpful_tip
+    cta_text
+    cta_link
+    related_services
+    related_suburbs
+    featured_faq
+    
+    Loop through all selected FAQs.
+    
+    Display:
+    - Category badge
+    - Icon
+    - Question
+    - Answer using metafield_tag because answer is rich text
+    - Helpful Tip using metafield_tag if available
+    - CTA button if CTA Text and CTA Link exist
+    - Related Services as chips
+    - Related Suburbs as chips
+    - Featured badge if Featured FAQ is true
+    
+    Make it a premium accordion:
+    - First FAQ open by default
+    - Only one open at a time
+    - Plus/minus icon
+    - Smooth animation
+    - Mobile friendly
+    - White cards
+    - Rounded corners
+    - Soft shadow
+    - Good spacing
+    
+    Important:
+    For rich text fields, use metafield_tag.
+    Do not output raw JSON.
+    
+    Hide empty fields.
+    Hide entire section if no FAQs are assigned.
+    
+    Generate FAQPage JSON-LD from question and answer.
+    Use plain text for schema answers.
+    Use Liquid, CSS and vanilla JavaScript only.
+    No external libraries.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign faqs = page.metafields.custom.faqs.value %}
+
+{% if faqs.size > 0 %}
+  {% assign sorted_faqs = faqs | sort: 'display_order' %}
+
+  {% style %}
+    .ai-faq-section-{{ ai_gen_id }} {
+      display: block;
+      width: 100%;
+      padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px 20px;
+      background-color: {{ block.settings.background_color }};
+    }
+
+    .ai-faq-container-{{ ai_gen_id }} {
+      max-width: {{ block.settings.max_width }}px;
+      margin: 0 auto;
+    }
+
+    .ai-faq-header-{{ ai_gen_id }} {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .ai-faq-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size }}px;
+      color: {{ block.settings.heading_color }};
+      margin: 0 0 16px 0;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .ai-faq-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size }}px;
+      color: {{ block.settings.text_color }};
+      margin: 0;
+      opacity: 0.8;
+      line-height: 1.6;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ai-faq-list-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+      gap: {{ block.settings.item_spacing }}px;
+    }
+
+    .ai-faq-item-{{ ai_gen_id }} {
+      background-color: {{ block.settings.card_background }};
+      border-radius: {{ block.settings.border_radius }}px;
+      box-shadow: 0 {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+      overflow: hidden;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .ai-faq-item-{{ ai_gen_id }}:hover {
+      box-shadow: 0 {{ block.settings.shadow_vertical | plus: 2 }}px {{ block.settings.shadow_blur | plus: 4 }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | times: 1.5 | at_most: 1 }});
+    }
+
+    .ai-faq-featured-badge-{{ ai_gen_id }} {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background-color: {{ block.settings.featured_badge_bg }};
+      color: {{ block.settings.featured_badge_color }};
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 1;
+    }
+
+    .ai-faq-button-{{ ai_gen_id }} {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .ai-faq-button-{{ ai_gen_id }}:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .ai-faq-button-left-{{ ai_gen_id }} {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ai-faq-icon-wrapper-{{ ai_gen_id }} {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: {{ block.settings.icon_bg_color }};
+      border-radius: 8px;
+      margin-top: 2px;
+    }
+
+    .ai-faq-icon-wrapper-{{ ai_gen_id }} svg {
+      width: 18px;
+      height: 18px;
+      fill: {{ block.settings.icon_color }};
+    }
+
+    .ai-faq-button-content-{{ ai_gen_id }} {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ai-faq-category-{{ ai_gen_id }} {
+      display: inline-block;
+      padding: 4px 12px;
+      background-color: {{ block.settings.category_background }};
+      color: {{ block.settings.category_text_color }};
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .ai-faq-question-{{ ai_gen_id }} {
+      font-size: {{ block.settings.question_size }}px;
+      color: {{ block.settings.question_color }};
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.4;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .ai-faq-toggle-icon-{{ ai_gen_id }} {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-top: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    .ai-faq-toggle-icon-{{ ai_gen_id }} svg {
+      width: 100%;
+      height: 100%;
+      stroke: {{ block.settings.toggle_icon_color }};
+      stroke-width: 2;
+    }
+
+    .ai-faq-button-{{ ai_gen_id }}[aria-expanded="true"] .ai-faq-toggle-icon-{{ ai_gen_id }} {
+      transform: rotate(45deg);
+    }
+
+    .ai-faq-panel-{{ ai_gen_id }} {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .ai-faq-panel-{{ ai_gen_id }}.active {
+      max-height: 5000px;
+      padding: 0 {{ block.settings.padding_horizontal }}px {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+    }
+
+    .ai-faq-panel-content-{{ ai_gen_id }} {
+      padding-left: 44px;
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} {
+      font-size: {{ block.settings.answer_size }}px;
+      color: {{ block.settings.text_color }};
+      line-height: 1.7;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      margin-bottom: 20px;
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} p {
+      margin: 0 0 12px 0;
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} ul,
+    .ai-faq-answer-{{ ai_gen_id }} ol {
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} li {
+      margin-bottom: 8px;
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} strong {
+      font-weight: 600;
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} a {
+      color: {{ block.settings.link_color }};
+      text-decoration: underline;
+      word-break: break-word;
+    }
+
+    .ai-faq-tip-{{ ai_gen_id }} {
+      background-color: {{ block.settings.tip_bg_color }};
+      border-left: 3px solid {{ block.settings.tip_border_color }};
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: {{ block.settings.answer_size }}px;
+      color: {{ block.settings.text_color }};
+      line-height: 1.6;
+    }
+
+    .ai-faq-tip-{{ ai_gen_id }} p {
+      margin: 0;
+    }
+
+    .ai-faq-cta-{{ ai_gen_id }} {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: {{ block.settings.cta_bg_color }};
+      color: {{ block.settings.cta_text_color }};
+      text-decoration: none;
+      border-radius: {{ block.settings.cta_border_radius }}px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-bottom: 20px;
+    }
+
+    .ai-faq-cta-{{ ai_gen_id }}:hover {
+      background-color: {{ block.settings.cta_hover_bg_color }};
+      transform: translateY(-1px);
+    }
+
+    .ai-faq-chips-{{ ai_gen_id }} {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .ai-faq-chip-{{ ai_gen_id }} {
+      display: inline-block;
+      padding: 6px 14px;
+      background-color: {{ block.settings.chip_bg_color }};
+      color: {{ block.settings.chip_text_color }};
+      font-size: 13px;
+      border-radius: 16px;
+      border: 1px solid {{ block.settings.chip_border_color }};
+    }
+
+    .ai-faq-chips-label-{{ ai_gen_id }} {
+      font-size: 12px;
+      font-weight: 600;
+      color: {{ block.settings.text_color }};
+      opacity: 0.7;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media screen and (max-width: 749px) {
+      .ai-faq-section-{{ ai_gen_id }} {
+        padding: {{ block.settings.section_padding_top | times: 0.7 | round }}px 16px {{ block.settings.section_padding_bottom | times: 0.7 | round }}px 16px;
+      }
+
+      .ai-faq-header-{{ ai_gen_id }} {
+        margin-bottom: 32px;
+      }
+
+      .ai-faq-heading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.heading_size | times: 0.65 | round }}px;
+        margin-bottom: 12px;
+      }
+
+      .ai-faq-subheading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.subheading_size | times: 0.9 | round }}px;
+      }
+
+      .ai-faq-list-{{ ai_gen_id }} {
+        gap: {{ block.settings.item_spacing | times: 0.75 | round }}px;
+      }
+
+      .ai-faq-question-{{ ai_gen_id }} {
+        font-size: {{ block.settings.question_size | times: 0.9 | round }}px;
+      }
+
+      .ai-faq-answer-{{ ai_gen_id }} {
+        font-size: {{ block.settings.answer_size | times: 0.95 | round }}px;
+      }
+
+      .ai-faq-button-{{ ai_gen_id }} {
+        padding: {{ block.settings.padding_vertical | times: 0.75 | round }}px {{ block.settings.padding_horizontal | times: 0.7 | round }}px;
+        gap: 12px;
+      }
+
+      .ai-faq-panel-{{ ai_gen_id }}.active {
+        padding: 0 {{ block.settings.padding_horizontal | times: 0.7 | round }}px {{ block.settings.padding_vertical | times: 0.75 | round }}px {{ block.settings.padding_horizontal | times: 0.7 | round }}px;
+      }
+
+      .ai-faq-panel-content-{{ ai_gen_id }} {
+        padding-left: 0;
+      }
+
+      .ai-faq-button-left-{{ ai_gen_id }} {
+        gap: 10px;
+      }
+
+      .ai-faq-icon-wrapper-{{ ai_gen_id }} {
+        width: 28px;
+        height: 28px;
+      }
+
+      .ai-faq-icon-wrapper-{{ ai_gen_id }} svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .ai-faq-toggle-icon-{{ ai_gen_id }} {
+        width: 20px;
+        height: 20px;
+      }
+
+      .ai-faq-category-{{ ai_gen_id }} {
+        font-size: 10px;
+        padding: 3px 10px;
+      }
+
+      .ai-faq-featured-badge-{{ ai_gen_id }} {
+        font-size: 10px;
+        padding: 3px 10px;
+        top: 12px;
+        right: 12px;
+      }
+
+      .ai-faq-answer-{{ ai_gen_id }} ul,
+      .ai-faq-answer-{{ ai_gen_id }} ol {
+        padding-left: 16px;
+      }
+
+      .ai-faq-tip-{{ ai_gen_id }} {
+        padding: 12px;
+        font-size: {{ block.settings.answer_size | times: 0.95 | round }}px;
+      }
+
+      .ai-faq-cta-{{ ai_gen_id }} {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+
+      .ai-faq-chip-{{ ai_gen_id }} {
+        font-size: 12px;
+        padding: 5px 12px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .ai-faq-section-{{ ai_gen_id }} {
+        padding: {{ block.settings.section_padding_top | times: 0.6 | round }}px 12px {{ block.settings.section_padding_bottom | times: 0.6 | round }}px 12px;
+      }
+
+      .ai-faq-heading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.heading_size | times: 0.55 | round }}px;
+      }
+
+      .ai-faq-button-{{ ai_gen_id }} {
+        padding: {{ block.settings.padding_vertical | times: 0.65 | round }}px {{ block.settings.padding_horizontal | times: 0.6 | round }}px;
+      }
+
+      .ai-faq-panel-{{ ai_gen_id }}.active {
+        padding: 0 {{ block.settings.padding_horizontal | times: 0.6 | round }}px {{ block.settings.padding_vertical | times: 0.65 | round }}px {{ block.settings.padding_horizontal | times: 0.6 | round }}px;
+      }
+    }
+  {% endstyle %}
+
+  <faq-accordion-{{ ai_gen_id }} class="ai-faq-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+    <section class="ai-faq-container-{{ ai_gen_id }}">
+      {% if block.settings.section_heading != blank or block.settings.section_subheading != blank %}
+        <div class="ai-faq-header-{{ ai_gen_id }}">
+          {% if block.settings.section_heading != blank %}
+            <h2 class="ai-faq-heading-{{ ai_gen_id }}">{{ block.settings.section_heading }}</h2>
+          {% endif %}
+          {% if block.settings.section_subheading != blank %}
+            <p class="ai-faq-subheading-{{ ai_gen_id }}">{{ block.settings.section_subheading }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="ai-faq-list-{{ ai_gen_id }}">
+        {% for faq in sorted_faqs %}
+          {% assign faq_index = forloop.index %}
+          {% assign faq_id = ai_gen_id | append: '-faq-' | append: faq_index %}
+          {% assign answer_content = faq.answer | metafield_tag %}
+          {% assign helpful_tip_content = faq.helpful_tip | metafield_tag %}
+          
+          <article class="ai-faq-item-{{ ai_gen_id }}">
+            {% if faq.featured_faq == true %}
+              <span class="ai-faq-featured-badge-{{ ai_gen_id }}">{{ block.settings.featured_label }}</span>
+            {% endif %}
+
+            <button
+              class="ai-faq-button-{{ ai_gen_id }}"
+              aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="{{ faq_id }}"
+              data-faq-button
+            >
+              <div class="ai-faq-button-left-{{ ai_gen_id }}">
+                {% if faq.icon != blank %}
+                  <div class="ai-faq-icon-wrapper-{{ ai_gen_id }}">
+                    {{ faq.icon }}
+                  </div>
+                {% endif %}
+                <div class="ai-faq-button-content-{{ ai_gen_id }}">
+                  {% if faq.category != blank %}
+                    <span class="ai-faq-category-{{ ai_gen_id }}">{{ faq.category }}</span>
+                  {% endif %}
+                  <h3 class="ai-faq-question-{{ ai_gen_id }}">{{ faq.question }}</h3>
+                </div>
+              </div>
+              <span class="ai-faq-toggle-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="{{ faq_id }}"
+              class="ai-faq-panel-{{ ai_gen_id }}{% if forloop.first %} active{% endif %}"
+              data-faq-panel
+            >
+              <div class="ai-faq-panel-content-{{ ai_gen_id }}">
+                {% if answer_content != blank %}
+                  <div class="ai-faq-answer-{{ ai_gen_id }}">
+                    {{ answer_content }}
+                  </div>
+                {% endif %}
+
+                {% if helpful_tip_content != blank %}
+                  <div class="ai-faq-tip-{{ ai_gen_id }}">
+                    {{ helpful_tip_content }}
+                  </div>
+                {% endif %}
+
+                {% if faq.cta_text != blank and faq.cta_link != blank %}
+                  <a href="{{ faq.cta_link }}" class="ai-faq-cta-{{ ai_gen_id }}">
+                    {{ faq.cta_text }}
+                  </a>
+                {% endif %}
+
+                {% if faq.related_services != blank %}
+                  <div>
+                    <div class="ai-faq-chips-label-{{ ai_gen_id }}">Related Services</div>
+                    <div class="ai-faq-chips-{{ ai_gen_id }}">
+                      {% assign services = faq.related_services | split: ',' %}
+                      {% for service in services %}
+                        <span class="ai-faq-chip-{{ ai_gen_id }}">{{ service | strip }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if faq.related_suburbs != blank %}
+                  <div>
+                    <div class="ai-faq-chips-label-{{ ai_gen_id }}">Related Suburbs</div>
+                    <div class="ai-faq-chips-{{ ai_gen_id }}">
+                      {% assign suburbs = faq.related_suburbs | split: ',' %}
+                      {% for suburb in suburbs %}
+                        <span class="ai-faq-chip-{{ ai_gen_id }}">{{ suburb | strip }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  </faq-accordion-{{ ai_gen_id }}>
+
+  {% if block.settings.enable_schema %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for faq in sorted_faqs %}
+          {% assign answer_html = faq.answer | metafield_tag %}
+          {% assign answer_text = answer_html | strip_html %}
+          {
+            "@type": "Question",
+            "name": {{ faq.question | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ answer_text | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    </script>
+  {% endif %}
+
+  <script>
+    (function() {
+      class FaqAccordion{{ ai_gen_id }} extends HTMLElement {
+        constructor() {
+          super();
+        }
+
+        connectedCallback() {
+          this.buttons = this.querySelectorAll('[data-faq-button]');
+          this.panels = this.querySelectorAll('[data-faq-panel]');
+          this.setupEventListeners();
+        }
+
+        setupEventListeners() {
+          this.buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+              this.toggleFaq(index);
+            });
+
+            button.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.toggleFaq(index);
+              }
+            });
+          });
+        }
+
+        toggleFaq(index) {
+          const button = this.buttons[index];
+          const panel = this.panels[index];
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+          this.buttons.forEach((btn, i) => {
+            if (i !== index) {
+              btn.setAttribute('aria-expanded', 'false');
+              this.panels[i].classList.remove('active');
+            }
+          });
+
+          button.setAttribute('aria-expanded', !isExpanded);
+          panel.classList.toggle('active');
+        }
+      }
+
+      customElements.define('faq-accordion-{{ ai_gen_id }}', FaqAccordion{{ ai_gen_id }});
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Dynamic FAQ",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section content"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subheading",
+      "label": "Subheading",
+      "default": "Helpful answers about our furniture delivery, marketplace pickup, pricing and same-day delivery services."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_schema",
+      "label": "Enable FAQ schema",
+      "default": true,
+      "info": "Adds structured data for search engines"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section top padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section bottom padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Space between items",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "toggle_icon_color",
+      "label": "Toggle icon",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "category_background",
+      "label": "Category badge background",
+      "default": "#e1edf5"
+    },
+    {
+      "type": "color",
+      "id": "category_text_color",
+      "label": "Category badge text",
+      "default": "#1d3686"
+    },
+    {
+      "type": "header",
+      "content": "Featured badge"
+    },
+    {
+      "type": "text",
+      "id": "featured_label",
+      "label": "Badge text",
+      "default": "Featured"
+    },
+    {
+      "type": "color",
+      "id": "featured_badge_bg",
+      "label": "Background",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "featured_badge_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Helpful tip"
+    },
+    {
+      "type": "color",
+      "id": "tip_bg_color",
+      "label": "Background",
+      "default": "#f0f8ff"
+    },
+    {
+      "type": "color",
+      "id": "tip_border_color",
+      "label": "Border",
+      "default": "#1d3686"
+    },
+    {
+      "type": "header",
+      "content": "CTA button"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_bg_color",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "cta_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Chips"
+    },
+    {
+      "type": "color",
+      "id": "chip_bg_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "chip_text_color",
+      "label": "Text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "chip_border_color",
+      "label": "Border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "label": "Question size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "label": "Answer size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "label": "Vertical offset",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Blur radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic FAQ"
+    }
+  ]
+}
+{% endschema %}

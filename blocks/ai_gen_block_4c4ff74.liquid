@@ -1,0 +1,1107 @@
+{% doc %}
+  @prompt
+    Build a premium, modern, high-converting Shopify homepage hero section for Titan Express, a Sydney-based Removalist, Man and Van, and Furniture Delivery business.
+    
+    PRIMARY OBJECTIVE
+    
+    This section must be designed to:
+    
+    • Increase Google Ads Quality Score
+    • Improve Landing Page Relevance
+    • Clearly communicate all services to both users and Google's AI systems
+    • Generate phone calls and quote requests
+    • Establish trust within the first few seconds
+    • Work perfectly on mobile devices where most visitors arrive from Google Ads
+    
+    BUSINESS SERVICES
+    
+    Titan Express provides:
+    
+    • Removalist Sydney
+    • Man and Van Sydney
+    • Furniture Delivery Sydney
+    • Furniture Removalist Sydney
+    • Single Item Delivery Sydney
+    • Marketplace Pickup & Delivery
+    • Store Collection & Delivery
+    • Small Apartment Moves
+    • Granny Flat Moves
+    • Same Day Furniture Delivery
+    • Same Day Removalist Service
+    • Local Sydney Moving Services
+    
+    TOP CONTACT BAR
+    
+    Create a slim sticky top bar above the hero section.
+    
+    Text:
+    Need a Removalist Today?
+    
+    Primary Button:
+    📞 Call 0469 717 535
+    
+    The phone button must be highly visible on mobile and desktop.
+    
+    Include subtle pulse animation on the phone button.
+    
+    HERO HEADLINE (H1)
+    
+    Same Day Removalist & Man With Van Sydney
+    
+    SECONDARY TEXT
+    
+    Furniture Delivery • Small Moves • Marketplace Pickup • Store Collection
+    
+    SUBHEADING
+    
+    Titan Express provides affordable furniture delivery, single item transport, apartment moves, granny flat moves, Marketplace pickup and store collection services throughout Sydney.
+    
+    CALL TO ACTIONS
+    
+    Primary Button:
+    Call Now
+    
+    Secondary Button:
+    Get Free Quote
+    
+    TRUST BADGES
+    
+    Display visually appealing badges:
+    
+    ✓ Same Day Available
+    
+    ✓ Oversized Van
+    
+    ✓ Professional Mover
+    
+    ✓ Furniture Protection
+    
+    ✓ Trolley & Blankets
+    
+    ✓ Sydney Wide Service
+    
+    SERVICE KEYWORD CHIPS
+    
+    Display interactive service chips:
+    
+    Removalist Sydney
+    
+    Man and Van Sydney
+    
+    Furniture Delivery Sydney
+    
+    Furniture Removalist Sydney
+    
+    Small Apartment Moves
+    
+    Single Item Delivery
+    
+    Marketplace Pickup
+    
+    Store Collection Delivery
+    
+    Same Day Delivery
+    
+    Granny Flat Moves
+    
+    DESIGN STYLE
+    
+    Create a premium service-business appearance.
+    
+    Use:
+    
+    • Modern layout
+    • White background
+    • Black text
+    • Yellow / Gold accent colours
+    • Small blue trust accents
+    • High-end service company feel
+    • Professional removalist branding
+    • Clean spacing
+    • Modern typography
+    • No clutter
+    • No outdated elements
+    
+    ADVANCED SVG REQUIREMENTS
+    
+    Use modern custom SVG graphics:
+    
+    • Oversized moving van
+    • Furniture trolley
+    • Moving boxes
+    • Sofa icon
+    • Route lines
+    • Location pins
+    • Direction arrows
+    • Delivery path graphics
+    
+    SVG elements should feel premium and interactive.
+    
+    INTERACTIVE REQUIREMENTS
+    
+    The section must be highly interactive:
+    
+    • Hover effects
+    • Floating badges
+    • Smooth animations
+    • Micro interactions
+    • Animated route paths
+    • Animated service icons
+    • Interactive service chips
+    • Button animations
+    • Modern card effects
+    
+    Keep all animations smooth and professional.
+    
+    USER EXPERIENCE REQUIREMENTS
+    
+    The section must be:
+    
+    User-Friendly:
+    Easy to understand instantly.
+    
+    Responsive:
+    Works perfectly on mobile, tablet and desktop.
+    
+    Streamlined:
+    No unnecessary elements.
+    
+    Intuitive:
+    Naturally guides users to call or request a quote.
+    
+    Interactive:
+    Encourages engagement and action.
+    
+    Accessible:
+    Readable text, proper contrast and touch-friendly buttons.
+    
+    Functional:
+    Every element must serve a purpose.
+    
+    PERFORMANCE REQUIREMENTS
+    
+    • Fast loading
+    • Lightweight code
+    • No external libraries
+    • Optimised for mobile devices
+    • No layout shift
+    • No horizontal scrolling
+    • SEO-friendly structure
+    • Clean HTML and CSS
+    
+    GOOGLE ADS LANDING PAGE OPTIMISATION
+    
+    The hero section should clearly communicate:
+    
+    Who we are:
+    Titan Express
+    
+    What we do:
+    Removalist, Man and Van, Furniture Delivery
+    
+    Where:
+    Sydney NSW
+    
+    Why choose us:
+    Same Day Service, Oversized Van, Professional Handling
+    
+    What action to take:
+    Call Now or Request Quote
+    
+    SEO REQUIREMENTS
+    
+    Use a single H1 only.
+    
+    Naturally include:
+    
+    Removalist Sydney
+    
+    Man and Van Sydney
+    
+    Furniture Delivery Sydney
+    
+    Furniture Removalist Sydney
+    
+    Small Moves Sydney
+    
+    Single Item Delivery Sydney
+    
+    Marketplace Pickup Sydney
+    
+    Store Collection Delivery Sydney
+    
+    Same Day Removalist Sydney
+    
+    Include a short SEO-rich business description below the hero.
+    
+    SCHEMA REQUIREMENTS
+    
+    Include JSON-LD schema for:
+    
+    Business Name:
+    Titan Express
+    
+    Business Type:
+    MovingCompany
+    
+    Phone:
+    0469 717 535
+    
+    Service Area:
+    Sydney NSW
+    
+    Services:
+    Removalist Sydney
+    Man and Van Sydney
+    Furniture Delivery Sydney
+    Small Apartment Moves
+    Granny Flat Moves
+    Marketplace Pickup
+    Store Collection Delivery
+    Single Item Delivery
+    
+    OUTPUT REQUIREMENTS
+    
+    Provide complete Shopify-compatible code.
+    
+    Include:
+    
+    • HTML
+    • CSS
+    • SVG
+    • JavaScript
+    
+    Use clean class names beginning with:
+    
+    titan-hero-
+    
+    The final result should look like a premium removalist company website designed specifically to maximise Google Ads performance, SEO relevance, user engagement, and phone call conversions.
+    , ad a Photo Above The Heading  Remove Get Quote Button Change The Call Now Button Make it A service Style 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-hero-{{ai_gen_id}} {
+    display: block;
+    width: 100%;
+    position: relative;
+    background-color: {{ block.settings.background_color }};
+    overflow: hidden;
+  }
+
+  .titan-hero-top-bar-{{ai_gen_id}} {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: {{ block.settings.top_bar_bg }};
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .titan-hero-top-bar-text-{{ai_gen_id}} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.top_bar_text_color }};
+  }
+
+  .titan-hero-phone-btn-{{ai_gen_id}} {
+    background-color: {{ block.settings.phone_btn_bg }};
+    color: {{ block.settings.phone_btn_text_color }};
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  }
+
+  .titan-hero-phone-btn-{{ai_gen_id}}:hover {
+    background-color: {{ block.settings.phone_btn_hover }};
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+  }
+
+  .titan-hero-phone-icon-{{ai_gen_id}} {
+    width: 20px;
+    height: 20px;
+    animation: titan-hero-pulse-{{ai_gen_id}} 2s infinite;
+  }
+
+  @keyframes titan-hero-pulse-{{ai_gen_id}} {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  .titan-hero-container-{{ai_gen_id}} {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    position: relative;
+  }
+
+  .titan-hero-content-{{ai_gen_id}} {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .titan-hero-image-wrapper-{{ai_gen_id}} {
+    margin: 0 auto 30px;
+    max-width: 600px;
+  }
+
+  .titan-hero-image-{{ai_gen_id}} {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+
+  .titan-hero-h1-{{ai_gen_id}} {
+    font-size: {{ block.settings.h1_size }}px;
+    font-weight: 800;
+    color: {{ block.settings.h1_color }};
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .titan-hero-secondary-{{ai_gen_id}} {
+    font-size: {{ block.settings.secondary_size }}px;
+    color: {{ block.settings.secondary_color }};
+    margin: 0 0 24px 0;
+    font-weight: 500;
+  }
+
+  .titan-hero-subheading-{{ai_gen_id}} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.subheading_color }};
+    line-height: 1.6;
+    margin: 0 0 40px 0;
+  }
+
+  .titan-hero-cta-group-{{ai_gen_id}} {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .titan-hero-btn-primary-{{ai_gen_id}} {
+    background-color: {{ block.settings.primary_btn_bg }};
+    color: {{ block.settings.primary_btn_color }};
+    padding: 18px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+    border: none;
+  }
+
+  .titan-hero-btn-primary-{{ai_gen_id}}:hover {
+    background-color: {{ block.settings.primary_btn_hover }};
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 193, 7, 0.5);
+  }
+
+  .titan-hero-btn-icon-{{ai_gen_id}} {
+    width: 22px;
+    height: 22px;
+  }
+
+  .titan-hero-badges-{{ai_gen_id}} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 50px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .titan-hero-badge-{{ai_gen_id}} {
+    background-color: {{ block.settings.badge_bg }};
+    padding: 16px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+  }
+
+  .titan-hero-badge-{{ai_gen_id}}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .titan-hero-badge-icon-{{ai_gen_id}} {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .titan-hero-badge-text-{{ai_gen_id}} {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ block.settings.badge_text_color }};
+  }
+
+  .titan-hero-chips-{{ai_gen_id}} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+
+  .titan-hero-chip-{{ai_gen_id}} {
+    background-color: {{ block.settings.chip_bg }};
+    color: {{ block.settings.chip_text }};
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid {{ block.settings.chip_border }};
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .titan-hero-chip-{{ai_gen_id}}:hover {
+    background-color: {{ block.settings.chip_hover_bg }};
+    color: {{ block.settings.chip_hover_text }};
+    transform: scale(1.05);
+  }
+
+  .titan-hero-svg-container-{{ai_gen_id}} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.1;
+  }
+
+  .titan-hero-van-svg-{{ai_gen_id}} {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    width: 300px;
+    height: auto;
+  }
+
+  .titan-hero-box-svg-{{ai_gen_id}} {
+    position: absolute;
+    left: 5%;
+    bottom: 20%;
+    width: 150px;
+    height: auto;
+  }
+
+  .titan-hero-seo-text-{{ai_gen_id}} {
+    max-width: 900px;
+    margin: 50px auto 0;
+    padding: 30px;
+    background-color: {{ block.settings.seo_bg }};
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: {{ block.settings.seo_text_color }};
+  }
+
+  @media (max-width: 768px) {
+    .titan-hero-top-bar-{{ai_gen_id}} {
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px 16px;
+    }
+
+    .titan-hero-top-bar-text-{{ai_gen_id}} {
+      font-size: 14px;
+    }
+
+    .titan-hero-phone-btn-{{ai_gen_id}} {
+      width: 100%;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .titan-hero-container-{{ai_gen_id}} {
+      padding: 40px 16px;
+    }
+
+    .titan-hero-image-wrapper-{{ai_gen_id}} {
+      margin-bottom: 24px;
+    }
+
+    .titan-hero-h1-{{ai_gen_id}} {
+      font-size: {{ block.settings.h1_size | times: 0.6 }}px;
+    }
+
+    .titan-hero-secondary-{{ai_gen_id}} {
+      font-size: {{ block.settings.secondary_size | times: 0.8 }}px;
+    }
+
+    .titan-hero-subheading-{{ai_gen_id}} {
+      font-size: {{ block.settings.subheading_size | times: 0.9 }}px;
+    }
+
+    .titan-hero-cta-group-{{ai_gen_id}} {
+      flex-direction: column;
+    }
+
+    .titan-hero-btn-primary-{{ai_gen_id}} {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .titan-hero-badges-{{ai_gen_id}} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .titan-hero-badge-{{ai_gen_id}} {
+      padding: 12px 14px;
+    }
+
+    .titan-hero-badge-text-{{ai_gen_id}} {
+      font-size: 12px;
+    }
+
+    .titan-hero-chip-{{ai_gen_id}} {
+      font-size: 12px;
+      padding: 8px 16px;
+    }
+
+    .titan-hero-van-svg-{{ai_gen_id}} {
+      width: 200px;
+    }
+
+    .titan-hero-box-svg-{{ai_gen_id}} {
+      width: 100px;
+    }
+  }
+{% endstyle %}
+
+<titan-hero-{{ai_gen_id}} class="titan-hero-{{ai_gen_id}}" {{ block.shopify_attributes }}>
+  <div class="titan-hero-top-bar-{{ai_gen_id}}">
+    <span class="titan-hero-top-bar-text-{{ai_gen_id}}">{{ block.settings.top_bar_text }}</span>
+    <a href="tel:{{ block.settings.phone_number }}" class="titan-hero-phone-btn-{{ai_gen_id}}">
+      <svg class="titan-hero-phone-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+      </svg>
+      {{ block.settings.phone_button_text }}
+    </a>
+  </div>
+
+  <div class="titan-hero-container-{{ai_gen_id}}">
+    <div class="titan-hero-svg-container-{{ai_gen_id}}">
+      <svg class="titan-hero-van-svg-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="currentColor">
+        <rect x="20" y="40" width="120" height="50" rx="5"/>
+        <rect x="140" y="50" width="40" height="40" rx="3"/>
+        <circle cx="50" cy="95" r="12"/>
+        <circle cx="150" cy="95" r="12"/>
+        <rect x="30" y="50" width="30" height="20" fill="#fff" opacity="0.3"/>
+        <rect x="70" y="50" width="30" height="20" fill="#fff" opacity="0.3"/>
+        <rect x="110" y="50" width="20" height="20" fill="#fff" opacity="0.3"/>
+      </svg>
+
+      <svg class="titan-hero-box-svg-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z"/>
+        <path d="M50 10 L50 50 L90 70" stroke="#fff" stroke-width="2" fill="none" opacity="0.3"/>
+        <path d="M50 50 L10 70" stroke="#fff" stroke-width="2" fill="none" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <div class="titan-hero-content-{{ai_gen_id}}">
+      {% if block.settings.hero_image %}
+        <div class="titan-hero-image-wrapper-{{ai_gen_id}}">
+          <img
+            src="{{ block.settings.hero_image | image_url: width: 1200 }}"
+            alt="{{ block.settings.hero_image.alt | escape }}"
+            loading="eager"
+            width="{{ block.settings.hero_image.width }}"
+            height="{{ block.settings.hero_image.height }}"
+            class="titan-hero-image-{{ai_gen_id}}"
+          >
+        </div>
+      {% endif %}
+
+      <h1 class="titan-hero-h1-{{ai_gen_id}}">{{ block.settings.h1_text }}</h1>
+      
+      <p class="titan-hero-secondary-{{ai_gen_id}}">{{ block.settings.secondary_text }}</p>
+      
+      <p class="titan-hero-subheading-{{ai_gen_id}}">{{ block.settings.subheading_text }}</p>
+
+      <div class="titan-hero-cta-group-{{ai_gen_id}}">
+        <a href="tel:{{ block.settings.phone_number }}" class="titan-hero-btn-primary-{{ai_gen_id}}">
+          <svg class="titan-hero-btn-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+          </svg>
+          {{ block.settings.primary_btn_label }}
+        </a>
+      </div>
+
+      <div class="titan-hero-badges-{{ai_gen_id}}">
+        <div class="titan-hero-badge-{{ai_gen_id}}">
+          <svg class="titan-hero-badge-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.badge_icon_color }}" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span class="titan-hero-badge-text-{{ai_gen_id}}">Same Day Available</span>
+        </div>
+
+        <div class="titan-hero-badge-{{ai_gen_id}}">
+          <svg class="titan-hero-badge-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.badge_icon_color }}" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13"/>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+          <span class="titan-hero-badge-text-{{ai_gen_id}}">Oversized Van</span>
+        </div>
+
+        <div class="titan-hero-badge-{{ai_gen_id}}">
+          <svg class="titan-hero-badge-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.badge_icon_color }}" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span class="titan-hero-badge-text-{{ai_gen_id}}">Professional Mover</span>
+        </div>
+
+        <div class="titan-hero-badge-{{ai_gen_id}}">
+          <svg class="titan-hero-badge-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.badge_icon_color }}" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span class="titan-hero-badge-text-{{ai_gen_id}}">Furniture Protection</span>
+        </div>
+
+        <div class="titan-hero-badge-{{ai_gen_id}}">
+          <svg class="titan-hero-badge-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.badge_icon_color }}" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18"/>
+          </svg>
+          <span class="titan-hero-badge-text-{{ai_gen_id}}">Trolley & Blankets</span>
+        </div>
+
+        <div class="titan-hero-badge-{{ai_gen_id}}">
+          <svg class="titan-hero-badge-icon-{{ai_gen_id}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.badge_icon_color }}" stroke-width="2">
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/>
+          </svg>
+          <span class="titan-hero-badge-text-{{ai_gen_id}}">Sydney Wide Service</span>
+        </div>
+      </div>
+
+      <div class="titan-hero-chips-{{ai_gen_id}}">
+        <span class="titan-hero-chip-{{ai_gen_id}}">Removalist Sydney</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Man and Van Sydney</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Furniture Delivery Sydney</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Furniture Removalist Sydney</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Small Apartment Moves</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Single Item Delivery</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Marketplace Pickup</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Store Collection Delivery</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Same Day Delivery</span>
+        <span class="titan-hero-chip-{{ai_gen_id}}">Granny Flat Moves</span>
+      </div>
+
+      <div class="titan-hero-seo-text-{{ai_gen_id}}">
+        {{ block.settings.seo_description }}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MovingCompany",
+    "name": "{{ block.settings.business_name }}",
+    "telephone": "{{ block.settings.phone_number }}",
+    "areaServed": {
+      "@type": "City",
+      "name": "Sydney",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "NSW",
+        "addressCountry": "AU"
+      }
+    },
+    "priceRange": "$$",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Moving Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Removalist Sydney"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Man and Van Sydney"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Furniture Delivery Sydney"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Small Apartment Moves"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Granny Flat Moves"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Marketplace Pickup"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Store Collection Delivery"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Single Item Delivery"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+</titan-hero-{{ai_gen_id}}>
+
+<script>
+  (function() {
+    class TitanHero{{ai_gen_id}} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.initChips();
+      }
+
+      initChips() {
+        const chips = this.querySelectorAll('.titan-hero-chip-{{ai_gen_id}}');
+        chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            chip.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+              chip.style.transform = 'scale(1)';
+            }, 200);
+          });
+        });
+      }
+    }
+
+    customElements.define('titan-hero-{{ai_gen_id}}', TitanHero{{ai_gen_id}});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Titan Express hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Top contact bar"
+    },
+    {
+      "type": "text",
+      "id": "top_bar_text",
+      "label": "Top bar text",
+      "default": "Need a Removalist Today?"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469717535"
+    },
+    {
+      "type": "text",
+      "id": "phone_button_text",
+      "label": "Phone button text",
+      "default": "Call 0469 717 535"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_bg",
+      "label": "Background",
+      "default": "#FFC107"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_bg",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_text_color",
+      "label": "Button text",
+      "default": "#FFC107"
+    },
+    {
+      "type": "color",
+      "id": "phone_btn_hover",
+      "label": "Button hover",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Hero content"
+    },
+    {
+      "type": "text",
+      "id": "h1_text",
+      "label": "Main headline",
+      "default": "Same Day Removalist & Man With Van Sydney"
+    },
+    {
+      "type": "range",
+      "id": "h1_size",
+      "label": "Headline size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "h1_color",
+      "label": "Headline color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "secondary_text",
+      "label": "Secondary text",
+      "default": "Furniture Delivery • Small Moves • Marketplace Pickup • Store Collection"
+    },
+    {
+      "type": "range",
+      "id": "secondary_size",
+      "label": "Secondary text size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary text color",
+      "default": "#FFC107"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_text",
+      "label": "Subheading",
+      "default": "Titan Express provides affordable furniture delivery, single item transport, apartment moves, granny flat moves, Marketplace pickup and store collection services throughout Sydney."
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Call to action button"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Button label",
+      "default": "Call Now"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_bg",
+      "label": "Button background",
+      "default": "#FFC107"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_color",
+      "label": "Button text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_hover",
+      "label": "Button hover",
+      "default": "#FFD54F"
+    },
+    {
+      "type": "header",
+      "content": "Trust badges"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge background",
+      "default": "#F8F9FA"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "badge_icon_color",
+      "label": "Badge icon",
+      "default": "#2196F3"
+    },
+    {
+      "type": "header",
+      "content": "Service chips"
+    },
+    {
+      "type": "color",
+      "id": "chip_bg",
+      "label": "Chip background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "chip_text",
+      "label": "Chip text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "chip_border",
+      "label": "Chip border",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "chip_hover_bg",
+      "label": "Chip hover background",
+      "default": "#FFC107"
+    },
+    {
+      "type": "color",
+      "id": "chip_hover_text",
+      "label": "Chip hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "SEO section"
+    },
+    {
+      "type": "text",
+      "id": "business_name",
+      "label": "Business name",
+      "default": "Titan Express"
+    },
+    {
+      "type": "textarea",
+      "id": "seo_description",
+      "label": "SEO description",
+      "default": "Titan Express is Sydney's trusted removalist and man with van service. We specialise in furniture delivery, small apartment moves, granny flat relocations, marketplace pickup, and store collection services. Our professional team operates throughout Sydney with same-day availability, an oversized van, furniture protection equipment, trolleys, and moving blankets. Whether you need a single item delivered or a complete small move, we provide affordable, reliable service across all Sydney suburbs."
+    },
+    {
+      "type": "color",
+      "id": "seo_bg",
+      "label": "SEO section background",
+      "default": "#F8F9FA"
+    },
+    {
+      "type": "color",
+      "id": "seo_text_color",
+      "label": "SEO text color",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan Express hero"
+    }
+  ]
+}
+{% endschema %}

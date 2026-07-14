@@ -1,0 +1,1295 @@
+{% doc %}
+  @prompt
+    Update the Call / Get Quote card.
+    
+    Add two buttons:
+    
+    Primary Button:
+    📞 Call Now
+    Link: tel:0469717535
+    
+    Secondary Button:
+    Get Free Quote
+    
+    When the user clicks “Get Free Quote”, open a modern removalist quote form in a popup modal.
+    
+    FORM TITLE:
+    Get a Fast Removalist Quote
+    
+    FORM SUBTITLE:
+    Send your moving details and Titan Express will reply with the best available price.
+    
+    FORM FIELDS:
+    
+    * Customer Name
+    * Phone Number
+    * Pickup Suburb
+    * Drop-off Suburb
+    * Item Details
+    * Stairs or Lift?
+    * Preferred Date / Time
+    * Upload Photo optional
+    * Extra Notes optional
+    
+    FORM REQUIREMENTS:
+    
+    * Mobile-friendly popup
+    * Easy to close
+    * Smooth open/close animation
+    * Required fields clearly marked
+    * Large tap-friendly inputs
+    * Submit button text: Send Quote Request
+    * Success message after submit:
+      “Thanks! Your quote request has been sent. Titan Express will contact you shortly.”
+    
+    EMAIL NOTIFICATION:
+    When the form is submitted, send an email notification to the admin with all customer details.
+    
+    Admin email:
+    [billsarwar0@gmail.com](mailto:billsarwar0@gmail.com)
+    
+    Email subject:
+    New Titan Express Quote Request
+    
+    Email body should include:
+    Customer name
+    Phone number
+    Pickup suburb
+    Drop-off suburb
+    Item details
+    Stairs/lift details
+    Preferred date/time
+    Photo upload link if available
+    Extra notes
+    
+    SHOPIFY REQUIREMENT:
+    Use Shopify-compatible contact form code where possible.
+    
+    Use:
+    {% form 'contact' %}
+    
+    Include hidden input: <input type="hidden" name="contact[form_type]" value="Titan Express Quote Request">
+    
+    Make sure form fields use Shopify contact format:
+    name="contact[Customer Name]"
+    name="contact[Phone Number]"
+    name="contact[Pickup Suburb]"
+    name="contact[Drop-off Suburb]"
+    name="contact[Item Details]"
+    name="contact[Stairs or Lift]"
+    name="contact[Preferred Date Time]"
+    name="contact[Extra Notes]"
+    
+    IMPORTANT:
+    Shopify contact forms can send email to the store admin email configured in Shopify notifications.
+    
+    If direct email to [billsarwar0@gmail.com](mailto:billsarwar0@gmail.com) is required, explain that the Shopify store notification email must be set to this email address in Shopify settings, or connect the form to a form app such as Hulk Form, Klaviyo, Zapier, Make or n8n.
+    
+    DESIGN STYLE:
+    
+    * Premium modern card
+    * White background
+    * Rounded corners
+    * Soft shadow
+    * Gold/yellow Call Now button
+    * Black outline Get Free Quote button
+    * Green active status dot
+    * Titan Express logo or van photo on left
+    * Clean removalist service styling
+    * Fully responsive on mobile, tablet and desktop
+    
+    INTERACTIVE REQUIREMENTS:
+    
+    * Call button hover effect
+    * Quote button hover effect
+    * Modal popup animation
+    * Background overlay blur
+    * Close button
+    * Click outside modal to close
+    * Escape key closes modal
+    * Form validation
+    * Smooth success message
+    
+    OUTPUT:
+    Generate complete Shopify-compatible Liquid, HTML, CSS and JavaScript.
+    
+    Use clean class names starting with:
+    
+    titan-quote-card-
+    
+    The final result should be functional, responsive, user-friendly and conversion-focused.
+    , make it as floating , Reduce the Size Of The Card
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-quote-card-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    bottom: {{ block.settings.floating_bottom_offset }}px;
+    {% if block.settings.floating_position == 'left' %}
+      left: {{ block.settings.floating_side_offset }}px;
+    {% elsif block.settings.floating_position == 'right' %}
+      right: {{ block.settings.floating_side_offset }}px;
+    {% else %}
+      left: 50%;
+      transform: translateX(-50%);
+    {% endif %}
+    z-index: 999;
+    max-width: {{ block.settings.floating_max_width }}px;
+    width: calc(100% - {{ block.settings.floating_side_offset | times: 2 }}px);
+  }
+
+  .titan-quote-card-container-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: {{ block.settings.card_padding }}px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+  }
+
+  .titan-quote-card-image-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.image_width }}px;
+    height: {{ block.settings.image_width }}px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .titan-quote-card-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .titan-quote-card-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .titan-quote-card-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .titan-quote-card-content-{{ ai_gen_id }} {
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .titan-quote-card-status-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .titan-quote-card-status-dot-{{ ai_gen_id }} {
+    width: 6px;
+    height: 6px;
+    background-color: {{ block.settings.status_dot_color }};
+    border-radius: 50%;
+  }
+
+  .titan-quote-card-status-text-{{ ai_gen_id }} {
+    font-size: 11px;
+    color: {{ block.settings.status_text_color }};
+    font-weight: 500;
+  }
+
+  .titan-quote-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 3px;
+    line-height: 1.2;
+  }
+
+  .titan-quote-card-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .titan-quote-card-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .titan-quote-card-btn-{{ ai_gen_id }} {
+    padding: 8px 16px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    white-space: nowrap;
+  }
+
+  .titan-quote-card-btn-primary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.primary_button_bg }};
+    color: {{ block.settings.primary_button_text }};
+  }
+
+  .titan-quote-card-btn-primary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.primary_button_hover_bg }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .titan-quote-card-btn-secondary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.secondary_button_bg }};
+    color: {{ block.settings.secondary_button_text }};
+    border: 2px solid {{ block.settings.secondary_button_border }};
+  }
+
+  .titan-quote-card-btn-secondary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.secondary_button_hover_bg }};
+    border-color: {{ block.settings.secondary_button_hover_border }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .titan-quote-card-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    padding: 0;
+  }
+
+  .titan-quote-card-close-{{ ai_gen_id }}:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .titan-quote-card-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  .titan-quote-card-modal-overlay-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .titan-quote-card-modal-overlay-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .titan-quote-card-modal-{{ ai_gen_id }} {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: {{ block.settings.modal_background }};
+    border-radius: {{ block.settings.modal_border_radius }}px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .titan-quote-card-modal-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .titan-quote-card-modal-header-{{ ai_gen_id }} {
+    padding: 24px;
+    border-bottom: 1px solid #e6e6e6;
+    position: relative;
+  }
+
+  .titan-quote-card-modal-title-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ block.settings.modal_title_color }};
+    margin: 0 0 8px;
+  }
+
+  .titan-quote-card-modal-subtitle-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.modal_subtitle_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .titan-quote-card-modal-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #666;
+    transition: color 0.2s ease;
+  }
+
+  .titan-quote-card-modal-close-{{ ai_gen_id }}:hover {
+    color: #000;
+  }
+
+  .titan-quote-card-modal-body-{{ ai_gen_id }} {
+    padding: 24px;
+  }
+
+  .titan-quote-card-form-group-{{ ai_gen_id }} {
+    margin-bottom: 20px;
+  }
+
+  .titan-quote-card-form-label-{{ ai_gen_id }} {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ block.settings.form_label_color }};
+    margin-bottom: 8px;
+  }
+
+  .titan-quote-card-form-required-{{ ai_gen_id }} {
+    color: #d82c0d;
+    margin-left: 4px;
+  }
+
+  .titan-quote-card-form-input-{{ ai_gen_id }},
+  .titan-quote-card-form-textarea-{{ ai_gen_id }},
+  .titan-quote-card-form-select-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid {{ block.settings.form_input_border }};
+    border-radius: {{ block.settings.form_input_radius }}px;
+    font-size: 16px;
+    color: {{ block.settings.form_input_text }};
+    background-color: {{ block.settings.form_input_bg }};
+    transition: border-color 0.2s ease;
+  }
+
+  .titan-quote-card-form-input-{{ ai_gen_id }}:focus,
+  .titan-quote-card-form-textarea-{{ ai_gen_id }}:focus,
+  .titan-quote-card-form-select-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.form_input_focus_border }};
+  }
+
+  .titan-quote-card-form-textarea-{{ ai_gen_id }} {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .titan-quote-card-form-file-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed {{ block.settings.form_input_border }};
+    border-radius: {{ block.settings.form_input_radius }}px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .titan-quote-card-form-file-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.form_input_focus_border }};
+  }
+
+  .titan-quote-card-form-submit-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 16px;
+    background-color: {{ block.settings.submit_btn_bg }};
+    color: {{ block.settings.submit_btn_text }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .titan-quote-card-form-submit-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.submit_btn_hover_bg }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .titan-quote-card-success-message-{{ ai_gen_id }} {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  .titan-quote-card-success-message-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .titan-quote-card-error-message-{{ ai_gen_id }} {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  .titan-quote-card-error-message-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 768px) {
+    .titan-quote-card-{{ ai_gen_id }} {
+      bottom: {{ block.settings.floating_bottom_offset_mobile }}px;
+      {% if block.settings.floating_position == 'center' %}
+        left: {{ block.settings.floating_side_offset_mobile }}px;
+        right: {{ block.settings.floating_side_offset_mobile }}px;
+        transform: none;
+        width: auto;
+      {% else %}
+        left: {{ block.settings.floating_side_offset_mobile }}px;
+        right: {{ block.settings.floating_side_offset_mobile }}px;
+        width: auto;
+      {% endif %}
+    }
+
+    .titan-quote-card-container-{{ ai_gen_id }} {
+      flex-direction: column;
+      text-align: center;
+      padding: 12px;
+      gap: 8px;
+    }
+
+    .titan-quote-card-image-{{ ai_gen_id }} {
+      width: 50px;
+      height: 50px;
+    }
+
+    .titan-quote-card-title-{{ ai_gen_id }} {
+      font-size: 14px;
+    }
+
+    .titan-quote-card-subtitle-{{ ai_gen_id }} {
+      font-size: 11px;
+    }
+
+    .titan-quote-card-status-text-{{ ai_gen_id }} {
+      font-size: 10px;
+    }
+
+    .titan-quote-card-buttons-{{ ai_gen_id }} {
+      justify-content: center;
+      width: 100%;
+      gap: 6px;
+    }
+
+    .titan-quote-card-btn-{{ ai_gen_id }} {
+      flex: 1;
+      justify-content: center;
+      min-width: 100px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+
+    .titan-quote-card-modal-{{ ai_gen_id }} {
+      width: 95%;
+      max-height: 95vh;
+    }
+
+    .titan-quote-card-modal-header-{{ ai_gen_id }},
+    .titan-quote-card-modal-body-{{ ai_gen_id }} {
+      padding: 20px;
+    }
+  }
+{% endstyle %}
+
+<titan-quote-card-{{ ai_gen_id }} class="titan-quote-card-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="titan-quote-card-container-{{ ai_gen_id }}">
+    {% if block.settings.show_close_button %}
+      <button class="titan-quote-card-close-{{ ai_gen_id }}" data-close-card aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    {% endif %}
+
+    <div class="titan-quote-card-image-{{ ai_gen_id }}">
+      {% if block.settings.card_image %}
+        <img
+          src="{{ block.settings.card_image | image_url: width: 300 }}"
+          alt="{{ block.settings.card_image.alt | escape }}"
+          loading="lazy"
+          width="300"
+          height="300"
+        >
+      {% else %}
+        <div class="titan-quote-card-image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="titan-quote-card-content-{{ ai_gen_id }}">
+      {% if block.settings.show_status %}
+        <div class="titan-quote-card-status-{{ ai_gen_id }}">
+          <span class="titan-quote-card-status-dot-{{ ai_gen_id }}"></span>
+          <span class="titan-quote-card-status-text-{{ ai_gen_id }}">{{ block.settings.status_text }}</span>
+        </div>
+      {% endif %}
+
+      <h3 class="titan-quote-card-title-{{ ai_gen_id }}">{{ block.settings.card_title }}</h3>
+      <p class="titan-quote-card-subtitle-{{ ai_gen_id }}">{{ block.settings.card_subtitle }}</p>
+
+      <div class="titan-quote-card-buttons-{{ ai_gen_id }}">
+        <a
+          href="tel:{{ block.settings.phone_number }}"
+          class="titan-quote-card-btn-{{ ai_gen_id }} titan-quote-card-btn-primary-{{ ai_gen_id }}"
+        >
+          <span>📞</span>
+          <span>{{ block.settings.call_button_text }}</span>
+        </a>
+        <button
+          class="titan-quote-card-btn-{{ ai_gen_id }} titan-quote-card-btn-secondary-{{ ai_gen_id }}"
+          data-modal-trigger
+        >
+          {{ block.settings.quote_button_text }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="titan-quote-card-modal-overlay-{{ ai_gen_id }}" data-modal-overlay></div>
+
+  <div class="titan-quote-card-modal-{{ ai_gen_id }}" data-modal>
+    <div class="titan-quote-card-modal-header-{{ ai_gen_id }}">
+      <h2 class="titan-quote-card-modal-title-{{ ai_gen_id }}">{{ block.settings.form_title }}</h2>
+      <p class="titan-quote-card-modal-subtitle-{{ ai_gen_id }}">{{ block.settings.form_subtitle }}</p>
+      <button class="titan-quote-card-modal-close-{{ ai_gen_id }}" data-modal-close aria-label="Close modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="titan-quote-card-modal-body-{{ ai_gen_id }}">
+      <div class="titan-quote-card-success-message-{{ ai_gen_id }}" data-success-message>
+        {{ block.settings.success_message }}
+      </div>
+
+      <div class="titan-quote-card-error-message-{{ ai_gen_id }}" data-error-message>
+        Please fill in all required fields correctly.
+      </div>
+
+      {% form 'contact' %}
+        <input type="hidden" name="contact[form_type]" value="Titan Express Quote Request">
+        <input type="hidden" name="contact[Admin Email]" value="{{ block.settings.admin_email }}">
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Customer Name
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="text"
+            name="contact[Customer Name]"
+            class="titan-quote-card-form-input-{{ ai_gen_id }}"
+            required
+          >
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Phone Number
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="tel"
+            name="contact[Phone Number]"
+            class="titan-quote-card-form-input-{{ ai_gen_id }}"
+            required
+          >
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Email
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="email"
+            name="contact[email]"
+            class="titan-quote-card-form-input-{{ ai_gen_id }}"
+            required
+          >
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Pickup Suburb
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="text"
+            name="contact[Pickup Suburb]"
+            class="titan-quote-card-form-input-{{ ai_gen_id }}"
+            required
+          >
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Drop-off Suburb
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="text"
+            name="contact[Drop-off Suburb]"
+            class="titan-quote-card-form-input-{{ ai_gen_id }}"
+            required
+          >
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Item Details
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <textarea
+            name="contact[Item Details]"
+            class="titan-quote-card-form-textarea-{{ ai_gen_id }}"
+            placeholder="Please describe the items you need moved"
+            required
+          ></textarea>
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Stairs or Lift?
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <select
+            name="contact[Stairs or Lift]"
+            class="titan-quote-card-form-select-{{ ai_gen_id }}"
+            required
+          >
+            <option value="">Please select</option>
+            <option value="Ground Floor">Ground Floor</option>
+            <option value="Stairs">Stairs</option>
+            <option value="Lift Available">Lift Available</option>
+            <option value="Both Stairs and Lift">Both Stairs and Lift</option>
+          </select>
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Preferred Date / Time
+            <span class="titan-quote-card-form-required-{{ ai_gen_id }}">*</span>
+          </label>
+          <input
+            type="text"
+            name="contact[Preferred Date Time]"
+            class="titan-quote-card-form-input-{{ ai_gen_id }}"
+            placeholder="e.g., 15 June 2026, 9:00 AM"
+            required
+          >
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Upload Photo (optional)
+          </label>
+          <input
+            type="file"
+            name="contact[Photo Upload]"
+            class="titan-quote-card-form-file-{{ ai_gen_id }}"
+            accept="image/*"
+          >
+        </div>
+
+        <div class="titan-quote-card-form-group-{{ ai_gen_id }}">
+          <label class="titan-quote-card-form-label-{{ ai_gen_id }}">
+            Extra Notes (optional)
+          </label>
+          <textarea
+            name="contact[Extra Notes]"
+            class="titan-quote-card-form-textarea-{{ ai_gen_id }}"
+            placeholder="Any additional information we should know"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="titan-quote-card-form-submit-{{ ai_gen_id }}">
+          {{ block.settings.submit_btn_label }}
+        </button>
+
+        {% if form.posted_successfully? %}
+          <script>
+            (function() {
+              var successMsg = document.querySelector('[data-success-message]');
+              if (successMsg) {
+                successMsg.classList.add('active');
+                setTimeout(function() {
+                  var modal = document.querySelector('[data-modal]');
+                  var overlay = document.querySelector('[data-modal-overlay]');
+                  if (modal) modal.classList.remove('active');
+                  if (overlay) overlay.classList.remove('active');
+                  document.body.style.overflow = '';
+                }, 3000);
+              }
+            })();
+          </script>
+        {% endif %}
+
+        {% if form.errors %}
+          <script>
+            (function() {
+              var errorMsg = document.querySelector('[data-error-message]');
+              if (errorMsg) {
+                errorMsg.classList.add('active');
+              }
+            })();
+          </script>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</titan-quote-card-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TitanQuoteCard{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.modalTrigger = this.querySelector('[data-modal-trigger]');
+        this.modal = this.querySelector('[data-modal]');
+        this.modalOverlay = this.querySelector('[data-modal-overlay]');
+        this.modalClose = this.querySelector('[data-modal-close]');
+        this.closeCard = this.querySelector('[data-close-card]');
+
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        if (this.modalTrigger) {
+          this.modalTrigger.addEventListener('click', () => this.openModal());
+        }
+
+        if (this.modalClose) {
+          this.modalClose.addEventListener('click', () => this.closeModal());
+        }
+
+        if (this.modalOverlay) {
+          this.modalOverlay.addEventListener('click', () => this.closeModal());
+        }
+
+        if (this.closeCard) {
+          this.closeCard.addEventListener('click', () => this.hideCard());
+        }
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+            this.closeModal();
+          }
+        });
+      }
+
+      openModal() {
+        if (this.modal && this.modalOverlay) {
+          this.modal.classList.add('active');
+          this.modalOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      closeModal() {
+        if (this.modal && this.modalOverlay) {
+          this.modal.classList.remove('active');
+          this.modalOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+
+      hideCard() {
+        this.classList.add('hidden');
+      }
+    }
+
+    customElements.define('titan-quote-card-{{ ai_gen_id }}', TitanQuoteCard{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Titan quote card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Floating position"
+    },
+    {
+      "type": "select",
+      "id": "floating_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "floating_bottom_offset",
+      "label": "Bottom offset (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "floating_side_offset",
+      "label": "Side offset (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "floating_bottom_offset_mobile",
+      "label": "Bottom offset (mobile)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "floating_side_offset_mobile",
+      "label": "Side offset (mobile)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "floating_max_width",
+      "label": "Max width",
+      "min": 300,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close_button",
+      "label": "Show close button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card design"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image",
+      "label": "Card image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image size",
+      "min": 40,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Card title",
+      "default": "Titan Express"
+    },
+    {
+      "type": "text",
+      "id": "card_subtitle",
+      "label": "Card subtitle",
+      "default": "Fast removalist services"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Status indicator"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_status",
+      "label": "Show status",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "status_text",
+      "label": "Status text",
+      "default": "Available Now"
+    },
+    {
+      "type": "color",
+      "id": "status_dot_color",
+      "label": "Status dot color",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "status_text_color",
+      "label": "Status text color",
+      "default": "#22c55e"
+    },
+    {
+      "type": "header",
+      "content": "Call button"
+    },
+    {
+      "type": "text",
+      "id": "call_button_text",
+      "label": "Button text",
+      "default": "Call"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469717535"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg",
+      "label": "Background color",
+      "default": "#fbbf24"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_bg",
+      "label": "Hover background",
+      "default": "#f59e0b"
+    },
+    {
+      "type": "header",
+      "content": "Quote button"
+    },
+    {
+      "type": "text",
+      "id": "quote_button_text",
+      "label": "Button text",
+      "default": "Quote"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_bg",
+      "label": "Hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_border",
+      "label": "Hover border",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Quote form"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title",
+      "default": "Get a Fast Removalist Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "form_subtitle",
+      "label": "Form subtitle",
+      "default": "Send your moving details and Titan Express will reply with the best available price."
+    },
+    {
+      "type": "text",
+      "id": "admin_email",
+      "label": "Admin email",
+      "default": "billsarwar0@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "submit_btn_label",
+      "label": "Submit button label",
+      "default": "Send Quote Request"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks! Your quote request has been sent. Titan Express will contact you shortly."
+    },
+    {
+      "type": "header",
+      "content": "Modal colors"
+    },
+    {
+      "type": "color",
+      "id": "modal_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "modal_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "modal_subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Form styling"
+    },
+    {
+      "type": "color",
+      "id": "form_label_color",
+      "label": "Label color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "form_input_bg",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "form_input_text",
+      "label": "Input text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "form_input_border",
+      "label": "Input border",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "form_input_focus_border",
+      "label": "Input focus border",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "form_input_radius",
+      "label": "Input border radius",
+      "min": 0,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "submit_btn_bg",
+      "label": "Submit button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "submit_btn_text",
+      "label": "Submit button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "submit_btn_hover_bg",
+      "label": "Submit button hover",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Card colors"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan quote card"
+    }
+  ]
+}
+{% endschema %}

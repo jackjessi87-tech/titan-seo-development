@@ -1,0 +1,919 @@
+{% doc %}
+  @prompt
+    Create a premium dynamic FAQ section for a local furniture delivery and removalist landing page.
+    
+    The section must load FAQs dynamically from the Page metafield:
+    
+    custom.faqs
+    
+    This metafield is a List of FAQ metaobject references.
+    
+    Each FAQ metaobject contains:
+    
+    Question
+    Answer
+    Category
+    Display Order
+    
+    Also use these Page metafields to personalise the FAQ wording:
+    
+    custom.target_suburb
+    custom.service_name
+    custom.primary_keyword
+    custom.item_type
+    custom.pickup_suburb
+    custom.drop_off_suburb
+    custom.price_range
+    
+    Do not hardcode FAQ content.
+    
+    Loop through:
+    
+    page.metafields.custom.faqs.value
+    
+    Hide the entire FAQ section if no FAQs are selected.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    FAQ FIELD MAPPING
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    Question
+    → Display as accordion button heading.
+    
+    Answer
+    → Display inside accordion content.
+    
+    Category
+    → Display as small category tag above or beside the question.
+    
+    Display Order
+    → Sort FAQs by display order if possible.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    DYNAMIC PERSONALISATION
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    Where possible, replace dynamic placeholders inside FAQ text using page metafields.
+    
+    Supported placeholders:
+    
+    {{ target_suburb }}
+    {{ service_name }}
+    {{ primary_keyword }}
+    {{ item_type }}
+    {{ pickup_suburb }}
+    {{ drop_off_suburb }}
+    {{ price_range }}
+    
+    Example:
+    
+    Question:
+    Do you offer {{ service_name }} in {{ target_suburb }}?
+    
+    Output:
+    Do you offer Fridge Delivery in Blacktown?
+    
+    Answer:
+    Yes, we offer {{ service_name }} across {{ target_suburb }} and nearby suburbs. Pricing usually depends on item size, stairs, access, distance, and whether one man or two men are required.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    DESIGN
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    Create a premium modern FAQ accordion.
+    
+    Style:
+    
+    White background
+    
+    Rounded cards
+    
+    Soft shadow
+    
+    Clean border
+    
+    Modern typography
+    
+    Smooth open and close animation
+    
+    Plus/minus SVG icon
+    
+    Mobile-first spacing
+    
+    Desktop max width 900px
+    
+    Section background light and clean
+    
+    Heading:
+    
+    Frequently Asked Questions
+    
+    Subheading:
+    
+    Helpful answers about furniture delivery, pricing, access, and same-day service.
+    
+    Allow merchant to edit heading and subheading in theme settings.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    ACCORDION BEHAVIOUR
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    Only one FAQ open at a time.
+    
+    First FAQ open by default.
+    
+    Clicking another FAQ closes the current one.
+    
+    Keyboard accessible.
+    
+    ARIA labels included.
+    
+    Smooth animation.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    FAQ CARD LAYOUT
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    Each FAQ item should show:
+    
+    Category tag if available
+    
+    Question
+    
+    Plus/minus icon
+    
+    Answer when opened
+    
+    Use <button> for the question.
+    
+    Use semantic HTML.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    SEO REQUIREMENTS
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    Use:
+    
+    <section>
+    
+    <header>
+    
+    <h2>
+    
+    FAQ list should use semantic markup.
+    
+    Generate FAQPage JSON-LD schema dynamically from the selected FAQ metaobjects.
+    
+    Schema must use the same dynamic Question and Answer values shown on the page.
+    
+    Do not generate schema if no FAQs exist.
+    
+    Do not generate duplicate FAQ schema.
+    
+    Strip HTML from answers inside schema.
+    
+    Keep schema valid JSON-LD.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    PERFORMANCE
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    Use Shopify Liquid, CSS, and vanilla JavaScript only.
+    
+    No jQuery.
+    
+    No external libraries.
+    
+    Load JavaScript only when the FAQ section exists.
+    
+    Optimise for mobile and Core Web Vitals.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    EMPTY STATE
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    If custom.faqs is empty, hide the full section automatically.
+    
+    Do not show blank headings.
+    
+    ━━━━━━━━━━━━━━━━━━━━
+    FINAL GOAL
+    ━━━━━━━━━━━━━━━━━━━━
+    
+    The FAQ section should look premium, clean, and trustworthy.
+    
+    It should help customers understand the service, improve local SEO, generate FAQ schema, and make each landing page feel more specific to its suburb, service, item, and delivery route.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign faqs = page.metafields.custom.faqs.value
+  assign target_suburb = page.metafields.custom.target_suburb
+  assign service_name = page.metafields.custom.service_name
+  assign primary_keyword = page.metafields.custom.primary_keyword
+  assign item_type = page.metafields.custom.item_type
+  assign pickup_suburb = page.metafields.custom.pickup_suburb
+  assign drop_off_suburb = page.metafields.custom.drop_off_suburb
+  assign price_range = page.metafields.custom.price_range
+%}
+
+{% if faqs != blank and faqs.size > 0 %}
+  {% style %}
+    .ai-faq-section-{{ ai_gen_id }} {
+      display: block;
+      width: 100%;
+      background-color: {{ block.settings.section_background }};
+      padding: {{ block.settings.section_padding_mobile }}px 20px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .ai-faq-section-{{ ai_gen_id }} {
+        padding: {{ block.settings.section_padding_desktop }}px 40px;
+      }
+    }
+
+    .ai-faq-container-{{ ai_gen_id }} {
+      max-width: {{ block.settings.max_width }}px;
+      margin: 0 auto;
+    }
+
+    .ai-faq-header-{{ ai_gen_id }} {
+      text-align: {{ block.settings.text_alignment }};
+      margin-bottom: 40px;
+    }
+
+    .ai-faq-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_mobile }}px;
+      font-weight: 700;
+      color: {{ block.settings.heading_color }};
+      margin: 0 0 12px 0;
+      line-height: 1.2;
+    }
+
+    @media screen and (min-width: 750px) {
+      .ai-faq-heading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.heading_size_desktop }}px;
+      }
+    }
+
+    .ai-faq-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size_mobile }}px;
+      color: {{ block.settings.subheading_color }};
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    @media screen and (min-width: 750px) {
+      .ai-faq-subheading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.subheading_size_desktop }}px;
+      }
+    }
+
+    .ai-faq-list-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+      gap: {{ block.settings.card_spacing }}px;
+    }
+
+    .ai-faq-item-{{ ai_gen_id }} {
+      background-color: {{ block.settings.card_background }};
+      border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+      border-radius: {{ block.settings.card_border_radius }}px;
+      box-shadow: {{ block.settings.card_shadow_x }}px {{ block.settings.card_shadow_y }}px {{ block.settings.card_shadow_blur }}px {{ block.settings.card_shadow_color }};
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .ai-faq-item-{{ ai_gen_id }}:hover {
+      box-shadow: {{ block.settings.card_shadow_x | times: 1.5 }}px {{ block.settings.card_shadow_y | times: 1.5 }}px {{ block.settings.card_shadow_blur | times: 1.5 }}px {{ block.settings.card_shadow_color }};
+    }
+
+    .ai-faq-question-button-{{ ai_gen_id }} {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: {{ block.settings.card_padding }}px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: background-color 0.2s ease;
+    }
+
+    .ai-faq-question-button-{{ ai_gen_id }}:hover {
+      background-color: {{ block.settings.question_hover_background }};
+    }
+
+    .ai-faq-question-content-{{ ai_gen_id }} {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ai-faq-category-{{ ai_gen_id }} {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: {{ block.settings.category_color }};
+      background-color: {{ block.settings.category_background }};
+      padding: 4px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .ai-faq-question-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.question_size }}px;
+      font-weight: 600;
+      color: {{ block.settings.question_color }};
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .ai-faq-icon-{{ ai_gen_id }} {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-top: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    .ai-faq-icon-{{ ai_gen_id }} svg {
+      width: 100%;
+      height: 100%;
+      stroke: {{ block.settings.icon_color }};
+      stroke-width: 2;
+    }
+
+    .ai-faq-item-{{ ai_gen_id }}.active .ai-faq-icon-{{ ai_gen_id }} {
+      transform: rotate(45deg);
+    }
+
+    .ai-faq-answer-{{ ai_gen_id }} {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 {{ block.settings.card_padding }}px;
+    }
+
+    .ai-faq-item-{{ ai_gen_id }}.active .ai-faq-answer-{{ ai_gen_id }} {
+      max-height: 1000px;
+      padding: 0 {{ block.settings.card_padding }}px {{ block.settings.card_padding }}px {{ block.settings.card_padding }}px;
+    }
+
+    .ai-faq-answer-content-{{ ai_gen_id }} {
+      font-size: {{ block.settings.answer_size }}px;
+      color: {{ block.settings.answer_color }};
+      line-height: 1.6;
+      padding-top: 8px;
+    }
+
+    .ai-faq-answer-content-{{ ai_gen_id }} p {
+      margin: 0 0 12px 0;
+    }
+
+    .ai-faq-answer-content-{{ ai_gen_id }} p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ai-faq-answer-content-{{ ai_gen_id }} ul,
+    .ai-faq-answer-content-{{ ai_gen_id }} ol {
+      margin: 0 0 12px 0;
+      padding-left: 20px;
+    }
+
+    .ai-faq-answer-content-{{ ai_gen_id }} li {
+      margin-bottom: 6px;
+    }
+  {% endstyle %}
+
+  <faq-accordion-{{ ai_gen_id }} class="ai-faq-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+    <section class="ai-faq-container-{{ ai_gen_id }}">
+      <header class="ai-faq-header-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-faq-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.subheading != blank %}
+          <p class="ai-faq-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+        {% endif %}
+      </header>
+
+      <div class="ai-faq-list-{{ ai_gen_id }}">
+        {% assign sorted_faqs = faqs | sort: 'display_order' %}
+        {% for faq in sorted_faqs %}
+          {% liquid
+            assign question = faq.question.value
+            assign answer = faq.answer.value
+            assign category = faq.category.value
+            assign display_order = faq.display_order.value
+
+            if target_suburb != blank
+              assign question = question | replace: '{{ target_suburb }}', target_suburb
+              assign answer = answer | replace: '{{ target_suburb }}', target_suburb
+            endif
+
+            if service_name != blank
+              assign question = question | replace: '{{ service_name }}', service_name
+              assign answer = answer | replace: '{{ service_name }}', service_name
+            endif
+
+            if primary_keyword != blank
+              assign question = question | replace: '{{ primary_keyword }}', primary_keyword
+              assign answer = answer | replace: '{{ primary_keyword }}', primary_keyword
+            endif
+
+            if item_type != blank
+              assign question = question | replace: '{{ item_type }}', item_type
+              assign answer = answer | replace: '{{ item_type }}', item_type
+            endif
+
+            if pickup_suburb != blank
+              assign question = question | replace: '{{ pickup_suburb }}', pickup_suburb
+              assign answer = answer | replace: '{{ pickup_suburb }}', pickup_suburb
+            endif
+
+            if drop_off_suburb != blank
+              assign question = question | replace: '{{ drop_off_suburb }}', drop_off_suburb
+              assign answer = answer | replace: '{{ drop_off_suburb }}', drop_off_suburb
+            endif
+
+            if price_range != blank
+              assign question = question | replace: '{{ price_range }}', price_range
+              assign answer = answer | replace: '{{ price_range }}', price_range
+            endif
+          %}
+
+          <div class="ai-faq-item-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}" data-faq-item>
+            <button
+              class="ai-faq-question-button-{{ ai_gen_id }}"
+              aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="ai-faq-answer-{{ ai_gen_id }}-{{ forloop.index }}"
+              data-faq-button
+            >
+              <div class="ai-faq-question-content-{{ ai_gen_id }}">
+                {% if category != blank %}
+                  <span class="ai-faq-category-{{ ai_gen_id }}">{{ category }}</span>
+                {% endif %}
+                <h3 class="ai-faq-question-text-{{ ai_gen_id }}">{{ question }}</h3>
+              </div>
+              <div class="ai-faq-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </div>
+            </button>
+            <div
+              class="ai-faq-answer-{{ ai_gen_id }}"
+              id="ai-faq-answer-{{ ai_gen_id }}-{{ forloop.index }}"
+              role="region"
+              aria-labelledby="ai-faq-question-{{ ai_gen_id }}-{{ forloop.index }}"
+            >
+              <div class="ai-faq-answer-content-{{ ai_gen_id }}">
+                {{ answer }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  </faq-accordion-{{ ai_gen_id }}>
+
+  {% if block.settings.enable_schema %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for faq in sorted_faqs %}
+          {% liquid
+            assign question = faq.question.value
+            assign answer = faq.answer.value
+
+            if target_suburb != blank
+              assign question = question | replace: '{{ target_suburb }}', target_suburb
+              assign answer = answer | replace: '{{ target_suburb }}', target_suburb
+            endif
+
+            if service_name != blank
+              assign question = question | replace: '{{ service_name }}', service_name
+              assign answer = answer | replace: '{{ service_name }}', service_name
+            endif
+
+            if primary_keyword != blank
+              assign question = question | replace: '{{ primary_keyword }}', primary_keyword
+              assign answer = answer | replace: '{{ primary_keyword }}', primary_keyword
+            endif
+
+            if item_type != blank
+              assign question = question | replace: '{{ item_type }}', item_type
+              assign answer = answer | replace: '{{ item_type }}', item_type
+            endif
+
+            if pickup_suburb != blank
+              assign question = question | replace: '{{ pickup_suburb }}', pickup_suburb
+              assign answer = answer | replace: '{{ pickup_suburb }}', pickup_suburb
+            endif
+
+            if drop_off_suburb != blank
+              assign question = question | replace: '{{ drop_off_suburb }}', drop_off_suburb
+              assign answer = answer | replace: '{{ drop_off_suburb }}', drop_off_suburb
+            endif
+
+            if price_range != blank
+              assign question = question | replace: '{{ price_range }}', price_range
+              assign answer = answer | replace: '{{ price_range }}', price_range
+            endif
+
+            assign answer_text = answer | strip_html | strip
+          %}
+          {
+            "@type": "Question",
+            "name": {{ question | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ answer_text | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    </script>
+  {% endif %}
+
+  <script>
+    (function() {
+      class FaqAccordion{{ ai_gen_id }} extends HTMLElement {
+        constructor() {
+          super();
+        }
+
+        connectedCallback() {
+          this.items = this.querySelectorAll('[data-faq-item]');
+          this.buttons = this.querySelectorAll('[data-faq-button]');
+          this.setupEventListeners();
+        }
+
+        setupEventListeners() {
+          this.buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+              this.toggleItem(index);
+            });
+
+            button.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.toggleItem(index);
+              }
+            });
+          });
+        }
+
+        toggleItem(index) {
+          const clickedItem = this.items[index];
+          const clickedButton = this.buttons[index];
+          const isActive = clickedItem.classList.contains('active');
+
+          this.items.forEach((item, i) => {
+            if (i !== index) {
+              item.classList.remove('active');
+              this.buttons[i].setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          if (isActive) {
+            clickedItem.classList.remove('active');
+            clickedButton.setAttribute('aria-expanded', 'false');
+          } else {
+            clickedItem.classList.add('active');
+            clickedButton.setAttribute('aria-expanded', 'true');
+          }
+        }
+      }
+
+      customElements.define('faq-accordion-{{ ai_gen_id }}', FaqAccordion{{ ai_gen_id }});
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Dynamic FAQ section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Helpful answers about furniture delivery, pricing, access, and same-day service."
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "label": "Mobile padding",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "label": "Desktop padding",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "header",
+      "content": "Heading style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Mobile size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Desktop size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading mobile size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "label": "Subheading desktop size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "header",
+      "content": "FAQ card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "label": "Space between cards",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Card shadow"
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_x",
+      "label": "Shadow X offset",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_y",
+      "label": "Shadow Y offset",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "card_shadow_color",
+      "label": "Shadow color",
+      "default": "#0000000d"
+    },
+    {
+      "type": "header",
+      "content": "Category tag"
+    },
+    {
+      "type": "color",
+      "id": "category_color",
+      "label": "Text color",
+      "default": "#6366f1"
+    },
+    {
+      "type": "color",
+      "id": "category_background",
+      "label": "Background",
+      "default": "#eef2ff"
+    },
+    {
+      "type": "header",
+      "content": "Question style"
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "label": "Font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Text color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "question_hover_background",
+      "label": "Hover background",
+      "default": "#f9fafb"
+    },
+    {
+      "type": "header",
+      "content": "Answer style"
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Text color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "header",
+      "content": "SEO"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_schema",
+      "label": "Enable FAQ schema",
+      "default": true,
+      "info": "Generates FAQPage structured data for search engines"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic FAQ section"
+    }
+  ]
+}
+{% endschema %}

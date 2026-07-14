@@ -1,0 +1,720 @@
+{% doc %}
+  @prompt
+    Create a premium dark hero section for a Sydney removalist service page called "Man With a Van Sydney". Dark charcoal #111 background with full-width background image picker and dark gradient overlay with adjustable opacity.
+    
+    TOP: Google Ads style pill — amber "Sponsored" badge + blue domain text "www.titanexpress.com.au › Man With a Van Sydney"
+    
+    REVIEW BADGE: Clickable pill "⭐ 4.9 | 300+ Google Reviews" linking to Google Business Profile URL (editable in settings)
+    
+    H1: "Man With a Van Sydney" — large bold white, with "Man With a Van" in amber with underline accent stroke
+    
+    THREE SUBHEADINGS:
+    - Sub 1 (amber, bold, 22px): "Same-Day Removals · Marketplace Pickups · Single Item Moves"
+    - Sub 2 (white, medium, 18px): "Serving All Sydney Suburbs — Fast, Insured & Fixed Price"
+    - Sub 3 (grey italic, 15px): "Book online in 60 seconds. No hidden fees. Trusted by 300+ Sydney locals."
+    
+    GOOGLE SITELINKS ROW: 4 blue pill links styled like Google search sitelinks with hover effect — "Same-Day Moves", "Marketplace Pickup", "Single Item Moves", "All Sydney Suburbs" — each label and URL editable in settings
+    
+    CTA BUTTONS: Amber solid "Get a Free Quote" + white outline "Call Now" — both URLs editable
+    
+    TRUST STRIP: 4 items with amber icons — Same-Day Available, Fully Insured, Fixed Price, All Sydney Suburbs — show/hide toggle in settings
+    
+    SETTINGS: accent colour, overlay opacity, all text, all URLs, ad label, display domain, sitelink labels/URLs, badge text/count/link, trust items
+    
+    Mobile responsive: buttons stack vertically, sitelinks wrap, trust strip 2-column grid. SEO: H1 > subheading hierarchy, aria-labels on links, role=list on trust strip.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hero-mwav-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    overflow: hidden;
+  }
+
+  .ai-hero-mwav-bg-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .ai-hero-mwav-bg-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-hero-mwav-bg-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+  }
+
+  .ai-hero-mwav-bg-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+  }
+
+  .ai-hero-mwav-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, {{ block.settings.overlay_opacity }}) 0%, rgba(17, 17, 17, {{ block.settings.overlay_opacity }}) 100%);
+    z-index: 1;
+  }
+
+  .ai-hero-mwav-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .ai-hero-mwav-ad-pill-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .ai-hero-mwav-sponsored-{{ ai_gen_id }} {
+    background-color: {{ block.settings.accent_color }};
+    color: #000000;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .ai-hero-mwav-domain-{{ ai_gen_id }} {
+    color: #4285f4;
+    font-weight: 500;
+  }
+
+  .ai-hero-mwav-review-badge-{{ ai_gen_id }} {
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+
+  .ai-hero-mwav-review-link-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .ai-hero-mwav-review-link-{{ ai_gen_id }}:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .ai-hero-mwav-h1-{{ ai_gen_id }} {
+    font-size: 56px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 24px;
+    line-height: 1.1;
+  }
+
+  .ai-hero-mwav-h1-accent-{{ ai_gen_id }} {
+    color: {{ block.settings.accent_color }};
+    position: relative;
+    display: inline-block;
+  }
+
+  .ai-hero-mwav-h1-accent-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: {{ block.settings.accent_color }};
+  }
+
+  .ai-hero-mwav-sub1-{{ ai_gen_id }} {
+    font-size: 22px;
+    font-weight: 700;
+    color: {{ block.settings.accent_color }};
+    margin: 0 0 12px;
+    line-height: 1.3;
+  }
+
+  .ai-hero-mwav-sub2-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 12px;
+    line-height: 1.4;
+  }
+
+  .ai-hero-mwav-sub3-{{ ai_gen_id }} {
+    font-size: 15px;
+    font-style: italic;
+    color: #b0b0b0;
+    margin: 0 0 32px;
+    line-height: 1.5;
+  }
+
+  .ai-hero-mwav-sitelinks-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .ai-hero-mwav-sitelink-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: rgba(66, 133, 244, 0.1);
+    color: #4285f4;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgba(66, 133, 244, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .ai-hero-mwav-sitelink-{{ ai_gen_id }}:hover {
+    background-color: rgba(66, 133, 244, 0.2);
+    border-color: rgba(66, 133, 244, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .ai-hero-mwav-cta-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .ai-hero-mwav-btn-primary-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.accent_color }};
+    color: #000000;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: 2px solid {{ block.settings.accent_color }};
+  }
+
+  .ai-hero-mwav-btn-primary-{{ ai_gen_id }}:hover {
+    background-color: #d4a017;
+    border-color: #d4a017;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 191, 0, 0.3);
+  }
+
+  .ai-hero-mwav-btn-secondary-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: transparent;
+    color: #ffffff;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: 2px solid #ffffff;
+  }
+
+  .ai-hero-mwav-btn-secondary-{{ ai_gen_id }}:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .ai-hero-mwav-trust-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .ai-hero-mwav-trust-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ai-hero-mwav-trust-icon-{{ ai_gen_id }} {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-hero-mwav-trust-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.accent_color }};
+  }
+
+  .ai-hero-mwav-trust-text-{{ ai_gen_id }} {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-hero-mwav-content-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-hero-mwav-h1-{{ ai_gen_id }} {
+      font-size: 40px;
+    }
+
+    .ai-hero-mwav-sub1-{{ ai_gen_id }} {
+      font-size: 18px;
+    }
+
+    .ai-hero-mwav-sub2-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+
+    .ai-hero-mwav-trust-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-hero-mwav-content-{{ ai_gen_id }} {
+      padding: 32px 16px;
+    }
+
+    .ai-hero-mwav-h1-{{ ai_gen_id }} {
+      font-size: 32px;
+    }
+
+    .ai-hero-mwav-sub1-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+
+    .ai-hero-mwav-sub2-{{ ai_gen_id }} {
+      font-size: 15px;
+    }
+
+    .ai-hero-mwav-sub3-{{ ai_gen_id }} {
+      font-size: 14px;
+    }
+
+    .ai-hero-mwav-cta-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-hero-mwav-btn-primary-{{ ai_gen_id }},
+    .ai-hero-mwav-btn-secondary-{{ ai_gen_id }} {
+      width: 100%;
+      text-align: center;
+    }
+
+    .ai-hero-mwav-sitelinks-{{ ai_gen_id }} {
+      gap: 8px;
+    }
+
+    .ai-hero-mwav-sitelink-{{ ai_gen_id }} {
+      font-size: 13px;
+      padding: 6px 12px;
+    }
+  }
+{% endstyle %}
+
+<man-with-van-hero-{{ ai_gen_id }} class="ai-hero-mwav-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-hero-mwav-bg-{{ ai_gen_id }}">
+    {% if block.settings.background_image %}
+      <img
+        src="{{ block.settings.background_image | image_url: width: 2000 }}"
+        alt="{{ block.settings.background_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.background_image.width }}"
+        height="{{ block.settings.background_image.height }}"
+      >
+    {% else %}
+      <div class="ai-hero-mwav-bg-placeholder-{{ ai_gen_id }}">
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-hero-mwav-overlay-{{ ai_gen_id }}"></div>
+
+  <div class="ai-hero-mwav-content-{{ ai_gen_id }}">
+    <div class="ai-hero-mwav-ad-pill-{{ ai_gen_id }}">
+      <span class="ai-hero-mwav-sponsored-{{ ai_gen_id }}">{{ block.settings.ad_label }}</span>
+      <span class="ai-hero-mwav-domain-{{ ai_gen_id }}">{{ block.settings.display_domain }}</span>
+    </div>
+
+    <div class="ai-hero-mwav-review-badge-{{ ai_gen_id }}">
+      <a
+        href="{{ block.settings.review_link }}"
+        class="ai-hero-mwav-review-link-{{ ai_gen_id }}"
+        target="_blank"
+        rel="noopener"
+        aria-label="View our Google reviews"
+      >
+        <span>{{ block.settings.review_badge_text }}</span>
+      </a>
+    </div>
+
+    <h1 class="ai-hero-mwav-h1-{{ ai_gen_id }}">
+      <span class="ai-hero-mwav-h1-accent-{{ ai_gen_id }}">{{ block.settings.h1_accent }}</span> {{ block.settings.h1_rest }}
+    </h1>
+
+    <div class="ai-hero-mwav-sub1-{{ ai_gen_id }}">{{ block.settings.subheading_1 }}</div>
+    <div class="ai-hero-mwav-sub2-{{ ai_gen_id }}">{{ block.settings.subheading_2 }}</div>
+    <div class="ai-hero-mwav-sub3-{{ ai_gen_id }}">{{ block.settings.subheading_3 }}</div>
+
+    <div class="ai-hero-mwav-sitelinks-{{ ai_gen_id }}">
+      {% if block.settings.sitelink_1_label != blank %}
+        <a
+          href="{{ block.settings.sitelink_1_url }}"
+          class="ai-hero-mwav-sitelink-{{ ai_gen_id }}"
+          aria-label="{{ block.settings.sitelink_1_label }}"
+        >
+          {{ block.settings.sitelink_1_label }}
+        </a>
+      {% endif %}
+      {% if block.settings.sitelink_2_label != blank %}
+        <a
+          href="{{ block.settings.sitelink_2_url }}"
+          class="ai-hero-mwav-sitelink-{{ ai_gen_id }}"
+          aria-label="{{ block.settings.sitelink_2_label }}"
+        >
+          {{ block.settings.sitelink_2_label }}
+        </a>
+      {% endif %}
+      {% if block.settings.sitelink_3_label != blank %}
+        <a
+          href="{{ block.settings.sitelink_3_url }}"
+          class="ai-hero-mwav-sitelink-{{ ai_gen_id }}"
+          aria-label="{{ block.settings.sitelink_3_label }}"
+        >
+          {{ block.settings.sitelink_3_label }}
+        </a>
+      {% endif %}
+      {% if block.settings.sitelink_4_label != blank %}
+        <a
+          href="{{ block.settings.sitelink_4_url }}"
+          class="ai-hero-mwav-sitelink-{{ ai_gen_id }}"
+          aria-label="{{ block.settings.sitelink_4_label }}"
+        >
+          {{ block.settings.sitelink_4_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="ai-hero-mwav-cta-{{ ai_gen_id }}">
+      <a
+        href="{{ block.settings.primary_cta_url }}"
+        class="ai-hero-mwav-btn-primary-{{ ai_gen_id }}"
+        aria-label="{{ block.settings.primary_cta_text }}"
+      >
+        {{ block.settings.primary_cta_text }}
+      </a>
+      <a
+        href="{{ block.settings.secondary_cta_url }}"
+        class="ai-hero-mwav-btn-secondary-{{ ai_gen_id }}"
+        aria-label="{{ block.settings.secondary_cta_text }}"
+      >
+        {{ block.settings.secondary_cta_text }}
+      </a>
+    </div>
+
+    {% if block.settings.show_trust_strip %}
+      <div class="ai-hero-mwav-trust-{{ ai_gen_id }}" role="list">
+        <div class="ai-hero-mwav-trust-item-{{ ai_gen_id }}" role="listitem">
+          <div class="ai-hero-mwav-trust-icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L2 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V7.3l7-3.11v8.8z"/>
+            </svg>
+          </div>
+          <div class="ai-hero-mwav-trust-text-{{ ai_gen_id }}">{{ block.settings.trust_item_1 }}</div>
+        </div>
+        <div class="ai-hero-mwav-trust-item-{{ ai_gen_id }}" role="listitem">
+          <div class="ai-hero-mwav-trust-icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+            </svg>
+          </div>
+          <div class="ai-hero-mwav-trust-text-{{ ai_gen_id }}">{{ block.settings.trust_item_2 }}</div>
+        </div>
+        <div class="ai-hero-mwav-trust-item-{{ ai_gen_id }}" role="listitem">
+          <div class="ai-hero-mwav-trust-icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          <div class="ai-hero-mwav-trust-text-{{ ai_gen_id }}">{{ block.settings.trust_item_3 }}</div>
+        </div>
+        <div class="ai-hero-mwav-trust-item-{{ ai_gen_id }}" role="listitem">
+          <div class="ai-hero-mwav-trust-icon-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <div class="ai-hero-mwav-trust-text-{{ ai_gen_id }}">{{ block.settings.trust_item_4 }}</div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</man-with-van-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ManWithVanHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('man-with-van-hero-{{ ai_gen_id }}', ManWithVanHero{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Man with a van hero",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.7
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#FFBF00"
+    },
+    {
+      "type": "header",
+      "content": "Google Ads pill"
+    },
+    {
+      "type": "text",
+      "id": "ad_label",
+      "label": "Ad label",
+      "default": "Sponsored"
+    },
+    {
+      "type": "text",
+      "id": "display_domain",
+      "label": "Display domain",
+      "default": "www.titanexpress.com.au › Man With a Van Sydney"
+    },
+    {
+      "type": "header",
+      "content": "Review badge"
+    },
+    {
+      "type": "text",
+      "id": "review_badge_text",
+      "label": "Badge text",
+      "default": "⭐ 4.9 | 300+ Google Reviews"
+    },
+    {
+      "type": "url",
+      "id": "review_link",
+      "label": "Review link"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "h1_accent",
+      "label": "H1 accent text",
+      "default": "Man With a Van"
+    },
+    {
+      "type": "text",
+      "id": "h1_rest",
+      "label": "H1 rest of text",
+      "default": "Sydney"
+    },
+    {
+      "type": "header",
+      "content": "Subheadings"
+    },
+    {
+      "type": "text",
+      "id": "subheading_1",
+      "label": "Subheading 1",
+      "default": "Same-Day Removals · Marketplace Pickups · Single Item Moves"
+    },
+    {
+      "type": "text",
+      "id": "subheading_2",
+      "label": "Subheading 2",
+      "default": "Serving All Sydney Suburbs — Fast, Insured & Fixed Price"
+    },
+    {
+      "type": "text",
+      "id": "subheading_3",
+      "label": "Subheading 3",
+      "default": "Book online in 60 seconds. No hidden fees. Trusted by 300+ Sydney locals."
+    },
+    {
+      "type": "header",
+      "content": "Google sitelinks"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_1_label",
+      "label": "Sitelink 1 label",
+      "default": "Same-Day Moves"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_1_url",
+      "label": "Sitelink 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_2_label",
+      "label": "Sitelink 2 label",
+      "default": "Marketplace Pickup"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_2_url",
+      "label": "Sitelink 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_3_label",
+      "label": "Sitelink 3 label",
+      "default": "Single Item Moves"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_3_url",
+      "label": "Sitelink 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_4_label",
+      "label": "Sitelink 4 label",
+      "default": "All Sydney Suburbs"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_4_url",
+      "label": "Sitelink 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "Call to action buttons"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary button text",
+      "default": "Get a Free Quote"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary button text",
+      "default": "Call Now"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_url",
+      "label": "Secondary button URL"
+    },
+    {
+      "type": "header",
+      "content": "Trust strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_strip",
+      "label": "Show trust strip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_item_1",
+      "label": "Trust item 1",
+      "default": "Same-Day Available"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_2",
+      "label": "Trust item 2",
+      "default": "Fully Insured"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_3",
+      "label": "Trust item 3",
+      "default": "Fixed Price"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_4",
+      "label": "Trust item 4",
+      "default": "All Sydney Suburbs"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Man with a van hero"
+    }
+  ]
+}
+{% endschema %}

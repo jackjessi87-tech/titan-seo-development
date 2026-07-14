@@ -1,0 +1,782 @@
+{% doc %}
+  @prompt
+    Create a three-card feature comparison section for a Sydney removalist page. Section heading: "Not All Removalists Are Equal". Three cards side by side (stacked on mobile): Card 1 - Titan Express (full amber or dark colour, white text, "Recommended" badge) listing 7 features all with green checkmarks: Fixed Price, Fully Insured, Same-Day Available, Equipment Included, No Hidden Fees, Trained Team, 5-Star Rated; Card 2 - Airtasker (light grey, muted) with mixed ticks and X marks - price varies, insurance unknown, quality mixed; Card 3 - DIY Van Hire (light grey, muted) with mostly X marks - no help loading, no equipment, hidden fuel costs. Below all cards: CTA "Choose the Trusted Option - Get a Free Quote". Clean white page background, modern card shadows, fully mobile responsive.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-feature-comparison-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-feature-comparison-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-feature-comparison-heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 {{ block.settings.heading_margin_bottom }}px;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+  }
+
+  .ai-feature-comparison-cards-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+    margin-bottom: {{ block.settings.cta_margin_top }}px;
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }}.recommended {
+    background-color: {{ block.settings.recommended_card_background }};
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }}.muted {
+    background-color: {{ block.settings.muted_card_background }};
+    opacity: 0.85;
+  }
+
+  .ai-feature-comparison-badge-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 6px 14px;
+    border-radius: {{ block.settings.badge_border_radius }}px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .ai-feature-comparison-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    font-weight: 700;
+    margin: 0 0 24px;
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }}.recommended .ai-feature-comparison-card-title-{{ ai_gen_id }} {
+    color: {{ block.settings.recommended_card_text_color }};
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }}.muted .ai-feature-comparison-card-title-{{ ai_gen_id }} {
+    color: {{ block.settings.muted_card_text_color }};
+  }
+
+  .ai-feature-comparison-features-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-feature-comparison-feature-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: {{ block.settings.feature_text_size }}px;
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }}.recommended .ai-feature-comparison-feature-{{ ai_gen_id }} {
+    color: {{ block.settings.recommended_card_text_color }};
+  }
+
+  .ai-feature-comparison-card-{{ ai_gen_id }}.muted .ai-feature-comparison-feature-{{ ai_gen_id }} {
+    color: {{ block.settings.muted_card_text_color }};
+  }
+
+  .ai-feature-comparison-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .ai-feature-comparison-icon-{{ ai_gen_id }}.check {
+    color: {{ block.settings.check_icon_color }};
+  }
+
+  .ai-feature-comparison-icon-{{ ai_gen_id }}.cross {
+    color: {{ block.settings.cross_icon_color }};
+  }
+
+  .ai-feature-comparison-cta-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-feature-comparison-cta-button-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.cta_button_background }};
+    color: {{ block.settings.cta_button_text_color }};
+    padding: 16px 40px;
+    border-radius: {{ block.settings.cta_button_border_radius }}px;
+    font-size: {{ block.settings.cta_button_text_size }}px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-feature-comparison-cta-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.cta_button_hover_background }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-feature-comparison-cards-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .ai-feature-comparison-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .ai-feature-comparison-card-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.card_title_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<feature-comparison-{{ ai_gen_id }} class="ai-feature-comparison-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-feature-comparison-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-feature-comparison-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="ai-feature-comparison-cards-{{ ai_gen_id }}">
+      <div class="ai-feature-comparison-card-{{ ai_gen_id }} recommended">
+        {% if block.settings.show_recommended_badge %}
+          <span class="ai-feature-comparison-badge-{{ ai_gen_id }}">{{ block.settings.badge_text }}</span>
+        {% endif %}
+        <h3 class="ai-feature-comparison-card-title-{{ ai_gen_id }}">{{ block.settings.card_1_title }}</h3>
+        <ul class="ai-feature-comparison-features-{{ ai_gen_id }}">
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_1_feature_1 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_1_feature_2 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_1_feature_3 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_1_feature_4 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_1_feature_5 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_1_feature_6 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_1_feature_7 }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ai-feature-comparison-card-{{ ai_gen_id }} muted">
+        <h3 class="ai-feature-comparison-card-title-{{ ai_gen_id }}">{{ block.settings.card_2_title }}</h3>
+        <ul class="ai-feature-comparison-features-{{ ai_gen_id }}">
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_2_feature_1 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_2_feature_2 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_2_feature_3 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_2_feature_4 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_2_feature_5 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_2_feature_6 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_2_feature_7 }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ai-feature-comparison-card-{{ ai_gen_id }} muted">
+        <h3 class="ai-feature-comparison-card-title-{{ ai_gen_id }}">{{ block.settings.card_3_title }}</h3>
+        <ul class="ai-feature-comparison-features-{{ ai_gen_id }}">
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_3_feature_1 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_3_feature_2 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_3_feature_3 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_3_feature_4 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_3_feature_5 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>{{ block.settings.card_3_feature_6 }}</span>
+          </li>
+          <li class="ai-feature-comparison-feature-{{ ai_gen_id }}">
+            <svg class="ai-feature-comparison-icon-{{ ai_gen_id }} check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{{ block.settings.card_3_feature_7 }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {% if block.settings.cta_text != blank %}
+      <div class="ai-feature-comparison-cta-{{ ai_gen_id }}">
+        <a href="{{ block.settings.cta_link }}" class="ai-feature-comparison-cta-button-{{ ai_gen_id }}">
+          {{ block.settings.cta_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</feature-comparison-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FeatureComparison{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('feature-comparison-{{ ai_gen_id }}', FeatureComparison{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Feature comparison",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not All Removalists Are Equal"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading bottom spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Default card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Card title size",
+      "min": 16,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "label": "Feature text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Recommended card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_recommended_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Recommended"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "label": "Badge border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "recommended_card_background",
+      "label": "Background",
+      "default": "#f59e0b"
+    },
+    {
+      "type": "color",
+      "id": "recommended_card_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Muted cards"
+    },
+    {
+      "type": "color",
+      "id": "muted_card_background",
+      "label": "Background",
+      "default": "#f3f4f6"
+    },
+    {
+      "type": "color",
+      "id": "muted_card_text_color",
+      "label": "Text color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "color",
+      "id": "check_icon_color",
+      "label": "Check icon color",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "cross_icon_color",
+      "label": "Cross icon color",
+      "default": "#ef4444"
+    },
+    {
+      "type": "header",
+      "content": "Card 1 - Titan Express"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Title",
+      "default": "Titan Express"
+    },
+    {
+      "type": "text",
+      "id": "card_1_feature_1",
+      "label": "Feature 1",
+      "default": "Fixed Price"
+    },
+    {
+      "type": "text",
+      "id": "card_1_feature_2",
+      "label": "Feature 2",
+      "default": "Fully Insured"
+    },
+    {
+      "type": "text",
+      "id": "card_1_feature_3",
+      "label": "Feature 3",
+      "default": "Same-Day Available"
+    },
+    {
+      "type": "text",
+      "id": "card_1_feature_4",
+      "label": "Feature 4",
+      "default": "Equipment Included"
+    },
+    {
+      "type": "text",
+      "id": "card_1_feature_5",
+      "label": "Feature 5",
+      "default": "No Hidden Fees"
+    },
+    {
+      "type": "text",
+      "id": "card_1_feature_6",
+      "label": "Feature 6",
+      "default": "Trained Team"
+    },
+    {
+      "type": "text",
+      "id": "card_1_feature_7",
+      "label": "Feature 7",
+      "default": "5-Star Rated"
+    },
+    {
+      "type": "header",
+      "content": "Card 2 - Airtasker"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Title",
+      "default": "Airtasker"
+    },
+    {
+      "type": "text",
+      "id": "card_2_feature_1",
+      "label": "Feature 1",
+      "default": "Price Varies"
+    },
+    {
+      "type": "text",
+      "id": "card_2_feature_2",
+      "label": "Feature 2",
+      "default": "Insurance Unknown"
+    },
+    {
+      "type": "text",
+      "id": "card_2_feature_3",
+      "label": "Feature 3",
+      "default": "Availability Uncertain"
+    },
+    {
+      "type": "text",
+      "id": "card_2_feature_4",
+      "label": "Feature 4",
+      "default": "Equipment Maybe"
+    },
+    {
+      "type": "text",
+      "id": "card_2_feature_5",
+      "label": "Feature 5",
+      "default": "Extra Charges Possible"
+    },
+    {
+      "type": "text",
+      "id": "card_2_feature_6",
+      "label": "Feature 6",
+      "default": "Quality Mixed"
+    },
+    {
+      "type": "text",
+      "id": "card_2_feature_7",
+      "label": "Feature 7",
+      "default": "Reviews Vary"
+    },
+    {
+      "type": "header",
+      "content": "Card 3 - DIY van hire"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Title",
+      "default": "DIY Van Hire"
+    },
+    {
+      "type": "text",
+      "id": "card_3_feature_1",
+      "label": "Feature 1",
+      "default": "No Help Loading"
+    },
+    {
+      "type": "text",
+      "id": "card_3_feature_2",
+      "label": "Feature 2",
+      "default": "No Insurance"
+    },
+    {
+      "type": "text",
+      "id": "card_3_feature_3",
+      "label": "Feature 3",
+      "default": "Time Consuming"
+    },
+    {
+      "type": "text",
+      "id": "card_3_feature_4",
+      "label": "Feature 4",
+      "default": "No Equipment"
+    },
+    {
+      "type": "text",
+      "id": "card_3_feature_5",
+      "label": "Feature 5",
+      "default": "Hidden Fuel Costs"
+    },
+    {
+      "type": "text",
+      "id": "card_3_feature_6",
+      "label": "Feature 6",
+      "default": "Physical Strain"
+    },
+    {
+      "type": "text",
+      "id": "card_3_feature_7",
+      "label": "Feature 7",
+      "default": "Damage Risk"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Choose the Trusted Option - Get a Free Quote"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "cta_margin_top",
+      "label": "Top spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "cta_button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "cta_button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cta_button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "cta_button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "cta_button_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature comparison"
+    }
+  ]
+}
+{% endschema %}

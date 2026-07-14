@@ -1,0 +1,631 @@
+{% doc %}
+  @prompt
+    Based on the metafields creat a Get quote form for this service with a floating icon near the buttom middle with a movement effect get wuote upon click opens a form for the quote sending notification to the store email  aldo give a link to this form to use in otehr get wquote button to open this form  a based on page metafield make a dynamic quote form  for delivery service minimum form quick inquiery
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-quote-float-{{ ai_gen_id }} {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: block;
+  }
+
+  .ai-quote-float-button-{{ ai_gen_id }} {
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: 50px;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    animation: ai-quote-float-pulse-{{ ai_gen_id }} 2s ease-in-out infinite;
+  }
+
+  .ai-quote-float-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-quote-float-button-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @keyframes ai-quote-float-pulse-{{ ai_gen_id }} {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .ai-quote-modal-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-quote-modal-{{ ai_gen_id }}.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .ai-quote-modal-content-{{ ai_gen_id }} {
+    background-color: {{ block.settings.form_background }};
+    border-radius: {{ block.settings.form_border_radius }}px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .ai-quote-modal-{{ ai_gen_id }}.active .ai-quote-modal-content-{{ ai_gen_id }} {
+    transform: scale(1);
+  }
+
+  .ai-quote-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: {{ block.settings.form_text_color }};
+    opacity: 0.6;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-quote-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-quote-form-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .ai-quote-form-title-{{ ai_gen_id }} {
+    font-size: 28px;
+    font-weight: 700;
+    color: {{ block.settings.form_text_color }};
+    margin: 0 0 8px 0;
+  }
+
+  .ai-quote-form-subtitle-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.form_text_color }};
+    opacity: 0.7;
+    margin: 0 0 20px 0;
+  }
+
+  .ai-quote-field-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .ai-quote-label-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ block.settings.form_text_color }};
+  }
+
+  .ai-quote-input-{{ ai_gen_id }},
+  .ai-quote-textarea-{{ ai_gen_id }},
+  .ai-quote-select-{{ ai_gen_id }} {
+    padding: 12px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: 14px;
+    background-color: {{ block.settings.input_background }};
+    color: {{ block.settings.form_text_color }};
+    width: 100%;
+  }
+
+  .ai-quote-textarea-{{ ai_gen_id }} {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .ai-quote-submit-{{ ai_gen_id }} {
+    background-color: {{ block.settings.submit_button_color }};
+    color: {{ block.settings.submit_button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.submit_button_radius }}px;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-quote-submit-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.submit_button_hover_color }};
+  }
+
+  .ai-quote-success-{{ ai_gen_id }} {
+    color: #008060;
+    font-size: 14px;
+    padding: 12px;
+    background-color: #d4f4e8;
+    border-radius: 8px;
+    display: none;
+  }
+
+  .ai-quote-success-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-quote-error-{{ ai_gen_id }} {
+    color: #D82C0D;
+    font-size: 14px;
+    padding: 12px;
+    background-color: #ffd4cc;
+    border-radius: 8px;
+    display: none;
+  }
+
+  .ai-quote-error-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-quote-modal-content-{{ ai_gen_id }} {
+      padding: 24px;
+    }
+
+    .ai-quote-form-title-{{ ai_gen_id }} {
+      font-size: 24px;
+    }
+
+    .ai-quote-float-button-{{ ai_gen_id }} {
+      padding: 14px 24px;
+      font-size: 14px;
+    }
+  }
+{% endstyle %}
+
+<floating-quote-form-{{ ai_gen_id }}
+  class="ai-quote-float-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+  data-form-id="quote-form-{{ ai_gen_id }}"
+>
+  <button
+    class="ai-quote-float-button-{{ ai_gen_id }}"
+    aria-label="Open quote form"
+    type="button"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    {{ block.settings.button_text }}
+  </button>
+
+  <div class="ai-quote-modal-{{ ai_gen_id }}">
+    <div class="ai-quote-modal-content-{{ ai_gen_id }}">
+      <button
+        class="ai-quote-close-{{ ai_gen_id }}"
+        aria-label="Close quote form"
+        type="button"
+      >
+        ×
+      </button>
+
+      {%- form 'contact', id: 'quote-form-' | append: ai_gen_id -%}
+        <input type="hidden" name="contact[subject]" value="Quote Request - {{ page.metafields.custom.service_name | default: page.title }}">
+        <input type="hidden" name="contact[service_area]" value="{{ page.metafields.custom.service_area | default: 'General' }}">
+        <input type="hidden" name="contact[page_url]" value="{{ shop.url }}{{ page.url }}">
+
+        <div class="ai-quote-form-{{ ai_gen_id }}">
+          <div>
+            <h2 class="ai-quote-form-title-{{ ai_gen_id }}">
+              {% if block.settings.form_title != blank %}
+                {{ block.settings.form_title }}
+              {% else %}
+                Get a Quick Quote
+              {% endif %}
+            </h2>
+            {% if block.settings.form_subtitle != blank %}
+              <p class="ai-quote-form-subtitle-{{ ai_gen_id }}">{{ block.settings.form_subtitle }}</p>
+            {% endif %}
+          </div>
+
+          {%- if form.posted_successfully? -%}
+            <div class="ai-quote-success-{{ ai_gen_id }} active">
+              {{ block.settings.success_message }}
+            </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="ai-quote-error-{{ ai_gen_id }} active">
+              {{ form.errors.messages | first }}
+            </div>
+          {%- endif -%}
+
+          <div class="ai-quote-field-{{ ai_gen_id }}">
+            <label class="ai-quote-label-{{ ai_gen_id }}" for="quote-name-{{ ai_gen_id }}">
+              Name <span style="color: #D82C0D;">*</span>
+            </label>
+            <input
+              type="text"
+              id="quote-name-{{ ai_gen_id }}"
+              name="contact[name]"
+              class="ai-quote-input-{{ ai_gen_id }}"
+              required
+              autocomplete="name"
+            >
+          </div>
+
+          <div class="ai-quote-field-{{ ai_gen_id }}">
+            <label class="ai-quote-label-{{ ai_gen_id }}" for="quote-email-{{ ai_gen_id }}">
+              Email <span style="color: #D82C0D;">*</span>
+            </label>
+            <input
+              type="email"
+              id="quote-email-{{ ai_gen_id }}"
+              name="contact[email]"
+              class="ai-quote-input-{{ ai_gen_id }}"
+              required
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="ai-quote-field-{{ ai_gen_id }}">
+            <label class="ai-quote-label-{{ ai_gen_id }}" for="quote-phone-{{ ai_gen_id }}">
+              Phone <span style="color: #D82C0D;">*</span>
+            </label>
+            <input
+              type="tel"
+              id="quote-phone-{{ ai_gen_id }}"
+              name="contact[phone]"
+              class="ai-quote-input-{{ ai_gen_id }}"
+              required
+              autocomplete="tel"
+            >
+          </div>
+
+          {% if block.settings.show_service_type %}
+            <div class="ai-quote-field-{{ ai_gen_id }}">
+              <label class="ai-quote-label-{{ ai_gen_id }}" for="quote-service-{{ ai_gen_id }}">
+                Service Type
+              </label>
+              <select
+                id="quote-service-{{ ai_gen_id }}"
+                name="contact[service_type]"
+                class="ai-quote-select-{{ ai_gen_id }}"
+              >
+                <option value="{{ page.metafields.custom.service_name | default: 'Furniture Delivery' }}">
+                  {{ page.metafields.custom.service_name | default: 'Furniture Delivery' }}
+                </option>
+                <option value="Single Item Move">Single Item Move</option>
+                <option value="Marketplace Pickup">Marketplace Pickup</option>
+                <option value="Full Removal">Full Removal</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_pickup_location %}
+            <div class="ai-quote-field-{{ ai_gen_id }}">
+              <label class="ai-quote-label-{{ ai_gen_id }}" for="quote-pickup-{{ ai_gen_id }}">
+                Pickup Location
+              </label>
+              <input
+                type="text"
+                id="quote-pickup-{{ ai_gen_id }}"
+                name="contact[pickup_location]"
+                class="ai-quote-input-{{ ai_gen_id }}"
+                placeholder="Suburb or postcode"
+              >
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_delivery_location %}
+            <div class="ai-quote-field-{{ ai_gen_id }}">
+              <label class="ai-quote-label-{{ ai_gen_id }}" for="quote-delivery-{{ ai_gen_id }}">
+                Delivery Location
+              </label>
+              <input
+                type="text"
+                id="quote-delivery-{{ ai_gen_id }}"
+                name="contact[delivery_location]"
+                class="ai-quote-input-{{ ai_gen_id }}"
+                placeholder="Suburb or postcode"
+              >
+            </div>
+          {% endif %}
+
+          <div class="ai-quote-field-{{ ai_gen_id }}">
+            <label class="ai-quote-label-{{ ai_gen_id }}" for="quote-message-{{ ai_gen_id }}">
+              Message
+            </label>
+            <textarea
+              id="quote-message-{{ ai_gen_id }}"
+              name="contact[body]"
+              class="ai-quote-textarea-{{ ai_gen_id }}"
+              placeholder="Tell us about your furniture delivery needs..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="ai-quote-submit-{{ ai_gen_id }}"
+          >
+            {{ block.settings.submit_button_text }}
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</floating-quote-form-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FloatingQuoteForm{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.button = this.querySelector('.ai-quote-float-button-{{ ai_gen_id }}');
+        this.modal = this.querySelector('.ai-quote-modal-{{ ai_gen_id }}');
+        this.closeButton = this.querySelector('.ai-quote-close-{{ ai_gen_id }}');
+        this.form = this.querySelector('form');
+
+        this.setupEventListeners();
+        this.exposeOpenMethod();
+      }
+
+      setupEventListeners() {
+        this.button.addEventListener('click', () => this.openModal());
+        this.closeButton.addEventListener('click', () => this.closeModal());
+        
+        this.modal.addEventListener('click', (e) => {
+          if (e.target === this.modal) {
+            this.closeModal();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+            this.closeModal();
+          }
+        });
+
+        if (this.form) {
+          this.form.addEventListener('submit', () => {
+            setTimeout(() => {
+              const successMessage = this.querySelector('.ai-quote-success-{{ ai_gen_id }}');
+              if (successMessage && successMessage.classList.contains('active')) {
+                setTimeout(() => {
+                  this.closeModal();
+                  this.form.reset();
+                }, 3000);
+              }
+            }, 100);
+          });
+        }
+      }
+
+      openModal() {
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        const firstInput = this.querySelector('input[type="text"]');
+        if (firstInput) {
+          setTimeout(() => firstInput.focus(), 300);
+        }
+      }
+
+      closeModal() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      exposeOpenMethod() {
+        window.openQuoteForm{{ ai_gen_id }} = () => this.openModal();
+      }
+    }
+
+    customElements.define('floating-quote-form-{{ ai_gen_id }}', FloatingQuoteForm{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Floating quote form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Floating button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Get Quote"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Form content"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title",
+      "default": "Get a Quick Quote"
+    },
+    {
+      "type": "text",
+      "id": "form_subtitle",
+      "label": "Form subtitle",
+      "default": "Fill out the form below and we'll get back to you shortly"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit button text",
+      "default": "Send Quote Request"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you! We'll contact you soon with your quote."
+    },
+    {
+      "type": "header",
+      "content": "Form fields"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_service_type",
+      "label": "Show service type field",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pickup_location",
+      "label": "Show pickup location field",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_delivery_location",
+      "label": "Show delivery location field",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Form style"
+    },
+    {
+      "type": "color",
+      "id": "form_background",
+      "label": "Form background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "form_text_color",
+      "label": "Form text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "form_border_radius",
+      "label": "Form border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border color",
+      "default": "#dfdfdf"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "submit_button_color",
+      "label": "Submit button color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "submit_button_text_color",
+      "label": "Submit button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "submit_button_hover_color",
+      "label": "Submit button hover color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "submit_button_radius",
+      "label": "Submit button radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating quote form"
+    }
+  ]
+}
+{% endschema %}

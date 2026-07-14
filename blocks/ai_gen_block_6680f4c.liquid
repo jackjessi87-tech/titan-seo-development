@@ -1,0 +1,399 @@
+{% doc %}
+  @prompt
+    Create an invisible (no visual output) Liquid schema markup block that injects a JSON-LD LocalBusiness and Service structured data script into the page head for a Sydney furniture removalist service page. The schema should include: "@type": ["LocalBusiness", "MovingCompany"], "name": "Titan Express Furniture Removalists", "description": "Professional man with a van Sydney service offering same-day furniture removals, single item moves, and marketplace pickups across all Sydney suburbs. Fixed price, fully insured.", "url": dynamic page URL using Liquid, "telephone": "+61 placeholder", "priceRange": "$$", "areaServed": an array of Sydney suburbs including Sydney CBD, Bondi, Newtown, Surry Hills, Parramatta, Chatswood, Manly, Cronulla, Penrith, Liverpool, Campbelltown, Blacktown, Castle Hill, Hornsby, Mosman, Neutral Bay, Balmain, Glebe, Leichhardt, Marrickville, Randwick, Coogee, Maroubra, Hurstville, Kogarah, Strathfield, Burwood, Ashfield, Five Dock, Drummoyne, "serviceType": "Man With a Van Removalist", "aggregateRating" with ratingValue 4.9 and reviewCount 300, "openingHoursSpecification" for Monday to Sunday 7am to 7pm, and "hasOfferCatalog" listing Single Item Move from $89, Marketplace Pickup from $89, Studio Move from $180. The block should output only the JSON-LD script tag with no visible HTML. Use Liquid where appropriate for dynamic values.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "MovingCompany"],
+  "name": "Titan Express Furniture Removalists",
+  "description": "Professional man with a van Sydney service offering same-day furniture removals, single item moves, and marketplace pickups across all Sydney suburbs. Fixed price, fully insured.",
+  "url": "{{ shop.url }}{{ page.url }}",
+  "telephone": "+61{{ block.settings.phone_number }}",
+  "priceRange": "$$",
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Sydney CBD",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Bondi",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Newtown",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Surry Hills",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Parramatta",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Chatswood",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Manly",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Cronulla",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Penrith",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Liverpool",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Campbelltown",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Blacktown",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Castle Hill",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Hornsby",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Mosman",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Neutral Bay",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Balmain",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Glebe",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Leichhardt",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Marrickville",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Randwick",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Coogee",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Maroubra",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Hurstville",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Kogarah",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Strathfield",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Burwood",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Ashfield",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Five Dock",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    },
+    {
+      "@type": "City",
+      "name": "Drummoyne",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "New South Wales"
+      }
+    }
+  ],
+  "serviceType": "Man With a Van Removalist",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ block.settings.rating_value }}",
+    "reviewCount": "{{ block.settings.review_count }}"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "07:00",
+      "closes": "19:00"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Man With a Van Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Single Item Move",
+          "description": "Professional single furniture item removal service"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "{{ block.settings.single_item_price }}",
+          "priceCurrency": "AUD"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Marketplace Pickup",
+          "description": "Facebook Marketplace and Gumtree furniture pickup service"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "{{ block.settings.marketplace_pickup_price }}",
+          "priceCurrency": "AUD"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Studio Move",
+          "description": "Complete studio apartment furniture removal"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "{{ block.settings.studio_move_price }}",
+          "priceCurrency": "AUD"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+{% schema %}
+{
+  "name": "Local schema markup",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contact information"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "info": "Enter without +61 prefix (e.g., 412345678)",
+      "default": "412345678"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "range",
+      "id": "rating_value",
+      "label": "Rating value",
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "default": 4.9
+    },
+    {
+      "type": "range",
+      "id": "review_count",
+      "label": "Review count",
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Service pricing"
+    },
+    {
+      "type": "range",
+      "id": "single_item_price",
+      "label": "Single item move price",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "$",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "marketplace_pickup_price",
+      "label": "Marketplace pickup price",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "$",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "studio_move_price",
+      "label": "Studio move price",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "unit": "$",
+      "default": 180
+    }
+  ],
+  "presets": [
+    {
+      "name": "Local schema markup"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,623 @@
+{% doc %}
+  @prompt
+    Ad A Serivces Section Stylish With Ad A Phot oTo Each Service Section with A Headline and Make Easy For Sydney And Ready TO Understand , Design for Van ANd man Removalsit Style Details Section With Seo In Mind And Alos Ad Alt Text For Photos And Also Ad  Text Tag on Photos, Make It More Services Style  Also Ad What A Van Fits generally small Car With A Tage What It Can Fit Then Give Place holserd  TO AD list And Maker this Informative 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-removals-services-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-removals-services__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-removals-services__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-removals-services__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+
+  .ai-removals-services__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .ai-removals-services__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: {{ block.settings.grid_gap }}px;
+    margin-bottom: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-removals-service-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-removals-service-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-removals-service-card__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 66.67%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .ai-removals-service-card__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-removals-service-card__image-wrapper-{{ ai_gen_id }} svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-removals-service-card__content-{{ ai_gen_id }} {
+    padding: 24px;
+  }
+
+  .ai-removals-service-card__tag-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.tag_background }};
+    color: {{ block.settings.tag_text_color }};
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .ai-removals-service-card__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_heading_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .ai-removals-service-card__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_text_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .ai-removals-service-card__capacity-{{ ai_gen_id }} {
+    background-color: {{ block.settings.capacity_background }};
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ai-removals-service-card__capacity-title-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 700;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 8px;
+  }
+
+  .ai-removals-service-card__capacity-text-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .ai-removals-service-card__list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-removals-service-card__list-item-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_text_size }}px;
+    color: {{ block.settings.text_color }};
+    padding: 8px 0;
+    border-bottom: 1px solid {{ block.settings.border_color }};
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-removals-service-card__list-item-{{ ai_gen_id }}:last-child {
+    border-bottom: none;
+  }
+
+  .ai-removals-service-card__list-item-{{ ai_gen_id }}::before {
+    content: "✓";
+    color: {{ block.settings.checkmark_color }};
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-removals-services__grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-removals-services__title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-removals-service-card__heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.card_heading_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<removals-services-{{ ai_gen_id }} class="ai-removals-services-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-removals-services__container-{{ ai_gen_id }}">
+    <div class="ai-removals-services__header-{{ ai_gen_id }}">
+      {% if block.settings.main_title != blank %}
+        <h2 class="ai-removals-services__title-{{ ai_gen_id }}">{{ block.settings.main_title }}</h2>
+      {% endif %}
+      {% if block.settings.main_subtitle != blank %}
+        <div class="ai-removals-services__subtitle-{{ ai_gen_id }}">{{ block.settings.main_subtitle }}</div>
+      {% endif %}
+    </div>
+
+    <div class="ai-removals-services__grid-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign service_enabled_key = 'service_' | append: i | append: '_enabled'
+          assign service_image_key = 'service_' | append: i | append: '_image'
+          assign service_alt_key = 'service_' | append: i | append: '_alt_text'
+          assign service_tag_key = 'service_' | append: i | append: '_tag'
+          assign service_heading_key = 'service_' | append: i | append: '_heading'
+          assign service_description_key = 'service_' | append: i | append: '_description'
+          assign service_capacity_key = 'service_' | append: i | append: '_capacity'
+          assign service_list_key = 'service_' | append: i | append: '_list'
+
+          assign service_enabled = block.settings[service_enabled_key]
+          assign service_image = block.settings[service_image_key]
+          assign service_alt = block.settings[service_alt_key]
+          assign service_tag = block.settings[service_tag_key]
+          assign service_heading = block.settings[service_heading_key]
+          assign service_description = block.settings[service_description_key]
+          assign service_capacity = block.settings[service_capacity_key]
+          assign service_list = block.settings[service_list_key]
+        %}
+
+        {% if service_enabled %}
+          <article class="ai-removals-service-card-{{ ai_gen_id }}">
+            <div class="ai-removals-service-card__image-wrapper-{{ ai_gen_id }}">
+              {% if service_image %}
+                <img
+                  src="{{ service_image | image_url: width: 800 }}"
+                  alt="{{ service_alt | escape }}"
+                  loading="lazy"
+                  width="800"
+                  height="533"
+                  class="ai-removals-service-card__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                {{ 'image' | placeholder_svg_tag }}
+              {% endif %}
+            </div>
+
+            <div class="ai-removals-service-card__content-{{ ai_gen_id }}">
+              {% if service_tag != blank %}
+                <span class="ai-removals-service-card__tag-{{ ai_gen_id }}">{{ service_tag }}</span>
+              {% endif %}
+
+              {% if service_heading != blank %}
+                <h3 class="ai-removals-service-card__heading-{{ ai_gen_id }}">{{ service_heading }}</h3>
+              {% endif %}
+
+              {% if service_description != blank %}
+                <div class="ai-removals-service-card__description-{{ ai_gen_id }}">{{ service_description }}</div>
+              {% endif %}
+
+              {% if service_capacity != blank %}
+                <div class="ai-removals-service-card__capacity-{{ ai_gen_id }}">
+                  <h4 class="ai-removals-service-card__capacity-title-{{ ai_gen_id }}">Van Capacity</h4>
+                  <p class="ai-removals-service-card__capacity-text-{{ ai_gen_id }}">{{ service_capacity }}</p>
+                </div>
+              {% endif %}
+
+              {% if service_list != blank %}
+                {% assign list_items = service_list | split: ',' %}
+                <ul class="ai-removals-service-card__list-{{ ai_gen_id }}">
+                  {% for item in list_items %}
+                    <li class="ai-removals-service-card__list-item-{{ ai_gen_id }}">{{ item | strip }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</removals-services-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RemovalsServices{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.initializeCards();
+      }
+
+      initializeCards() {
+        const cards = this.querySelectorAll('.ai-removals-service-card-{{ ai_gen_id }}');
+        cards.forEach((card, index) => {
+          card.style.animationDelay = `${index * 0.1}s`;
+        });
+      }
+    }
+
+    customElements.define('removals-services-{{ ai_gen_id }}', RemovalsServices{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Removals services",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main title",
+      "default": "Van and Man Removals Sydney"
+    },
+    {
+      "type": "textarea",
+      "id": "main_subtitle",
+      "label": "Subtitle",
+      "default": "Professional removal services tailored to your needs across Sydney"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "tag_background",
+      "label": "Tag background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tag_text_color",
+      "label": "Tag text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "capacity_background",
+      "label": "Capacity box background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "checkmark_color",
+      "label": "Checkmark",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Main title size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_heading_size",
+      "label": "Card heading size",
+      "min": 18,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_text_size",
+      "label": "Card text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Service 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "service_1_enabled",
+      "label": "Enable service 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "service_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_1_alt_text",
+      "label": "Image alt text",
+      "default": "Small van removal service in Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_1_tag",
+      "label": "Tag",
+      "default": "Small Van"
+    },
+    {
+      "type": "text",
+      "id": "service_1_heading",
+      "label": "Heading",
+      "default": "Small Van Removals"
+    },
+    {
+      "type": "textarea",
+      "id": "service_1_description",
+      "label": "Description",
+      "default": "Perfect for small moves, single items, or studio apartments. Our compact vans navigate Sydney streets with ease."
+    },
+    {
+      "type": "text",
+      "id": "service_1_capacity",
+      "label": "Van capacity",
+      "default": "Equivalent to a small car load"
+    },
+    {
+      "type": "textarea",
+      "id": "service_1_list",
+      "label": "Features list",
+      "default": "Single room moves, Small furniture items, Boxes and personal items, Quick delivery service",
+      "info": "Separate items with commas"
+    },
+    {
+      "type": "header",
+      "content": "Service 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "service_2_enabled",
+      "label": "Enable service 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "service_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_2_alt_text",
+      "label": "Image alt text",
+      "default": "Medium van removal service in Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_2_tag",
+      "label": "Tag",
+      "default": "Medium Van"
+    },
+    {
+      "type": "text",
+      "id": "service_2_heading",
+      "label": "Heading",
+      "default": "Medium Van Removals"
+    },
+    {
+      "type": "textarea",
+      "id": "service_2_description",
+      "label": "Description",
+      "default": "Ideal for 1-2 bedroom apartments or office relocations. Spacious and efficient for medium-sized moves."
+    },
+    {
+      "type": "text",
+      "id": "service_2_capacity",
+      "label": "Van capacity",
+      "default": "Equivalent to a sedan and SUV combined"
+    },
+    {
+      "type": "textarea",
+      "id": "service_2_list",
+      "label": "Features list",
+      "default": "1-2 bedroom apartments, Office furniture, Appliances, Multiple room moves",
+      "info": "Separate items with commas"
+    },
+    {
+      "type": "header",
+      "content": "Service 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "service_3_enabled",
+      "label": "Enable service 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "service_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_3_alt_text",
+      "label": "Image alt text",
+      "default": "Large van removal service in Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_3_tag",
+      "label": "Tag",
+      "default": "Large Van"
+    },
+    {
+      "type": "text",
+      "id": "service_3_heading",
+      "label": "Heading",
+      "default": "Large Van Removals"
+    },
+    {
+      "type": "textarea",
+      "id": "service_3_description",
+      "label": "Description",
+      "default": "Best for 3+ bedroom homes or large office moves. Maximum capacity for comprehensive relocations across Sydney."
+    },
+    {
+      "type": "text",
+      "id": "service_3_capacity",
+      "label": "Van capacity",
+      "default": "Equivalent to a large SUV and trailer"
+    },
+    {
+      "type": "textarea",
+      "id": "service_3_list",
+      "label": "Features list",
+      "default": "3+ bedroom homes, Full house moves, Large furniture sets, Commercial relocations",
+      "info": "Separate items with commas"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Removals services"
+    }
+  ]
+}
+{% endschema %}

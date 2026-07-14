@@ -1,0 +1,1071 @@
+{% doc %}
+  @prompt
+    Build Section 6 for the Titan Express homepage.
+    
+    SECTION TYPE
+    
+    Sydney Service Areas Section
+    
+    SECTION GOAL
+    
+    Show customers and Google Ads that Titan Express provides removalist, man and van, furniture delivery, single item delivery, store collection, Marketplace pickup and small move services across Sydney.
+    
+    SECTION TITLE
+    
+    Removalist & Furniture Delivery Across Sydney
+    
+    SUBHEADING
+    
+    Titan Express provides same-day furniture moving, man and van services, small apartment moves, store collections and Marketplace pickup delivery across Sydney suburbs.
+    
+    TOP TRUST LINE
+    
+    Local Sydney service • Fast quote response • Same-day availability may be possible
+    
+    LAYOUT
+    
+    Create a premium responsive service area section.
+    
+    Desktop:
+    Two-column layout.
+    
+    Left side:
+    Heading, short SEO-rich description, call button, quote button and trust badges.
+    
+    Right side:
+    Interactive Sydney suburb cards or map-style grid.
+    
+    Mobile:
+    Single column layout with easy-to-tap suburb cards and sticky-style call button.
+    
+    SERVICE AREA GROUPS
+    
+    Display areas in organised groups:
+    
+    Sydney CBD & Inner City:
+    Sydney CBD, Surry Hills, Waterloo, Alexandria, Redfern, Zetland
+    
+    Western Sydney:
+    Parramatta, Blacktown, Penrith, Mount Druitt, Auburn, Merrylands
+    
+    South West Sydney:
+    Liverpool, Bankstown, Campbelltown, Fairfield, Cabramatta, Casula
+    
+    Inner West:
+    Strathfield, Burwood, Ashfield, Newtown, Marrickville, Leichhardt
+    
+    North Sydney & Hills:
+    North Sydney, Chatswood, Ryde, Castle Hill, Hornsby, Baulkham Hills
+    
+    Eastern Suburbs:
+    Bondi, Randwick, Maroubra, Coogee, Mascot, Rosebery
+    
+    South Sydney & St George:
+    Hurstville, Kogarah, Rockdale, Sutherland, Miranda, Cronulla
+    
+    SERVICE KEYWORDS TO INCLUDE NATURALLY
+    
+    Removalist Sydney
+    Man and Van Sydney
+    Furniture Delivery Sydney
+    Single Item Delivery Sydney
+    Small Moves Sydney
+    Marketplace Pickup Sydney
+    Store Collection Delivery Sydney
+    Same Day Removalist Sydney
+    Apartment Moves Sydney
+    Granny Flat Moves Sydney
+    
+    INTERACTIVE REQUIREMENTS
+    
+    • Suburb cards should have hover effects
+    • Cards should lift slightly on hover
+    • Add animated map pins
+    • Add SVG route line background
+    • Add small moving van icon travelling along route line
+    • Add smooth fade-in animations
+    • Add “Popular Area” badges on Parramatta, Blacktown, Bankstown, Liverpool, Ryde and Sydney CBD
+    • Add clickable call button using phone number 0469 717 535
+    • Add quote button that scrolls to the quote form section
+    
+    CTA TEXT
+    
+    Primary Button:
+    Call 0469 717 535
+    
+    Secondary Button:
+    Get Free Quote
+    
+    TRUST BADGES
+    
+    Sydney Wide Service
+    Same Day Available
+    Furniture Protection
+    Oversized Van
+    Fast Quote Response
+    
+    DESIGN STYLE
+    
+    Premium removalist website design.
+    
+    Use:
+    White background
+    Black text
+    Gold/yellow accents
+    Small blue trust accents
+    Soft shadows
+    Rounded cards
+    Advanced SVG graphics
+    Clean modern spacing
+    No clutter
+    
+    SEO DESCRIPTION
+    
+    Include this visible paragraph:
+    
+    Titan Express helps Sydney customers with removalist services, man and van moving, furniture delivery, single item transport, Marketplace pickup, store collection delivery, small apartment moves and granny flat moves across major Sydney suburbs.
+    
+    PERFORMANCE REQUIREMENTS
+    
+    • Shopify compatible
+    • Mobile-first responsive layout
+    • No external libraries
+    • No horizontal scrolling
+    • Fast loading
+    • Lightweight CSS and JavaScript
+    • Accessible contrast
+    • Clean class names
+    
+    OUTPUT
+    
+    Generate complete Shopify-compatible Liquid, HTML, CSS, SVG and JavaScript.
+    
+    Use class names starting with:
+    
+    titan-areas-
+    
+    The final section should look premium, interactive, trustworthy and designed to improve Google Ads landing page relevance for Sydney removalist and furniture delivery searches.
+    , Remove Suburb Name 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-areas-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .titan-areas-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .titan-areas-trust-line-{{ ai_gen_id }} {
+    text-align: center;
+    font-size: {{ block.settings.trust_line_size }}px;
+    color: {{ block.settings.trust_line_color }};
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .titan-areas-trust-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .titan-areas-trust-dot-{{ ai_gen_id }} {
+    width: 4px;
+    height: 4px;
+    background-color: {{ block.settings.accent_color }};
+    border-radius: 50%;
+  }
+
+  .titan-areas-layout-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .titan-areas-left-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .titan-areas-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .titan-areas-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .titan-areas-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .titan-areas-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .titan-areas-btn-{{ ai_gen_id }} {
+    padding: 14px 28px;
+    border-radius: {{ block.settings.button_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .titan-areas-btn-primary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.primary_button_bg }};
+    color: {{ block.settings.primary_btn_text }};
+  }
+
+  .titan-areas-btn-primary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.primary_button_hover_bg }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .titan-areas-btn-secondary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.secondary_button_bg }};
+    color: {{ block.settings.secondary_btn_text }};
+    border: 2px solid {{ block.settings.secondary_button_border }};
+  }
+
+  .titan-areas-btn-secondary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.secondary_button_hover_bg }};
+    border-color: {{ block.settings.secondary_button_hover_border }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .titan-areas-phone-icon-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+  }
+
+  .titan-areas-trust-badges-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .titan-areas-badge-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: {{ block.settings.badge_bg }};
+    border-radius: {{ block.settings.badge_radius }}px;
+    font-size: {{ block.settings.badge_text_size }}px;
+    color: {{ block.settings.badge_text_color }};
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .titan-areas-badge-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .titan-areas-right-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .titan-areas-svg-bg-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .titan-areas-grid-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .titan-areas-group-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_bg }};
+    border-radius: {{ block.settings.card_radius }}px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid {{ block.settings.card_border }};
+  }
+
+  .titan-areas-group-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .titan-areas-group-header-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .titan-areas-group-icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .titan-areas-group-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.group_title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .titan-areas-layout-{{ ai_gen_id }} {
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+    }
+
+    .titan-areas-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 1.2 }}px;
+    }
+
+    .titan-areas-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .titan-areas-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.6 }}px 16px {{ block.settings.section_padding_bottom | times: 0.6 }}px;
+    }
+
+    .titan-areas-trust-line-{{ ai_gen_id }} {
+      font-size: {{ block.settings.trust_line_size | minus: 2 }}px;
+      margin-bottom: 24px;
+    }
+
+    .titan-areas-buttons-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .titan-areas-btn-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .titan-areas-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<sydney-service-areas-{{ ai_gen_id }} class="titan-areas-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="titan-areas-container-{{ ai_gen_id }}">
+    {% if block.settings.show_trust_line %}
+      <div class="titan-areas-trust-line-{{ ai_gen_id }}">
+        <span class="titan-areas-trust-item-{{ ai_gen_id }}">{{ block.settings.trust_item_1 }}</span>
+        <span class="titan-areas-trust-dot-{{ ai_gen_id }}"></span>
+        <span class="titan-areas-trust-item-{{ ai_gen_id }}">{{ block.settings.trust_item_2 }}</span>
+        <span class="titan-areas-trust-dot-{{ ai_gen_id }}"></span>
+        <span class="titan-areas-trust-item-{{ ai_gen_id }}">{{ block.settings.trust_item_3 }}</span>
+      </div>
+    {% endif %}
+
+    <div class="titan-areas-layout-{{ ai_gen_id }}">
+      <div class="titan-areas-left-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="titan-areas-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+
+        {% if block.settings.subheading != blank %}
+          <p class="titan-areas-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="titan-areas-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+        {% endif %}
+
+        <div class="titan-areas-buttons-{{ ai_gen_id }}">
+          <a href="tel:{{ block.settings.phone_number }}" class="titan-areas-btn-{{ ai_gen_id }} titan-areas-btn-primary-{{ ai_gen_id }}">
+            <svg class="titan-areas-phone-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            {{ block.settings.primary_btn_label }}
+          </a>
+          <button class="titan-areas-btn-{{ ai_gen_id }} titan-areas-btn-secondary-{{ ai_gen_id }}" data-scroll-to-quote>
+            {{ block.settings.secondary_btn_label }}
+          </button>
+        </div>
+
+        {% if block.settings.show_trust_badges %}
+          <div class="titan-areas-trust-badges-{{ ai_gen_id }}">
+            <div class="titan-areas-badge-{{ ai_gen_id }}">
+              <svg class="titan-areas-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>{{ block.settings.badge_1 }}</span>
+            </div>
+            <div class="titan-areas-badge-{{ ai_gen_id }}">
+              <svg class="titan-areas-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>{{ block.settings.badge_2 }}</span>
+            </div>
+            <div class="titan-areas-badge-{{ ai_gen_id }}">
+              <svg class="titan-areas-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span>{{ block.settings.badge_3 }}</span>
+            </div>
+            <div class="titan-areas-badge-{{ ai_gen_id }}">
+              <svg class="titan-areas-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+              <span>{{ block.settings.badge_4 }}</span>
+            </div>
+            <div class="titan-areas-badge-{{ ai_gen_id }}">
+              <svg class="titan-areas-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+              <span>{{ block.settings.badge_5 }}</span>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="titan-areas-right-{{ ai_gen_id }}">
+        <svg class="titan-areas-svg-bg-{{ ai_gen_id }}" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50,200 Q100,100 200,150 T350,200" stroke="{{ block.settings.accent_color }}" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+          <circle cx="50" cy="200" r="8" fill="{{ block.settings.accent_color }}"/>
+          <circle cx="200" cy="150" r="8" fill="{{ block.settings.accent_color }}"/>
+          <circle cx="350" cy="200" r="8" fill="{{ block.settings.accent_color }}"/>
+        </svg>
+
+        <div class="titan-areas-grid-{{ ai_gen_id }}">
+          {% if block.settings.show_group_1 %}
+            <div class="titan-areas-group-{{ ai_gen_id }}">
+              <div class="titan-areas-group-header-{{ ai_gen_id }}">
+                <svg class="titan-areas-group-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3 class="titan-areas-group-title-{{ ai_gen_id }}">{{ block.settings.group_1_title }}</h3>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_group_2 %}
+            <div class="titan-areas-group-{{ ai_gen_id }}">
+              <div class="titan-areas-group-header-{{ ai_gen_id }}">
+                <svg class="titan-areas-group-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3 class="titan-areas-group-title-{{ ai_gen_id }}">{{ block.settings.group_2_title }}</h3>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_group_3 %}
+            <div class="titan-areas-group-{{ ai_gen_id }}">
+              <div class="titan-areas-group-header-{{ ai_gen_id }}">
+                <svg class="titan-areas-group-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3 class="titan-areas-group-title-{{ ai_gen_id }}">{{ block.settings.group_3_title }}</h3>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_group_4 %}
+            <div class="titan-areas-group-{{ ai_gen_id }}">
+              <div class="titan-areas-group-header-{{ ai_gen_id }}">
+                <svg class="titan-areas-group-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3 class="titan-areas-group-title-{{ ai_gen_id }}">{{ block.settings.group_4_title }}</h3>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_group_5 %}
+            <div class="titan-areas-group-{{ ai_gen_id }}">
+              <div class="titan-areas-group-header-{{ ai_gen_id }}">
+                <svg class="titan-areas-group-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3 class="titan-areas-group-title-{{ ai_gen_id }}">{{ block.settings.group_5_title }}</h3>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_group_6 %}
+            <div class="titan-areas-group-{{ ai_gen_id }}">
+              <div class="titan-areas-group-header-{{ ai_gen_id }}">
+                <svg class="titan-areas-group-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3 class="titan-areas-group-title-{{ ai_gen_id }}">{{ block.settings.group_6_title }}</h3>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.show_group_7 %}
+            <div class="titan-areas-group-{{ ai_gen_id }}">
+              <div class="titan-areas-group-header-{{ ai_gen_id }}">
+                <svg class="titan-areas-group-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3 class="titan-areas-group-title-{{ ai_gen_id }}">{{ block.settings.group_7_title }}</h3>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</sydney-service-areas-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SydneyServiceAreas{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupQuoteButton();
+      }
+
+      setupQuoteButton() {
+        const quoteButton = this.querySelector('[data-scroll-to-quote]');
+        if (quoteButton) {
+          quoteButton.addEventListener('click', function() {
+            const quoteSection = document.querySelector('[data-quote-form]');
+            if (quoteSection) {
+              quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        }
+      }
+    }
+
+    customElements.define('sydney-service-areas-{{ ai_gen_id }}', SydneyServiceAreas{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sydney service areas",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Removalist & Furniture Delivery Across Sydney"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Titan Express provides same-day furniture moving, man and van services, small apartment moves, store collections and Marketplace pickup delivery across Sydney suburbs."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Titan Express helps Sydney customers with removalist services, man and van moving, furniture delivery, single item transport, Marketplace pickup, store collection delivery, small apartment moves and granny flat moves across major Sydney suburbs.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Trust line"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_line",
+      "label": "Show trust line",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_item_1",
+      "label": "Trust item 1",
+      "default": "Local Sydney service"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_2",
+      "label": "Trust item 2",
+      "default": "Fast quote response"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_3",
+      "label": "Trust item 3",
+      "default": "Same-day availability may be possible"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469717535"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Primary button label",
+      "default": "Call 0469 717 535"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Secondary button label",
+      "default": "Get Free Quote"
+    },
+    {
+      "type": "header",
+      "content": "Trust badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show trust badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge 1",
+      "default": "Sydney Wide Service"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge 2",
+      "default": "Same Day Available"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Badge 3",
+      "default": "Furniture Protection"
+    },
+    {
+      "type": "text",
+      "id": "badge_4",
+      "label": "Badge 4",
+      "default": "Oversized Van"
+    },
+    {
+      "type": "text",
+      "id": "badge_5",
+      "label": "Badge 5",
+      "default": "Fast Quote Response"
+    },
+    {
+      "type": "header",
+      "content": "Service area group 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_group_1",
+      "label": "Show group 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "group_1_title",
+      "label": "Group 1 title",
+      "default": "Sydney CBD & Inner City"
+    },
+    {
+      "type": "header",
+      "content": "Service area group 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_group_2",
+      "label": "Show group 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "group_2_title",
+      "label": "Group 2 title",
+      "default": "Western Sydney"
+    },
+    {
+      "type": "header",
+      "content": "Service area group 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_group_3",
+      "label": "Show group 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "group_3_title",
+      "label": "Group 3 title",
+      "default": "South West Sydney"
+    },
+    {
+      "type": "header",
+      "content": "Service area group 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_group_4",
+      "label": "Show group 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "group_4_title",
+      "label": "Group 4 title",
+      "default": "Inner West"
+    },
+    {
+      "type": "header",
+      "content": "Service area group 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_group_5",
+      "label": "Show group 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "group_5_title",
+      "label": "Group 5 title",
+      "default": "North Sydney & Hills"
+    },
+    {
+      "type": "header",
+      "content": "Service area group 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_group_6",
+      "label": "Show group 6",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "group_6_title",
+      "label": "Group 6 title",
+      "default": "Eastern Suburbs"
+    },
+    {
+      "type": "header",
+      "content": "Service area group 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_group_7",
+      "label": "Show group 7",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "group_7_title",
+      "label": "Group 7 title",
+      "default": "South Sydney & St George"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "trust_line_color",
+      "label": "Trust line",
+      "default": "#1E90FF"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg",
+      "label": "Primary button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_text",
+      "label": "Primary button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_bg",
+      "label": "Primary button hover",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_bg",
+      "label": "Secondary button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "secondary_btn_text",
+      "label": "Secondary button text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border",
+      "label": "Secondary button border",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_bg",
+      "label": "Secondary button hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_hover_border",
+      "label": "Secondary button hover border",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "trust_line_size",
+      "label": "Trust line size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "group_title_size",
+      "label": "Group title size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "badge_text_size",
+      "label": "Badge text size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Border radius"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_radius",
+      "label": "Badge",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sydney service areas"
+    }
+  ]
+}
+{% endschema %}

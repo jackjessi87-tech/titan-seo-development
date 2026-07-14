@@ -1,0 +1,541 @@
+{% doc %}
+  @prompt
+    Ad Faq Section For this Removalist Website Include Faq For Seo And GOOGle Ads To Pupll Data 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-faq-section-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-faq-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-faq-header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-faq-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.subtitle_spacing }}px 0;
+    font-weight: 700;
+  }
+
+  .ai-faq-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .ai-faq-list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-faq-item-{{ ai_gen_id }} {
+    border-bottom: 1px solid {{ block.settings.border_color }};
+  }
+
+  .ai-faq-item-{{ ai_gen_id }}:last-child {
+    border-bottom: none;
+  }
+
+  .ai-faq-question-button-{{ ai_gen_id }} {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: {{ block.settings.item_padding }}px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    gap: 20px;
+  }
+
+  .ai-faq-question-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.question_size }}px;
+    color: {{ block.settings.question_color }};
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+  }
+
+  .ai-faq-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-faq-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    stroke: {{ block.settings.icon_color }};
+  }
+
+  .ai-faq-item-{{ ai_gen_id }}.active .ai-faq-icon-{{ ai_gen_id }} {
+    transform: rotate(180deg);
+  }
+
+  .ai-faq-answer-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .ai-faq-answer-content-{{ ai_gen_id }} {
+    font-size: {{ block.settings.answer_size }}px;
+    color: {{ block.settings.answer_color }};
+    line-height: 1.7;
+    padding-bottom: {{ block.settings.item_padding }}px;
+  }
+
+  .ai-faq-item-{{ ai_gen_id }}.active .ai-faq-answer-{{ ai_gen_id }} {
+    max-height: 1000px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-faq-section-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-faq-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.7);
+    }
+
+    .ai-faq-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    }
+
+    .ai-faq-question-text-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.question_size }}px * 0.9);
+    }
+
+    .ai-faq-answer-content-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.answer_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<removalist-faq-{{ ai_gen_id }} class="ai-faq-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-faq-container-{{ ai_gen_id }}">
+    {% if block.settings.section_title != blank or block.settings.section_subtitle != blank %}
+      <div class="ai-faq-header-{{ ai_gen_id }}">
+        {% if block.settings.section_title != blank %}
+          <h2 class="ai-faq-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+        {% endif %}
+        {% if block.settings.section_subtitle != blank %}
+          <div class="ai-faq-subtitle-{{ ai_gen_id }}">{{ block.settings.section_subtitle }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div itemscope itemtype="https://schema.org/FAQPage">
+      <ul class="ai-faq-list-{{ ai_gen_id }}">
+        {% for i in (1..10) %}
+          {% liquid
+            assign question_key = 'faq_question_' | append: i
+            assign answer_key = 'faq_answer_' | append: i
+            assign question = block.settings[question_key]
+            assign answer = block.settings[answer_key]
+          %}
+
+          {% if question != blank and answer != blank %}
+            <li class="ai-faq-item-{{ ai_gen_id }}" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <button
+                class="ai-faq-question-button-{{ ai_gen_id }}"
+                aria-expanded="false"
+                data-faq-toggle
+              >
+                <h3 class="ai-faq-question-text-{{ ai_gen_id }}" itemprop="name">{{ question }}</h3>
+                <span class="ai-faq-icon-{{ ai_gen_id }}" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </button>
+              <div class="ai-faq-answer-{{ ai_gen_id }}" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <div class="ai-faq-answer-content-{{ ai_gen_id }}" itemprop="text">{{ answer }}</div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</removalist-faq-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RemovalistFaq{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.faqItems = this.querySelectorAll('.ai-faq-item-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.faqItems.forEach((item) => {
+          const button = item.querySelector('[data-faq-toggle]');
+          const answer = item.querySelector('.ai-faq-answer-{{ ai_gen_id }}');
+
+          button.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            if (isActive) {
+              item.classList.remove('active');
+              button.setAttribute('aria-expanded', 'false');
+            } else {
+              item.classList.add('active');
+              button.setAttribute('aria-expanded', 'true');
+            }
+          });
+        });
+      }
+    }
+
+    customElements.define('removalist-faq-{{ ai_gen_id }}', RemovalistFaq{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Removalist FAQ",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Subtitle",
+      "default": "Get answers to common questions about our removalist services"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "FAQ questions"
+    },
+    {
+      "type": "text",
+      "id": "faq_question_1",
+      "label": "Question 1",
+      "default": "How much does a removalist service cost?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_1",
+      "label": "Answer 1",
+      "default": "Our removalist service costs vary based on distance, volume of items, and additional services required. Contact us for a free quote tailored to your specific moving needs."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_2",
+      "label": "Question 2",
+      "default": "What areas do you service?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_2",
+      "label": "Answer 2",
+      "default": "We provide removalist services across all major metropolitan areas and regional locations. Our experienced team handles local, interstate, and long-distance moves with professional care."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_3",
+      "label": "Question 3",
+      "default": "Do you provide packing services?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_3",
+      "label": "Answer 3",
+      "default": "Yes, we offer comprehensive packing services including packing materials, professional packing, and unpacking at your destination. We can handle fragile items, furniture, and specialty items."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_4",
+      "label": "Question 4",
+      "default": "Are my belongings insured during the move?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_4",
+      "label": "Answer 4",
+      "default": "All our removalist services include transit insurance to protect your belongings. We also offer additional insurance options for high-value items and comprehensive coverage."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_5",
+      "label": "Question 5",
+      "default": "How far in advance should I book?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_5",
+      "label": "Answer 5",
+      "default": "We recommend booking at least 2-4 weeks in advance, especially during peak moving season. However, we can accommodate last-minute moves subject to availability."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_6",
+      "label": "Question 6",
+      "default": "What payment methods do you accept?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_6",
+      "label": "Answer 6",
+      "default": "We accept all major credit cards, bank transfers, and cash payments. A deposit is required to secure your booking, with the balance due upon completion of the move."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_7",
+      "label": "Question 7",
+      "default": "Do you move pianos and heavy furniture?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_7",
+      "label": "Answer 7",
+      "default": "Yes, our experienced removalists are trained to handle pianos, pool tables, safes, and other heavy or specialty items. We use professional equipment to ensure safe transport."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_8",
+      "label": "Question 8",
+      "default": "Can you provide storage solutions?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_8",
+      "label": "Answer 8",
+      "default": "We offer short-term and long-term storage solutions in secure, climate-controlled facilities. Perfect for when your move-in and move-out dates don't align."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_9",
+      "label": "Question 9",
+      "default": "What happens if there are delays?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_9",
+      "label": "Answer 9",
+      "default": "We maintain clear communication throughout your move. If unexpected delays occur, we'll notify you immediately and work to minimize any inconvenience to your schedule."
+    },
+    {
+      "type": "text",
+      "id": "faq_question_10",
+      "label": "Question 10",
+      "default": "Do I need to be present during the move?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_answer_10",
+      "label": "Answer 10",
+      "default": "While not always required, we recommend being present at both pickup and delivery locations to oversee the process and provide any specific instructions to our team."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum content width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subtitle_spacing",
+      "label": "Subtitle spacing",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Item padding",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "label": "Question size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "label": "Answer size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Removalist FAQ"
+    }
+  ]
+}
+{% endschema %}

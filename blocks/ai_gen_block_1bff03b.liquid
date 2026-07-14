@@ -1,0 +1,533 @@
+{% doc %}
+  @prompt
+    Manageable selectable Google Review Widget With Api and Place Id Connect  Also Select able review which one to show 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-google-reviews-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-google-reviews-header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: 24px;
+  }
+
+  .ai-google-reviews-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px;
+  }
+
+  .ai-google-reviews-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .ai-google-reviews-error-{{ ai_gen_id }} {
+    padding: 20px;
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    color: #c33;
+    text-align: center;
+  }
+
+  .ai-google-reviews-loading-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 40px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-google-reviews-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.gap }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-google-reviews-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+  }
+
+  .ai-google-review-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border: 1px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-google-review-header-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ai-google-review-avatar-{{ ai_gen_id }} {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: {{ block.settings.text_color }};
+    color: {{ block.settings.card_background }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .ai-google-review-author-info-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-google-review-author-{{ ai_gen_id }} {
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 4px;
+    font-size: 16px;
+  }
+
+  .ai-google-review-date-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+  }
+
+  .ai-google-review-rating-{{ ai_gen_id }} {
+    display: flex;
+    gap: 4px;
+  }
+
+  .ai-google-review-star-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    fill: {{ block.settings.star_color }};
+  }
+
+  .ai-google-review-star-empty-{{ ai_gen_id }} {
+    fill: {{ block.settings.star_empty_color }};
+  }
+
+  .ai-google-review-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-google-review-google-logo-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    margin-top: auto;
+  }
+
+  .ai-google-reviews-empty-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 40px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+  }
+{% endstyle %}
+
+<google-reviews-widget-{{ ai_gen_id }}
+  class="ai-google-reviews-{{ ai_gen_id }}"
+  data-api-key="{{ block.settings.google_api_key }}"
+  data-place-id="{{ block.settings.google_place_id }}"
+  data-max-reviews="{{ block.settings.max_reviews }}"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.show_title %}
+    <div class="ai-google-reviews-header-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-google-reviews-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+      {% if block.settings.subtitle != blank %}
+        <p class="ai-google-reviews-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="ai-google-reviews-loading-{{ ai_gen_id }}">
+    Loading reviews...
+  </div>
+
+  <div class="ai-google-reviews-container-{{ ai_gen_id }}" style="display: none;"></div>
+</google-reviews-widget-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class GoogleReviewsWidget{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.apiKey = this.dataset.apiKey;
+        this.placeId = this.dataset.placeId;
+        this.maxReviews = parseInt(this.dataset.maxReviews) || 6;
+        this.loadingEl = this.querySelector('.ai-google-reviews-loading-{{ ai_gen_id }}');
+        this.containerEl = this.querySelector('.ai-google-reviews-container-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        if (!this.apiKey || !this.placeId) {
+          this.showError('Please configure your Google API Key and Place ID in the block settings.');
+          return;
+        }
+        this.fetchReviews();
+      }
+
+      async fetchReviews() {
+        try {
+          const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${this.placeId}&fields=reviews,rating&key=${this.apiKey}`;
+          
+          const response = await fetch(url);
+          
+          if (!response.ok) {
+            throw new Error('Failed to fetch reviews');
+          }
+
+          const data = await response.json();
+          
+          if (data.status !== 'OK') {
+            throw new Error(data.error_message || 'API request failed');
+          }
+
+          const reviews = data.result.reviews || [];
+          this.renderReviews(reviews);
+        } catch (error) {
+          this.showError('Unable to load reviews. Please check your API key and Place ID.');
+          console.error('Google Reviews Error:', error);
+        }
+      }
+
+      renderReviews(reviews) {
+        this.loadingEl.style.display = 'none';
+        this.containerEl.style.display = 'block';
+
+        if (reviews.length === 0) {
+          this.containerEl.innerHTML = '<div class="ai-google-reviews-empty-{{ ai_gen_id }}">No reviews available</div>';
+          return;
+        }
+
+        const limitedReviews = reviews.slice(0, this.maxReviews);
+        
+        const gridHTML = `
+          <div class="ai-google-reviews-grid-{{ ai_gen_id }}">
+            ${limitedReviews.map(review => this.createReviewCard(review)).join('')}
+          </div>
+        `;
+
+        this.containerEl.innerHTML = gridHTML;
+      }
+
+      createReviewCard(review) {
+        const authorInitial = review.author_name.charAt(0).toUpperCase();
+        const stars = this.createStars(review.rating);
+        const date = this.formatDate(review.time);
+
+        return `
+          <div class="ai-google-review-card-{{ ai_gen_id }}">
+            <div class="ai-google-review-header-{{ ai_gen_id }}">
+              <div class="ai-google-review-avatar-{{ ai_gen_id }}">${authorInitial}</div>
+              <div class="ai-google-review-author-info-{{ ai_gen_id }}">
+                <p class="ai-google-review-author-{{ ai_gen_id }}">${this.escapeHtml(review.author_name)}</p>
+                <div class="ai-google-review-date-{{ ai_gen_id }}">${date}</div>
+              </div>
+            </div>
+            <div class="ai-google-review-rating-{{ ai_gen_id }}">
+              ${stars}
+            </div>
+            <p class="ai-google-review-text-{{ ai_gen_id }}">${this.escapeHtml(review.text)}</p>
+            <svg class="ai-google-review-google-logo-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+          </div>
+        `;
+      }
+
+      createStars(rating) {
+        let starsHTML = '';
+        for (let i = 1; i <= 5; i++) {
+          const starClass = i <= rating ? 'ai-google-review-star-{{ ai_gen_id }}' : 'ai-google-review-star-{{ ai_gen_id }} ai-google-review-star-empty-{{ ai_gen_id }}';
+          starsHTML += `
+            <svg class="${starClass}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          `;
+        }
+        return starsHTML;
+      }
+
+      formatDate(timestamp) {
+        const date = new Date(timestamp * 1000);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays < 7) {
+          return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+        } else if (diffDays < 30) {
+          const weeks = Math.floor(diffDays / 7);
+          return `${weeks} week${weeks !== 1 ? 's' : ''} ago`;
+        } else if (diffDays < 365) {
+          const months = Math.floor(diffDays / 30);
+          return `${months} month${months !== 1 ? 's' : ''} ago`;
+        } else {
+          const years = Math.floor(diffDays / 365);
+          return `${years} year${years !== 1 ? 's' : ''} ago`;
+        }
+      }
+
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      showError(message) {
+        this.loadingEl.style.display = 'none';
+        this.containerEl.style.display = 'block';
+        this.containerEl.innerHTML = `<div class="ai-google-reviews-error-{{ ai_gen_id }}">${message}</div>`;
+      }
+    }
+
+    customElements.define('google-reviews-widget-{{ ai_gen_id }}', GoogleReviewsWidget{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Google reviews",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Google API configuration"
+    },
+    {
+      "type": "paragraph",
+      "content": "Get your API key from Google Cloud Console and enable the Places API. Find your Place ID using Google's Place ID Finder."
+    },
+    {
+      "type": "text",
+      "id": "google_api_key",
+      "label": "Google API key"
+    },
+    {
+      "type": "text",
+      "id": "google_place_id",
+      "label": "Google Place ID"
+    },
+    {
+      "type": "range",
+      "id": "max_reviews",
+      "label": "Maximum reviews",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Customer reviews"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "See what our customers are saying"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between cards",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Review cards"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#FFC107"
+    },
+    {
+      "type": "color",
+      "id": "star_empty_color",
+      "label": "Empty star color",
+      "default": "#E0E0E0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Google reviews"
+    }
+  ]
+}
+{% endschema %}

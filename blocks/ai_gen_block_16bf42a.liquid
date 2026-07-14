@@ -1,0 +1,501 @@
+{% doc %}
+  @prompt
+    ### Footer Section Requirements
+    
+    Create a professional service-business footer for **Titan Express**.
+    
+    The footer must appear below the hero and reviews section.
+    
+    Footer design:
+    
+    * White or dark premium background option
+    * Clean service-based layout
+    * Mobile responsive
+    * Bigger business name
+    * Strong trust and contact visibility
+    * Simple, professional, not cluttered
+    
+    Footer must include:
+    
+    **Business Name**
+    Titan Express
+    
+    Make the business name large and bold.
+    
+    **ABN**
+    ABN: [Add ABN Here]
+    
+    **Contact Number**
+    Phone: 0469 717 535
+    Make the phone number clickable using:
+    
+    `tel:0469717535`
+    
+    **Service Area**
+    Sydney NSW and surrounding suburbs
+    
+    **Services**
+    Removalist Sydney
+    Man and Van Sydney
+    Furniture Delivery Sydney
+    Single Item Delivery Sydney
+    Marketplace Pickup Sydney
+    Store Collection Delivery Sydney
+    Small Moves Sydney
+    Same Day Removalist Sydney
+    
+    **Quick Links**
+    Home
+    Services
+    Get Free Quote
+    Google Reviews
+    Privacy Policy
+    
+    Add a Privacy Policy link:
+    
+    `/pages/privacy-policy`
+    
+    Also add footer legal text:
+    
+    © 2026 Titan Express. All rights reserved.
+    
+    Add a short trust line:
+    
+    Reliable Sydney removalist, man and van, and furniture delivery service.
+    
+    Footer SEO requirement:
+    
+    Naturally include service keywords without stuffing.
+    
+    Footer schema support:
+    
+    Make sure footer details match the business schema:
+    
+    Business Name: Titan Express
+    Phone: 0469 717 535
+    Service Area: Sydney NSW
+    Business Type: MovingCompany
+    
+    Footer must look suitable for a Google Ads landing page and a professional service-based business website.
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-footer-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-footer-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-footer-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .ai-footer-column-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-footer-business-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.business_name_size }}px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: {{ block.settings.text_color }};
+    line-height: 1.2;
+  }
+
+  .ai-footer-heading-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-footer-text-{{ ai_gen_id }} {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-footer-link-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    transition: color 0.3s ease;
+    line-height: 1.8;
+  }
+
+  .ai-footer-link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-footer-phone-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .ai-footer-phone-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-footer-bottom-{{ ai_gen_id }} {
+    border-top: 1px solid {{ block.settings.border_color }};
+    padding-top: 24px;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .ai-footer-trust-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+
+  .ai-footer-copyright-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-footer-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .ai-footer-business-name-{{ ai_gen_id }} {
+      font-size: {{ block.settings.business_name_size | times: 0.8 }}px;
+    }
+
+    .ai-footer-bottom-{{ ai_gen_id }} {
+      text-align: center;
+    }
+  }
+{% endstyle %}
+
+<footer class="ai-footer-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-footer-container-{{ ai_gen_id }}">
+    <div class="ai-footer-grid-{{ ai_gen_id }}">
+      <div class="ai-footer-column-{{ ai_gen_id }}">
+        <h2 class="ai-footer-business-name-{{ ai_gen_id }}">{{ block.settings.business_name }}</h2>
+        <p class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.abn_text }}</p>
+        <a href="tel:{{ block.settings.phone_number | replace: ' ', '' }}" class="ai-footer-phone-{{ ai_gen_id }}">
+          Phone: {{ block.settings.phone_number }}
+        </a>
+        <p class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_area }}</p>
+      </div>
+
+      <div class="ai-footer-column-{{ ai_gen_id }}">
+        <h3 class="ai-footer-heading-{{ ai_gen_id }}">Services</h3>
+        {% if block.settings.service_1 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_1 }}</span>
+        {% endif %}
+        {% if block.settings.service_2 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_2 }}</span>
+        {% endif %}
+        {% if block.settings.service_3 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_3 }}</span>
+        {% endif %}
+        {% if block.settings.service_4 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_4 }}</span>
+        {% endif %}
+        {% if block.settings.service_5 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_5 }}</span>
+        {% endif %}
+        {% if block.settings.service_6 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_6 }}</span>
+        {% endif %}
+        {% if block.settings.service_7 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_7 }}</span>
+        {% endif %}
+        {% if block.settings.service_8 != blank %}
+          <span class="ai-footer-text-{{ ai_gen_id }}">{{ block.settings.service_8 }}</span>
+        {% endif %}
+      </div>
+
+      <div class="ai-footer-column-{{ ai_gen_id }}">
+        <h3 class="ai-footer-heading-{{ ai_gen_id }}">Quick links</h3>
+        {% if block.settings.link_1_text != blank and block.settings.link_1_url != blank %}
+          <a href="{{ block.settings.link_1_url }}" class="ai-footer-link-{{ ai_gen_id }}">{{ block.settings.link_1_text }}</a>
+        {% endif %}
+        {% if block.settings.link_2_text != blank and block.settings.link_2_url != blank %}
+          <a href="{{ block.settings.link_2_url }}" class="ai-footer-link-{{ ai_gen_id }}">{{ block.settings.link_2_text }}</a>
+        {% endif %}
+        {% if block.settings.link_3_text != blank and block.settings.link_3_url != blank %}
+          <a href="{{ block.settings.link_3_url }}" class="ai-footer-link-{{ ai_gen_id }}">{{ block.settings.link_3_text }}</a>
+        {% endif %}
+        {% if block.settings.link_4_text != blank and block.settings.link_4_url != blank %}
+          <a href="{{ block.settings.link_4_url }}" class="ai-footer-link-{{ ai_gen_id }}">{{ block.settings.link_4_text }}</a>
+        {% endif %}
+        {% if block.settings.link_5_text != blank and block.settings.link_5_url != blank %}
+          <a href="{{ block.settings.link_5_url }}" class="ai-footer-link-{{ ai_gen_id }}">{{ block.settings.link_5_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ai-footer-bottom-{{ ai_gen_id }}">
+      {% if block.settings.trust_text != blank %}
+        <p class="ai-footer-trust-{{ ai_gen_id }}">{{ block.settings.trust_text }}</p>
+      {% endif %}
+      {% if block.settings.copyright_text != blank %}
+        <p class="ai-footer-copyright-{{ ai_gen_id }}">{{ block.settings.copyright_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Titan Express footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Business information"
+    },
+    {
+      "type": "text",
+      "id": "business_name",
+      "label": "Business name",
+      "default": "Titan Express"
+    },
+    {
+      "type": "range",
+      "id": "business_name_size",
+      "label": "Business name size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "text",
+      "id": "abn_text",
+      "label": "ABN",
+      "default": "ABN: [Add ABN Here]"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469 717 535"
+    },
+    {
+      "type": "text",
+      "id": "service_area",
+      "label": "Service area",
+      "default": "Sydney NSW and surrounding suburbs"
+    },
+    {
+      "type": "header",
+      "content": "Services"
+    },
+    {
+      "type": "text",
+      "id": "service_1",
+      "label": "Service 1",
+      "default": "Removalist Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_2",
+      "label": "Service 2",
+      "default": "Man and Van Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_3",
+      "label": "Service 3",
+      "default": "Furniture Delivery Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_4",
+      "label": "Service 4",
+      "default": "Single Item Delivery Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_5",
+      "label": "Service 5",
+      "default": "Marketplace Pickup Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_6",
+      "label": "Service 6",
+      "default": "Store Collection Delivery Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_7",
+      "label": "Service 7",
+      "default": "Small Moves Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_8",
+      "label": "Service 8",
+      "default": "Same Day Removalist Sydney"
+    },
+    {
+      "type": "header",
+      "content": "Quick links"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 text",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 text",
+      "default": "Services"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_3_text",
+      "label": "Link 3 text",
+      "default": "Get Free Quote"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_4_text",
+      "label": "Link 4 text",
+      "default": "Google Reviews"
+    },
+    {
+      "type": "url",
+      "id": "link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_5_text",
+      "label": "Link 5 text",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "url",
+      "id": "link_5_url",
+      "label": "Link 5 URL"
+    },
+    {
+      "type": "header",
+      "content": "Footer bottom"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust line",
+      "default": "Reliable Sydney removalist, man and van, and furniture delivery service."
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© 2026 Titan Express. All rights reserved."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Links hover",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e6e6e6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan Express footer"
+    }
+  ]
+}
+{% endschema %}

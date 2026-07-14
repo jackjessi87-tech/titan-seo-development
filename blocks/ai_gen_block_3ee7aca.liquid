@@ -1,0 +1,1112 @@
+code = r'''{% comment %}
+  Titan Express — Man With a Van Hero
+  IMPORTANT: Save this file inside /sections, not /blocks.
+  Suggested filename: titan-man-van-hero.liquid
+{% endcomment %}
+
+{% assign sid = section.id | replace: '_', '' | downcase %}
+
+<section
+  id="TitanManVanHero-{{ section.id }}"
+  class="tmv-hero-{{ sid }}"
+  style="
+    --tmv-red: {{ section.settings.red_color }};
+    --tmv-amber: {{ section.settings.accent_color }};
+    --tmv-bg: {{ section.settings.background_color }};
+    --tmv-muted: {{ section.settings.muted_color }};
+    --tmv-image-width: {{ section.settings.image_width }}px;
+    --tmv-image-height: {{ section.settings.image_height }}px;
+    --tmv-radius: {{ section.settings.border_radius }}px;
+  "
+>
+  <div class="tmv-shell-{{ sid }}">
+    <article class="tmv-card-{{ sid }}">
+      <div class="tmv-top-{{ sid }}">
+        <div class="tmv-adline-{{ sid }}">
+          {% if section.settings.show_ad_badge %}
+            <span class="tmv-adbadge-{{ sid }}">{{ section.settings.ad_badge_text | escape }}</span>
+          {% endif %}
+          <span class="tmv-domain-{{ sid }}">{{ section.settings.display_domain | escape }}</span>
+        </div>
+
+        {% if section.settings.show_review_badge %}
+          <a
+            class="tmv-review-{{ sid }}"
+            href="{{ section.settings.review_url }}"
+            {% if section.settings.review_url != blank %}target="_blank" rel="noopener noreferrer"{% endif %}
+            aria-label="View Titan Express Google reviews"
+          >
+            <span class="tmv-stars-{{ sid }}" aria-hidden="true">★★★★★</span>
+            <span>{{ section.settings.review_rating | escape }} ({{ section.settings.review_count | escape }})</span>
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="tmv-main-{{ sid }}">
+        <div class="tmv-copy-{{ sid }}">
+          <h1 class="tmv-heading-{{ sid }}">
+            <span class="tmv-heading-accent-{{ sid }}">{{ section.settings.heading_accent | escape }}</span>
+            <span class="tmv-heading-rest-{{ sid }}">{{ section.settings.heading_rest | escape }}</span>
+          </h1>
+
+          {% if section.settings.subheading_1 != blank %}
+            <p class="tmv-sub1-{{ sid }}">{{ section.settings.subheading_1 | escape }}</p>
+          {% endif %}
+
+          {% if section.settings.subheading_2 != blank %}
+            <p class="tmv-sub2-{{ sid }}">{{ section.settings.subheading_2 | escape }}</p>
+          {% endif %}
+
+          {% if section.settings.subheading_3 != blank %}
+            <p class="tmv-sub3-{{ sid }}">{{ section.settings.subheading_3 | escape }}</p>
+          {% endif %}
+
+          <nav class="tmv-links-{{ sid }}" aria-label="Service links">
+            {% if section.settings.link_1_label != blank %}
+              <a href="{{ section.settings.link_1_url | default: '#' }}">{{ section.settings.link_1_label | escape }}</a>
+            {% endif %}
+            {% if section.settings.link_2_label != blank %}
+              <a href="{{ section.settings.link_2_url | default: '#' }}">{{ section.settings.link_2_label | escape }}</a>
+            {% endif %}
+            {% if section.settings.link_3_label != blank %}
+              <a href="{{ section.settings.link_3_url | default: '#' }}">{{ section.settings.link_3_label | escape }}</a>
+            {% endif %}
+            {% if section.settings.link_4_label != blank %}
+              <a href="{{ section.settings.link_4_url | default: '#' }}">{{ section.settings.link_4_label | escape }}</a>
+            {% endif %}
+          </nav>
+
+          <div class="tmv-actions-{{ sid }}">
+            {% if section.settings.primary_button_text != blank %}
+              <a
+                class="tmv-btn-primary-{{ sid }}"
+                href="{{ section.settings.primary_button_url | default: '#instant-quote' }}"
+              >
+                {{ section.settings.primary_button_text | escape }}
+              </a>
+            {% endif %}
+
+            {% if section.settings.secondary_button_text != blank %}
+              <a
+                class="tmv-btn-secondary-{{ sid }}"
+                href="tel:{{ section.settings.phone_number | replace: ' ', '' }}"
+              >
+                {{ section.settings.secondary_button_text | escape }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <aside class="tmv-preview-{{ sid }}" aria-label="Titan Express preview photos">
+          <div
+            class="tmv-carousel-{{ sid }}"
+            data-tmv-carousel
+            data-autoplay="{{ section.settings.autoplay }}"
+            data-speed="{{ section.settings.rotation_speed | times: 1000 }}"
+          >
+            {% assign slide_count = 0 %}
+
+            {% for i in (1..4) %}
+              {% assign image_key = 'preview_image_' | append: i %}
+              {% assign caption_key = 'preview_caption_' | append: i %}
+              {% assign image = section.settings[image_key] %}
+              {% assign caption = section.settings[caption_key] %}
+
+              {% if image != blank %}
+                <div
+                  class="tmv-slide-{{ sid }}{% if slide_count == 0 %} is-active{% endif %}"
+                  data-tmv-slide
+                  data-index="{{ slide_count }}"
+                  aria-hidden="{% if slide_count == 0 %}false{% else %}true{% endif %}"
+                >
+                  {{
+                    image
+                    | image_url: width: 600
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '180, 240, 360, 480, 600',
+                      sizes: '(max-width: 749px) 220px, 200px',
+                      class: 'tmv-image',
+                      alt: image.alt
+                  }}
+                  {% if caption != blank %}
+                    <span class="tmv-caption-{{ sid }}">{{ caption | escape }}</span>
+                  {% endif %}
+                </div>
+                {% assign slide_count = slide_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+
+            {% if slide_count == 0 %}
+              <div class="tmv-slide-{{ sid }} is-active" data-tmv-slide data-index="0" aria-hidden="false">
+                <div class="tmv-placeholder-{{ sid }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              </div>
+              {% assign slide_count = 1 %}
+            {% endif %}
+          </div>
+
+          {% if section.settings.show_dots and slide_count > 1 %}
+            <div class="tmv-dots-{{ sid }}" aria-label="Choose image">
+              {% for n in (1..4) %}
+                {% if n <= slide_count %}
+                  <button
+                    type="button"
+                    class="tmv-dot-{{ sid }}{% if n == 1 %} is-active{% endif %}"
+                    data-tmv-dot="{{ n | minus: 1 }}"
+                    aria-label="Show image {{ n }}"
+                  ></button>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </aside>
+      </div>
+
+      {% if section.settings.show_trust_strip %}
+        <div class="tmv-trust-{{ sid }}" role="list">
+          <div role="listitem">🚚 {{ section.settings.trust_1 | escape }}</div>
+          <div role="listitem">⚡ {{ section.settings.trust_2 | escape }}</div>
+          <div role="listitem">🛡️ {{ section.settings.trust_3 | escape }}</div>
+          <div role="listitem">📍 {{ section.settings.trust_4 | escape }}</div>
+        </div>
+      {% endif %}
+    </article>
+
+    {% if section.settings.show_pricing %}
+      <section class="tmv-panel-{{ sid }}">
+        <div class="tmv-panel-head-{{ sid }}">
+          <h2>{{ section.settings.pricing_title | escape }}</h2>
+          <p>{{ section.settings.pricing_subtitle | escape }}</p>
+        </div>
+
+        <div class="tmv-price-grid-{{ sid }}">
+          <article class="tmv-price-card-{{ sid }}">
+            <h3>{{ section.settings.price_1_title | escape }}</h3>
+            <strong>{{ section.settings.price_1_value | escape }}</strong>
+            <p>✓ {{ section.settings.price_1_feature_1 | escape }}</p>
+            <p>✓ {{ section.settings.price_1_feature_2 | escape }}</p>
+            <p>✓ {{ section.settings.price_1_feature_3 | escape }}</p>
+          </article>
+
+          <article class="tmv-price-card-{{ sid }}">
+            <h3>{{ section.settings.price_2_title | escape }}</h3>
+            <strong>{{ section.settings.price_2_value | escape }}</strong>
+            <p>✓ {{ section.settings.price_2_feature_1 | escape }}</p>
+            <p>✓ {{ section.settings.price_2_feature_2 | escape }}</p>
+            <p>✓ {{ section.settings.price_2_feature_3 | escape }}</p>
+          </article>
+
+          <article class="tmv-price-card-{{ sid }}">
+            <h3>{{ section.settings.price_3_title | escape }}</h3>
+            <strong>{{ section.settings.price_3_value | escape }}</strong>
+            <p>✓ {{ section.settings.price_3_feature_1 | escape }}</p>
+            <p>✓ {{ section.settings.price_3_feature_2 | escape }}</p>
+            <p>✓ {{ section.settings.price_3_feature_3 | escape }}</p>
+          </article>
+        </div>
+      </section>
+    {% endif %}
+
+    {% if section.settings.show_how_it_works %}
+      <section class="tmv-panel-{{ sid }}">
+        <div class="tmv-panel-head-{{ sid }}">
+          <h2>{{ section.settings.how_title | escape }}</h2>
+        </div>
+
+        <div class="tmv-steps-{{ sid }}">
+          <article>
+            <span>1</span>
+            <h3>{{ section.settings.step_1_title | escape }}</h3>
+            <p>{{ section.settings.step_1_text | escape }}</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>{{ section.settings.step_2_title | escape }}</h3>
+            <p>{{ section.settings.step_2_text | escape }}</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>{{ section.settings.step_3_title | escape }}</h3>
+            <p>{{ section.settings.step_3_text | escape }}</p>
+          </article>
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #TitanManVanHero-{{ section.id }} {
+    background: var(--tmv-bg);
+    padding: 36px 0;
+  }
+
+  #TitanManVanHero-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-shell-{{ sid }} {
+    width: min(1180px, calc(100% - 30px));
+    margin: 0 auto;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-card-{{ sid }},
+  #TitanManVanHero-{{ section.id }} .tmv-panel-{{ sid }} {
+    background: #fff;
+    border: 1px solid #dfe3e8;
+    border-radius: var(--tmv-radius);
+    box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-card-{{ sid }} {
+    padding: 22px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-top-{{ sid }} {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-adline-{{ sid }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-adbadge-{{ sid }} {
+    background: #111;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-domain-{{ sid }},
+  #TitanManVanHero-{{ section.id }} .tmv-review-{{ sid }} {
+    color: #1a0dab;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-review-{{ sid }} {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-stars-{{ sid }} {
+    color: #f4b400;
+    letter-spacing: 1px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-main-{{ sid }} {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(150px, var(--tmv-image-width));
+    gap: 20px;
+    align-items: start;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-heading-{{ sid }} {
+    margin: 0 0 18px;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.03;
+    font-weight: 850;
+    letter-spacing: -.035em;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-heading-accent-{{ sid }} {
+    display: inline-block;
+    color: var(--tmv-red);
+    position: relative;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-heading-accent-{{ sid }}::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 72%;
+    height: 5px;
+    background: var(--tmv-amber);
+    border-radius: 999px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-heading-rest-{{ sid }} {
+    display: block;
+    color: #111;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-sub1-{{ sid }} {
+    color: var(--tmv-red);
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 800;
+    line-height: 1.45;
+    margin: 0 0 10px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-sub2-{{ sid }} {
+    color: #20242a;
+    font-size: 17px;
+    margin: 0 0 9px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-sub3-{{ sid }} {
+    color: var(--tmv-muted);
+    margin: 0 0 20px;
+    line-height: 1.5;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-links-{{ sid }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 20px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-links-{{ sid }} a {
+    padding: 8px 14px;
+    border: 1px solid #d7dce2;
+    border-radius: 999px;
+    color: #1a0dab;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-actions-{{ sid }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-btn-primary-{{ sid }},
+  #TitanManVanHero-{{ section.id }} .tmv-btn-secondary-{{ sid }} {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 800;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-btn-primary-{{ sid }} {
+    background: var(--tmv-red);
+    color: #fff;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-btn-secondary-{{ sid }} {
+    color: #111;
+    border: 1px solid #111;
+    background: #fff;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-preview-{{ sid }} {
+    width: min(100%, var(--tmv-image-width));
+    justify-self: end;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-carousel-{{ sid }} {
+    position: relative;
+    width: 100%;
+    height: var(--tmv-image-height);
+    overflow: hidden;
+    border-radius: var(--tmv-radius);
+    border: 1px solid #111;
+    box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-slide-{{ sid }} {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .6s ease;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-slide-{{ sid }}.is-active {
+    opacity: 1;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-image,
+  #TitanManVanHero-{{ section.id }} .tmv-placeholder-{{ sid }} {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-placeholder-{{ sid }} {
+    background: #f4f5f6;
+    display: grid;
+    place-items: center;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-caption-{{ sid }} {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 9px 10px;
+    color: white;
+    font-size: 12px;
+    background: linear-gradient(transparent, rgba(0,0,0,.75));
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-dots-{{ sid }} {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 9px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-dot-{{ sid }} {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 99px;
+    background: #c9ced5;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-dot-{{ sid }}.is-active {
+    width: 24px;
+    background: var(--tmv-red);
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-trust-{{ sid }} {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    border-top: 1px solid #e4e7eb;
+    margin-top: 24px;
+    padding-top: 20px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-panel-{{ sid }} {
+    padding: 28px;
+    margin-top: 26px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-panel-head-{{ sid }} {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-panel-head-{{ sid }} h2 {
+    margin: 0;
+    font-size: clamp(26px, 4vw, 36px);
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-panel-head-{{ sid }} p {
+    color: var(--tmv-muted);
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-price-grid-{{ sid }},
+  #TitanManVanHero-{{ section.id }} .tmv-steps-{{ sid }} {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-price-card-{{ sid }} {
+    padding: 22px;
+    border: 1px solid #e0e4e9;
+    border-radius: 12px;
+    background: #f8f9fa;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-price-card-{{ sid }} h3 {
+    margin-top: 0;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-price-card-{{ sid }} strong {
+    color: var(--tmv-red);
+    font-size: 22px;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-steps-{{ sid }} article {
+    text-align: center;
+  }
+
+  #TitanManVanHero-{{ section.id }} .tmv-steps-{{ sid }} span {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 14px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--tmv-red);
+    font-size: 24px;
+    font-weight: 900;
+  }
+
+  @media (max-width: 749px) {
+    #TitanManVanHero-{{ section.id }} .tmv-top-{{ sid }} {
+      flex-direction: column;
+    }
+
+    #TitanManVanHero-{{ section.id }} .tmv-main-{{ sid }} {
+      grid-template-columns: 1fr;
+    }
+
+    #TitanManVanHero-{{ section.id }} .tmv-preview-{{ sid }} {
+      width: min(220px, 100%);
+      justify-self: center;
+    }
+
+    #TitanManVanHero-{{ section.id }} .tmv-carousel-{{ sid }} {
+      height: 150px;
+    }
+
+    #TitanManVanHero-{{ section.id }} .tmv-actions-{{ sid }} {
+      flex-direction: column;
+    }
+
+    #TitanManVanHero-{{ section.id }} .tmv-btn-primary-{{ sid }},
+    #TitanManVanHero-{{ section.id }} .tmv-btn-secondary-{{ sid }} {
+      width: 100%;
+    }
+
+    #TitanManVanHero-{{ section.id }} .tmv-trust-{{ sid }} {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #TitanManVanHero-{{ section.id }} .tmv-price-grid-{{ sid }},
+    #TitanManVanHero-{{ section.id }} .tmv-steps-{{ sid }} {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #TitanManVanHero-{{ section.id }} .tmv-slide-{{ sid }} {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById('TitanManVanHero-{{ section.id }}');
+    if (!root || root.dataset.ready === 'true') return;
+    root.dataset.ready = 'true';
+
+    const carousel = root.querySelector('[data-tmv-carousel]');
+    if (!carousel) return;
+
+    const slides = Array.from(root.querySelectorAll('[data-tmv-slide]'));
+    const dots = Array.from(root.querySelectorAll('[data-tmv-dot]'));
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    let timer = null;
+    const autoplay = carousel.dataset.autoplay === 'true';
+    const speed = Math.max(Number(carousel.dataset.speed) || 4000, 2000);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const show = (index) => {
+      current = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === current);
+        slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === current);
+      });
+    };
+
+    const stop = () => {
+      if (timer) clearInterval(timer);
+      timer = null;
+    };
+
+    const start = () => {
+      stop();
+      if (!autoplay || reduced || document.hidden) return;
+      timer = setInterval(() => show(current + 1), speed);
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        show(i);
+        start();
+      });
+    });
+
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+
+    document.addEventListener('visibilitychange', () => {
+      document.hidden ? stop() : start();
+    });
+
+    start();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Titan man van hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_ad_badge",
+      "label": "Show AD badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "ad_badge_text",
+      "label": "AD badge text",
+      "default": "AD"
+    },
+    {
+      "type": "text",
+      "id": "display_domain",
+      "label": "Display domain",
+      "default": "www.titanexpress.com.au › Man With a Van Sydney"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_badge",
+      "label": "Show review badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_rating",
+      "label": "Review rating",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "300+"
+    },
+    {
+      "type": "url",
+      "id": "review_url",
+      "label": "Review URL"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Highlighted heading",
+      "default": "Man With a Van"
+    },
+    {
+      "type": "text",
+      "id": "heading_rest",
+      "label": "Heading second line",
+      "default": "Sydney"
+    },
+    {
+      "type": "text",
+      "id": "subheading_1",
+      "label": "Primary subheading",
+      "default": "Same-Day Removals · Marketplace Pickups · Single Item Moves"
+    },
+    {
+      "type": "text",
+      "id": "subheading_2",
+      "label": "Secondary subheading",
+      "default": "Serving All Sydney Suburbs — Fast, Insured & Fixed Price"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_3",
+      "label": "Supporting text",
+      "default": "Book online in 60 seconds. No hidden fees. Trusted by Sydney locals."
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary button",
+      "default": "Get a Free Quote"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Call button",
+      "default": "Call Now"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469717535"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_1",
+      "label": "Preview image 1"
+    },
+    {
+      "type": "text",
+      "id": "preview_caption_1",
+      "label": "Image 1 caption"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_2",
+      "label": "Preview image 2"
+    },
+    {
+      "type": "text",
+      "id": "preview_caption_2",
+      "label": "Image 2 caption"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_3",
+      "label": "Preview image 3"
+    },
+    {
+      "type": "text",
+      "id": "preview_caption_3",
+      "label": "Image 3 caption"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_4",
+      "label": "Preview image 4"
+    },
+    {
+      "type": "text",
+      "id": "preview_caption_4",
+      "label": "Image 4 caption"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 150,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Image width",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 140,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Image height",
+      "default": 165
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto rotate",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rotation_speed",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "s",
+      "label": "Rotation speed",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show dots",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "link_1_label",
+      "label": "Service link 1",
+      "default": "Furniture Delivery"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Service link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_label",
+      "label": "Service link 2",
+      "default": "Marketplace Pickup"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Service link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_3_label",
+      "label": "Service link 3",
+      "default": "Small Moves"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Service link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_4_label",
+      "label": "Service link 4",
+      "default": "Same-Day Service"
+    },
+    {
+      "type": "url",
+      "id": "link_4_url",
+      "label": "Service link 4 URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_strip",
+      "label": "Show trust strip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust item 1",
+      "default": "Oversized Van"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust item 2",
+      "default": "Same-Day Available"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Trust item 3",
+      "default": "Furniture Protected"
+    },
+    {
+      "type": "text",
+      "id": "trust_4",
+      "label": "Trust item 4",
+      "default": "Sydney-Wide Service"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pricing",
+      "label": "Show pricing cards",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pricing_title",
+      "label": "Pricing title",
+      "default": "Simple Man and Van Options"
+    },
+    {
+      "type": "text",
+      "id": "pricing_subtitle",
+      "label": "Pricing subtitle",
+      "default": "Choose the service that best matches your pickup or move."
+    },
+    {
+      "type": "text",
+      "id": "price_1_title",
+      "label": "Price card 1 title",
+      "default": "One Man + Van"
+    },
+    {
+      "type": "text",
+      "id": "price_1_value",
+      "label": "Price card 1 value",
+      "default": "Request Quote"
+    },
+    {
+      "type": "text",
+      "id": "price_1_feature_1",
+      "label": "Card 1 feature 1",
+      "default": "Single item delivery"
+    },
+    {
+      "type": "text",
+      "id": "price_1_feature_2",
+      "label": "Card 1 feature 2",
+      "default": "Marketplace pickup"
+    },
+    {
+      "type": "text",
+      "id": "price_1_feature_3",
+      "label": "Card 1 feature 3",
+      "default": "Customer helping hand"
+    },
+    {
+      "type": "text",
+      "id": "price_2_title",
+      "label": "Price card 2 title",
+      "default": "Two Men Full Service"
+    },
+    {
+      "type": "text",
+      "id": "price_2_value",
+      "label": "Price card 2 value",
+      "default": "Request Quote"
+    },
+    {
+      "type": "text",
+      "id": "price_2_feature_1",
+      "label": "Card 2 feature 1",
+      "default": "Heavy furniture"
+    },
+    {
+      "type": "text",
+      "id": "price_2_feature_2",
+      "label": "Card 2 feature 2",
+      "default": "Stairs and apartments"
+    },
+    {
+      "type": "text",
+      "id": "price_2_feature_3",
+      "label": "Card 2 feature 3",
+      "default": "Loading and unloading"
+    },
+    {
+      "type": "text",
+      "id": "price_3_title",
+      "label": "Price card 3 title",
+      "default": "Same-Day Delivery"
+    },
+    {
+      "type": "text",
+      "id": "price_3_value",
+      "label": "Price card 3 value",
+      "default": "Check Availability"
+    },
+    {
+      "type": "text",
+      "id": "price_3_feature_1",
+      "label": "Card 3 feature 1",
+      "default": "Sydney metro"
+    },
+    {
+      "type": "text",
+      "id": "price_3_feature_2",
+      "label": "Card 3 feature 2",
+      "default": "Store and seller pickup"
+    },
+    {
+      "type": "text",
+      "id": "price_3_feature_3",
+      "label": "Card 3 feature 3",
+      "default": "Subject to availability"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_how_it_works",
+      "label": "Show how it works",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "how_title",
+      "label": "How it works title",
+      "default": "How It Works"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 title",
+      "default": "Send the Details"
+    },
+    {
+      "type": "textarea",
+      "id": "step_1_text",
+      "label": "Step 1 text",
+      "default": "Tell us the pickup suburb, delivery suburb and what needs to be moved."
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 title",
+      "default": "Receive Your Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "step_2_text",
+      "label": "Step 2 text",
+      "default": "We review the item, access and travel distance before confirming the price."
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 title",
+      "default": "Pickup and Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "step_3_text",
+      "label": "Step 3 text",
+      "default": "Your furniture is collected, protected and delivered safely."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f7fb"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted text",
+      "default": "#667085"
+    },
+    {
+      "type": "color",
+      "id": "red_color",
+      "label": "Titan red",
+      "default": "#c61f45"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Amber accent",
+      "default": "#f6bd16"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan man van hero"
+    }
+  ]
+}
+{% endschema %}
+'''

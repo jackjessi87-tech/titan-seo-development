@@ -1,0 +1,1140 @@
+{% doc %}
+  @prompt
+    Build Section 3 directly below the Services Section.
+    
+    SECTION GOAL
+    
+    Build trust, reduce customer hesitation, and clearly explain why customers should choose Titan Express.
+    
+    This section should increase conversion rates and reinforce Google Ads landing page quality.
+    
+    SECTION TITLE
+    
+    Why Choose Titan Express?
+    
+    SUBHEADING
+    
+    Professional furniture moving and delivery services trusted by Sydney customers for reliability, care and fast response times.
+    
+    LAYOUT
+    
+    Create a modern premium trust section.
+    
+    Desktop:
+    4 cards per row
+    
+    Tablet:
+    2 cards per row
+    
+    Mobile:
+    1 card per row
+    
+    Each card should feature:
+    
+    • Advanced SVG icon
+    • Hover animation
+    • Glassmorphism effects
+    • Modern shadows
+    • Smooth micro-interactions
+    • Premium service-business styling
+    
+    TRUST CARDS
+    
+    Oversized Long Wheelbase Van
+    
+    Description:
+    More furniture moved in one trip, saving time and reducing costs.
+    
+    Icon:
+    Large delivery van SVG
+    
+    ---
+    
+    Professional Furniture Handling
+    
+    Description:
+    Furniture is handled carefully using proven moving techniques.
+    
+    Icon:
+    Furniture protection SVG
+    
+    ---
+    
+    Blankets, Straps & Trolley
+    
+    Description:
+    Professional moving equipment helps protect items during transport.
+    
+    Icon:
+    Trolley and moving equipment SVG
+    
+    ---
+    
+    Same Day Availability
+    
+    Description:
+    Need urgent delivery today? Same-day service may be available.
+    
+    Icon:
+    Clock and route SVG
+    
+    ---
+    
+    Sydney Wide Coverage
+    
+    Description:
+    Covering Sydney CBD, Western Sydney, Inner West, Northern Beaches and surrounding suburbs.
+    
+    Icon:
+    Sydney map SVG
+    
+    ---
+    
+    Marketplace Pickup Specialists
+    
+    Description:
+    Experienced with Facebook Marketplace, Gumtree and private seller collections.
+    
+    Icon:
+    Package pickup SVG
+    
+    ---
+    
+    Affordable Pricing
+    
+    Description:
+    Flexible options including one-man-and-van or two-person moving teams.
+    
+    Icon:
+    Savings SVG
+    
+    ---
+    
+    Fast Quote Response
+    
+    Description:
+    Quick responses and transparent pricing without complicated booking processes.
+    
+    Icon:
+    Chat and phone SVG
+    
+    STATISTICS SECTION
+    
+    Add animated counters:
+    
+    1000+
+    Furniture Deliveries
+    
+    500+
+    Happy Customers
+    
+    Sydney Wide
+    Service Area
+    
+    Same Day
+    Availability
+    
+    ANIMATION REQUIREMENTS
+    
+    • Number counters animate when visible
+    • Cards lift slightly on hover
+    • SVG icons animate subtly
+    • Smooth fade-in effects while scrolling
+    • Interactive glow effect on hover
+    
+    VISUAL STYLE
+    
+    Premium removalist company
+    
+    Colours:
+    White
+    Black
+    Gold
+    Yellow
+    Blue trust accents
+    
+    BACKGROUND
+    
+    Use subtle route-line SVG graphics and location markers.
+    
+    Keep the section clean, professional and conversion-focused.
+    
+    GOOGLE ADS LANDING PAGE GOAL
+    
+    This section should answer:
+    
+    Why Titan Express?
+    
+    Why trust us?
+    
+    Why call now?
+    
+    OUTPUT
+    
+    Generate complete Shopify-compatible HTML, CSS and JavaScript.
+    
+    Use class names beginning with:
+    
+    titan-trust-
+    
+    The final result should feel premium, trustworthy, modern and highly professional.
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-trust-section-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+    background: {{ block.settings.background_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .titan-trust-background-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: {{ block.settings.background_pattern_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .titan-trust-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .titan-trust-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .titan-trust-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+
+  .titan-trust-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .titan-trust-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+    margin-bottom: {{ block.settings.stats_spacing }}px;
+  }
+
+  .titan-trust-card-{{ ai_gen_id }} {
+    background: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid {{ block.settings.card_border_color }};
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px {{ block.settings.card_shadow_color }};
+  }
+
+  .titan-trust-card-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, {{ block.settings.card_glow_color }} 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .titan-trust-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px {{ block.settings.card_hover_shadow_color }};
+  }
+
+  .titan-trust-card-{{ ai_gen_id }}:hover::before {
+    opacity: {{ block.settings.card_glow_opacity | divided_by: 100.0 }};
+  }
+
+  .titan-trust-icon-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+  }
+
+  .titan-trust-card-{{ ai_gen_id }}:hover .titan-trust-icon-wrapper-{{ ai_gen_id }} {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .titan-trust-icon-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .titan-trust-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.card_title_color }};
+    margin: 0 0 12px;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .titan-trust-card-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_description_size }}px;
+    color: {{ block.settings.card_description_color }};
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .titan-trust-stats-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: {{ block.settings.stats_padding }}px;
+    background: {{ block.settings.stats_background }};
+    border-radius: {{ block.settings.stats_border_radius }}px;
+    border: 1px solid {{ block.settings.stats_border_color }};
+  }
+
+  .titan-trust-stat-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .titan-trust-stat-number-{{ ai_gen_id }} {
+    font-size: {{ block.settings.stat_number_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.stat_number_color }};
+    margin: 0 0 8px;
+    line-height: 1;
+  }
+
+  .titan-trust-stat-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.stat_label_size }}px;
+    color: {{ block.settings.stat_label_color }};
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 989px) {
+    .titan-trust-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .titan-trust-stats-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .titan-trust-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.7);
+    }
+
+    .titan-trust-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .titan-trust-section-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.6 }}px 16px {{ block.settings.section_padding_bottom | times: 0.6 }}px;
+    }
+
+    .titan-trust-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .titan-trust-stats-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: {{ block.settings.stats_padding | times: 0.7 }}px;
+    }
+
+    .titan-trust-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.6);
+    }
+
+    .titan-trust-card-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<titan-trust-section-{{ ai_gen_id }} class="titan-trust-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="titan-trust-background-{{ ai_gen_id }}">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="titan-route-pattern-{{ ai_gen_id }}" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+          <path d="M0,100 Q50,80 100,100 T200,100" stroke="{{ block.settings.pattern_color }}" stroke-width="2" fill="none" stroke-dasharray="5,5" opacity="0.3"/>
+          <circle cx="50" cy="90" r="4" fill="{{ block.settings.pattern_accent_color }}" opacity="0.5"/>
+          <circle cx="150" cy="110" r="4" fill="{{ block.settings.pattern_accent_color }}" opacity="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#titan-route-pattern-{{ ai_gen_id }})"/>
+    </svg>
+  </div>
+
+  <div class="titan-trust-container-{{ ai_gen_id }}">
+    <div class="titan-trust-header-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="titan-trust-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+      {% if block.settings.subtitle != blank %}
+        <div class="titan-trust-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+      {% endif %}
+    </div>
+
+    <div class="titan-trust-grid-{{ ai_gen_id }}">
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="1">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="20" width="48" height="28" rx="2" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <rect x="12" y="24" width="40" height="20" rx="1" fill="{{ block.settings.icon_accent_color }}" opacity="0.2"/>
+            <path d="M56 32 L60 28 L60 40 L56 36 Z" fill="{{ block.settings.icon_color }}"/>
+            <circle cx="16" cy="50" r="3" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <circle cx="52" cy="50" r="3" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <rect x="20" y="28" width="8" height="12" rx="1" fill="{{ block.settings.icon_accent_color }}" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_1_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_1_description }}</p>
+      </div>
+
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="2">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="16" y="12" width="32" height="40" rx="2" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <path d="M24 20 L40 20 L40 28 L32 32 L24 28 Z" fill="{{ block.settings.icon_accent_color }}" opacity="0.3"/>
+            <circle cx="32" cy="38" r="6" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <path d="M32 32 L32 38 M29 38 L35 38" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            <rect x="20" y="48" width="24" height="2" fill="{{ block.settings.icon_accent_color }}" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_2_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_2_description }}</p>
+      </div>
+
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="3">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="16" width="40" height="32" rx="2" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <path d="M20 24 L44 24 L44 36 L20 36 Z" fill="{{ block.settings.icon_accent_color }}" opacity="0.2"/>
+            <circle cx="20" cy="52" r="4" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <circle cx="44" cy="52" r="4" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <path d="M24 28 L40 28 M24 32 L36 32" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            <rect x="28" y="20" width="8" height="4" fill="{{ block.settings.icon_accent_color }}" opacity="0.5"/>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_3_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_3_description }}</p>
+      </div>
+
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="4">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="20" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <circle cx="32" cy="32" r="16" fill="{{ block.settings.icon_accent_color }}" opacity="0.2"/>
+            <path d="M32 20 L32 32 L40 36" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            <path d="M48 32 L52 32 M32 12 L32 16 M16 32 L12 32 M32 48 L32 52" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            <path d="M42 22 L38 26 M42 42 L38 38" stroke="{{ block.settings.icon_accent_color }}" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_4_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_4_description }}</p>
+      </div>
+
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="5">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="28" r="16" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <circle cx="32" cy="28" r="12" fill="{{ block.settings.icon_accent_color }}" opacity="0.2"/>
+            <circle cx="32" cy="28" r="4" fill="{{ block.settings.icon_color }}"/>
+            <path d="M20 48 L24 40 M32 52 L32 44 M44 48 L40 40" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16 32 Q20 36 24 32 M40 32 Q44 36 48 32" stroke="{{ block.settings.icon_accent_color }}" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_5_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_5_description }}</p>
+      </div>
+
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="6">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="16" y="20" width="32" height="28" rx="2" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <rect x="20" y="24" width="24" height="20" rx="1" fill="{{ block.settings.icon_accent_color }}" opacity="0.2"/>
+            <path d="M28 32 L32 36 L40 28" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="14" r="3" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <circle cx="40" cy="14" r="3" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <path d="M24 17 L24 20 M40 17 L40 20" stroke="{{ block.settings.icon_color }}" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_6_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_6_description }}</p>
+      </div>
+
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="7">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="20" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <circle cx="32" cy="32" r="16" fill="{{ block.settings.icon_accent_color }}" opacity="0.2"/>
+            <path d="M32 24 L32 32 L38 32" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            <path d="M24 20 L20 16 M40 20 L44 16 M44 44 L40 40 M24 44 L20 40" stroke="{{ block.settings.icon_accent_color }}" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <text x="32" y="48" text-anchor="middle" font-size="12" fill="{{ block.settings.icon_color }}" font-weight="bold">$</text>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_7_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_7_description }}</p>
+      </div>
+
+      <div class="titan-trust-card-{{ ai_gen_id }}" data-card="8">
+        <div class="titan-trust-icon-wrapper-{{ ai_gen_id }}">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="16" y="16" width="32" height="32" rx="4" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            <rect x="20" y="20" width="24" height="24" rx="2" fill="{{ block.settings.icon_accent_color }}" opacity="0.2"/>
+            <path d="M28 28 L36 28 M28 32 L36 32 M28 36 L34 36" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="50" cy="18" r="6" fill="{{ block.settings.icon_accent_color }}" opacity="0.6"/>
+            <path d="M48 18 L50 20 L54 16" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="titan-trust-card-title-{{ ai_gen_id }}">{{ block.settings.card_8_title }}</h3>
+        <p class="titan-trust-card-description-{{ ai_gen_id }}">{{ block.settings.card_8_description }}</p>
+      </div>
+    </div>
+
+    {% if block.settings.show_stats %}
+      <div class="titan-trust-stats-{{ ai_gen_id }}">
+        <div class="titan-trust-stat-{{ ai_gen_id }}" data-stat="1">
+          <div class="titan-trust-stat-number-{{ ai_gen_id }}" data-target="{{ block.settings.stat_1_number }}">0</div>
+          <div class="titan-trust-stat-label-{{ ai_gen_id }}">{{ block.settings.stat_1_label }}</div>
+        </div>
+        <div class="titan-trust-stat-{{ ai_gen_id }}" data-stat="2">
+          <div class="titan-trust-stat-number-{{ ai_gen_id }}" data-target="{{ block.settings.stat_2_number }}">0</div>
+          <div class="titan-trust-stat-label-{{ ai_gen_id }}">{{ block.settings.stat_2_label }}</div>
+        </div>
+        <div class="titan-trust-stat-{{ ai_gen_id }}" data-stat="3">
+          <div class="titan-trust-stat-number-{{ ai_gen_id }}">{{ block.settings.stat_3_text }}</div>
+          <div class="titan-trust-stat-label-{{ ai_gen_id }}">{{ block.settings.stat_3_label }}</div>
+        </div>
+        <div class="titan-trust-stat-{{ ai_gen_id }}" data-stat="4">
+          <div class="titan-trust-stat-number-{{ ai_gen_id }}">{{ block.settings.stat_4_text }}</div>
+          <div class="titan-trust-stat-label-{{ ai_gen_id }}">{{ block.settings.stat_4_label }}</div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</titan-trust-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TitanTrustSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.animated = false;
+        this.observer = null;
+      }
+
+      connectedCallback() {
+        this.setupIntersectionObserver();
+      }
+
+      setupIntersectionObserver() {
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.2
+        };
+
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !this.animated) {
+              this.animateCards();
+              this.animateStats();
+              this.animated = true;
+            }
+          });
+        }, options);
+
+        this.observer.observe(this);
+      }
+
+      animateCards() {
+        const cards = this.querySelectorAll('.titan-trust-card-{{ ai_gen_id }}');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            
+            requestAnimationFrame(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          }, index * 100);
+        });
+      }
+
+      animateStats() {
+        const statNumbers = this.querySelectorAll('.titan-trust-stat-number-{{ ai_gen_id }}[data-target]');
+        
+        statNumbers.forEach(stat => {
+          const target = parseInt(stat.getAttribute('data-target'));
+          const duration = 2000;
+          const increment = target / (duration / 16);
+          let current = 0;
+
+          const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+              stat.textContent = Math.floor(current) + '+';
+              requestAnimationFrame(updateCounter);
+            } else {
+              stat.textContent = target + '+';
+            }
+          };
+
+          setTimeout(() => {
+            updateCounter();
+          }, 400);
+        });
+      }
+
+      disconnectedCallback() {
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+    }
+
+    customElements.define('titan-trust-section-{{ ai_gen_id }}', TitanTrustSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Why choose Titan Express",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why Choose Titan Express?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Professional furniture moving and delivery services trusted by Sydney customers for reliability, care and fast response times."
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Trust cards"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 title",
+      "default": "Oversized Long Wheelbase Van"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_description",
+      "label": "Card 1 description",
+      "default": "More furniture moved in one trip, saving time and reducing costs."
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 title",
+      "default": "Professional Furniture Handling"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_description",
+      "label": "Card 2 description",
+      "default": "Furniture is handled carefully using proven moving techniques."
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 title",
+      "default": "Blankets, Straps & Trolley"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_description",
+      "label": "Card 3 description",
+      "default": "Professional moving equipment helps protect items during transport."
+    },
+    {
+      "type": "text",
+      "id": "card_4_title",
+      "label": "Card 4 title",
+      "default": "Same Day Availability"
+    },
+    {
+      "type": "textarea",
+      "id": "card_4_description",
+      "label": "Card 4 description",
+      "default": "Need urgent delivery today? Same-day service may be available."
+    },
+    {
+      "type": "text",
+      "id": "card_5_title",
+      "label": "Card 5 title",
+      "default": "Sydney Wide Coverage"
+    },
+    {
+      "type": "textarea",
+      "id": "card_5_description",
+      "label": "Card 5 description",
+      "default": "Covering Sydney CBD, Western Sydney, Inner West, Northern Beaches and surrounding suburbs."
+    },
+    {
+      "type": "text",
+      "id": "card_6_title",
+      "label": "Card 6 title",
+      "default": "Marketplace Pickup Specialists"
+    },
+    {
+      "type": "textarea",
+      "id": "card_6_description",
+      "label": "Card 6 description",
+      "default": "Experienced with Facebook Marketplace, Gumtree and private seller collections."
+    },
+    {
+      "type": "text",
+      "id": "card_7_title",
+      "label": "Card 7 title",
+      "default": "Affordable Pricing"
+    },
+    {
+      "type": "textarea",
+      "id": "card_7_description",
+      "label": "Card 7 description",
+      "default": "Flexible options including one-man-and-van or two-person moving teams."
+    },
+    {
+      "type": "text",
+      "id": "card_8_title",
+      "label": "Card 8 title",
+      "default": "Fast Quote Response"
+    },
+    {
+      "type": "textarea",
+      "id": "card_8_description",
+      "label": "Card 8 description",
+      "default": "Quick responses and transparent pricing without complicated booking processes."
+    },
+    {
+      "type": "header",
+      "content": "Statistics"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show statistics",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "stat_1_number",
+      "label": "Stat 1 number",
+      "min": 0,
+      "max": 5000,
+      "step": 100,
+      "default": 1000
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Furniture Deliveries"
+    },
+    {
+      "type": "range",
+      "id": "stat_2_number",
+      "label": "Stat 2 number",
+      "min": 0,
+      "max": 5000,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Happy Customers"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_text",
+      "label": "Stat 3 text",
+      "default": "Sydney Wide"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Service Area"
+    },
+    {
+      "type": "text",
+      "id": "stat_4_text",
+      "label": "Stat 4 text",
+      "default": "Same Day"
+    },
+    {
+      "type": "text",
+      "id": "stat_4_label",
+      "label": "Stat 4 label",
+      "default": "Availability"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "card_shadow_color",
+      "label": "Card shadow",
+      "default": "#00000010"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_shadow_color",
+      "label": "Card hover shadow",
+      "default": "#00000020"
+    },
+    {
+      "type": "color",
+      "id": "card_glow_color",
+      "label": "Card glow",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_description_color",
+      "label": "Card description",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon primary",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_accent_color",
+      "label": "Icon accent",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "stats_background",
+      "label": "Stats background",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "stats_border_color",
+      "label": "Stats border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "stat_number_color",
+      "label": "Stat number",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "stat_label_color",
+      "label": "Stat label",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern lines",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "pattern_accent_color",
+      "label": "Pattern markers",
+      "default": "#FFD700"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Card title size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_description_size",
+      "label": "Card description size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "stat_number_size",
+      "label": "Stat number size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "stat_label_size",
+      "label": "Stat label size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section padding top",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section padding bottom",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "stats_spacing",
+      "label": "Stats spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "stats_padding",
+      "label": "Stats padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "stats_border_radius",
+      "label": "Stats border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Effects"
+    },
+    {
+      "type": "range",
+      "id": "card_glow_opacity",
+      "label": "Card glow opacity",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "background_pattern_opacity",
+      "label": "Background pattern opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why choose Titan Express"
+    }
+  ]
+}
+{% endschema %}

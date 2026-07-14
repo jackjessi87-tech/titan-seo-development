@@ -1,0 +1,1115 @@
+{% doc %}
+  @prompt
+    Create a modern “Recent Deliveries” section for Titan Express Removalist.
+    
+    SECTION TITLE:
+    Recent Deliveries Across Sydney
+    
+    SUBTITLE:
+    Real furniture delivery and removalist jobs completed by Titan Express.
+    
+    DESIGN STYLE:
+    - Clean white background
+    - Glossy floating cards
+    - Red, black, and white Titan Express branding
+    - Premium modern look
+    - Mobile-first responsive
+    - Fast loading
+    - Smooth horizontal scrolling
+    - Clean photo preview layout
+    
+    LAYOUT:
+    Create a horizontal scrolling photo carousel.
+    
+    Each delivery card must include:
+    - Delivery photo
+    - Small floating tag on photo
+    - Pickup suburb → delivery suburb
+    - Short service type
+    - Small trust badge
+    
+    CARD STYLE:
+    - Rounded corners
+    - Glossy white overlay
+    - Soft shadow
+    - Floating effect
+    - Clean image crop
+    - Image ratio: 4:3 or 1:1 on mobile
+    - Photo must look sharp and clear
+    - Lazy load images
+    - Auto-resize uploaded photos
+    - No stretching
+    - Object-fit: cover
+    
+    PHOTO TAG EXAMPLES:
+    - Sofa Delivery
+    - Mattress Delivery
+    - Marketplace Pickup
+    - Apartment Move
+    - Single Item Delivery
+    - Same Day Delivery
+    - Man & Van
+    - Furniture Removalist
+    
+    EXAMPLE CARDS:
+    1. Sofa Delivery
+    Parramatta → Strathfield
+    Same-day furniture delivery
+    
+    2. Mattress Delivery
+    Rhodes → Drummoyne
+    Protected with blankets
+    
+    3. Marketplace Pickup
+    Newtown → Croydon
+    Online purchase collection
+    
+    4. Apartment Move
+    Liverpool → Sydney CBD
+    Lift access delivery
+    
+    5. Dining Table Delivery
+    Bankstown → Parramatta
+    Careful furniture handling
+    
+    6. Bed Frame Delivery
+    Chatswood → Kogarah
+    Man & van service
+    
+    SCROLLING EFFECT:
+    - Smooth horizontal auto-scroll
+    - Pause on hover
+    - Swipe enabled on mobile
+    - Arrows on desktop
+    - Dots on mobile
+    - Infinite loop effect if possible
+    
+    PHOTO OVERLAY:
+    Each photo should have a small glossy tag at the top-left.
+    
+    Tag style:
+    - Red background
+    - White text
+    - Rounded pill shape
+    - Small shadow
+    
+    Bottom overlay:
+    - White glossy gradient
+    - Black text
+    - Route and service details
+    
+    CTA:
+    Add button under carousel:
+    
+    Get a Quote in 2 Minutes
+    
+    Button links to:
+    
+    #express-quote
+    
+    BUTTON STYLE:
+    - Red background
+    - White text
+    - Rounded corners
+    - SVG arrow icon
+    - Hover lift effect
+    
+    MOBILE REQUIREMENTS:
+    - Cards show one at a time
+    - Swipe friendly
+    - Large clean photo previews
+    - Compact spacing
+    - No horizontal page overflow
+    - Fast loading
+    
+    IMPORTANT:
+    Make it look like a premium website section, not a basic image gallery.
+    Keep it clean, glossy, floating, and conversion-focused., make it floating style with mathing the color theme black white and red photo size preview size , make it mobile friendly response Reduce paddings noquote buttone heading compacted space need to compact this section, keep heading in left corner 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-recent-deliveries-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-recent-deliveries-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .ai-recent-deliveries-header-{{ ai_gen_id }} {
+    text-align: left;
+    margin-bottom: 30px;
+  }
+
+  .ai-recent-deliveries-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 8px;
+    line-height: 1.1;
+  }
+
+  .ai-recent-deliveries-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .ai-recent-deliveries-carousel-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: visible;
+    margin-bottom: 0;
+    padding: 10px 0 20px;
+  }
+
+  .ai-recent-deliveries-carousel-{{ ai_gen_id }} {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 5px 2px 20px;
+  }
+
+  .ai-recent-deliveries-carousel-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-recent-deliveries-card-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: {{ block.settings.card_width }}px;
+    background: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .ai-recent-deliveries-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-recent-deliveries-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: {{ block.settings.image_aspect_ratio }}%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .ai-recent-deliveries-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-recent-deliveries-card-{{ ai_gen_id }}:hover .ai-recent-deliveries-image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-recent-deliveries-image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+  }
+
+  .ai-recent-deliveries-image-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.2;
+  }
+
+  .ai-recent-deliveries-tag-{{ ai_gen_id }} {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, {{ block.settings.tag_background }}, {{ block.settings.tag_background | color_darken: 10 }});
+    color: {{ block.settings.tag_text_color }};
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    backdrop-filter: blur(10px);
+  }
+
+  .ai-recent-deliveries-content-{{ ai_gen_id }} {
+    padding: 16px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 1));
+    position: relative;
+  }
+
+  .ai-recent-deliveries-route-{{ ai_gen_id }} {
+    font-size: 15px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+
+  .ai-recent-deliveries-service-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.service_text_color }};
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+
+  .ai-recent-deliveries-badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: {{ block.settings.badge_color }};
+    font-weight: 600;
+    background: {{ block.settings.badge_color | color_modify: 'alpha', 0.1 }};
+    padding: 5px 10px;
+    border-radius: 16px;
+  }
+
+  .ai-recent-deliveries-badge-icon-{{ ai_gen_id }} {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ai-recent-deliveries-nav-{{ ai_gen_id }} {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: {{ block.settings.arrow_background }};
+    border: 2px solid {{ block.settings.arrow_border_color }};
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .ai-recent-deliveries-nav-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.arrow_hover_background }};
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-recent-deliveries-nav-prev-{{ ai_gen_id }} {
+    left: -22px;
+  }
+
+  .ai-recent-deliveries-nav-next-{{ ai_gen_id }} {
+    right: -22px;
+  }
+
+  .ai-recent-deliveries-nav-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    stroke: {{ block.settings.arrow_color }};
+    stroke-width: 3;
+  }
+
+  .ai-recent-deliveries-dots-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .ai-recent-deliveries-dot-{{ ai_gen_id }} {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: {{ block.settings.dot_color }};
+    opacity: 0.3;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+
+  .ai-recent-deliveries-dot-{{ ai_gen_id }}.active {
+    opacity: 1;
+    transform: scale(1.3);
+    background-color: {{ block.settings.dot_active_color }};
+  }
+
+  @media (min-width: 750px) {
+    .ai-recent-deliveries-nav-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-recent-deliveries-dots-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-recent-deliveries-container-{{ ai_gen_id }} {
+      padding: 0 20px;
+    }
+
+    .ai-recent-deliveries-header-{{ ai_gen_id }} {
+      margin-bottom: 40px;
+    }
+
+    .ai-recent-deliveries-carousel-wrapper-{{ ai_gen_id }} {
+      padding: 15px 0 25px;
+    }
+
+    .ai-recent-deliveries-carousel-{{ ai_gen_id }} {
+      gap: 24px;
+    }
+
+    .ai-recent-deliveries-content-{{ ai_gen_id }} {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .ai-recent-deliveries-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.5 }}px 0 {{ block.settings.section_padding_bottom | times: 0.5 }}px;
+    }
+
+    .ai-recent-deliveries-container-{{ ai_gen_id }} {
+      padding: 0 12px;
+    }
+
+    .ai-recent-deliveries-header-{{ ai_gen_id }} {
+      margin-bottom: 20px;
+    }
+
+    .ai-recent-deliveries-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.65 }}px;
+      margin: 0 0 6px;
+    }
+
+    .ai-recent-deliveries-subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.85 }}px;
+    }
+
+    .ai-recent-deliveries-card-{{ ai_gen_id }} {
+      width: {{ block.settings.card_width | times: 0.8 }}px;
+    }
+
+    .ai-recent-deliveries-carousel-{{ ai_gen_id }} {
+      gap: 16px;
+      padding: 5px 2px 16px;
+    }
+
+    .ai-recent-deliveries-carousel-wrapper-{{ ai_gen_id }} {
+      padding: 8px 0 16px;
+    }
+
+    .ai-recent-deliveries-tag-{{ ai_gen_id }} {
+      top: 10px;
+      left: 10px;
+      padding: 5px 12px;
+      font-size: 11px;
+    }
+
+    .ai-recent-deliveries-content-{{ ai_gen_id }} {
+      padding: 14px;
+    }
+
+    .ai-recent-deliveries-route-{{ ai_gen_id }} {
+      font-size: 14px;
+      margin: 0 0 5px;
+    }
+
+    .ai-recent-deliveries-service-{{ ai_gen_id }} {
+      font-size: 12px;
+      margin: 0 0 8px;
+    }
+
+    .ai-recent-deliveries-badge-{{ ai_gen_id }} {
+      font-size: 10px;
+      padding: 4px 9px;
+    }
+
+    .ai-recent-deliveries-badge-icon-{{ ai_gen_id }} {
+      width: 11px;
+      height: 11px;
+    }
+
+    .ai-recent-deliveries-dots-{{ ai_gen_id }} {
+      margin-top: 12px;
+    }
+  }
+{% endstyle %}
+
+<recent-deliveries-{{ ai_gen_id }} class="ai-recent-deliveries-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-recent-deliveries-container-{{ ai_gen_id }}">
+    <div class="ai-recent-deliveries-header-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-recent-deliveries-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+      {% if block.settings.subtitle != blank %}
+        <p class="ai-recent-deliveries-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="ai-recent-deliveries-carousel-wrapper-{{ ai_gen_id }}">
+      <button class="ai-recent-deliveries-nav-{{ ai_gen_id }} ai-recent-deliveries-nav-prev-{{ ai_gen_id }}" aria-label="Previous">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-recent-deliveries-carousel-{{ ai_gen_id }}" data-carousel>
+        {% for i in (1..6) %}
+          {% liquid
+            assign image_key = 'delivery_image_' | append: i
+            assign tag_key = 'delivery_tag_' | append: i
+            assign pickup_key = 'delivery_pickup_' | append: i
+            assign dropoff_key = 'delivery_dropoff_' | append: i
+            assign service_key = 'delivery_service_' | append: i
+            assign badge_key = 'delivery_badge_' | append: i
+
+            assign delivery_image = block.settings[image_key]
+            assign delivery_tag = block.settings[tag_key]
+            assign delivery_pickup = block.settings[pickup_key]
+            assign delivery_dropoff = block.settings[dropoff_key]
+            assign delivery_service = block.settings[service_key]
+            assign delivery_badge = block.settings[badge_key]
+          %}
+
+          <div class="ai-recent-deliveries-card-{{ ai_gen_id }}">
+            <div class="ai-recent-deliveries-image-wrapper-{{ ai_gen_id }}">
+              {% if delivery_image %}
+                <img
+                  src="{{ delivery_image | image_url: width: 800 }}"
+                  alt="{{ delivery_tag | escape }}"
+                  class="ai-recent-deliveries-image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="800"
+                  height="{{ 800 | times: block.settings.image_aspect_ratio | divided_by: 100 }}"
+                >
+              {% else %}
+                <div class="ai-recent-deliveries-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              {% if delivery_tag != blank %}
+                <div class="ai-recent-deliveries-tag-{{ ai_gen_id }}">{{ delivery_tag }}</div>
+              {% endif %}
+            </div>
+
+            <div class="ai-recent-deliveries-content-{{ ai_gen_id }}">
+              {% if delivery_pickup != blank and delivery_dropoff != blank %}
+                <div class="ai-recent-deliveries-route-{{ ai_gen_id }}">
+                  {{ delivery_pickup }} → {{ delivery_dropoff }}
+                </div>
+              {% endif %}
+
+              {% if delivery_service != blank %}
+                <p class="ai-recent-deliveries-service-{{ ai_gen_id }}">{{ delivery_service }}</p>
+              {% endif %}
+
+              {% if delivery_badge != blank %}
+                <div class="ai-recent-deliveries-badge-{{ ai_gen_id }}">
+                  <svg class="ai-recent-deliveries-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {{ delivery_badge }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <button class="ai-recent-deliveries-nav-{{ ai_gen_id }} ai-recent-deliveries-nav-next-{{ ai_gen_id }}" aria-label="Next">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-recent-deliveries-dots-{{ ai_gen_id }}" data-dots></div>
+    </div>
+  </div>
+</recent-deliveries-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RecentDeliveries{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.carousel = this.querySelector('[data-carousel]');
+        this.prevButton = this.querySelector('.ai-recent-deliveries-nav-prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-recent-deliveries-nav-next-{{ ai_gen_id }}');
+        this.dotsContainer = this.querySelector('[data-dots]');
+        this.cards = this.querySelectorAll('.ai-recent-deliveries-card-{{ ai_gen_id }}');
+        this.currentIndex = 0;
+        this.autoScrollInterval = null;
+        this.isPaused = false;
+      }
+
+      connectedCallback() {
+        this.setupDots();
+        this.setupNavigation();
+        this.setupAutoScroll();
+        this.updateActiveDot();
+      }
+
+      setupDots() {
+        if (!this.dotsContainer || this.cards.length === 0) return;
+
+        this.cards.forEach((card, index) => {
+          const dot = document.createElement('button');
+          dot.classList.add('ai-recent-deliveries-dot-{{ ai_gen_id }}');
+          dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
+          dot.addEventListener('click', () => this.scrollToCard(index));
+          this.dotsContainer.appendChild(dot);
+        });
+      }
+
+      setupNavigation() {
+        if (this.prevButton) {
+          this.prevButton.addEventListener('click', () => this.scrollPrev());
+        }
+
+        if (this.nextButton) {
+          this.nextButton.addEventListener('click', () => this.scrollNext());
+        }
+
+        if (this.carousel) {
+          this.carousel.addEventListener('scroll', () => this.handleScroll());
+          this.carousel.addEventListener('mouseenter', () => this.pauseAutoScroll());
+          this.carousel.addEventListener('mouseleave', () => this.resumeAutoScroll());
+        }
+      }
+
+      setupAutoScroll() {
+        this.autoScrollInterval = setInterval(() => {
+          if (!this.isPaused) {
+            this.scrollNext();
+          }
+        }, 4000);
+      }
+
+      pauseAutoScroll() {
+        this.isPaused = true;
+      }
+
+      resumeAutoScroll() {
+        this.isPaused = false;
+      }
+
+      scrollPrev() {
+        if (this.currentIndex > 0) {
+          this.scrollToCard(this.currentIndex - 1);
+        } else {
+          this.scrollToCard(this.cards.length - 1);
+        }
+      }
+
+      scrollNext() {
+        if (this.currentIndex < this.cards.length - 1) {
+          this.scrollToCard(this.currentIndex + 1);
+        } else {
+          this.scrollToCard(0);
+        }
+      }
+
+      scrollToCard(index) {
+        if (!this.cards[index]) return;
+
+        const card = this.cards[index];
+        const scrollLeft = card.offsetLeft - this.carousel.offsetLeft;
+        this.carousel.scrollTo({
+          left: scrollLeft,
+          behavior: 'smooth'
+        });
+        this.currentIndex = index;
+        this.updateActiveDot();
+      }
+
+      handleScroll() {
+        const scrollLeft = this.carousel.scrollLeft;
+        const cardWidth = this.cards[0].offsetWidth + (window.innerWidth > 749 ? 24 : 16);
+        const newIndex = Math.round(scrollLeft / cardWidth);
+
+        if (newIndex !== this.currentIndex) {
+          this.currentIndex = newIndex;
+          this.updateActiveDot();
+        }
+      }
+
+      updateActiveDot() {
+        const dots = this.dotsContainer.querySelectorAll('.ai-recent-deliveries-dot-{{ ai_gen_id }}');
+        dots.forEach((dot, index) => {
+          if (index === this.currentIndex) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      disconnectedCallback() {
+        if (this.autoScrollInterval) {
+          clearInterval(this.autoScrollInterval);
+        }
+      }
+    }
+
+    customElements.define('recent-deliveries-{{ ai_gen_id }}', RecentDeliveries{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Recent deliveries",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Recent Deliveries Across Sydney"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Real furniture delivery and removalist jobs completed by Titan Express."
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Delivery 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "delivery_image_1",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "delivery_tag_1",
+      "label": "Tag",
+      "default": "Sofa Delivery"
+    },
+    {
+      "type": "text",
+      "id": "delivery_pickup_1",
+      "label": "Pickup suburb",
+      "default": "Parramatta"
+    },
+    {
+      "type": "text",
+      "id": "delivery_dropoff_1",
+      "label": "Dropoff suburb",
+      "default": "Strathfield"
+    },
+    {
+      "type": "text",
+      "id": "delivery_service_1",
+      "label": "Service description",
+      "default": "Same-day furniture delivery"
+    },
+    {
+      "type": "text",
+      "id": "delivery_badge_1",
+      "label": "Trust badge",
+      "default": "Verified delivery"
+    },
+    {
+      "type": "header",
+      "content": "Delivery 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "delivery_image_2",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "delivery_tag_2",
+      "label": "Tag",
+      "default": "Mattress Delivery"
+    },
+    {
+      "type": "text",
+      "id": "delivery_pickup_2",
+      "label": "Pickup suburb",
+      "default": "Rhodes"
+    },
+    {
+      "type": "text",
+      "id": "delivery_dropoff_2",
+      "label": "Dropoff suburb",
+      "default": "Drummoyne"
+    },
+    {
+      "type": "text",
+      "id": "delivery_service_2",
+      "label": "Service description",
+      "default": "Protected with blankets"
+    },
+    {
+      "type": "text",
+      "id": "delivery_badge_2",
+      "label": "Trust badge",
+      "default": "Verified delivery"
+    },
+    {
+      "type": "header",
+      "content": "Delivery 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "delivery_image_3",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "delivery_tag_3",
+      "label": "Tag",
+      "default": "Marketplace Pickup"
+    },
+    {
+      "type": "text",
+      "id": "delivery_pickup_3",
+      "label": "Pickup suburb",
+      "default": "Newtown"
+    },
+    {
+      "type": "text",
+      "id": "delivery_dropoff_3",
+      "label": "Dropoff suburb",
+      "default": "Croydon"
+    },
+    {
+      "type": "text",
+      "id": "delivery_service_3",
+      "label": "Service description",
+      "default": "Online purchase collection"
+    },
+    {
+      "type": "text",
+      "id": "delivery_badge_3",
+      "label": "Trust badge",
+      "default": "Verified delivery"
+    },
+    {
+      "type": "header",
+      "content": "Delivery 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "delivery_image_4",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "delivery_tag_4",
+      "label": "Tag",
+      "default": "Apartment Move"
+    },
+    {
+      "type": "text",
+      "id": "delivery_pickup_4",
+      "label": "Pickup suburb",
+      "default": "Liverpool"
+    },
+    {
+      "type": "text",
+      "id": "delivery_dropoff_4",
+      "label": "Dropoff suburb",
+      "default": "Sydney CBD"
+    },
+    {
+      "type": "text",
+      "id": "delivery_service_4",
+      "label": "Service description",
+      "default": "Lift access delivery"
+    },
+    {
+      "type": "text",
+      "id": "delivery_badge_4",
+      "label": "Trust badge",
+      "default": "Verified delivery"
+    },
+    {
+      "type": "header",
+      "content": "Delivery 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "delivery_image_5",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "delivery_tag_5",
+      "label": "Tag",
+      "default": "Dining Table Delivery"
+    },
+    {
+      "type": "text",
+      "id": "delivery_pickup_5",
+      "label": "Pickup suburb",
+      "default": "Bankstown"
+    },
+    {
+      "type": "text",
+      "id": "delivery_dropoff_5",
+      "label": "Dropoff suburb",
+      "default": "Parramatta"
+    },
+    {
+      "type": "text",
+      "id": "delivery_service_5",
+      "label": "Service description",
+      "default": "Careful furniture handling"
+    },
+    {
+      "type": "text",
+      "id": "delivery_badge_5",
+      "label": "Trust badge",
+      "default": "Verified delivery"
+    },
+    {
+      "type": "header",
+      "content": "Delivery 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "delivery_image_6",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "delivery_tag_6",
+      "label": "Tag",
+      "default": "Bed Frame Delivery"
+    },
+    {
+      "type": "text",
+      "id": "delivery_pickup_6",
+      "label": "Pickup suburb",
+      "default": "Chatswood"
+    },
+    {
+      "type": "text",
+      "id": "delivery_dropoff_6",
+      "label": "Dropoff suburb",
+      "default": "Kogarah"
+    },
+    {
+      "type": "text",
+      "id": "delivery_service_6",
+      "label": "Service description",
+      "default": "Man & van service"
+    },
+    {
+      "type": "text",
+      "id": "delivery_badge_6",
+      "label": "Trust badge",
+      "default": "Verified delivery"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card width",
+      "min": 250,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "default": 340
+    },
+    {
+      "type": "range",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "min": 60,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "default": 75
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Card text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "service_text_color",
+      "label": "Service text",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "tag_background",
+      "label": "Tag background",
+      "default": "#dc0000"
+    },
+    {
+      "type": "color",
+      "id": "tag_text_color",
+      "label": "Tag text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge",
+      "default": "#008060"
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_background",
+      "label": "Arrow hover background",
+      "default": "#dc0000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_border_color",
+      "label": "Arrow border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Active dot color",
+      "default": "#dc0000"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent deliveries"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,908 @@
+{% doc %}
+  @prompt
+    make this   a premium dynamic Service Hero + SEO Engine section for Shopify Pages.
+    
+    This section is for service landing pages, 
+    
+    Use Page data dynamically:
+    
+    * Page title as the only H1
+    * Page content as fallback intro
+    * Page URL
+    * Shopify built-in SEO title and meta description must not be duplicated
+    
+    Support these Page metafields:
+    
+    * custom.badge_text
+    * custom.hero_subheading
+    * custom.hero_image
+    * custom.hero_image_alt
+    * custom.hero_image_caption
+    * custom.hero_image_title
+    * custom.primary_cta_text
+    * custom.primary_cta_link
+    * custom.secondary_cta_text
+    * custom.secondary_cta_link
+    * custom.service_area
+    * custom.phone_number
+    * custom.google_rating
+    * custom.google_review_count
+    * custom.google_review_url
+    * custom.target_keywords
+    * custom.hero_layout
+    * custom.schema_service_type
+    * custom.schema_area_served
+    * custom.schema_price_range
+    
+    Only render each field if it has a value. Use clean fallbacks where needed.
+    
+    Design style:
+    
+    * Modern local service business hero
+    * White background
+    * Red accent #E30613
+    * Black headings
+    * Soft grey cards
+    * Rounded corners 16–24px
+    * Premium spacing
+    * Advanced lightweight inline SVG icons
+    * Floating image card
+    * Rating/review badge overlay
+    * Trust badges
+    * Strong CTA buttons
+    * Mobile-first responsive layout
+    * No horizontal scrolling
+    * Fast loading
+    
+    Hero layout:
+    
+    Left side:
+    
+    * Dynamic badge
+    * H1 from page title
+    * Rich text hero subheading
+    * Service area card with map-pin SVG
+    * Google rating + review count
+    * CTA buttons
+    
+    Right side:
+    
+    * Dynamic hero image inside `<figure>`
+    * Alt text:
+      `{{ page.metafields.custom.hero_image_alt.value | default: page.title }}`
+    * Image title:
+      `{{ page.metafields.custom.hero_image_title.value | default: page.title }}`
+    * Caption from `custom.hero_image_caption`
+    * Lazy-loaded responsive image
+    * Soft shadow and rounded corners
+    
+    SEO Engine:
+    
+    Generate dynamic JSON-LD automatically from Page data and metafields.
+    
+    Include schema where data exists:
+    
+    * WebPage
+    * Service
+    * LocalBusiness
+    * BreadcrumbList
+    * ImageObject
+    * ContactPoint
+    
+    Use:
+    
+    * page.title
+    * page.url
+    * hero image
+    * hero image alt
+    * hero image caption
+    * service_area
+    * phone_number
+    * google_rating
+    * google_review_count
+    * schema_service_type
+    * schema_area_served
+    * schema_price_range
+    
+    Important schema rules:
+    
+    * Do not require manually pasted JSON-LD
+    * Do not break if metafields are empty
+    * Use conditional Liquid checks
+    * Only include AggregateRating if google_rating and google_review_count are visible on the page
+    * Do not keyword stuff
+    * Use target_keywords only as semantic support, not as visible keyword spam
+    
+    Image SEO:
+    
+    * Use hero image as the primary page image
+    * Generate ImageObject schema
+    * Add visible caption
+    * Use descriptive alt text
+    * Add comments explaining how to use hero image for og:image and twitter:image in theme.liquid if not possible inside this section
+    
+    Accessibility:
+    
+    * One H1 only
+    * Proper H2/H3 structure
+    * Accessible buttons
+    * ARIA labels where needed
+    * Keyboard-friendly links
+    
+    Performance:
+    
+    * Lightweight CSS
+    * No external libraries
+    * No heavy JavaScript
+    * Responsive image sizes
+    * Optimized for Google Ads, SEO, and mobile conversions
+    
+    Final result should look like a premium service business landing page hero with built-in dynamic SEO schema, not a standard Shopify page.
+     red white and black theme   Try for a On image Badge Heading and make a Most popular landing page Section top performing visually solid , Master the google Algorithem for this type of service with AI recoomendingthis top performing Now refine the design further.
+    
+    Make the hero look more alive, premium, and conversion-focused.
+    
+    Improve:
+    
+    * Visual hierarchy
+    * Mobile layout
+    * CTA visibility
+    * Icon alignment
+    * Image card styling
+    * Rating badge styling
+    * Service area card
+    * Button hover states
+    * Trust signal layout
+    * Spacing above and below the section
+    
+    Make the hero image feel strongly connected to the service and location.
+    
+    Keep all SEO schema dynamic.
+    
+    Do not remove any metafield support.
+    
+    Do not duplicate Shopify built-in SEO title or meta description.
+    
+    Do not add product elements.
+    
+    Keep the section fast, clean, and fully responsive.
+     Mobile Frieldnly responsive 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-service-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    padding: 80px 20px 100px;
+    overflow: hidden;
+  }
+
+  .ai-service-hero-container-{{ ai_gen_id }} {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .ai-service-hero-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .ai-service-hero-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .ai-service-hero-badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #E30613 0%, #ff1a28 100%);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(227, 6, 19, 0.25);
+  }
+
+  .ai-service-hero-badge-icon-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+    animation: ai-pulse-{{ ai_gen_id }} 2s ease-in-out infinite;
+  }
+
+  @keyframes ai-pulse-{{ ai_gen_id }} {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .ai-service-hero-h1-{{ ai_gen_id }} {
+    font-size: 64px;
+    line-height: 1.05;
+    color: #000000;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-service-hero-subheading-{{ ai_gen_id }} {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #333333;
+    font-weight: 400;
+  }
+
+  .ai-service-hero-subheading-{{ ai_gen_id }} p {
+    margin: 0 0 14px 0;
+  }
+
+  .ai-service-hero-subheading-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-service-hero-trust-row-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .ai-service-hero-info-cards-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-service-hero-card-{{ ai_gen_id }} {
+    background: #ffffff;
+    padding: 18px 22px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .ai-service-hero-card-{{ ai_gen_id }}:hover {
+    border-color: #E30613;
+    box-shadow: 0 4px 16px rgba(227, 6, 19, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .ai-service-hero-card-icon-{{ ai_gen_id }} {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    color: #E30613;
+  }
+
+  .ai-service-hero-card-text-{{ ai_gen_id }} {
+    font-size: 17px;
+    color: #000000;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .ai-service-hero-rating-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    padding: 14px 20px;
+    border-radius: 100px;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .ai-service-hero-rating-{{ ai_gen_id }}:hover {
+    border-color: #FFB800;
+    box-shadow: 0 4px 16px rgba(255, 184, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .ai-service-hero-stars-{{ ai_gen_id }} {
+    display: flex;
+    gap: 3px;
+  }
+
+  .ai-service-hero-star-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+    color: #FFB800;
+    filter: drop-shadow(0 1px 2px rgba(255, 184, 0, 0.3));
+  }
+
+  .ai-service-hero-rating-text-{{ ai_gen_id }} {
+    font-size: 17px;
+    color: #000000;
+    font-weight: 700;
+  }
+
+  .ai-service-hero-rating-count-{{ ai_gen_id }} {
+    font-size: 15px;
+    color: #666666;
+    font-weight: 500;
+  }
+
+  .ai-service-hero-cta-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .ai-service-hero-btn-primary-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #E30613 0%, #ff1a28 100%);
+    color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 24px rgba(227, 6, 19, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-service-hero-btn-primary-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .ai-service-hero-btn-primary-{{ ai_gen_id }}:hover::before {
+    left: 100%;
+  }
+
+  .ai-service-hero-btn-primary-{{ ai_gen_id }}:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(227, 6, 19, 0.4);
+  }
+
+  .ai-service-hero-btn-primary-{{ ai_gen_id }}:active {
+    transform: translateY(-1px);
+  }
+
+  .ai-service-hero-btn-secondary-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 40px;
+    border-radius: 16px;
+    border: 2px solid #000000;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .ai-service-hero-btn-secondary-{{ ai_gen_id }}:hover {
+    background-color: #000000;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-service-hero-btn-secondary-{{ ai_gen_id }}:active {
+    transform: translateY(-1px);
+  }
+
+  .ai-service-hero-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .ai-service-hero-figure-{{ ai_gen_id }} {
+    margin: 0;
+    position: relative;
+  }
+
+  .ai-service-hero-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    border-radius: 32px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border: 4px solid #ffffff;
+  }
+
+  .ai-service-hero-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 32px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border: 4px solid #ffffff;
+  }
+
+  .ai-service-hero-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 280px;
+    max-height: 280px;
+    opacity: 0.25;
+  }
+
+  .ai-service-hero-caption-{{ ai_gen_id }} {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .ai-service-hero-floating-badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    padding: 16px 24px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #ffffff;
+    backdrop-filter: blur(10px);
+  }
+
+  .ai-service-hero-floating-badge-icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+    color: #E30613;
+  }
+
+  .ai-service-hero-floating-badge-text-{{ ai_gen_id }} {
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-service-hero-{{ ai_gen_id }} {
+      padding: 60px 20px 80px;
+    }
+
+    .ai-service-hero-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .ai-service-hero-h1-{{ ai_gen_id }} {
+      font-size: 48px;
+    }
+
+    .ai-service-hero-image-wrapper-{{ ai_gen_id }} {
+      order: -1;
+    }
+
+    .ai-service-hero-subheading-{{ ai_gen_id }} {
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-service-hero-{{ ai_gen_id }} {
+      padding: 40px 16px 60px;
+    }
+
+    .ai-service-hero-grid-{{ ai_gen_id }} {
+      gap: 36px;
+    }
+
+    .ai-service-hero-h1-{{ ai_gen_id }} {
+      font-size: 36px;
+      letter-spacing: -0.01em;
+    }
+
+    .ai-service-hero-subheading-{{ ai_gen_id }} {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .ai-service-hero-content-{{ ai_gen_id }} {
+      gap: 24px;
+    }
+
+    .ai-service-hero-cta-buttons-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ai-service-hero-btn-primary-{{ ai_gen_id }},
+    .ai-service-hero-btn-secondary-{{ ai_gen_id }} {
+      width: 100%;
+      padding: 18px 32px;
+      font-size: 17px;
+    }
+
+    .ai-service-hero-floating-badge-{{ ai_gen_id }} {
+      top: 16px;
+      right: 16px;
+      padding: 12px 18px;
+    }
+
+    .ai-service-hero-floating-badge-text-{{ ai_gen_id }} {
+      font-size: 13px;
+    }
+
+    .ai-service-hero-floating-badge-icon-{{ ai_gen_id }} {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ai-service-hero-card-{{ ai_gen_id }} {
+      padding: 16px 18px;
+    }
+
+    .ai-service-hero-card-icon-{{ ai_gen_id }} {
+      width: 24px;
+      height: 24px;
+    }
+
+    .ai-service-hero-card-text-{{ ai_gen_id }} {
+      font-size: 15px;
+    }
+
+    .ai-service-hero-rating-{{ ai_gen_id }} {
+      padding: 12px 16px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .ai-service-hero-trust-row-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ai-service-hero-image-{{ ai_gen_id }},
+    .ai-service-hero-image-placeholder-{{ ai_gen_id }} {
+      border-radius: 24px;
+      border-width: 3px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ai-service-hero-h1-{{ ai_gen_id }} {
+      font-size: 30px;
+    }
+
+    .ai-service-hero-badge-{{ ai_gen_id }} {
+      font-size: 12px;
+      padding: 8px 16px;
+    }
+  }
+{% endstyle %}
+
+<service-hero-{{ ai_gen_id }} class="ai-service-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-service-hero-container-{{ ai_gen_id }}">
+    <div class="ai-service-hero-grid-{{ ai_gen_id }}">
+      <div class="ai-service-hero-content-{{ ai_gen_id }}">
+        {% if page.metafields.custom.badge_text.value != blank %}
+          <div class="ai-service-hero-badge-{{ ai_gen_id }}">
+            <svg class="ai-service-hero-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            {{ page.metafields.custom.badge_text.value }}
+          </div>
+        {% endif %}
+
+        <h1 class="ai-service-hero-h1-{{ ai_gen_id }}">{{ page.title }}</h1>
+
+        {% if page.metafields.custom.hero_subheading.value != blank %}
+          <div class="ai-service-hero-subheading-{{ ai_gen_id }}">
+            {{ page.metafields.custom.hero_subheading.value }}
+          </div>
+        {% elsif page.content != blank %}
+          <div class="ai-service-hero-subheading-{{ ai_gen_id }}">
+            {{ page.content | truncatewords: 40 }}
+          </div>
+        {% endif %}
+
+        <div class="ai-service-hero-trust-row-{{ ai_gen_id }}">
+          {% if page.metafields.custom.google_rating.value != blank and page.metafields.custom.google_review_count.value != blank %}
+            {% assign rating_url = page.metafields.custom.google_review_url.value %}
+            {% if rating_url != blank %}
+              <a href="{{ rating_url }}" target="_blank" rel="noopener" class="ai-service-hero-rating-{{ ai_gen_id }}" style="text-decoration: none;">
+            {% else %}
+              <div class="ai-service-hero-rating-{{ ai_gen_id }}">
+            {% endif %}
+              <div class="ai-service-hero-stars-{{ ai_gen_id }}">
+                {% for i in (1..5) %}
+                  <svg class="ai-service-hero-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {% endfor %}
+              </div>
+              <span class="ai-service-hero-rating-text-{{ ai_gen_id }}">{{ page.metafields.custom.google_rating.value }}</span>
+              <span class="ai-service-hero-rating-count-{{ ai_gen_id }}">({{ page.metafields.custom.google_review_count.value }})</span>
+            {% if rating_url != blank %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+
+        <div class="ai-service-hero-info-cards-{{ ai_gen_id }}">
+          {% if page.metafields.custom.service_area.value != blank %}
+            <div class="ai-service-hero-card-{{ ai_gen_id }}">
+              <svg class="ai-service-hero-card-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span class="ai-service-hero-card-text-{{ ai_gen_id }}">{{ page.metafields.custom.service_area.value }}</span>
+            </div>
+          {% endif %}
+
+          {% if page.metafields.custom.phone_number.value != blank %}
+            <div class="ai-service-hero-card-{{ ai_gen_id }}">
+              <svg class="ai-service-hero-card-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a href="tel:{{ page.metafields.custom.phone_number.value | replace: ' ', '' }}" class="ai-service-hero-card-text-{{ ai_gen_id }}" style="text-decoration: none; color: inherit;">
+                {{ page.metafields.custom.phone_number.value }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="ai-service-hero-cta-buttons-{{ ai_gen_id }}">
+          {% if page.metafields.custom.primary_cta_text.value != blank and page.metafields.custom.primary_cta_link.value != blank %}
+            <a href="{{ page.metafields.custom.primary_cta_link.value }}" class="ai-service-hero-btn-primary-{{ ai_gen_id }}">
+              {{ page.metafields.custom.primary_cta_text.value }}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </a>
+          {% endif %}
+
+          {% if page.metafields.custom.secondary_cta_text.value != blank and page.metafields.custom.secondary_cta_link.value != blank %}
+            <a href="{{ page.metafields.custom.secondary_cta_link.value }}" class="ai-service-hero-btn-secondary-{{ ai_gen_id }}">
+              {{ page.metafields.custom.secondary_cta_text.value }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ai-service-hero-image-wrapper-{{ ai_gen_id }}">
+        <figure class="ai-service-hero-figure-{{ ai_gen_id }}">
+          {% if page.metafields.custom.hero_image.value != blank %}
+            {% assign hero_image = page.metafields.custom.hero_image.value %}
+            {% assign image_alt = page.metafields.custom.hero_image_alt.value | default: page.title %}
+            {% assign image_title = page.metafields.custom.hero_image_title.value | default: page.title %}
+            
+            <img
+              src="{{ hero_image | image_url: width: 1200 }}"
+              srcset="{{ hero_image | image_url: width: 600 }} 600w,
+                      {{ hero_image | image_url: width: 900 }} 900w,
+                      {{ hero_image | image_url: width: 1200 }} 1200w"
+              sizes="(max-width: 749px) 100vw, (max-width: 989px) 100vw, 45vw"
+              alt="{{ image_alt | escape }}"
+              title="{{ image_title | escape }}"
+              class="ai-service-hero-image-{{ ai_gen_id }}"
+              loading="eager"
+              width="{{ hero_image.width }}"
+              height="{{ hero_image.height }}"
+            >
+
+            {% if page.metafields.custom.hero_image_caption.value != blank %}
+              <figcaption class="ai-service-hero-caption-{{ ai_gen_id }}">
+                {{ page.metafields.custom.hero_image_caption.value }}
+              </figcaption>
+            {% endif %}
+          {% else %}
+            <div class="ai-service-hero-image-placeholder-{{ ai_gen_id }}">
+              {{ 'hero-apparel-1' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+
+          {% if page.metafields.custom.badge_text.value != blank %}
+            <div class="ai-service-hero-floating-badge-{{ ai_gen_id }}">
+              <svg class="ai-service-hero-floating-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="ai-service-hero-floating-badge-text-{{ ai_gen_id }}">Most Popular</span>
+            </div>
+          {% endif %}
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  {% if page.metafields.custom.hero_image.value != blank %}
+    {% assign hero_image = page.metafields.custom.hero_image.value %}
+    {% assign image_alt = page.metafields.custom.hero_image_alt.value | default: page.title %}
+    {% assign service_type = page.metafields.custom.schema_service_type.value %}
+    {% assign area_served = page.metafields.custom.schema_area_served.value %}
+    {% assign price_range = page.metafields.custom.schema_price_range.value %}
+    {% assign google_rating = page.metafields.custom.google_rating.value %}
+    {% assign google_review_count = page.metafields.custom.google_review_count.value %}
+    {% assign phone_number = page.metafields.custom.phone_number.value %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "{{ shop.url }}{{ page.url }}",
+          "url": "{{ shop.url }}{{ page.url }}",
+          "name": "{{ page.title | escape }}",
+          "description": "{{ page.metafields.custom.hero_subheading.value | strip_html | truncatewords: 30 | escape | default: page.content | strip_html | truncatewords: 30 | escape }}",
+          "isPartOf": {
+            "@id": "{{ shop.url }}/#website"
+          },
+          "primaryImageOfPage": {
+            "@id": "{{ shop.url }}{{ page.url }}#primaryimage"
+          },
+          "breadcrumb": {
+            "@id": "{{ shop.url }}{{ page.url }}#breadcrumb"
+          }
+        },
+        {
+          "@type": "ImageObject",
+          "@id": "{{ shop.url }}{{ page.url }}#primaryimage",
+          "url": "{{ hero_image | image_url: width: 1200 }}",
+          "contentUrl": "{{ hero_image | image_url: width: 1200 }}",
+          "width": {{ hero_image.width }},
+          "height": {{ hero_image.height }},
+          "caption": "{{ page.metafields.custom.hero_image_caption.value | escape | default: image_alt }}"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "{{ shop.url }}{{ page.url }}#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "{{ shop.url }}"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "{{ page.title | escape }}",
+              "item": "{{ shop.url }}{{ page.url }}"
+            }
+          ]
+        }
+        {% if service_type != blank %},
+        {
+          "@type": "Service",
+          "name": "{{ page.title | escape }}",
+          "description": "{{ page.metafields.custom.hero_subheading.value | strip_html | escape | default: page.content | strip_html | truncatewords: 50 | escape }}",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "{{ shop.name | escape }}",
+            "url": "{{ shop.url }}"
+            {% if phone_number != blank %},
+            "telephone": "{{ phone_number | escape }}"
+            {% endif %}
+            {% if area_served != blank %},
+            "areaServed": {
+              "@type": "Place",
+              "name": "{{ area_served | escape }}"
+            }
+            {% endif %}
+            {% if google_rating != blank and google_review_count != blank %},
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "{{ google_rating }}",
+              "reviewCount": "{{ google_review_count }}"
+            }
+            {% endif %}
+          },
+          "serviceType": "{{ service_type | escape }}"
+          {% if area_served != blank %},
+          "areaServed": {
+            "@type": "Place",
+            "name": "{{ area_served | escape }}"
+          }
+          {% endif %}
+          {% if price_range != blank %},
+          "priceRange": "{{ price_range | escape }}"
+          {% endif %}
+        }
+        {% endif %}
+      ]
+    }
+    </script>
+  {% endif %}
+</service-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ServiceHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('service-hero-{{ ai_gen_id }}', ServiceHero{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Service hero + SEO",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Dynamically pulls data from page and page metafields. Configure metafields in Settings > Custom data > Pages."
+    },
+    {
+      "type": "header",
+      "content": "Page metafields"
+    },
+    {
+      "type": "paragraph",
+      "content": "Badge: custom.badge_text • Hero: custom.hero_subheading, custom.hero_image, custom.hero_image_alt, custom.hero_image_title, custom.hero_image_caption"
+    },
+    {
+      "type": "paragraph",
+      "content": "CTAs: custom.primary_cta_text, custom.primary_cta_link, custom.secondary_cta_text, custom.secondary_cta_link"
+    },
+    {
+      "type": "paragraph",
+      "content": "Info: custom.service_area, custom.phone_number • Reviews: custom.google_rating, custom.google_review_count, custom.google_review_url"
+    },
+    {
+      "type": "paragraph",
+      "content": "Schema: custom.schema_service_type, custom.schema_area_served, custom.schema_price_range, custom.target_keywords"
+    },
+    {
+      "type": "header",
+      "content": "SEO notes"
+    },
+    {
+      "type": "paragraph",
+      "content": "Generates JSON-LD schema for WebPage, Service, LocalBusiness, BreadcrumbList, and ImageObject automatically from page data."
+    },
+    {
+      "type": "paragraph",
+      "content": "Use page.metafields.custom.hero_image for og:image and twitter:image in theme.liquid if not already configured."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service hero + SEO"
+    }
+  ]
+}
+{% endschema %}

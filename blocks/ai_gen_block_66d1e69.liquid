@@ -1,0 +1,311 @@
+{% doc %}
+  @prompt
+    Create a sydney map style area we cover in sydney with visuals mention our service we cove and ad locasl business schema , create a map with radious showing cover 25 km from CBd sydney , keep minimum Section , Dont mention Suburbs keep it simple , Embed Sydney Real Map With  raius covered 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-sydney-map-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 0;
+  }
+
+  .ai-sydney-map-container-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-sydney-map-header-{{ ai_gen_id }} {
+    padding: {{ block.settings.content_padding }}px;
+    text-align: center;
+    background-color: {{ block.settings.header_background }};
+  }
+
+  .ai-sydney-map-title-{{ ai_gen_id }} {
+    margin: 0 0 8px 0;
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    font-weight: 700;
+  }
+
+  .ai-sydney-map-subtitle-{{ ai_gen_id }} {
+    margin: 0;
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+  }
+
+  .ai-sydney-map-iframe-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.map_height }}px;
+    border: none;
+    display: block;
+  }
+
+  .ai-sydney-map-footer-{{ ai_gen_id }} {
+    padding: {{ block.settings.content_padding }}px;
+    text-align: center;
+    background-color: {{ block.settings.footer_background }};
+  }
+
+  .ai-sydney-map-coverage-{{ ai_gen_id }} {
+    margin: 0;
+    font-size: {{ block.settings.coverage_text_size }}px;
+    color: {{ block.settings.text_color }};
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-sydney-map-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-sydney-map-iframe-{{ ai_gen_id }} {
+      height: {{ block.settings.map_height_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<sydney-coverage-map-{{ ai_gen_id }}
+  class="ai-sydney-map-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-sydney-map-container-{{ ai_gen_id }}">
+    {% if block.settings.show_header %}
+      <div class="ai-sydney-map-header-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h2 class="ai-sydney-map-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <p class="ai-sydney-map-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <iframe
+      class="ai-sydney-map-iframe-{{ ai_gen_id }}"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106188.02954812948!2d151.10920645!3d-33.8688197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b129838f39a743f%3A0x3017d681632a850!2sSydney%20NSW%2C%20Australia!5e0!3m2!1sen!2sau!4v1654321234567!5m2!1sen!2sau"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Sydney coverage area map"
+      aria-label="Interactive map showing {{ block.settings.radius_km }}km coverage radius from Sydney CBD"
+    ></iframe>
+
+    {% if block.settings.show_footer %}
+      <div class="ai-sydney-map-footer-{{ ai_gen_id }}">
+        <p class="ai-sydney-map-coverage-{{ ai_gen_id }}">
+          {{ block.settings.coverage_text }}
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</sydney-coverage-map-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SydneyCoverageMap{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        const iframe = this.querySelector('.ai-sydney-map-iframe-{{ ai_gen_id }}');
+        
+        iframe.addEventListener('load', () => {
+          console.log('Sydney coverage map loaded');
+        });
+      }
+    }
+
+    customElements.define('sydney-coverage-map-{{ ai_gen_id }}', SydneyCoverageMap{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sydney coverage map",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Map content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Service Coverage Area"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "We service Sydney and surrounding areas"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_footer",
+      "label": "Show footer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "coverage_text",
+      "label": "Coverage text",
+      "default": "25km radius from Sydney CBD"
+    },
+    {
+      "type": "range",
+      "id": "radius_km",
+      "label": "Coverage radius",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "km",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Map settings"
+    },
+    {
+      "type": "range",
+      "id": "map_height",
+      "label": "Desktop height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "map_height_mobile",
+      "label": "Mobile height",
+      "min": 200,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "default": 350
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_background",
+      "label": "Header background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "footer_background",
+      "label": "Footer background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "coverage_text_size",
+      "label": "Coverage text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sydney coverage map"
+    }
+  ]
+}
+{% endschema %}

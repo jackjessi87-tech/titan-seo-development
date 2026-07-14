@@ -1,0 +1,633 @@
+{% doc %}
+  @prompt
+    Auto generate Schema Based on the Metafields on the Page for Local Buasiness Auto Generate Dynamic Shcema to work with the the Algorithem , auto Generate schema dynamic depending on the page metafields , Upgrade this Dynamic schema generator block with the following requirements:
+    
+    1. AggregateRating Schema from page metafields:
+    
+    Pull ratingValue from page.metafields.custom.google_rating (decimal)
+    Pull reviewCount from page.metafields.custom.review_count (integer)
+    Only output the aggregateRating block if both values exist
+    Include "@type": "AggregateRating", bestRating: 5, worstRating: 1
+    Embed this inside the MovingCompany / LocalBusiness JSON-LD script block
+    2. Google Reviews Rocket app embed:
+    
+    Below the JSON-LD schema output, render the Google Reviews Rocket app embed block so live reviews display visually on the page
+    Wrap it in a {% render %} or app block tag if available, otherwise use the app's embed snippet
+    Only show the widget if page.metafields.custom.google_rating has a value (i.e. this is a page with reviews configured)
+    3. Link the schema rating to the Google Review URL:
+    
+    Add "sameAs": [page.metafields.custom.google_review_url] to the LocalBusiness schema so Google can cross-reference the live GBP listing
+    4. areaServed from Target Suburb metafield:
+    
+    Pull page.metafields.custom.target_suburb (single line text) and output as {"@type": "City", "name": "[value]"}
+    Skip if empty
+    5. Telephone from page metafield:
+    
+    Pull page.metafields.custom.phone_number and add as "telephone" in the LocalBusiness schema
+    Fall back to shop.phone if the page metafield is empty
+    Keep all existing toggles, business type selector, social URL fields, and preview display settings intact. All JSON-LD must be valid and compliant with Google Rich Results requirements.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign has_business_data = false
+  assign has_faq_data = false
+  assign has_article_data = false
+  assign has_breadcrumb_data = false
+  assign has_rating_data = false
+  
+  if page.metafields.custom.business_name != blank or page.metafields.custom.phone_number != blank or page.metafields.custom.street_address != blank
+    assign has_business_data = true
+  endif
+  
+  if page.metafields.custom.faqs != blank
+    assign has_faq_data = true
+  endif
+  
+  if page.metafields.custom.hero_image != blank or page.metafields.custom.badge_text != blank
+    assign has_article_data = true
+  endif
+  
+  if page.metafields.custom.google_rating != blank and page.metafields.custom.review_count != blank
+    assign has_rating_data = true
+  endif
+  
+  assign business_name = shop.name
+  if page.metafields.custom.business_name != blank
+    assign business_name = page.metafields.custom.business_name
+  endif
+  
+  assign business_phone = page.metafields.custom.phone_number
+  if business_phone == blank
+    assign business_phone = shop.phone
+  endif
+  
+  assign business_email = page.metafields.custom.email_address
+  assign street_address = page.metafields.custom.street_address
+  assign city = page.metafields.custom.city
+  assign state = page.metafields.custom.state
+  assign postal_code = page.metafields.custom.postal_code
+  assign country = page.metafields.custom.country
+  assign opening_hours = page.metafields.custom.opening_hours
+  assign price_range = page.metafields.custom.price_range
+  assign latitude = page.metafields.custom.latitude
+  assign longitude = page.metafields.custom.longitude
+  assign target_suburb = page.metafields.custom.target_suburb
+  assign google_rating = page.metafields.custom.google_rating
+  assign review_count = page.metafields.custom.review_count
+  assign google_review_url = page.metafields.custom.google_review_url
+  
+  assign business_logo = shop.brand.logo
+  if page.metafields.custom.logo_image != blank
+    assign business_logo = page.metafields.custom.logo_image
+  endif
+%}
+
+{% if block.settings.enable_organization_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name | escape }}",
+  "url": "{{ shop.url }}",
+  {% if shop.brand.logo != blank %}
+  "logo": "{{ shop.brand.logo | image_url: width: 600 }}",
+  {% endif %}
+  "sameAs": [
+    {% if block.settings.facebook_url != blank %}"{{ block.settings.facebook_url }}"{% if block.settings.instagram_url != blank or block.settings.twitter_url != blank or block.settings.linkedin_url != blank %},{% endif %}{% endif %}
+    {% if block.settings.instagram_url != blank %}"{{ block.settings.instagram_url }}"{% if block.settings.twitter_url != blank or block.settings.linkedin_url != blank %},{% endif %}{% endif %}
+    {% if block.settings.twitter_url != blank %}"{{ block.settings.twitter_url }}"{% if block.settings.linkedin_url != blank %},{% endif %}{% endif %}
+    {% if block.settings.linkedin_url != blank %}"{{ block.settings.linkedin_url }}"{% endif %}
+  ]
+}
+</script>
+{% endif %}
+
+{% if has_business_data and block.settings.enable_local_business_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ block.settings.business_type }}",
+  "name": "{{ business_name | escape }}",
+  "url": "{{ shop.url }}{{ request.path }}",
+  {% if business_logo != blank %}
+  "logo": "{{ business_logo | image_url: width: 600 }}",
+  "image": "{{ business_logo | image_url: width: 1200 }}",
+  {% endif %}
+  {% if business_phone != blank %}
+  "telephone": "{{ business_phone | escape }}",
+  {% endif %}
+  {% if business_email != blank %}
+  "email": "{{ business_email | escape }}",
+  {% endif %}
+  {% if street_address != blank or city != blank %}
+  "address": {
+    "@type": "PostalAddress"{% if street_address != blank %},
+    "streetAddress": "{{ street_address | escape }}"{% endif %}{% if city != blank %},
+    "addressLocality": "{{ city | escape }}"{% endif %}{% if state != blank %},
+    "addressRegion": "{{ state | escape }}"{% endif %}{% if postal_code != blank %},
+    "postalCode": "{{ postal_code | escape }}"{% endif %}{% if country != blank %},
+    "addressCountry": "{{ country | escape }}"{% endif %}
+  },
+  {% endif %}
+  {% if latitude != blank and longitude != blank %}
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "{{ latitude }}",
+    "longitude": "{{ longitude }}"
+  },
+  {% endif %}
+  {% if target_suburb != blank %}
+  "areaServed": {
+    "@type": "City",
+    "name": "{{ target_suburb | escape }}"
+  },
+  {% endif %}
+  {% if has_rating_data %}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ google_rating }}",
+    "reviewCount": "{{ review_count }}",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  {% endif %}
+  {% if opening_hours != blank %}
+  "openingHours": "{{ opening_hours | escape }}",
+  {% endif %}
+  {% if price_range != blank %}
+  "priceRange": "{{ price_range | escape }}",
+  {% endif %}
+  "sameAs": [
+    {% if google_review_url != blank %}"{{ google_review_url }}"{% if block.settings.facebook_url != blank or block.settings.instagram_url != blank or block.settings.twitter_url != blank or block.settings.linkedin_url != blank %},{% endif %}{% endif %}
+    {% if block.settings.facebook_url != blank %}"{{ block.settings.facebook_url }}"{% if block.settings.instagram_url != blank or block.settings.twitter_url != blank or block.settings.linkedin_url != blank %},{% endif %}{% endif %}
+    {% if block.settings.instagram_url != blank %}"{{ block.settings.instagram_url }}"{% if block.settings.twitter_url != blank or block.settings.linkedin_url != blank %},{% endif %}{% endif %}
+    {% if block.settings.twitter_url != blank %}"{{ block.settings.twitter_url }}"{% if block.settings.linkedin_url != blank %},{% endif %}{% endif %}
+    {% if block.settings.linkedin_url != blank %}"{{ block.settings.linkedin_url }}"{% endif %}
+  ]
+}
+</script>
+{% endif %}
+
+{% if has_faq_data and block.settings.enable_faq_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for faq in page.metafields.custom.faqs.value %}
+      {
+        "@type": "Question",
+        "name": "{{ faq.question | escape }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ faq.answer | escape }}"
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+
+{% if block.settings.enable_webpage_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ page.title | escape }}",
+  "url": "{{ shop.url }}{{ request.path }}",
+  "description": "{{ page.content | strip_html | truncate: 160 | escape }}",
+  {% if page.metafields.custom.hero_image != blank %}
+  "image": "{{ page.metafields.custom.hero_image | image_url: width: 1200 }}",
+  {% endif %}
+  "inLanguage": "{{ request.locale.iso_code }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ shop.name | escape }}",
+    "url": "{{ shop.url }}"
+  }
+}
+</script>
+{% endif %}
+
+{% if block.settings.enable_breadcrumb_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ shop.url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ page.title | escape }}",
+      "item": "{{ shop.url }}{{ request.path }}"
+    }
+  ]
+}
+</script>
+{% endif %}
+
+{% if google_rating != blank and block.settings.show_google_reviews_widget %}
+  {% style %}
+    .ai-google-reviews-widget-{{ ai_gen_id }} {
+      display: block;
+      width: {{ block.settings.desktop_width_percent }}%;
+      max-width: 100%;
+      margin: {{ block.settings.widget_margin_top }}px 0 {{ block.settings.widget_margin_bottom }}px;
+    }
+  {% endstyle %}
+
+  <div class="ai-google-reviews-widget-{{ ai_gen_id }}">
+    {{ block.settings.google_reviews_app_embed }}
+  </div>
+{% endif %}
+
+{% if block.settings.show_preview %}
+  {% style %}
+    .ai-dynamic-schema-preview-{{ ai_gen_id }} {
+      display: block;
+      width: {{ block.settings.desktop_width_percent }}%;
+      max-width: 100%;
+      padding: 20px;
+      background-color: {{ block.settings.preview_bg_color }};
+      border: 1px solid {{ block.settings.preview_border_color }};
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    .ai-dynamic-schema-preview__title-{{ ai_gen_id }} {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: {{ block.settings.preview_text_color }};
+    }
+
+    .ai-dynamic-schema-preview__section-{{ ai_gen_id }} {
+      margin-bottom: 20px;
+      padding: 16px;
+      background-color: {{ block.settings.preview_section_bg }};
+      border-radius: 6px;
+    }
+
+    .ai-dynamic-schema-preview__section-title-{{ ai_gen_id }} {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: {{ block.settings.preview_text_color }};
+    }
+
+    .ai-dynamic-schema-preview__code-{{ ai_gen_id }} {
+      font-family: monospace;
+      font-size: 11px;
+      color: {{ block.settings.preview_text_color }};
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      line-height: 1.5;
+    }
+
+    .ai-dynamic-schema-preview__status-{{ ai_gen_id }} {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    .ai-dynamic-schema-preview__status--active-{{ ai_gen_id }} {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .ai-dynamic-schema-preview__status--inactive-{{ ai_gen_id }} {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .ai-dynamic-schema-preview__metafields-{{ ai_gen_id }} {
+      margin-top: 12px;
+      padding: 12px;
+      background-color: {{ block.settings.preview_bg_color }};
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    .ai-dynamic-schema-preview__metafield-{{ ai_gen_id }} {
+      margin: 4px 0;
+      color: {{ block.settings.preview_text_color }};
+      opacity: 0.8;
+    }
+  {% endstyle %}
+
+  <div class="ai-dynamic-schema-preview-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+    <div class="ai-dynamic-schema-preview__title-{{ ai_gen_id }}">
+      Dynamic Schema Generator - Active Schemas
+    </div>
+
+    {% if block.settings.enable_organization_schema %}
+    <div class="ai-dynamic-schema-preview__section-{{ ai_gen_id }}">
+      <div class="ai-dynamic-schema-preview__section-title-{{ ai_gen_id }}">
+        Organization Schema
+        <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--active-{{ ai_gen_id }}">ACTIVE</span>
+      </div>
+      <div class="ai-dynamic-schema-preview__code-{{ ai_gen_id }}">Type: Organization
+Shop: {{ shop.name }}
+URL: {{ shop.url }}</div>
+    </div>
+    {% endif %}
+
+    {% if block.settings.enable_local_business_schema %}
+    <div class="ai-dynamic-schema-preview__section-{{ ai_gen_id }}">
+      <div class="ai-dynamic-schema-preview__section-title-{{ ai_gen_id }}">
+        Local Business Schema
+        {% if has_business_data %}
+          <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--active-{{ ai_gen_id }}">ACTIVE</span>
+        {% else %}
+          <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--inactive-{{ ai_gen_id }}">NO DATA</span>
+        {% endif %}
+      </div>
+      <div class="ai-dynamic-schema-preview__code-{{ ai_gen_id }}">Type: {{ block.settings.business_type }}
+Name: {{ business_name }}
+{% if business_phone %}Phone: {{ business_phone }}
+{% endif %}{% if street_address %}Address: {{ street_address }}{% if city %}, {{ city }}{% endif %}
+{% endif %}{% if has_rating_data %}Rating: {{ google_rating }} ({{ review_count }} reviews)
+{% endif %}{% if target_suburb %}Area Served: {{ target_suburb }}
+{% endif %}</div>
+      <div class="ai-dynamic-schema-preview__metafields-{{ ai_gen_id }}">
+        <strong>Detected metafields:</strong>
+        {% if page.metafields.custom.business_name %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ business_name</div>{% endif %}
+        {% if page.metafields.custom.phone_number %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ phone_number</div>{% endif %}
+        {% if page.metafields.custom.street_address %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ street_address</div>{% endif %}
+        {% if page.metafields.custom.city %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ city</div>{% endif %}
+        {% if page.metafields.custom.google_rating %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ google_rating</div>{% endif %}
+        {% if page.metafields.custom.review_count %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ review_count</div>{% endif %}
+        {% if page.metafields.custom.google_review_url %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ google_review_url</div>{% endif %}
+        {% if page.metafields.custom.target_suburb %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ target_suburb</div>{% endif %}
+        {% unless has_business_data %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">No business metafields found</div>{% endunless %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if block.settings.enable_faq_schema %}
+    <div class="ai-dynamic-schema-preview__section-{{ ai_gen_id }}">
+      <div class="ai-dynamic-schema-preview__section-title-{{ ai_gen_id }}">
+        FAQ Schema
+        {% if has_faq_data %}
+          <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--active-{{ ai_gen_id }}">ACTIVE</span>
+        {% else %}
+          <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--inactive-{{ ai_gen_id }}">NO DATA</span>
+        {% endif %}
+      </div>
+      <div class="ai-dynamic-schema-preview__code-{{ ai_gen_id }}">Type: FAQPage
+{% if has_faq_data %}Questions: {{ page.metafields.custom.faqs.value.size }}{% else %}No FAQ metafield found{% endif %}</div>
+      <div class="ai-dynamic-schema-preview__metafields-{{ ai_gen_id }}">
+        <strong>Detected metafields:</strong>
+        {% if page.metafields.custom.faqs %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">✓ faqs ({{ page.metafields.custom.faqs.value.size }} items)</div>{% else %}<div class="ai-dynamic-schema-preview__metafield-{{ ai_gen_id }}">No FAQ metafield found</div>{% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if block.settings.enable_webpage_schema %}
+    <div class="ai-dynamic-schema-preview__section-{{ ai_gen_id }}">
+      <div class="ai-dynamic-schema-preview__section-title-{{ ai_gen_id }}">
+        WebPage Schema
+        <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--active-{{ ai_gen_id }}">ACTIVE</span>
+      </div>
+      <div class="ai-dynamic-schema-preview__code-{{ ai_gen_id }}">Type: WebPage
+Page: {{ page.title }}
+URL: {{ shop.url }}{{ request.path }}</div>
+    </div>
+    {% endif %}
+
+    {% if block.settings.enable_breadcrumb_schema %}
+    <div class="ai-dynamic-schema-preview__section-{{ ai_gen_id }}">
+      <div class="ai-dynamic-schema-preview__section-title-{{ ai_gen_id }}">
+        Breadcrumb Schema
+        <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--active-{{ ai_gen_id }}">ACTIVE</span>
+      </div>
+      <div class="ai-dynamic-schema-preview__code-{{ ai_gen_id }}">Type: BreadcrumbList
+Items: Home → {{ page.title }}</div>
+    </div>
+    {% endif %}
+
+    {% if block.settings.show_google_reviews_widget %}
+    <div class="ai-dynamic-schema-preview__section-{{ ai_gen_id }}">
+      <div class="ai-dynamic-schema-preview__section-title-{{ ai_gen_id }}">
+        Google Reviews Widget
+        {% if google_rating != blank %}
+          <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--active-{{ ai_gen_id }}">ACTIVE</span>
+        {% else %}
+          <span class="ai-dynamic-schema-preview__status-{{ ai_gen_id }} ai-dynamic-schema-preview__status--inactive-{{ ai_gen_id }}">NO DATA</span>
+        {% endif %}
+      </div>
+      <div class="ai-dynamic-schema-preview__code-{{ ai_gen_id }}">{% if google_rating != blank %}Widget will display when google_rating metafield exists{% else %}Add google_rating metafield to activate{% endif %}</div>
+    </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Dynamic schema generator",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Schema types"
+    },
+    {
+      "type": "paragraph",
+      "content": "Enable schema types. Schemas auto-generate based on available page metafields."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_organization_schema",
+      "label": "Organization schema",
+      "default": true,
+      "info": "Always active - uses shop data"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_local_business_schema",
+      "label": "Local business schema",
+      "default": true,
+      "info": "Activates when business metafields detected"
+    },
+    {
+      "type": "select",
+      "id": "business_type",
+      "label": "Business type",
+      "options": [
+        {
+          "value": "LocalBusiness",
+          "label": "Local business"
+        },
+        {
+          "value": "MovingCompany",
+          "label": "Moving company"
+        },
+        {
+          "value": "HomeAndConstructionBusiness",
+          "label": "Home and construction"
+        },
+        {
+          "value": "ProfessionalService",
+          "label": "Professional service"
+        },
+        {
+          "value": "Store",
+          "label": "Store"
+        },
+        {
+          "value": "Restaurant",
+          "label": "Restaurant"
+        }
+      ],
+      "default": "MovingCompany"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_faq_schema",
+      "label": "FAQ schema",
+      "default": true,
+      "info": "Activates when FAQ metafield detected"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_webpage_schema",
+      "label": "WebPage schema",
+      "default": true,
+      "info": "Always active - uses page data"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_breadcrumb_schema",
+      "label": "Breadcrumb schema",
+      "default": true,
+      "info": "Always active - auto-generates navigation"
+    },
+    {
+      "type": "header",
+      "content": "Google Reviews widget"
+    },
+    {
+      "type": "paragraph",
+      "content": "Display Google Reviews Rocket app widget when google_rating metafield exists"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_google_reviews_widget",
+      "label": "Show Google Reviews widget",
+      "default": false,
+      "info": "Only displays when google_rating metafield has a value"
+    },
+    {
+      "type": "liquid",
+      "id": "google_reviews_app_embed",
+      "label": "Google Reviews app embed code",
+      "info": "Paste the embed code from Google Reviews Rocket app"
+    },
+    {
+      "type": "range",
+      "id": "widget_margin_top",
+      "label": "Widget top margin",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "widget_margin_bottom",
+      "label": "Widget bottom margin",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Social media"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "LinkedIn URL"
+    },
+    {
+      "type": "header",
+      "content": "Preview settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_preview",
+      "label": "Show schema preview",
+      "default": false,
+      "info": "Display active schemas and detected metafields"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "preview_bg_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "preview_section_bg",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "preview_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "preview_border_color",
+      "label": "Border",
+      "default": "#e6e6e6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic schema generator"
+    }
+  ]
+}
+{% endschema %}

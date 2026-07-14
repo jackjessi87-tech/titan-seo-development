@@ -1,0 +1,635 @@
+{% doc %}
+  @prompt
+    Create a compact floating Facebook-style lead card for Titan Express.
+    
+    CARD POSITION:
+    
+    * Fixed floating at bottom of screen
+    * Desktop: bottom right
+    * Mobile: bottom center
+    * Compact size
+    * High z-index
+    * Do not cover too much screen
+    
+    DESIGN STYLE:
+    
+    * Red, white and black theme
+    * Facebook ad card style
+    * Rounded corners
+    * Soft shadow
+    * Clean professional removalist design
+    * Mobile responsive
+    * Fast loading
+    
+    CARD CONTENT:
+    Logo / Brand:
+    Titan Express
+    
+    Headline:
+    Need Furniture Moved Today?
+    
+    Availability:
+    Add green live dot with text:
+    Available Today
+    
+    Small text:
+    Same Day Removalist • Furniture Delivery • Small Moves
+    
+    BUTTONS:
+    Two buttons side by side, equal size.
+    
+    Button 1:
+    📞 Call Now
+    Link:
+    tel:0469717535
+    Style:
+    Dark red background, white text
+    Add vibrating phone icon animation
+    
+    Button 2:
+    Get Quote
+    Link:
+    #instant-quote
+    Style:
+    White background, black text, red border
+    
+    BUTTON ACTION:
+    When customer clicks Get Quote:
+    
+    * Smooth scroll to #instant-quote
+    * Hide/disappear the floating card
+    * Only the quote section should show
+    
+    CLOSE BUTTON:
+    
+    * Add X close button on top right
+    * When customer clicks X, hide the card
+    * Keep animation smooth
+    
+    INTERACTIVE EFFECTS:
+    
+    * Phone icon vibration animation
+    * Button hover effects
+    * Smooth fade-in card animation
+    * Smooth close animation
+    * Smooth scroll to quote form
+    * Mobile tap friendly
+    
+    CLASS NAMES:
+    Use class names starting with:
+    titan-facebook-card-
+    
+    OUTPUT:
+    Generate complete Shopify-compatible Liquid, HTML, CSS and JavaScript.
+    , make it compacted Only keep button side by side to reduce size make it compacted style , get quote button will redirect to #instant-quote and also auto close the card  make this card even more compacted 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-facebook-card-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    z-index: 9999;
+    max-width: {{ block.settings.card_width }}px;
+    width: 90%;
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.border_radius }}px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 10px 12px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .titan-facebook-card-{{ ai_gen_id }}.titan-facebook-card-visible-{{ ai_gen_id }} {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .titan-facebook-card-{{ ai_gen_id }}.titan-facebook-card-hidden-{{ ai_gen_id }} {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+
+  @media (min-width: 750px) {
+    .titan-facebook-card-{{ ai_gen_id }} {
+      bottom: {{ block.settings.desktop_bottom }}px;
+      right: {{ block.settings.desktop_right }}px;
+      left: auto;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .titan-facebook-card-{{ ai_gen_id }} {
+      bottom: {{ block.settings.mobile_bottom }}px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+    }
+
+    .titan-facebook-card-{{ ai_gen_id }}.titan-facebook-card-visible-{{ ai_gen_id }} {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .titan-facebook-card-{{ ai_gen_id }}.titan-facebook-card-hidden-{{ ai_gen_id }} {
+      transform: translateX(-50%) translateY(20px);
+    }
+  }
+
+  .titan-facebook-card-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .titan-facebook-card-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .titan-facebook-card-close-{{ ai_gen_id }} svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .titan-facebook-card-brand-{{ ai_gen_id }} {
+    font-size: {{ block.settings.brand_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.brand_color }};
+    margin: 0 0 3px 0;
+    line-height: 1.2;
+  }
+
+  .titan-facebook-card-headline-{{ ai_gen_id }} {
+    font-size: {{ block.settings.headline_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+  }
+
+  .titan-facebook-card-availability-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .titan-facebook-card-live-dot-{{ ai_gen_id }} {
+    width: 6px;
+    height: 6px;
+    background-color: {{ block.settings.live_dot_color }};
+    border-radius: 50%;
+  }
+
+  .titan-facebook-card-availability-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.availability_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.live_dot_color }};
+    margin: 0;
+    line-height: 1;
+  }
+
+  .titan-facebook-card-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 6px;
+  }
+
+  .titan-facebook-card-button-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: {{ block.settings.button_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: none;
+    line-height: 1;
+  }
+
+  .titan-facebook-card-button-call-{{ ai_gen_id }} {
+    background-color: {{ block.settings.call_button_bg }};
+    color: {{ block.settings.call_button_text_color }};
+  }
+
+  .titan-facebook-card-button-call-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.call_button_hover_bg }};
+    transform: scale(1.02);
+  }
+
+  .titan-facebook-card-button-quote-{{ ai_gen_id }} {
+    background-color: {{ block.settings.quote_button_bg }};
+    color: {{ block.settings.quote_button_text_color }};
+    border: 2px solid {{ block.settings.quote_button_border }};
+  }
+
+  .titan-facebook-card-button-quote-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.quote_button_hover_bg }};
+    border-color: {{ block.settings.quote_button_hover_border }};
+    transform: scale(1.02);
+  }
+
+  .titan-facebook-card-phone-icon-{{ ai_gen_id }} {
+    display: inline-block;
+    animation: titan-facebook-card-vibrate-{{ ai_gen_id }} 0.5s ease-in-out infinite;
+  }
+
+  @keyframes titan-facebook-card-vibrate-{{ ai_gen_id }} {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-5deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+  }
+
+  @media (max-width: 749px) {
+    .titan-facebook-card-{{ ai_gen_id }} {
+      max-width: 90%;
+    }
+  }
+{% endstyle %}
+
+<titan-facebook-card-{{ ai_gen_id }}
+  class="titan-facebook-card-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+  data-quote-target="{{ block.settings.quote_target }}"
+>
+  <button
+    class="titan-facebook-card-close-{{ ai_gen_id }}"
+    aria-label="Close"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <h3 class="titan-facebook-card-brand-{{ ai_gen_id }}">{{ block.settings.brand_name }}</h3>
+
+  <h2 class="titan-facebook-card-headline-{{ ai_gen_id }}">{{ block.settings.headline }}</h2>
+
+  <div class="titan-facebook-card-availability-{{ ai_gen_id }}">
+    <span class="titan-facebook-card-live-dot-{{ ai_gen_id }}"></span>
+    <p class="titan-facebook-card-availability-text-{{ ai_gen_id }}">{{ block.settings.availability_text }}</p>
+  </div>
+
+  <div class="titan-facebook-card-buttons-{{ ai_gen_id }}">
+    <a
+      href="{{ block.settings.call_link }}"
+      class="titan-facebook-card-button-{{ ai_gen_id }} titan-facebook-card-button-call-{{ ai_gen_id }}"
+    >
+      <span class="titan-facebook-card-phone-icon-{{ ai_gen_id }}">📞</span>
+      {{ block.settings.call_label }}
+    </a>
+    <a
+      href="{{ block.settings.quote_target }}"
+      class="titan-facebook-card-button-{{ ai_gen_id }} titan-facebook-card-button-quote-{{ ai_gen_id }} titan-facebook-card-quote-btn-{{ ai_gen_id }}"
+    >
+      {{ block.settings.quote_label }}
+    </a>
+  </div>
+</titan-facebook-card-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TitanFacebookCard{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.card = this;
+        this.closeButton = this.querySelector('.titan-facebook-card-close-{{ ai_gen_id }}');
+        this.quoteButton = this.querySelector('.titan-facebook-card-quote-btn-{{ ai_gen_id }}');
+        this.quoteTarget = this.dataset.quoteTarget;
+      }
+
+      connectedCallback() {
+        this.showCard();
+        this.setupEventListeners();
+      }
+
+      showCard() {
+        setTimeout(() => {
+          this.card.classList.add('titan-facebook-card-visible-{{ ai_gen_id }}');
+        }, 500);
+      }
+
+      setupEventListeners() {
+        this.closeButton.addEventListener('click', () => {
+          this.hideCard();
+        });
+
+        this.quoteButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.scrollToQuote();
+        });
+      }
+
+      hideCard() {
+        this.card.classList.remove('titan-facebook-card-visible-{{ ai_gen_id }}');
+        this.card.classList.add('titan-facebook-card-hidden-{{ ai_gen_id }}');
+      }
+
+      scrollToQuote() {
+        const targetElement = document.querySelector(this.quoteTarget);
+        
+        if (targetElement) {
+          this.hideCard();
+          
+          setTimeout(() => {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }, 300);
+        } else {
+          window.location.href = this.quoteTarget;
+        }
+      }
+    }
+
+    customElements.define('titan-facebook-card-{{ ai_gen_id }}', TitanFacebookCard{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Titan Express lead card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card position"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card width",
+      "min": 180,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "default": 260
+    },
+    {
+      "type": "range",
+      "id": "desktop_bottom",
+      "label": "Desktop bottom spacing",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_right",
+      "label": "Desktop right spacing",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_bottom",
+      "label": "Mobile bottom spacing",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "Titan Express"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Need Furniture Moved Today?"
+    },
+    {
+      "type": "text",
+      "id": "availability_text",
+      "label": "Availability text",
+      "default": "Available Today"
+    },
+    {
+      "type": "header",
+      "content": "Call button"
+    },
+    {
+      "type": "text",
+      "id": "call_label",
+      "label": "Button label",
+      "default": "Call Now"
+    },
+    {
+      "type": "text",
+      "id": "call_link",
+      "label": "Phone link",
+      "default": "tel:0469717535"
+    },
+    {
+      "type": "header",
+      "content": "Quote button"
+    },
+    {
+      "type": "text",
+      "id": "quote_label",
+      "label": "Button label",
+      "default": "Get Quote"
+    },
+    {
+      "type": "text",
+      "id": "quote_target",
+      "label": "Quote section ID",
+      "default": "#instant-quote"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "brand_color",
+      "label": "Brand color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "live_dot_color",
+      "label": "Live dot color",
+      "default": "#00C853"
+    },
+    {
+      "type": "color",
+      "id": "call_button_bg",
+      "label": "Call button background",
+      "default": "#C62828"
+    },
+    {
+      "type": "color",
+      "id": "call_button_text_color",
+      "label": "Call button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "call_button_hover_bg",
+      "label": "Call button hover",
+      "default": "#B71C1C"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_bg",
+      "label": "Quote button background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_text_color",
+      "label": "Quote button text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_border",
+      "label": "Quote button border",
+      "default": "#C62828"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_hover_bg",
+      "label": "Quote button hover background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_hover_border",
+      "label": "Quote button hover border",
+      "default": "#B71C1C"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "brand_size",
+      "label": "Brand size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "headline_size",
+      "label": "Headline size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "availability_size",
+      "label": "Availability size",
+      "min": 9,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 10,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan Express lead card"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1272 @@
+{% doc %}
+  @prompt
+    Create a premium Shopify Online Store 2.0 section called "Recent Deliveries".
+    
+    The design should be modern, compact, clean and mobile-first.
+    
+    Use a Red, White and Black colour scheme.
+    
+    The layout should feel like a premium service company, not an ecommerce product grid.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    DATA SOURCE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Load all jobs dynamically from the page metafield:
+    
+    custom.recent_jobs
+    
+    This metafield is a List of Recent Job metaobject references.
+    
+    Loop through:
+    
+    page.metafields.custom.recent_jobs.value
+    
+    Never use manual blocks.
+    
+    Never hardcode any job content.
+    
+    If there are no Recent Jobs assigned to the page, hide the entire section.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    RECENT JOB METAOBJECT FIELDS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Load these fields dynamically:
+    
+    Recent Job
+    
+    Pickup suburb
+    
+    Drop-off suburb
+    
+    Item
+    
+    Service type
+    
+    Short description
+    
+    Image
+    
+    Job date
+    
+    Rating
+    
+    Related suburbs
+    
+    Related services
+    
+    Price Range
+    
+    Hide any field that has no value.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    SECTION HEADER
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Small label
+    
+    RECENT DELIVERIES
+    
+    Main Heading
+    
+    Recent Delivery Jobs
+    
+    Sub Heading
+    
+    Browse some of our recently completed furniture deliveries across Sydney.
+    
+    Allow merchant to edit:
+    
+    Heading
+    
+    Subheading
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    CARD DESIGN
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Create compact horizontal cards.
+    
+    Desktop
+    
+    One card per row.
+    
+    Image on the left.
+    
+    Content in the centre.
+    
+    Rating and Date aligned to the right.
+    
+    Mobile
+    
+    Compact stacked layout.
+    
+    Image around 90px wide.
+    
+    Everything should fit comfortably without excessive scrolling.
+    
+    Cards should have:
+    
+    White background
+    
+    18px border radius
+    
+    Soft shadow
+    
+    Thin red accent line on the left
+    
+    Smooth hover lift
+    
+    Image zoom on hover
+    
+    Excellent spacing
+    
+    Professional typography
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    CARD CONTENT
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Display Image
+    
+    Rounded thumbnail
+    
+    Lazy loaded
+    
+    Display
+    
+    Recent Job
+    
+    as the main heading.
+    
+    Below it display
+    
+    📍 Pickup suburb
+    
+    →
+    
+    📍 Drop-off suburb
+    
+    Below the route display
+    
+    📦 Item
+    
+    •
+    
+    🚚 Service type
+    
+    Display Short description below.
+    
+    Maximum two lines.
+    
+    Display Job date with calendar icon.
+    
+    Display Rating with stars.
+    
+    Convert decimal rating automatically.
+    
+    Examples
+    
+    5.0
+    
+    ★★★★★
+    
+    4.5
+    
+    ★★★★☆
+    
+    Display Price Range as a highlighted badge.
+    
+    Examples
+    
+    From $79
+    
+    $120–$180
+    
+    Display Related suburbs as rounded location chips.
+    
+    Display Related services as clickable badges.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    BOTTOM CTA
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Display button
+    
+    View More Deliveries
+    
+    Allow merchant to edit
+    
+    Button text
+    
+    Button URL
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    TRUST BAR
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Below the cards display four trust icons.
+    
+    Handled With Care
+    
+    Same Day Delivery
+    
+    Oversized Van
+    
+    5 Star Rated
+    
+    Use premium SVG icons.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    SEO
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Use semantic HTML.
+    
+    <section>
+    
+    <header>
+    
+    <h2>
+    
+    Each delivery card should use
+    
+    <article>
+    
+    Generate descriptive ALT text dynamically.
+    
+    Example
+    
+    "Fridge delivery from Mt Druitt to Blacktown by Titan Express"
+    
+    Lazy load images.
+    
+    Optimise for Core Web Vitals.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    SCHEMA
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Generate ItemList JSON-LD automatically.
+    
+    Each Recent Job becomes one ListItem.
+    
+    Include:
+    
+    Recent Job
+    
+    Description
+    
+    Image
+    
+    Pickup suburb
+    
+    Drop-off suburb
+    
+    Service type
+    
+    Job date
+    
+    Rating
+    
+    Price Range
+    
+    Do not generate duplicate schema.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    PERFORMANCE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Use Shopify Liquid.
+    
+    CSS.
+    
+    Vanilla JavaScript only.
+    
+    No jQuery.
+    
+    No external libraries.
+    
+    Load JavaScript only when this section exists.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    FINAL GOAL
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    The section should look like a premium portfolio of completed deliveries.
+    
+    It should build trust, improve local SEO, showcase real completed jobs and encourage customers to request a quote.
+    
+    It must be extremely mobile friendly, fast loading and easy to scan., ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    MODERN PREMIUM SVG ICONS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Do NOT use basic Shopify icons.
+    
+    Do NOT use emoji icons.
+    
+    Use premium modern outline SVG icons throughout the section.
+    
+    Icons should be elegant, clean and consistent.
+    
+    Use Heroicons, Lucide, Tabler Icons or Remix Icons style.
+    
+    All icons should have:
+    
+    • 24px size
+    • Rounded stroke caps
+    • Rounded stroke joins
+    • 2px stroke width
+    • Consistent line weight
+    • Crisp rendering
+    • Accessible SVG markup
+    • Inline SVG (not icon fonts)
+    
+    Use these icons:
+    
+    Recent Jobs
+    Modern Delivery Truck
+    
+    Pickup Suburb
+    Map Pin
+    
+    Drop-off Suburb
+    Location Marker with Check
+    
+    Route
+    Curved Route / Navigation Path
+    
+    Item
+    Package Box
+    
+    Service Type
+    Moving Truck
+    
+    Short Description
+    Document Text
+    
+    Job Date
+    Calendar
+    
+    Rating
+    Star
+    
+    Related Suburbs
+    Map
+    
+    Related Services
+    Grid
+    
+    Price Range
+    Price Tag
+    
+    CTA Button
+    Arrow Right
+    
+    Trust Badges
+    
+    Handled With Care
+    Shield Check
+    
+    Same Day Delivery
+    Clock Fast
+    
+    Oversized Van
+    Truck
+    
+    Professional Equipment
+    Toolbox
+    
+    5 Star Rated
+    Badge Check
+    
+    Hover Effects
+    
+    Icons should slightly animate on hover.
+    
+    Cards should have a subtle left accent bar.
+    
+    Use premium SVG icons instead of flat or basic icons.
+    
+    Icons should feel similar to Stripe, Apple, Notion or Linear design systems.
+    
+    Maintain the same icon family throughout the entire section., Dynamically Name the Area getting tails from the fields from metaobject field automatically makr the Heading recent deliveries mention Area  Option to recise the heading , Update the Recent Deliveries section heading to be dynamic.
+    
+    The section loads jobs from:
+    
+    page.metafields.custom.recent_jobs.value
+    
+    Create a dynamic area name for the heading.
+    
+    Area name priority:
+    
+    1. If page metafield custom.target_suburb exists, use that.
+    2. If custom.target_suburb is empty, use the Pickup suburb from the first Recent Job.
+    3. If Pickup suburb is empty, use the Drop-off suburb from the first Recent Job.
+    4. If all are empty, use "Your Area".
+    
+    Heading should display:
+    
+    Recent Deliveries in {{ area_name }}
+    
+    Examples:
+    
+    Recent Deliveries in Blacktown
+    Recent Deliveries in Parramatta
+    Recent Deliveries in Mt Druitt
+    Recent Deliveries in Your Area
+    
+    Subheading should also be dynamic:
+    
+    Browse recent furniture delivery jobs completed by Titan Express around {{ area_name }} and nearby Sydney suburbs.
+    
+    Use the same area_name in the ItemList schema where relevant.
+    
+    Do not hardcode suburb names.
+    
+    Hide the section if no recent jobs are assigned.
+    
+    Use Shopify Liquid only.
+    
+    Keep the heading compact and mobile friendly.
+    
+    On mobile:
+    Line 1: Recent Deliveries
+    Line 2: in {{ area_name }}
+    
+    Make {{ area_name }} bold with red underline or red highlight., ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    DYNAMIC AREA METAFIELD
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Use the Page metafield:
+    
+    page.metafields.custom.target_suburb.value
+    
+    This metafield contains the primary suburb or local service area for the landing page.
+    
+    Use this value throughout the section.
+    
+    Dynamic Heading:
+    
+    Recent Deliveries in {{ target_suburb }}
+    
+    Examples:
+    
+    Recent Deliveries in Blacktown
+    
+    Recent Deliveries in Parramatta
+    
+    Recent Deliveries in Liverpool
+    
+    Dynamic Subheading:
+    
+    Browse recently completed furniture delivery, marketplace pickup and removalist jobs completed in {{ target_suburb }} and surrounding Sydney suburbs.
+    
+    If the page metafield is empty, automatically display:
+    
+    Recent Deliveries
+    
+    Browse some of our recently completed furniture deliveries across Sydney.
+    
+    Do not hardcode suburb names.
+    
+    This heading must update automatically on every landing page based on the custom.target_suburb page metafield.
+    
+    Also use the same target_suburb value for:
+    
+    • Image ALT text
+    • Schema description
+    • Section description
+    • Button aria-labels
+    • Accessibility labels
+    
+    Example ALT text:
+    
+    "Fridge delivery completed in Blacktown by Titan Express"
+    
+    Example aria-label:
+    
+    "View recent furniture deliveries completed in Blacktown"
+    
+    This section should always remain fully dynamic and SEO friendly., mention recent deliveries and then mention the Area name make the heading smaller little smaller make this section Seao and dynamic for the seo , ad dollar sign  in te price section and ad from , remove the trust badges fro mthis section handled with care same day over size van 5 staer remover only these 
+{% enddoc %}
+{% liquid
+  assign recent_jobs = page.metafields.custom.recent_jobs.value
+%}
+
+{% if recent_jobs == blank or recent_jobs.size == 0 %}
+  {% comment %}Section hidden when no jobs{% endcomment %}
+{% else %}
+
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign target_suburb = page.metafields.custom.target_suburb.value
+  
+  if target_suburb != blank
+    assign area_name = target_suburb
+  else
+    assign first_job = recent_jobs.first
+    if first_job.pickup_suburb.value != blank
+      assign area_name = first_job.pickup_suburb.value
+    elsif first_job.drop_off_suburb.value != blank
+      assign area_name = first_job.drop_off_suburb.value
+    else
+      assign area_name = ''
+    endif
+  endif
+  
+  if area_name != blank
+    assign heading_text = 'Recent Deliveries in ' | append: area_name
+    assign subheading_text = 'Browse recently completed furniture delivery, marketplace pickup and removalist jobs completed in ' | append: area_name | append: ' and surrounding Sydney suburbs.'
+    assign button_aria = 'View recent furniture deliveries completed in ' | append: area_name
+    assign schema_description = 'Recent furniture delivery and removalist jobs completed by Titan Express in ' | append: area_name | append: ' and nearby Sydney suburbs'
+  else
+    assign heading_text = 'Recent Deliveries'
+    assign subheading_text = 'Browse some of our recently completed furniture deliveries across Sydney.'
+    assign button_aria = 'View more recent furniture deliveries'
+    assign schema_description = 'Recent furniture delivery and removalist jobs completed by Titan Express across Sydney'
+  endif
+%}
+
+{% style %}
+  .recent-deliveries-{{ ai_gen_id }} {
+    display: block;
+    padding: 50px 20px;
+    background-color: {{ block.settings.section_bg_color }};
+  }
+
+  .recent-deliveries-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .recent-deliveries-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .recent-deliveries-label-{{ ai_gen_id }} {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: {{ block.settings.accent_color }};
+    margin-bottom: 10px;
+    font-family: var(--font-heading-family);
+  }
+
+  .recent-deliveries-heading-{{ ai_gen_id }} {
+    font-size: 28px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 12px;
+    line-height: 1.3;
+    font-family: var(--font-heading-family);
+  }
+
+  .recent-deliveries-heading-line1-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .recent-deliveries-heading-line2-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .recent-deliveries-area-name-{{ ai_gen_id }} {
+    font-weight: 900;
+    color: {{ block.settings.accent_color }};
+    position: relative;
+    display: inline-block;
+    padding-bottom: 4px;
+  }
+
+  .recent-deliveries-area-name-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: {{ block.settings.accent_color }};
+    border-radius: 2px;
+  }
+
+  .recent-deliveries-subheading-{{ ai_gen_id }} {
+    font-size: 15px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .recent-deliveries-grid-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 36px;
+  }
+
+  .delivery-card-{{ ai_gen_id }} {
+    background: {{ block.settings.card_bg_color }};
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid {{ block.settings.accent_color }};
+    display: flex;
+    flex-direction: column;
+  }
+
+  .delivery-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .delivery-card-inner-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .delivery-card-image-wrapper-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .delivery-card-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .delivery-card-{{ ai_gen_id }}:hover .delivery-card-image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .delivery-card-content-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .delivery-card-title-{{ ai_gen_id }} {
+    font-size: 17px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 8px;
+    line-height: 1.3;
+    font-family: var(--font-heading-family);
+  }
+
+  .delivery-card-route-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .delivery-card-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: {{ block.settings.text_color }};
+  }
+
+  .delivery-card-route-arrow-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .delivery-card-meta-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: {{ block.settings.text_color }};
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .delivery-card-meta-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .delivery-card-meta-separator-{{ ai_gen_id }} {
+    color: #ccc;
+  }
+
+  .delivery-card-description-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+    margin: 0 0 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .delivery-card-footer-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .delivery-card-date-rating-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .delivery-card-date-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .delivery-card-rating-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .delivery-card-star-{{ ai_gen_id }} {
+    width: 15px;
+    height: 15px;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .delivery-card-star-empty-{{ ai_gen_id }} {
+    opacity: 0.3;
+  }
+
+  .delivery-card-price-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 11px;
+    background: {{ block.settings.accent_color }};
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 20px;
+  }
+
+  .delivery-card-price-icon-{{ ai_gen_id }} {
+    width: 13px;
+    height: 13px;
+  }
+
+  .delivery-card-tags-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 18px 18px;
+  }
+
+  .delivery-card-tag-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: #f5f5f5;
+    color: {{ block.settings.text_color }};
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .delivery-card-tag-icon-{{ ai_gen_id }} {
+    width: 11px;
+    height: 11px;
+  }
+
+  .delivery-card-tag-service-{{ ai_gen_id }} {
+    background: {{ block.settings.heading_color }};
+    color: #ffffff;
+  }
+
+  .recent-deliveries-cta-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .recent-deliveries-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    border: 2px solid {{ block.settings.button_bg_color }};
+  }
+
+  .recent-deliveries-button-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.button_hover_bg_color }};
+    border-color: {{ block.settings.button_hover_bg_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .recent-deliveries-button-icon-{{ ai_gen_id }} {
+    width: 17px;
+    height: 17px;
+    transition: transform 0.3s ease;
+  }
+
+  .recent-deliveries-button-{{ ai_gen_id }}:hover .recent-deliveries-button-icon-{{ ai_gen_id }} {
+    transform: translateX(4px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .recent-deliveries-{{ ai_gen_id }} {
+      padding: 70px 40px;
+    }
+
+    .recent-deliveries-heading-{{ ai_gen_id }} {
+      font-size: 38px;
+    }
+
+    .recent-deliveries-heading-line1-{{ ai_gen_id }},
+    .recent-deliveries-heading-line2-{{ ai_gen_id }} {
+      display: inline;
+    }
+
+    .recent-deliveries-subheading-{{ ai_gen_id }} {
+      font-size: 17px;
+    }
+
+    .delivery-card-inner-{{ ai_gen_id }} {
+      flex-direction: row;
+      align-items: center;
+      padding: 22px;
+    }
+
+    .delivery-card-image-wrapper-{{ ai_gen_id }} {
+      width: 130px;
+      height: 130px;
+    }
+
+    .delivery-card-content-{{ ai_gen_id }} {
+      flex: 1;
+    }
+
+    .delivery-card-footer-{{ ai_gen_id }} {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .delivery-card-tags-{{ ai_gen_id }} {
+      padding: 0 22px 22px;
+    }
+  }
+{% endstyle %}
+
+<recent-deliveries-{{ ai_gen_id }} class="recent-deliveries-{{ ai_gen_id }}">
+  <div class="recent-deliveries-container-{{ ai_gen_id }}">
+    <header class="recent-deliveries-header-{{ ai_gen_id }}">
+      <div class="recent-deliveries-label-{{ ai_gen_id }}">Recent Deliveries</div>
+      <h2 class="recent-deliveries-heading-{{ ai_gen_id }}">
+        {% if area_name != blank %}
+          <span class="recent-deliveries-heading-line1-{{ ai_gen_id }}">Recent Deliveries</span>
+          <span class="recent-deliveries-heading-line2-{{ ai_gen_id }}"> in <span class="recent-deliveries-area-name-{{ ai_gen_id }}">{{ area_name }}</span></span>
+        {% else %}
+          {{ heading_text }}
+        {% endif %}
+      </h2>
+      <p class="recent-deliveries-subheading-{{ ai_gen_id }}">{{ subheading_text }}</p>
+    </header>
+
+    <div class="recent-deliveries-grid-{{ ai_gen_id }}">
+      {% for job in recent_jobs %}
+        {% liquid
+          assign pickup = job.pickup_suburb.value
+          assign dropoff = job.drop_off_suburb.value
+          assign item = job.item.value
+          assign service = job.service_type.value
+          assign description = job.short_description.value
+          assign image = job.image.value
+          assign job_date = job.job_date.value
+          assign rating = job.rating.value
+          assign related_suburbs = job.related_suburbs.value
+          assign related_services = job.related_services.value
+          assign price_range = job.price_range.value
+          assign job_title = job.recent_job.value
+
+          assign alt_text = ''
+          if item != blank and area_name != blank
+            assign alt_text = item | append: ' delivery completed in ' | append: area_name | append: ' by Titan Express'
+          elsif item != blank and pickup != blank
+            assign alt_text = item | append: ' delivery from ' | append: pickup
+            if dropoff != blank
+              assign alt_text = alt_text | append: ' to ' | append: dropoff
+            endif
+            assign alt_text = alt_text | append: ' by Titan Express'
+          elsif job_title != blank
+            assign alt_text = job_title | append: ' - Titan Express'
+          else
+            assign alt_text = 'Furniture delivery by Titan Express'
+          endif
+        %}
+
+        <article class="delivery-card-{{ ai_gen_id }}">
+          <div class="delivery-card-inner-{{ ai_gen_id }}">
+            <div class="delivery-card-image-wrapper-{{ ai_gen_id }}">
+              {% if image != blank %}
+                <img
+                  src="{{ image | image_url: width: 280 }}"
+                  alt="{{ alt_text | escape }}"
+                  width="280"
+                  height="280"
+                  loading="lazy"
+                  class="delivery-card-image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="delivery-card-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="delivery-card-content-{{ ai_gen_id }}">
+              {% if job_title != blank %}
+                <h3 class="delivery-card-title-{{ ai_gen_id }}">{{ job_title }}</h3>
+              {% endif %}
+
+              {% if pickup != blank or dropoff != blank %}
+                <div class="delivery-card-route-{{ ai_gen_id }}">
+                  {% if pickup != blank %}
+                    <svg class="delivery-card-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>{{ pickup }}</span>
+                  {% endif %}
+                  {% if pickup != blank and dropoff != blank %}
+                    <svg class="delivery-card-route-arrow-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  {% endif %}
+                  {% if dropoff != blank %}
+                    <svg class="delivery-card-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <path d="M9 10l2 2 4-4"></path>
+                    </svg>
+                    <span>{{ dropoff }}</span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if item != blank or service != blank %}
+                <div class="delivery-card-meta-{{ ai_gen_id }}">
+                  {% if item != blank %}
+                    <span class="delivery-card-meta-item-{{ ai_gen_id }}">
+                      <svg class="delivery-card-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                      </svg>
+                      <span>{{ item }}</span>
+                    </span>
+                  {% endif %}
+                  {% if item != blank and service != blank %}
+                    <span class="delivery-card-meta-separator-{{ ai_gen_id }}">•</span>
+                  {% endif %}
+                  {% if service != blank %}
+                    <span class="delivery-card-meta-item-{{ ai_gen_id }}">
+                      <svg class="delivery-card-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="3" width="15" height="13"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                      </svg>
+                      <span>{{ service }}</span>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if description != blank %}
+                <p class="delivery-card-description-{{ ai_gen_id }}">{{ description }}</p>
+              {% endif %}
+
+              <div class="delivery-card-footer-{{ ai_gen_id }}">
+                <div class="delivery-card-date-rating-{{ ai_gen_id }}">
+                  {% if job_date != blank %}
+                    <div class="delivery-card-date-{{ ai_gen_id }}">
+                      <svg class="delivery-card-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                      <span>{{ job_date | date: '%b %d, %Y' }}</span>
+                    </div>
+                  {% endif %}
+
+                  {% if rating != blank %}
+                    <div class="delivery-card-rating-{{ ai_gen_id }}">
+                      {% assign rating_num = rating | times: 1.0 %}
+                      {% assign full_stars = rating_num | floor %}
+                      {% assign has_half = rating_num | minus: full_stars %}
+                      {% for i in (1..full_stars) %}
+                        <svg class="delivery-card-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                      {% endfor %}
+                      {% if has_half >= 0.5 %}
+                        <svg class="delivery-card-star-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                      {% endif %}
+                      {% assign remaining = 5 | minus: full_stars %}
+                      {% if has_half >= 0.5 %}
+                        {% assign remaining = remaining | minus: 1 %}
+                      {% endif %}
+                      {% for i in (1..remaining) %}
+                        <svg class="delivery-card-star-{{ ai_gen_id }} delivery-card-star-empty-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                {% if price_range != blank %}
+                  <div class="delivery-card-price-{{ ai_gen_id }}">
+                    <svg class="delivery-card-price-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                      <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                    <span>From ${{ price_range }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          {% if related_suburbs.size > 0 or related_services.size > 0 %}
+            <div class="delivery-card-tags-{{ ai_gen_id }}">
+              {% for suburb in related_suburbs %}
+                <span class="delivery-card-tag-{{ ai_gen_id }}">
+                  <svg class="delivery-card-tag-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                    <line x1="8" y1="2" x2="8" y2="18"></line>
+                    <line x1="16" y1="6" x2="16" y2="22"></line>
+                  </svg>
+                  {{ suburb }}
+                </span>
+              {% endfor %}
+              {% for service in related_services %}
+                <span class="delivery-card-tag-{{ ai_gen_id }} delivery-card-tag-service-{{ ai_gen_id }}">
+                  <svg class="delivery-card-tag-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                  {{ service }}
+                </span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+
+    {% if block.settings.button_text != blank %}
+      <div class="recent-deliveries-cta-{{ ai_gen_id }}">
+        <a href="{{ block.settings.button_url }}" class="recent-deliveries-button-{{ ai_gen_id }}" aria-label="{{ button_aria | escape }}">
+          <span>{{ block.settings.button_text }}</span>
+          <svg class="recent-deliveries-button-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</recent-deliveries-{{ ai_gen_id }}>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": {{ heading_text | json }},
+  "description": {{ schema_description | json }},
+  "itemListElement": [
+    {% for job in recent_jobs %}
+      {% liquid
+        assign pickup = job.pickup_suburb.value
+        assign dropoff = job.drop_off_suburb.value
+        assign item = job.item.value
+        assign service = job.service_type.value
+        assign description = job.short_description.value
+        assign image = job.image.value
+        assign job_date = job.job_date.value
+        assign rating = job.rating.value
+        assign price_range = job.price_range.value
+        assign job_title = job.recent_job.value
+      %}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.index }},
+        "item": {
+          "@type": "Service",
+          {% if job_title != blank %}
+            "name": {{ job_title | json }},
+          {% endif %}
+          {% if description != blank %}
+            "description": {{ description | json }},
+          {% endif %}
+          {% if image != blank %}
+            "image": {{ image | image_url: width: 800 | json }},
+          {% endif %}
+          {% if area_name != blank %}
+            "areaServed": {
+              "@type": "Place",
+              "name": {{ area_name | json }}
+            },
+          {% endif %}
+          {% if service != blank %}
+            "serviceType": {{ service | json }},
+          {% endif %}
+          {% if rating != blank %}
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": {{ rating | json }},
+              "bestRating": "5"
+            },
+          {% endif %}
+          {% if price_range != blank %}
+            "offers": {
+              "@type": "Offer",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": {{ price_range | json }}
+              }
+            },
+          {% endif %}
+          "provider": {
+            "@type": "Organization",
+            "name": "Titan Express"
+          }
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Recent Deliveries",
+  "tag": "section",
+  "class": "section-recent-deliveries",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View More Deliveries"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#dc2626"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#dc2626"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#b91c1c"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent Deliveries"
+    }
+  ]
+}
+{% endschema %}

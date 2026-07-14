@@ -1,0 +1,1316 @@
+{% doc %}
+  @prompt
+    Create a premium dynamic Hero section for a Shopify Page template used for service landing pages.
+    
+    
+    
+    Use these Shopify page fields dynamically:
+    
+    Page title as the only H1
+    Page content as fallback intro
+    Page URL
+    
+    Use these Page metafields dynamically:
+    
+    custom.badge_text
+    custom.hero_subheading
+    custom.hero_image
+    custom.hero_image_alt
+    custom.primary_cta_text
+    custom.primary_cta_link
+    custom.secondary_cta_text
+    custom.secondary_cta_link
+    custom.service_area
+    custom.trust_points
+    custom.phone_number
+    custom.rating_text
+    custom.review_count
+    custom.target_keywords
+    
+    Only render each metafield if it has a value.
+    
+    Design style:
+    
+    Modern service-business hero
+    White background
+    Strong red accent #E30613
+    Black headings
+    Soft grey cards
+    Rounded corners 16–24px
+    Premium spacing
+    Mobile-first
+    Fully responsive
+    No horizontal scrolling
+    Advanced lightweight inline SVG icons
+    Looks like a professional local service booking website, not a normal Shopify page
+    
+    Hero layout:
+    
+    Desktop:
+    
+    Left side: badge, H1, hero subheading, service area, rating, trust badges, CTA buttons
+    Right side: hero image card and floating quick quote teaser card
+    
+    Mobile:
+    
+    Badge, H1, intro, image, CTA buttons, trust badges
+    Compact spacing
+    Image must appear near the top
+    
+    Metafield display:
+    
+    Badge Text as red highlighted badge
+    Hero Subheading as rich SEO intro below H1
+    Hero Image as main visual
+    Hero Image Alt logic:
+    {{ page.metafields.custom.hero_image_alt.value | default: page.title }}
+    Service Area as location card with map-pin SVG
+    Trust Points as looped pill badges with check SVG
+    Rating Text + Review Count as Google-style rating row
+    Primary CTA button links to metafield value, fallback #main-quote
+    Secondary CTA button links to metafield value, fallback phone number
+    Target Keywords should be used only as hidden semantic support or natural context, never shown as ugly keyword stuffing
+    
+    SEO requirements:
+    
+    Only one H1: {{ page.title }}
+    Use semantic HTML: section, header, h1, p
+    Lazy-load hero image
+    Use clean alt text
+    Keep copy natural and customer-friendly
+    Do not keyword stuff
+    Make it Google Ads and SEO friendly
+    Include basic dynamic WebPage and ImageObject schema if possible using page title, URL, hero image, and hero image alt
+    
+    Create the full Shopify section file with Liquid, CSS, and JSON schema included.
+    Name the section: service-hero
+    
+    
+    white red and black theme , Now enhance and refine this Hero section.
+    
+    Do not rebuild it. Improve the existing section.
+    
+    ## Design Improvements
+    
+    * Make it look like a premium local service business website, not an ecommerce store.
+    * Improve spacing, alignment, typography, and visual hierarchy.
+    * Add subtle entrance animations and smooth hover effects.
+    * Use advanced lightweight inline SVG icons throughout.
+    * Increase white space for readability while keeping the hero above the fold.
+    * Make the image card feel premium with soft shadow and rounded corners.
+    * Add a floating review/rating card overlay on the hero image.
+    * Add a floating "Same Day Available" or dynamic badge overlay on the image.
+    * Make CTA buttons larger and more prominent.
+    * Add a premium trust bar below the hero.
+    * Improve mobile responsiveness with no horizontal scrolling.
+    * Optimize for Core Web Vitals and fast loading.
+    
+    ## Dynamic SEO Improvements
+    
+    Keep everything dynamic using page fields and metafields.
+    
+    Improve the hero so it naturally supports SEO without keyword stuffing.
+    
+    Use:
+    
+    * Page title as the only H1.
+    * Hero subheading as the primary SEO introduction.
+    * Service area naturally within supporting copy.
+    * Target keywords only for semantic context if appropriate.
+    * Hero image alt fallback:
+      `{{ page.metafields.custom.hero_image_alt.value | default: page.title }}`
+    
+    ## Local SEO
+    
+    Add a dynamic service location row using:
+    
+    `custom.service_area`
+    
+    Example:
+    
+    Serving Sydney CBD, Parramatta, Liverpool, Bankstown and surrounding suburbs.
+    
+    Do not simply dump keywords.
+    
+    Write natural, customer-friendly content.
+    
+    ## Reviews
+    
+    Display dynamically:
+    
+    * Rating Text
+    * Review Count
+    
+    Example:
+    
+    ★★★★★ 5.0 Google Rating • 112 Reviews
+    
+    If values are empty, hide the block.
+    
+    ## Trust Points
+    
+    Loop through:
+    
+    `custom.trust_points`
+    
+    Display each as premium icon badges using inline SVG.
+    
+    ## CTA
+    
+    Improve button hierarchy.
+    
+    Primary CTA:
+    
+    Get Free Quote
+    
+    Secondary CTA:
+    
+    Call Now
+    
+    Buttons should remain dynamic from metafields.
+    
+    ## Structured Data
+    
+    Generate dynamic structured data where appropriate using page information.
+    
+    Include:
+    
+    * WebPage
+    * ImageObject
+    * BreadcrumbList
+    * LocalBusiness (if available globally)
+    
+    Do not hardcode schema values.
+    
+    Use page data and metafields.
+    
+    ## Accessibility
+    
+    Improve accessibility:
+    
+    * Proper heading hierarchy
+    * ARIA labels where appropriate
+    * Accessible buttons
+    * Descriptive image alt text
+    * Keyboard-friendly interactions
+    
+    ## Final Goal
+    
+    The hero should immediately communicate:
+    
+    * What service is offered
+    * Where the service is available
+    * Why customers should trust the business
+    * How to request a quote
+    
+    The final result should feel comparable to a premium service company website, with excellent SEO, mobile usability, and conversion-focused design while remaining lightweight and fully dynamic.
+    , Add full dynamic image SEO support using Page metafields.
+    
+    Add these Page metafields if missing from the section logic:
+    
+    custom.hero_image
+    custom.hero_image_alt
+    custom.hero_image_caption
+    custom.hero_image_title
+    
+    Image requirements:
+    
+    Use custom.hero_image as the main hero image.
+    Add dynamic alt text:
+    {{ page.metafields.custom.hero_image_alt.value | default: page.title }}
+    Add dynamic image title if available:
+    {{ page.metafields.custom.hero_image_title.value | default: page.title }}
+    Add a visible image caption below the hero image using:
+    {{ page.metafields.custom.hero_image_caption }}
+    Wrap the image in semantic HTML:
+    <figure>, <img>, and <figcaption>.
+    Use a clean premium caption style.
+    Use lazy loading where appropriate.
+    Make the image responsive and mobile-friendly.
+    Keep image border radius 16–24px with soft shadow.
+    
+    Dynamic schema requirements:
+    
+    Automatically generate ImageObject schema from:
+    
+    Page title
+    Page URL
+    Hero image URL
+    Hero image alt
+    Hero image caption
+    Hero image title
+    
+    Also generate or improve dynamic schema for:
+    
+    WebPage
+    Service
+    LocalBusiness if business details are available
+    BreadcrumbList
+    ImageObject
+    
+    Use existing Page metafields:
+    
+    custom.badge_text
+    custom.hero_subheading
+    custom.service_area
+    custom.phone_number
+    custom.google_rating
+    custom.google_review_count
+    custom.target_keywords
+    custom.schema_service_type
+    custom.schema_area_served
+    custom.schema_price_range
+    
+    Schema must be generated dynamically from page fields and metafields.
+    
+    Do not require manually pasting JSON-LD into every page.
+    
+    Do not break if any metafield is empty.
+    
+    Use conditional Liquid checks.
+    
+    Image search improvement:
+    
+    Use the hero image as the primary page image where possible.
+    
+    If theme files allow it, use the hero image for:
+    
+    og:image
+    twitter:image
+    
+    If this cannot be done inside this section, add clear comments showing what needs to be added to theme.liquid.
+    
+    SEO rules:
+    
+    Do not keyword stuff.
+    Use target keywords only naturally.
+    Keep the page customer-friendly.
+    Use only one H1: {{ page.title }}
+    Keep the design clean, fast, mobile-first, and service-business focused.
+    
+    Final goal:
+    
+    The hero image should be strongly connected to the page topic for Google Image Search, organic search previews, social sharing, and structured data.
+{% enddoc %}
+{% liquid
+  assign badge_text = page.metafields.custom.badge_text.value
+  assign hero_subheading = page.metafields.custom.hero_subheading.value
+  assign hero_image = page.metafields.custom.hero_image.value
+  assign hero_image_alt = page.metafields.custom.hero_image_alt.value | default: page.title
+  assign hero_image_title = page.metafields.custom.hero_image_title.value | default: page.title
+  assign hero_image_caption = page.metafields.custom.hero_image_caption.value
+  assign primary_cta_text = page.metafields.custom.primary_cta_text.value
+  assign primary_cta_link = page.metafields.custom.primary_cta_link.value | default: '#main-quote'
+  assign secondary_cta_text = page.metafields.custom.secondary_cta_text.value
+  assign secondary_cta_link = page.metafields.custom.secondary_cta_link.value
+  assign service_area = page.metafields.custom.service_area.value
+  assign trust_points = page.metafields.custom.trust_points.value
+  assign phone_number = page.metafields.custom.phone_number.value
+  assign rating_text = page.metafields.custom.rating_text.value
+  assign review_count = page.metafields.custom.review_count.value
+  assign target_keywords = page.metafields.custom.target_keywords.value
+  assign schema_service_type = page.metafields.custom.schema_service_type.value
+  assign schema_area_served = page.metafields.custom.schema_area_served.value
+  assign schema_price_range = page.metafields.custom.schema_price_range.value
+
+  if secondary_cta_link == blank and phone_number != blank
+    assign secondary_cta_link = 'tel:' | append: phone_number
+  endif
+
+  assign page_description = ''
+  if hero_subheading != blank
+    assign page_description = hero_subheading | strip_html | truncatewords: 30
+  elsif page.content != blank
+    assign page_description = page.content | strip_html | truncatewords: 30
+  else
+    assign page_description = page.title
+  endif
+%}
+
+{% style %}
+  @keyframes service-hero-fade-in-up-{{ section.id }} {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes service-hero-fade-in-{{ section.id }} {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes service-hero-scale-in-{{ section.id }} {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .service-hero-{{ section.id }} {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+    padding: 80px 24px 100px;
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-hero-container-{{ section.id }} {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .service-hero-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .service-hero-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    animation: service-hero-fade-in-up-{{ section.id }} 0.8s ease-out;
+  }
+
+  .service-hero-badge-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+    color: #E30613;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    width: fit-content;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(227, 6, 19, 0.15);
+  }
+
+  .service-hero-badge-{{ section.id }} svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .service-hero-h1-{{ section.id }} {
+    font-size: 58px;
+    line-height: 1.1;
+    color: #000000;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .service-hero-subheading-{{ section.id }} {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #374151;
+    max-width: 600px;
+  }
+
+  .service-hero-subheading-{{ section.id }} p {
+    margin: 0 0 16px 0;
+  }
+
+  .service-hero-subheading-{{ section.id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .service-hero-service-area-{{ section.id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background-color: #F9FAFB;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid #E5E7EB;
+    max-width: fit-content;
+  }
+
+  .service-hero-service-area-{{ section.id }} svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: #E30613;
+    margin-top: 2px;
+  }
+
+  .service-hero-service-area-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .service-hero-service-area-label-{{ section.id }} {
+    font-size: 12px;
+    color: #6B7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .service-hero-service-area-text-{{ section.id }} {
+    font-size: 15px;
+    color: #111827;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .service-hero-rating-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background-color: #FFFBEB;
+    border-radius: 16px;
+    border: 1px solid #FDE68A;
+    width: fit-content;
+  }
+
+  .service-hero-stars-{{ section.id }} {
+    display: flex;
+    gap: 3px;
+  }
+
+  .service-hero-stars-{{ section.id }} svg {
+    width: 22px;
+    height: 22px;
+    color: #F59E0B;
+    filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.3));
+  }
+
+  .service-hero-rating-text-{{ section.id }} {
+    font-size: 15px;
+    color: #92400E;
+    font-weight: 700;
+  }
+
+  .service-hero-rating-divider-{{ section.id }} {
+    width: 1px;
+    height: 20px;
+    background-color: #FCD34D;
+  }
+
+  .service-hero-review-count-{{ section.id }} {
+    font-size: 14px;
+    color: #78350F;
+    font-weight: 600;
+  }
+
+  .service-hero-trust-points-{{ section.id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .service-hero-trust-badge-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #F0FDF4;
+    padding: 12px 18px;
+    border-radius: 100px;
+    border: 1px solid #BBF7D0;
+    transition: all 0.3s ease;
+  }
+
+  .service-hero-trust-badge-{{ section.id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+  }
+
+  .service-hero-trust-badge-{{ section.id }} svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: #10B981;
+  }
+
+  .service-hero-trust-badge-{{ section.id }} span {
+    font-size: 14px;
+    color: #065F46;
+    font-weight: 600;
+  }
+
+  .service-hero-cta-group-{{ section.id }} {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .service-hero-cta-primary-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #E30613 0%, #B8050F 100%);
+    color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(227, 6, 19, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-hero-cta-primary-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-hero-cta-primary-{{ section.id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(227, 6, 19, 0.4);
+  }
+
+  .service-hero-cta-primary-{{ section.id }}:hover::before {
+    opacity: 1;
+  }
+
+  .service-hero-cta-primary-{{ section.id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .service-hero-cta-secondary-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 40px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid #000000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .service-hero-cta-secondary-{{ section.id }}:hover {
+    background-color: #000000;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .service-hero-cta-secondary-{{ section.id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .service-hero-visual-{{ section.id }} {
+    position: relative;
+    animation: service-hero-scale-in-{{ section.id }} 0.9s ease-out 0.2s both;
+  }
+
+  .service-hero-image-figure-{{ section.id }} {
+    margin: 0;
+    position: relative;
+  }
+
+  .service-hero-image-card-{{ section.id }} {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+
+  .service-hero-image-card-{{ section.id }} img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .service-hero-image-caption-{{ section.id }} {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.6;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .service-hero-image-overlay-badge-{{ section.id }} {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: linear-gradient(135deg, #E30613 0%, #B8050F 100%);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 24px rgba(227, 6, 19, 0.4);
+    animation: service-hero-fade-in-{{ section.id }} 1s ease-out 0.5s both;
+  }
+
+  .service-hero-image-review-card-{{ section.id }} {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 16px 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    animation: service-hero-fade-in-{{ section.id }} 1s ease-out 0.7s both;
+  }
+
+  .service-hero-image-review-stars-{{ section.id }} {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+
+  .service-hero-image-review-stars-{{ section.id }} svg {
+    width: 18px;
+    height: 18px;
+    color: #F59E0B;
+  }
+
+  .service-hero-image-review-text-{{ section.id }} {
+    font-size: 13px;
+    color: #111827;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .service-hero-quote-teaser-{{ section.id }} {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    background-color: #ffffff;
+    padding: 28px;
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+    max-width: 300px;
+    border: 1px solid #F3F4F6;
+    animation: service-hero-scale-in-{{ section.id }} 1s ease-out 0.9s both;
+  }
+
+  .service-hero-quote-teaser-title-{{ section.id }} {
+    font-size: 18px;
+    font-weight: 800;
+    color: #000000;
+    margin: 0 0 8px 0;
+  }
+
+  .service-hero-quote-teaser-text-{{ section.id }} {
+    font-size: 14px;
+    color: #6B7280;
+    margin: 0 0 18px 0;
+    line-height: 1.5;
+  }
+
+  .service-hero-quote-teaser-cta-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #E30613;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: gap 0.3s ease;
+  }
+
+  .service-hero-quote-teaser-cta-{{ section.id }}:hover {
+    gap: 12px;
+  }
+
+  .service-hero-quote-teaser-cta-{{ section.id }} svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .service-hero-trust-bar-{{ section.id }} {
+    margin-top: 80px;
+    padding: 32px 40px;
+    background: linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%);
+    border-radius: 20px;
+    border: 1px solid #E5E7EB;
+    animation: service-hero-fade-in-up-{{ section.id }} 1s ease-out 0.4s both;
+  }
+
+  .service-hero-trust-bar-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    align-items: center;
+  }
+
+  .service-hero-trust-item-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .service-hero-trust-icon-{{ section.id }} {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #E30613 0%, #B8050F 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .service-hero-trust-icon-{{ section.id }} svg {
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
+  }
+
+  .service-hero-trust-item-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .service-hero-trust-item-value-{{ section.id }} {
+    font-size: 20px;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1;
+  }
+
+  .service-hero-trust-item-label-{{ section.id }} {
+    font-size: 13px;
+    color: #6B7280;
+    font-weight: 600;
+  }
+
+  .service-hero-keywords-{{ section.id }} {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .service-hero-grid-{{ section.id }} {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+
+    .service-hero-visual-{{ section.id }} {
+      order: -1;
+    }
+
+    .service-hero-quote-teaser-{{ section.id }} {
+      bottom: 20px;
+      right: 20px;
+      max-width: 260px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .service-hero-{{ section.id }} {
+      padding: 48px 20px 60px;
+    }
+
+    .service-hero-grid-{{ section.id }} {
+      gap: 40px;
+    }
+
+    .service-hero-h1-{{ section.id }} {
+      font-size: 40px;
+    }
+
+    .service-hero-subheading-{{ section.id }} {
+      font-size: 17px;
+    }
+
+    .service-hero-content-{{ section.id }} {
+      gap: 24px;
+    }
+
+    .service-hero-cta-group-{{ section.id }} {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .service-hero-cta-primary-{{ section.id }},
+    .service-hero-cta-secondary-{{ section.id }} {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .service-hero-quote-teaser-{{ section.id }} {
+      position: static;
+      margin-top: 24px;
+      max-width: 100%;
+    }
+
+    .service-hero-trust-bar-{{ section.id }} {
+      margin-top: 60px;
+      padding: 24px 20px;
+    }
+
+    .service-hero-trust-bar-grid-{{ section.id }} {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .service-hero-image-overlay-badge-{{ section.id }} {
+      top: 16px;
+      left: 16px;
+      padding: 10px 18px;
+      font-size: 12px;
+    }
+
+    .service-hero-image-review-card-{{ section.id }} {
+      top: 16px;
+      right: 16px;
+      padding: 12px 16px;
+    }
+  }
+{% endstyle %}
+
+<section class="service-hero-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="service-hero-container-{{ section.id }}">
+    <div class="service-hero-grid-{{ section.id }}">
+      <div class="service-hero-content-{{ section.id }}">
+        {% if badge_text != blank %}
+          <div class="service-hero-badge-{{ section.id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            {{ badge_text }}
+          </div>
+        {% endif %}
+
+        <h1 class="service-hero-h1-{{ section.id }}">{{ page.title }}</h1>
+
+        {% if hero_subheading != blank %}
+          <div class="service-hero-subheading-{{ section.id }}">
+            {{ hero_subheading }}
+          </div>
+        {% elsif page.content != blank %}
+          <div class="service-hero-subheading-{{ section.id }}">
+            {{ page.content | truncatewords: 30 }}
+          </div>
+        {% endif %}
+
+        {% if service_area != blank %}
+          <div class="service-hero-service-area-{{ section.id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <div class="service-hero-service-area-content-{{ section.id }}">
+              <div class="service-hero-service-area-label-{{ section.id }}">Service Area</div>
+              <div class="service-hero-service-area-text-{{ section.id }}">{{ service_area }}</div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if rating_text != blank or review_count != blank %}
+          <div class="service-hero-rating-{{ section.id }}" role="img" aria-label="Customer rating: {% if rating_text != blank %}{{ rating_text }}{% endif %}{% if review_count != blank %} based on {{ review_count }} reviews{% endif %}">
+            <div class="service-hero-stars-{{ section.id }}" aria-hidden="true">
+              {% for i in (1..5) %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              {% endfor %}
+            </div>
+            {% if rating_text != blank %}
+              <span class="service-hero-rating-text-{{ section.id }}">{{ rating_text }}</span>
+            {% endif %}
+            {% if rating_text != blank and review_count != blank %}
+              <div class="service-hero-rating-divider-{{ section.id }}"></div>
+            {% endif %}
+            {% if review_count != blank %}
+              <span class="service-hero-review-count-{{ section.id }}">{{ review_count }} reviews</span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if trust_points != blank %}
+          <div class="service-hero-trust-points-{{ section.id }}">
+            {% for point in trust_points %}
+              <div class="service-hero-trust-badge-{{ section.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{{ point }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="service-hero-cta-group-{{ section.id }}">
+          {% if primary_cta_text != blank %}
+            <a href="{{ primary_cta_link }}" class="service-hero-cta-primary-{{ section.id }}" aria-label="{{ primary_cta_text }}">
+              {{ primary_cta_text }}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          {% endif %}
+
+          {% if secondary_cta_text != blank %}
+            <a href="{{ secondary_cta_link }}" class="service-hero-cta-secondary-{{ section.id }}" aria-label="{{ secondary_cta_text }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              {{ secondary_cta_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="service-hero-visual-{{ section.id }}">
+        <figure class="service-hero-image-figure-{{ section.id }}">
+          <div class="service-hero-image-card-{{ section.id }}">
+            {% if hero_image != blank %}
+              <img
+                src="{{ hero_image | image_url: width: 800 }}"
+                srcset="{{ hero_image | image_url: width: 400 }} 400w, {{ hero_image | image_url: width: 600 }} 600w, {{ hero_image | image_url: width: 800 }} 800w, {{ hero_image | image_url: width: 1200 }} 1200w"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+                alt="{{ hero_image_alt }}"
+                title="{{ hero_image_title }}"
+                width="{{ hero_image.width }}"
+                height="{{ hero_image.height }}"
+                loading="eager"
+                fetchpriority="high"
+              >
+            {% else %}
+              {{ 'hero-apparel-1' | placeholder_svg_tag }}
+            {% endif %}
+
+            {% if section.settings.show_image_badge and section.settings.image_badge_text != blank %}
+              <div class="service-hero-image-overlay-badge-{{ section.id }}">
+                {{ section.settings.image_badge_text }}
+              </div>
+            {% endif %}
+
+            {% if section.settings.show_image_review and rating_text != blank %}
+              <div class="service-hero-image-review-card-{{ section.id }}">
+                <div class="service-hero-image-review-stars-{{ section.id }}" aria-hidden="true">
+                  {% for i in (1..5) %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  {% endfor %}
+                </div>
+                <div class="service-hero-image-review-text-{{ section.id }}">{{ rating_text }} Rating</div>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if hero_image_caption != blank %}
+            <figcaption class="service-hero-image-caption-{{ section.id }}">
+              {{ hero_image_caption }}
+            </figcaption>
+          {% endif %}
+        </figure>
+
+        {% if section.settings.show_quote_teaser %}
+          <div class="service-hero-quote-teaser-{{ section.id }}">
+            <h2 class="service-hero-quote-teaser-title-{{ section.id }}">{{ section.settings.teaser_title }}</h2>
+            <p class="service-hero-quote-teaser-text-{{ section.id }}">{{ section.settings.teaser_text }}</p>
+            <a href="{{ section.settings.teaser_link }}" class="service-hero-quote-teaser-cta-{{ section.id }}" aria-label="{{ section.settings.teaser_cta_text }}">
+              {{ section.settings.teaser_cta_text }}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.settings.show_trust_bar %}
+      <div class="service-hero-trust-bar-{{ section.id }}">
+        <div class="service-hero-trust-bar-grid-{{ section.id }}">
+          <div class="service-hero-trust-item-{{ section.id }}">
+            <div class="service-hero-trust-icon-{{ section.id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="service-hero-trust-item-content-{{ section.id }}">
+              <div class="service-hero-trust-item-value-{{ section.id }}">{{ section.settings.trust_item_1_value }}</div>
+              <div class="service-hero-trust-item-label-{{ section.id }}">{{ section.settings.trust_item_1_label }}</div>
+            </div>
+          </div>
+
+          <div class="service-hero-trust-item-{{ section.id }}">
+            <div class="service-hero-trust-icon-{{ section.id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div class="service-hero-trust-item-content-{{ section.id }}">
+              <div class="service-hero-trust-item-value-{{ section.id }}">{{ section.settings.trust_item_2_value }}</div>
+              <div class="service-hero-trust-item-label-{{ section.id }}">{{ section.settings.trust_item_2_label }}</div>
+            </div>
+          </div>
+
+          <div class="service-hero-trust-item-{{ section.id }}">
+            <div class="service-hero-trust-icon-{{ section.id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div class="service-hero-trust-item-content-{{ section.id }}">
+              <div class="service-hero-trust-item-value-{{ section.id }}">{{ section.settings.trust_item_3_value }}</div>
+              <div class="service-hero-trust-item-label-{{ section.id }}">{{ section.settings.trust_item_3_label }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if target_keywords != blank %}
+    <div class="service-hero-keywords-{{ section.id }}">{{ target_keywords }}</div>
+  {% endif %}
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": {{ page.title | json }},
+      "url": {{ page.url | prepend: request.origin | json }},
+      {% if hero_image != blank %}
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": {{ hero_image | image_url: width: 1200 | json }},
+        "width": {{ hero_image.width | json }},
+        "height": {{ hero_image.height | json }},
+        "caption": {% if hero_image_caption != blank %}{{ hero_image_caption | json }}{% else %}{{ hero_image_alt | json }}{% endif %},
+        "name": {{ hero_image_title | json }}
+      },
+      {% endif %}
+      "description": {{ page_description | json }}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": {{ request.origin | json }}
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ page.title | json }},
+          "item": {{ page.url | prepend: request.origin | json }}
+        }
+      ]
+    }
+    {% if hero_image != blank %},
+    {
+      "@type": "ImageObject",
+      "url": {{ hero_image | image_url: width: 1200 | json }},
+      "width": {{ hero_image.width | json }},
+      "height": {{ hero_image.height | json }},
+      "caption": {% if hero_image_caption != blank %}{{ hero_image_caption | json }}{% else %}{{ hero_image_alt | json }}{% endif %},
+      "name": {{ hero_image_title | json }},
+      "contentUrl": {{ hero_image | image_url: width: 1200 | json }},
+      "thumbnailUrl": {{ hero_image | image_url: width: 400 | json }}
+    }
+    {% endif %}
+    {% if schema_service_type != blank %},
+    {
+      "@type": "Service",
+      "serviceType": {{ schema_service_type | json }},
+      "name": {{ page.title | json }},
+      "description": {{ page_description | json }},
+      {% if service_area != blank or schema_area_served != blank %}
+      "areaServed": {% if schema_area_served != blank %}{{ schema_area_served | json }}{% else %}{{ service_area | json }}{% endif %},
+      {% endif %}
+      {% if schema_price_range != blank %}
+      "priceRange": {{ schema_price_range | json }},
+      {% endif %}
+      {% if hero_image != blank %}
+      "image": {{ hero_image | image_url: width: 1200 | json }},
+      {% endif %}
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": {{ shop.name | json }},
+        {% if phone_number != blank %}
+        "telephone": {{ phone_number | json }},
+        {% endif %}
+        {% if service_area != blank or schema_area_served != blank %}
+        "areaServed": {% if schema_area_served != blank %}{{ schema_area_served | json }}{% else %}{{ service_area | json }}{% endif %},
+        {% endif %}
+        {% if schema_price_range != blank %}
+        "priceRange": {{ schema_price_range | json }},
+        {% endif %}
+        {% if rating_text != blank and review_count != blank %}
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ rating_text | json }},
+          "reviewCount": {{ review_count | json }}
+        },
+        {% endif %}
+        "url": {{ request.origin | json }}
+      }
+    }
+    {% endif %}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Service hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image overlays"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_badge",
+      "label": "Show image badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "image_badge_text",
+      "label": "Badge text",
+      "default": "Same Day Available"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_review",
+      "label": "Show review card overlay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Quick quote teaser card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quote_teaser",
+      "label": "Show floating quote teaser",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "teaser_title",
+      "label": "Teaser title",
+      "default": "Get instant quote"
+    },
+    {
+      "type": "text",
+      "id": "teaser_text",
+      "label": "Teaser text",
+      "default": "Free quote in 60 seconds"
+    },
+    {
+      "type": "text",
+      "id": "teaser_cta_text",
+      "label": "Teaser CTA text",
+      "default": "Start now"
+    },
+    {
+      "type": "url",
+      "id": "teaser_link",
+      "label": "Teaser link"
+    },
+    {
+      "type": "header",
+      "content": "Trust bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_bar",
+      "label": "Show trust bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_item_1_value",
+      "label": "Item 1 value",
+      "default": "24/7"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_1_label",
+      "label": "Item 1 label",
+      "default": "Available"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_2_value",
+      "label": "Item 2 value",
+      "default": "Insured"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_2_label",
+      "label": "Item 2 label",
+      "default": "Fully Licensed"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_3_value",
+      "label": "Item 3 value",
+      "default": "5,000+"
+    },
+    {
+      "type": "text",
+      "id": "trust_item_3_label",
+      "label": "Item 3 label",
+      "default": "Happy Customers"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service hero"
+    }
+  ]
+}
+{% endschema %}

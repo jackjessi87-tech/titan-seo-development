@@ -1,0 +1,334 @@
+{% doc %}
+  @prompt
+    Generate a Floatign Quote button with Cal to actio  to Main Quote  this Floatign quate button is round Red Button with small heading Get Quoe and Arrow above heading with a moving emotion effect make a Nice one , In the middle like a similar to face book Scrolling adsa a middle button no square roundee Corner Arrow inside the button color white , in the buttom middle proper Get a Quote Button 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-bottom-quote-button-{{ ai_gen_id }} {
+    position: fixed;
+    bottom: {{ block.settings.bottom_position }}px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: block;
+  }
+
+  .ai-bottom-quote-link-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.text_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    white-space: nowrap;
+  }
+
+  .ai-bottom-quote-link-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background-color: {{ block.settings.button_hover_color }};
+    color: {{ block.settings.text_hover_color }};
+  }
+
+  .ai-bottom-quote-arrow-{{ ai_gen_id }} {
+    width: 0;
+    height: 0;
+    border-top: {{ block.settings.arrow_size }}px solid transparent;
+    border-bottom: {{ block.settings.arrow_size }}px solid transparent;
+    border-left: {{ block.settings.arrow_size }}px solid currentColor;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-bottom-quote-link-{{ ai_gen_id }}:hover .ai-bottom-quote-arrow-{{ ai_gen_id }} {
+    transform: translateX(3px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-bottom-quote-button-{{ ai_gen_id }} {
+      bottom: {{ block.settings.bottom_position_mobile }}px;
+    }
+
+    .ai-bottom-quote-link-{{ ai_gen_id }} {
+      padding: {{ block.settings.button_padding_vertical_mobile }}px {{ block.settings.button_padding_horizontal_mobile }}px;
+      font-size: {{ block.settings.font_size_mobile }}px;
+    }
+
+    .ai-bottom-quote-arrow-{{ ai_gen_id }} {
+      border-top: {{ block.settings.arrow_size_mobile }}px solid transparent;
+      border-bottom: {{ block.settings.arrow_size_mobile }}px solid transparent;
+      border-left: {{ block.settings.arrow_size_mobile }}px solid currentColor;
+    }
+  }
+{% endstyle %}
+
+<bottom-quote-button-{{ ai_gen_id }}
+  class="ai-bottom-quote-button-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <a
+    href="{{ block.settings.quote_link }}"
+    class="ai-bottom-quote-link-{{ ai_gen_id }}"
+    aria-label="{{ block.settings.button_text }}"
+  >
+    <span>{{ block.settings.button_text }}</span>
+    {% if block.settings.show_arrow %}
+      <div class="ai-bottom-quote-arrow-{{ ai_gen_id }}"></div>
+    {% endif %}
+  </a>
+</bottom-quote-button-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BottomQuoteButton{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupScrollBehavior();
+      }
+
+      setupScrollBehavior() {
+        const button = this.querySelector('.ai-bottom-quote-link-{{ ai_gen_id }}');
+        if (!button) return;
+
+        let ticking = false;
+
+        const updateButtonVisibility = () => {
+          const scrollY = window.scrollY;
+          
+          if (scrollY > 100) {
+            button.style.opacity = '1';
+            button.style.pointerEvents = 'auto';
+          } else {
+            button.style.opacity = '0.95';
+            button.style.pointerEvents = 'auto';
+          }
+
+          ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateButtonVisibility);
+            ticking = true;
+          }
+        });
+
+        updateButtonVisibility();
+      }
+    }
+
+    customElements.define('bottom-quote-button-{{ ai_gen_id }}', BottomQuoteButton{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Bottom quote button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Button content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Get a Quote"
+    },
+    {
+      "type": "url",
+      "id": "quote_link",
+      "label": "Quote link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show arrow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Hover background color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_hover_color",
+      "label": "Hover text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size (desktop)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "label": "Font size (mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding (desktop)",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding (desktop)",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical_mobile",
+      "label": "Vertical padding (mobile)",
+      "min": 6,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal_mobile",
+      "label": "Horizontal padding (mobile)",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "label": "Arrow size (desktop)",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "arrow_size_mobile",
+      "label": "Arrow size (mobile)",
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "range",
+      "id": "bottom_position",
+      "label": "Bottom position (desktop)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "bottom_position_mobile",
+      "label": "Bottom position (mobile)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bottom quote button"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1176 @@
+{% doc %}
+  @prompt
+    Update the Call / Get Quote card.
+    
+    Add two buttons:
+    
+    Primary Button:
+    📞 Call Now
+    Link: tel:0469717535
+    
+    Secondary Button:
+    Get Free Quote
+    
+    When the user clicks “Get Free Quote”, open a modern removalist quote form in a popup modal.
+    
+    FORM TITLE:
+    Get a Fast Removalist Quote
+    
+    FORM SUBTITLE:
+    Send your moving details and Titan Express will reply with the best available price.
+    
+    FORM FIELDS:
+    
+    * Customer Name
+    * Phone Number
+    * Pickup Suburb
+    * Drop-off Suburb
+    * Item Details
+    * Stairs or Lift?
+    * Preferred Date / Time
+    * Upload Photo optional
+    * Extra Notes optional
+    
+    FORM REQUIREMENTS:
+    
+    * Mobile-friendly popup
+    * Easy to close
+    * Smooth open/close animation
+    * Required fields clearly marked
+    * Large tap-friendly inputs
+    * Submit button text: Send Quote Request
+    * Success message after submit:
+      “Thanks! Your quote request has been sent. Titan Express will contact you shortly.”
+    
+    EMAIL NOTIFICATION:
+    When the form is submitted, send an email notification to the admin with all customer details.
+    
+    Admin email:
+    [billsarwar0@gmail.com](mailto:billsarwar0@gmail.com)
+    
+    Email subject:
+    New Titan Express Quote Request
+    
+    Email body should include:
+    Customer name
+    Phone number
+    Pickup suburb
+    Drop-off suburb
+    Item details
+    Stairs/lift details
+    Preferred date/time
+    Photo upload link if available
+    Extra notes
+    
+    SHOPIFY REQUIREMENT:
+    Use Shopify-compatible contact form code where possible.
+    
+    Use:
+    {% form 'contact' %}
+    
+    Include hidden input: <input type="hidden" name="contact[form_type]" value="Titan Express Quote Request">
+    
+    Make sure form fields use Shopify contact format:
+    name="contact[Customer Name]"
+    name="contact[Phone Number]"
+    name="contact[Pickup Suburb]"
+    name="contact[Drop-off Suburb]"
+    name="contact[Item Details]"
+    name="contact[Stairs or Lift]"
+    name="contact[Preferred Date Time]"
+    name="contact[Extra Notes]"
+    
+    IMPORTANT:
+    Shopify contact forms can send email to the store admin email configured in Shopify notifications.
+    
+    If direct email to [billsarwar0@gmail.com](mailto:billsarwar0@gmail.com) is required, explain that the Shopify store notification email must be set to this email address in Shopify settings, or connect the form to a form app such as Hulk Form, Klaviyo, Zapier, Make or n8n.
+    
+    DESIGN STYLE:
+    
+    * Premium modern card
+    * White background
+    * Rounded corners
+    * Soft shadow
+    * Gold/yellow Call Now button
+    * Black outline Get Free Quote button
+    * Green active status dot
+    * Titan Express logo or van photo on left
+    * Clean removalist service styling
+    * Fully responsive on mobile, tablet and desktop
+    
+    INTERACTIVE REQUIREMENTS:
+    
+    * Call button hover effect
+    * Quote button hover effect
+    * Modal popup animation
+    * Background overlay blur
+    * Close button
+    * Click outside modal to close
+    * Escape key closes modal
+    * Form validation
+    * Smooth success message
+    
+    OUTPUT:
+    Generate complete Shopify-compatible Liquid, HTML, CSS and JavaScript.
+    
+    Use clean class names starting with:
+    
+    titan-quote-card-
+    
+    The final result should be functional, responsive, user-friendly and conversion-focused.
+    , make it as floating , Reduce the Size Of The Card  Titan Removalist , Make Button Fit Side By Side Button Call / Quote Instead Of Photo Ad a Moto Or Headlines Or Something Other , Keep only Call Button Make this A facebook Style , Faceboo kStyle Card Button Card 
+    , Ad A Photo instead of the Facebook logo Campact this section Ad a cross buttonm to cancel the card whe pressed it hide but also come back in 10 secon also  on top corner Ad aciculd Smal lSection Get a Quote ith form Instruct previousely , Keep Everything same But Add Email Notification Send to billsarwar0@gmail.com and admin Email for notifications also Bring Call and Quote Button Same width sizer a, remove the notification message from quote form
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-fb-card-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    bottom: {{ block.settings.bottom_position }}px;
+    right: {{ block.settings.right_position }}px;
+    z-index: 9999;
+    max-width: 300px;
+  }
+
+  .titan-fb-card-container-{{ ai_gen_id }} {
+    background: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .titan-fb-card-container-{{ ai_gen_id }}.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+
+  .titan-fb-card-container-{{ ai_gen_id }}:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 12px 32px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .titan-fb-card-header-{{ ai_gen_id }} {
+    background: {{ block.settings.header_gradient_start }};
+    background: linear-gradient(135deg, {{ block.settings.header_gradient_start }} 0%, {{ block.settings.header_gradient_end }} 100%);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+
+  .titan-fb-card-avatar-{{ ai_gen_id }} {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: {{ block.settings.avatar_background }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .titan-fb-card-avatar-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .titan-fb-card-avatar-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .titan-fb-card-avatar-placeholder-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+    color: #999;
+  }
+
+  .titan-fb-card-info-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .titan-fb-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.header_text_color }};
+    margin: 0 0 3px 0;
+    line-height: 1.2;
+  }
+
+  .titan-fb-card-status-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: {{ block.settings.status_font_size }}px;
+    color: {{ block.settings.header_text_color }};
+    opacity: 0.9;
+  }
+
+  .titan-fb-card-status-dot-{{ ai_gen_id }} {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: {{ block.settings.status_dot_color }};
+    box-shadow: 0 0 6px {{ block.settings.status_dot_color }};
+  }
+
+  .titan-fb-card-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: {{ block.settings.header_text_color }};
+  }
+
+  .titan-fb-card-close-{{ ai_gen_id }}:hover {
+    background: rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+  }
+
+  .titan-fb-card-close-{{ ai_gen_id }} svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .titan-fb-card-body-{{ ai_gen_id }} {
+    padding: 14px 16px;
+  }
+
+  .titan-fb-card-message-{{ ai_gen_id }} {
+    font-size: {{ block.settings.message_font_size }}px;
+    color: {{ block.settings.message_text_color }};
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+  }
+
+  .titan-fb-card-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+  }
+
+  .titan-fb-card-call-btn-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 1;
+    padding: 10px 14px;
+    background: {{ block.settings.call_button_color }};
+    color: {{ block.settings.call_button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .titan-fb-card-call-btn-{{ ai_gen_id }}:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .titan-fb-card-call-btn-{{ ai_gen_id }} svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .titan-fb-card-quote-btn-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 10px 14px;
+    background: {{ block.settings.quote_button_color }};
+    color: {{ block.settings.quote_button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .titan-fb-card-quote-btn-{{ ai_gen_id }}:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .titan-fb-card-quote-btn-{{ ai_gen_id }} svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .titan-fb-modal-overlay-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .titan-fb-modal-overlay-{{ ai_gen_id }}.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .titan-fb-modal-{{ ai_gen_id }} {
+    background: {{ block.settings.modal_background }};
+    border-radius: {{ block.settings.modal_border_radius }}px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .titan-fb-modal-overlay-{{ ai_gen_id }}.active .titan-fb-modal-{{ ai_gen_id }} {
+    transform: scale(1);
+  }
+
+  .titan-fb-modal-header-{{ ai_gen_id }} {
+    padding: 20px 24px;
+    border-bottom: 1px solid {{ block.settings.modal_border_color }};
+    position: relative;
+  }
+
+  .titan-fb-modal-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.modal_title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.modal_text_color }};
+    margin: 0 0 6px 0;
+  }
+
+  .titan-fb-modal-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.modal_subtitle_size }}px;
+    color: {{ block.settings.modal_text_color }};
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .titan-fb-modal-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ block.settings.modal_text_color }};
+    transition: all 0.2s ease;
+  }
+
+  .titan-fb-modal-close-{{ ai_gen_id }}:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .titan-fb-modal-close-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .titan-fb-modal-body-{{ ai_gen_id }} {
+    padding: 24px;
+  }
+
+  .titan-fb-form-group-{{ ai_gen_id }} {
+    margin-bottom: 16px;
+  }
+
+  .titan-fb-form-label-{{ ai_gen_id }} {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: {{ block.settings.modal_text_color }};
+    margin-bottom: 6px;
+  }
+
+  .titan-fb-form-required-{{ ai_gen_id }} {
+    color: #ef4444;
+  }
+
+  .titan-fb-form-input-{{ ai_gen_id }},
+  .titan-fb-form-textarea-{{ ai_gen_id }},
+  .titan-fb-form-select-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: 14px;
+    color: {{ block.settings.modal_text_color }};
+    background: {{ block.settings.input_background }};
+    transition: all 0.2s ease;
+  }
+
+  .titan-fb-form-input-{{ ai_gen_id }}:focus,
+  .titan-fb-form-textarea-{{ ai_gen_id }}:focus,
+  .titan-fb-form-select-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.header_gradient_start }};
+    box-shadow: 0 0 0 3px {{ block.settings.header_gradient_start }}33;
+  }
+
+  .titan-fb-form-textarea-{{ ai_gen_id }} {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .titan-fb-form-file-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px dashed {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .titan-fb-form-submit-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 14px 20px;
+    background: {{ block.settings.submit_button_color }};
+    color: {{ block.settings.submit_button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+  }
+
+  .titan-fb-form-submit-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .titan-fb-success-message-{{ ai_gen_id }} {
+    padding: 16px;
+    background: #10b981;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .titan-fb-card-{{ ai_gen_id }} {
+      bottom: {{ block.settings.mobile_bottom_position }}px;
+      right: {{ block.settings.mobile_right_position }}px;
+      left: {{ block.settings.mobile_right_position }}px;
+      max-width: none;
+    }
+
+    .titan-fb-modal-{{ ai_gen_id }} {
+      max-height: 85vh;
+    }
+
+    .titan-fb-modal-header-{{ ai_gen_id }},
+    .titan-fb-modal-body-{{ ai_gen_id }} {
+      padding: 16px;
+    }
+  }
+{% endstyle %}
+
+<titan-fb-card-{{ ai_gen_id }}
+  class="titan-fb-card-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="titan-fb-card-container-{{ ai_gen_id }}">
+    <div class="titan-fb-card-header-{{ ai_gen_id }}">
+      <div class="titan-fb-card-avatar-{{ ai_gen_id }}">
+        {% if block.settings.company_photo %}
+          <img
+            src="{{ block.settings.company_photo | image_url: width: 80 }}"
+            alt="{{ block.settings.card_title }}"
+            loading="lazy"
+            width="40"
+            height="40"
+          >
+        {% else %}
+          <div class="titan-fb-card-avatar-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+      
+      <div class="titan-fb-card-info-{{ ai_gen_id }}">
+        <h3 class="titan-fb-card-title-{{ ai_gen_id }}">{{ block.settings.card_title }}</h3>
+        <div class="titan-fb-card-status-{{ ai_gen_id }}">
+          <span class="titan-fb-card-status-dot-{{ ai_gen_id }}"></span>
+          <span>{{ block.settings.status_text }}</span>
+        </div>
+      </div>
+
+      <button
+        class="titan-fb-card-close-{{ ai_gen_id }}"
+        aria-label="Close"
+        data-close-card
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="titan-fb-card-body-{{ ai_gen_id }}">
+      <p class="titan-fb-card-message-{{ ai_gen_id }}">
+        {{ block.settings.message_text }}
+      </p>
+
+      <div class="titan-fb-card-buttons-{{ ai_gen_id }}">
+        <a
+          href="tel:{{ block.settings.phone_number }}"
+          class="titan-fb-card-call-btn-{{ ai_gen_id }}"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+          </svg>
+          {{ block.settings.call_button_text }}
+        </a>
+
+        <button
+          class="titan-fb-card-quote-btn-{{ ai_gen_id }}"
+          data-open-quote
+          aria-label="Get a quote"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          Quote
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="titan-fb-modal-overlay-{{ ai_gen_id }}" data-modal-overlay>
+    <div class="titan-fb-modal-{{ ai_gen_id }}">
+      <div class="titan-fb-modal-header-{{ ai_gen_id }}">
+        <h2 class="titan-fb-modal-title-{{ ai_gen_id }}">{{ block.settings.form_title }}</h2>
+        <p class="titan-fb-modal-subtitle-{{ ai_gen_id }}">{{ block.settings.form_subtitle }}</p>
+        
+        <button
+          class="titan-fb-modal-close-{{ ai_gen_id }}"
+          data-close-modal
+          aria-label="Close"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="titan-fb-modal-body-{{ ai_gen_id }}">
+        {%- form 'contact' -%}
+          <input type="hidden" name="contact[form_type]" value="Titan Express Quote Request">
+          <input type="hidden" name="contact[email]" value="billsarwar0@gmail.com">
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Customer Name <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <input
+              type="text"
+              name="contact[Customer Name]"
+              class="titan-fb-form-input-{{ ai_gen_id }}"
+              required
+            >
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Phone Number <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <input
+              type="tel"
+              name="contact[Phone Number]"
+              class="titan-fb-form-input-{{ ai_gen_id }}"
+              required
+            >
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Customer Email <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <input
+              type="email"
+              name="contact[Customer Email]"
+              class="titan-fb-form-input-{{ ai_gen_id }}"
+              required
+            >
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Pickup Suburb <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <input
+              type="text"
+              name="contact[Pickup Suburb]"
+              class="titan-fb-form-input-{{ ai_gen_id }}"
+              required
+            >
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Drop-off Suburb <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <input
+              type="text"
+              name="contact[Drop-off Suburb]"
+              class="titan-fb-form-input-{{ ai_gen_id }}"
+              required
+            >
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Item Details <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <textarea
+              name="contact[Item Details]"
+              class="titan-fb-form-textarea-{{ ai_gen_id }}"
+              required
+            ></textarea>
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Stairs or Lift? <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <select
+              name="contact[Stairs or Lift]"
+              class="titan-fb-form-select-{{ ai_gen_id }}"
+              required
+            >
+              <option value="">Select option</option>
+              <option value="Stairs">Stairs</option>
+              <option value="Lift">Lift</option>
+              <option value="Ground Floor">Ground Floor</option>
+            </select>
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Preferred Date / Time <span class="titan-fb-form-required-{{ ai_gen_id }}">*</span>
+            </label>
+            <input
+              type="text"
+              name="contact[Preferred Date Time]"
+              class="titan-fb-form-input-{{ ai_gen_id }}"
+              placeholder="e.g., June 15, 2026 at 10:00 AM"
+              required
+            >
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Upload Photo (optional)
+            </label>
+            <input
+              type="file"
+              name="contact[Photo]"
+              class="titan-fb-form-file-{{ ai_gen_id }}"
+              accept="image/*"
+            >
+          </div>
+
+          <div class="titan-fb-form-group-{{ ai_gen_id }}">
+            <label class="titan-fb-form-label-{{ ai_gen_id }}">
+              Extra Notes (optional)
+            </label>
+            <textarea
+              name="contact[Extra Notes]"
+              class="titan-fb-form-textarea-{{ ai_gen_id }}"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="titan-fb-form-submit-{{ ai_gen_id }}"
+          >
+            {{ block.settings.submit_button_text }}
+          </button>
+
+          {%- if form.posted_successfully? -%}
+            <div class="titan-fb-success-message-{{ ai_gen_id }}">
+              {{ block.settings.success_message }}
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</titan-fb-card-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TitanFbCard{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.hideTimeout = null;
+      }
+
+      connectedCallback() {
+        const container = this.querySelector('.titan-fb-card-container-{{ ai_gen_id }}');
+        const closeBtn = this.querySelector('[data-close-card]');
+        const quoteBtn = this.querySelector('[data-open-quote]');
+        const modalOverlay = this.querySelector('[data-modal-overlay]');
+        const closeModalBtn = this.querySelector('[data-close-modal]');
+        
+        if (closeBtn && container) {
+          closeBtn.addEventListener('click', () => {
+            container.classList.add('hidden');
+            
+            this.hideTimeout = setTimeout(() => {
+              container.classList.remove('hidden');
+            }, 10000);
+          });
+        }
+
+        if (quoteBtn && modalOverlay) {
+          quoteBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        }
+
+        if (closeModalBtn && modalOverlay) {
+          closeModalBtn.addEventListener('click', () => {
+            this.closeModal(modalOverlay);
+          });
+        }
+
+        if (modalOverlay) {
+          modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+              this.closeModal(modalOverlay);
+            }
+          });
+
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+              this.closeModal(modalOverlay);
+            }
+          });
+        }
+      }
+
+      closeModal(modalOverlay) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      disconnectedCallback() {
+        if (this.hideTimeout) {
+          clearTimeout(this.hideTimeout);
+        }
+      }
+    }
+
+    customElements.define('titan-fb-card-{{ ai_gen_id }}', TitanFbCard{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Titan Facebook card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card content"
+    },
+    {
+      "type": "image_picker",
+      "id": "company_photo",
+      "label": "Company photo"
+    },
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Title",
+      "default": "Titan Express"
+    },
+    {
+      "type": "text",
+      "id": "status_text",
+      "label": "Status text",
+      "default": "Available Now"
+    },
+    {
+      "type": "textarea",
+      "id": "message_text",
+      "label": "Message",
+      "default": "Need a removalist? Call us now for a fast quote!"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469717535"
+    },
+    {
+      "type": "text",
+      "id": "call_button_text",
+      "label": "Call button text",
+      "default": "Call Now"
+    },
+    {
+      "type": "header",
+      "content": "Quote form"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title",
+      "default": "Get a Fast Removalist Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "form_subtitle",
+      "label": "Form subtitle",
+      "default": "Send your moving details and Titan Express will reply with the best available price."
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit button text",
+      "default": "Send Quote Request"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks! Your quote request has been sent. Titan Express will contact you shortly."
+    },
+    {
+      "type": "header",
+      "content": "Card position"
+    },
+    {
+      "type": "range",
+      "id": "bottom_position",
+      "label": "Bottom position (desktop)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "right_position",
+      "label": "Right position (desktop)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_bottom_position",
+      "label": "Bottom position (mobile)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_right_position",
+      "label": "Side margin (mobile)",
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Header style"
+    },
+    {
+      "type": "color",
+      "id": "header_gradient_start",
+      "label": "Header gradient start",
+      "default": "#0084ff"
+    },
+    {
+      "type": "color",
+      "id": "header_gradient_end",
+      "label": "Header gradient end",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "avatar_background",
+      "label": "Avatar background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "status_dot_color",
+      "label": "Status dot color",
+      "default": "#44b700"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "call_button_color",
+      "label": "Call button color",
+      "default": "#fbbf24"
+    },
+    {
+      "type": "color",
+      "id": "call_button_text_color",
+      "label": "Call button text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_color",
+      "label": "Quote button color",
+      "default": "#10b981"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_text_color",
+      "label": "Quote button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "message_text_color",
+      "label": "Message text color",
+      "default": "#374151"
+    },
+    {
+      "type": "header",
+      "content": "Modal style"
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "label": "Modal border radius",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "modal_background",
+      "label": "Modal background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "modal_text_color",
+      "label": "Modal text color",
+      "default": "#1f2937"
+    },
+    {
+      "type": "color",
+      "id": "modal_border_color",
+      "label": "Modal border color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border color",
+      "default": "#d1d5db"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input border radius",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "submit_button_color",
+      "label": "Submit button color",
+      "default": "#0084ff"
+    },
+    {
+      "type": "color",
+      "id": "submit_button_text_color",
+      "label": "Submit button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title size",
+      "min": 13,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "status_font_size",
+      "label": "Status size",
+      "min": 10,
+      "max": 13,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "message_font_size",
+      "label": "Message size",
+      "min": 12,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button size",
+      "min": 12,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "modal_title_size",
+      "label": "Modal title size",
+      "min": 16,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "modal_subtitle_size",
+      "label": "Modal subtitle size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan Facebook card"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1384 @@
+{% doc %}
+  @prompt
+    Build Section 2 directly below the hero section.
+    
+    SECTION GOAL
+    
+    This section must immediately show visitors and Google Ads what services Titan Express provides.
+    
+    The design should increase landing page relevance, improve Google Ads Quality Score, strengthen SEO signals, and help customers quickly identify the service they need.
+    
+    SECTION TITLE
+    
+    What Can We Move For You?
+    
+    SUBHEADING
+    
+    From single-item furniture delivery to apartment moves and Marketplace pickups, Titan Express provides fast, affordable moving and delivery services throughout Sydney.
+    
+    LAYOUT
+    
+    Create a premium responsive service grid.
+    
+    Desktop:
+    3 columns
+    
+    Tablet:
+    2 columns
+    
+    Mobile:
+    1 column
+    
+    Use modern service cards with hover animations, subtle shadows, glassmorphism effects, SVG icons and smooth transitions.
+    
+    SERVICE CARDS
+    
+    Furniture Delivery Sydney
+    
+    Description:
+    Sofas, dining tables, beds, wardrobes, entertainment units and household furniture delivered across Sydney.
+    
+    Icon:
+    Modern sofa SVG
+    
+    ---
+    
+    Marketplace Pickup & Delivery
+    
+    Description:
+    Facebook Marketplace, Gumtree and private seller pickups delivered directly to your home.
+    
+    Icon:
+    Location pin + package SVG
+    
+    ---
+    
+    Man and Van Sydney
+    
+    Description:
+    Affordable moving help with an oversized long-wheelbase van and professional mover.
+    
+    Icon:
+    Modern van SVG
+    
+    ---
+    
+    Small Apartment Moves
+    
+    Description:
+    Studio apartments, one-bedroom units and small household relocations.
+    
+    Icon:
+    Apartment building SVG
+    
+    ---
+    
+    Store Collection Delivery
+    
+    Description:
+    Furniture pickups from IKEA, Fantastic Furniture, Freedom, Amart and retail stores.
+    
+    Icon:
+    Storefront SVG
+    
+    ---
+    
+    Single Item Delivery
+    
+    Description:
+    Fridges, washing machines, mattresses, lounges and bulky household items.
+    
+    Icon:
+    Package delivery SVG
+    
+    ---
+    
+    Granny Flat Moves
+    
+    Description:
+    Affordable relocation assistance for granny flats and smaller homes.
+    
+    Icon:
+    House SVG
+    
+    ---
+    
+    Same Day Delivery
+    
+    Description:
+    Urgent furniture pickups and deliveries available across Sydney.
+    
+    Icon:
+    Fast delivery route SVG
+    
+    INTERACTIVE REQUIREMENTS
+    
+    Each service card should include:
+    
+    • Hover lift animation
+    • Border glow effect
+    • Animated icon movement
+    • Smooth transitions
+    • Mobile touch feedback
+    • Expandable "Learn More" interaction
+    • Modern card shadows
+    • Floating background elements
+    
+    VISUAL STYLE
+    
+    Premium service-business appearance.
+    
+    Colours:
+    White
+    Black
+    Gold
+    Yellow
+    Small blue accents
+    
+    Use modern SVG illustrations.
+    
+    Avoid stock-looking icons.
+    
+    BACKGROUND
+    
+    Create a subtle SVG pattern background.
+    
+    Use:
+    
+    • Route lines
+    • Delivery paths
+    • Location markers
+    • Abstract moving elements
+    
+    Keep the design clean and professional.
+    
+    SEO REQUIREMENTS
+    
+    Naturally include:
+    
+    Removalist Sydney
+    
+    Furniture Delivery Sydney
+    
+    Man and Van Sydney
+    
+    Marketplace Pickup Delivery Sydney
+    
+    Single Item Delivery Sydney
+    
+    Small Apartment Moves Sydney
+    
+    Store Collection Delivery Sydney
+    
+    Same Day Delivery Sydney
+    
+    Do not keyword stuff.
+    
+    GOOGLE ADS RELEVANCE
+    
+    This section should clearly communicate:
+    
+    Who we help
+    
+    What we move
+    
+    Where we operate
+    
+    Why customers choose Titan Express
+    
+    Trust indicators:
+    
+    ✓ Professional Handling
+    
+    ✓ Oversized Van
+    
+    ✓ Furniture Protection
+    
+    ✓ Sydney Wide Service
+    
+    ✓ Same Day Availability
+    
+    OUTPUT
+    
+    Generate complete Shopify-compatible Liquid, HTML, CSS and JavaScript.
+    
+    Use class names beginning with:
+    
+    titan-services-
+    
+    Make the section highly responsive, interactive, conversion-focused and visually premium while maintaining fast loading performance.
+      yelloww white black theme
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .titan-services-section-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .titan-services-background-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: {{ block.settings.background_pattern_opacity | divided_by: 100.0 }};
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .titan-services-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .titan-services-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .titan-services-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.title_spacing }}px;
+    line-height: 1.2;
+  }
+
+  .titan-services-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .titan-services-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-top: {{ block.settings.grid_spacing }}px;
+  }
+
+  .titan-services-card-{{ ai_gen_id }} {
+    background: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    backdrop-filter: blur({{ block.settings.glassmorphism_blur }}px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .titan-services-card-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, {{ block.settings.card_gradient_start }} 0%, {{ block.settings.card_gradient_end }} 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .titan-services-card-{{ ai_gen_id }}:hover::before {
+    opacity: {{ block.settings.card_gradient_opacity | divided_by: 100.0 }};
+  }
+
+  .titan-services-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-{{ block.settings.hover_lift }}px);
+    box-shadow: 0 {{ block.settings.hover_shadow_y }}px {{ block.settings.hover_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.hover_shadow_opacity | divided_by: 100.0 }});
+    border-color: {{ block.settings.card_hover_border_color }};
+  }
+
+  .titan-services-card-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 1;
+  }
+
+  .titan-services-icon-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-bottom: {{ block.settings.icon_spacing }}px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .titan-services-card-{{ ai_gen_id }}:hover .titan-services-icon-wrapper-{{ ai_gen_id }} {
+    transform: translateY(-{{ block.settings.icon_hover_move }}px) scale(1.05);
+  }
+
+  .titan-services-icon-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .titan-services-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.card_title_color }};
+    margin: 0 0 {{ block.settings.card_title_spacing }}px;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+  }
+
+  .titan-services-card-{{ ai_gen_id }}:hover .titan-services-card-title-{{ ai_gen_id }} {
+    color: {{ block.settings.card_title_hover_color }};
+  }
+
+  .titan-services-card-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_description_size }}px;
+    color: {{ block.settings.card_description_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .titan-services-learn-more-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.learn_more_spacing }}px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+  }
+
+  .titan-services-card-{{ ai_gen_id }}.expanded .titan-services-learn-more-{{ ai_gen_id }} {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .titan-services-learn-more-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.learn_more_text_size }}px;
+    color: {{ block.settings.learn_more_color }};
+    line-height: 1.5;
+  }
+
+  .titan-services-trust-section-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.trust_section_spacing }}px;
+    padding-top: {{ block.settings.trust_section_padding }}px;
+    border-top: 1px solid {{ block.settings.trust_border_color }};
+  }
+
+  .titan-services-trust-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: center;
+  }
+
+  .titan-services-trust-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: {{ block.settings.trust_text_size }}px;
+    color: {{ block.settings.trust_text_color }};
+    font-weight: 500;
+  }
+
+  .titan-services-trust-icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    color: {{ block.settings.trust_icon_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .titan-services-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .titan-services-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .titan-services-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .titan-services-section-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.7 }}px 16px {{ block.settings.section_padding_bottom | times: 0.7 }}px;
+    }
+
+    .titan-services-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.grid_gap | times: 0.75 }}px;
+    }
+
+    .titan-services-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.65);
+    }
+
+    .titan-services-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.85);
+    }
+
+    .titan-services-card-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding | times: 0.8 }}px;
+    }
+
+    .titan-services-icon-wrapper-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.85 }}px;
+      height: {{ block.settings.icon_size | times: 0.85 }}px;
+    }
+
+    .titan-services-card-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.card_title_size }}px * 0.9);
+    }
+
+    .titan-services-trust-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .titan-services-trust-item-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.trust_text_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<titan-services-{{ ai_gen_id }} class="titan-services-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <svg class="titan-services-background-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="titan-pattern-{{ ai_gen_id }}" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <path d="M10 10 L30 30 M30 10 L10 30" stroke="{{ block.settings.pattern_color }}" stroke-width="0.5" fill="none" opacity="0.3"/>
+        <circle cx="50" cy="50" r="2" fill="{{ block.settings.pattern_color }}" opacity="0.4"/>
+        <path d="M70 20 Q80 30 70 40" stroke="{{ block.settings.pattern_color }}" stroke-width="0.5" fill="none" opacity="0.3"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#titan-pattern-{{ ai_gen_id }})"/>
+    <path d="M0,400 Q300,350 600,400 T1200,400" stroke="{{ block.settings.pattern_color }}" stroke-width="1" fill="none" opacity="0.2"/>
+    <path d="M0,500 Q300,450 600,500 T1200,500" stroke="{{ block.settings.pattern_color }}" stroke-width="1" fill="none" opacity="0.15"/>
+  </svg>
+
+  <div class="titan-services-container-{{ ai_gen_id }}">
+    <div class="titan-services-header-{{ ai_gen_id }}">
+      {% if block.settings.section_title != blank %}
+        <h2 class="titan-services-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+      {% endif %}
+      {% if block.settings.section_subtitle != blank %}
+        <div class="titan-services-subtitle-{{ ai_gen_id }}">{{ block.settings.section_subtitle }}</div>
+      {% endif %}
+    </div>
+
+    <div class="titan-services-grid-{{ ai_gen_id }}">
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="furniture-delivery">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="32" width="48" height="4" fill="{{ block.settings.icon_color }}" rx="2"/>
+              <rect x="12" y="20" width="40" height="12" fill="{{ block.settings.icon_accent_color }}" rx="2"/>
+              <circle cx="16" cy="40" r="3" fill="{{ block.settings.icon_color }}"/>
+              <circle cx="48" cy="40" r="3" fill="{{ block.settings.icon_color }}"/>
+              <path d="M20 20 L20 14 Q20 12 22 12 L42 12 Q44 12 44 14 L44 20" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_1_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_1_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_1_details }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="marketplace-pickup">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <path d="M32 12 L32 28 M32 12 L28 16 M32 12 L36 16" stroke="{{ block.settings.icon_color }}" stroke-width="2.5" stroke-linecap="round"/>
+              <rect x="20" y="28" width="24" height="20" fill="{{ block.settings.icon_accent_color }}" rx="2"/>
+              <path d="M26 28 L26 24 L38 24 L38 28" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+              <circle cx="32" cy="52" r="8" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+              <circle cx="32" cy="52" r="3" fill="{{ block.settings.icon_color }}"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_2_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_2_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_2_details }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="man-and-van">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="24" width="36" height="20" fill="{{ block.settings.icon_accent_color }}" rx="2"/>
+              <rect x="12" y="16" width="28" height="8" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <circle cx="18" cy="48" r="4" fill="{{ block.settings.icon_color }}"/>
+              <circle cx="38" cy="48" r="4" fill="{{ block.settings.icon_color }}"/>
+              <path d="M44 32 L52 32 L56 40 L56 44 L44 44 L44 32 Z" fill="{{ block.settings.icon_accent_color }}"/>
+              <rect x="48" y="36" width="4" height="4" fill="{{ block.settings.icon_color }}" rx="0.5"/>
+              <circle cx="50" cy="48" r="4" fill="{{ block.settings.icon_color }}"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_3_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_3_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_3_details }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="apartment-moves">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <rect x="16" y="12" width="32" height="44" fill="{{ block.settings.icon_accent_color }}" rx="2"/>
+              <rect x="22" y="18" width="8" height="6" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="34" y="18" width="8" height="6" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="22" y="28" width="8" height="6" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="34" y="28" width="8" height="6" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="22" y="38" width="8" height="6" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="34" y="38" width="8" height="6" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="26" y="48" width="12" height="8" fill="{{ block.settings.icon_color }}" rx="1"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_4_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_4_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_4_details }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="store-collection">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <path d="M12 20 L12 52 L52 52 L52 20" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+              <path d="M8 20 L16 12 L48 12 L56 20 L8 20 Z" fill="{{ block.settings.icon_accent_color }}"/>
+              <rect x="26" y="40" width="12" height="12" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="18" y="26" width="10" height="10" fill="{{ block.settings.icon_accent_color }}" rx="1"/>
+              <rect x="36" y="26" width="10" height="10" fill="{{ block.settings.icon_accent_color }}" rx="1"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_5_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_5_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_5_details }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="single-item">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <rect x="18" y="18" width="28" height="28" fill="{{ block.settings.icon_accent_color }}" rx="2"/>
+              <path d="M32 12 L32 24 M28 16 L32 12 L36 16" stroke="{{ block.settings.icon_color }}" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M24 32 L40 32 M32 24 L32 40" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="32" cy="52" r="6" stroke="{{ block.settings.icon_color }}" stroke-width="2" fill="none"/>
+              <path d="M29 52 L31 54 L35 50" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_6_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_6_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_6_details }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="granny-flat">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <path d="M32 8 L52 24 L52 52 L12 52 L12 24 Z" fill="{{ block.settings.icon_accent_color }}"/>
+              <path d="M32 8 L12 24 L52 24 Z" fill="{{ block.settings.icon_color }}"/>
+              <rect x="24" y="36" width="10" height="16" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <rect x="40" y="30" width="6" height="6" fill="{{ block.settings.icon_color }}" rx="1"/>
+              <circle cx="28" cy="44" r="1.5" fill="{{ block.settings.icon_accent_color }}"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_7_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_7_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_7_details }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="titan-services-card-{{ ai_gen_id }}" data-service="same-day">
+        <div class="titan-services-card-content-{{ ai_gen_id }}">
+          <div class="titan-services-icon-wrapper-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="32" r="20" stroke="{{ block.settings.icon_color }}" stroke-width="2.5" fill="none"/>
+              <path d="M32 16 L32 32 L42 38" stroke="{{ block.settings.icon_accent_color }}" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M48 12 L56 12 L56 20 M48 12 L56 20" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+              <path d="M16 52 L8 52 L8 44 M16 52 L8 44" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="titan-services-card-title-{{ ai_gen_id }}">{{ block.settings.service_8_title }}</h3>
+          <p class="titan-services-card-description-{{ ai_gen_id }}">{{ block.settings.service_8_description }}</p>
+          <div class="titan-services-learn-more-{{ ai_gen_id }}">
+            <p class="titan-services-learn-more-text-{{ ai_gen_id }}">{{ block.settings.service_8_details }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if block.settings.show_trust_indicators %}
+      <div class="titan-services-trust-section-{{ ai_gen_id }}">
+        <div class="titan-services-trust-grid-{{ ai_gen_id }}">
+          <div class="titan-services-trust-item-{{ ai_gen_id }}">
+            <svg class="titan-services-trust-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Professional Handling</span>
+          </div>
+          <div class="titan-services-trust-item-{{ ai_gen_id }}">
+            <svg class="titan-services-trust-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Oversized Van</span>
+          </div>
+          <div class="titan-services-trust-item-{{ ai_gen_id }}">
+            <svg class="titan-services-trust-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Furniture Protection</span>
+          </div>
+          <div class="titan-services-trust-item-{{ ai_gen_id }}">
+            <svg class="titan-services-trust-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Sydney Wide Service</span>
+          </div>
+          <div class="titan-services-trust-item-{{ ai_gen_id }}">
+            <svg class="titan-services-trust-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Same Day Availability</span>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</titan-services-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TitanServices{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.cards = this.querySelectorAll('.titan-services-card-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.cards.forEach((card) => {
+          card.addEventListener('click', () => {
+            const isExpanded = card.classList.contains('expanded');
+            
+            this.cards.forEach((c) => c.classList.remove('expanded'));
+            
+            if (!isExpanded) {
+              card.classList.add('expanded');
+            }
+          });
+        });
+
+        document.addEventListener('click', (event) => {
+          if (!event.target.closest('.titan-services-card-{{ ai_gen_id }}')) {
+            this.cards.forEach((card) => card.classList.remove('expanded'));
+          }
+        });
+      }
+    }
+
+    customElements.define('titan-services-{{ ai_gen_id }}', TitanServices{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Titan services grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "What Can We Move For You?"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Subtitle",
+      "default": "From single-item furniture delivery to apartment moves and Marketplace pickups, Titan Express provides fast, affordable moving and delivery services throughout Sydney."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "grid_spacing",
+      "label": "Grid spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern",
+      "default": "#FFD700"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Title spacing",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Background pattern"
+    },
+    {
+      "type": "range",
+      "id": "background_pattern_opacity",
+      "label": "Pattern opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border_color",
+      "label": "Hover border",
+      "default": "#FFD700"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Padding",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "glassmorphism_blur",
+      "label": "Glassmorphism blur",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Card gradient"
+    },
+    {
+      "type": "color",
+      "id": "card_gradient_start",
+      "label": "Gradient start",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "card_gradient_end",
+      "label": "Gradient end",
+      "default": "#FFA500"
+    },
+    {
+      "type": "range",
+      "id": "card_gradient_opacity",
+      "label": "Gradient opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Card hover effects"
+    },
+    {
+      "type": "range",
+      "id": "hover_lift",
+      "label": "Lift distance",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "hover_shadow_y",
+      "label": "Shadow Y offset",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "hover_shadow_blur",
+      "label": "Shadow blur",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "hover_shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Card icons"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon primary",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_accent_color",
+      "label": "Icon accent",
+      "default": "#FFD700"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "label": "Icon spacing",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_hover_move",
+      "label": "Icon hover movement",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Card text"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_title_hover_color",
+      "label": "Title hover",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_description_color",
+      "label": "Description",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_title_spacing",
+      "label": "Title spacing",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Learn more section"
+    },
+    {
+      "type": "color",
+      "id": "learn_more_color",
+      "label": "Text color",
+      "default": "#555555"
+    },
+    {
+      "type": "range",
+      "id": "learn_more_spacing",
+      "label": "Spacing",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "learn_more_text_size",
+      "label": "Text size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Trust indicators"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_indicators",
+      "label": "Show trust indicators",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "trust_text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "trust_icon_color",
+      "label": "Icon color",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "trust_border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "trust_section_spacing",
+      "label": "Section spacing",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "trust_section_padding",
+      "label": "Section padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "trust_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Service 1 - Furniture delivery"
+    },
+    {
+      "type": "text",
+      "id": "service_1_title",
+      "label": "Title",
+      "default": "Furniture Delivery Sydney"
+    },
+    {
+      "type": "textarea",
+      "id": "service_1_description",
+      "label": "Description",
+      "default": "Sofas, dining tables, beds, wardrobes, entertainment units and household furniture delivered across Sydney."
+    },
+    {
+      "type": "textarea",
+      "id": "service_1_details",
+      "label": "Learn more details",
+      "default": "Professional removalists Sydney with furniture protection and careful handling."
+    },
+    {
+      "type": "header",
+      "content": "Service 2 - Marketplace pickup"
+    },
+    {
+      "type": "text",
+      "id": "service_2_title",
+      "label": "Title",
+      "default": "Marketplace Pickup & Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "service_2_description",
+      "label": "Description",
+      "default": "Facebook Marketplace, Gumtree and private seller pickups delivered directly to your home."
+    },
+    {
+      "type": "textarea",
+      "id": "service_2_details",
+      "label": "Learn more details",
+      "default": "Marketplace pickup delivery Sydney service available same day."
+    },
+    {
+      "type": "header",
+      "content": "Service 3 - Man and van"
+    },
+    {
+      "type": "text",
+      "id": "service_3_title",
+      "label": "Title",
+      "default": "Man and Van Sydney"
+    },
+    {
+      "type": "textarea",
+      "id": "service_3_description",
+      "label": "Description",
+      "default": "Affordable moving help with an oversized long-wheelbase van and professional mover."
+    },
+    {
+      "type": "textarea",
+      "id": "service_3_details",
+      "label": "Learn more details",
+      "default": "Man and van Sydney service with experienced removalist and large capacity vehicle."
+    },
+    {
+      "type": "header",
+      "content": "Service 4 - Apartment moves"
+    },
+    {
+      "type": "text",
+      "id": "service_4_title",
+      "label": "Title",
+      "default": "Small Apartment Moves"
+    },
+    {
+      "type": "textarea",
+      "id": "service_4_description",
+      "label": "Description",
+      "default": "Studio apartments, one-bedroom units and small household relocations."
+    },
+    {
+      "type": "textarea",
+      "id": "service_4_details",
+      "label": "Learn more details",
+      "default": "Small apartment moves Sydney with professional packing and furniture protection."
+    },
+    {
+      "type": "header",
+      "content": "Service 5 - Store collection"
+    },
+    {
+      "type": "text",
+      "id": "service_5_title",
+      "label": "Title",
+      "default": "Store Collection Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "service_5_description",
+      "label": "Description",
+      "default": "Furniture pickups from IKEA, Fantastic Furniture, Freedom, Amart and retail stores."
+    },
+    {
+      "type": "textarea",
+      "id": "service_5_details",
+      "label": "Learn more details",
+      "default": "Store collection delivery Sydney from all major furniture retailers."
+    },
+    {
+      "type": "header",
+      "content": "Service 6 - Single item"
+    },
+    {
+      "type": "text",
+      "id": "service_6_title",
+      "label": "Title",
+      "default": "Single Item Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "service_6_description",
+      "label": "Description",
+      "default": "Fridges, washing machines, mattresses, lounges and bulky household items."
+    },
+    {
+      "type": "textarea",
+      "id": "service_6_details",
+      "label": "Learn more details",
+      "default": "Single item delivery Sydney for large appliances and furniture pieces."
+    },
+    {
+      "type": "header",
+      "content": "Service 7 - Granny flat"
+    },
+    {
+      "type": "text",
+      "id": "service_7_title",
+      "label": "Title",
+      "default": "Granny Flat Moves"
+    },
+    {
+      "type": "textarea",
+      "id": "service_7_description",
+      "label": "Description",
+      "default": "Affordable relocation assistance for granny flats and smaller homes."
+    },
+    {
+      "type": "textarea",
+      "id": "service_7_details",
+      "label": "Learn more details",
+      "default": "Granny flat moves with careful handling and competitive pricing."
+    },
+    {
+      "type": "header",
+      "content": "Service 8 - Same day"
+    },
+    {
+      "type": "text",
+      "id": "service_8_title",
+      "label": "Title",
+      "default": "Same Day Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "service_8_description",
+      "label": "Description",
+      "default": "Urgent furniture pickups and deliveries available across Sydney."
+    },
+    {
+      "type": "textarea",
+      "id": "service_8_details",
+      "label": "Learn more details",
+      "default": "Same day delivery Sydney for urgent furniture and household item transport."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan services grid"
+    }
+  ]
+}
+{% endschema %}

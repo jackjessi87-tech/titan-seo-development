@@ -1,0 +1,749 @@
+{% doc %}
+  @prompt
+    Create a modern comparison table section titled "Why Choose Titan Express?" with subheading "See how we compare to Airtasker and DIY van hire". Three columns: Titan Express (centre, highlighted with amber border and "Most Trusted" badge), Airtasker, DIY Van Hire. Seven comparison rows with icons: 1) Fixed Price - Yes / Varies / No; 2) Fully Insured - Yes / Sometimes / No; 3) Same-Day Available - Yes / Sometimes / No; 4) Equipment Included (blankets, trolleys) - Yes / Sometimes / No; 5) Trained Professionals - Yes / Unknown / Self; 6) No Hidden Fees - Yes / Platform fees apply / Fuel & extras; 7) 5-Star Google Rating - Yes / Mixed / N/A. Green checkmarks for Titan Express, red X or orange warning for others. CTA button below: "Book Titan Express Today" in amber. White background, clean minimal design, fully mobile responsive - scrollable table on small screens.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-comparison-table-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-comparison-table__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-comparison-table__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .ai-comparison-table__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .ai-comparison-table__wrapper-{{ ai_gen_id }} {
+    overflow-x: auto;
+    margin-bottom: 32px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-comparison-table__table-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+
+  .ai-comparison-table__header-row-{{ ai_gen_id }} {
+    border-bottom: 2px solid {{ block.settings.border_color }};
+  }
+
+  .ai-comparison-table__header-cell-{{ ai_gen_id }} {
+    padding: 24px 16px;
+    text-align: center;
+    font-weight: 600;
+    font-size: {{ block.settings.header_size }}px;
+    color: {{ block.settings.text_color }};
+    position: relative;
+  }
+
+  .ai-comparison-table__header-cell-{{ ai_gen_id }}--highlighted {
+    background-color: {{ block.settings.highlight_bg_color }};
+    border: 3px solid {{ block.settings.highlight_border_color }};
+    border-bottom: none;
+  }
+
+  .ai-comparison-table__badge-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.badge_bg_color }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .ai-comparison-table__company-name-{{ ai_gen_id }} {
+    display: block;
+    font-size: {{ block.settings.header_size }}px;
+    font-weight: 700;
+  }
+
+  .ai-comparison-table__row-{{ ai_gen_id }} {
+    border-bottom: 1px solid {{ block.settings.border_color }};
+  }
+
+  .ai-comparison-table__cell-{{ ai_gen_id }} {
+    padding: 20px 16px;
+    text-align: center;
+    font-size: {{ block.settings.cell_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-comparison-table__cell-{{ ai_gen_id }}--highlighted {
+    background-color: {{ block.settings.highlight_bg_color }};
+    border-left: 3px solid {{ block.settings.highlight_border_color }};
+    border-right: 3px solid {{ block.settings.highlight_border_color }};
+  }
+
+  .ai-comparison-table__row-{{ ai_gen_id }}:last-child .ai-comparison-table__cell-{{ ai_gen_id }}--highlighted {
+    border-bottom: 3px solid {{ block.settings.highlight_border_color }};
+  }
+
+  .ai-comparison-table__feature-{{ ai_gen_id }} {
+    text-align: left;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ai-comparison-table__icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .ai-comparison-table__check-{{ ai_gen_id }} {
+    color: {{ block.settings.check_color }};
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .ai-comparison-table__cross-{{ ai_gen_id }} {
+    color: {{ block.settings.cross_color }};
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .ai-comparison-table__warning-{{ ai_gen_id }} {
+    color: {{ block.settings.warning_color }};
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .ai-comparison-table__cta-{{ ai_gen_id }} {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  .ai-comparison-table__button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_size }}px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-comparison-table__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-comparison-table__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.7 }}px;
+    }
+
+    .ai-comparison-table__subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.85 }}px;
+    }
+
+    .ai-comparison-table__header-cell-{{ ai_gen_id }} {
+      padding: 16px 8px;
+      font-size: {{ block.settings.header_size | times: 0.85 }}px;
+    }
+
+    .ai-comparison-table__cell-{{ ai_gen_id }} {
+      padding: 16px 8px;
+      font-size: {{ block.settings.cell_size | times: 0.9 }}px;
+    }
+
+    .ai-comparison-table__badge-{{ ai_gen_id }} {
+      font-size: 10px;
+      padding: 4px 8px;
+    }
+
+    .ai-comparison-table__wrapper-{{ ai_gen_id }} {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding: 0 20px;
+    }
+  }
+{% endstyle %}
+
+<comparison-table-{{ ai_gen_id }} class="ai-comparison-table-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-comparison-table__header-{{ ai_gen_id }}">
+    <h2 class="ai-comparison-table__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    <p class="ai-comparison-table__subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+  </div>
+
+  <div class="ai-comparison-table__wrapper-{{ ai_gen_id }}">
+    <table class="ai-comparison-table__table-{{ ai_gen_id }}">
+      <thead>
+        <tr class="ai-comparison-table__header-row-{{ ai_gen_id }}">
+          <th class="ai-comparison-table__header-cell-{{ ai_gen_id }}"></th>
+          <th class="ai-comparison-table__header-cell-{{ ai_gen_id }} ai-comparison-table__header-cell-{{ ai_gen_id }}--highlighted">
+            {% if block.settings.show_badge %}
+              <span class="ai-comparison-table__badge-{{ ai_gen_id }}">{{ block.settings.badge_text }}</span>
+            {% endif %}
+            <span class="ai-comparison-table__company-name-{{ ai_gen_id }}">{{ block.settings.company_1_name }}</span>
+          </th>
+          <th class="ai-comparison-table__header-cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__company-name-{{ ai_gen_id }}">{{ block.settings.company_2_name }}</span>
+          </th>
+          <th class="ai-comparison-table__header-cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__company-name-{{ ai_gen_id }}">{{ block.settings.company_3_name }}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ai-comparison-table__row-{{ ai_gen_id }}">
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <div class="ai-comparison-table__feature-{{ ai_gen_id }}">
+              <svg class="ai-comparison-table__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+              <span>{{ block.settings.feature_1_name }}</span>
+            </div>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--highlighted">
+            <span class="ai-comparison-table__check-{{ ai_gen_id }}">✓</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_1_col2 }}</td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_1_col3 }}</td>
+        </tr>
+
+        <tr class="ai-comparison-table__row-{{ ai_gen_id }}">
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <div class="ai-comparison-table__feature-{{ ai_gen_id }}">
+              <svg class="ai-comparison-table__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>{{ block.settings.feature_2_name }}</span>
+            </div>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--highlighted">
+            <span class="ai-comparison-table__check-{{ ai_gen_id }}">✓</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__warning-{{ ai_gen_id }}">⚠</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__cross-{{ ai_gen_id }}">✕</span>
+          </td>
+        </tr>
+
+        <tr class="ai-comparison-table__row-{{ ai_gen_id }}">
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <div class="ai-comparison-table__feature-{{ ai_gen_id }}">
+              <svg class="ai-comparison-table__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>{{ block.settings.feature_3_name }}</span>
+            </div>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--highlighted">
+            <span class="ai-comparison-table__check-{{ ai_gen_id }}">✓</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__warning-{{ ai_gen_id }}">⚠</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__cross-{{ ai_gen_id }}">✕</span>
+          </td>
+        </tr>
+
+        <tr class="ai-comparison-table__row-{{ ai_gen_id }}">
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <div class="ai-comparison-table__feature-{{ ai_gen_id }}">
+              <svg class="ai-comparison-table__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 7h-9M14 17H5M17 3v18M7 3v18"/>
+              </svg>
+              <span>{{ block.settings.feature_4_name }}</span>
+            </div>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--highlighted">
+            <span class="ai-comparison-table__check-{{ ai_gen_id }}">✓</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__warning-{{ ai_gen_id }}">⚠</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <span class="ai-comparison-table__cross-{{ ai_gen_id }}">✕</span>
+          </td>
+        </tr>
+
+        <tr class="ai-comparison-table__row-{{ ai_gen_id }}">
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <div class="ai-comparison-table__feature-{{ ai_gen_id }}">
+              <svg class="ai-comparison-table__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              <span>{{ block.settings.feature_5_name }}</span>
+            </div>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--highlighted">
+            <span class="ai-comparison-table__check-{{ ai_gen_id }}">✓</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_5_col2 }}</td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_5_col3 }}</td>
+        </tr>
+
+        <tr class="ai-comparison-table__row-{{ ai_gen_id }}">
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <div class="ai-comparison-table__feature-{{ ai_gen_id }}">
+              <svg class="ai-comparison-table__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+              <span>{{ block.settings.feature_6_name }}</span>
+            </div>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--highlighted">
+            <span class="ai-comparison-table__check-{{ ai_gen_id }}">✓</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_6_col2 }}</td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_6_col3 }}</td>
+        </tr>
+
+        <tr class="ai-comparison-table__row-{{ ai_gen_id }}">
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">
+            <div class="ai-comparison-table__feature-{{ ai_gen_id }}">
+              <svg class="ai-comparison-table__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span>{{ block.settings.feature_7_name }}</span>
+            </div>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--highlighted">
+            <span class="ai-comparison-table__check-{{ ai_gen_id }}">✓</span>
+          </td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_7_col2 }}</td>
+          <td class="ai-comparison-table__cell-{{ ai_gen_id }}">{{ block.settings.feature_7_col3 }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ai-comparison-table__cta-{{ ai_gen_id }}">
+    <a href="{{ block.settings.cta_link }}" class="ai-comparison-table__button-{{ ai_gen_id }}">
+      {{ block.settings.cta_text }}
+    </a>
+  </div>
+</comparison-table-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ComparisonTable{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        const table = this.querySelector('.ai-comparison-table__table-{{ ai_gen_id }}');
+        if (table) {
+          table.setAttribute('role', 'table');
+          table.setAttribute('aria-label', 'Service comparison table');
+        }
+      }
+    }
+
+    customElements.define('comparison-table-{{ ai_gen_id }}', ComparisonTable{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why Choose Titan Express?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "See how we compare to Airtasker and DIY van hire"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Company names"
+    },
+    {
+      "type": "text",
+      "id": "company_1_name",
+      "label": "Company 1 (highlighted)",
+      "default": "Titan Express"
+    },
+    {
+      "type": "text",
+      "id": "company_2_name",
+      "label": "Company 2",
+      "default": "Airtasker"
+    },
+    {
+      "type": "text",
+      "id": "company_3_name",
+      "label": "Company 3",
+      "default": "DIY Van Hire"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Most Trusted"
+    },
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_name",
+      "label": "Feature name",
+      "default": "Fixed Price"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_col2",
+      "label": "Company 2 value",
+      "default": "Varies"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_col3",
+      "label": "Company 3 value",
+      "default": "No"
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_name",
+      "label": "Feature name",
+      "default": "Fully Insured"
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_name",
+      "label": "Feature name",
+      "default": "Same-Day Available"
+    },
+    {
+      "type": "header",
+      "content": "Feature 4"
+    },
+    {
+      "type": "text",
+      "id": "feature_4_name",
+      "label": "Feature name",
+      "default": "Equipment Included"
+    },
+    {
+      "type": "header",
+      "content": "Feature 5"
+    },
+    {
+      "type": "text",
+      "id": "feature_5_name",
+      "label": "Feature name",
+      "default": "Trained Professionals"
+    },
+    {
+      "type": "text",
+      "id": "feature_5_col2",
+      "label": "Company 2 value",
+      "default": "Unknown"
+    },
+    {
+      "type": "text",
+      "id": "feature_5_col3",
+      "label": "Company 3 value",
+      "default": "Self"
+    },
+    {
+      "type": "header",
+      "content": "Feature 6"
+    },
+    {
+      "type": "text",
+      "id": "feature_6_name",
+      "label": "Feature name",
+      "default": "No Hidden Fees"
+    },
+    {
+      "type": "text",
+      "id": "feature_6_col2",
+      "label": "Company 2 value",
+      "default": "Platform fees apply"
+    },
+    {
+      "type": "text",
+      "id": "feature_6_col3",
+      "label": "Company 3 value",
+      "default": "Fuel & extras"
+    },
+    {
+      "type": "header",
+      "content": "Feature 7"
+    },
+    {
+      "type": "text",
+      "id": "feature_7_name",
+      "label": "Feature name",
+      "default": "5-Star Google Rating"
+    },
+    {
+      "type": "text",
+      "id": "feature_7_col2",
+      "label": "Company 2 value",
+      "default": "Mixed"
+    },
+    {
+      "type": "text",
+      "id": "feature_7_col3",
+      "label": "Company 3 value",
+      "default": "N/A"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Book Titan Express Today"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "header_size",
+      "label": "Header text size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "cell_size",
+      "label": "Cell text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "highlight_bg_color",
+      "label": "Highlight background",
+      "default": "#fffbf0"
+    },
+    {
+      "type": "color",
+      "id": "highlight_border_color",
+      "label": "Highlight border",
+      "default": "#f59e0b"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#f59e0b"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Check mark",
+      "default": "#10b981"
+    },
+    {
+      "type": "color",
+      "id": "cross_color",
+      "label": "Cross mark",
+      "default": "#ef4444"
+    },
+    {
+      "type": "color",
+      "id": "warning_color",
+      "label": "Warning mark",
+      "default": "#f59e0b"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#f59e0b"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#d97706"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,813 @@
+{% doc %}
+  @prompt
+    Create a premium Shopify Online Store 2.0 section called "Dynamic FAQ".
+    
+    This section must load FAQs dynamically from the page metafield:
+    
+    custom.faqs
+    
+    The metafield is a List of FAQ metaobject references.
+    
+    Loop through:
+    
+    page.metafields.custom.faqs.value
+    
+    Do not use manual section blocks.
+    
+    Do not hardcode FAQ content.
+    
+    Everything must come from the selected FAQ metaobjects.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    FAQ METAOBJECT FIELDS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Each FAQ contains:
+    
+    • Question
+    • Answer
+    • Category
+    • Display Order
+    
+    Display every selected FAQ.
+    
+    If no FAQs are selected, hide the entire section automatically.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    SECTION HEADER
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Heading
+    
+    Frequently Asked Questions
+    
+    Subheading
+    
+    Find answers to common questions about our furniture delivery, marketplace pickups, pricing, and same-day delivery services.
+    
+    Allow merchant to edit:
+    
+    • Heading
+    • Subheading
+    • Background colour
+    • Section spacing
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    DESIGN
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Create a premium modern FAQ section.
+    
+    White background
+    
+    Rounded cards
+    
+    18px border radius
+    
+    Soft shadow
+    
+    Large spacing
+    
+    Professional typography
+    
+    Premium SVG icons
+    
+    Smooth animations
+    
+    Maximum width 900px
+    
+    Centered layout
+    
+    Excellent mobile spacing
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    FAQ LAYOUT
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Each FAQ should display:
+    
+    Optional Category Badge
+    
+    Question
+    
+    Plus / Minus SVG icon
+    
+    Answer
+    
+    Category badge examples:
+    
+    Pricing
+    
+    Marketplace
+    
+    Furniture Delivery
+    
+    Booking
+    
+    Access
+    
+    Safety
+    
+    Same Day
+    
+    Use different subtle colours for category badges.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ACCORDION
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Create a premium accordion.
+    
+    Requirements:
+    
+    First FAQ opened by default.
+    
+    Only one FAQ stays open.
+    
+    Opening another FAQ automatically closes the previous one.
+    
+    Smooth animation.
+    
+    Keyboard accessible.
+    
+    ARIA labels.
+    
+    Use semantic button elements.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    SEO
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Use semantic HTML.
+    
+    <section>
+    
+    <header>
+    
+    <h2>
+    
+    Each FAQ should use semantic markup.
+    
+    Generate FAQPage JSON-LD automatically using the selected FAQ metaobjects.
+    
+    Each Question becomes:
+    
+    mainEntity
+    
+    Each Answer becomes:
+    
+    acceptedAnswer
+    
+    Do not generate schema if no FAQs exist.
+    
+    Avoid duplicate schema.
+    
+    Strip HTML tags inside schema.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    PERFORMANCE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Use Shopify Liquid.
+    
+    Use CSS.
+    
+    Use Vanilla JavaScript only.
+    
+    No jQuery.
+    
+    No external libraries.
+    
+    Lazy load JavaScript only when this section exists.
+    
+    Optimise for Core Web Vitals.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    THEME SETTINGS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Allow merchant to customise:
+    
+    Heading
+    
+    Subheading
+    
+    Background colour
+    
+    Card colour
+    
+    Border radius
+    
+    Shadow
+    
+    Spacing
+    
+    Accordion icon colour
+    
+    Animation speed
+    
+    Open first FAQ
+    
+    Enable category badges
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    DYNAMIC DATA
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    Read data only from:
+    
+    page.metafields.custom.faqs.value
+    
+    Display dynamically:
+    
+    Question
+    
+    Answer
+    
+    Category
+    
+    Sort FAQs by Display Order.
+    
+    Hide empty fields.
+    
+    Hide the section if there are no FAQs assigned.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    FINAL GOAL
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    The FAQ section should look like a premium service website rather than a default Shopify accordion.
+    
+    It should increase trust, answer customer questions, improve user experience, generate FAQ schema automatically, and contribute to local SEO while remaining fully dynamic through Shopify metaobjects.
+{% enddoc %}
+{% assign ai_gen_id = section.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign faqs = page.metafields.custom.faqs.value
+  assign has_faqs = false
+  if faqs and faqs.size > 0
+    assign has_faqs = true
+  endif
+%}
+
+{% if has_faqs %}
+  {% style %}
+    .ai-dynamic-faq-{{ ai_gen_id }} {
+      display: block;
+      width: 100%;
+      background-color: {{ section.settings.background_color }};
+      padding: {{ section.settings.spacing_top }}px 20px {{ section.settings.spacing_bottom }}px;
+    }
+
+    .ai-dynamic-faq-container-{{ ai_gen_id }} {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .ai-dynamic-faq-header-{{ ai_gen_id }} {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .ai-dynamic-faq-heading-{{ ai_gen_id }} {
+      font-size: 32px;
+      font-weight: 700;
+      color: {{ section.settings.heading_color }};
+      margin: 0 0 16px;
+      line-height: 1.2;
+    }
+
+    .ai-dynamic-faq-subheading-{{ ai_gen_id }} {
+      font-size: 16px;
+      color: {{ section.settings.subheading_color }};
+      margin: 0;
+      line-height: 1.6;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ai-dynamic-faq-list-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .ai-dynamic-faq-item-{{ ai_gen_id }} {
+      background-color: {{ section.settings.card_background }};
+      border-radius: {{ section.settings.border_radius }}px;
+      box-shadow: {{ section.settings.shadow_horizontal }}px {{ section.settings.shadow_vertical }}px {{ section.settings.shadow_blur }}px {{ section.settings.shadow_color }};
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .ai-dynamic-faq-item-{{ ai_gen_id }}:hover {
+      box-shadow: {{ section.settings.shadow_horizontal | times: 1.5 }}px {{ section.settings.shadow_vertical | times: 1.5 }}px {{ section.settings.shadow_blur | times: 1.5 }}px {{ section.settings.shadow_color }};
+    }
+
+    .ai-dynamic-faq-question-wrapper-{{ ai_gen_id }} {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .ai-dynamic-faq-question-wrapper-{{ ai_gen_id }}:hover {
+      background-color: {{ section.settings.card_hover_background }};
+    }
+
+    .ai-dynamic-faq-question-content-{{ ai_gen_id }} {
+      flex: 1;
+    }
+
+    .ai-dynamic-faq-category-badge-{{ ai_gen_id }} {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ai-dynamic-faq-category-pricing-{{ ai_gen_id }} {
+      background-color: #e3f2fd;
+      color: #1565c0;
+    }
+
+    .ai-dynamic-faq-category-marketplace-{{ ai_gen_id }} {
+      background-color: #f3e5f5;
+      color: #6a1b9a;
+    }
+
+    .ai-dynamic-faq-category-furniture-delivery-{{ ai_gen_id }} {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .ai-dynamic-faq-category-booking-{{ ai_gen_id }} {
+      background-color: #fff3e0;
+      color: #e65100;
+    }
+
+    .ai-dynamic-faq-category-access-{{ ai_gen_id }} {
+      background-color: #fce4ec;
+      color: #c2185b;
+    }
+
+    .ai-dynamic-faq-category-safety-{{ ai_gen_id }} {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+
+    .ai-dynamic-faq-category-same-day-{{ ai_gen_id }} {
+      background-color: #e0f2f1;
+      color: #00695c;
+    }
+
+    .ai-dynamic-faq-category-default-{{ ai_gen_id }} {
+      background-color: #f5f5f5;
+      color: #424242;
+    }
+
+    .ai-dynamic-faq-question-{{ ai_gen_id }} {
+      font-size: 18px;
+      font-weight: 600;
+      color: {{ section.settings.question_color }};
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .ai-dynamic-faq-icon-{{ ai_gen_id }} {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      transition: transform {{ section.settings.animation_speed }}ms ease;
+      color: {{ section.settings.icon_color }};
+    }
+
+    .ai-dynamic-faq-item-{{ ai_gen_id }}.active .ai-dynamic-faq-icon-{{ ai_gen_id }} {
+      transform: rotate(45deg);
+    }
+
+    .ai-dynamic-faq-answer-wrapper-{{ ai_gen_id }} {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height {{ section.settings.animation_speed }}ms ease;
+    }
+
+    .ai-dynamic-faq-answer-{{ ai_gen_id }} {
+      padding: 0 24px 24px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: {{ section.settings.answer_color }};
+    }
+
+    .ai-dynamic-faq-answer-{{ ai_gen_id }} p {
+      margin: 0 0 12px;
+    }
+
+    .ai-dynamic-faq-answer-{{ ai_gen_id }} p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 749px) {
+      .ai-dynamic-faq-{{ ai_gen_id }} {
+        padding: {{ section.settings.spacing_top | times: 0.6 }}px 16px {{ section.settings.spacing_bottom | times: 0.6 }}px;
+      }
+
+      .ai-dynamic-faq-heading-{{ ai_gen_id }} {
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
+
+      .ai-dynamic-faq-subheading-{{ ai_gen_id }} {
+        font-size: 14px;
+      }
+
+      .ai-dynamic-faq-header-{{ ai_gen_id }} {
+        margin-bottom: 32px;
+      }
+
+      .ai-dynamic-faq-question-wrapper-{{ ai_gen_id }} {
+        padding: 20px;
+        gap: 12px;
+      }
+
+      .ai-dynamic-faq-question-{{ ai_gen_id }} {
+        font-size: 16px;
+      }
+
+      .ai-dynamic-faq-answer-{{ ai_gen_id }} {
+        padding: 0 20px 20px;
+        font-size: 14px;
+      }
+    }
+  {% endstyle %}
+
+  <dynamic-faq-{{ ai_gen_id }} class="ai-dynamic-faq-{{ ai_gen_id }}">
+    <section class="ai-dynamic-faq-container-{{ ai_gen_id }}">
+      {% if section.settings.heading != blank or section.settings.subheading != blank %}
+        <header class="ai-dynamic-faq-header-{{ ai_gen_id }}">
+          {% if section.settings.heading != blank %}
+            <h2 class="ai-dynamic-faq-heading-{{ ai_gen_id }}">{{ section.settings.heading }}</h2>
+          {% endif %}
+          {% if section.settings.subheading != blank %}
+            <p class="ai-dynamic-faq-subheading-{{ ai_gen_id }}">{{ section.settings.subheading }}</p>
+          {% endif %}
+        </header>
+      {% endif %}
+
+      <div class="ai-dynamic-faq-list-{{ ai_gen_id }}">
+        {% assign sorted_faqs = faqs | sort: 'display_order' %}
+        {% for faq in sorted_faqs %}
+          {% liquid
+            assign question = faq.question.value
+            assign answer = faq.answer.value
+            assign category = faq.category.value
+            assign display_order = faq.display_order.value
+          %}
+
+          {% if question != blank and answer != blank %}
+            {% assign category_class = category | handleize | replace: '-', '_' %}
+            {% assign is_first = forloop.first %}
+
+            <div class="ai-dynamic-faq-item-{{ ai_gen_id }}{% if is_first and section.settings.open_first %} active{% endif %}" data-faq-item>
+              <button
+                class="ai-dynamic-faq-question-wrapper-{{ ai_gen_id }}"
+                aria-expanded="{% if is_first and section.settings.open_first %}true{% else %}false{% endif %}"
+                data-faq-button
+              >
+                <div class="ai-dynamic-faq-question-content-{{ ai_gen_id }}">
+                  {% if section.settings.show_category_badges and category != blank %}
+                    <span class="ai-dynamic-faq-category-badge-{{ ai_gen_id }} ai-dynamic-faq-category-{{ category_class }}-{{ ai_gen_id }}">
+                      {{ category }}
+                    </span>
+                  {% endif %}
+                  <h3 class="ai-dynamic-faq-question-{{ ai_gen_id }}">{{ question }}</h3>
+                </div>
+                <svg
+                  class="ai-dynamic-faq-icon-{{ ai_gen_id }}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+              <div class="ai-dynamic-faq-answer-wrapper-{{ ai_gen_id }}" data-faq-answer>
+                <div class="ai-dynamic-faq-answer-{{ ai_gen_id }}">
+                  {{ answer }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  </dynamic-faq-{{ ai_gen_id }}>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for faq in sorted_faqs %}
+        {% liquid
+          assign question = faq.question.value
+          assign answer = faq.answer.value
+        %}
+        {% if question != blank and answer != blank %}
+          {% assign clean_question = question | strip_html | escape %}
+          {% assign clean_answer = answer | strip_html | escape %}
+          {
+            "@type": "Question",
+            "name": {{ clean_question | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ clean_answer | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+
+  <script>
+    (function() {
+      class DynamicFaq{{ ai_gen_id }} extends HTMLElement {
+        constructor() {
+          super();
+        }
+
+        connectedCallback() {
+          this.items = this.querySelectorAll('[data-faq-item]');
+          this.setupEventListeners();
+          this.initializeFirstItem();
+        }
+
+        setupEventListeners() {
+          this.items.forEach((item) => {
+            const button = item.querySelector('[data-faq-button]');
+            const answer = item.querySelector('[data-faq-answer]');
+
+            button.addEventListener('click', () => {
+              const isActive = item.classList.contains('active');
+
+              this.items.forEach((otherItem) => {
+                if (otherItem !== item) {
+                  this.closeItem(otherItem);
+                }
+              });
+
+              if (isActive) {
+                this.closeItem(item);
+              } else {
+                this.openItem(item);
+              }
+            });
+
+            button.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                button.click();
+              }
+            });
+          });
+        }
+
+        initializeFirstItem() {
+          const firstItem = this.items[0];
+          if (firstItem && firstItem.classList.contains('active')) {
+            const answer = firstItem.querySelector('[data-faq-answer]');
+            if (answer) {
+              answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+          }
+        }
+
+        openItem(item) {
+          const button = item.querySelector('[data-faq-button]');
+          const answer = item.querySelector('[data-faq-answer]');
+
+          item.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+
+        closeItem(item) {
+          const button = item.querySelector('[data-faq-button]');
+          const answer = item.querySelector('[data-faq-answer]');
+
+          item.classList.remove('active');
+          button.setAttribute('aria-expanded', 'false');
+          answer.style.maxHeight = '0';
+        }
+      }
+
+      customElements.define('dynamic-faq-{{ ai_gen_id }}', DynamicFaq{{ ai_gen_id }});
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Dynamic FAQ",
+  "tag": "section",
+  "class": "section-dynamic-faq",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find answers to common questions about our furniture delivery, marketplace pickups, pricing, and same-day delivery services."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_background",
+      "label": "Card hover background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "label": "Shadow horizontal",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "label": "Shadow vertical",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "#00000010"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Accordion settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first FAQ by default",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Animation speed",
+      "min": 100,
+      "max": 800,
+      "step": 50,
+      "unit": "ms",
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Category badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category_badges",
+      "label": "Show category badges",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic FAQ"
+    }
+  ]
+}
+{% endschema %}

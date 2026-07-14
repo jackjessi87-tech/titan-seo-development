@@ -1,0 +1,1378 @@
+{% doc %}
+  @prompt
+    Create a premium "Recent Delivery Jobs" Shopify section for a local furniture delivery and removalist business.
+    
+    This section must dynamically display the Page metafield:
+    
+    custom.recent_jobs
+    
+    This metafield is a List of Recent Job Metaobject References.
+    
+    Each Recent Job contains:
+    
+    • Job Title
+    • Pickup Suburb
+    • Drop-off Suburb
+    • Item Type
+    • Service Type
+    • Image
+    • Job Date
+    • Customer Rating
+    • Short Description
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    SECTION HEADER
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Heading:
+    
+    Recent Furniture Deliveries Near You
+    
+    Subheading:
+    
+    Browse some of our recently completed furniture deliveries across Sydney. Every delivery shown below was completed by Titan Express using our oversized van and professional furniture handling equipment.
+    
+    Add a subtle animated underline beneath the heading.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    CARD DESIGN
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Create premium modern cards.
+    
+    Use:
+    
+    • White glossy background
+    • Rounded corners (18-20px)
+    • Soft shadows
+    • Modern spacing
+    • Premium typography
+    • Mobile first design
+    • SVG icons only
+    • Smooth hover animation
+    • Slight card lift on hover
+    • Image zoom effect on hover
+    
+    Desktop
+    
+    3 cards per row
+    
+    Tablet
+    
+    2 cards
+    
+    Mobile
+    
+    Horizontal swipe carousel
+    
+    Lazy load all images.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    CARD LAYOUT
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    TOP
+    
+    Large featured image
+    
+    Rounded corners
+    
+    Image ratio 16:9
+    
+    Lazy loaded
+    
+    Middle
+    
+    Display
+    
+    Job Title
+    
+    Large Bold
+    
+    Underneath display
+    
+    📍 Pickup Suburb
+    
+    ↓
+    
+    🚚 Titan Express
+    
+    ↓
+    
+    📍 Delivery Suburb
+    
+    Make the route visually attractive using modern SVG timeline icons.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    JOB DETAILS
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Display as premium information chips
+    
+    📦 Item Type
+    
+    🚚 Service Type
+    
+    📅 Job Date
+    
+    ⭐ Customer Rating
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    DESCRIPTION
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Display the Short Description below the information chips.
+    
+    Limit to approximately three lines.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    TRUST BADGES
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Display premium badges automatically on every card.
+    
+    ✓ Oversized Van
+    
+    ✓ Furniture Protected
+    
+    ✓ Professional Equipment
+    
+    ✓ Same Day Available
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    BOTTOM CTA
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Display button
+    
+    Get Similar Delivery Quote
+    
+    Button should smoothly scroll to the Quote Form.
+    
+    Use configurable Quote Form ID.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    OPTIONAL MODAL
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    When clicking the card, open a premium popup.
+    
+    Popup displays
+    
+    Large Image
+    
+    Job Title
+    
+    Pickup Suburb
+    
+    Drop-off Suburb
+    
+    Item Type
+    
+    Service Type
+    
+    Customer Rating
+    
+    Job Date
+    
+    Full Description
+    
+    Bottom CTA
+    
+    Get My Quote
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    EMPTY STATE
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    If no Recent Jobs are assigned to the page
+    
+    Hide the entire section automatically.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    SEO
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Use semantic HTML.
+    
+    Section
+    
+    <header>
+    
+    Heading
+    
+    <h2>
+    
+    Each Job
+    
+    <article>
+    
+    Pickup and Delivery suburbs should use semantic text.
+    
+    Images require descriptive ALT text generated dynamically such as:
+    
+    "Sofa delivery from Parramatta to Strathfield by Titan Express"
+    
+    Lazy load images.
+    
+    Avoid CLS.
+    
+    Optimize Core Web Vitals.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    ACCESSIBILITY
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Keyboard accessible
+    
+    ARIA labels
+    
+    High colour contrast
+    
+    Screen reader friendly
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    SCHEMA
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    If Recent Jobs exist,
+    
+    generate ItemList schema dynamically.
+    
+    Each Recent Job becomes a ListItem.
+    
+    Include
+    
+    Job Title
+    
+    Description
+    
+    Image
+    
+    Date
+    
+    Service Area
+    
+    Do not generate duplicate schema.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    PERFORMANCE
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    No external libraries.
+    
+    No jQuery.
+    
+    Pure Shopify Liquid
+    
+    CSS
+    
+    JavaScript
+    
+    Optimize for Lighthouse 95+
+    
+    Use CSS variables.
+    
+    Lazy load images.
+    
+    Load JavaScript only when this section exists.
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    CUSTOMIZATION
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    Allow merchant to customize:
+    
+    Section Heading
+    
+    Subheading
+    
+    Background colour
+    
+    Card colour
+    
+    Card radius
+    
+    Card shadow
+    
+    Cards per row
+    
+    Enable carousel
+    
+    Enable popup
+    
+    Enable trust badges
+    
+    Enable quote button
+    
+    Quote Form ID
+    
+    Animation speed
+    
+    Spacing
+    
+    Section padding
+    
+    ━━━━━━━━━━━━━━━━━━━━━━
+    FINAL GOAL
+    ━━━━━━━━━━━━━━━━━━━━━━
+    
+    The section should feel like a premium portfolio of real furniture deliveries rather than a product grid.
+    
+    It should increase customer trust, improve local SEO, encourage quote requests, and showcase real work completed by Titan Express across Sydney.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign recent_jobs = page.metafields.custom.recent_jobs.value %}
+
+{% if recent_jobs.size > 0 %}
+  {% style %}
+    .ai-recent-jobs-{{ ai_gen_id }} {
+      display: block;
+      width: 100%;
+      padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+      background-color: {{ block.settings.background_color }};
+    }
+
+    .ai-recent-jobs-container-{{ ai_gen_id }} {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ai-recent-jobs-header-{{ ai_gen_id }} {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .ai-recent-jobs-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size }}px;
+      font-weight: 700;
+      color: {{ block.settings.heading_color }};
+      margin: 0 0 12px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .ai-recent-jobs-heading-{{ ai_gen_id }}::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, {{ block.settings.heading_color }}, transparent);
+      animation: ai-underline-{{ ai_gen_id }} 2s ease-in-out infinite;
+    }
+
+    @keyframes ai-underline-{{ ai_gen_id }} {
+      0%, 100% { transform: scaleX(0.3); opacity: 0.5; }
+      50% { transform: scaleX(1); opacity: 1; }
+    }
+
+    .ai-recent-jobs-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size }}px;
+      color: {{ block.settings.subheading_color }};
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .ai-recent-jobs-grid-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: repeat({{ block.settings.cards_per_row }}, 1fr);
+      gap: 32px;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 989px) {
+      .ai-recent-jobs-grid-{{ ai_gen_id }} {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 749px) {
+      .ai-recent-jobs-grid-{{ ai_gen_id }} {
+        {% if block.settings.enable_mobile_carousel %}
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: 16px;
+          padding-bottom: 16px;
+          -webkit-overflow-scrolling: touch;
+        {% else %}
+          grid-template-columns: 1fr;
+          gap: 20px;
+        {% endif %}
+      }
+
+      {% if block.settings.enable_mobile_carousel %}
+        .ai-recent-jobs-grid-{{ ai_gen_id }}::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        .ai-recent-jobs-grid-{{ ai_gen_id }}::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+
+        .ai-recent-jobs-grid-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 10px;
+        }
+      {% endif %}
+    }
+
+    .ai-recent-jobs-card-{{ ai_gen_id }} {
+      background: {{ block.settings.card_background }};
+      border-radius: {{ block.settings.card_radius }}px;
+      box-shadow: {{ block.settings.card_shadow }};
+      overflow: hidden;
+      transition: transform {{ block.settings.animation_speed }}ms ease, box-shadow {{ block.settings.animation_speed }}ms ease;
+      cursor: {% if block.settings.enable_popup %}pointer{% else %}default{% endif %};
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 749px) {
+      {% if block.settings.enable_mobile_carousel %}
+        .ai-recent-jobs-card-{{ ai_gen_id }} {
+          min-width: 85%;
+          scroll-snap-align: start;
+        }
+      {% endif %}
+    }
+
+    .ai-recent-jobs-card-{{ ai_gen_id }}:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .ai-recent-jobs-image-wrapper-{{ ai_gen_id }} {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .ai-recent-jobs-image-{{ ai_gen_id }} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform {{ block.settings.animation_speed }}ms ease;
+    }
+
+    .ai-recent-jobs-card-{{ ai_gen_id }}:hover .ai-recent-jobs-image-{{ ai_gen_id }} {
+      transform: scale(1.05);
+    }
+
+    .ai-recent-jobs-content-{{ ai_gen_id }} {
+      padding: 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ai-recent-jobs-title-{{ ai_gen_id }} {
+      font-size: 20px;
+      font-weight: 700;
+      color: {{ block.settings.card_text_color }};
+      margin: 0 0 16px;
+      line-height: 1.3;
+    }
+
+    .ai-recent-jobs-route-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: #f9f9f9;
+      border-radius: 12px;
+    }
+
+    .ai-recent-jobs-route-item-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .ai-recent-jobs-route-icon-{{ ai_gen_id }} {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .ai-recent-jobs-route-icon-{{ ai_gen_id }} svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .ai-recent-jobs-route-divider-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 30px;
+    }
+
+    .ai-recent-jobs-route-divider-{{ ai_gen_id }} svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0.5;
+    }
+
+    .ai-recent-jobs-details-{{ ai_gen_id }} {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .ai-recent-jobs-chip-{{ ai_gen_id }} {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #f0f0f0;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .ai-recent-jobs-chip-icon-{{ ai_gen_id }} {
+      width: 14px;
+      height: 14px;
+    }
+
+    .ai-recent-jobs-description-{{ ai_gen_id }} {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    {% if block.settings.show_trust_badges %}
+      .ai-recent-jobs-badges-{{ ai_gen_id }} {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 20px;
+        padding-top: 16px;
+        border-top: 1px solid #e6e6e6;
+      }
+
+      .ai-recent-jobs-badge-{{ ai_gen_id }} {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: #008060;
+        font-weight: 500;
+      }
+
+      .ai-recent-jobs-badge-icon-{{ ai_gen_id }} {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+    {% endif %}
+
+    {% if block.settings.show_quote_button %}
+      .ai-recent-jobs-cta-{{ ai_gen_id }} {
+        margin-top: auto;
+      }
+
+      .ai-recent-jobs-button-{{ ai_gen_id }} {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        background: {{ block.settings.button_background }};
+        color: {{ block.settings.button_text_color }};
+        text-align: center;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        transition: background {{ block.settings.animation_speed }}ms ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .ai-recent-jobs-button-{{ ai_gen_id }}:hover {
+        background: {{ block.settings.button_hover_background }};
+      }
+    {% endif %}
+
+    {% if block.settings.enable_popup %}
+      .ai-recent-jobs-modal-{{ ai_gen_id }} {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity 300ms ease;
+      }
+
+      .ai-recent-jobs-modal-{{ ai_gen_id }}.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .ai-recent-jobs-modal-content-{{ ai_gen_id }} {
+        background: white;
+        border-radius: 20px;
+        max-width: 700px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 300ms ease;
+      }
+
+      .ai-recent-jobs-modal-{{ ai_gen_id }}.active .ai-recent-jobs-modal-content-{{ ai_gen_id }} {
+        transform: scale(1);
+      }
+
+      .ai-recent-jobs-modal-close-{{ ai_gen_id }} {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+        transition: transform 200ms ease;
+      }
+
+      .ai-recent-jobs-modal-close-{{ ai_gen_id }}:hover {
+        transform: scale(1.1);
+      }
+
+      .ai-recent-jobs-modal-image-{{ ai_gen_id }} {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .ai-recent-jobs-modal-body-{{ ai_gen_id }} {
+        padding: 32px;
+      }
+
+      .ai-recent-jobs-modal-title-{{ ai_gen_id }} {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 20px;
+        color: #000;
+      }
+
+      .ai-recent-jobs-modal-route-{{ ai_gen_id }} {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 12px;
+      }
+
+      .ai-recent-jobs-modal-details-{{ ai_gen_id }} {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .ai-recent-jobs-modal-description-{{ ai_gen_id }} {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #333;
+        margin-bottom: 24px;
+      }
+
+      .ai-recent-jobs-modal-cta-{{ ai_gen_id }} {
+        text-align: center;
+      }
+
+      .ai-recent-jobs-modal-button-{{ ai_gen_id }} {
+        display: inline-block;
+        padding: 14px 32px;
+        background: {{ block.settings.button_background }};
+        color: {{ block.settings.button_text_color }};
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        transition: background 300ms ease;
+      }
+
+      .ai-recent-jobs-modal-button-{{ ai_gen_id }}:hover {
+        background: {{ block.settings.button_hover_background }};
+      }
+    {% endif %}
+
+    @media (max-width: 749px) {
+      .ai-recent-jobs-heading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+      }
+
+      .ai-recent-jobs-subheading-{{ ai_gen_id }} {
+        font-size: {{ block.settings.subheading_size | times: 0.9 }}px;
+      }
+
+      {% if block.settings.enable_popup %}
+        .ai-recent-jobs-modal-image-{{ ai_gen_id }} {
+          height: 250px;
+        }
+
+        .ai-recent-jobs-modal-body-{{ ai_gen_id }} {
+          padding: 24px;
+        }
+
+        .ai-recent-jobs-modal-title-{{ ai_gen_id }} {
+          font-size: 22px;
+        }
+      {% endif %}
+    }
+  {% endstyle %}
+
+  <recent-delivery-jobs-{{ ai_gen_id }} class="ai-recent-jobs-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+    <div class="ai-recent-jobs-container-{{ ai_gen_id }}">
+      <header class="ai-recent-jobs-header-{{ ai_gen_id }}">
+        <h2 class="ai-recent-jobs-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        <p class="ai-recent-jobs-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+      </header>
+
+      <div class="ai-recent-jobs-grid-{{ ai_gen_id }}">
+        {% for job in recent_jobs %}
+          <article 
+            class="ai-recent-jobs-card-{{ ai_gen_id }}" 
+            data-job-index="{{ forloop.index0 }}"
+            {% if block.settings.enable_popup %}role="button" tabindex="0" aria-label="View details for {{ job.job_title.value }}"{% endif %}
+          >
+            <div class="ai-recent-jobs-image-wrapper-{{ ai_gen_id }}">
+              {% if job.image %}
+                <img 
+                  src="{{ job.image | image_url: width: 800 }}" 
+                  alt="{{ job.item_type.value }} delivery from {{ job.pickup_suburb.value }} to {{ job.dropoff_suburb.value }} by Titan Express"
+                  class="ai-recent-jobs-image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="800"
+                  height="450"
+                >
+              {% else %}
+                <div class="ai-recent-jobs-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-recent-jobs-content-{{ ai_gen_id }}">
+              <h3 class="ai-recent-jobs-title-{{ ai_gen_id }}">{{ job.job_title.value }}</h3>
+
+              <div class="ai-recent-jobs-route-{{ ai_gen_id }}">
+                <div class="ai-recent-jobs-route-item-{{ ai_gen_id }}">
+                  <span class="ai-recent-jobs-route-icon-{{ ai_gen_id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                  </span>
+                  <span>{{ job.pickup_suburb.value }}</span>
+                </div>
+
+                <div class="ai-recent-jobs-route-divider-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                </div>
+
+                <div class="ai-recent-jobs-route-item-{{ ai_gen_id }}">
+                  <span class="ai-recent-jobs-route-icon-{{ ai_gen_id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                      <rect x="1" y="3" width="15" height="13"></rect>
+                      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                  </span>
+                  <span>Titan Express</span>
+                </div>
+
+                <div class="ai-recent-jobs-route-divider-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                </div>
+
+                <div class="ai-recent-jobs-route-item-{{ ai_gen_id }}">
+                  <span class="ai-recent-jobs-route-icon-{{ ai_gen_id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#008060" stroke-width="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  </span>
+                  <span>{{ job.dropoff_suburb.value }}</span>
+                </div>
+              </div>
+
+              <div class="ai-recent-jobs-details-{{ ai_gen_id }}">
+                {% if job.item_type.value %}
+                  <span class="ai-recent-jobs-chip-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">📦</span>
+                    {{ job.item_type.value }}
+                  </span>
+                {% endif %}
+
+                {% if job.service_type.value %}
+                  <span class="ai-recent-jobs-chip-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">🚚</span>
+                    {{ job.service_type.value }}
+                  </span>
+                {% endif %}
+
+                {% if job.job_date.value %}
+                  <span class="ai-recent-jobs-chip-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">📅</span>
+                    {{ job.job_date.value | date: "%b %d, %Y" }}
+                  </span>
+                {% endif %}
+
+                {% if job.customer_rating.value %}
+                  <span class="ai-recent-jobs-chip-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">⭐</span>
+                    {{ job.customer_rating.value }}/5
+                  </span>
+                {% endif %}
+              </div>
+
+              {% if job.short_description.value %}
+                <p class="ai-recent-jobs-description-{{ ai_gen_id }}">{{ job.short_description.value }}</p>
+              {% endif %}
+
+              {% if block.settings.show_trust_badges %}
+                <div class="ai-recent-jobs-badges-{{ ai_gen_id }}">
+                  <div class="ai-recent-jobs-badge-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-badge-icon-{{ ai_gen_id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#008060" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    Oversized Van
+                  </div>
+                  <div class="ai-recent-jobs-badge-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-badge-icon-{{ ai_gen_id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#008060" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    Furniture Protected
+                  </div>
+                  <div class="ai-recent-jobs-badge-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-badge-icon-{{ ai_gen_id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#008060" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    Professional Equipment
+                  </div>
+                  <div class="ai-recent-jobs-badge-{{ ai_gen_id }}">
+                    <span class="ai-recent-jobs-badge-icon-{{ ai_gen_id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#008060" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    Same Day Available
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_quote_button %}
+                <div class="ai-recent-jobs-cta-{{ ai_gen_id }}">
+                  <a 
+                    href="#{{ block.settings.quote_form_id }}" 
+                    class="ai-recent-jobs-button-{{ ai_gen_id }}"
+                    aria-label="Get a quote for similar delivery"
+                  >
+                    Get Similar Delivery Quote
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if block.settings.enable_popup %}
+      <div class="ai-recent-jobs-modal-{{ ai_gen_id }}" role="dialog" aria-modal="true" aria-labelledby="modal-title-{{ ai_gen_id }}">
+        <div class="ai-recent-jobs-modal-content-{{ ai_gen_id }}">
+          <button class="ai-recent-jobs-modal-close-{{ ai_gen_id }}" aria-label="Close modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <div class="ai-recent-jobs-modal-inner-{{ ai_gen_id }}"></div>
+        </div>
+      </div>
+    {% endif %}
+  </recent-delivery-jobs-{{ ai_gen_id }}>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for job in recent_jobs %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "item": {
+            "@type": "Service",
+            "name": "{{ job.job_title.value | escape }}",
+            "description": "{{ job.short_description.value | escape }}",
+            {% if job.image %}
+            "image": "{{ job.image | image_url: width: 1200 }}",
+            {% endif %}
+            "serviceType": "{{ job.service_type.value | escape }}",
+            "areaServed": {
+              "@type": "Place",
+              "name": "{{ job.pickup_suburb.value | escape }} to {{ job.dropoff_suburb.value | escape }}"
+            },
+            {% if job.job_date.value %}
+            "datePublished": "{{ job.job_date.value }}",
+            {% endif %}
+            {% if job.customer_rating.value %}
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "{{ job.customer_rating.value }}",
+              "bestRating": "5"
+            },
+            {% endif %}
+            "provider": {
+              "@type": "Organization",
+              "name": "Titan Express"
+            }
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+
+  <script>
+    (function() {
+      class RecentDeliveryJobs{{ ai_gen_id }} extends HTMLElement {
+        constructor() {
+          super();
+          this.jobs = {{ recent_jobs | json }};
+        }
+
+        connectedCallback() {
+          {% if block.settings.enable_popup %}
+            this.setupModal();
+          {% endif %}
+          this.setupSmoothScroll();
+        }
+
+        {% if block.settings.enable_popup %}
+        setupModal() {
+          const cards = this.querySelectorAll('.ai-recent-jobs-card-{{ ai_gen_id }}');
+          const modal = this.querySelector('.ai-recent-jobs-modal-{{ ai_gen_id }}');
+          const modalInner = this.querySelector('.ai-recent-jobs-modal-inner-{{ ai_gen_id }}');
+          const closeBtn = this.querySelector('.ai-recent-jobs-modal-close-{{ ai_gen_id }}');
+
+          cards.forEach((card) => {
+            card.addEventListener('click', (e) => {
+              if (e.target.closest('.ai-recent-jobs-button-{{ ai_gen_id }}')) {
+                return;
+              }
+              const index = parseInt(card.dataset.jobIndex);
+              this.openModal(index, modal, modalInner);
+            });
+
+            card.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const index = parseInt(card.dataset.jobIndex);
+                this.openModal(index, modal, modalInner);
+              }
+            });
+          });
+
+          closeBtn.addEventListener('click', () => {
+            this.closeModal(modal);
+          });
+
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              this.closeModal(modal);
+            }
+          });
+
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+              this.closeModal(modal);
+            }
+          });
+        }
+
+        openModal(index, modal, modalInner) {
+          const job = this.jobs[index];
+          
+          let imageHtml = '';
+          if (job.image) {
+            const imageUrl = job.image.replace(/\.(jpg|jpeg|png|gif|webp)/i, '_1200x.$1');
+            const altText = `${job.item_type?.value || 'Item'} delivery from ${job.pickup_suburb?.value || ''} to ${job.dropoff_suburb?.value || ''} by Titan Express`;
+            imageHtml = `<img src="${imageUrl}" alt="${altText}" class="ai-recent-jobs-modal-image-{{ ai_gen_id }}" loading="lazy">`;
+          }
+
+          const formattedDate = job.job_date?.value ? new Date(job.job_date.value).toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+
+          modalInner.innerHTML = `
+            ${imageHtml}
+            <div class="ai-recent-jobs-modal-body-{{ ai_gen_id }}">
+              <h3 id="modal-title-{{ ai_gen_id }}" class="ai-recent-jobs-modal-title-{{ ai_gen_id }}">${job.job_title?.value || ''}</h3>
+              
+              <div class="ai-recent-jobs-modal-route-{{ ai_gen_id }}">
+                <div class="ai-recent-jobs-route-item-{{ ai_gen_id }}">
+                  <span class="ai-recent-jobs-route-icon-{{ ai_gen_id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                  </span>
+                  <span>${job.pickup_suburb?.value || ''}</span>
+                </div>
+                <div class="ai-recent-jobs-route-divider-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                </div>
+                <div class="ai-recent-jobs-route-item-{{ ai_gen_id }}">
+                  <span class="ai-recent-jobs-route-icon-{{ ai_gen_id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                      <rect x="1" y="3" width="15" height="13"></rect>
+                      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                  </span>
+                  <span>Titan Express</span>
+                </div>
+                <div class="ai-recent-jobs-route-divider-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                </div>
+                <div class="ai-recent-jobs-route-item-{{ ai_gen_id }}">
+                  <span class="ai-recent-jobs-route-icon-{{ ai_gen_id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#008060" stroke-width="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  </span>
+                  <span>${job.dropoff_suburb?.value || ''}</span>
+                </div>
+              </div>
+
+              <div class="ai-recent-jobs-modal-details-{{ ai_gen_id }}">
+                ${job.item_type?.value ? `<span class="ai-recent-jobs-chip-{{ ai_gen_id }}"><span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">📦</span>${job.item_type.value}</span>` : ''}
+                ${job.service_type?.value ? `<span class="ai-recent-jobs-chip-{{ ai_gen_id }}"><span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">🚚</span>${job.service_type.value}</span>` : ''}
+                ${formattedDate ? `<span class="ai-recent-jobs-chip-{{ ai_gen_id }}"><span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">📅</span>${formattedDate}</span>` : ''}
+                ${job.customer_rating?.value ? `<span class="ai-recent-jobs-chip-{{ ai_gen_id }}"><span class="ai-recent-jobs-chip-icon-{{ ai_gen_id }}">⭐</span>${job.customer_rating.value}/5</span>` : ''}
+              </div>
+
+              ${job.short_description?.value ? `<p class="ai-recent-jobs-modal-description-{{ ai_gen_id }}">${job.short_description.value}</p>` : ''}
+
+              <div class="ai-recent-jobs-modal-cta-{{ ai_gen_id }}">
+                <a href="#{{ block.settings.quote_form_id }}" class="ai-recent-jobs-modal-button-{{ ai_gen_id }}">Get My Quote</a>
+              </div>
+            </div>
+          `;
+
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+
+        closeModal(modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        {% endif %}
+
+        setupSmoothScroll() {
+          const buttons = this.querySelectorAll('a[href^="#"]');
+          buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+              const targetId = button.getAttribute('href').substring(1);
+              const targetElement = document.getElementById(targetId);
+              
+              if (targetElement) {
+                e.preventDefault();
+                {% if block.settings.enable_popup %}
+                const modal = this.querySelector('.ai-recent-jobs-modal-{{ ai_gen_id }}');
+                if (modal && modal.classList.contains('active')) {
+                  this.closeModal(modal);
+                }
+                {% endif %}
+                setTimeout(() => {
+                  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+              }
+            });
+          });
+        }
+      }
+
+      customElements.define('recent-delivery-jobs-{{ ai_gen_id }}', RecentDeliveryJobs{{ ai_gen_id }});
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Recent delivery jobs",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Recent Furniture Deliveries Near You"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Browse some of our recently completed furniture deliveries across Sydney. Every delivery shown below was completed by Titan Express using our oversized van and professional furniture handling equipment."
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_carousel",
+      "label": "Enable mobile carousel",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "card_shadow",
+      "label": "Card shadow",
+      "options": [
+        {
+          "value": "0 2px 8px rgba(0, 0, 0, 0.08)",
+          "label": "Light"
+        },
+        {
+          "value": "0 4px 16px rgba(0, 0, 0, 0.12)",
+          "label": "Medium"
+        },
+        {
+          "value": "0 8px 24px rgba(0, 0, 0, 0.15)",
+          "label": "Heavy"
+        }
+      ],
+      "default": "0 4px 16px rgba(0, 0, 0, 0.12)"
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show trust badges",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Enable popup modal",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Quote button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quote_button",
+      "label": "Show quote button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "quote_form_id",
+      "label": "Quote form ID",
+      "default": "main-quote",
+      "info": "Enter the ID of your quote form for smooth scrolling"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Animation speed",
+      "min": 100,
+      "max": 500,
+      "step": 50,
+      "unit": "ms",
+      "default": 300
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent delivery jobs"
+    }
+  ]
+}
+{% endschema %}

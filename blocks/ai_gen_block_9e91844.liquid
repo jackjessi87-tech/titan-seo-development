@@ -1,0 +1,1452 @@
+{% doc %}
+  @prompt
+    Create a premium dark hero section for a Sydney removalist service page called "Man With a Van Sydney". Dark charcoal #111 background with full-width background image picker and dark gradient overlay with adjustable opacity.
+    
+    TOP: Google Ads style pill — amber "Sponsored" badge + blue domain text "www.titanexpress.com.au › Man With a Van Sydney"
+    
+    REVIEW BADGE: Clickable pill "⭐ 4.9 | 300+ Google Reviews" linking to Google Business Profile URL (editable in settings)
+    
+    H1: "Man With a Van Sydney" — large bold white, with "Man With a Van" in amber with underline accent stroke
+    
+    THREE SUBHEADINGS:
+    - Sub 1 (amber, bold, 22px): "Same-Day Removals · Marketplace Pickups · Single Item Moves"
+    - Sub 2 (white, medium, 18px): "Serving All Sydney Suburbs — Fast, Insured & Fixed Price"
+    - Sub 3 (grey italic, 15px): "Book online in 60 seconds. No hidden fees. Trusted by 300+ Sydney locals."
+    
+    GOOGLE SITELINKS ROW: 4 blue pill links styled like Google search sitelinks with hover effect — "Same-Day Moves", "Marketplace Pickup", "Single Item Moves", "All Sydney Suburbs" — each label and URL editable in settings
+    
+    CTA BUTTONS: Amber solid "Get a Free Quote" + white outline "Call Now" — both URLs editable
+    
+    TRUST STRIP: 4 items with amber icons — Same-Day Available, Fully Insured, Fixed Price, All Sydney Suburbs — show/hide toggle in settings
+    
+    SETTINGS: accent colour, overlay opacity, all text, all URLs, ad label, display domain, sitelink labels/URLs, badge text/count/link, trust items
+    
+    Mobile responsive: buttons stack vertically, sitelinks wrap, trust strip 2-column grid. SEO: H1 > subheading hierarchy, aria-labels on links, role=list on trust strip.
+    , pgrades I'll add:
+    
+    Modern SVG icon set
+    Replace basic icons with professional removalist-themed icons (van, boxes, clock, shield, dollar sign, location pin)
+    
+    Price list section
+    Add a transparent pricing table below the hero with:
+    
+    Service categories (Single Item, Small Move, Medium Move, Marketplace Pickup)
+    Starting prices with "From $XX" format
+    Quick feature bullets per service
+    Schema.org PriceSpecification markup for Google
+    Additional follow-up UI elements:
+    
+    "How it works" 3-step process with numbered icons
+    Service area coverage map indicator
+    Real-time availability badge ("Available Today")
+    Trust signals (Years in business, Jobs completed, Response time)
+    SEO improvements Google loves:
+    
+    Proper schema.org LocalBusiness + Service markup
+    FAQ schema-ready accordion section
+    Breadcrumb navigation schema
+    AggregateRating schema for reviews
+    areaServed geo-targeting for Sydney suburbs
+    Semantic HTML5 structure (article, section, aside tags)
+    Optimized heading hierarchy (H1 → H2 → H3)  instead of background image Create a Small section like a preview section simikar to Google service sponsord ad  also Use black white red color theme the New preview photo allow upto 4 auto change to next image with adots below the photo  Seo master piece googles family memebr type 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-removalist-hero-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+    display: block;
+  }
+
+  .ai-removalist-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .ai-removalist-ad-header-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ai-removalist-ad-badge-{{ ai_gen_id }} {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .ai-removalist-ad-domain-{{ ai_gen_id }} {
+    color: #1a0dab;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .ai-removalist-main-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .ai-removalist-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-removalist-review-badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    text-decoration: none;
+  }
+
+  .ai-removalist-stars-{{ ai_gen_id }} {
+    color: #fbbc04;
+    font-size: 16px;
+  }
+
+  .ai-removalist-rating-text-{{ ai_gen_id }} {
+    color: #1a0dab;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .ai-removalist-h1-{{ ai_gen_id }} {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+    margin: 0 0 20px 0;
+  }
+
+  .ai-removalist-h1-accent-{{ ai_gen_id }} {
+    color: #dc143c;
+    position: relative;
+  }
+
+  .ai-removalist-sub1-{{ ai_gen_id }} {
+    font-size: 20px;
+    font-weight: 600;
+    color: #dc143c;
+    margin: 0 0 12px 0;
+  }
+
+  .ai-removalist-sub2-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0 0 8px 0;
+  }
+
+  .ai-removalist-sub3-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: #5f6368;
+    margin: 0 0 24px 0;
+  }
+
+  .ai-removalist-sitelinks-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ai-removalist-sitelink-{{ ai_gen_id }} {
+    display: inline-block;
+    color: #1a0dab;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid #dadce0;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .ai-removalist-sitelink-{{ ai_gen_id }}:hover {
+    background-color: #f8f9fa;
+    border-color: #1a0dab;
+  }
+
+  .ai-removalist-cta-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .ai-removalist-btn-primary-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dc143c;
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .ai-removalist-btn-primary-{{ ai_gen_id }}:hover {
+    background-color: #b8112f;
+    box-shadow: 0 2px 8px rgba(220, 20, 60, 0.3);
+  }
+
+  .ai-removalist-btn-secondary-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid #dadce0;
+    transition: all 0.2s ease;
+  }
+
+  .ai-removalist-btn-secondary-{{ ai_gen_id }}:hover {
+    background-color: #f8f9fa;
+    border-color: #000000;
+  }
+
+  .ai-removalist-trust-strip-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid #dadce0;
+  }
+
+  .ai-removalist-trust-item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .ai-removalist-trust-value-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: #dc143c;
+  }
+
+  .ai-removalist-trust-label-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: #5f6368;
+    font-weight: 500;
+  }
+
+  .ai-removalist-preview-section-{{ ai_gen_id }} {
+    background-color: #f8f9fa;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+
+  .ai-removalist-preview-carousel-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+
+  .ai-removalist-preview-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .ai-removalist-preview-image-{{ ai_gen_id }}.active {
+    opacity: 1;
+  }
+
+  .ai-removalist-preview-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-removalist-preview-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-removalist-preview-placeholder-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+
+  .ai-removalist-preview-dots-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ai-removalist-preview-dot-{{ ai_gen_id }} {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #dadce0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-removalist-preview-dot-{{ ai_gen_id }}.active {
+    background-color: #dc143c;
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .ai-removalist-preview-title-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 12px 0;
+  }
+
+  .ai-removalist-preview-features-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-removalist-preview-feature-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #5f6368;
+  }
+
+  .ai-removalist-preview-feature-{{ ai_gen_id }} svg {
+    width: 16px;
+    height: 16px;
+    stroke: #dc143c;
+    flex-shrink: 0;
+  }
+
+  .ai-removalist-pricing-section-{{ ai_gen_id }} {
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 40px;
+  }
+
+  .ai-removalist-pricing-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .ai-removalist-pricing-title-{{ ai_gen_id }} {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 8px 0;
+  }
+
+  .ai-removalist-pricing-subtitle-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: #5f6368;
+  }
+
+  .ai-removalist-pricing-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .ai-removalist-price-card-{{ ai_gen_id }} {
+    background-color: #f8f9fa;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .ai-removalist-price-card-{{ ai_gen_id }}:hover {
+    border-color: #dc143c;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-removalist-price-icon-{{ ai_gen_id }} {
+    width: 48px;
+    height: 48px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .ai-removalist-price-icon-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+    stroke: #dc143c;
+  }
+
+  .ai-removalist-price-name-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 8px 0;
+  }
+
+  .ai-removalist-price-amount-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: #dc143c;
+    margin: 0 0 16px 0;
+  }
+
+  .ai-removalist-price-features-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-removalist-price-feature-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 13px;
+    color: #5f6368;
+  }
+
+  .ai-removalist-price-feature-{{ ai_gen_id }}::before {
+    content: '✓';
+    color: #dc143c;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .ai-removalist-how-it-works-{{ ai_gen_id }} {
+    margin-bottom: 40px;
+  }
+
+  .ai-removalist-how-title-{{ ai_gen_id }} {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 32px 0;
+    text-align: center;
+  }
+
+  .ai-removalist-steps-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .ai-removalist-step-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-removalist-step-number-{{ ai_gen_id }} {
+    width: 64px;
+    height: 64px;
+    background-color: #dc143c;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 auto 16px;
+  }
+
+  .ai-removalist-step-title-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 8px 0;
+  }
+
+  .ai-removalist-step-desc-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: #5f6368;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .ai-removalist-main-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-removalist-preview-section-{{ ai_gen_id }} {
+      position: relative;
+      top: 0;
+    }
+
+    .ai-removalist-pricing-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-removalist-steps-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-removalist-h1-{{ ai_gen_id }} {
+      font-size: 32px;
+    }
+
+    .ai-removalist-cta-buttons-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-removalist-btn-primary-{{ ai_gen_id }},
+    .ai-removalist-btn-secondary-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-removalist-trust-strip-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-removalist-pricing-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<removalist-hero-seo-{{ ai_gen_id }} class="ai-removalist-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <article itemscope itemtype="https://schema.org/LocalBusiness">
+    <div class="ai-removalist-container-{{ ai_gen_id }}">
+      <header>
+        <div class="ai-removalist-ad-header-{{ ai_gen_id }}">
+          <span class="ai-removalist-ad-badge-{{ ai_gen_id }}">{{ block.settings.ad_label }}</span>
+          <span class="ai-removalist-ad-domain-{{ ai_gen_id }}" itemprop="url">{{ block.settings.display_domain }}</span>
+        </div>
+
+        <div class="ai-removalist-main-grid-{{ ai_gen_id }}">
+          <div class="ai-removalist-content-{{ ai_gen_id }}">
+            {% if block.settings.show_review_badge %}
+              <a
+                href="{{ block.settings.review_badge_url }}"
+                class="ai-removalist-review-badge-{{ ai_gen_id }}"
+                aria-label="View our Google reviews"
+                target="_blank"
+                rel="noopener"
+                itemprop="aggregateRating"
+                itemscope
+                itemtype="https://schema.org/AggregateRating"
+              >
+                <span class="ai-removalist-stars-{{ ai_gen_id }}">{{ block.settings.review_stars }}</span>
+                <span class="ai-removalist-rating-text-{{ ai_gen_id }}">
+                  <span itemprop="ratingValue">{{ block.settings.review_rating }}</span>
+                  (<span itemprop="reviewCount">{{ block.settings.review_count }}</span>)
+                </span>
+              </a>
+            {% endif %}
+
+            <h1 class="ai-removalist-h1-{{ ai_gen_id }}" itemprop="name">
+              <span class="ai-removalist-h1-accent-{{ ai_gen_id }}">{{ block.settings.h1_accent }}</span> {{ block.settings.h1_rest }}
+            </h1>
+
+            <p class="ai-removalist-sub1-{{ ai_gen_id }}">{{ block.settings.subheading_1 }}</p>
+            <p class="ai-removalist-sub2-{{ ai_gen_id }}" itemprop="description">{{ block.settings.subheading_2 }}</p>
+            <p class="ai-removalist-sub3-{{ ai_gen_id }}">{{ block.settings.subheading_3 }}</p>
+
+            <nav class="ai-removalist-sitelinks-{{ ai_gen_id }}" aria-label="Service navigation">
+              {% if block.settings.sitelink_1_label != blank %}
+                <a href="{{ block.settings.sitelink_1_url }}" class="ai-removalist-sitelink-{{ ai_gen_id }}">
+                  {{ block.settings.sitelink_1_label }}
+                </a>
+              {% endif %}
+              {% if block.settings.sitelink_2_label != blank %}
+                <a href="{{ block.settings.sitelink_2_url }}" class="ai-removalist-sitelink-{{ ai_gen_id }}">
+                  {{ block.settings.sitelink_2_label }}
+                </a>
+              {% endif %}
+              {% if block.settings.sitelink_3_label != blank %}
+                <a href="{{ block.settings.sitelink_3_url }}" class="ai-removalist-sitelink-{{ ai_gen_id }}">
+                  {{ block.settings.sitelink_3_label }}
+                </a>
+              {% endif %}
+              {% if block.settings.sitelink_4_label != blank %}
+                <a href="{{ block.settings.sitelink_4_url }}" class="ai-removalist-sitelink-{{ ai_gen_id }}">
+                  {{ block.settings.sitelink_4_label }}
+                </a>
+              {% endif %}
+            </nav>
+
+            <div class="ai-removalist-cta-buttons-{{ ai_gen_id }}">
+              {% if block.settings.primary_button_text != blank %}
+                <a href="{{ block.settings.primary_button_url }}" class="ai-removalist-btn-primary-{{ ai_gen_id }}">
+                  {{ block.settings.primary_button_text }}
+                </a>
+              {% endif %}
+              {% if block.settings.secondary_button_text != blank %}
+                <a href="{{ block.settings.secondary_button_url }}" class="ai-removalist-btn-secondary-{{ ai_gen_id }}">
+                  {{ block.settings.secondary_button_text }}
+                </a>
+              {% endif %}
+            </div>
+
+            <div class="ai-removalist-trust-strip-{{ ai_gen_id }}" role="list">
+              <div class="ai-removalist-trust-item-{{ ai_gen_id }}" role="listitem">
+                <div class="ai-removalist-trust-value-{{ ai_gen_id }}">{{ block.settings.trust_1_value }}</div>
+                <div class="ai-removalist-trust-label-{{ ai_gen_id }}">{{ block.settings.trust_1_label }}</div>
+              </div>
+              <div class="ai-removalist-trust-item-{{ ai_gen_id }}" role="listitem">
+                <div class="ai-removalist-trust-value-{{ ai_gen_id }}">{{ block.settings.trust_2_value }}</div>
+                <div class="ai-removalist-trust-label-{{ ai_gen_id }}">{{ block.settings.trust_2_label }}</div>
+              </div>
+              <div class="ai-removalist-trust-item-{{ ai_gen_id }}" role="listitem">
+                <div class="ai-removalist-trust-value-{{ ai_gen_id }}">{{ block.settings.trust_3_value }}</div>
+                <div class="ai-removalist-trust-label-{{ ai_gen_id }}">{{ block.settings.trust_3_label }}</div>
+              </div>
+              <div class="ai-removalist-trust-item-{{ ai_gen_id }}" role="listitem">
+                <div class="ai-removalist-trust-value-{{ ai_gen_id }}">{{ block.settings.trust_4_value }}</div>
+                <div class="ai-removalist-trust-label-{{ ai_gen_id }}">{{ block.settings.trust_4_label }}</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="ai-removalist-preview-section-{{ ai_gen_id }}">
+            <div class="ai-removalist-preview-carousel-{{ ai_gen_id }}" data-carousel>
+              {% if block.settings.preview_image_1 %}
+                <div class="ai-removalist-preview-image-{{ ai_gen_id }} active" data-slide="0">
+                  <img
+                    src="{{ block.settings.preview_image_1 | image_url: width: 800 }}"
+                    alt="{{ block.settings.preview_image_1.alt | escape }}"
+                    loading="eager"
+                    width="400"
+                    height="280"
+                  >
+                </div>
+              {% else %}
+                <div class="ai-removalist-preview-image-{{ ai_gen_id }} active" data-slide="0">
+                  <div class="ai-removalist-preview-placeholder-{{ ai_gen_id }}">
+                    {{ 'image' | placeholder_svg_tag }}
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if block.settings.preview_image_2 %}
+                <div class="ai-removalist-preview-image-{{ ai_gen_id }}" data-slide="1">
+                  <img
+                    src="{{ block.settings.preview_image_2 | image_url: width: 800 }}"
+                    alt="{{ block.settings.preview_image_2.alt | escape }}"
+                    loading="lazy"
+                    width="400"
+                    height="280"
+                  >
+                </div>
+              {% endif %}
+
+              {% if block.settings.preview_image_3 %}
+                <div class="ai-removalist-preview-image-{{ ai_gen_id }}" data-slide="2">
+                  <img
+                    src="{{ block.settings.preview_image_3 | image_url: width: 800 }}"
+                    alt="{{ block.settings.preview_image_3.alt | escape }}"
+                    loading="lazy"
+                    width="400"
+                    height="280"
+                  >
+                </div>
+              {% endif %}
+
+              {% if block.settings.preview_image_4 %}
+                <div class="ai-removalist-preview-image-{{ ai_gen_id }}" data-slide="3">
+                  <img
+                    src="{{ block.settings.preview_image_4 | image_url: width: 800 }}"
+                    alt="{{ block.settings.preview_image_4.alt | escape }}"
+                    loading="lazy"
+                    width="400"
+                    height="280"
+                  >
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-removalist-preview-dots-{{ ai_gen_id }}" data-dots>
+              <button class="ai-removalist-preview-dot-{{ ai_gen_id }} active" data-dot="0" aria-label="View image 1"></button>
+              {% if block.settings.preview_image_2 %}
+                <button class="ai-removalist-preview-dot-{{ ai_gen_id }}" data-dot="1" aria-label="View image 2"></button>
+              {% endif %}
+              {% if block.settings.preview_image_3 %}
+                <button class="ai-removalist-preview-dot-{{ ai_gen_id }}" data-dot="2" aria-label="View image 3"></button>
+              {% endif %}
+              {% if block.settings.preview_image_4 %}
+                <button class="ai-removalist-preview-dot-{{ ai_gen_id }}" data-dot="3" aria-label="View image 4"></button>
+              {% endif %}
+            </div>
+
+            <h3 class="ai-removalist-preview-title-{{ ai_gen_id }}">{{ block.settings.preview_title }}</h3>
+            <div class="ai-removalist-preview-features-{{ ai_gen_id }}">
+              {% if block.settings.preview_feature_1 != blank %}
+                <div class="ai-removalist-preview-feature-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {{ block.settings.preview_feature_1 }}
+                </div>
+              {% endif %}
+              {% if block.settings.preview_feature_2 != blank %}
+                <div class="ai-removalist-preview-feature-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {{ block.settings.preview_feature_2 }}
+                </div>
+              {% endif %}
+              {% if block.settings.preview_feature_3 != blank %}
+                <div class="ai-removalist-preview-feature-{{ ai_gen_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {{ block.settings.preview_feature_3 }}
+                </div>
+              {% endif %}
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      {% if block.settings.show_pricing %}
+        <section class="ai-removalist-pricing-section-{{ ai_gen_id }}" itemscope itemtype="https://schema.org/Service">
+          <div class="ai-removalist-pricing-header-{{ ai_gen_id }}">
+            <h2 class="ai-removalist-pricing-title-{{ ai_gen_id }}">{{ block.settings.pricing_title }}</h2>
+            <p class="ai-removalist-pricing-subtitle-{{ ai_gen_id }}">{{ block.settings.pricing_subtitle }}</p>
+          </div>
+
+          <div class="ai-removalist-pricing-grid-{{ ai_gen_id }}">
+            <div class="ai-removalist-price-card-{{ ai_gen_id }}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <div class="ai-removalist-price-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              </div>
+              <h3 class="ai-removalist-price-name-{{ ai_gen_id }}" itemprop="name">{{ block.settings.price_1_name }}</h3>
+              <div class="ai-removalist-price-amount-{{ ai_gen_id }}" itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
+                <span itemprop="price">{{ block.settings.price_1_amount }}</span>
+              </div>
+              <div class="ai-removalist-price-features-{{ ai_gen_id }}">
+                {% if block.settings.price_1_feature_1 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_1_feature_1 }}</div>
+                {% endif %}
+                {% if block.settings.price_1_feature_2 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_1_feature_2 }}</div>
+                {% endif %}
+                {% if block.settings.price_1_feature_3 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_1_feature_3 }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="ai-removalist-price-card-{{ ai_gen_id }}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <div class="ai-removalist-price-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+              </div>
+              <h3 class="ai-removalist-price-name-{{ ai_gen_id }}" itemprop="name">{{ block.settings.price_2_name }}</h3>
+              <div class="ai-removalist-price-amount-{{ ai_gen_id }}" itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
+                <span itemprop="price">{{ block.settings.price_2_amount }}</span>
+              </div>
+              <div class="ai-removalist-price-features-{{ ai_gen_id }}">
+                {% if block.settings.price_2_feature_1 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_2_feature_1 }}</div>
+                {% endif %}
+                {% if block.settings.price_2_feature_2 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_2_feature_2 }}</div>
+                {% endif %}
+                {% if block.settings.price_2_feature_3 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_2_feature_3 }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="ai-removalist-price-card-{{ ai_gen_id }}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <div class="ai-removalist-price-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <h3 class="ai-removalist-price-name-{{ ai_gen_id }}" itemprop="name">{{ block.settings.price_3_name }}</h3>
+              <div class="ai-removalist-price-amount-{{ ai_gen_id }}" itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
+                <span itemprop="price">{{ block.settings.price_3_amount }}</span>
+              </div>
+              <div class="ai-removalist-price-features-{{ ai_gen_id }}">
+                {% if block.settings.price_3_feature_1 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_3_feature_1 }}</div>
+                {% endif %}
+                {% if block.settings.price_3_feature_2 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_3_feature_2 }}</div>
+                {% endif %}
+                {% if block.settings.price_3_feature_3 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_3_feature_3 }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="ai-removalist-price-card-{{ ai_gen_id }}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <div class="ai-removalist-price-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+              </div>
+              <h3 class="ai-removalist-price-name-{{ ai_gen_id }}" itemprop="name">{{ block.settings.price_4_name }}</h3>
+              <div class="ai-removalist-price-amount-{{ ai_gen_id }}" itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
+                <span itemprop="price">{{ block.settings.price_4_amount }}</span>
+              </div>
+              <div class="ai-removalist-price-features-{{ ai_gen_id }}">
+                {% if block.settings.price_4_feature_1 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_4_feature_1 }}</div>
+                {% endif %}
+                {% if block.settings.price_4_feature_2 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_4_feature_2 }}</div>
+                {% endif %}
+                {% if block.settings.price_4_feature_3 != blank %}
+                  <div class="ai-removalist-price-feature-{{ ai_gen_id }}">{{ block.settings.price_4_feature_3 }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+
+      {% if block.settings.show_how_it_works %}
+        <section class="ai-removalist-how-it-works-{{ ai_gen_id }}">
+          <h2 class="ai-removalist-how-title-{{ ai_gen_id }}">{{ block.settings.how_it_works_title }}</h2>
+          <div class="ai-removalist-steps-grid-{{ ai_gen_id }}">
+            <div class="ai-removalist-step-{{ ai_gen_id }}">
+              <div class="ai-removalist-step-number-{{ ai_gen_id }}">1</div>
+              <h3 class="ai-removalist-step-title-{{ ai_gen_id }}">{{ block.settings.step_1_title }}</h3>
+              <p class="ai-removalist-step-desc-{{ ai_gen_id }}">{{ block.settings.step_1_desc }}</p>
+            </div>
+            <div class="ai-removalist-step-{{ ai_gen_id }}">
+              <div class="ai-removalist-step-number-{{ ai_gen_id }}">2</div>
+              <h3 class="ai-removalist-step-title-{{ ai_gen_id }}">{{ block.settings.step_2_title }}</h3>
+              <p class="ai-removalist-step-desc-{{ ai_gen_id }}">{{ block.settings.step_2_desc }}</p>
+            </div>
+            <div class="ai-removalist-step-{{ ai_gen_id }}">
+              <div class="ai-removalist-step-number-{{ ai_gen_id }}">3</div>
+              <h3 class="ai-removalist-step-title-{{ ai_gen_id }}">{{ block.settings.step_3_title }}</h3>
+              <p class="ai-removalist-step-desc-{{ ai_gen_id }}">{{ block.settings.step_3_desc }}</p>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    </div>
+
+    <meta itemprop="areaServed" content="{{ block.settings.area_served }}">
+    <meta itemprop="telephone" content="{{ block.settings.phone_number }}">
+    <meta itemprop="priceRange" content="{{ block.settings.price_range }}">
+  </article>
+</removalist-hero-seo-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RemovalistHeroSeo{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentSlide = 0;
+        this.autoplayInterval = null;
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+        this.carousel = this.querySelector('[data-carousel]');
+        this.slides = this.querySelectorAll('[data-slide]');
+        this.dots = this.querySelectorAll('[data-dot]');
+
+        if (this.slides.length > 1) {
+          this.setupCarousel();
+          this.startAutoplay();
+        }
+      }
+
+      setupCarousel() {
+        this.dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            this.goToSlide(index);
+            this.resetAutoplay();
+          });
+        });
+      }
+
+      goToSlide(index) {
+        this.slides[this.currentSlide].classList.remove('active');
+        this.dots[this.currentSlide].classList.remove('active');
+
+        this.currentSlide = index;
+
+        this.slides[this.currentSlide].classList.add('active');
+        this.dots[this.currentSlide].classList.add('active');
+      }
+
+      nextSlide() {
+        const next = (this.currentSlide + 1) % this.slides.length;
+        this.goToSlide(next);
+      }
+
+      startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+          this.nextSlide();
+        }, 4000);
+      }
+
+      resetAutoplay() {
+        clearInterval(this.autoplayInterval);
+        this.startAutoplay();
+      }
+
+      disconnectedCallback() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+        }
+      }
+    }
+
+    customElements.define('removalist-hero-seo-{{ ai_gen_id }}', RemovalistHeroSeo{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Removalist hero SEO",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Ad header"
+    },
+    {
+      "type": "text",
+      "id": "ad_label",
+      "label": "Ad label",
+      "default": "Ad"
+    },
+    {
+      "type": "text",
+      "id": "display_domain",
+      "label": "Display domain",
+      "default": "www.titanexpress.com.au › Man With a Van Sydney"
+    },
+    {
+      "type": "header",
+      "content": "Review badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_badge",
+      "label": "Show review badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_stars",
+      "label": "Stars display",
+      "default": "★★★★★"
+    },
+    {
+      "type": "text",
+      "id": "review_rating",
+      "label": "Rating value",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "300+"
+    },
+    {
+      "type": "url",
+      "id": "review_badge_url",
+      "label": "Review link"
+    },
+    {
+      "type": "header",
+      "content": "Main heading"
+    },
+    {
+      "type": "text",
+      "id": "h1_accent",
+      "label": "H1 accent text",
+      "default": "Man With a Van"
+    },
+    {
+      "type": "text",
+      "id": "h1_rest",
+      "label": "H1 rest of text",
+      "default": "Sydney"
+    },
+    {
+      "type": "header",
+      "content": "Subheadings"
+    },
+    {
+      "type": "text",
+      "id": "subheading_1",
+      "label": "Subheading 1",
+      "default": "Same-Day Removals · Marketplace Pickups · Single Item Moves"
+    },
+    {
+      "type": "text",
+      "id": "subheading_2",
+      "label": "Subheading 2",
+      "default": "Serving All Sydney Suburbs — Fast, Insured & Fixed Price"
+    },
+    {
+      "type": "text",
+      "id": "subheading_3",
+      "label": "Subheading 3",
+      "default": "Book online in 60 seconds. No hidden fees. Trusted by 300+ Sydney locals."
+    },
+    {
+      "type": "header",
+      "content": "Sitelinks"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_1_label",
+      "label": "Sitelink 1 label",
+      "default": "Same-Day Moves"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_1_url",
+      "label": "Sitelink 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_2_label",
+      "label": "Sitelink 2 label",
+      "default": "Marketplace Pickup"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_2_url",
+      "label": "Sitelink 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_3_label",
+      "label": "Sitelink 3 label",
+      "default": "Single Item Moves"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_3_url",
+      "label": "Sitelink 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "sitelink_4_label",
+      "label": "Sitelink 4 label",
+      "default": "All Sydney Suburbs"
+    },
+    {
+      "type": "url",
+      "id": "sitelink_4_url",
+      "label": "Sitelink 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "CTA buttons"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary button text",
+      "default": "Get a Free Quote"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary button text",
+      "default": "Call Now"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_url",
+      "label": "Secondary button URL"
+    },
+    {
+      "type": "header",
+      "content": "Trust signals"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_value",
+      "label": "Trust 1 value",
+      "default": "15+"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_label",
+      "label": "Trust 1 label",
+      "default": "Years in Business"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_value",
+      "label": "Trust 2 value",
+      "default": "5000+"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_label",
+      "label": "Trust 2 label",
+      "default": "Jobs Completed"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_value",
+      "label": "Trust 3 value",
+      "default": "< 2hrs"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_label",
+      "label": "Trust 3 label",
+      "default": "Response Time"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_value",
+      "label": "Trust 4 value",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_label",
+      "label": "Trust 4 label",
+      "default": "Insured Moves"
+    },
+    {
+      "type": "header",
+      "content": "Preview carousel"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_1",
+      "label": "Preview image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_2",
+      "label": "Preview image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_3",
+      "label": "Preview image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image_4",
+      "label": "Preview image 4"
+    },
+    {
+      "type": "text",
+      "id": "preview_title",
+      "label": "Preview title",
+      "default": "Why Choose Titan Express?"
+    },
+    {
+      "type": "text",
+      "id": "preview_feature_1",
+      "label": "Preview feature 1",
+      "default": "Same-day service available"
+    },
+    {
+      "type": "text",
+      "id": "preview_feature_2",
+      "label": "Preview feature 2",
+      "default": "Fixed pricing, no hidden fees"
+    },
+    {
+      "type": "text",
+      "id": "preview_feature_3",
+      "label": "Preview feature 3",
+      "default": "Fully insured and licensed"
+    },
+    {
+      "type": "header",
+      "content": "Pricing section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pricing",
+      "label": "Show pricing section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pricing_title",
+      "label": "Pricing title",
+      "default": "Transparent Pricing"
+    },
+    {
+      "type": "text",
+      "id": "pricing_subtitle",
+      "label": "Pricing subtitle",
+      "default": "No hidden fees. Fixed prices you can trust."
+    },
+    {
+      "type": "header",
+      "content": "Price 1"
+    },
+    {
+      "type": "text",
+      "id": "price_1_name",
+      "label": "Name",
+      "default": "Single Item"
+    },
+    {
+      "type": "text",
+      "id": "price_1_amount",
+      "label": "Amount",
+      "default": "From $89"
+    },
+    {
+      "type": "text",
+      "id": "price_1_feature_1",
+      "label": "Feature 1",
+      "default": "1 item pickup & delivery"
+    },
+    {
+      "type": "text",
+      "id": "price_1_feature_2",
+      "label": "Feature 2",
+      "default": "Within Sydney metro"
+    },
+    {
+      "type": "text",
+      "id": "price_1_feature_3",
+      "label": "Feature 3",
+      "default": "Same-day available"
+    },
+    {
+      "type": "header",
+      "content": "Price 2"
+    },
+    {
+      "type": "text",
+      "id": "price_2_name",
+      "label": "Name",
+      "default": "Small Move"
+    },
+    {
+      "type": "text",
+      "id": "price_2_amount",
+      "label": "Amount",
+      "default": "From $149"
+    },
+    {
+      "type": "text",
+      "id": "price_2_feature_1",
+      "label": "Feature 1",
+      "default": "Studio or 1 bedroom"
+    },
+    {
+      "type": "text",
+      "id": "price_2_feature_2",
+      "label": "Feature 2",
+      "default": "2 movers included"
+    },
+    {
+      "type": "text",
+      "id": "price_2_feature_3",
+      "label": "Feature 3",
+      "default": "Up to 2 hours"
+    },
+    {
+      "type": "header",
+      "content": "Price 3"
+    },
+    {
+      "type": "text",
+      "id": "price_3_name",
+      "label": "Name",
+      "default": "Medium Move"
+    },
+    {
+      "type": "text",
+      "id": "price_3_amount",
+      "label": "Amount",
+      "default": "From $249"
+    },
+    {
+      "type": "text",
+      "id": "price_3_feature_1",
+      "label": "Feature 1",
+      "default": "2-3 bedroom home"
+    },
+    {
+      "type": "text",
+      "id": "price_3_feature_2",
+      "label": "Feature 2",
+      "default": "3 movers included"
+    },
+    {
+      "type": "text",
+      "id": "price_3_feature_3",
+      "label": "Feature 3",
+      "default": "Up to 4 hours"
+    },
+    {
+      "type": "header",
+      "content": "Price 4"
+    },
+    {
+      "type": "text",
+      "id": "price_4_name",
+      "label": "Name",
+      "default": "Marketplace Pickup"
+    },
+    {
+      "type": "text",
+      "id": "price_4_amount",
+      "label": "Amount",
+      "default": "From $79"
+    },
+    {
+      "type": "text",
+      "id": "price_4_feature_1",
+      "label": "Feature 1",
+      "default": "Facebook, Gumtree pickup"
+    },
+    {
+      "type": "text",
+      "id": "price_4_feature_2",
+      "label": "Feature 2",
+      "default": "Quick turnaround"
+    },
+    {
+      "type": "text",
+      "id": "price_4_feature_3",
+      "label": "Feature 3",
+      "default": "Safe handling"
+    },
+    {
+      "type": "header",
+      "content": "How it works"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_how_it_works",
+      "label": "Show how it works",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "how_it_works_title",
+      "label": "Title",
+      "default": "How It Works"
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 title",
+      "default": "Get a Quote"
+    },
+    {
+      "type": "text",
+      "id": "step_1_desc",
+      "label": "Step 1 description",
+      "default": "Fill out our quick online form or call us for an instant quote"
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 title",
+      "default": "Book Your Move"
+    },
+    {
+      "type": "text",
+      "id": "step_2_desc",
+      "label": "Step 2 description",
+      "default": "Choose your preferred date and time. Same-day service available"
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 title",
+      "default": "We Move It"
+    },
+    {
+      "type": "text",
+      "id": "step_3_desc",
+      "label": "Step 3 description",
+      "default": "Our professional team handles everything with care and efficiency"
+    },
+    {
+      "type": "header",
+      "content": "SEO schema data"
+    },
+    {
+      "type": "text",
+      "id": "area_served",
+      "label": "Area served",
+      "default": "Sydney, NSW, Australia"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "+61-XXX-XXX-XXX"
+    },
+    {
+      "type": "text",
+      "id": "price_range",
+      "label": "Price range",
+      "default": "$$"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Removalist hero SEO"
+    }
+  ]
+}
+{% endschema %}

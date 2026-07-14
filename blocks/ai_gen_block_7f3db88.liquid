@@ -1,0 +1,1254 @@
+{% doc %}
+  @prompt
+    Create a premium floating quote form inspired by modern Meta lead generation ads.
+    
+    SECTION NAME:
+    Instant Removalist Quote
+    
+    DESIGN STYLE:
+    
+    * Glassmorphism design
+    * Transparent frosted glass background
+    * Blur effect behind form
+    * Rounded corners (24px)
+    * Premium modern appearance
+    * White border with subtle transparency
+    * Floating card effect
+    * Soft shadow
+    * Mobile responsive
+    * High conversion focused
+    * Similar visual style to Meta Lead Ads
+    
+    FORM POSITION:
+    
+    * Overlay on top of hero image
+    * Desktop: right side floating
+    * Mobile: centered and full width
+    * Appear after 5% page scroll
+    * Smooth fade and slide animation
+    
+    HEADING:
+    Get Your Quote In 2 Minutes
+    
+    SUBHEADING:
+    Furniture Delivery • Small Moves • Marketplace Pickups • Same Day Service
+    
+    FORM FIELDS:
+    
+    Step 1
+    Pickup Suburb
+    
+    Step 2
+    Delivery Suburb
+    
+    Step 3
+    What Are You Moving?
+    
+    Options:
+    
+    * Sofa
+    * Bed
+    * Mattress
+    * Dining Table
+    * Marketplace Purchase
+    * Apartment Move
+    * Multiple Items
+    
+    Step 4
+    Stairs or Lift?
+    
+    Options:
+    
+    * Ground Floor
+    * Lift Available
+    * Stairs
+    
+    Step 5
+    Preferred Date
+    
+    Step 6
+    Name
+    
+    Step 7
+    Phone Number
+    
+    Step 8
+    Email Address
+    
+    BUTTON:
+    Get My Fast Quote →
+    
+    BUTTON STYLE:
+    
+    * Bright red gradient
+    * White text
+    * Hover animation
+    * Mobile friendly
+    * Full width
+    
+    SUCCESS MESSAGE:
+    Thank You!
+    
+    Your quote request has been received.
+    
+    Titan Express will contact you shortly with pricing and availability.
+    
+    TRUST ELEMENTS BELOW FORM:
+    
+    ★★★★★ 5 Star Service
+    
+    ✓ Same Day Available
+    ✓ Fully Insured
+    ✓ Professional Removalists
+    ✓ Sydney Wide Coverage
+    
+    ADVANCED FEATURES:
+    
+    * Multi-step progress bar
+    * Auto save entered data
+    * Floating animation
+    * Close (X) button
+    * Glassmorphism effect
+    * Blur background
+    * Email notification to admin
+    * Send form to admin email instantly
+    * Mobile keyboard optimized
+    * One-click phone call button
+    * WhatsApp button option
+    
+    COLORS:
+    
+    * White glass background
+    * Black text
+    * Red CTA buttons
+    * Light grey borders
+    * Premium corporate appearance
+    
+    BUSINESS DETAILS:
+    
+    Titan Express Removalist
+    Phone: 0469 717 535
+    
+    SEO OPTIMIZED FOR:
+    Furniture Removalist Sydney
+    Furniture Delivery Sydney
+    Man With A Van Sydney
+    Small Moves Sydney
+    Same Day Furniture Delivery Sydney
+    
+    The form should look like a premium Meta Lead Ad form floating over the hero image, modern, clean, trustworthy, and designed to maximize quote requests.
+    "Make the form look exactly like a modern Meta lead generation form with glassmorphism, transparent background, blur effect, floating card design, and smooth animations. Prioritize mobile conversions and Google Ads landing page performance."
+    
+    
+    
+    
+    
+    
+    
+    
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-quote-form-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease, transform 0.6s ease;
+    width: {{ block.settings.form_width }}px;
+    max-width: calc(100vw - 40px);
+  }
+
+  .ai-quote-form-{{ ai_gen_id }}.ai-quote-form-visible-{{ ai_gen_id }} {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ai-quote-form-container-{{ ai_gen_id }} {
+    background: {{ block.settings.glass_background }};
+    backdrop-filter: blur({{ block.settings.blur_amount }}px);
+    -webkit-backdrop-filter: blur({{ block.settings.blur_amount }}px);
+    border-radius: {{ block.settings.border_radius }}px;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    box-shadow: {{ block.settings.shadow_x }}px {{ block.settings.shadow_y }}px {{ block.settings.shadow_blur }}px {{ block.settings.shadow_color }};
+    padding: {{ block.settings.form_padding }}px;
+    position: relative;
+  }
+
+  .ai-quote-form-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .ai-quote-form-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-quote-form-header-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+    padding-right: 40px;
+  }
+
+  .ai-quote-form-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+  }
+
+  .ai-quote-form-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .ai-quote-form-progress-{{ ai_gen_id }} {
+    height: 4px;
+    background: {{ block.settings.progress_bg_color }};
+    border-radius: 2px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .ai-quote-form-progress-bar-{{ ai_gen_id }} {
+    height: 100%;
+    background: {{ block.settings.progress_color }};
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  .ai-quote-form-step-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-quote-form-step-{{ ai_gen_id }}.ai-quote-form-step-active-{{ ai_gen_id }} {
+    display: block;
+    animation: ai-quote-form-fade-in-{{ ai_gen_id }} 0.4s ease;
+  }
+
+  @keyframes ai-quote-form-fade-in-{{ ai_gen_id }} {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ai-quote-form-label-{{ ai_gen_id }} {
+    display: block;
+    font-size: {{ block.settings.label_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin-bottom: 8px;
+  }
+
+  .ai-quote-form-input-{{ ai_gen_id }},
+  .ai-quote-form-select-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: {{ block.settings.input_size }}px;
+    color: {{ block.settings.text_color }};
+    background: {{ block.settings.input_background }};
+    transition: border-color 0.3s ease, background 0.3s ease;
+    margin-bottom: 16px;
+  }
+
+  .ai-quote-form-input-{{ ai_gen_id }}:focus,
+  .ai-quote-form-select-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.input_focus_color }};
+    background: {{ block.settings.input_focus_background }};
+  }
+
+  .ai-quote-form-input-{{ ai_gen_id }}::placeholder {
+    color: {{ block.settings.text_color }};
+    opacity: 0.5;
+  }
+
+  .ai-quote-form-options-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .ai-quote-form-option-{{ ai_gen_id }} {
+    padding: 12px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    background: {{ block.settings.input_background }};
+    color: {{ block.settings.text_color }};
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: {{ block.settings.input_size }}px;
+  }
+
+  .ai-quote-form-option-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.input_focus_background }};
+    border-color: {{ block.settings.input_focus_color }};
+  }
+
+  .ai-quote-form-option-{{ ai_gen_id }}.ai-quote-form-option-selected-{{ ai_gen_id }} {
+    background: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border-color: {{ block.settings.button_color }};
+  }
+
+  .ai-quote-form-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .ai-quote-form-button-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-quote-form-button-primary-{{ ai_gen_id }} {
+    background: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+  }
+
+  .ai-quote-form-button-primary-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.button_hover_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px {{ block.settings.button_shadow_color }};
+  }
+
+  .ai-quote-form-button-secondary-{{ ai_gen_id }} {
+    background: {{ block.settings.input_background }};
+    color: {{ block.settings.text_color }};
+    border: 1px solid {{ block.settings.input_border_color }};
+  }
+
+  .ai-quote-form-button-secondary-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.input_focus_background }};
+  }
+
+  .ai-quote-form-success-{{ ai_gen_id }} {
+    display: none;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .ai-quote-form-success-{{ ai_gen_id }}.ai-quote-form-success-visible-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .ai-quote-form-success-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.success_color }};
+    margin: 0 0 16px 0;
+  }
+
+  .ai-quote-form-success-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-quote-form-trust-{{ ai_gen_id }} {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid {{ block.settings.input_border_color }};
+  }
+
+  .ai-quote-form-trust-rating-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .ai-quote-form-stars-{{ ai_gen_id }} {
+    color: {{ block.settings.star_color }};
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .ai-quote-form-rating-text-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    font-weight: 600;
+  }
+
+  .ai-quote-form-trust-items-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .ai-quote-form-trust-item-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.text_color }};
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ai-quote-form-trust-icon-{{ ai_gen_id }} {
+    color: {{ block.settings.success_color }};
+    font-weight: 700;
+  }
+
+  .ai-quote-form-contact-buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .ai-quote-form-contact-button-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 12px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .ai-quote-form-phone-button-{{ ai_gen_id }} {
+    background: {{ block.settings.phone_button_color }};
+    color: {{ block.settings.phone_button_text_color }};
+  }
+
+  .ai-quote-form-phone-button-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px {{ block.settings.button_shadow_color }};
+  }
+
+  .ai-quote-form-whatsapp-button-{{ ai_gen_id }} {
+    background: {{ block.settings.whatsapp_button_color }};
+    color: {{ block.settings.whatsapp_button_text_color }};
+  }
+
+  .ai-quote-form-whatsapp-button-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px {{ block.settings.button_shadow_color }};
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-quote-form-{{ ai_gen_id }} {
+      top: auto;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      transform: translateY(100%);
+      width: 100%;
+      max-width: 100%;
+      border-radius: {{ block.settings.border_radius }}px {{ block.settings.border_radius }}px 0 0;
+    }
+
+    .ai-quote-form-{{ ai_gen_id }}.ai-quote-form-visible-{{ ai_gen_id }} {
+      transform: translateY(0);
+    }
+
+    .ai-quote-form-container-{{ ai_gen_id }} {
+      border-radius: {{ block.settings.border_radius }}px {{ block.settings.border_radius }}px 0 0;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .ai-quote-form-options-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-quote-form-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .ai-quote-form-subheading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subheading_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<quote-form-{{ ai_gen_id }}
+  class="ai-quote-form-{{ ai_gen_id }}"
+  data-scroll-trigger="{{ block.settings.scroll_trigger }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-quote-form-container-{{ ai_gen_id }}">
+    <button
+      class="ai-quote-form-close-{{ ai_gen_id }}"
+      aria-label="Close form"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="ai-quote-form-content-{{ ai_gen_id }}">
+      <div class="ai-quote-form-header-{{ ai_gen_id }}">
+        <h2 class="ai-quote-form-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        <p class="ai-quote-form-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+      </div>
+
+      <div class="ai-quote-form-progress-{{ ai_gen_id }}">
+        <div class="ai-quote-form-progress-bar-{{ ai_gen_id }}"></div>
+      </div>
+
+      {%- form 'contact' -%}
+        <input type="hidden" name="contact[form_type]" value="quote_request">
+        <input type="hidden" name="contact[business_name]" value="{{ block.settings.business_name }}">
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }} ai-quote-form-step-active-{{ ai_gen_id }}" data-step="1">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">Pickup Suburb</label>
+          <input
+            type="text"
+            name="contact[pickup_suburb]"
+            class="ai-quote-form-input-{{ ai_gen_id }}"
+            placeholder="Enter pickup suburb"
+            required
+          >
+        </div>
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }}" data-step="2">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">Delivery Suburb</label>
+          <input
+            type="text"
+            name="contact[delivery_suburb]"
+            class="ai-quote-form-input-{{ ai_gen_id }}"
+            placeholder="Enter delivery suburb"
+            required
+          >
+        </div>
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }}" data-step="3">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">What Are You Moving?</label>
+          <input type="hidden" name="contact[moving_item]" class="ai-quote-form-moving-item-{{ ai_gen_id }}">
+          <div class="ai-quote-form-options-{{ ai_gen_id }}">
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Sofa">Sofa</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Bed">Bed</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Mattress">Mattress</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Dining Table">Dining Table</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Marketplace Purchase">Marketplace Purchase</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Apartment Move">Apartment Move</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Multiple Items">Multiple Items</div>
+          </div>
+        </div>
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }}" data-step="4">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">Stairs or Lift?</label>
+          <input type="hidden" name="contact[access_type]" class="ai-quote-form-access-type-{{ ai_gen_id }}">
+          <div class="ai-quote-form-options-{{ ai_gen_id }}">
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Ground Floor">Ground Floor</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Lift Available">Lift Available</div>
+            <div class="ai-quote-form-option-{{ ai_gen_id }}" data-value="Stairs">Stairs</div>
+          </div>
+        </div>
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }}" data-step="5">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">Preferred Date</label>
+          <input
+            type="text"
+            name="contact[preferred_date]"
+            class="ai-quote-form-input-{{ ai_gen_id }}"
+            placeholder="DD/MM/YYYY"
+            required
+          >
+        </div>
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }}" data-step="6">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">Name</label>
+          <input
+            type="text"
+            name="contact[name]"
+            class="ai-quote-form-input-{{ ai_gen_id }}"
+            placeholder="Your name"
+            required
+          >
+        </div>
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }}" data-step="7">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">Phone Number</label>
+          <input
+            type="tel"
+            name="contact[phone]"
+            class="ai-quote-form-input-{{ ai_gen_id }}"
+            placeholder="{{ block.settings.phone_number }}"
+            required
+          >
+        </div>
+
+        <div class="ai-quote-form-step-{{ ai_gen_id }}" data-step="8">
+          <label class="ai-quote-form-label-{{ ai_gen_id }}">Email Address</label>
+          <input
+            type="email"
+            name="contact[email]"
+            class="ai-quote-form-input-{{ ai_gen_id }}"
+            placeholder="your@email.com"
+            required
+          >
+        </div>
+
+        <div class="ai-quote-form-buttons-{{ ai_gen_id }}">
+          <button
+            type="button"
+            class="ai-quote-form-button-{{ ai_gen_id }} ai-quote-form-button-secondary-{{ ai_gen_id }} ai-quote-form-back-{{ ai_gen_id }}"
+            style="display: none;"
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            class="ai-quote-form-button-{{ ai_gen_id }} ai-quote-form-button-primary-{{ ai_gen_id }} ai-quote-form-next-{{ ai_gen_id }}"
+          >
+            Next
+          </button>
+          <button
+            type="submit"
+            class="ai-quote-form-button-{{ ai_gen_id }} ai-quote-form-button-primary-{{ ai_gen_id }} ai-quote-form-submit-{{ ai_gen_id }}"
+            style="display: none;"
+          >
+            {{ block.settings.button_text }}
+          </button>
+        </div>
+      {%- endform -%}
+
+      <div class="ai-quote-form-trust-{{ ai_gen_id }}">
+        <div class="ai-quote-form-trust-rating-{{ ai_gen_id }}">
+          <div class="ai-quote-form-stars-{{ ai_gen_id }}">★★★★★</div>
+          <div class="ai-quote-form-rating-text-{{ ai_gen_id }}">5 Star Service</div>
+        </div>
+        <div class="ai-quote-form-trust-items-{{ ai_gen_id }}">
+          <div class="ai-quote-form-trust-item-{{ ai_gen_id }}">
+            <span class="ai-quote-form-trust-icon-{{ ai_gen_id }}">✓</span>
+            <span>Same Day Available</span>
+          </div>
+          <div class="ai-quote-form-trust-item-{{ ai_gen_id }}">
+            <span class="ai-quote-form-trust-icon-{{ ai_gen_id }}">✓</span>
+            <span>Fully Insured</span>
+          </div>
+          <div class="ai-quote-form-trust-item-{{ ai_gen_id }}">
+            <span class="ai-quote-form-trust-icon-{{ ai_gen_id }}">✓</span>
+            <span>Professional Removalists</span>
+          </div>
+          <div class="ai-quote-form-trust-item-{{ ai_gen_id }}">
+            <span class="ai-quote-form-trust-icon-{{ ai_gen_id }}">✓</span>
+            <span>Sydney Wide Coverage</span>
+          </div>
+        </div>
+        <div class="ai-quote-form-contact-buttons-{{ ai_gen_id }}">
+          <a
+            href="tel:{{ block.settings.phone_number }}"
+            class="ai-quote-form-contact-button-{{ ai_gen_id }} ai-quote-form-phone-button-{{ ai_gen_id }}"
+          >
+            📞 Call Now
+          </a>
+          <a
+            href="https://wa.me/{{ block.settings.whatsapp_number }}"
+            class="ai-quote-form-contact-button-{{ ai_gen_id }} ai-quote-form-whatsapp-button-{{ ai_gen_id }}"
+            target="_blank"
+          >
+            💬 WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-quote-form-success-{{ ai_gen_id }}">
+      <h3 class="ai-quote-form-success-heading-{{ ai_gen_id }}">{{ block.settings.success_heading }}</h3>
+      <p class="ai-quote-form-success-text-{{ ai_gen_id }}">{{ block.settings.success_message }}</p>
+      <div class="ai-quote-form-contact-buttons-{{ ai_gen_id }}">
+        <a
+          href="tel:{{ block.settings.phone_number }}"
+          class="ai-quote-form-contact-button-{{ ai_gen_id }} ai-quote-form-phone-button-{{ ai_gen_id }}"
+        >
+          📞 Call Now
+        </a>
+        <a
+          href="https://wa.me/{{ block.settings.whatsapp_number }}"
+          class="ai-quote-form-contact-button-{{ ai_gen_id }} ai-quote-form-whatsapp-button-{{ ai_gen_id }}"
+          target="_blank"
+        >
+          💬 WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</quote-form-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class QuoteForm{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentStep = 1;
+        this.totalSteps = 8;
+        this.formData = {};
+      }
+
+      connectedCallback() {
+        this.scrollTrigger = parseInt(this.dataset.scrollTrigger) || 5;
+        this.steps = this.querySelectorAll('.ai-quote-form-step-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-quote-form-next-{{ ai_gen_id }}');
+        this.backButton = this.querySelector('.ai-quote-form-back-{{ ai_gen_id }}');
+        this.submitButton = this.querySelector('.ai-quote-form-submit-{{ ai_gen_id }}');
+        this.closeButton = this.querySelector('.ai-quote-form-close-{{ ai_gen_id }}');
+        this.progressBar = this.querySelector('.ai-quote-form-progress-bar-{{ ai_gen_id }}');
+        this.form = this.querySelector('form');
+        this.content = this.querySelector('.ai-quote-form-content-{{ ai_gen_id }}');
+        this.success = this.querySelector('.ai-quote-form-success-{{ ai_gen_id }}');
+
+        this.setupEventListeners();
+        this.setupScrollTrigger();
+        this.loadSavedData();
+        this.updateProgress();
+      }
+
+      setupEventListeners() {
+        this.nextButton.addEventListener('click', () => this.nextStep());
+        this.backButton.addEventListener('click', () => this.prevStep());
+        this.closeButton.addEventListener('click', () => this.closeForm());
+
+        this.querySelectorAll('.ai-quote-form-option-{{ ai_gen_id }}').forEach(option => {
+          option.addEventListener('click', (e) => this.selectOption(e));
+        });
+
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+
+        this.querySelectorAll('.ai-quote-form-input-{{ ai_gen_id }}').forEach(input => {
+          input.addEventListener('input', () => this.saveData());
+        });
+      }
+
+      setupScrollTrigger() {
+        let hasShown = false;
+        window.addEventListener('scroll', () => {
+          if (hasShown) return;
+          const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+          if (scrollPercent >= this.scrollTrigger) {
+            this.showForm();
+            hasShown = true;
+          }
+        });
+      }
+
+      showForm() {
+        this.classList.add('ai-quote-form-visible-{{ ai_gen_id }}');
+      }
+
+      closeForm() {
+        this.classList.remove('ai-quote-form-visible-{{ ai_gen_id }}');
+      }
+
+      selectOption(e) {
+        const option = e.target;
+        const step = option.closest('.ai-quote-form-step-{{ ai_gen_id }}');
+        const options = step.querySelectorAll('.ai-quote-form-option-{{ ai_gen_id }}');
+        const hiddenInput = step.querySelector('input[type="hidden"]');
+
+        options.forEach(opt => opt.classList.remove('ai-quote-form-option-selected-{{ ai_gen_id }}'));
+        option.classList.add('ai-quote-form-option-selected-{{ ai_gen_id }}');
+
+        if (hiddenInput) {
+          hiddenInput.value = option.dataset.value;
+        }
+
+        this.saveData();
+        setTimeout(() => this.nextStep(), 300);
+      }
+
+      nextStep() {
+        const currentStepEl = this.steps[this.currentStep - 1];
+        const inputs = currentStepEl.querySelectorAll('input[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+          if (!input.value) {
+            isValid = false;
+            input.focus();
+          }
+        });
+
+        if (!isValid) return;
+
+        if (this.currentStep < this.totalSteps) {
+          this.steps[this.currentStep - 1].classList.remove('ai-quote-form-step-active-{{ ai_gen_id }}');
+          this.currentStep++;
+          this.steps[this.currentStep - 1].classList.add('ai-quote-form-step-active-{{ ai_gen_id }}');
+          this.updateButtons();
+          this.updateProgress();
+        }
+      }
+
+      prevStep() {
+        if (this.currentStep > 1) {
+          this.steps[this.currentStep - 1].classList.remove('ai-quote-form-step-active-{{ ai_gen_id }}');
+          this.currentStep--;
+          this.steps[this.currentStep - 1].classList.add('ai-quote-form-step-active-{{ ai_gen_id }}');
+          this.updateButtons();
+          this.updateProgress();
+        }
+      }
+
+      updateButtons() {
+        if (this.currentStep === 1) {
+          this.backButton.style.display = 'none';
+        } else {
+          this.backButton.style.display = 'block';
+        }
+
+        if (this.currentStep === this.totalSteps) {
+          this.nextButton.style.display = 'none';
+          this.submitButton.style.display = 'block';
+        } else {
+          this.nextButton.style.display = 'block';
+          this.submitButton.style.display = 'none';
+        }
+      }
+
+      updateProgress() {
+        const progress = (this.currentStep / this.totalSteps) * 100;
+        this.progressBar.style.width = progress + '%';
+      }
+
+      saveData() {
+        const formData = new FormData(this.form);
+        const data = {};
+        for (let [key, value] of formData.entries()) {
+          data[key] = value;
+        }
+        localStorage.setItem('quoteForm{{ ai_gen_id }}', JSON.stringify(data));
+      }
+
+      loadSavedData() {
+        const saved = localStorage.getItem('quoteForm{{ ai_gen_id }}');
+        if (saved) {
+          const data = JSON.parse(saved);
+          Object.keys(data).forEach(key => {
+            const input = this.form.querySelector(`[name="${key}"]`);
+            if (input) {
+              input.value = data[key];
+            }
+          });
+        }
+      }
+
+      handleSubmit(e) {
+        e.preventDefault();
+        this.content.style.display = 'none';
+        this.success.classList.add('ai-quote-form-success-visible-{{ ai_gen_id }}');
+        localStorage.removeItem('quoteForm{{ ai_gen_id }}');
+
+        const formData = new FormData(this.form);
+        fetch(this.form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+      }
+    }
+
+    customElements.define('quote-form-{{ ai_gen_id }}', QuoteForm{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Instant removalist quote",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Form content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get Your Quote In 2 Minutes"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Furniture Delivery • Small Moves • Marketplace Pickups • Same Day Service"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Get My Fast Quote →"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Success heading",
+      "default": "Thank You!"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Your quote request has been received. Titan Express will contact you shortly with pricing and availability."
+    },
+    {
+      "type": "header",
+      "content": "Business details"
+    },
+    {
+      "type": "text",
+      "id": "business_name",
+      "label": "Business name",
+      "default": "Titan Express Removalist"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469717535"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp number",
+      "default": "61469717535"
+    },
+    {
+      "type": "header",
+      "content": "Form behavior"
+    },
+    {
+      "type": "range",
+      "id": "scroll_trigger",
+      "label": "Show after scroll",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "form_width",
+      "label": "Form width",
+      "min": 300,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Glassmorphism style"
+    },
+    {
+      "type": "color",
+      "id": "glass_background",
+      "label": "Glass background",
+      "default": "rgba(255, 255, 255, 0.85)"
+    },
+    {
+      "type": "range",
+      "id": "blur_amount",
+      "label": "Blur amount",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "rgba(255, 255, 255, 0.5)"
+    },
+    {
+      "type": "range",
+      "id": "form_padding",
+      "label": "Padding",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_x",
+      "label": "Shadow X",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_y",
+      "label": "Shadow Y",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.15)"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#DC2626"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#B91C1C"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_shadow_color",
+      "label": "Button shadow color",
+      "default": "rgba(220, 38, 38, 0.3)"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input background",
+      "default": "rgba(255, 255, 255, 0.6)"
+    },
+    {
+      "type": "color",
+      "id": "input_focus_background",
+      "label": "Input focus background",
+      "default": "rgba(255, 255, 255, 0.9)"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "color",
+      "id": "input_focus_color",
+      "label": "Input focus color",
+      "default": "#DC2626"
+    },
+    {
+      "type": "color",
+      "id": "progress_bg_color",
+      "label": "Progress background",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "color",
+      "id": "progress_color",
+      "label": "Progress color",
+      "default": "#DC2626"
+    },
+    {
+      "type": "color",
+      "id": "success_color",
+      "label": "Success color",
+      "default": "#16A34A"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#FBBF24"
+    },
+    {
+      "type": "color",
+      "id": "phone_button_color",
+      "label": "Phone button color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "phone_button_text_color",
+      "label": "Phone button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "whatsapp_button_color",
+      "label": "WhatsApp button color",
+      "default": "#25D366"
+    },
+    {
+      "type": "color",
+      "id": "whatsapp_button_text_color",
+      "label": "WhatsApp button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "Label size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "input_size",
+      "label": "Input size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Input style"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instant removalist quote"
+    }
+  ]
+}
+{% endschema %}

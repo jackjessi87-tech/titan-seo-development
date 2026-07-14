@@ -1,0 +1,1596 @@
+{% doc %}
+  @prompt
+    Create a premium service Hero section for Shopify Pages.
+    
+    Only focus on:
+    
+    Layout
+    Image
+    H1
+    Buttons
+    Mobile responsiveness  service based  use white black and red theme 
+    Connect the Hero section to Shopify Page Dynamic Sources.
+    
+    Support these Page metafields:
+    
+    custom.badge_text
+    custom.hero_subheading
+    custom.hero_image
+    custom.hero_image_alt
+    custom.hero_image_caption
+    custom.hero_image_title
+    custom.primary_cta_text
+    custom.primary_cta_link
+    custom.secondary_cta_text
+    custom.secondary_cta_link
+    custom.service_area
+    custom.phone_number
+    custom.google_rating
+    custom.google_review_count
+    custom.google_review_url
+    custom.target_keywords
+    
+    Only display fields when they contain data.
+    
+    Use sensible fallbacks., Connect all Page metafields using Shopify Dynamic Sources.
+    
+    Now it connects:
+    
+    Hero image
+    Badge
+    Rating
+    CTA
+    Service area
+    Prompt 3 — Design
+    
+    Then:
+    
+    Improve typography, spacing, animations, SVG icons, floating cards and premium styling., Completely refine and enhance the existing Service Hero section.
+    
+    Do NOT rebuild the section.
+    
+    Keep all current functionality and dynamic metafields.
+    
+    This is a premium local service landing page, not an ecommerce page.
+    
+    The goal is to create a Hero that instantly tells both Google and visitors:
+    
+    • What service is offered
+    • Where it is offered
+    • Why this business is trusted
+    • How to get a quote
+    
+    while remaining lightweight, mobile-first and SEO focused.
+    
+    --------------------------------
+    FIX EXISTING ISSUES
+    --------------------------------
+    
+    1. Fix all Shopify Rich Text metafields.
+    
+    Do not output raw JSON.
+    
+    Render Rich Text properly using Shopify's rich text rendering.
+    
+    This applies to:
+    
+    - Hero Subheading
+    - Service Area
+    - Any Rich Text metafields
+    
+    --------------------------------
+    VISUAL DESIGN
+    --------------------------------
+    
+    Redesign the Hero to feel like a premium service business.
+    
+    White background.
+    
+    Strong red accent.
+    
+    Modern typography.
+    
+    Excellent spacing.
+    
+    Large bold H1.
+    
+    Professional SVG icons.
+    
+    Premium shadows.
+    
+    Rounded corners.
+    
+    Responsive.
+    
+    Fast.
+    
+    No horizontal scrolling.
+    
+    --------------------------------
+    IMAGE CARD
+    --------------------------------
+    
+    The hero image should become the visual focal point.
+    
+    Large rounded image.
+    
+    Premium shadow.
+    
+    Subtle hover animation.
+    
+    Overlay information cards.
+    
+    Use dynamic Page metafields.
+    
+    Overlay cards should include:
+    
+    ✓ Same Day Available
+    
+    ✓ Fully Insured
+    
+    ✓ 5.0 Google Rating
+    
+    ✓ 112+ Reviews
+    
+    ✓ Sydney Wide
+    
+    ✓ Oversized Van
+    
+    Only display cards when corresponding metafields exist.
+    
+    Make these cards floating over the image similar to premium SaaS websites.
+    
+    --------------------------------
+    INSTANT UNDERSTANDING
+    --------------------------------
+    
+    Within 3 seconds a visitor should understand:
+    
+    Furniture Delivery Ryde
+    
+    Professional Furniture Delivery
+    
+    Same Day Available
+    
+    Furniture Protected
+    
+    Oversized Van
+    
+    5-Star Rated
+    
+    Fast Quotes
+    
+    Sydney Wide
+    
+    Show these as premium badges around the hero.
+    
+    --------------------------------
+    TRUST BAR
+    --------------------------------
+    
+    Below the Hero create a modern trust bar.
+    
+    Loop through:
+    
+    custom.trust_points
+    
+    Display as animated SVG icon badges.
+    
+    --------------------------------
+    LOCAL SEO
+    --------------------------------
+    
+    Use the Service Area metafield naturally.
+    
+    Instead of dumping suburbs.
+    
+    Create natural wording like:
+    
+    "Proudly servicing Ryde, West Ryde, North Ryde, Putney, Meadowbank and surrounding Sydney suburbs."
+    
+    --------------------------------
+    GOOGLE REVIEW BLOCK
+    --------------------------------
+    
+    Display dynamically:
+    
+    ★★★★★
+    
+    Google Rating
+    
+    Review Count
+    
+    Button
+    
+    Read Google Reviews
+    
+    Use:
+    
+    custom.google_rating
+    
+    custom.google_review_count
+    
+    custom.google_review_url
+    
+    --------------------------------
+    CTA
+    --------------------------------
+    
+    Primary CTA
+    
+    Get Free Quote
+    
+    Secondary CTA
+    
+    Call Now
+    
+    Buttons should remain dynamic.
+    
+    --------------------------------
+    IMAGE SEO
+    --------------------------------
+    
+    Improve image SEO.
+    
+    Use:
+    
+    custom.hero_image
+    
+    custom.hero_image_alt
+    
+    custom.hero_image_caption
+    
+    custom.hero_image_title
+    
+    Render image inside:
+    
+    <figure>
+    
+    <img>
+    
+    <figcaption>
+    
+    Lazy load where appropriate.
+    
+    Responsive.
+    
+    --------------------------------
+    DYNAMIC SCHEMA ENGINE
+    --------------------------------
+    
+    Automatically generate:
+    
+    WebPage
+    
+    Service
+    
+    LocalBusiness
+    
+    BreadcrumbList
+    
+    ImageObject
+    
+    ContactPoint
+    
+    Use:
+    
+    Page Title
+    
+    Page URL
+    
+    Hero Image
+    
+    Hero Image Alt
+    
+    Hero Image Caption
+    
+    Service Area
+    
+    Phone Number
+    
+    Google Rating
+    
+    Review Count
+    
+    Schema Service Type
+    
+    Schema Area Served
+    
+    Schema Price Range
+    
+    Only generate schema when data exists.
+    
+    Do not require manually pasting JSON-LD.
+    
+    --------------------------------
+    MOBILE EXPERIENCE
+    --------------------------------
+    
+    This Hero must be designed primarily for mobile.
+    
+    Image should appear immediately.
+    
+    Overlay cards must remain readable.
+    
+    Buttons full width.
+    
+    One-hand usability.
+    
+    No horizontal scrolling.
+    
+    Above the fold.
+    
+    --------------------------------
+    PERFORMANCE
+    --------------------------------
+    
+    No unnecessary JavaScript.
+    
+    No heavy animations.
+    
+    No external libraries.
+    
+    Optimise for Core Web Vitals.
+    
+    Optimise for Google Ads landing pages.
+    
+    --------------------------------
+    FINAL GOAL
+    --------------------------------
+    
+    The Hero should feel comparable to the quality of Stripe, Airbnb, Apple and leading Australian service websites.
+    
+    The page should immediately communicate professionalism, trust and local expertise while remaining highly optimised for SEO, structured data, Google Images and AI-powered search., The Rich Text Page metafields are currently rendering as raw JSON instead of formatted content.
+    
+    Fix all Rich Text metafields throughout this section.
+    
+    Do not output the metafield object directly.
+    
+    Render Rich Text correctly using Shopify Liquid rich text rendering.
+    
+    This applies to:
+    
+    - custom.hero_subheading
+    - custom.service_area
+    - any other Rich Text metafields
+    
+    The output should display clean paragraphs and formatting, never JSON.
+    
+    Use conditional checks so empty Rich Text metafields do not render.
+    
+    Maintain semantic HTML and accessibility., Review and upgrade the existing Service Hero section.
+    
+    Do not rebuild from scratch unless required. Keep it as a Shopify Page section.
+    
+    Confirm and support these Page metafields:
+    
+    custom.badge_text
+    custom.hero_subheading
+    custom.hero_image
+    custom.hero_image_alt
+    custom.hero_image_caption
+    custom.hero_image_title
+    custom.primary_cta_text
+    custom.primary_cta_link
+    custom.secondary_cta_text
+    custom.secondary_cta_link
+    custom.service_area
+    custom.phone_number
+    custom.google_rating
+    custom.google_review_count
+    custom.google_review_url
+    custom.target_keywords
+    custom.hero_layout
+    custom.schema_service_type
+    custom.schema_area_served
+    custom.schema_price_range
+    
+    Important:
+    Render Rich Text metafields correctly. Do not show raw JSON like {"type":"root","children"...}.
+    
+    Design:
+    Make the section modern, bright, mobile-first and service-based.
+    
+    Use:
+    White background
+    Red accent #E30613
+    Black headings
+    Soft grey cards
+    Rounded corners
+    Soft shadows
+    Premium spacing
+    Advanced inline SVG icons
+    No external icon library
+    
+    Mobile UX:
+    Fix mobile layout.
+    No horizontal scrolling.
+    Hero image must look good on mobile.
+    Buttons must be large and easy to tap.
+    Keep important content above the fold.
+    Improve spacing and readability.
+    
+    Hero image:
+    Use custom.hero_image.
+    Alt text:
+    {{ page.metafields.custom.hero_image_alt.value | default: page.title }}
+    Title:
+    {{ page.metafields.custom.hero_image_title.value | default: page.title }}
+    Caption:
+    custom.hero_image_caption
+    
+    Wrap image with:
+    figure
+    img
+    figcaption
+    
+    Add overlay highlight cards on the main image using tick/check style badges.
+    
+    Overlay examples:
+    ✓ Same Day Available
+    ✓ Furniture Protected
+    ✓ Oversized Van
+    ✓ Marketplace Pickup
+    ✓ Apartment Deliveries
+    ✓ 5-Star Rated
+    ✓ Sydney Wide
+    
+    Use custom.trust_points if available. If not, use smart fallback highlights.
+    
+    Overlay cards must:
+    Be readable on mobile
+    Sit neatly over the image
+    Use small check SVG icons
+    Use white cards with red/green accent
+    Have soft shadow
+    Not cover the important part of the image
+    
+    SEO:
+    Use only one H1:
+    {{ page.title }}
+    
+    Use semantic HTML:
+    section
+    header
+    figure
+    figcaption
+    article
+    
+    Use target_keywords naturally only if useful.
+    Do not keyword stuff.
+    
+    Dynamic Schema:
+    Generate JSON-LD automatically from page data and metafields.
+    
+    Include:
+    WebPage
+    Service
+    LocalBusiness
+    BreadcrumbList
+    ImageObject
+    ContactPoint
+    
+    Generate AggregateRating only if google_rating and google_review_count exist and are visible on the page.
+    
+    Use:
+    page.title
+    page.url
+    hero_image
+    hero_image_alt
+    hero_image_caption
+    service_area
+    phone_number
+    google_rating
+    google_review_count
+    schema_service_type
+    schema_area_served
+    schema_price_range
+    
+    Do not require manual JSON-LD.
+    
+    Core Web Vitals:
+    Use lightweight CSS.
+    No heavy JavaScript.
+    No external libraries.
+    Use responsive image sizes.
+    Lazy-load non-critical images.
+    Avoid layout shift.
+    Keep CSS scoped to this section.
+    
+    Final goal:
+    The section should instantly explain the service, area, trust signals and quote action within 3 seconds, while staying fast, responsive, SEO-friendly and conversion-focused., Now audit the section like a senior Shopify developer, mobile UX designer, CRO expert and technical SEO specialist.
+    
+    Fix anything that could hurt:
+    Mobile layout
+    Core Web Vitals
+    SEO schema
+    Rich Text rendering
+    Image SEO
+    CTA clicks
+    Trust signals
+    Accessibility
+    
+    Do not remove dynamic metafields.
+    Do not add ecommerce elements.
+    Make it production-ready., Update the existing Service Hero section.
+    
+    Add support for this Page metafield:
+    
+    custom.overlay_highlights
+    
+    Type: List of single line text.
+    
+    Use this metafield to create tick/check style overlay cards on the hero image.
+    
+    Each overlay item should display as:
+    
+    ✓ Same Day Available
+    ✓ Furniture Protected
+    ✓ Oversized Van
+    ✓ Marketplace Pickup
+    ✓ Apartment Deliveries
+    ✓ 5-Star Rated
+    ✓ Sydney Wide
+    
+    Use inline SVG check icons, not emoji.
+    
+    Overlay cards must sit on top of the hero image, look premium, and remain readable on mobile.
+    
+    Design:
+    - Small white floating cards
+    - Red or green accent
+    - Soft shadow
+    - Rounded corners
+    - Compact spacing
+    - Mobile responsive
+    - Do not cover the main subject of the image
+    - Hide overlay section if custom.overlay_highlights is empty
+    
+    Also fix custom.trust_points.
+    
+    custom.trust_points should be treated as a List of single line text, not a boolean true/false.
+    
+    Loop through custom.trust_points and display them as trust badges below the hero content.
+    
+    Keep all existing metafields working.
+    
+    Do not remove schema, image SEO, CTAs, rating, or service area.
+    
+    Keep the section fast, mobile-first, and SEO-friendly.   make it compacted overall section full width screen , Update the existing Service Hero section.
+    
+    Add support for these Page metafields:
+    
+    custom.overlay_highlights
+    Type: List of single line text
+    
+    custom.target_suburb
+    Type: Single line text
+    
+    Use custom.overlay_highlights to create premium overlay highlight cards on top of the hero image.
+    
+    Important:
+    The hero image must remain visible.
+    Do not cover the whole image.
+    Use small floating cards over the image with a semi-transparent white background, soft shadow, rounded corners, and inline SVG check icons.
+    Cards should look like real website UI, not plain text.
+    
+    Overlay examples:
+    ✓ Same Day Available
+    ✓ Furniture Protected
+    ✓ Oversized Van
+    ✓ Marketplace Pickup
+    ✓ Apartment Deliveries
+    ✓ 5-Star Rated
+    ✓ Fast Quote Response
+    ✓ Sydney Wide
+    
+    Only show overlay cards if custom.overlay_highlights has values.
+    
+    Add a dynamic headline above the image:
+    
+    Need Furniture Delivered in {{ page.metafields.custom.target_suburb.value }}?
+    
+    If target_suburb is empty, fallback to:
+    
+    Need Furniture Delivered Near You?
+    
+    Add a typing-effect second line below the headline:
+    
+    Book a Man and Van in {{ page.metafields.custom.target_suburb.value }}
+    
+    If target_suburb is empty, fallback to:
+    
+    Book a Man and Van Near You
+    
+    The typing effect should be lightweight CSS/JS only.
+    Do not use external libraries.
+    Make it smooth but not annoying.
+    
+    Improve the hero so it looks like a live, premium service website:
+    
+    - Large service headline
+    - Background hero image still clearly visible
+    - Overlay highlight cards
+    - Strong red CTA button
+    - Call button
+    - Rating/review badge
+    - Service area card
+    - Mobile-first layout
+    - No horizontal scrolling
+    - Fast loading
+    - Advanced inline SVG icons
+    - Clean white/red/black theme
+    
+    Keep all existing metafields working:
+    
+    custom.badge_text
+    custom.hero_subheading
+    custom.hero_image
+    custom.hero_image_alt
+    custom.hero_image_caption
+    custom.hero_image_title
+    custom.primary_cta_text
+    custom.primary_cta_link
+    custom.secondary_cta_text
+    custom.secondary_cta_link
+    custom.service_area
+    custom.phone_number
+    custom.google_rating
+    custom.google_review_count
+    custom.google_review_url
+    custom.target_keywords
+    custom.schema_service_type
+    custom.schema_area_served
+    custom.schema_price_range
+    
+    Do not remove dynamic schema.
+    Do not remove image SEO.
+    Do not remove CTA buttons.
+    Do not remove rating/review display.
+    
+    Use only one H1:
+    {{ page.title }}
+    
+    The new dynamic overlay headline should be H2, not H1.
+    
+    Make the section feel modern, trustworthy, local, and conversion-focused.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign hero_layout = page.metafields.custom.hero_layout.value | default: block.settings.layout
+  assign schema_service = page.metafields.custom.schema_service_type.value | default: block.settings.schema_service_type
+  assign schema_area = page.metafields.custom.schema_area_served.value | default: block.settings.schema_area_served
+  assign schema_price = page.metafields.custom.schema_price_range.value | default: block.settings.schema_price_range
+  assign target_suburb = page.metafields.custom.target_suburb.value
+%}
+
+{% style %}
+  .ai-service-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background: #FFFFFF;
+    overflow: hidden;
+  }
+
+  .ai-service-hero-container-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 60px 40px 40px;
+  }
+
+  .ai-service-hero-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    {% if hero_layout == 'image_right' %}
+      order: 1;
+      margin-left: auto;
+      margin-right: 0;
+    {% else %}
+      order: 2;
+      margin-left: 0;
+      margin-right: auto;
+    {% endif %}
+  }
+
+  .ai-service-hero-badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: #E30613;
+    color: #FFFFFF;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    width: fit-content;
+    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.2);
+  }
+
+  .ai-service-hero-badge-icon-{{ ai_gen_id }} {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .ai-service-hero-heading-{{ ai_gen_id }} {
+    margin: 0;
+    color: #000000;
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-service-hero-subheading-{{ ai_gen_id }} {
+    margin: 0;
+    color: #4B5563;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .ai-service-hero-subheading-{{ ai_gen_id }} p {
+    margin: 0 0 10px 0;
+  }
+
+  .ai-service-hero-subheading-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-service-hero-service-area-{{ ai_gen_id }} {
+    margin: 0;
+    padding: 14px 18px;
+    background: #FEF2F2;
+    border-left: 3px solid #E30613;
+    border-radius: 6px;
+    color: #4B5563;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ai-service-hero-service-area-{{ ai_gen_id }} p {
+    margin: 0 0 6px 0;
+  }
+
+  .ai-service-hero-service-area-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-service-hero-service-area-{{ ai_gen_id }} strong {
+    color: #000000;
+    font-weight: 700;
+  }
+
+  .ai-service-hero-google-card-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #E5E7EB;
+  }
+
+  .ai-service-hero-google-logo-{{ ai_gen_id }} {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .ai-service-hero-rating-info-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-service-hero-stars-{{ ai_gen_id }} {
+    display: flex;
+    gap: 2px;
+  }
+
+  .ai-service-hero-star-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .ai-service-hero-rating-text-{{ ai_gen_id }} {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .ai-service-hero-review-link-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #E30613;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-service-hero-review-link-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-service-hero-review-link-{{ ai_gen_id }}:focus {
+    outline: 2px solid #E30613;
+    outline-offset: 2px;
+  }
+
+  .ai-service-hero-review-arrow-{{ ai_gen_id }} {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+
+  .ai-service-hero-buttons-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .ai-service-hero-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 2px solid transparent;
+    min-height: 52px;
+  }
+
+  .ai-service-hero-button-icon-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .ai-service-hero-button-{{ ai_gen_id }}:hover .ai-service-hero-button-icon-{{ ai_gen_id }} {
+    transform: translateX(3px);
+  }
+
+  .ai-service-hero-button-{{ ai_gen_id }}:focus {
+    outline: 3px solid #E30613;
+    outline-offset: 2px;
+  }
+
+  .ai-service-hero-button-primary-{{ ai_gen_id }} {
+    background: #E30613;
+    color: #FFFFFF;
+    border-color: #E30613;
+    box-shadow: 0 4px 14px rgba(227, 6, 19, 0.25);
+  }
+
+  .ai-service-hero-button-primary-{{ ai_gen_id }}:hover {
+    background: #C00510;
+    border-color: #C00510;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(227, 6, 19, 0.35);
+  }
+
+  .ai-service-hero-button-secondary-{{ ai_gen_id }} {
+    background: #FFFFFF;
+    color: #000000;
+    border-color: #000000;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .ai-service-hero-button-secondary-{{ ai_gen_id }}:hover {
+    background: #F3F4F6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .ai-service-hero-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    {% if hero_layout == 'image_right' %}
+      order: 2;
+    {% else %}
+      order: 1;
+    {% endif %}
+  }
+
+  .ai-service-hero-dynamic-headline-{{ ai_gen_id }} {
+    margin: 0 0 16px 0;
+    padding: 0;
+  }
+
+  .ai-service-hero-dynamic-h2-{{ ai_gen_id }} {
+    margin: 0 0 8px 0;
+    color: #000000;
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .ai-service-hero-typing-line-{{ ai_gen_id }} {
+    margin: 0;
+    color: #E30613;
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 600;
+    min-height: 25px;
+  }
+
+  .ai-service-hero-typing-text-{{ ai_gen_id }} {
+    display: inline-block;
+    border-right: 2px solid #E30613;
+    padding-right: 4px;
+    animation: ai-service-hero-blink-{{ ai_gen_id }} 0.8s step-end infinite;
+  }
+
+  @keyframes ai-service-hero-blink-{{ ai_gen_id }} {
+    0%, 50% {
+      border-color: #E30613;
+    }
+    51%, 100% {
+      border-color: transparent;
+    }
+  }
+
+  .ai-service-hero-figure-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  }
+
+  .ai-service-hero-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-service-hero-caption-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px 18px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .ai-service-hero-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-service-hero-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 350px;
+    opacity: 0.3;
+  }
+
+  .ai-service-hero-empty-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+  }
+
+  .ai-service-hero-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .ai-service-hero-overlay-card-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(1),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(3),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(5),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(7) {
+    justify-self: start;
+  }
+
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(2),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(4),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(6),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(8) {
+    justify-self: end;
+  }
+
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(1),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(2) {
+    align-self: start;
+  }
+
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(3),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(4) {
+    align-self: center;
+  }
+
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(5),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(6),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(7),
+  .ai-service-hero-overlay-card-{{ ai_gen_id }}:nth-child(8) {
+    align-self: end;
+  }
+
+  .ai-service-hero-overlay-icon-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+    padding: 3px;
+    background: #DCFCE7;
+    border-radius: 5px;
+    color: #16A34A;
+    flex-shrink: 0;
+  }
+
+  .ai-service-hero-overlay-text-{{ ai_gen_id }} {
+    font-size: 12px;
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ai-service-hero-trust-bar-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 32px 40px;
+    border-top: 1px solid #E5E7EB;
+  }
+
+  .ai-service-hero-trust-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ai-service-hero-trust-icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    color: #E30613;
+    flex-shrink: 0;
+  }
+
+  .ai-service-hero-trust-text-{{ ai_gen_id }} {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .ai-service-hero-seo-keywords-{{ ai_gen_id }} {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-service-hero-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 32px 16px 24px;
+    }
+
+    .ai-service-hero-content-{{ ai_gen_id }} {
+      order: 2;
+      gap: 16px;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .ai-service-hero-image-wrapper-{{ ai_gen_id }} {
+      order: 1;
+    }
+
+    .ai-service-hero-dynamic-h2-{{ ai_gen_id }} {
+      font-size: 22px;
+    }
+
+    .ai-service-hero-typing-line-{{ ai_gen_id }} {
+      font-size: 15px;
+    }
+
+    .ai-service-hero-figure-{{ ai_gen_id }} {
+      aspect-ratio: 3 / 2;
+    }
+
+    .ai-service-hero-heading-{{ ai_gen_id }} {
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    .ai-service-hero-subheading-{{ ai_gen_id }} {
+      font-size: 15px;
+    }
+
+    .ai-service-hero-service-area-{{ ai_gen_id }} {
+      font-size: 13px;
+      padding: 12px 14px;
+    }
+
+    .ai-service-hero-buttons-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ai-service-hero-button-{{ ai_gen_id }} {
+      width: 100%;
+      padding: 14px 28px;
+      min-height: 50px;
+    }
+
+    .ai-service-hero-google-card-{{ ai_gen_id }} {
+      padding: 14px 16px;
+      gap: 12px;
+    }
+
+    .ai-service-hero-google-logo-{{ ai_gen_id }} {
+      width: 32px;
+      height: 32px;
+    }
+
+    .ai-service-hero-rating-text-{{ ai_gen_id }} {
+      font-size: 12px;
+    }
+
+    .ai-service-hero-overlay-{{ ai_gen_id }} {
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .ai-service-hero-overlay-card-{{ ai_gen_id }} {
+      padding: 7px 10px;
+      gap: 5px;
+    }
+
+    .ai-service-hero-overlay-icon-{{ ai_gen_id }} {
+      width: 15px;
+      height: 15px;
+    }
+
+    .ai-service-hero-overlay-text-{{ ai_gen_id }} {
+      font-size: 10px;
+    }
+
+    .ai-service-hero-trust-bar-{{ ai_gen_id }} {
+      gap: 14px;
+      padding: 24px 16px;
+    }
+
+    .ai-service-hero-trust-item-{{ ai_gen_id }} {
+      gap: 8px;
+    }
+
+    .ai-service-hero-trust-icon-{{ ai_gen_id }} {
+      width: 18px;
+      height: 18px;
+    }
+
+    .ai-service-hero-trust-text-{{ ai_gen_id }} {
+      font-size: 12px;
+    }
+  }
+{% endstyle %}
+
+<section class="ai-service-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }} aria-label="Service hero">
+  <div class="ai-service-hero-container-{{ ai_gen_id }}">
+    <header class="ai-service-hero-content-{{ ai_gen_id }}">
+      {% if page.metafields.custom.badge_text.value != blank %}
+        <div class="ai-service-hero-badge-{{ ai_gen_id }}" role="status">
+          <svg class="ai-service-hero-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          {{ page.metafields.custom.badge_text.value }}
+        </div>
+      {% endif %}
+
+      <h1 class="ai-service-hero-heading-{{ ai_gen_id }}">
+        {{ page.title | default: 'Premium Furniture Removalist Services' }}
+      </h1>
+
+      {% if page.metafields.custom.hero_subheading != blank %}
+        <div class="ai-service-hero-subheading-{{ ai_gen_id }}">
+          {{ page.metafields.custom.hero_subheading | metafield_tag }}
+        </div>
+      {% endif %}
+
+      {% if page.metafields.custom.service_area != blank %}
+        <div class="ai-service-hero-service-area-{{ ai_gen_id }}">
+          {{ page.metafields.custom.service_area | metafield_tag }}
+        </div>
+      {% endif %}
+
+      {% if page.metafields.custom.google_rating.value != blank and page.metafields.custom.google_review_count.value != blank %}
+        <div class="ai-service-hero-google-card-{{ ai_gen_id }}">
+          <svg class="ai-service-hero-google-logo-{{ ai_gen_id }}" viewBox="0 0 24 24" aria-label="Google">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          <div class="ai-service-hero-rating-info-{{ ai_gen_id }}">
+            <div class="ai-service-hero-stars-{{ ai_gen_id }}" role="img" aria-label="{{ page.metafields.custom.google_rating.value }} out of 5 stars">
+              {% assign rating = page.metafields.custom.google_rating.value | times: 1.0 %}
+              {% for i in (1..5) %}
+                <svg class="ai-service-hero-star-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="{% if i <= rating %}#FFC107{% else %}#E0E0E0{% endif %}" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              {% endfor %}
+            </div>
+            <div class="ai-service-hero-rating-text-{{ ai_gen_id }}">
+              {{ page.metafields.custom.google_rating.value }} Google Rating · {{ page.metafields.custom.google_review_count.value }} Reviews
+            </div>
+            {% if page.metafields.custom.google_review_url.value != blank %}
+              <a href="{{ page.metafields.custom.google_review_url.value }}" target="_blank" rel="noopener noreferrer" class="ai-service-hero-review-link-{{ ai_gen_id }}">
+                Read Google Reviews
+                <svg class="ai-service-hero-review-arrow-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      <nav class="ai-service-hero-buttons-{{ ai_gen_id }}" aria-label="Call to action">
+        {% if page.metafields.custom.primary_cta_text.value != blank and page.metafields.custom.primary_cta_link.value != blank %}
+          <a href="{{ page.metafields.custom.primary_cta_link.value }}" class="ai-service-hero-button-{{ ai_gen_id }} ai-service-hero-button-primary-{{ ai_gen_id }}">
+            <span>{{ page.metafields.custom.primary_cta_text.value }}</span>
+            <svg class="ai-service-hero-button-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if page.metafields.custom.secondary_cta_text.value != blank and page.metafields.custom.secondary_cta_link.value != blank %}
+          <a href="{{ page.metafields.custom.secondary_cta_link.value }}" class="ai-service-hero-button-{{ ai_gen_id }} ai-service-hero-button-secondary-{{ ai_gen_id }}">
+            <span>{{ page.metafields.custom.secondary_cta_text.value }}</span>
+            <svg class="ai-service-hero-button-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+          </a>
+        {% endif %}
+      </nav>
+
+      {% if page.metafields.custom.target_keywords.value != blank %}
+        <div class="ai-service-hero-seo-keywords-{{ ai_gen_id }}">
+          {{ page.metafields.custom.target_keywords.value }}
+        </div>
+      {% endif %}
+    </header>
+
+    <div class="ai-service-hero-image-wrapper-{{ ai_gen_id }}">
+      <div class="ai-service-hero-dynamic-headline-{{ ai_gen_id }}">
+        <h2 class="ai-service-hero-dynamic-h2-{{ ai_gen_id }}">
+          {% if target_suburb != blank %}
+            Need Furniture Delivered in {{ target_suburb }}?
+          {% else %}
+            Need Furniture Delivered Near You?
+          {% endif %}
+        </h2>
+        <p class="ai-service-hero-typing-line-{{ ai_gen_id }}">
+          <span class="ai-service-hero-typing-text-{{ ai_gen_id }}" data-typing-text="{% if target_suburb != blank %}Book a Man and Van in {{ target_suburb }}{% else %}Book a Man and Van Near You{% endif %}"></span>
+        </p>
+      </div>
+
+      <figure class="ai-service-hero-figure-{{ ai_gen_id }}">
+        {% if page.metafields.custom.hero_image != blank %}
+          <img
+            src="{{ page.metafields.custom.hero_image | image_url: width: 1200 }}"
+            srcset="{{ page.metafields.custom.hero_image | image_url: width: 600 }} 600w, {{ page.metafields.custom.hero_image | image_url: width: 900 }} 900w, {{ page.metafields.custom.hero_image | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 749px) 100vw, 50vw"
+            alt="{{ page.metafields.custom.hero_image_alt.value | default: page.title | escape }}"
+            {% if page.metafields.custom.hero_image_title.value != blank %}
+              title="{{ page.metafields.custom.hero_image_title.value | escape }}"
+            {% endif %}
+            class="ai-service-hero-image-{{ ai_gen_id }}"
+            loading="eager"
+            fetchpriority="high"
+            width="1200"
+            height="900"
+          >
+          {% if page.metafields.custom.hero_image_caption.value != blank %}
+            <figcaption class="ai-service-hero-caption-{{ ai_gen_id }}">
+              {{ page.metafields.custom.hero_image_caption.value }}
+            </figcaption>
+          {% endif %}
+        {% else %}
+          <div class="ai-service-hero-placeholder-{{ ai_gen_id }}">
+            {{ 'hero-apparel-1' | placeholder_svg_tag }}
+            <div class="ai-service-hero-empty-{{ ai_gen_id }}">
+              Add hero image
+            </div>
+          </div>
+        {% endif %}
+
+        {% if page.metafields.custom.overlay_highlights.value != blank %}
+          <div class="ai-service-hero-overlay-{{ ai_gen_id }}" aria-hidden="true">
+            {% for highlight in page.metafields.custom.overlay_highlights.value limit: 8 %}
+              <div class="ai-service-hero-overlay-card-{{ ai_gen_id }}">
+                <svg class="ai-service-hero-overlay-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span class="ai-service-hero-overlay-text-{{ ai_gen_id }}">{{ highlight }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </figure>
+    </div>
+  </div>
+
+  {% if page.metafields.custom.trust_points.value != blank %}
+    <div class="ai-service-hero-trust-bar-{{ ai_gen_id }}">
+      {% for point in page.metafields.custom.trust_points.value %}
+        <div class="ai-service-hero-trust-item-{{ ai_gen_id }}">
+          <svg class="ai-service-hero-trust-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="ai-service-hero-trust-text-{{ ai_gen_id }}">{{ point }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+<script>
+  (function() {
+    const typingElement = document.querySelector('.ai-service-hero-typing-text-{{ ai_gen_id }}');
+    if (!typingElement) return;
+
+    const text = typingElement.getAttribute('data-typing-text');
+    if (!text) return;
+
+    let index = 0;
+    typingElement.textContent = '';
+
+    function type() {
+      if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 50);
+      }
+    }
+
+    setTimeout(type, 500);
+  })();
+</script>
+
+{% if block.settings.enable_schema %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": {{ page.title | json }},
+        "url": "{{ shop.url }}{{ page.url }}"
+        {% if page.metafields.custom.hero_subheading != blank %}
+          {% assign description = page.metafields.custom.hero_subheading | metafield_text | strip_html | strip %}
+          {% if description != blank %}
+            ,"description": {{ description | json }}
+          {% endif %}
+        {% endif %}
+        {% if page.metafields.custom.hero_image != blank %}
+          ,"image": {
+            "@type": "ImageObject",
+            "url": "{{ page.metafields.custom.hero_image | image_url: width: 1200 }}",
+            "width": 1200,
+            "height": 900
+            {% if page.metafields.custom.hero_image_alt.value != blank %}
+              ,"name": {{ page.metafields.custom.hero_image_alt.value | json }}
+            {% endif %}
+            {% if page.metafields.custom.hero_image_caption.value != blank %}
+              ,"caption": {{ page.metafields.custom.hero_image_caption.value | json }}
+            {% endif %}
+          }
+        {% endif %}
+      }
+      {% if schema_service != blank %}
+        ,{
+          "@type": "Service",
+          "serviceType": {{ schema_service | json }},
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": {{ shop.name | json }},
+            "url": "{{ shop.url }}"
+            {% if page.metafields.custom.phone_number.value != blank %}
+              ,"telephone": {{ page.metafields.custom.phone_number.value | json }}
+            {% endif %}
+            {% if page.metafields.custom.google_rating.value != blank and page.metafields.custom.google_review_count.value != blank %}
+              ,"aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": {{ page.metafields.custom.google_rating.value | json }},
+                "reviewCount": {{ page.metafields.custom.google_review_count.value | json }}
+              }
+            {% endif %}
+            {% if page.metafields.custom.hero_image != blank %}
+              ,"image": "{{ page.metafields.custom.hero_image | image_url: width: 1200 }}"
+            {% endif %}
+          }
+          {% if schema_area != blank %}
+            ,"areaServed": {
+              "@type": "City",
+              "name": {{ schema_area | json }}
+            }
+          {% endif %}
+          {% if schema_price != blank %}
+            ,"priceRange": {{ schema_price | json }}
+          {% endif %}
+        }
+      {% endif %}
+      {% if page.metafields.custom.phone_number.value != blank %}
+        ,{
+          "@type": "LocalBusiness",
+          "name": {{ shop.name | json }},
+          "url": "{{ shop.url }}",
+          "telephone": {{ page.metafields.custom.phone_number.value | json }},
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": {{ page.metafields.custom.phone_number.value | json }},
+            "contactType": "Customer Service"
+          }
+          {% if page.metafields.custom.google_rating.value != blank and page.metafields.custom.google_review_count.value != blank %}
+            ,"aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": {{ page.metafields.custom.google_rating.value | json }},
+              "reviewCount": {{ page.metafields.custom.google_review_count.value | json }}
+            }
+          {% endif %}
+        }
+      {% endif %}
+      ,{
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ shop.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ page.title | json }},
+            "item": "{{ shop.url }}{{ page.url }}"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Service hero",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Default image position",
+      "options": [
+        {
+          "value": "image_left",
+          "label": "Left"
+        },
+        {
+          "value": "image_right",
+          "label": "Right"
+        }
+      ],
+      "default": "image_right",
+      "info": "Can be overridden by page metafield custom.hero_layout"
+    },
+    {
+      "type": "header",
+      "content": "Structured data"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_schema",
+      "label": "Enable schema markup",
+      "default": true,
+      "info": "Automatically generates JSON-LD from page metafields"
+    },
+    {
+      "type": "text",
+      "id": "schema_service_type",
+      "label": "Default service type",
+      "default": "Furniture Delivery Service",
+      "info": "Can be overridden by page metafield custom.schema_service_type"
+    },
+    {
+      "type": "text",
+      "id": "schema_area_served",
+      "label": "Default area served",
+      "info": "Can be overridden by page metafield custom.schema_area_served"
+    },
+    {
+      "type": "text",
+      "id": "schema_price_range",
+      "label": "Default price range",
+      "info": "Can be overridden by page metafield custom.schema_price_range"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,796 @@
+{% doc %}
+  @prompt
+    Create a premium floating quote form inspired by modern Meta lead generation ads.
+    
+    SECTION NAME:
+    Instant Removalist Quote
+    
+    DESIGN STYLE:
+    
+    * Glassmorphism design
+    * Transparent frosted glass background
+    * Blur effect behind form
+    * Rounded corners (24px)
+    * Premium modern appearance
+    * White border with subtle transparency
+    * Floating card effect
+    * Soft shadow
+    * Mobile responsive
+    * High conversion focused
+    * Similar visual style to Meta Lead Ads
+    
+    FORM POSITION:
+    
+    * Overlay on top of hero image
+    * Desktop: right side floating
+    * Mobile: centered and full width
+    * Appear after 5% page scroll
+    * Smooth fade and slide animation
+    
+    HEADING:
+    Get Your Quote In 2 Minutes
+    
+    SUBHEADING:
+    Furniture Delivery • Small Moves • Marketplace Pickups • Same Day Service
+    
+    FORM FIELDS:
+    
+    Step 1
+    Pickup Suburb
+    
+    Step 2
+    Delivery Suburb
+    
+    Step 3
+    What Are You Moving?
+    
+    Options:
+    
+    * Sofa
+    * Bed
+    * Mattress
+    * Dining Table
+    * Marketplace Purchase
+    * Apartment Move
+    * Multiple Items
+    
+    Step 4
+    Stairs or Lift?
+    
+    Options:
+    
+    * Ground Floor
+    * Lift Available
+    * Stairs
+    
+    Step 5
+    Preferred Date
+    
+    Step 6
+    Name
+    
+    Step 7
+    Phone Number
+    
+    Step 8
+    Email Address
+    
+    BUTTON:
+    Get My Fast Quote →
+    
+    BUTTON STYLE:
+    
+    * Bright red gradient
+    * White text
+    * Hover animation
+    * Mobile friendly
+    * Full width
+    
+    SUCCESS MESSAGE:
+    Thank You!
+    
+    Your quote request has been received.
+    
+    Titan Express will contact you shortly with pricing and availability.
+    
+    TRUST ELEMENTS BELOW FORM:
+    
+    ★★★★★ 5 Star Service
+    
+    ✓ Same Day Available
+    ✓ Fully Insured
+    ✓ Professional Removalists
+    ✓ Sydney Wide Coverage
+    
+    ADVANCED FEATURES:
+    
+    * Multi-step progress bar
+    * Auto save entered data
+    * Floating animation
+    * Close (X) button
+    * Glassmorphism effect
+    * Blur background
+    * Email notification to admin
+    * Send form to admin email instantly
+    * Mobile keyboard optimized
+    * One-click phone call button
+    * WhatsApp button option
+    
+    COLORS:
+    
+    * White glass background
+    * Black text
+    * Red CTA buttons
+    * Light grey borders
+    * Premium corporate appearance
+    
+    BUSINESS DETAILS:
+    
+    Titan Express Removalist
+    Phone: 0469 717 535
+    
+    SEO OPTIMIZED FOR:
+    Furniture Removalist Sydney
+    Furniture Delivery Sydney
+    Man With A Van Sydney
+    Small Moves Sydney
+    Same Day Furniture Delivery Sydney
+    
+    The form should look like a premium Meta Lead Ad form floating over the hero image, modern, clean, trustworthy, and designed to maximize quote requests.
+    "Make the form look exactly like a modern Meta lead generation form with glassmorphism, transparent background, blur effect, floating card design, and smooth animations. Prioritize mobile conversions and Google Ads landing page performance.", First make a Floating Card with get a Quote and Call now Button when someong click get quote ope this form when someone Clicks Call open Call on the Card Allow To AD a photo but like 500 width and 80 hieght or adjustable 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-floating-card-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    bottom: {{ block.settings.bottom_position }}px;
+    right: {{ block.settings.right_position }}px;
+    z-index: 999;
+    width: {{ block.settings.card_width }}px;
+    max-width: 90vw;
+  }
+
+  .ai-floating-card-container-{{ ai_gen_id }} {
+    background: {{ block.settings.card_background }};
+    backdrop-filter: blur({{ block.settings.blur_amount }}px);
+    -webkit-backdrop-filter: blur({{ block.settings.blur_amount }}px);
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    box-shadow: {{ block.settings.shadow_x }}px {{ block.settings.shadow_y }}px {{ block.settings.shadow_blur }}px {{ block.settings.shadow_color }};
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-floating-card-container-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: {{ block.settings.shadow_x }}px {{ block.settings.shadow_y | plus: 4 }}px {{ block.settings.shadow_blur | plus: 8 }}px {{ block.settings.shadow_color }};
+  }
+
+  .ai-floating-card-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-floating-card-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    background: {{ block.settings.placeholder_bg }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-floating-card-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  .ai-floating-card-content-{{ ai_gen_id }} {
+    padding: {{ block.settings.content_padding }}px;
+  }
+
+  .ai-floating-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .ai-floating-card-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+  }
+
+  .ai-floating-card-buttons-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ai-floating-card-btn-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.button_padding }}px;
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .ai-floating-card-btn-quote-{{ ai_gen_id }} {
+    background: {{ block.settings.quote_button_bg }};
+    color: {{ block.settings.quote_button_text }};
+  }
+
+  .ai-floating-card-btn-quote-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.quote_button_hover }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px {{ block.settings.quote_button_bg }}66;
+  }
+
+  .ai-floating-card-btn-call-{{ ai_gen_id }} {
+    background: {{ block.settings.call_button_bg }};
+    color: {{ block.settings.call_button_text }};
+  }
+
+  .ai-floating-card-btn-call-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.call_button_hover }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px {{ block.settings.call_button_bg }}66;
+  }
+
+  .ai-floating-card-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: {{ block.settings.close_button_bg }};
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ block.settings.close_button_color }};
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .ai-floating-card-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .ai-floating-card-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-floating-card-{{ ai_gen_id }} {
+      bottom: {{ block.settings.mobile_bottom }}px;
+      right: {{ block.settings.mobile_right }}px;
+      left: {{ block.settings.mobile_right }}px;
+      width: auto;
+    }
+
+    .ai-floating-card-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.9 }}px;
+    }
+
+    .ai-floating-card-image-{{ ai_gen_id }},
+    .ai-floating-card-image-placeholder-{{ ai_gen_id }} {
+      height: {{ block.settings.mobile_image_height }}px;
+    }
+  }
+{% endstyle %}
+
+<floating-card-{{ ai_gen_id }}
+  class="ai-floating-card-{{ ai_gen_id }}"
+  data-target-form="{{ block.settings.target_form_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-floating-card-container-{{ ai_gen_id }}">
+    {% if block.settings.show_close_button %}
+      <button
+        class="ai-floating-card-close-{{ ai_gen_id }}"
+        aria-label="Close card"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    {% endif %}
+
+    {% if block.settings.card_image %}
+      <img
+        src="{{ block.settings.card_image | image_url: width: 1000 }}"
+        alt="{{ block.settings.card_image.alt | escape }}"
+        class="ai-floating-card-image-{{ ai_gen_id }}"
+        loading="lazy"
+        width="{{ block.settings.card_image.width }}"
+        height="{{ block.settings.image_height }}"
+      >
+    {% else %}
+      <div class="ai-floating-card-image-placeholder-{{ ai_gen_id }}">
+        {{ 'image' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+
+    <div class="ai-floating-card-content-{{ ai_gen_id }}">
+      {% if block.settings.card_title != blank %}
+        <h3 class="ai-floating-card-title-{{ ai_gen_id }}">{{ block.settings.card_title }}</h3>
+      {% endif %}
+
+      {% if block.settings.card_subtitle != blank %}
+        <p class="ai-floating-card-subtitle-{{ ai_gen_id }}">{{ block.settings.card_subtitle }}</p>
+      {% endif %}
+
+      <div class="ai-floating-card-buttons-{{ ai_gen_id }}">
+        <button
+          class="ai-floating-card-btn-{{ ai_gen_id }} ai-floating-card-btn-quote-{{ ai_gen_id }}"
+          data-action="open-form"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          {{ block.settings.quote_btn_text }}
+        </button>
+
+        <a
+          href="tel:{{ block.settings.phone_number }}"
+          class="ai-floating-card-btn-{{ ai_gen_id }} ai-floating-card-btn-call-{{ ai_gen_id }}"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          {{ block.settings.call_btn_text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</floating-card-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FloatingCard{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.quoteBtn = this.querySelector('[data-action="open-form"]');
+        this.closeBtn = this.querySelector('.ai-floating-card-close-{{ ai_gen_id }}');
+        this.targetFormId = this.dataset.targetForm;
+
+        this.setupEventListeners();
+        this.checkDismissed();
+      }
+
+      setupEventListeners() {
+        if (this.quoteBtn) {
+          this.quoteBtn.addEventListener('click', () => this.openForm());
+        }
+
+        if (this.closeBtn) {
+          this.closeBtn.addEventListener('click', () => this.dismissCard());
+        }
+      }
+
+      openForm() {
+        if (this.targetFormId) {
+          const targetForm = document.querySelector(this.targetFormId);
+          if (targetForm) {
+            targetForm.classList.add('visible');
+            targetForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        } else {
+          const quoteForm = document.querySelector('[class*="ai-quote-form-"]');
+          if (quoteForm) {
+            quoteForm.classList.add('visible');
+          }
+        }
+      }
+
+      dismissCard() {
+        this.classList.add('hidden');
+        localStorage.setItem('floatingCard{{ ai_gen_id }}Dismissed', 'true');
+      }
+
+      checkDismissed() {
+        const dismissed = localStorage.getItem('floatingCard{{ ai_gen_id }}Dismissed');
+        if (dismissed === 'true') {
+          this.classList.add('hidden');
+        }
+      }
+    }
+
+    customElements.define('floating-card-{{ ai_gen_id }}', FloatingCard{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Floating quote card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card content"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image",
+      "label": "Card image"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "label": "Mobile image height",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Title",
+      "default": "Need a Quote?"
+    },
+    {
+      "type": "textarea",
+      "id": "card_subtitle",
+      "label": "Subtitle",
+      "default": "Get instant pricing for your move"
+    },
+    {
+      "type": "header",
+      "content": "Quote button"
+    },
+    {
+      "type": "text",
+      "id": "quote_btn_text",
+      "label": "Button text",
+      "default": "Get a Quote"
+    },
+    {
+      "type": "text",
+      "id": "target_form_id",
+      "label": "Target form ID",
+      "info": "CSS selector for the form to open (e.g., #my-form). Leave blank to auto-detect quote form."
+    },
+    {
+      "type": "header",
+      "content": "Call button"
+    },
+    {
+      "type": "text",
+      "id": "call_btn_text",
+      "label": "Button text",
+      "default": "Call Now"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "0469717535"
+    },
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card width",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 320
+    },
+    {
+      "type": "range",
+      "id": "bottom_position",
+      "label": "Bottom position",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "right_position",
+      "label": "Right position",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_bottom",
+      "label": "Mobile bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_right",
+      "label": "Mobile side spacing",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffffee"
+    },
+    {
+      "type": "range",
+      "id": "blur_amount",
+      "label": "Blur amount",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#ffffff80"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_x",
+      "label": "Shadow X",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_y",
+      "label": "Shadow Y",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "#00000033"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_bg",
+      "label": "Placeholder background",
+      "default": "#f3f4f6"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_bg",
+      "label": "Quote button background",
+      "default": "#dc2626"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_hover",
+      "label": "Quote button hover",
+      "default": "#b91c1c"
+    },
+    {
+      "type": "color",
+      "id": "quote_button_text",
+      "label": "Quote button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "call_button_bg",
+      "label": "Call button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "call_button_hover",
+      "label": "Call button hover",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "call_button_text",
+      "label": "Call button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Close button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close_button",
+      "label": "Show close button",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "close_button_bg",
+      "label": "Background",
+      "default": "#00000015"
+    },
+    {
+      "type": "color",
+      "id": "close_button_color",
+      "label": "Icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "label": "Button padding",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating quote card"
+    }
+  ]
+}
+{% endschema %}

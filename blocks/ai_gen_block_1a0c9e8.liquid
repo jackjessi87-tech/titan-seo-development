@@ -1,0 +1,842 @@
+{% doc %}
+  @prompt
+    Removals ServiceCards Wit Caption Tags And Information   Single Item Delivery   Small One Bedroom Move for Removalist Business small Moving Sevices 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-removals-services-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 0;
+  }
+
+  .ai-removals-services__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-removals-services__heading-{{ ai_gen_id }} {
+    text-align: {{ block.settings.heading_alignment }};
+    margin-bottom: {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+  }
+
+  .ai-removals-services__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+  }
+
+  .ai-removals-service-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+  }
+
+  .ai-removals-service-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-{{ block.settings.hover_lift }}px);
+    box-shadow: 0 {{ block.settings.hover_lift | times: 2 }}px {{ block.settings.hover_lift | times: 4 }}px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-removals-service-card__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 66.67%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .ai-removals-service-card__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-removals-service-card__image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-removals-service-card__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-removals-service-card__tag-{{ ai_gen_id }} {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: {{ block.settings.tag_background }};
+    color: {{ block.settings.tag_text_color }};
+    padding: 6px 12px;
+    border-radius: {{ block.settings.tag_border_radius }}px;
+    font-size: {{ block.settings.tag_font_size }}px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-removals-service-card__content-{{ ai_gen_id }} {
+    padding: {{ block.settings.card_padding }}px;
+  }
+
+  .ai-removals-service-card__title-{{ ai_gen_id }} {
+    color: {{ block.settings.title_color }};
+    font-size: {{ block.settings.title_size }}px;
+    margin: 0 0 {{ block.settings.title_spacing }}px;
+    font-weight: 700;
+  }
+
+  .ai-removals-service-card__description-{{ ai_gen_id }} {
+    color: {{ block.settings.description_color }};
+    font-size: {{ block.settings.description_size }}px;
+    line-height: 1.6;
+    margin: 0 0 {{ block.settings.description_spacing }}px;
+  }
+
+  .ai-removals-service-card__info-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: {{ block.settings.info_spacing }}px;
+  }
+
+  .ai-removals-service-card__info-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: {{ block.settings.info_color }};
+    font-size: {{ block.settings.info_size }}px;
+  }
+
+  .ai-removals-service-card__info-icon-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .ai-removals-service-card__price-{{ ai_gen_id }} {
+    color: {{ block.settings.price_color }};
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: 700;
+    margin-bottom: {{ block.settings.price_spacing }}px;
+  }
+
+  .ai-removals-service-card__button-{{ ai_gen_id }} {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-removals-service-card__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-removals-services__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_tablet }}, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-removals-services__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+
+    .ai-removals-services__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-removals-service-card__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.85 }}px;
+    }
+  }
+{% endstyle %}
+
+<removals-services-{{ ai_gen_id }} class="ai-removals-services-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-removals-services__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-removals-services__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="ai-removals-services__grid-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign service_enabled_key = 'service_' | append: i | append: '_enabled'
+          assign service_image_key = 'service_' | append: i | append: '_image'
+          assign service_tag_key = 'service_' | append: i | append: '_tag'
+          assign service_title_key = 'service_' | append: i | append: '_title'
+          assign service_description_key = 'service_' | append: i | append: '_description'
+          assign service_duration_key = 'service_' | append: i | append: '_duration'
+          assign service_distance_key = 'service_' | append: i | append: '_distance'
+          assign service_price_key = 'service_' | append: i | append: '_price'
+          assign service_link_key = 'service_' | append: i | append: '_link'
+
+          assign service_enabled = block.settings[service_enabled_key]
+          assign service_image = block.settings[service_image_key]
+          assign service_tag = block.settings[service_tag_key]
+          assign service_title = block.settings[service_title_key]
+          assign service_description = block.settings[service_description_key]
+          assign service_duration = block.settings[service_duration_key]
+          assign service_distance = block.settings[service_distance_key]
+          assign service_price = block.settings[service_price_key]
+          assign service_link = block.settings[service_link_key]
+        %}
+
+        {% if service_enabled %}
+          <div class="ai-removals-service-card-{{ ai_gen_id }}">
+            <div class="ai-removals-service-card__image-wrapper-{{ ai_gen_id }}">
+              {% if service_image %}
+                <img
+                  src="{{ service_image | image_url: width: 800 }}"
+                  alt="{{ service_image.alt | escape }}"
+                  loading="lazy"
+                  width="800"
+                  height="533"
+                  class="ai-removals-service-card__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="ai-removals-service-card__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              {% if service_tag != blank %}
+                <div class="ai-removals-service-card__tag-{{ ai_gen_id }}">
+                  {{ service_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-removals-service-card__content-{{ ai_gen_id }}">
+              {% if service_title != blank %}
+                <h3 class="ai-removals-service-card__title-{{ ai_gen_id }}">{{ service_title }}</h3>
+              {% endif %}
+
+              {% if service_description != blank %}
+                <p class="ai-removals-service-card__description-{{ ai_gen_id }}">{{ service_description }}</p>
+              {% endif %}
+
+              {% if service_duration != blank or service_distance != blank %}
+                <div class="ai-removals-service-card__info-{{ ai_gen_id }}">
+                  {% if service_duration != blank %}
+                    <div class="ai-removals-service-card__info-item-{{ ai_gen_id }}">
+                      <svg class="ai-removals-service-card__info-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                      <span>{{ service_duration }}</span>
+                    </div>
+                  {% endif %}
+
+                  {% if service_distance != blank %}
+                    <div class="ai-removals-service-card__info-item-{{ ai_gen_id }}">
+                      <svg class="ai-removals-service-card__info-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="2" x2="12" y2="22"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                      </svg>
+                      <span>{{ service_distance }}</span>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if service_price != blank %}
+                <div class="ai-removals-service-card__price-{{ ai_gen_id }}">{{ service_price }}</div>
+              {% endif %}
+
+              {% if service_link != blank %}
+                <a href="{{ service_link }}" class="ai-removals-service-card__button-{{ ai_gen_id }}">
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</removals-services-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RemovalsServices{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('removals-services-{{ ai_gen_id }}', RemovalsServices{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Removals service cards",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Moving Services"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "hover_lift",
+      "label": "Hover lift",
+      "min": 0,
+      "max": 12,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Tag style"
+    },
+    {
+      "type": "color",
+      "id": "tag_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tag_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "tag_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "tag_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Card title size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Title spacing",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "description_spacing",
+      "label": "Description spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "info_color",
+      "label": "Info color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "info_size",
+      "label": "Info size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "info_spacing",
+      "label": "Info spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "label": "Price size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "price_spacing",
+      "label": "Price spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Book Now"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Service 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "service_1_enabled",
+      "label": "Enable service 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "service_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_1_tag",
+      "label": "Tag",
+      "default": "Popular"
+    },
+    {
+      "type": "text",
+      "id": "service_1_title",
+      "label": "Title",
+      "default": "Single Item Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "service_1_description",
+      "label": "Description",
+      "default": "Perfect for delivering single furniture items or appliances across the city."
+    },
+    {
+      "type": "text",
+      "id": "service_1_duration",
+      "label": "Duration",
+      "default": "2-3 hours"
+    },
+    {
+      "type": "text",
+      "id": "service_1_distance",
+      "label": "Distance info",
+      "default": "Up to 30km"
+    },
+    {
+      "type": "text",
+      "id": "service_1_price",
+      "label": "Price",
+      "default": "From $120"
+    },
+    {
+      "type": "url",
+      "id": "service_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Service 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "service_2_enabled",
+      "label": "Enable service 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "service_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_2_tag",
+      "label": "Tag",
+      "default": "Best Value"
+    },
+    {
+      "type": "text",
+      "id": "service_2_title",
+      "label": "Title",
+      "default": "Small One Bedroom Move"
+    },
+    {
+      "type": "textarea",
+      "id": "service_2_description",
+      "label": "Description",
+      "default": "Ideal for studio or one bedroom apartments with minimal furniture."
+    },
+    {
+      "type": "text",
+      "id": "service_2_duration",
+      "label": "Duration",
+      "default": "4-5 hours"
+    },
+    {
+      "type": "text",
+      "id": "service_2_distance",
+      "label": "Distance info",
+      "default": "Up to 50km"
+    },
+    {
+      "type": "text",
+      "id": "service_2_price",
+      "label": "Price",
+      "default": "From $350"
+    },
+    {
+      "type": "url",
+      "id": "service_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Service 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "service_3_enabled",
+      "label": "Enable service 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "service_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "service_3_tag",
+      "label": "Tag",
+      "default": "Premium"
+    },
+    {
+      "type": "text",
+      "id": "service_3_title",
+      "label": "Title",
+      "default": "Small Moving Services"
+    },
+    {
+      "type": "textarea",
+      "id": "service_3_description",
+      "label": "Description",
+      "default": "Comprehensive moving service for small homes with professional packing."
+    },
+    {
+      "type": "text",
+      "id": "service_3_duration",
+      "label": "Duration",
+      "default": "6-8 hours"
+    },
+    {
+      "type": "text",
+      "id": "service_3_distance",
+      "label": "Distance info",
+      "default": "Up to 100km"
+    },
+    {
+      "type": "text",
+      "id": "service_3_price",
+      "label": "Price",
+      "default": "From $550"
+    },
+    {
+      "type": "url",
+      "id": "service_3_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Removals service cards"
+    }
+  ]
+}
+{% endschema %}
