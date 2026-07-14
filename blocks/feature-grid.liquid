@@ -1,0 +1,128 @@
+{%- doc -%}
+  Reusable feature grid block. Renders a multi-column grid of feature tiles.
+  Each tile is a nested _feature-grid-item block with icon, heading, text.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+<div
+  class="feature-grid feature-grid--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="feature-grid__inner">
+    {%- if block_settings.heading != blank -%}
+      {{ block_settings.heading }}
+    {%- endif -%}
+    
+    <div class="feature-grid__grid">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .feature-grid__inner {
+    max-width: var(--page-width, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .feature-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--gap-lg, 24px);
+    margin-top: var(--margin-lg, 20px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .feature-grid__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .feature-grid__item {
+    text-align: center;
+  }
+
+  .feature-grid__icon {
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--margin-md, 16px);
+    color: var(--color-primary);
+  }
+
+  .feature-grid__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .feature-grid__item-heading {
+    margin-bottom: var(--margin-sm, 12px);
+  }
+
+  .feature-grid__item-text {
+    font-size: var(--font-paragraph-small--size, 0.875rem);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Feature grid",
+  "tag": null,
+  "blocks": [
+    { "type": "_feature-grid-item" }
+  ],
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Why choose us</h2>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature grid"
+    }
+  ]
+}
+{% endschema %}

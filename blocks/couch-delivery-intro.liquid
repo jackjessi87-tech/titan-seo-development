@@ -1,0 +1,98 @@
+{%- doc -%}
+  Couch Delivery Sydney - quick service introduction block.
+  Renders a single H2 and an editable richtext paragraph (~180-250 words).
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+<div
+  class="couch-intro couch-intro--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="couch-intro__inner">
+    {{ block_settings.heading }}
+    <div class="couch-intro__body rte">
+      {{ block_settings.body }}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .couch-intro__inner {
+    max-width: var(--normal-content-width, 720px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .couch-intro__body {
+    font-size: var(--font-paragraph-medium--size, 1.0625rem);
+    line-height: 1.65;
+  }
+
+  .couch-intro__body p:first-child {
+    margin-block-start: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Couch delivery intro",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Couch pickup and delivery, done the careful way</h2>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body copy",
+      "default": "<p>Titan Express picks up couches and sofas from homes, shops and Facebook Marketplace sellers, then delivers them to houses, apartments and offices across Sydney. Whether it is a one-off single seat or a large corner modular suite, our trained team handles every piece with care.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Couch delivery intro"
+    }
+  ]
+}
+{% endschema %}

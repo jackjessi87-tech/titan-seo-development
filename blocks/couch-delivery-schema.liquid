@@ -1,0 +1,110 @@
+{%- doc -%}
+  Couch Delivery Sydney - structured data block (no visible output).
+
+  Emits only page-specific JSON-LD: Service, WebPage and BreadcrumbList.
+
+  Deliberately does NOT add Organization or LocalBusiness schema, because
+  sections/header.liquid already renders a sitewide Organization JSON-LD
+  block on every page. Adding another one here would duplicate that schema.
+  Deliberately does NOT add AggregateRating - the store has no verified
+  review metafield/app data to source it from.
+
+  FAQPage schema is intentionally handled inside blocks/couch-faq.liquid
+  instead, so it is only emitted when FAQs are actually visible and always
+  matches the rendered questions/answers exactly.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign service_name = block_settings.service_name | default: page.title
+  assign page_description = block_settings.description
+%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": {{ service_name | json }},
+    "serviceType": {{ block_settings.service_type | json }},
+    "description": {{ page_description | json }},
+    "areaServed": {
+      "@type": "City",
+      "name": "Sydney, New South Wales, Australia"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }}
+    },
+    "url": {{ canonical_url | json }}
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": {{ page.title | json }},
+    "url": {{ canonical_url | json }},
+    "description": {{ page_description | json }},
+    "inLanguage": {{ request.locale.iso_code | json }},
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }}
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": {{ shop.url | json }}
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ page.title | json }},
+        "item": {{ canonical_url | json }}
+      }
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Couch delivery structured data",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "service_name",
+      "label": "Service name",
+      "default": "Couch Delivery Sydney"
+    },
+    {
+      "type": "text",
+      "id": "service_type",
+      "label": "Service type",
+      "default": "Furniture delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Service / page description",
+      "default": "Couch and sofa pickup and delivery across Sydney, including Facebook Marketplace collections, with protective equipment and experienced handling."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Couch delivery structured data"
+    }
+  ]
+}
+{% endschema %}
