@@ -18,11 +18,40 @@
             "color_scheme": "scheme-1",
             "padding-block-start": 16,
             "padding-block-end": 8
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["breadcrumbs_block"],
-      "settings": {}
+      "block_order": [
+        "breadcrumbs_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "hero": {
       "type": "_blocks",
@@ -30,7 +59,7 @@
         "hero_block": {
           "type": "service-hero",
           "settings": {
-            "heading": "<h1>Facebook Marketplace Furniture Pickup &amp; Delivery — Sydney Wide</h1>",
+            "heading": "<h1>Facebook Marketplace Furniture Pickup & Delivery — Sydney Wide</h1>",
             "subheading": "Bought something too big to carry home? We'll collect it from the seller and deliver it safely to your door.",
             "phone_number": "0469 717 535",
             "call_button_text": "Call Now",
@@ -43,14 +72,44 @@
             "badge_3": "Same-day availability where scheduling allows",
             "badge_4": "No hidden fees",
             "badge_5": "Sydney-wide service",
+            "image": "shopify://shop_images/removals_Sydney_removalist.png",
             "color_scheme": "scheme-1",
             "padding-block-start": 32,
             "padding-block-end": 32
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["hero_block"],
-      "settings": {}
+      "block_order": [
+        "hero_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "intro": {
       "type": "_blocks",
@@ -63,17 +122,52 @@
             "color_scheme": "scheme-1",
             "padding-block-start": 48,
             "padding-block-end": 24
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["intro_block"],
-      "settings": {}
+      "block_order": [
+        "intro_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "what_we_collect": {
       "type": "_blocks",
       "blocks": {
         "what_we_collect_block": {
           "type": "feature-grid",
+          "settings": {
+            "heading": "<h2>What We Collect From Marketplace &amp; Gumtree Sellers</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          },
           "blocks": {
             "item-marketplace": {
               "type": "_feature-grid-item",
@@ -81,7 +175,8 @@
                 "heading": "Facebook Marketplace purchases",
                 "text": "Furniture, appliances and large items bought from a Marketplace seller.",
                 "icon": "marketplace"
-              }
+              },
+              "blocks": {}
             },
             "item-gumtree": {
               "type": "_feature-grid-item",
@@ -89,7 +184,8 @@
                 "heading": "Gumtree & online listings",
                 "text": "We'll travel to any Sydney seller, whichever platform you bought through.",
                 "icon": "location"
-              }
+              },
+              "blocks": {}
             },
             "item-private-seller": {
               "type": "_feature-grid-item",
@@ -97,7 +193,8 @@
                 "heading": "Private seller pickups",
                 "text": "We coordinate pickup time and access directly with the seller.",
                 "icon": "two-workers"
-              }
+              },
+              "blocks": {}
             },
             "item-single": {
               "type": "_feature-grid-item",
@@ -105,7 +202,8 @@
                 "heading": "Single-item delivery",
                 "text": "No minimum job size - one couch or one lamp, same careful service.",
                 "icon": "single-item"
-              }
+              },
+              "blocks": {}
             },
             "item-appliances": {
               "type": "_feature-grid-item",
@@ -113,7 +211,8 @@
                 "heading": "Appliances & heavy items",
                 "text": "Washing machines, fridges and other awkward, heavy pickups.",
                 "icon": "trolley"
-              }
+              },
+              "blocks": {}
             },
             "item-store": {
               "type": "_feature-grid-item",
@@ -121,60 +220,125 @@
                 "heading": "Store & warehouse collection",
                 "text": "Collection from a shop, storage unit or warehouse when needed.",
                 "icon": "van"
-              }
+              },
+              "blocks": {}
             }
           },
-          "block_order": ["item-marketplace", "item-gumtree", "item-private-seller", "item-single", "item-appliances", "item-store"],
-          "settings": {
-            "heading": "<h2>What We Collect From Marketplace &amp; Gumtree Sellers</h2>",
-            "color_scheme": "scheme-1",
-            "padding-block-start": 48,
-            "padding-block-end": 48
-          }
+          "block_order": [
+            "item-marketplace",
+            "item-gumtree",
+            "item-private-seller",
+            "item-single",
+            "item-appliances",
+            "item-store"
+          ]
         }
       },
-      "block_order": ["what_we_collect_block"],
-      "settings": {}
+      "block_order": [
+        "what_we_collect_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "how_it_works": {
       "type": "_blocks",
       "blocks": {
         "how_it_works_block": {
           "type": "process-steps",
+          "settings": {
+            "heading": "<h2>From Listing to Your Door in 3 Steps</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          },
           "blocks": {
             "step-1": {
               "type": "_process-step-item",
               "settings": {
                 "heading": "Get a free quote",
                 "text": "Send us the listing link, item details and both addresses - we'll reply with a fixed price, usually within minutes."
-              }
+              },
+              "blocks": {}
             },
             "step-2": {
               "type": "_process-step-item",
               "settings": {
                 "heading": "We arrange pickup with the seller",
                 "text": "We contact the seller directly to confirm a pickup time and access - you don't need to be there or share your address."
-              }
+              },
+              "blocks": {}
             },
             "step-3": {
               "type": "_process-step-item",
               "settings": {
                 "heading": "We collect and deliver",
                 "text": "Your item is loaded with protective blankets and straps, then delivered carefully to your door."
-              }
+              },
+              "blocks": {}
             }
           },
-          "block_order": ["step-1", "step-2", "step-3"],
-          "settings": {
-            "heading": "<h2>From Listing to Your Door in 3 Steps</h2>",
-            "color_scheme": "scheme-1",
-            "padding-block-start": 48,
-            "padding-block-end": 48
-          }
+          "block_order": [
+            "step-1",
+            "step-2",
+            "step-3"
+          ]
         }
       },
-      "block_order": ["how_it_works_block"],
-      "settings": {}
+      "block_order": [
+        "how_it_works_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "service_areas": {
       "type": "_blocks",
@@ -188,11 +352,40 @@
             "color_scheme": "scheme-1",
             "padding-block-start": 48,
             "padding-block-end": 48
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["service_areas_block"],
-      "settings": {}
+      "block_order": [
+        "service_areas_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "recent_jobs": {
       "type": "_blocks",
@@ -206,92 +399,172 @@
             "color_scheme": "scheme-1",
             "padding-block-start": 48,
             "padding-block-end": 48
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["recent_jobs_block"],
-      "settings": {}
+      "block_order": [
+        "recent_jobs_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "faq": {
       "type": "_blocks",
       "blocks": {
         "faq_block": {
           "type": "service-faq",
+          "settings": {
+            "heading": "<h2>Facebook Marketplace Delivery: Your Questions Answered</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          },
           "blocks": {
             "faq-1": {
               "type": "_faq-item",
               "settings": {
                 "question": "Does Facebook Marketplace deliver in Sydney?",
                 "answer": "<p>No. Facebook's own shipping only covers small, boxable items, and its official local delivery partners don't operate in Australia - so large Marketplace items default to local pickup only. That's exactly the gap we fill for Sydney buyers.</p>"
-              }
+              },
+              "blocks": {}
             },
             "faq-2": {
               "type": "_faq-item",
               "settings": {
                 "question": "Do I need to be home for the pickup?",
                 "answer": "<p>No. We contact the seller directly to arrange a pickup time and collect the item on your behalf, so you don't need to coordinate access yourself or share your address with a stranger.</p>"
-              }
+              },
+              "blocks": {}
             },
             "faq-3": {
               "type": "_faq-item",
               "settings": {
                 "question": "Can you contact the seller to arrange collection?",
                 "answer": "<p>Yes - just send us the listing details and the seller's contact information, and we'll organise pickup timing directly with them.</p>"
-              }
+              },
+              "blocks": {}
             },
             "faq-4": {
               "type": "_faq-item",
               "settings": {
                 "question": "What items can you collect?",
                 "answer": "<p>Furniture, appliances and other large or awkward items from Facebook Marketplace, Gumtree, online stores or private sellers - from a single item to a full apartment's worth.</p>"
-              }
+              },
+              "blocks": {}
             },
             "faq-5": {
               "type": "_faq-item",
               "settings": {
                 "question": "Is my item insured during transport?",
                 "answer": "<p>Yes, your item is covered while it's in our care, and we use protective blankets, straps and trolleys to keep it safe in transit.</p>"
-              }
+              },
+              "blocks": {}
             },
             "faq-6": {
               "type": "_faq-item",
               "settings": {
                 "question": "How quickly can you collect and deliver?",
                 "answer": "<p>We often offer same-day collection in Sydney, scheduling permitting. Contact us with the listing details and your preferred timing and we'll confirm availability.</p>"
-              }
+              },
+              "blocks": {}
             },
             "faq-7": {
               "type": "_faq-item",
               "settings": {
                 "question": "What should I check before booking a pickup?",
                 "answer": "<p>Confirm the item's exact dimensions with the seller, check whether there are stairs or lift access at both addresses, and have your pickup and delivery details ready when you request a quote - it helps us give you an accurate fixed price straight away.</p>"
-              }
+              },
+              "blocks": {}
             },
             "faq-8": {
               "type": "_faq-item",
               "settings": {
                 "question": "What if the item won't fit through a doorway or up the stairs?",
                 "answer": "<p>Let us know about stairs, tight hallways or awkward access when you book. Our team carries protective equipment and moving straps for tricky access, and we'll talk through the options with you before pickup day if it looks like it could be a problem.</p>"
-              }
+              },
+              "blocks": {}
             }
           },
-          "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7", "faq-8"],
-          "settings": {
-            "heading": "<h2>Facebook Marketplace Delivery: Your Questions Answered</h2>",
-            "color_scheme": "scheme-1",
-            "padding-block-start": 48,
-            "padding-block-end": 48
-          }
+          "block_order": [
+            "faq-1",
+            "faq-2",
+            "faq-3",
+            "faq-4",
+            "faq-5",
+            "faq-6",
+            "faq-7",
+            "faq-8"
+          ]
         }
       },
-      "block_order": ["faq_block"],
-      "settings": {}
+      "block_order": [
+        "faq_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "related_links": {
       "type": "_blocks",
       "blocks": {
         "related_links_block": {
           "type": "related-links",
+          "settings": {
+            "heading": "<h2>Other Ways We Can Help</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 24
+          },
           "blocks": {
             "link-man-with-a-van": {
               "type": "_related-link-item",
@@ -299,7 +572,8 @@
                 "label": "Man With a Van Sydney",
                 "url": "/pages/man-with-a-van-sydney",
                 "description": "Need help with a small move rather than a single pickup? See our man-and-van service."
-              }
+              },
+              "blocks": {}
             },
             "link-couch": {
               "type": "_related-link-item",
@@ -307,7 +581,8 @@
                 "label": "Couch Delivery Sydney",
                 "url": "/pages/couch-delivery-sydney",
                 "description": "Buying or selling a couch or sofa specifically? See our dedicated couch delivery service."
-              }
+              },
+              "blocks": {}
             },
             "link-home": {
               "type": "_related-link-item",
@@ -315,20 +590,47 @@
                 "label": "Titan Express home",
                 "url": "/",
                 "description": "See all our removalist and delivery services."
-              }
+              },
+              "blocks": {}
             }
           },
-          "block_order": ["link-man-with-a-van", "link-couch", "link-home"],
-          "settings": {
-            "heading": "<h2>Other Ways We Can Help</h2>",
-            "color_scheme": "scheme-1",
-            "padding-block-start": 48,
-            "padding-block-end": 24
-          }
+          "block_order": [
+            "link-man-with-a-van",
+            "link-couch",
+            "link-home"
+          ]
         }
       },
-      "block_order": ["related_links_block"],
-      "settings": {}
+      "block_order": [
+        "related_links_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "quote_form": {
       "type": "_blocks",
@@ -343,11 +645,40 @@
             "color_scheme": "scheme-1",
             "padding-block-start": 24,
             "padding-block-end": 48
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["quote_form_block"],
-      "settings": {}
+      "block_order": [
+        "quote_form_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "final_cta": {
       "type": "_blocks",
@@ -362,11 +693,40 @@
             "color_scheme": "scheme-1",
             "padding-block-start": 48,
             "padding-block-end": 48
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["final_cta_block"],
-      "settings": {}
+      "block_order": [
+        "final_cta_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "schema": {
       "type": "_blocks",
@@ -378,11 +738,40 @@
             "service_type": "Facebook Marketplace furniture pickup and delivery",
             "description": "Furniture and large item pickup and delivery from Facebook Marketplace, Gumtree and private sellers across Sydney, including direct seller coordination, protective handling and insured transport.",
             "areas_served": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney, Hills District"
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["schema_block"],
-      "settings": {}
+      "block_order": [
+        "schema_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "floating_quote_bar": {
       "type": "_blocks",
@@ -393,11 +782,40 @@
             "button_text": "Get a Free Quote",
             "quote_anchor": "#main-quote",
             "color_scheme": "scheme-1"
-          }
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["floating_quote_bar_block"],
-      "settings": {}
+      "block_order": [
+        "floating_quote_bar_block"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
