@@ -1,0 +1,142 @@
+{%- doc -%}
+  One-off floating quote bar for the Facebook Marketplace pickup & delivery
+  page. Not part of the documented reusable-block kit (see
+  Titan-Express-Service-Page-Blueprint.md, section 6, "Sticky CTA rules" -
+  a shared sticky pattern would need to be added there deliberately before
+  reuse; this block is scoped to this one page for now).
+
+  Renders a full-width, fixed, mobile-only bottom bar with a single CTA
+  that anchors to #main-quote (the page's one quote-form block). Hidden
+  entirely at 750px+ (this kit's one established breakpoint) since desktop
+  visitors already have the hero and final CTAs in easy reach.
+
+  Minimal JavaScript: an IntersectionObserver (not a scroll listener, to
+  keep INP cost near zero) watches the real #main-quote element and hides
+  this bar while the actual quote form is on screen, so the floating CTA
+  never visually competes with the form it points to. If IntersectionObserver
+  isn't supported, the bar simply stays visible (safe, functional fallback).
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign bar_id = block.id | prepend: 'FloatingQuoteBar-'
+%}
+
+<div
+  id="{{ bar_id }}"
+  class="floating-quote-bar color-{{ block_settings.color_scheme }}"
+  {{ block.shopify_attributes }}
+>
+  <a href="{{ block_settings.quote_anchor }}" class="floating-quote-bar__button">
+    {{- block_settings.button_text -}}
+  </a>
+</div>
+
+<script>
+  (function () {
+    var bar = document.getElementById({{ bar_id | json }});
+    var target = document.getElementById('main-quote');
+    if (!bar || !target || !('IntersectionObserver' in window)) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          bar.classList.toggle('floating-quote-bar--hidden', entry.isIntersecting);
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px' }
+    );
+    observer.observe(target);
+  })();
+</script>
+
+{% stylesheet %}
+  .floating-quote-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: var(--layer-sticky, 40);
+    display: none;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--color-background, #0b0b0c);
+    border-top: 1px solid rgb(var(--color-foreground-rgb, 255 255 255) / 0.12);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  @media screen and (max-width: 749px) {
+    .floating-quote-bar {
+      display: block;
+    }
+  }
+
+  .floating-quote-bar--hidden {
+    display: none;
+  }
+
+  .floating-quote-bar__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    background: linear-gradient(135deg, #e30613 0%, #a30410 100%);
+    color: #ffffff;
+    font-weight: var(--font-weight-semibold, 600);
+    text-decoration: none;
+    border-radius: var(--style-border-radius-buttons-primary, 8px);
+  }
+
+  .floating-quote-bar__button:focus-visible {
+    outline: 2px solid #e30613;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .floating-quote-bar__button {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .floating-quote-bar__button:hover,
+    .floating-quote-bar__button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(227, 6, 19, 0.4);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Floating Quote",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Get a Free Quote"
+    },
+    {
+      "type": "text",
+      "id": "quote_anchor",
+      "label": "Quote form anchor",
+      "default": "#main-quote",
+      "info": "Must match the id of this page's Quote Form block."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating Quote"
+    }
+  ]
+}
+{% endschema %}
