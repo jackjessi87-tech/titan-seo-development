@@ -1,0 +1,71 @@
+{%- doc -%}
+  Nested item block for blocks/related-links.liquid.
+  Renders one internal link: label + destination URL, with an optional
+  short description of what the linked page is for.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+{%- if block_settings.url != blank and block_settings.label != blank -%}
+  <li class="related-links__item" {{ block.shopify_attributes }}>
+    <a class="related-links__link" href="{{ block_settings.url }}">{{ block_settings.label }}</a>
+    {%- if block_settings.description != blank -%}
+      <span class="related-links__description">{{ block_settings.description }}</span>
+    {%- endif -%}
+  </li>
+{%- endif -%}
+
+{% stylesheet %}
+  .related-links__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-block: var(--padding-sm, 12px);
+    border-bottom: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-border, 0.1));
+  }
+
+  .related-links__link {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold, 600);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .related-links__description {
+    font-size: var(--font-paragraph-small--size, 0.875rem);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Related link",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Link text",
+      "default": "Link"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Destination URL"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Short description (optional)",
+      "default": ""
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related link"
+    }
+  ]
+}
+{% endschema %}

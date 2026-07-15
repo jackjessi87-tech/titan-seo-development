@@ -1,8 +1,16 @@
 {
   "type": "page",
   "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding-block-start": 16,
+        "padding-block-end": 8
+      }
+    },
     "hero": {
-      "type": "couch-delivery-hero",
+      "type": "service-hero",
       "settings": {
         "heading": "<h1>Couch Delivery Sydney</h1>",
         "subheading": "Careful couch and sofa pickup and delivery across Sydney, including Marketplace purchases and single-item moves.",
@@ -10,6 +18,7 @@
         "call_button_text": "Call Now",
         "quote_button_text": "Get a Free Quote",
         "quote_anchor": "#main-quote",
+        "rating_filter_keywords": "sofa, couch",
         "fallback_trust_text": "Trusted by Sydney households and Marketplace buyers for careful couch handling.",
         "badge_1": "Oversized van",
         "badge_2": "Protective blankets",
@@ -22,7 +31,7 @@
       }
     },
     "intro": {
-      "type": "couch-delivery-intro",
+      "type": "service-intro",
       "settings": {
         "heading": "<h2>Couch pickup and delivery, done the careful way</h2>",
         "body": "<p>Titan Express picks up couches and sofas from homes, shops and Facebook Marketplace sellers, then delivers them to houses, apartments and offices across Sydney. Whether it is a one-off single seat or a large corner modular suite, our trained team handles every piece with care.</p>",
@@ -193,17 +202,18 @@
       }
     },
     "recent_jobs": {
-      "type": "recent-jobs-couch",
+      "type": "recent-jobs",
       "settings": {
         "heading": "<h2>Recent couch deliveries</h2>",
         "intro_text": "Here are some recent couch and sofa delivery jobs we've completed across Sydney.",
+        "filter_keywords": "sofa, couch",
         "color_scheme": "scheme-1",
         "padding-block-start": 48,
         "padding-block-end": 48
       }
     },
     "faq": {
-      "type": "couch-faq",
+      "type": "service-faq",
       "blocks": {
         "faq-1": {
           "type": "_faq-item",
@@ -241,6 +251,53 @@
         "padding-block-end": 48
       }
     },
+    "related_links": {
+      "type": "related-links",
+      "blocks": {
+        "link-quote": {
+          "type": "_related-link-item",
+          "settings": {
+            "label": "Get a free quote",
+            "url": "#main-quote",
+            "description": "Tell us what you need moved and get a fixed price."
+          }
+        },
+        "link-man-with-a-van": {
+          "type": "_related-link-item",
+          "settings": {
+            "label": "Man With a Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Need a hand with a single item or small move? See our man-and-van service."
+          }
+        },
+        "link-home": {
+          "type": "_related-link-item",
+          "settings": {
+            "label": "Titan Express home",
+            "url": "/",
+            "description": "See all our removalist and delivery services."
+          }
+        }
+      },
+      "settings": {
+        "heading": "<h2>Explore more</h2>",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 24
+      }
+    },
+    "quote_form": {
+      "type": "quote-form",
+      "settings": {
+        "heading": "<h2>Get your free couch delivery quote</h2>",
+        "subheading": "Tell us what needs moving and we'll send a fixed-price quote.",
+        "submit_text": "Request my quote",
+        "success_text": "Thanks - we've received your quote request and will be in touch shortly.",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 24,
+        "padding-block-end": 48
+      }
+    },
     "final_cta": {
       "type": "final-cta",
       "settings": {
@@ -254,11 +311,12 @@
       }
     },
     "schema": {
-      "type": "couch-delivery-schema",
+      "type": "service-schema",
       "settings": {
         "service_name": "Couch Delivery Sydney",
         "service_type": "Furniture delivery",
-        "description": "Professional couch and sofa pickup and delivery across Sydney, including Facebook Marketplace collections, with protective equipment and experienced handling."
+        "description": "Professional couch and sofa pickup and delivery across Sydney, including Facebook Marketplace collections, with protective equipment and experienced handling.",
+        "areas_served": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney, Hills District"
       }
     }
   }

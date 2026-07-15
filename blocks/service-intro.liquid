@@ -1,0 +1,98 @@
+{%- doc -%}
+  Reusable service landing page intro block.
+  Renders a single H2 and an editable richtext paragraph (~180-250 words).
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+<div
+  class="service-intro service-intro--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="service-intro__inner">
+    {{ block_settings.heading }}
+    <div class="service-intro__body rte">
+      {{ block_settings.body }}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .service-intro__inner {
+    max-width: var(--normal-content-width, 720px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .service-intro__body {
+    font-size: var(--font-paragraph-medium--size, 1.0625rem);
+    line-height: 1.65;
+  }
+
+  .service-intro__body p:first-child {
+    margin-block-start: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Service intro",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>How our service works</h2>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body copy",
+      "default": "<p>Describe the service in specific, helpful detail: who it's for, what's included, and what makes it different from a DIY option or a general-purpose platform.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service intro"
+    }
+  ]
+}
+{% endschema %}

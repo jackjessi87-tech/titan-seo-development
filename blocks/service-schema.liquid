@@ -1,23 +1,29 @@
 {%- doc -%}
-  Couch Delivery Sydney - structured data block (no visible output).
+  Reusable service landing page structured data block (no visible output).
 
   Emits only page-specific JSON-LD: Service, WebPage and BreadcrumbList.
 
   Deliberately does NOT add Organization or LocalBusiness schema, because
-  sections/header.liquid already renders a sitewide Organization JSON-LD
-  block on every page. Adding another one here would duplicate that schema.
-  Deliberately does NOT add AggregateRating - the store has no verified
-  review metafield/app data to source it from.
+  sections/footer-business.liquid (footer) already renders a sitewide
+  Organization JSON-LD block via sections/header.liquid on every page.
+  Adding another one here would duplicate that schema.
+  Deliberately does NOT add AggregateRating - only add it if the store has
+  verified review metafield/app data to source it from.
 
-  FAQPage schema is intentionally handled inside blocks/couch-faq.liquid
+  FAQPage schema is intentionally handled inside blocks/service-faq.liquid
   instead, so it is only emitted when FAQs are actually visible and always
   matches the rendered questions/answers exactly.
+
+  The BreadcrumbList below uses page.title/shop.url - the same source
+  blocks/breadcrumbs.liquid uses for the visible trail - so the two can
+  never drift apart.
 {%- enddoc -%}
 
 {% liquid
   assign block_settings = block.settings
   assign service_name = block_settings.service_name | default: page.title
   assign page_description = block_settings.description
+  assign areas = block_settings.areas_served | split: ','
 %}
 
 <script type="application/ld+json">
@@ -27,10 +33,18 @@
     "name": {{ service_name | json }},
     "serviceType": {{ block_settings.service_type | json }},
     "description": {{ page_description | json }},
-    "areaServed": {
-      "@type": "City",
-      "name": "Sydney, New South Wales, Australia"
-    },
+    {%- if areas.size > 1 -%}
+    "areaServed": [
+      {%- for area in areas -%}
+        {%- assign trimmed_area = area | strip -%}
+        {%- if trimmed_area != blank -%}
+          { "@type": "City", "name": {{ trimmed_area | json }} }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ],
+    {%- else -%}
+    "areaServed": { "@type": "City", "name": {{ block_settings.areas_served | json }} },
+    {%- endif -%}
     "provider": {
       "@type": "Organization",
       "name": {{ shop.name | json }},
@@ -79,14 +93,14 @@
 
 {% schema %}
 {
-  "name": "Couch delivery structured data",
+  "name": "Service structured data",
   "tag": null,
   "settings": [
     {
       "type": "text",
       "id": "service_name",
       "label": "Service name",
-      "default": "Couch Delivery Sydney"
+      "default": ""
     },
     {
       "type": "text",
@@ -98,12 +112,19 @@
       "type": "textarea",
       "id": "description",
       "label": "Service / page description",
-      "default": "Couch and sofa pickup and delivery across Sydney, including Facebook Marketplace collections, with protective equipment and experienced handling."
+      "default": ""
+    },
+    {
+      "type": "textarea",
+      "id": "areas_served",
+      "label": "Areas served (comma-separated)",
+      "default": "Sydney, New South Wales, Australia",
+      "info": "Keep this matching the visible Service Areas block on this page, so the structured data reflects what's actually on screen."
     }
   ],
   "presets": [
     {
-      "name": "Couch delivery structured data"
+      "name": "Service structured data"
     }
   ]
 }
