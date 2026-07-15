@@ -1,0 +1,129 @@
+{%- doc -%}
+  Reusable service landing page structured data block (no visible output).
+
+  Emits only page-specific JSON-LD: Service, WebPage and BreadcrumbList.
+
+  Deliberately does NOT add Organization or LocalBusiness schema, because
+  sections/footer-business.liquid (footer) already renders a sitewide
+  Organization JSON-LD block via sections/header.liquid on every page.
+  Adding another one here would duplicate that schema.
+  Deliberately does NOT add AggregateRating - only add it if the store has
+  verified review metafield/app data to source it from.
+
+  FAQPage schema is intentionally handled inside blocks/service-faq.liquid
+  instead, so it is only emitted when FAQs are actually visible and always
+  matches the rendered questions/answers exactly.
+
+  The BreadcrumbList below uses page.title/shop.url - the same source
+  blocks/breadcrumbs.liquid uses for the visible trail - so the two can
+  never drift apart.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign service_name = block_settings.service_name | default: page.title
+  assign page_description = block_settings.description
+  assign areas = block_settings.areas_served | split: ','
+%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": {{ service_name | json }},
+    "serviceType": {{ block_settings.service_type | json }},
+    "description": {{ page_description | json }},
+    {%- if areas.size > 1 -%}
+    "areaServed": [
+      {%- for area in areas -%}
+        {%- assign trimmed_area = area | strip -%}
+        {%- if trimmed_area != blank -%}
+          { "@type": "City", "name": {{ trimmed_area | json }} }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ],
+    {%- else -%}
+    "areaServed": { "@type": "City", "name": {{ block_settings.areas_served | json }} },
+    {%- endif -%}
+    "provider": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }}
+    },
+    "url": {{ canonical_url | json }}
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": {{ page.title | json }},
+    "url": {{ canonical_url | json }},
+    "description": {{ page_description | json }},
+    "inLanguage": {{ request.locale.iso_code | json }},
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }}
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": {{ shop.url | json }}
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ page.title | json }},
+        "item": {{ canonical_url | json }}
+      }
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Service structured data",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "service_name",
+      "label": "Service name"
+    },
+    {
+      "type": "text",
+      "id": "service_type",
+      "label": "Service type",
+      "default": "Furniture delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Service / page description"
+    },
+    {
+      "type": "textarea",
+      "id": "areas_served",
+      "label": "Areas served (comma-separated)",
+      "default": "Sydney, New South Wales, Australia",
+      "info": "Keep this matching the visible Service Areas block on this page, so the structured data reflects what's actually on screen."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service structured data"
+    }
+  ]
+}
+{% endschema %}

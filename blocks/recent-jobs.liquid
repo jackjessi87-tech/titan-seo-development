@@ -1,0 +1,171 @@
+{%- doc -%}
+  Reusable recent-jobs block for service landing pages.
+  Filters the shop's recent_jobs metaobject by filter_keywords (comma-
+  separated) and displays matching jobs. Gracefully hides if no matching
+  jobs found.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign all_jobs = shop.metaobjects.recent_jobs.values
+  assign keywords = block_settings.filter_keywords | split: ','
+  assign matched_count = 0
+
+  for job in all_jobs
+    assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | downcase
+    assign is_match = false
+    for keyword in keywords
+      assign trimmed_keyword = keyword | strip | downcase
+      if trimmed_keyword != blank and haystack contains trimmed_keyword
+        assign is_match = true
+      endif
+    endfor
+    if is_match
+      assign matched_count = matched_count | plus: 1
+    endif
+  endfor
+%}
+
+{%- if matched_count > 0 -%}
+  <div
+    class="recent-jobs recent-jobs--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+    style="{% render 'spacing-style', settings: block_settings %}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="recent-jobs__inner">
+      {%- if block_settings.heading != blank -%}
+        {{ block_settings.heading }}
+      {%- endif -%}
+
+      <p class="recent-jobs__intro">{{ block_settings.intro_text }}</p>
+
+      <div class="recent-jobs__grid">
+        {%- for job in all_jobs -%}
+          {%- assign haystack = job.item.value | append: ' ' | append: job.recent_job.value | append: ' ' | append: job.service_type.value | downcase -%}
+          {%- assign is_match = false -%}
+          {%- for keyword in keywords -%}
+            {%- assign trimmed_keyword = keyword | strip | downcase -%}
+            {%- if trimmed_keyword != blank and haystack contains trimmed_keyword -%}
+              {%- assign is_match = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if is_match -%}
+            <div class="recent-jobs__card">
+              {%- if job.recent_job.value != blank -%}
+                <p class="recent-jobs__job-title">{{ job.recent_job.value }}</p>
+              {%- endif -%}
+              {%- if job.item.value != blank -%}
+                <p class="recent-jobs__item">Item: {{ job.item.value }}</p>
+              {%- endif -%}
+              {%- if job.rating.value != blank -%}
+                <p class="recent-jobs__rating">⭐ {{ job.rating.value }} / 5</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .recent-jobs__inner {
+    max-width: var(--page-width, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .recent-jobs__intro {
+    font-size: var(--font-paragraph-medium--size, 1.0625rem);
+    margin-bottom: var(--margin-lg, 20px);
+  }
+
+  .recent-jobs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--gap-md, 16px);
+  }
+
+  .recent-jobs__card {
+    background-color: var(--color-background-secondary, #f5f5f5);
+    padding: var(--padding-md, 16px);
+    border-radius: var(--style-border-radius-buttons-primary, 8px);
+  }
+
+  .recent-jobs__job-title {
+    font-weight: var(--font-weight-semibold, 600);
+    margin: 0 0 var(--margin-sm, 12px);
+  }
+
+  .recent-jobs__item,
+  .recent-jobs__rating {
+    font-size: var(--font-paragraph-small--size, 0.875rem);
+    margin: 0 0 var(--margin-xs, 8px);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Recent jobs",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Recent deliveries</h2>"
+    },
+    {
+      "type": "text",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Here are some recent jobs we've completed in Sydney."
+    },
+    {
+      "type": "text",
+      "id": "filter_keywords",
+      "label": "Match keywords (comma-separated)",
+      "info": "Matches against the job's item, description and service type in the Recent Jobs metaobject. Leave blank to show no jobs (block stays hidden) rather than show unrelated ones."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recent jobs"
+    }
+  ]
+}
+{% endschema %}

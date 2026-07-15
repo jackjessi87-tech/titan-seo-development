@@ -1,0 +1,99 @@
+{%- doc -%}
+  Reusable internal-links block for service landing pages.
+  Renders an H2 plus a list of nested _related-link-item blocks. Each page's
+  entries are curated per page (real, currently-live destinations only -
+  not placeholder links) so this becomes the on-page internal linking
+  between service/location landing pages as more of them go live.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+<div
+  class="related-links related-links--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="related-links__inner">
+    {{ block_settings.heading }}
+
+    <ul class="related-links__list" role="list">
+      {% content_for 'blocks' %}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .related-links__inner {
+    max-width: var(--normal-content-width, 720px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .related-links__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm, 12px);
+    list-style: none;
+    margin: var(--margin-lg, 20px) 0 0;
+    padding: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Related links",
+  "tag": null,
+  "blocks": [
+    { "type": "_related-link-item" }
+  ],
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Explore more</h2>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related links"
+    }
+  ]
+}
+{% endschema %}

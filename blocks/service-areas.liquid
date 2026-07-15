@@ -1,0 +1,137 @@
+{%- doc -%}
+  Service areas block for Couch Delivery Sydney page.
+  Renders a list of service areas (suburbs/regions) for couch delivery.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign areas = block_settings.areas | split: ','
+%}
+
+<div
+  class="service-areas service-areas--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="service-areas__inner">
+    {%- if block_settings.heading != blank -%}
+      {{ block_settings.heading }}
+    {%- endif -%}
+    
+    {%- if block_settings.intro_text != blank -%}
+      <p class="service-areas__intro">{{ block_settings.intro_text }}</p>
+    {%- endif -%}
+    
+    <ul class="service-areas__list" role="list">
+      {%- for area in areas -%}
+        {%- assign trimmed_area = area | strip -%}
+        {%- if trimmed_area != blank -%}
+          <li class="service-areas__item">{{ trimmed_area }}</li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .service-areas__inner {
+    max-width: var(--page-width, 1280px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .service-areas__intro {
+    font-size: var(--font-paragraph-medium--size, 1.0625rem);
+    margin-bottom: var(--margin-lg, 20px);
+  }
+
+  .service-areas__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--gap-md, 16px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .service-areas__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: var(--padding-sm, 12px) var(--padding-md, 16px);
+    background-color: var(--color-background-secondary, #f5f5f5);
+    border-radius: var(--style-border-radius-buttons-primary, 8px);
+  }
+
+  .service-areas__item::before {
+    content: "📍";
+    flex-shrink: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Service areas",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>We service these Sydney areas</h2>"
+    },
+    {
+      "type": "text",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "Couch delivery available across Sydney and surrounding areas."
+    },
+    {
+      "type": "textarea",
+      "id": "areas",
+      "label": "Service areas (comma-separated)",
+      "default": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney",
+      "info": "Enter suburb/region names separated by commas."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service areas"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,254 @@
+{%- doc -%}
+  Reusable quote-request form for service landing pages.
+
+  Uses Shopify's native {% form 'contact' %} (the same reliable submission
+  mechanism as blocks/contact-form.liquid) so no app or custom backend is
+  required. Submissions arrive as a normal Shopify contact message, with the
+  pickup/delivery address fields included in the message body.
+
+  Rendered with id="main-quote" so every existing "Get a Free Quote" CTA
+  across the theme (hero, final CTA, footer) resolves to a real, working
+  form instead of a dead anchor.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign form_id = block.id | prepend: 'QuoteForm-'
+%}
+
+<div
+  id="main-quote"
+  class="quote-form quote-form--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="quote-form__inner">
+    {{ block_settings.heading }}
+
+    {%- if block_settings.subheading != blank -%}
+      <p class="quote-form__subheading">{{ block_settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- form 'contact', id: form_id, class: 'quote-form__form' -%}
+      <input type="hidden" name="contact[id]" value="{{ form_id }}">
+      <input type="hidden" name="contact[source]" value="{{ page.title | default: shop.name }} quote form">
+
+      {%- if form.errors -%}
+        <div class="quote-form__error" tabindex="-1" autofocus>
+          {{- form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email -}}
+        </div>
+      {%- endif -%}
+
+      {%- if form.posted_successfully? -%}
+        <div class="quote-form__success" tabindex="-1" autofocus>
+          {{- block_settings.success_text -}}
+        </div>
+      {%- else -%}
+        <div class="quote-form__row">
+          <label class="visually-hidden" for="{{ form_id }}-name">Full name</label>
+          <input
+            type="text"
+            id="{{ form_id }}-name"
+            class="quote-form__input"
+            autocomplete="name"
+            name="contact[name]"
+            placeholder="Full name"
+            required
+          >
+
+          <label class="visually-hidden" for="{{ form_id }}-phone">Phone number</label>
+          <input
+            type="tel"
+            id="{{ form_id }}-phone"
+            class="quote-form__input"
+            autocomplete="tel"
+            name="contact[phone]"
+            placeholder="Phone number"
+            required
+          >
+        </div>
+
+        <label class="visually-hidden" for="{{ form_id }}-email">Email</label>
+        <input
+          type="email"
+          id="{{ form_id }}-email"
+          class="quote-form__input"
+          autocomplete="email"
+          name="contact[email]"
+          spellcheck="false"
+          autocapitalize="off"
+          placeholder="Email address"
+          required
+        >
+
+        <div class="quote-form__row">
+          <label class="visually-hidden" for="{{ form_id }}-pickup">Pickup address</label>
+          <input
+            type="text"
+            id="{{ form_id }}-pickup"
+            class="quote-form__input"
+            name="contact[pickup_address]"
+            placeholder="Pickup address or suburb"
+          >
+
+          <label class="visually-hidden" for="{{ form_id }}-dropoff">Delivery address</label>
+          <input
+            type="text"
+            id="{{ form_id }}-dropoff"
+            class="quote-form__input"
+            name="contact[delivery_address]"
+            placeholder="Delivery address or suburb"
+          >
+        </div>
+
+        <label class="visually-hidden" for="{{ form_id }}-body">Tell us about the job</label>
+        <textarea
+          rows="4"
+          id="{{ form_id }}-body"
+          class="quote-form__input quote-form__input--textarea"
+          name="contact[body]"
+          placeholder="Tell us what needs moving and your preferred date"
+        >{{- form.body -}}</textarea>
+
+        <button type="submit" class="button quote-form__submit">
+          {{- block_settings.submit_text -}}
+        </button>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .quote-form__inner {
+    max-width: var(--normal-content-width, 720px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .quote-form__subheading {
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
+    margin: 0 0 var(--margin-lg, 20px);
+  }
+
+  .quote-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md, 16px);
+    margin-top: var(--margin-lg, 20px);
+  }
+
+  .quote-form__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md, 16px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .quote-form__row {
+      flex-direction: row;
+    }
+
+    .quote-form__row > * {
+      flex: 1;
+    }
+  }
+
+  .quote-form__input {
+    width: 100%;
+    color: var(--color-input-text, inherit);
+    background-color: var(--color-input-background, transparent);
+    padding: var(--padding-lg, 14px) var(--padding-xl, 18px);
+    border-radius: var(--style-border-radius-inputs, 8px);
+    border: var(--style-border-width-inputs, 1px) solid var(--color-input-border, currentColor);
+    font: inherit;
+  }
+
+  .quote-form__input--textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .quote-form__submit {
+    align-self: flex-start;
+  }
+
+  .quote-form__error,
+  .quote-form__success {
+    padding: var(--padding-md, 16px);
+    border-radius: var(--style-border-radius-inputs, 8px);
+    background-color: var(--color-background-secondary, #f5f5f5);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Quote form",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Get your free quote</h2>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Tell us what you need moved and we'll send a fixed price quote."
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit button text",
+      "default": "Request my quote"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "Thanks - we've received your quote request and will be in touch shortly."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote form"
+    }
+  ]
+}
+{% endschema %}
