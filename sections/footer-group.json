@@ -243,7 +243,7 @@
           "type": "service_link",
           "settings": {
             "label": "Facebook Marketplace Pickup",
-            "url": "https://www.titanexpress.com.au/pages/facebook-marketplace-pickup-delivery-sydney"
+            "url": ""
           }
         },
         "service_link_6": {
@@ -343,7 +343,6 @@
         "area_link_8"
       ],
       "settings": {
-        "logo_width": 140,
         "brand_name": "Titan Express removalist",
         "description": "<p>Reliable furniture pickup, single-item delivery and man-and-van services across Sydney.</p>",
         "trust_line": "Reliable Sydney removalist, man and van, and furniture delivery service.",
@@ -361,10 +360,6 @@
         "service_area_line": "Sydney NSW and surrounding suburbs",
         "quote_button_label": "Get a Free Quote",
         "quote_button_url": "/pages/couch-delivery-sydney#main-quote",
-        "rating_value": "",
-        "review_count": "",
-        "review_url": "",
-        "legal_menu": "",
         "show_back_to_top": true,
         "enable_schema": false,
         "schema_type": "MovingCompany",
