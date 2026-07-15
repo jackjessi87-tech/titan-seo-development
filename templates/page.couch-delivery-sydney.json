@@ -1,5 +1,4 @@
 {
-  "type": "page",
   "sections": {
     "breadcrumbs": {
       "type": "breadcrumbs",
@@ -319,5 +318,20 @@
         "areas_served": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney, Hills District"
       }
     }
-  }
+  },
+  "order": [
+    "breadcrumbs",
+    "hero",
+    "intro",
+    "couch_types",
+    "how_it_works",
+    "why_us",
+    "service_areas",
+    "recent_jobs",
+    "faq",
+    "related_links",
+    "quote_form",
+    "final_cta",
+    "schema"
+  ]
 }
