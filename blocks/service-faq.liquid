@@ -1,0 +1,129 @@
+{%- doc -%}
+  Reusable service landing page FAQ block.
+
+  Renders an H2 plus an accordion of nested _faq-item blocks (reusing the
+  theme's existing accordion-custom-component snippet and .details/.accordion
+  CSS, so no new accordion behaviour or styling is duplicated).
+
+  Also emits FAQPage JSON-LD built from the exact same nested block settings
+  (via block.blocks), so the structured data can never go out of sync with
+  the visibly rendered questions and answers, and is only emitted when the
+  FAQs are actually visible on the page.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+<div
+  class="service-faq service-faq--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="service-faq__inner">
+    {{ block_settings.heading }}
+
+    <div class="accordion service-faq__accordion">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{%- assign faq_entries = block.blocks | where: 'type', '_faq-item' -%}
+{%- if faq_entries.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for item in faq_entries -%}
+          {
+            "@type": "Question",
+            "name": {{ item.settings.question | strip_html | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ item.settings.answer | strip_html | json }}
+            }
+          }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .service-faq__inner {
+    max-width: var(--normal-content-width, 720px);
+    margin-inline: auto;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .service-faq__accordion {
+    margin-top: var(--margin-lg, 20px);
+  }
+
+  .service-faq__question {
+    font-weight: var(--font-weight-semibold, 600);
+  }
+
+  .service-faq__answer {
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text, 0.75));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Service FAQ",
+  "tag": null,
+  "blocks": [
+    { "type": "_faq-item" }
+  ],
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Frequently asked questions</h2>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service FAQ"
+    }
+  ]
+}
+{% endschema %}

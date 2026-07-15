@@ -1,0 +1,52 @@
+{%- doc -%}
+  Nested item block for blocks/couch-faq.liquid.
+  Renders one accordion row (question/answer). The parent block reads
+  these same settings via {% for child in block.blocks %} to build the
+  FAQPage JSON-LD, so the visible copy and the structured data can never
+  drift apart.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+{% capture row %}
+  <details class="details" {{ block.shopify_attributes }}>
+    <summary class="details__header couch-faq__question">
+      {{ block_settings.question }}
+      <span class="svg-wrapper icon-caret icon-animated">
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </span>
+    </summary>
+    <div class="details-content couch-faq__answer">
+      {{ block_settings.answer }}
+    </div>
+  </details>
+{% endcapture %}
+{% render 'accordion-custom-component', children: row %}
+
+{% schema %}
+{
+  "name": "FAQ item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "question",
+      "label": "Question",
+      "default": "Question"
+    },
+    {
+      "type": "richtext",
+      "id": "answer",
+      "label": "Answer",
+      "default": "<p>Answer</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ item"
+    }
+  ]
+}
+{% endschema %}

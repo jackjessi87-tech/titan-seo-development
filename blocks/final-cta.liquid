@@ -1,0 +1,124 @@
+{%- doc -%}
+  Final CTA block for Couch Delivery Sydney page.
+  Renders an H2, descriptive text, and CTA button linking to the quote form.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+<div
+  class="final-cta final-cta--{{ block.id }} color-{{ block_settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="final-cta__inner">
+    {{ block_settings.heading }}
+    
+    {%- if block_settings.text != blank -%}
+      <p class="final-cta__text">{{ block_settings.text }}</p>
+    {%- endif -%}
+    
+    <a href="{{ block_settings.button_anchor }}" class="button final-cta__button">
+      {{- block_settings.button_text -}}
+    </a>
+  </div>
+</div>
+
+{% stylesheet %}
+  .final-cta__inner {
+    max-width: var(--normal-content-width, 720px);
+    margin-inline: auto;
+    text-align: center;
+    padding-inline: var(--padding-md, 16px);
+  }
+
+  .final-cta__inner h2 {
+    margin-bottom: var(--margin-md, 16px);
+  }
+
+  .final-cta__text {
+    font-size: var(--font-paragraph-medium--size, 1.0625rem);
+    margin-bottom: var(--margin-lg, 20px);
+    max-width: 50ch;
+    margin-inline: auto;
+  }
+
+  .final-cta__button {
+    display: inline-block;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Final CTA",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading (H2)",
+      "default": "<h2>Ready to move your couch?</h2>"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Description text",
+      "default": "Get a free quote for your couch delivery in Sydney."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Get Your Free Quote"
+    },
+    {
+      "type": "text",
+      "id": "button_anchor",
+      "label": "Button link (anchor)",
+      "default": "#main-quote",
+      "info": "Link to quote form by ID (e.g., #main-quote)."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Final CTA"
+    }
+  ]
+}
+{% endschema %}

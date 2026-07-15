@@ -1,0 +1,44 @@
+{%- doc -%}
+  Nested item block for blocks/process-steps.liquid.
+  Renders one numbered step with an H3 heading and description.
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+%}
+
+<div
+  class="process-steps__item"
+  {{ block.shopify_attributes }}
+>
+  <span class="process-steps__number" aria-hidden="true"></span>
+  <h3 class="process-steps__heading">{{ block_settings.heading }}</h3>
+  {%- if block_settings.text != blank -%}
+    <p class="process-steps__text">{{ block_settings.text }}</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Step",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Step heading (H3)",
+      "default": "Step"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Step description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Step"
+    }
+  ]
+}
+{% endschema %}
