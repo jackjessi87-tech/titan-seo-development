@@ -1,0 +1,402 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "_blocks",
+      "blocks": {
+        "breadcrumbs_block": {
+          "type": "breadcrumbs",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "padding-block-start": 16,
+            "padding-block-end": 8
+          }
+        }
+      },
+      "block_order": ["breadcrumbs_block"],
+      "settings": {}
+    },
+    "hero": {
+      "type": "_blocks",
+      "blocks": {
+        "hero_block": {
+          "type": "service-hero",
+          "settings": {
+            "heading": "<h1>Facebook Marketplace Furniture Pickup &amp; Delivery — Sydney Wide</h1>",
+            "subheading": "Bought something too big to carry home? We'll collect it from the seller and deliver it safely to your door.",
+            "phone_number": "0469 717 535",
+            "call_button_text": "Call Now",
+            "quote_button_text": "Get a Free Quote",
+            "quote_anchor": "#main-quote",
+            "rating_filter_keywords": "marketplace, gumtree, pickup, collection",
+            "fallback_trust_text": "Trusted by Sydney buyers for careful Marketplace and Gumtree collections.",
+            "badge_1": "Titan Express · Facebook Marketplace & Gumtree",
+            "badge_2": "Fully insured",
+            "badge_3": "Same-day availability where scheduling allows",
+            "badge_4": "No hidden fees",
+            "badge_5": "Sydney-wide service",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 32,
+            "padding-block-end": 32
+          }
+        }
+      },
+      "block_order": ["hero_block"],
+      "settings": {}
+    },
+    "intro": {
+      "type": "_blocks",
+      "blocks": {
+        "intro_block": {
+          "type": "service-intro",
+          "settings": {
+            "heading": "<h2>Why Facebook Marketplace Won't Deliver It For You</h2>",
+            "body": "<p>Facebook's built-in shipping only covers small, boxable items - anything larger defaults to <strong>local pickup only</strong>, and Facebook's official delivery partners don't operate in Australia at all. So whether the seller is in Parramatta or the item needs to reach Bondi, getting a couch, dining table or fridge home is left entirely up to you.</p><p>We handle it instead. We contact the seller directly to confirm pickup, load the item with proper protective equipment, and deliver it straight to your door - no trailer to hire, no favours to call in, and no need to hand a stranger your home address.</p>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 24
+          }
+        }
+      },
+      "block_order": ["intro_block"],
+      "settings": {}
+    },
+    "what_we_collect": {
+      "type": "_blocks",
+      "blocks": {
+        "what_we_collect_block": {
+          "type": "feature-grid",
+          "blocks": {
+            "item-marketplace": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Facebook Marketplace purchases",
+                "text": "Furniture, appliances and large items bought from a Marketplace seller.",
+                "icon": "marketplace"
+              }
+            },
+            "item-gumtree": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Gumtree & online listings",
+                "text": "We'll travel to any Sydney seller, whichever platform you bought through.",
+                "icon": "location"
+              }
+            },
+            "item-private-seller": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Private seller pickups",
+                "text": "We coordinate pickup time and access directly with the seller.",
+                "icon": "two-workers"
+              }
+            },
+            "item-single": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Single-item delivery",
+                "text": "No minimum job size - one couch or one lamp, same careful service.",
+                "icon": "single-item"
+              }
+            },
+            "item-appliances": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Appliances & heavy items",
+                "text": "Washing machines, fridges and other awkward, heavy pickups.",
+                "icon": "trolley"
+              }
+            },
+            "item-store": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Store & warehouse collection",
+                "text": "Collection from a shop, storage unit or warehouse when needed.",
+                "icon": "van"
+              }
+            }
+          },
+          "block_order": ["item-marketplace", "item-gumtree", "item-private-seller", "item-single", "item-appliances", "item-store"],
+          "settings": {
+            "heading": "<h2>What We Collect From Marketplace &amp; Gumtree Sellers</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["what_we_collect_block"],
+      "settings": {}
+    },
+    "how_it_works": {
+      "type": "_blocks",
+      "blocks": {
+        "how_it_works_block": {
+          "type": "process-steps",
+          "blocks": {
+            "step-1": {
+              "type": "_process-step-item",
+              "settings": {
+                "heading": "Get a free quote",
+                "text": "Send us the listing link, item details and both addresses - we'll reply with a fixed price, usually within minutes."
+              }
+            },
+            "step-2": {
+              "type": "_process-step-item",
+              "settings": {
+                "heading": "We arrange pickup with the seller",
+                "text": "We contact the seller directly to confirm a pickup time and access - you don't need to be there or share your address."
+              }
+            },
+            "step-3": {
+              "type": "_process-step-item",
+              "settings": {
+                "heading": "We collect and deliver",
+                "text": "Your item is loaded with protective blankets and straps, then delivered carefully to your door."
+              }
+            }
+          },
+          "block_order": ["step-1", "step-2", "step-3"],
+          "settings": {
+            "heading": "<h2>From Listing to Your Door in 3 Steps</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["how_it_works_block"],
+      "settings": {}
+    },
+    "service_areas": {
+      "type": "_blocks",
+      "blocks": {
+        "service_areas_block": {
+          "type": "service-areas",
+          "settings": {
+            "heading": "<h2>Marketplace Pickup &amp; Delivery, All Across Sydney</h2>",
+            "intro_text": "From the Eastern Suburbs to Western Sydney, we'll collect your Marketplace or Gumtree find and bring it home.",
+            "areas": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney, Hills District",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["service_areas_block"],
+      "settings": {}
+    },
+    "recent_jobs": {
+      "type": "_blocks",
+      "blocks": {
+        "recent_jobs_block": {
+          "type": "recent-jobs",
+          "settings": {
+            "heading": "<h2>Recent Marketplace Pickups We've Completed</h2>",
+            "intro_text": "Here are some recent Marketplace and Gumtree pickup and delivery jobs we've completed across Sydney.",
+            "filter_keywords": "marketplace, gumtree, pickup, collection",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["recent_jobs_block"],
+      "settings": {}
+    },
+    "faq": {
+      "type": "_blocks",
+      "blocks": {
+        "faq_block": {
+          "type": "service-faq",
+          "blocks": {
+            "faq-1": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Does Facebook Marketplace deliver in Sydney?",
+                "answer": "<p>No. Facebook's own shipping only covers small, boxable items, and its official local delivery partners don't operate in Australia - so large Marketplace items default to local pickup only. That's exactly the gap we fill for Sydney buyers.</p>"
+              }
+            },
+            "faq-2": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Do I need to be home for the pickup?",
+                "answer": "<p>No. We contact the seller directly to arrange a pickup time and collect the item on your behalf, so you don't need to coordinate access yourself or share your address with a stranger.</p>"
+              }
+            },
+            "faq-3": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Can you contact the seller to arrange collection?",
+                "answer": "<p>Yes - just send us the listing details and the seller's contact information, and we'll organise pickup timing directly with them.</p>"
+              }
+            },
+            "faq-4": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "What items can you collect?",
+                "answer": "<p>Furniture, appliances and other large or awkward items from Facebook Marketplace, Gumtree, online stores or private sellers - from a single item to a full apartment's worth.</p>"
+              }
+            },
+            "faq-5": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Is my item insured during transport?",
+                "answer": "<p>Yes, your item is covered while it's in our care, and we use protective blankets, straps and trolleys to keep it safe in transit.</p>"
+              }
+            },
+            "faq-6": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "How quickly can you collect and deliver?",
+                "answer": "<p>We often offer same-day collection in Sydney, scheduling permitting. Contact us with the listing details and your preferred timing and we'll confirm availability.</p>"
+              }
+            },
+            "faq-7": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "What should I check before booking a pickup?",
+                "answer": "<p>Confirm the item's exact dimensions with the seller, check whether there are stairs or lift access at both addresses, and have your pickup and delivery details ready when you request a quote - it helps us give you an accurate fixed price straight away.</p>"
+              }
+            },
+            "faq-8": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "What if the item won't fit through a doorway or up the stairs?",
+                "answer": "<p>Let us know about stairs, tight hallways or awkward access when you book. Our team carries protective equipment and moving straps for tricky access, and we'll talk through the options with you before pickup day if it looks like it could be a problem.</p>"
+              }
+            }
+          },
+          "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7", "faq-8"],
+          "settings": {
+            "heading": "<h2>Facebook Marketplace Delivery: Your Questions Answered</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["faq_block"],
+      "settings": {}
+    },
+    "related_links": {
+      "type": "_blocks",
+      "blocks": {
+        "related_links_block": {
+          "type": "related-links",
+          "blocks": {
+            "link-man-with-a-van": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man With a Van Sydney",
+                "url": "/pages/man-with-a-van-sydney",
+                "description": "Need help with a small move rather than a single pickup? See our man-and-van service."
+              }
+            },
+            "link-couch": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Couch Delivery Sydney",
+                "url": "/pages/couch-delivery-sydney",
+                "description": "Buying or selling a couch or sofa specifically? See our dedicated couch delivery service."
+              }
+            },
+            "link-home": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Titan Express home",
+                "url": "/",
+                "description": "See all our removalist and delivery services."
+              }
+            }
+          },
+          "block_order": ["link-man-with-a-van", "link-couch", "link-home"],
+          "settings": {
+            "heading": "<h2>Other Ways We Can Help</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 24
+          }
+        }
+      },
+      "block_order": ["related_links_block"],
+      "settings": {}
+    },
+    "quote_form": {
+      "type": "_blocks",
+      "blocks": {
+        "quote_form_block": {
+          "type": "quote-form",
+          "settings": {
+            "heading": "<h2>Get Your Fixed-Price Quote</h2>",
+            "subheading": "Tell us about the item and we'll come back with a price - no obligation.",
+            "submit_text": "Request my quote",
+            "success_text": "Thanks - we've received your quote request and will be in touch shortly.",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 24,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["quote_form_block"],
+      "settings": {}
+    },
+    "final_cta": {
+      "type": "_blocks",
+      "blocks": {
+        "final_cta_block": {
+          "type": "final-cta",
+          "settings": {
+            "heading": "<h2>Ready to Get Your Marketplace Find Home Safely?</h2>",
+            "text": "Get a free, fixed-price quote and we'll take care of the rest.",
+            "button_text": "Get Your Free Quote",
+            "button_anchor": "#main-quote",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["final_cta_block"],
+      "settings": {}
+    },
+    "schema": {
+      "type": "_blocks",
+      "blocks": {
+        "schema_block": {
+          "type": "service-schema",
+          "settings": {
+            "service_name": "Facebook Marketplace Furniture Pickup & Delivery Sydney",
+            "service_type": "Facebook Marketplace furniture pickup and delivery",
+            "description": "Furniture and large item pickup and delivery from Facebook Marketplace, Gumtree and private sellers across Sydney, including direct seller coordination, protective handling and insured transport.",
+            "areas_served": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney, Hills District"
+          }
+        }
+      },
+      "block_order": ["schema_block"],
+      "settings": {}
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "hero",
+    "intro",
+    "what_we_collect",
+    "how_it_works",
+    "service_areas",
+    "recent_jobs",
+    "faq",
+    "related_links",
+    "quote_form",
+    "final_cta",
+    "schema"
+  ]
+}
