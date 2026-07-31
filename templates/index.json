@@ -50,7 +50,7 @@
             "business_end_hour": 18,
             "booked_percentage": 30,
             "border_radius": 12,
-            "title_size": 16,
+            "title_size": 23,
             "card_background": "#ffffff",
             "text_color": "#000000",
             "badge_background": "#22c55e",
