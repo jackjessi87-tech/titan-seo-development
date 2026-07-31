@@ -1,6 +1,437 @@
+{% doc %}
+  @prompt
+    generate availibility  card for liver avilailbity mention One man and Vailable today show the timing block random green and booked hr mostly keep the Business hr available show current date and time mention Same day availibity found 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% liquid
+  assign now = 'now' | date: '%s' | times: 1
+  assign current_date = 'now' | date: '%A, %B %d, %Y'
+  assign current_time = 'now' | date: '%I:%M %p'
+  
+  assign business_start = block.settings.business_start_hour
+  assign business_end = block.settings.business_end_hour
+  
+  assign total_hours = business_end | minus: business_start
+%}
+
+{% style %}
+  .ai-availability-card-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-availability-header-{{ ai_gen_id }} {
+    margin-bottom: 20px;
+  }
+
+  .ai-availability-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px 0;
+  }
+
+  .ai-availability-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .ai-availability-badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .ai-availability-badge-dot-{{ ai_gen_id }} {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: {{ block.settings.badge_text_color }};
+  }
+
+  .ai-availability-info-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .ai-availability-info-row-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-availability-info-label-{{ ai_gen_id }} {
+    font-weight: 600;
+    min-width: 100px;
+  }
+
+  .ai-availability-info-value-{{ ai_gen_id }} {
+    opacity: 0.8;
+  }
+
+  .ai-availability-schedule-{{ ai_gen_id }} {
+    margin-top: 20px;
+  }
+
+  .ai-availability-schedule-title-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px 0;
+  }
+
+  .ai-availability-timeline-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-availability-time-slot-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: {{ block.settings.slot_background }};
+  }
+
+  .ai-availability-time-label-{{ ai_gen_id }} {
+    min-width: 80px;
+    font-size: 13px;
+    font-weight: 500;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-availability-time-bar-{{ ai_gen_id }} {
+    flex-grow: 1;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .ai-availability-time-bar-{{ ai_gen_id }}.available {
+    background-color: {{ block.settings.available_color }};
+    color: #ffffff;
+  }
+
+  .ai-availability-time-bar-{{ ai_gen_id }}.booked {
+    background-color: {{ block.settings.booked_color }};
+    color: #ffffff;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-availability-card-{{ ai_gen_id }} {
+      width: 100%;
+      padding: 20px;
+    }
+
+    .ai-availability-time-label-{{ ai_gen_id }} {
+      min-width: 70px;
+      font-size: 12px;
+    }
+
+    .ai-availability-time-bar-{{ ai_gen_id }} {
+      font-size: 11px;
+    }
+  }
+{% endstyle %}
+
+<availability-card-{{ ai_gen_id }}
+  class="ai-availability-card-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-availability-header-{{ ai_gen_id }}">
+    <h3 class="ai-availability-title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+    <p class="ai-availability-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+  </div>
+
+  <div class="ai-availability-badge-{{ ai_gen_id }}">
+    <span class="ai-availability-badge-dot-{{ ai_gen_id }}"></span>
+    <span>{{ block.settings.badge_text }}</span>
+  </div>
+
+  <div class="ai-availability-info-{{ ai_gen_id }}">
+    <div class="ai-availability-info-row-{{ ai_gen_id }}">
+      <span class="ai-availability-info-label-{{ ai_gen_id }}">Service:</span>
+      <span class="ai-availability-info-value-{{ ai_gen_id }}">{{ block.settings.service_type }}</span>
+    </div>
+    <div class="ai-availability-info-row-{{ ai_gen_id }}">
+      <span class="ai-availability-info-label-{{ ai_gen_id }}">Date:</span>
+      <span class="ai-availability-info-value-{{ ai_gen_id }}">{{ current_date }}</span>
+    </div>
+    <div class="ai-availability-info-row-{{ ai_gen_id }}">
+      <span class="ai-availability-info-label-{{ ai_gen_id }}">Current Time:</span>
+      <span class="ai-availability-info-value-{{ ai_gen_id }}">{{ current_time }}</span>
+    </div>
+  </div>
+
+  <div class="ai-availability-schedule-{{ ai_gen_id }}">
+    <h4 class="ai-availability-schedule-title-{{ ai_gen_id }}">Today's Schedule</h4>
+    <div class="ai-availability-timeline-{{ ai_gen_id }}">
+      {% for i in (0..total_hours) %}
+        {% assign hour = business_start | plus: i %}
+        {% if hour < business_end %}
+          {% assign next_hour = hour | plus: 1 %}
+          {% assign hour_12 = hour %}
+          {% assign next_hour_12 = next_hour %}
+          {% assign am_pm = 'AM' %}
+          {% assign next_am_pm = 'AM' %}
+          
+          {% if hour >= 12 %}
+            {% assign am_pm = 'PM' %}
+            {% if hour > 12 %}
+              {% assign hour_12 = hour | minus: 12 %}
+            {% endif %}
+          {% endif %}
+          
+          {% if next_hour >= 12 %}
+            {% assign next_am_pm = 'PM' %}
+            {% if next_hour > 12 %}
+              {% assign next_hour_12 = next_hour | minus: 12 %}
+            {% endif %}
+          {% endif %}
+          
+          {% assign random_seed = hour | times: 17 | modulo: 100 %}
+          {% assign is_available = true %}
+          {% if random_seed < block.settings.booked_percentage %}
+            {% assign is_available = false %}
+          {% endif %}
+          
+          <div class="ai-availability-time-slot-{{ ai_gen_id }}">
+            <span class="ai-availability-time-label-{{ ai_gen_id }}">{{ hour_12 }}:00 {{ am_pm }}</span>
+            {% if is_available %}
+              <div class="ai-availability-time-bar-{{ ai_gen_id }} available">Available</div>
+            {% else %}
+              <div class="ai-availability-time-bar-{{ ai_gen_id }} booked">Booked</div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</availability-card-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AvailabilityCard{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.updateCurrentTime();
+        this.intervalId = setInterval(() => {
+          this.updateCurrentTime();
+        }, 60000);
+      }
+
+      disconnectedCallback() {
+        if (this.intervalId) {
+          clearInterval(this.intervalId);
+        }
+      }
+
+      updateCurrentTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        
+        const timeElement = this.querySelector('.ai-availability-info-value-{{ ai_gen_id }}:last-child');
+        if (timeElement) {
+          timeElement.textContent = timeString;
+        }
+      }
+    }
+
+    customElements.define('availability-card-{{ ai_gen_id }}', AvailabilityCard{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Availability card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Live Availability"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "One man service"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Same day availability found"
+    },
+    {
+      "type": "text",
+      "id": "service_type",
+      "label": "Service type",
+      "default": "One man and van"
+    },
+    {
+      "type": "header",
+      "content": "Business hours"
+    },
+    {
+      "type": "range",
+      "id": "business_start_hour",
+      "label": "Start hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "business_end_hour",
+      "label": "End hour",
+      "min": 1,
+      "max": 24,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "booked_percentage",
+      "label": "Booked slots",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "slot_background",
+      "label": "Time slot background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "available_color",
+      "label": "Available",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "booked_color",
+      "label": "Booked",
+      "default": "#ef4444"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Availability card"
+    }
+  ]
+}
 {% endschema %}
