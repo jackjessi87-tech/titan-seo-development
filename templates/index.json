@@ -42,6 +42,25 @@
     "blocks_pp44rW": {
       "type": "_blocks",
       "blocks": {
+        "ai_gen_block_b78040a_CBFAD4": {
+          "type": "ai_gen_block_b78040a",
+          "settings": {
+            "title": "Live availability",
+            "business_start_hour": 8,
+            "business_end_hour": 18,
+            "booked_percentage": 30,
+            "border_radius": 12,
+            "title_size": 16,
+            "card_background": "#ffffff",
+            "text_color": "#000000",
+            "badge_background": "#22c55e",
+            "badge_text_color": "#ffffff",
+            "timeline_background": "#f5f5f5",
+            "available_color": "#22c55e",
+            "booked_color": "#e5e5e5"
+          },
+          "blocks": {}
+        },
         "ai_gen_block_8e89168_MxcjFP": {
           "type": "ai_gen_block_8e89168",
           "settings": {
@@ -54,12 +73,12 @@
             "heading": "Get Your Delivery Quote",
             "heading_color": "#000000",
             "subheading": "Same Day Available / Same Day Pick up and Delivery Sydney Wide",
-            "subheading_color": "#4CE306",
+            "subheading_color": "#4ce306",
             "input_bg_color": "#ffffff",
             "input_text_color": "#000000",
             "input_border_color": "#ffe5e7",
-            "input_focus_border_color": "#71E306",
-            "icon_color": "#53C41E",
+            "input_focus_border_color": "#71e306",
+            "icon_color": "#53c41e",
             "input_border_radius": 10,
             "button_text": "Get My Quote Now",
             "button_text_color": "#ffffff",
@@ -87,6 +106,7 @@
         }
       },
       "block_order": [
+        "ai_gen_block_b78040a_CBFAD4",
         "ai_gen_block_8e89168_MxcjFP"
       ],
       "name": "Express quote form",
