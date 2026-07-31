@@ -106,6 +106,7 @@
       "block_order": [
         "ai_gen_block_a22d9e9_9DzXWK"
       ],
+      "disabled": true,
       "name": "Logo header center",
       "settings": {
         "content_direction": "column",
