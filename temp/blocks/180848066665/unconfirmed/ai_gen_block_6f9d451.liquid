@@ -1,6 +1,717 @@
+{% doc %}
+  @prompt
+    Generate a Facebook Lead Form Style Step By Step Qute for For Pick up and Delivery Which Sends Direct notification to  The Admin email  3 Step Form with THe Progres bas s same a Facebook Style with blue Bars Geta Quote 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-quote-form-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-quote-form__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .ai-quote-form__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 8px;
+  }
+
+  .ai-quote-form__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .ai-quote-form__progress-{{ ai_gen_id }} {
+    margin-bottom: 32px;
+  }
+
+  .ai-quote-form__progress-bar-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ai-quote-form__progress-segment-{{ ai_gen_id }} {
+    flex: 1;
+    height: 4px;
+    background-color: {{ block.settings.progress_inactive_color }};
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-quote-form__progress-segment-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.progress_active_color }};
+  }
+
+  .ai-quote-form__progress-text-{{ ai_gen_id }} {
+    text-align: center;
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+  }
+
+  .ai-quote-form__step-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-quote-form__step-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-quote-form__step-title-{{ ai_gen_id }} {
+    font-size: 20px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 24px;
+    font-weight: 600;
+  }
+
+  .ai-quote-form__field-{{ ai_gen_id }} {
+    margin-bottom: 20px;
+  }
+
+  .ai-quote-form__label-{{ ai_gen_id }} {
+    display: block;
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .ai-quote-form__input-{{ ai_gen_id }},
+  .ai-quote-form__textarea-{{ ai_gen_id }},
+  .ai-quote-form__select-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: 14px;
+    background-color: {{ block.settings.input_background }};
+    color: {{ block.settings.text_color }};
+    transition: border-color 0.3s ease;
+  }
+
+  .ai-quote-form__input-{{ ai_gen_id }}:focus,
+  .ai-quote-form__textarea-{{ ai_gen_id }}:focus,
+  .ai-quote-form__select-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.progress_active_color }};
+  }
+
+  .ai-quote-form__textarea-{{ ai_gen_id }} {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .ai-quote-form__buttons-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .ai-quote-form__button-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-quote-form__button-primary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.progress_active_color }};
+    color: #ffffff;
+  }
+
+  .ai-quote-form__button-primary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-quote-form__button-secondary-{{ ai_gen_id }} {
+    background-color: transparent;
+    color: {{ block.settings.text_color }};
+    border: 1px solid {{ block.settings.input_border_color }};
+  }
+
+  .ai-quote-form__button-secondary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.input_background }};
+  }
+
+  .ai-quote-form__success-{{ ai_gen_id }} {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .ai-quote-form__success-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-quote-form__success-icon-{{ ai_gen_id }} {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    background-color: {{ block.settings.progress_active_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-quote-form__success-icon-{{ ai_gen_id }} svg {
+    width: 32px;
+    height: 32px;
+    stroke: #ffffff;
+  }
+
+  .ai-quote-form__success-title-{{ ai_gen_id }} {
+    font-size: 24px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+
+  .ai-quote-form__success-message-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .ai-quote-form__error-{{ ai_gen_id }} {
+    color: #d82c0d;
+    font-size: 14px;
+    margin-top: 8px;
+    display: none;
+  }
+
+  .ai-quote-form__error-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-quote-form-{{ ai_gen_id }} {
+      padding: 24px;
+    }
+
+    .ai-quote-form__buttons-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+  }
+{% endstyle %}
+
+<quote-form-{{ ai_gen_id }} class="ai-quote-form-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-quote-form__header-{{ ai_gen_id }}">
+    <h2 class="ai-quote-form__title-{{ ai_gen_id }}">{{ block.settings.form_title }}</h2>
+    <p class="ai-quote-form__subtitle-{{ ai_gen_id }}">{{ block.settings.form_subtitle }}</p>
+  </div>
+
+  <div class="ai-quote-form__progress-{{ ai_gen_id }}">
+    <div class="ai-quote-form__progress-bar-{{ ai_gen_id }}">
+      <div class="ai-quote-form__progress-segment-{{ ai_gen_id }} active" data-step="1"></div>
+      <div class="ai-quote-form__progress-segment-{{ ai_gen_id }}" data-step="2"></div>
+      <div class="ai-quote-form__progress-segment-{{ ai_gen_id }}" data-step="3"></div>
+    </div>
+    <p class="ai-quote-form__progress-text-{{ ai_gen_id }}">Step <span class="current-step">1</span> of 3</p>
+  </div>
+
+  {%- form 'contact' -%}
+    <input type="hidden" name="contact[form_type]" value="pickup_delivery_quote">
+
+    <div class="ai-quote-form__step-{{ ai_gen_id }} active" data-step="1">
+      <h3 class="ai-quote-form__step-title-{{ ai_gen_id }}">{{ block.settings.step1_title }}</h3>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="service-type-{{ ai_gen_id }}">
+          Service type
+        </label>
+        <select
+          id="service-type-{{ ai_gen_id }}"
+          name="contact[service_type]"
+          class="ai-quote-form__select-{{ ai_gen_id }}"
+          required
+        >
+          <option value="">Select a service</option>
+          <option value="pickup">Pickup only</option>
+          <option value="delivery">Delivery only</option>
+          <option value="pickup_delivery">Pickup and delivery</option>
+        </select>
+      </div>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="item-type-{{ ai_gen_id }}">
+          What are you moving?
+        </label>
+        <input
+          type="text"
+          id="item-type-{{ ai_gen_id }}"
+          name="contact[item_type]"
+          class="ai-quote-form__input-{{ ai_gen_id }}"
+          placeholder="e.g., Sofa, Dining table, Appliances"
+          required
+        >
+      </div>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="item-details-{{ ai_gen_id }}">
+          Item details
+        </label>
+        <textarea
+          id="item-details-{{ ai_gen_id }}"
+          name="contact[item_details]"
+          class="ai-quote-form__textarea-{{ ai_gen_id }}"
+          placeholder="Dimensions, weight, special handling requirements..."
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="ai-quote-form__step-{{ ai_gen_id }}" data-step="2">
+      <h3 class="ai-quote-form__step-title-{{ ai_gen_id }}">{{ block.settings.step2_title }}</h3>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="pickup-address-{{ ai_gen_id }}">
+          Pickup address
+        </label>
+        <input
+          type="text"
+          id="pickup-address-{{ ai_gen_id }}"
+          name="contact[pickup_address]"
+          class="ai-quote-form__input-{{ ai_gen_id }}"
+          placeholder="Street address, suburb, postcode"
+          required
+        >
+      </div>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="delivery-address-{{ ai_gen_id }}">
+          Delivery address
+        </label>
+        <input
+          type="text"
+          id="delivery-address-{{ ai_gen_id }}"
+          name="contact[delivery_address]"
+          class="ai-quote-form__input-{{ ai_gen_id }}"
+          placeholder="Street address, suburb, postcode"
+          required
+        >
+      </div>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="preferred-date-{{ ai_gen_id }}">
+          Preferred date
+        </label>
+        <input
+          type="text"
+          id="preferred-date-{{ ai_gen_id }}"
+          name="contact[preferred_date]"
+          class="ai-quote-form__input-{{ ai_gen_id }}"
+          placeholder="DD/MM/YYYY"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="ai-quote-form__step-{{ ai_gen_id }}" data-step="3">
+      <h3 class="ai-quote-form__step-title-{{ ai_gen_id }}">{{ block.settings.step3_title }}</h3>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="full-name-{{ ai_gen_id }}">
+          Full name
+        </label>
+        <input
+          type="text"
+          id="full-name-{{ ai_gen_id }}"
+          name="contact[name]"
+          class="ai-quote-form__input-{{ ai_gen_id }}"
+          required
+        >
+      </div>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="email-{{ ai_gen_id }}">
+          Email address
+        </label>
+        <input
+          type="email"
+          id="email-{{ ai_gen_id }}"
+          name="contact[email]"
+          class="ai-quote-form__input-{{ ai_gen_id }}"
+          required
+          {% if form.errors %}
+            aria-invalid="true"
+            aria-describedby="email-error-{{ ai_gen_id }}"
+          {% endif %}
+        >
+        {%- if form.errors -%}
+          <div id="email-error-{{ ai_gen_id }}" class="ai-quote-form__error-{{ ai_gen_id }} active">
+            {{ form.errors.messages.email }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="phone-{{ ai_gen_id }}">
+          Phone number
+        </label>
+        <input
+          type="tel"
+          id="phone-{{ ai_gen_id }}"
+          name="contact[phone]"
+          class="ai-quote-form__input-{{ ai_gen_id }}"
+          required
+        >
+      </div>
+
+      <div class="ai-quote-form__field-{{ ai_gen_id }}">
+        <label class="ai-quote-form__label-{{ ai_gen_id }}" for="additional-notes-{{ ai_gen_id }}">
+          Additional notes
+        </label>
+        <textarea
+          id="additional-notes-{{ ai_gen_id }}"
+          name="contact[body]"
+          class="ai-quote-form__textarea-{{ ai_gen_id }}"
+          placeholder="Any special requirements or questions..."
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="ai-quote-form__buttons-{{ ai_gen_id }}">
+      <button
+        type="button"
+        class="ai-quote-form__button-{{ ai_gen_id }} ai-quote-form__button-secondary-{{ ai_gen_id }} back-button"
+        style="display: none;"
+      >
+        Back
+      </button>
+      <button
+        type="button"
+        class="ai-quote-form__button-{{ ai_gen_id }} ai-quote-form__button-primary-{{ ai_gen_id }} next-button"
+      >
+        Next
+      </button>
+      <button
+        type="submit"
+        class="ai-quote-form__button-{{ ai_gen_id }} ai-quote-form__button-primary-{{ ai_gen_id }} submit-button"
+        style="display: none;"
+      >
+        {{ block.settings.submit_button_text }}
+      </button>
+    </div>
+  {%- endform -%}
+
+  <div class="ai-quote-form__success-{{ ai_gen_id }} {% if form.posted_successfully? %}active{% endif %}">
+    <div class="ai-quote-form__success-icon-{{ ai_gen_id }}">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    <h3 class="ai-quote-form__success-title-{{ ai_gen_id }}">{{ block.settings.success_title }}</h3>
+    <p class="ai-quote-form__success-message-{{ ai_gen_id }}">{{ block.settings.success_message }}</p>
+  </div>
+</quote-form-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class QuoteForm{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentStep = 1;
+        this.totalSteps = 3;
+      }
+
+      connectedCallback() {
+        this.steps = this.querySelectorAll('.ai-quote-form__step-{{ ai_gen_id }}');
+        this.progressSegments = this.querySelectorAll('.ai-quote-form__progress-segment-{{ ai_gen_id }}');
+        this.currentStepText = this.querySelector('.current-step');
+        this.nextButton = this.querySelector('.next-button');
+        this.backButton = this.querySelector('.back-button');
+        this.submitButton = this.querySelector('.submit-button');
+        this.form = this.querySelector('form');
+
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.nextButton.addEventListener('click', () => this.goToNextStep());
+        this.backButton.addEventListener('click', () => this.goToPreviousStep());
+      }
+
+      goToNextStep() {
+        if (!this.validateCurrentStep()) {
+          return;
+        }
+
+        if (this.currentStep < this.totalSteps) {
+          this.currentStep++;
+          this.updateUI();
+        }
+      }
+
+      goToPreviousStep() {
+        if (this.currentStep > 1) {
+          this.currentStep--;
+          this.updateUI();
+        }
+      }
+
+      validateCurrentStep() {
+        const currentStepElement = this.querySelector(`.ai-quote-form__step-{{ ai_gen_id }}[data-step="${this.currentStep}"]`);
+        const requiredFields = currentStepElement.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+            field.style.borderColor = '#d82c0d';
+            isValid = false;
+          } else {
+            field.style.borderColor = '';
+          }
+        });
+
+        return isValid;
+      }
+
+      updateUI() {
+        this.steps.forEach((step, index) => {
+          if (index + 1 === this.currentStep) {
+            step.classList.add('active');
+          } else {
+            step.classList.remove('active');
+          }
+        });
+
+        this.progressSegments.forEach((segment, index) => {
+          if (index + 1 <= this.currentStep) {
+            segment.classList.add('active');
+          } else {
+            segment.classList.remove('active');
+          }
+        });
+
+        this.currentStepText.textContent = this.currentStep;
+
+        if (this.currentStep === 1) {
+          this.backButton.style.display = 'none';
+          this.nextButton.style.display = 'block';
+          this.submitButton.style.display = 'none';
+        } else if (this.currentStep === this.totalSteps) {
+          this.backButton.style.display = 'block';
+          this.nextButton.style.display = 'none';
+          this.submitButton.style.display = 'block';
+        } else {
+          this.backButton.style.display = 'block';
+          this.nextButton.style.display = 'block';
+          this.submitButton.style.display = 'none';
+        }
+      }
+    }
+
+    customElements.define('quote-form-{{ ai_gen_id }}', QuoteForm{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Get a quote",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Form header"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Title",
+      "default": "Get a quote"
+    },
+    {
+      "type": "text",
+      "id": "form_subtitle",
+      "label": "Subtitle",
+      "default": "Fill out this quick form and we'll get back to you with a quote"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Step titles"
+    },
+    {
+      "type": "text",
+      "id": "step1_title",
+      "label": "Step 1 title",
+      "default": "Service details"
+    },
+    {
+      "type": "text",
+      "id": "step2_title",
+      "label": "Step 2 title",
+      "default": "Location and date"
+    },
+    {
+      "type": "text",
+      "id": "step3_title",
+      "label": "Step 3 title",
+      "default": "Your contact information"
+    },
+    {
+      "type": "header",
+      "content": "Submit button"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Button text",
+      "default": "Get quote"
+    },
+    {
+      "type": "header",
+      "content": "Success message"
+    },
+    {
+      "type": "text",
+      "id": "success_title",
+      "label": "Title",
+      "default": "Thank you!"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Message",
+      "default": "We've received your quote request and will get back to you shortly."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Form border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "progress_active_color",
+      "label": "Progress bar active",
+      "default": "#1877f2"
+    },
+    {
+      "type": "color",
+      "id": "progress_inactive_color",
+      "label": "Progress bar inactive",
+      "default": "#e4e6eb"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover",
+      "default": "#166fe5"
+    },
+    {
+      "type": "header",
+      "content": "Input fields"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Border",
+      "default": "#dddfe2"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "Get a quote"
+    }
+  ]
+}
 {% endschema %}
