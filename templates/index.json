@@ -44,6 +44,7 @@
       "blocks": {
         "ai_gen_block_7cb7b8e_TgA4cP": {
           "type": "ai_gen_block_7cb7b8e",
+          "disabled": true,
           "settings": {
             "form_title": "Get a quote",
             "form_subtitle": "Fill out this quick form and we'll get back to you with a competitive quote",
