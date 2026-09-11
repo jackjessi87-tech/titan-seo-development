@@ -243,7 +243,7 @@
         ×
       </button>
 
-      {%- form 'contact', id: 'quote-form-' | append: ai_gen_id -%}
+      {%- form ai_gen_id -%}
         <input type="hidden" name="contact[subject]" value="Quote Request - {{ page.metafields.custom.service_name | default: page.title }}">
         <input type="hidden" name="contact[service_area]" value="{{ page.metafields.custom.service_area | default: 'General' }}">
         <input type="hidden" name="contact[page_url]" value="{{ shop.url }}{{ page.url }}">
@@ -629,3 +629,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- form 'contact', id: 'quote-form-' | append: ai_gen_id -%}"
+  to: "{%- form ai_gen_id -%}"
+  position: 6219..6241
+{% endcomment %}
