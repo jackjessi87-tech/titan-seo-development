@@ -1,0 +1,288 @@
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "_blocks",
+      "blocks": {
+        "breadcrumbs_block": {
+          "type": "breadcrumbs",
+          "settings": { "color_scheme": "scheme-1", "padding-block-start": 16, "padding-block-end": 8 }
+        }
+      },
+      "block_order": ["breadcrumbs_block"],
+      "settings": {}
+    },
+    "hero": {
+      "type": "_blocks",
+      "blocks": {
+        "hero_block": {
+          "type": "service-hero",
+          "settings": {
+            "heading": "<h1>Furniture Removalists Across Sydney</h1>",
+            "subheading": "From our base in Punchbowl we cover every corner of Sydney. Tell us your two suburbs and we'll send a fixed price, often for same-day pickup.",
+            "phone_number": "0469 717 535",
+            "call_button_text": "Call Now",
+            "quote_button_text": "Get a Free Quote",
+            "quote_anchor": "#main-quote",
+            "rating_filter_keywords": "",
+            "fallback_trust_text": "Rated 5.0 on Google by Sydney customers.",
+            "badge_1": "Titan Express · Sydney-wide removalists",
+            "badge_2": "Fully insured",
+            "badge_3": "Same-day where scheduling allows",
+            "badge_4": "Fixed-price quotes",
+            "badge_5": "7 days a week",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 32,
+            "padding-block-end": 32
+          }
+        }
+      },
+      "block_order": ["hero_block"],
+      "settings": {}
+    },
+    "intro": {
+      "type": "_blocks",
+      "blocks": {
+        "intro_block": {
+          "type": "service-intro",
+          "settings": {
+            "heading": "<h2>Why Your Suburb Matters When You Book a Removalist</h2>",
+            "body": "<p>Moving furniture in Sydney is rarely just about distance. A couch from a Bondi walk-up, a fridge from a Parramatta apartment with a booked lift, and a dining table from a Castle Hill driveway are three very different jobs. Parking, loading zones, stairs, building rules and traffic on the M4 or M5 all change how long a job takes. That is why <strong>we quote on your actual pickup and delivery suburbs</strong>, not a generic hourly rate.</p><p>Our van is based in Punchbowl, in the middle of Sydney, so we can reach the Inner West, the CBD, Western Sydney and the south quickly and plan runs across the city in one day. Give us both suburbs, the item and any stairs or lift details, and we'll come back with a fixed price you can rely on.</p>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 24
+          }
+        }
+      },
+      "block_order": ["intro_block"],
+      "settings": {}
+    },
+    "regions": {
+      "type": "_blocks",
+      "blocks": {
+        "regions_block": {
+          "type": "feature-grid",
+          "blocks": {
+            "region-canterbury-bankstown": { "type": "_feature-grid-item", "settings": { "heading": "Canterbury-Bankstown", "text": "Our home base: Punchbowl, Bankstown, Lakemba, Campsie, Canterbury, Revesby and Padstow.", "icon": "map" } },
+            "region-inner-west": { "type": "_feature-grid-item", "settings": { "heading": "Inner West", "text": "Newtown, Marrickville, Leichhardt, Ashfield, Burwood, Strathfield and Homebush.", "icon": "location" } },
+            "region-eastern-cbd": { "type": "_feature-grid-item", "settings": { "heading": "Eastern Suburbs & CBD", "text": "Sydney CBD, Surry Hills, Darlinghurst, Paddington, Bondi, Randwick and Maroubra.", "icon": "location" } },
+            "region-parramatta-west": { "type": "_feature-grid-item", "settings": { "heading": "Parramatta & Western Sydney", "text": "Parramatta, Westmead, Auburn, Merrylands, Blacktown, Mount Druitt and Penrith.", "icon": "location" } },
+            "region-ryde-north-shore": { "type": "_feature-grid-item", "settings": { "heading": "Ryde & North Shore", "text": "Ryde, Macquarie Park, Epping, Chatswood, Lane Cove, North Sydney and Hornsby.", "icon": "location" } },
+            "region-northern-beaches": { "type": "_feature-grid-item", "settings": { "heading": "Northern Beaches", "text": "Manly, Dee Why, Brookvale, Narrabeen, Mona Vale and Frenchs Forest.", "icon": "location" } },
+            "region-hills": { "type": "_feature-grid-item", "settings": { "heading": "Hills District", "text": "Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill and Glenhaven.", "icon": "location" } },
+            "region-south-west": { "type": "_feature-grid-item", "settings": { "heading": "South West Sydney", "text": "Liverpool, Fairfield, Cabramatta, Casula, Prestons, Leppington and Campbelltown.", "icon": "location" } },
+            "region-st-george-shire": { "type": "_feature-grid-item", "settings": { "heading": "St George & Sutherland Shire", "text": "Hurstville, Kogarah, Rockdale, Sutherland, Miranda and Cronulla.", "icon": "location" } }
+          },
+          "block_order": ["region-canterbury-bankstown", "region-inner-west", "region-eastern-cbd", "region-parramatta-west", "region-ryde-north-shore", "region-northern-beaches", "region-hills", "region-south-west", "region-st-george-shire"],
+          "settings": {
+            "heading": "<h2>Sydney Regions We Cover Every Day</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["regions_block"],
+      "settings": {}
+    },
+    "services": {
+      "type": "_blocks",
+      "blocks": {
+        "services_block": {
+          "type": "feature-grid",
+          "blocks": {
+            "svc-single": { "type": "_feature-grid-item", "settings": { "heading": "Single-item delivery", "text": "One couch, one fridge or one wardrobe. No minimum job size.", "icon": "single-item" } },
+            "svc-marketplace": { "type": "_feature-grid-item", "settings": { "heading": "Marketplace & Gumtree pickups", "text": "We collect from the seller and deliver to your door.", "icon": "marketplace" } },
+            "svc-small-moves": { "type": "_feature-grid-item", "settings": { "heading": "Small moves", "text": "Studios, units and partial moves with two careful movers.", "icon": "two-workers" } },
+            "svc-appliances": { "type": "_feature-grid-item", "settings": { "heading": "Appliances", "text": "Fridges, washing machines and other heavy, awkward items.", "icon": "trolley" } },
+            "svc-store": { "type": "_feature-grid-item", "settings": { "heading": "Store pickups", "text": "IKEA, furniture stores and warehouses, delivered the same day where possible.", "icon": "van" } },
+            "svc-stairs": { "type": "_feature-grid-item", "settings": { "heading": "Stairs & apartments", "text": "Walk-ups, lifts and tight hallways handled with straps and blankets.", "icon": "stairs" } }
+          },
+          "block_order": ["svc-single", "svc-marketplace", "svc-small-moves", "svc-appliances", "svc-store", "svc-stairs"],
+          "settings": {
+            "heading": "<h2>What We Move in Every Area</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["services_block"],
+      "settings": {}
+    },
+    "how_it_works": {
+      "type": "_blocks",
+      "blocks": {
+        "how_it_works_block": {
+          "type": "process-steps",
+          "blocks": {
+            "step-1": { "type": "_process-step-item", "settings": { "heading": "Send your two suburbs", "text": "Tell us the pickup and delivery suburbs, the item and any stairs or lift access." } },
+            "step-2": { "type": "_process-step-item", "settings": { "heading": "Get a fixed price", "text": "We reply with a fixed price and the earliest time we can be there, often the same day." } },
+            "step-3": { "type": "_process-step-item", "settings": { "heading": "We pick up and deliver", "text": "Your items are wrapped, strapped and delivered carefully, wherever you are in Sydney." } }
+          },
+          "block_order": ["step-1", "step-2", "step-3"],
+          "settings": {
+            "heading": "<h2>Booking a Removalist Anywhere in Sydney in 3 Steps</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["how_it_works_block"],
+      "settings": {}
+    },
+    "service_areas": {
+      "type": "_blocks",
+      "blocks": {
+        "service_areas_block": {
+          "type": "service-areas",
+          "settings": {
+            "heading": "<h2>All Sydney Regions at a Glance</h2>",
+            "intro_text": "Not sure if we cover your suburb? If it's in Greater Sydney, send us a quote request and we'll confirm straight away.",
+            "areas": "Canterbury-Bankstown, Inner West, Eastern Suburbs & CBD, Parramatta & Western Sydney, Ryde & North Shore, Northern Beaches, Hills District, South West Sydney, St George & Sutherland Shire",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["service_areas_block"],
+      "settings": {}
+    },
+    "recent_jobs": {
+      "type": "_blocks",
+      "blocks": {
+        "recent_jobs_block": {
+          "type": "recent-jobs",
+          "settings": {
+            "heading": "<h2>Recent Jobs Across Sydney</h2>",
+            "intro_text": "A few recent pickups and deliveries we've completed around Sydney.",
+            "filter_keywords": "delivery, pickup, removal, move",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["recent_jobs_block"],
+      "settings": {}
+    },
+    "faq": {
+      "type": "_blocks",
+      "blocks": {
+        "faq_block": {
+          "type": "service-faq",
+          "blocks": {
+            "faq-1": { "type": "_faq-item", "settings": { "question": "Do you cover my suburb?", "answer": "<p>We cover all of Greater Sydney, from the Northern Beaches to the Sutherland Shire and from the Eastern Suburbs out to Penrith and Campbelltown. Send your pickup and delivery suburbs in a quote request and we'll confirm availability.</p>" } },
+            "faq-2": { "type": "_faq-item", "settings": { "question": "Does it cost more if my suburbs are far apart?", "answer": "<p>Distance is one factor, along with the items, stairs or lifts, parking and timing. We quote a fixed price for your exact pickup and delivery suburbs, so you know the full cost before you book.</p>" } },
+            "faq-3": { "type": "_faq-item", "settings": { "question": "Can you do same-day pickups anywhere in Sydney?", "answer": "<p>Often, yes. Same-day availability depends on that day's schedule, so the earlier you send your request, the better the chance we can fit you in today.</p>" } },
+            "faq-4": { "type": "_faq-item", "settings": { "question": "Do you handle apartments with stairs or lifts?", "answer": "<p>Yes. Tell us how many flights of stairs there are, or whether a lift needs booking, at both addresses. We bring straps, trolleys and blankets for tight stairwells and lifts.</p>" } },
+            "faq-5": { "type": "_faq-item", "settings": { "question": "What about parking and loading zones?", "answer": "<p>Let us know if there's a driveway, a loading dock or only street parking. In busy areas like the CBD, Surry Hills or Bondi, a note about parking helps us plan the job and keep your price accurate.</p>" } },
+            "faq-6": { "type": "_faq-item", "settings": { "question": "Is my furniture insured while you move it?", "answer": "<p>Yes, your items are covered while they're in our care, and every item is wrapped in protective blankets and strapped in the van.</p>" } },
+            "faq-7": { "type": "_faq-item", "settings": { "question": "How do I get a price?", "answer": "<p>Fill in the quote form on this page or call 0469 717 535. Include both suburbs, the items, stairs or lift details and your preferred date, and we'll reply with a fixed price.</p>" } }
+          },
+          "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7"],
+          "settings": {
+            "heading": "<h2>Sydney Removalist Questions, Answered</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["faq_block"],
+      "settings": {}
+    },
+    "related_links": {
+      "type": "_blocks",
+      "blocks": {
+        "related_links_block": {
+          "type": "related-links",
+          "blocks": {
+            "link-ryde": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Ryde", "url": "/pages/furniture-delivery-ryde", "description": "Pickups and deliveries in Ryde, Macquarie Park and nearby suburbs." } },
+            "link-homebush": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Homebush", "url": "/pages/furniture-delivery-homebush", "description": "Removals and deliveries in Homebush, Strathfield and the Inner West." } },
+            "link-darlinghurst": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Darlinghurst", "url": "/pages/furniture-delivery-darlinghurst", "description": "Apartment-friendly deliveries in Darlinghurst and the inner city." } },
+            "link-man-van": { "type": "_related-link-item", "settings": { "label": "Man With a Van Sydney", "url": "/pages/man-with-a-van-sydney", "description": "Small moves and single items with a van and careful movers." } },
+            "link-marketplace": { "type": "_related-link-item", "settings": { "label": "Facebook Marketplace Pickup & Delivery", "url": "/pages/facebook-marketplace-pickup-delivery-sydney", "description": "We collect from the seller and deliver to your door." } },
+            "link-couch": { "type": "_related-link-item", "settings": { "label": "Couch Delivery Sydney", "url": "/pages/couch-delivery-sydney", "description": "Sofas, lounges and sofa beds moved without a scratch." } }
+          },
+          "block_order": ["link-ryde", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-couch"],
+          "settings": {
+            "heading": "<h2>Local Pages and Services</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 24
+          }
+        }
+      },
+      "block_order": ["related_links_block"],
+      "settings": {}
+    },
+    "quote_form": {
+      "type": "_blocks",
+      "blocks": {
+        "quote_form_block": {
+          "type": "quote-form",
+          "settings": {
+            "heading": "<h2>Get Your Fixed-Price Quote</h2>",
+            "subheading": "Add your pickup and delivery suburbs, the items, stairs or lift details and your preferred date. We usually reply within minutes.",
+            "submit_text": "Get my price",
+            "success_text": "Thanks! Your request is in. We'll text or email your fixed price shortly. Need it urgently? Call 0469 717 535.",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 24,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["quote_form_block"],
+      "settings": {}
+    },
+    "final_cta": {
+      "type": "_blocks",
+      "blocks": {
+        "final_cta_block": {
+          "type": "final-cta",
+          "settings": {
+            "heading": "<h2>Wherever You Are in Sydney, We'll Get It There</h2>",
+            "text": "Send your two suburbs and get a fixed price, often for today.",
+            "button_text": "Get Your Free Quote",
+            "button_anchor": "#main-quote",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 48
+          }
+        }
+      },
+      "block_order": ["final_cta_block"],
+      "settings": {}
+    },
+    "schema": {
+      "type": "_blocks",
+      "blocks": {
+        "schema_block": {
+          "type": "service-schema",
+          "settings": {
+            "service_name": "Furniture Removalists Sydney",
+            "service_type": "Furniture removals, pickup and delivery",
+            "description": "Furniture removals, single-item delivery, Marketplace pickups, appliance delivery and small moves across all Sydney regions, based in Punchbowl.",
+            "areas_served": "Canterbury-Bankstown, Inner West, Eastern Suburbs & CBD, Parramatta & Western Sydney, Ryde & North Shore, Northern Beaches, Hills District, South West Sydney, St George & Sutherland Shire"
+          }
+        }
+      },
+      "block_order": ["schema_block"],
+      "settings": {}
+    },
+    "floating_quote_bar": {
+      "type": "_blocks",
+      "blocks": {
+        "floating_quote_bar_block": {
+          "type": "floating-quote-bar",
+          "settings": { "button_text": "Get a Free Quote", "quote_anchor": "#main-quote", "color_scheme": "scheme-1" }
+        }
+      },
+      "block_order": ["floating_quote_bar_block"],
+      "settings": {}
+    }
+  },
+  "order": ["breadcrumbs", "hero", "intro", "regions", "services", "how_it_works", "service_areas", "recent_jobs", "faq", "related_links", "quote_form", "final_cta", "schema", "floating_quote_bar"]
+}
