@@ -168,6 +168,46 @@
             "url": "/pages/man-and-van-parramatta",
             "description": "Apartments, CBD towers and Westmead."
           }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
         }
       },
       "block_order": [
@@ -190,7 +230,12 @@
         "link_1",
         "link_2",
         "link_3",
-        "link_4"
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
       ],
       "settings": {
         "suburb_name": "Blacktown",
@@ -242,7 +287,13 @@
         "form_button": "Get my fixed price",
         "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
         "faq_heading": "Man and Van Blacktown Questions",
-        "links_heading": "More Ways We Can Help"
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a man and van in Blacktown?",
+        "quick_answer": "<p>Titan Express provides man and van, furniture pickup and delivery in Blacktown and across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 or send your suburbs for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
       }
     }
   },

@@ -1,0 +1,321 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Moved out today",
+            "text": "Lease ending, settlement day or a last-minute change. We fit urgent small moves in fast.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Grab it before someone else does",
+            "text": "Bought on Marketplace and the seller wants it gone today? We collect it from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "One item, today",
+            "text": "A couch, bed or wardrobe moved the same day, with no minimum job size.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store and IKEA pickups today",
+            "text": "Too big for the car? We collect your order and deliver it the same day.",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "link_label": "IKEA pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Urgent appliance moves",
+            "text": "New fridge or washer arriving? We move the old one or collect the new one today.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Last-minute unit moves",
+            "text": "Small apartment and granny-flat moves with lifts and loading docks.",
+            "url": "/pages/man-with-a-van-sydney",
+            "link_label": "Man and van"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Call before midday",
+            "text": "Morning bookings give us the best chance to fit you in the same day anywhere in Sydney."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Tell us about access",
+            "text": "Stairs, lifts and parking at both ends help us bring the right gear first time."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Send photos",
+            "text": "A quick photo of the items lets us price fast and confirm your slot sooner."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Next-morning backup",
+            "text": "If today is full, we lock in the first slot tomorrow from 7am."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move my furniture today?",
+            "answer": "<p>Often, yes. Same-day jobs depend on that day's schedule, so call 0469 717 535 early and we'll confirm straight away.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Is same-day more expensive?",
+            "answer": "<p>We quote a fixed price based on the items, suburbs, access and timing. You'll know the price before we start.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "What's the latest I can book for today?",
+            "answer": "<p>Calling before midday gives you the best chance. Later requests are still worth a call, as gaps open up during the day.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you do last-minute moves for end of lease?",
+            "answer": "<p>Yes. Small end-of-lease moves, single items and part moves are a regular same-day job for us.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect a Marketplace item today?",
+            "answer": "<p>Yes. Send the listing and the seller's suburb and we'll arrange a same-day pickup where possible.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "What if you can't do it today?",
+            "answer": "<p>We'll offer the first available slot, usually first thing the next morning from 7am.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Two movers and a large van, Sydney-wide."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "Units, rooms and part moves."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Furniture Pickup & Delivery Sydney",
+            "url": "/pages/furniture-pickup-delivery-sydney",
+            "description": "One item or a small load, same day."
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Same-day removals and last-minute furniture moves",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day jobs across Sydney right now",
+        "live_closed": "Book now for first thing tomorrow from 7am",
+        "live_fallback": "Same-day removals across Sydney",
+        "kicker": "Same-day · Sydney-wide · 7am to 7pm",
+        "heading": "Same-Day Removalists <em>Sydney</em>",
+        "subheading": "Need it moved today? We do same-day and last-minute removals across Sydney: single items, small moves and Marketplace pickups, with a fixed price before we start.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day, 7 days",
+        "hero_image": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
+        "hero_alt": "Titan Express van ready for a same-day removal in Sydney",
+        "hero_badge_title": "Book this morning, moved today",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What needs moving today?",
+        "intents_heading": "Same-Day and Last-Minute Jobs We Handle",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "How Same-Day Removals Work With Us",
+        "local_body": "<p>Same-day jobs depend on how busy the day is, so <strong>the earlier you call, the better</strong>. Ring or send your details in the morning and we'll tell you straight away if we can fit you in and roughly when we'll arrive.</p><p>You still get a <strong>fixed price before we start</strong>, two careful movers and a fully equipped van. Urgent doesn't mean rushed.</p>",
+        "steps_heading": "Book a Same-Day Removal in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_2": "shopify://shop_images/1000013354.jpg",
+        "gallery_3": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
+        "gallery_4": "shopify://shop_images/Delivery_Service_man_and_Van.png",
+        "nearby_heading": "Same-Day Removals Across Sydney",
+        "nearby_intro": "We cover every Sydney region for same-day jobs, subject to the day's schedule.",
+        "nearby_suburbs": "Parramatta, Bankstown, Liverpool, Blacktown, Castle Hill, Inner West, Sydney CBD, Eastern Suburbs, North Shore, Northern Beaches, Sutherland Shire, Penrith, Campbelltown, Ryde",
+        "price_heading": "What Affects a Same-Day Removal Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get a Same-Day Removal Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Same-Day Removalist Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Can I get a removalist today in Sydney?",
+        "quick_answer": "<p>Often, yes. Titan Express does same-day and last-minute removals across Sydney, 7 days a week from 7am to 7pm. Call 0469 717 535 as early as you can; we confirm straight away whether we can fit you in, and you get a fixed price before we start.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

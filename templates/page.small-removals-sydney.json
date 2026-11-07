@@ -1,0 +1,321 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Studios and 1-bedroom units",
+            "text": "Apartment moves with lifts, loading docks and booked time slots handled.",
+            "url": "/pages/man-with-a-van-sydney",
+            "link_label": "Man and van"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Share-house rooms",
+            "text": "Bed, desk, drawers and boxes moved in one trip, across town or across Sydney.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Granny flats and walk-ups",
+            "text": "Tight stairs and narrow paths handled with straps and the right trolleys.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Part moves and a few items",
+            "text": "Moving just the lounge suite, or a few pieces to a new place or storage.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Small moves plus pickups",
+            "text": "Add a Marketplace or store pickup on the way and save a second trip.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day small moves",
+            "text": "Call early and we'll check same-day availability.",
+            "url": "/pages/same-day-removalists-sydney",
+            "link_label": "Same-day removals"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Lifts and loading docks",
+            "text": "Send us your building's time slot and rules; we arrive ready to work within them."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs both ends",
+            "text": "Tell us how many flights at each address so we bring the right crew and gear."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Parking planned",
+            "text": "Clearways and permit zones sorted before moving day, so the job stays on time."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Across all of Sydney",
+            "text": "Local small moves or across the city, with fast routes on the M4, M5, M7 and M2."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a small removal cost in Sydney?",
+            "answer": "<p>It depends on what you're moving, the two suburbs, stairs or lifts and timing. We give a fixed price before we start. Send your details or call 0469 717 535.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Is a small removal cheaper with a man and van?",
+            "answer": "<p>For small moves, usually yes. You don't pay for a big truck or minimum hours you won't use.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move a studio or 1-bedroom unit?",
+            "answer": "<p>Yes. Studios, 1-bedroom units and share-house rooms are regular jobs for us.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need to help carry things?",
+            "answer": "<p>No. Two movers come with every job and do all the lifting.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you do a small move today?",
+            "answer": "<p>Often, yes. Call early and we'll confirm same-day availability.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you bring blankets and straps?",
+            "answer": "<p>Yes. Every item is wrapped in blankets and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Two movers and a large van, Sydney-wide."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Same-Day Removalists Sydney",
+            "url": "/pages/same-day-removalists-sydney",
+            "description": "Last-minute moves, 7am to 7pm."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Furniture Pickup & Delivery Sydney",
+            "url": "/pages/furniture-pickup-delivery-sydney",
+            "description": "One item or a small load, same day."
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Small removals and small moves",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Booking small removals across Sydney now",
+        "live_closed": "Book now for a small move tomorrow from 7am",
+        "live_fallback": "Small removals across Sydney",
+        "kicker": "Small moves · Sydney-wide · 7 days",
+        "heading": "Small Removals <em>Sydney</em>",
+        "subheading": "Studios, units, share-house rooms and part moves, done in one trip by two careful movers with a large van. Fixed price, no minimum hours.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_Sydney_removalist.png",
+        "hero_alt": "Titan Express movers loading a small removal into the van in Sydney",
+        "hero_badge_title": "Right-sized for small moves",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What size is your move?",
+        "intents_heading": "Small Removals We Do Every Week",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Why Small Moves Don't Need a Big Truck",
+        "local_body": "<p>Big removal trucks and minimum hours are built for full houses. For a studio, a room or a handful of items, that usually means paying for space and time you don't use.</p><p>Our <strong>large van and two movers</strong> are the right size for small removals. You get a <strong>fixed price before we start</strong>, blankets and straps on everything, and items placed in the rooms you choose.</p>",
+        "steps_heading": "Book a Small Removal in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Small Removals Across Sydney",
+        "nearby_intro": "We do small moves in every Sydney region, 7 days a week.",
+        "nearby_suburbs": "Parramatta, Bankstown, Liverpool, Blacktown, Castle Hill, Inner West, Sydney CBD, Eastern Suburbs, North Shore, Northern Beaches, Sutherland Shire, Penrith, Campbelltown, Ryde",
+        "price_heading": "What Affects a Small Removal Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Small Removal Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Small Removals Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "What's the best way to do a small move in Sydney?",
+        "quick_answer": "<p>For a studio, a room or a few pieces of furniture, a man and van is usually the best fit: you only pay for the van and two movers you need, not a big truck and minimum hours. Titan Express gives a fixed price before we start, 7 days a week from 7am to 7pm. Call 0469 717 535.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

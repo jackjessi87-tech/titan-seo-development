@@ -1,0 +1,312 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Beachside units",
+            "text": "Unit moves in Manly and Dee Why with lifts and steep driveways.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "A couch, bed or outdoor setting moved anywhere on the Beaches.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace pickups",
+            "text": "Bought something on the Beaches? We collect it from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Brookvale and store pickups",
+            "text": "Furniture collected from Warringah Mall, Brookvale and local stores.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges and washers",
+            "text": "Appliances moved upright with straps and trolleys.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day jobs",
+            "text": "Call early and we'll check same-day availability.",
+            "url": "/pages/same-day-removalists-sydney",
+            "link_label": "Same-day removals"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Hillside homes",
+            "text": "Steep paths and stairs are common. Tell us about access at both ends."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Traffic-smart timing",
+            "text": "We plan around the Spit Bridge and Wakehurst Parkway to keep your job on schedule."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Units in Manly and Dee Why",
+            "text": "Lift bookings and building rules handled."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Beach parking",
+            "text": "Weekend parking is tight near the beaches. A parking note helps us plan."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much do removalists cost on the Northern Beaches?",
+            "answer": "<p>It depends on the items, stairs, driveways, the suburbs and timing. We give a fixed price before we start.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move single items to the Beaches from other suburbs?",
+            "answer": "<p>Yes. We move single items between the Beaches and anywhere in Sydney.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you handle steep driveways?",
+            "answer": "<p>Yes. Let us know when booking and we'll bring the right trolleys and crew.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect a Marketplace item in Manly or Dee Why?",
+            "answer": "<p>Yes. Send us the listing and we'll arrange the pickup.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you do same-day jobs on the Beaches?",
+            "answer": "<p>Often, yes. Call early and we'll confirm.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Items are covered while in our care.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Two movers and a large van, Sydney-wide."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "Units, rooms and part moves."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Northern Beaches",
+        "phone": "0469 717 535",
+        "service_type": "Removals, man and van and furniture delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day bookings in Northern Beaches now",
+        "live_closed": "Book now for tomorrow in Northern Beaches",
+        "live_fallback": "Same-day pickups available in Northern Beaches",
+        "kicker": "Northern Beaches · Sydney",
+        "heading": "Removalists <em>Northern Beaches</em>",
+        "subheading": "Man and van, small moves and furniture delivery from Manly to Mona Vale. Two careful movers, a large van and a fixed price before we start.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/Delivery_Service_man_and_Van.png",
+        "hero_alt": "Titan Express man and van for a Northern Beaches delivery",
+        "hero_badge_title": "Beaches pickups and deliveries",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Removals and Delivery Jobs on the Northern Beaches",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Beaches Moves: Steep Driveways and One Way In",
+        "local_body": "<p>The Northern Beaches has <strong>steep driveways, hillside homes and only a few roads in and out</strong>. Timing around traffic on the Spit and Wakehurst Parkway makes a real difference.</p><p>We plan the route and arrival time, bring the right gear and give you a <strong>fixed price before we start</strong>.</p>",
+        "steps_heading": "Book a Northern Beaches Removalist in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Northern Beaches",
+        "gallery_1": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "gallery_2": "shopify://shop_images/Moving_Service_Sydney.png",
+        "gallery_3": "shopify://shop_images/single-item-delivery-sydney_jpg.jpg",
+        "gallery_4": "shopify://shop_images/Sofa_Removalist.png",
+        "nearby_heading": "Removalists Across the Northern Beaches",
+        "nearby_intro": "We cover every Beaches suburb, from Manly to Palm Beach.",
+        "nearby_suburbs": "Manly, Dee Why, Brookvale, Narrabeen, Collaroy, Mona Vale, Newport, Avalon, Freshwater, Curl Curl, Frenchs Forest, Belrose",
+        "price_heading": "What Affects Your Northern Beaches Removal Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Northern Beaches Removal Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Northern Beaches",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Northern Beaches Removalist Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a man and van in Northern Beaches?",
+        "quick_answer": "<p>Titan Express provides man and van, furniture pickup and delivery in Northern Beaches and across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 or send your suburbs for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

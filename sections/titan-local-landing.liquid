@@ -19,6 +19,7 @@
   assign local_points = section.blocks | where: 'type', 'local_point'
   assign faqs = section.blocks | where: 'type', 'faq'
   assign links = section.blocks | where: 'type', 'link'
+  assign compare_rows = section.blocks | where: 'type', 'compare_row'
   assign form_id = 'LocalQuote-' | append: uid
 -%}
 
@@ -128,6 +129,17 @@
     </section>
   {%- endif -%}
 
+  {%- comment -%} Quick answer: short, direct summary for searchers and AI answers {%- endcomment -%}
+  {%- if s.quick_answer != blank -%}
+    <section class="tll-section tll-wrap" aria-labelledby="tll-qa-{{ uid }}">
+      <div class="tll-qa">
+        <p class="tll-eyebrow">Quick answer</p>
+        <h2 id="tll-qa-{{ uid }}" class="tll-h2">{{ s.quick_answer_heading }}</h2>
+        <div class="tll-rte">{{ s.quick_answer }}</div>
+      </div>
+    </section>
+  {%- endif -%}
+
   {%- comment -%} Local knowledge {%- endcomment -%}
   <section class="tll-section tll-local" aria-labelledby="tll-local-{{ uid }}">
     <div class="tll-wrap tll-local__inner">
@@ -168,6 +180,27 @@
       <li><span class="tll-steps__n">03</span><h3>{{ s.step_3_title }}</h3><p>{{ s.step_3_text }}</p></li>
     </ol>
   </section>
+
+  {%- comment -%} Comparison table {%- endcomment -%}
+  {%- if compare_rows.size > 0 -%}
+    <section class="tll-section tll-wrap" aria-labelledby="tll-compare-{{ uid }}">
+      <p class="tll-eyebrow">Compare your options</p>
+      <h2 id="tll-compare-{{ uid }}" class="tll-h2">{{ s.compare_heading }}</h2>
+      {%- if s.compare_intro != blank -%}<p class="tll-lead">{{ s.compare_intro }}</p>{%- endif -%}
+      <div class="tll-compare" role="region" aria-labelledby="tll-compare-{{ uid }}" tabindex="0">
+        <table>
+          <thead>
+            <tr><th scope="col">What matters</th><th scope="col" class="tll-compare__us">{{ s.compare_us_label }}</th><th scope="col">{{ s.compare_them_label }}</th></tr>
+          </thead>
+          <tbody>
+            {%- for row in compare_rows -%}
+              <tr {{ row.shopify_attributes }}><th scope="row">{{ row.settings.feature }}</th><td class="tll-compare__us">{{ row.settings.ours }}</td><td>{{ row.settings.theirs }}</td></tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {%- endif -%}
 
   {%- comment -%} Gallery of real job photos {%- endcomment -%}
   {%- if s.gallery_1 != blank or s.gallery_2 != blank -%}
@@ -555,6 +588,17 @@
   .tll-steps__n { display: inline-block; margin-bottom: 14px; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; background: var(--tll-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .tll-steps h3 { font-size: 1.15rem; color: var(--tll-ink); margin-bottom: 6px; }
   .tll-steps p { margin: 0; color: var(--tll-muted); line-height: 1.55; }
+  .tll-qa { padding: 26px 28px; border-radius: var(--tll-radius); border: 1px solid var(--tll-line); border-left: 6px solid #e30613; background: var(--tll-soft); }
+  .tll-qa .tll-h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+  .tll-qa .tll-rte p { margin: 0.5em 0 0; line-height: 1.6; }
+  .tll-compare { margin-top: 22px; overflow-x: auto; border-radius: var(--tll-radius); border: 1px solid var(--tll-line); }
+  .tll-compare table { width: 100%; min-width: 520px; border-collapse: collapse; background: #fff; }
+  .tll-compare th, .tll-compare td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--tll-line); line-height: 1.45; }
+  .tll-compare thead th { background: var(--tll-ink); color: #fff; font-size: 0.95rem; }
+  .tll-compare thead th.tll-compare__us { background: #e30613; }
+  .tll-compare tbody th { font-weight: 700; color: var(--tll-ink); width: 30%; }
+  .tll-compare td.tll-compare__us { font-weight: 600; color: var(--tll-ink); background: rgba(227, 6, 19, 0.05); }
+  .tll-compare tbody tr:last-child th, .tll-compare tbody tr:last-child td { border-bottom: 0; }
 
   /* Gallery */
   .tll-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
@@ -705,6 +749,14 @@
     { "type": "text", "id": "step_2_text", "label": "Step 2 text" },
     { "type": "text", "id": "step_3_title", "label": "Step 3 title" },
     { "type": "text", "id": "step_3_text", "label": "Step 3 text" },
+    { "type": "header", "content": "Quick answer (optional)" },
+    { "type": "text", "id": "quick_answer_heading", "label": "Heading" },
+    { "type": "richtext", "id": "quick_answer", "label": "Short answer" },
+    { "type": "header", "content": "Comparison table (optional)" },
+    { "type": "text", "id": "compare_heading", "label": "Heading" },
+    { "type": "textarea", "id": "compare_intro", "label": "Intro" },
+    { "type": "text", "id": "compare_us_label", "label": "Our column label", "default": "Titan man and van" },
+    { "type": "text", "id": "compare_them_label", "label": "Other column label", "default": "Big removal truck" },
     { "type": "header", "content": "Gallery" },
     { "type": "text", "id": "gallery_heading", "label": "Heading" },
     { "type": "text", "id": "gallery_alt", "label": "Fallback alt text" },
@@ -761,6 +813,15 @@
       "settings": [
         { "type": "text", "id": "question", "label": "Question" },
         { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    },
+    {
+      "type": "compare_row",
+      "name": "Comparison row",
+      "settings": [
+        { "type": "text", "id": "feature", "label": "What matters" },
+        { "type": "text", "id": "ours", "label": "Our answer" },
+        { "type": "text", "id": "theirs", "label": "Other option" }
       ]
     },
     {

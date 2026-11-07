@@ -1,0 +1,321 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Mattresses (single to king)",
+            "text": "Kept clean and covered, carried up stairs and placed on the base.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Bed frames and bases",
+            "text": "Bases, ensembles and frames moved whole or carefully handled in pieces.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace beds",
+            "text": "Bought a bed online? We collect it from the seller and bring it home.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store and IKEA beds",
+            "text": "Too big for the car? We collect your order and deliver it.",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "link_label": "IKEA pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Upstairs and units",
+            "text": "Tight stairwells and lifts handled with straps and two movers.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day bed delivery",
+            "text": "Call early and we'll check same-day availability.",
+            "url": "/pages/same-day-removalists-sydney",
+            "link_label": "Same-day removals"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and tight turns",
+            "text": "Queen and king mattresses need planning on narrow stairs. We bring two movers and straps."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Lifts and units",
+            "text": "Large mattresses may need a booked lift. Send us your building's details."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Store pickups",
+            "text": "We collect from bedding and furniture stores across Sydney."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Placed where you want it",
+            "text": "We carry it into the bedroom and set it on the base."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does bed delivery cost in Sydney?",
+            "answer": "<p>It depends on the bed size, stairs or lifts, the two suburbs and timing. We give a fixed price before we start.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you deliver king and queen mattresses?",
+            "answer": "<p>Yes. All sizes, carried by two movers and kept covered.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up a bed from a Marketplace seller?",
+            "answer": "<p>Yes. Send us the listing and the seller's suburb and we'll arrange the pickup.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you take bed frames apart?",
+            "answer": "<p>We move frames whole where they fit. Where they don't, tell us when booking and we'll plan around it.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you deliver a bed today?",
+            "answer": "<p>Often, yes. Call early and we'll confirm same-day availability.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you remove old mattresses?",
+            "answer": "<p>We move items between addresses. Disposal of old mattresses is not something we offer.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "IKEA Pickup & Delivery Sydney",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "description": "Tempe, Rhodes and Marsden Park."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Furniture Pickup & Delivery Sydney",
+            "url": "/pages/furniture-pickup-delivery-sydney",
+            "description": "One item or a small load, same day."
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Two movers and a large van, Sydney-wide."
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Bed, bed frame and mattress delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking bed and mattress deliveries now",
+        "live_closed": "Book now for a bed delivery tomorrow from 7am",
+        "live_fallback": "Bed and mattress delivery across Sydney",
+        "kicker": "Beds · Mattresses · Sydney-wide",
+        "heading": "Bed &amp; Mattress Delivery <em>Sydney</em>",
+        "subheading": "Beds, bed frames, bases and mattresses collected from stores, Marketplace sellers or your old place and delivered to the room you choose, across Sydney.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/single-item-delivery-sydney_jpg.jpg",
+        "hero_alt": "Titan Express movers delivering a bed in Sydney",
+        "hero_badge_title": "Delivered to the bedroom",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What bed do you need moved?",
+        "intents_heading": "Bed and Mattress Jobs We Do Across Sydney",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Beds Are Awkward. We Move Them Every Day.",
+        "local_body": "<p>Mattresses bend, bases scratch and frames don't fit through every door. We <strong>cover mattresses</strong>, wrap frames in blankets and plan the route through stairs and lifts before we lift.</p><p>Tell us the size (single, double, queen or king) and access at both ends, and you'll get a <strong>fixed price before we start</strong>.</p>",
+        "steps_heading": "Book a Bed Delivery in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "gallery_2": "shopify://shop_images/Moving_Service_Sydney.png",
+        "gallery_3": "shopify://shop_images/single-item-delivery-sydney_jpg.jpg",
+        "gallery_4": "shopify://shop_images/Sofa_Removalist.png",
+        "nearby_heading": "Bed and Mattress Delivery Across Sydney",
+        "nearby_intro": "We pick up and deliver beds and mattresses in every Sydney region.",
+        "nearby_suburbs": "Parramatta, Bankstown, Liverpool, Blacktown, Castle Hill, Inner West, Sydney CBD, Eastern Suburbs, North Shore, Northern Beaches, Sutherland Shire, Penrith, Campbelltown, Ryde",
+        "price_heading": "What Affects a Bed Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Bed Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Bed and Mattress Delivery Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Can someone pick up and deliver a bed or mattress in Sydney?",
+        "quick_answer": "<p>Yes. Titan Express picks up and delivers beds, bed frames, bases and mattresses across Sydney, from stores, Marketplace sellers or home to home. Two movers carry it to the bedroom, with same-day often available, 7 days from 7am to 7pm. Call 0469 717 535 for a fixed price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

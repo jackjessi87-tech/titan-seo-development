@@ -1,0 +1,312 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Beachside units",
+            "text": "Unit moves in Cronulla and Miranda with lifts and loading areas handled.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "A couch, bed or table moved across the Shire or anywhere in Sydney.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace pickups",
+            "text": "Bought something in the Shire? We collect it from the seller for you.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Westfield Miranda and store pickups",
+            "text": "Furniture and homewares collected from Miranda and local stores.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges and washing machines",
+            "text": "Appliances moved upright on trolleys with straps.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day Shire jobs",
+            "text": "Call early and we'll check same-day availability.",
+            "url": "/pages/same-day-removalists-sydney",
+            "link_label": "Same-day removals"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Split-level homes",
+            "text": "Plenty of Shire homes have internal stairs. Tell us how many flights at each end."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Cronulla and Miranda units",
+            "text": "Booked lifts and loading docks handled within building rules."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Beach-day parking",
+            "text": "Weekend parking near the beaches is tight. A note on parking keeps your job on time."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Fast links north",
+            "text": "The Princes Highway and M1 connect the Shire to the rest of Sydney."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much do removalists cost in the Sutherland Shire?",
+            "answer": "<p>It depends on the items, stairs or lifts, the suburbs and timing. We give a fixed price before we start.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move single items in the Shire?",
+            "answer": "<p>Yes. One couch, bed or fridge is a normal job, with no minimum size.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you do same-day removals in Cronulla or Miranda?",
+            "answer": "<p>Often, yes. Call early and we'll confirm.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up from a Marketplace seller in the Shire?",
+            "answer": "<p>Yes. Send us the listing and we'll arrange the pickup.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you handle unit moves with lifts?",
+            "answer": "<p>Yes. Send us the building's lift booking and rules and we'll work within them.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Items are covered while in our care, wrapped in blankets and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Two movers and a large van, Sydney-wide."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "Units, rooms and part moves."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sutherland Shire",
+        "phone": "0469 717 535",
+        "service_type": "Removals, man and van and furniture delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day bookings in Sutherland Shire now",
+        "live_closed": "Book now for tomorrow in Sutherland Shire",
+        "live_fallback": "Same-day pickups available in Sutherland Shire",
+        "kicker": "Sutherland Shire · Southern Sydney",
+        "heading": "Removalists <em>Sutherland Shire</em>",
+        "subheading": "Man and van, small moves and furniture delivery across the Shire, from Cronulla to Engadine. Two careful movers, fixed price, often same day.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "hero_alt": "Titan Express man and van for a Sutherland Shire removal",
+        "hero_badge_title": "Shire pickups and deliveries",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Removals and Delivery Jobs in the Sutherland Shire",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Moving in the Shire: Hills, Units and Beach Traffic",
+        "local_body": "<p>The Shire mixes steep streets and split-level homes with busy beachside units around Cronulla. <strong>Driveways, stairs and weekend beach traffic</strong> all change how a job runs.</p><p>We plan arrival times, bring the right straps and trolleys, and give you a <strong>fixed price before we start</strong>.</p>",
+        "steps_heading": "Book a Sutherland Shire Removalist in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sutherland Shire",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Removalists Across the Sutherland Shire",
+        "nearby_intro": "We cover every Shire suburb and the rest of southern Sydney.",
+        "nearby_suburbs": "Cronulla, Miranda, Caringbah, Sutherland, Engadine, Kirrawee, Gymea, Jannali, Sylvania, Menai, Kareela, Woolooware",
+        "price_heading": "What Affects Your Sutherland Shire Removal Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Sutherland Shire Removal Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Sutherland Shire",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Sutherland Shire Removalist Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a man and van in Sutherland Shire?",
+        "quick_answer": "<p>Titan Express provides man and van, furniture pickup and delivery in Sutherland Shire and across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 or send your suburbs for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
