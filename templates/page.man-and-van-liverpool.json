@@ -9,8 +9,8 @@
             "icon": "box",
             "title": "New-home moves",
             "text": "Moving into a new build in Edmondson Park, Austral or Leppington? We handle small moves and furniture drops.",
-            "url": "Small moves",
-            "link_label": "/pages/man-with-a-van-sydney"
+            "url": "/pages/man-with-a-van-sydney",
+            "link_label": "Small moves"
           }
         },
         "intent_2": {
@@ -29,8 +29,8 @@
             "icon": "tag",
             "title": "Marketplace & Gumtree pickups",
             "text": "We collect from sellers across Sydney and deliver to your Liverpool home.",
-            "url": "Marketplace pickup",
-            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
           }
         },
         "intent_4": {
@@ -39,8 +39,8 @@
             "icon": "sofa",
             "title": "Single furniture items",
             "text": "One sofa, bed or wardrobe moved, with no minimum job size.",
-            "url": "Single item delivery",
-            "link_label": "/pages/single-item-delivery-sydney"
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
           }
         },
         "intent_5": {
@@ -59,8 +59,8 @@
             "icon": "fridge",
             "title": "Fridges & washing machines",
             "text": "Heavy appliances moved upright and placed where you need them.",
-            "url": "Appliance delivery",
-            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
           }
         },
         "point_1": {

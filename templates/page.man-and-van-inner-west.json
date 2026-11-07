@@ -19,8 +19,8 @@
             "icon": "tag",
             "title": "Marketplace & Gumtree pickups",
             "text": "The Inner West is full of great second-hand finds. We collect from the seller for you.",
-            "url": "Marketplace pickup",
-            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
           }
         },
         "intent_3": {
@@ -29,8 +29,8 @@
             "icon": "box",
             "title": "Share-house & studio moves",
             "text": "Rooms, studios and one-bedders moved in one trip.",
-            "url": "Small moves",
-            "link_label": "/pages/man-with-a-van-sydney"
+            "url": "/pages/man-with-a-van-sydney",
+            "link_label": "Small moves"
           }
         },
         "intent_4": {
@@ -39,8 +39,8 @@
             "icon": "store",
             "title": "IKEA Tempe pickups",
             "text": "IKEA Tempe is right on the edge of the Inner West. We collect and deliver your order.",
-            "url": "IKEA pickup",
-            "link_label": "/pages/ikea-pickup-delivery-sydney"
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "link_label": "IKEA pickup"
           }
         },
         "intent_5": {
@@ -49,8 +49,8 @@
             "icon": "sofa",
             "title": "Single furniture items",
             "text": "One couch, bed or bookcase moved, with no minimum job size.",
-            "url": "Couch delivery",
-            "link_label": "/pages/couch-delivery-sydney"
+            "url": "/pages/couch-delivery-sydney",
+            "link_label": "Couch delivery"
           }
         },
         "intent_6": {
@@ -59,8 +59,8 @@
             "icon": "fridge",
             "title": "Fridges & washing machines",
             "text": "Appliances moved upright through narrow hallways.",
-            "url": "Appliance delivery",
-            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
           }
         },
         "point_1": {

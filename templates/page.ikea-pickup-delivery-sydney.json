@@ -19,8 +19,8 @@
             "icon": "sofa",
             "title": "Sofas & armchairs",
             "text": "Big boxed sofas and modular pieces that won't fit in a hatchback.",
-            "url": "Couch delivery",
-            "link_label": "/pages/couch-delivery-sydney"
+            "url": "/pages/couch-delivery-sydney",
+            "link_label": "Couch delivery"
           }
         },
         "intent_3": {
@@ -59,8 +59,8 @@
             "icon": "tag",
             "title": "Second-hand IKEA",
             "text": "Bought used IKEA on Marketplace? We collect from the seller too.",
-            "url": "Marketplace pickup",
-            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
           }
         },
         "point_1": {

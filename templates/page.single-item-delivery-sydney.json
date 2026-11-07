@@ -9,8 +9,8 @@
             "icon": "sofa",
             "title": "Couches & sofas",
             "text": "Lounges, sofa beds and modulars, wrapped and carried in.",
-            "url": "Couch delivery",
-            "link_label": "/pages/couch-delivery-sydney"
+            "url": "/pages/couch-delivery-sydney",
+            "link_label": "Couch delivery"
           }
         },
         "intent_2": {
@@ -29,8 +29,8 @@
             "icon": "fridge",
             "title": "Fridges & washing machines",
             "text": "Appliances moved upright with trolleys and straps.",
-            "url": "Appliance delivery",
-            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
           }
         },
         "intent_4": {
@@ -49,8 +49,8 @@
             "icon": "tag",
             "title": "Marketplace purchases",
             "text": "We collect your find from the seller and bring it home.",
-            "url": "Marketplace pickup",
-            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
           }
         },
         "intent_6": {
