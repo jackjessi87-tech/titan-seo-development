@@ -6,6 +6,7 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
+    {%- render 'titan-google-ads' -%}
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"

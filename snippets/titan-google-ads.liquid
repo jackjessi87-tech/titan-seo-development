@@ -1,0 +1,43 @@
+{%- comment -%}
+  Google Ads tag and lead conversions for Titan Express.
+  - Tag: AW-10946257107
+  - "Titan - Call button tap": any click on a tel: link
+  - "Titan - Quote form submit": page load after a successful Shopify contact form (?contact_posted=true)
+  Not loaded in the theme editor, so previews don't count as conversions.
+{%- endcomment -%}
+{%- unless request.design_mode -%}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10946257107"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10946257107');
+
+    (function () {
+      var CALL = 'AW-10946257107/CRiECObX8bMdENPByuMo';
+      var QUOTE = 'AW-10946257107/8FVbCInF8bMdENPByuMo';
+
+      // Call button taps: one conversion per tap on any tel: link.
+      document.addEventListener('click', function (e) {
+        var link = e.target && e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
+        if (!link) return;
+        gtag('event', 'conversion', { send_to: CALL });
+      }, true);
+
+      // Quote form: Shopify reloads the page with ?contact_posted=true after a successful send.
+      try {
+        if (/[?&]contact_posted=true/.test(window.location.search)) {
+          var key = 'titan_quote_conv:' + window.location.pathname + window.location.search;
+          if (!sessionStorage.getItem(key)) {
+            sessionStorage.setItem(key, '1');
+            gtag('event', 'conversion', { send_to: QUOTE });
+          }
+        }
+      } catch (err) {
+        if (/[?&]contact_posted=true/.test(window.location.search)) {
+          gtag('event', 'conversion', { send_to: QUOTE });
+        }
+      }
+    })();
+  </script>
+{%- endunless -%}
