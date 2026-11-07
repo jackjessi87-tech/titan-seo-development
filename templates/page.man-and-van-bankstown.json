@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day local pickups",
+            "text": "Our van is based nearby, so same-day jobs in Bankstown are often easiest for us to fit in.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Small moves & granny flats",
+            "text": "Units, granny flats and partial house moves across Bankstown, Yagoona and Greenacre.",
+            "url": "Small moves",
+            "link_label": "/pages/man-with-a-van-sydney"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree pickups",
+            "text": "Collected from the seller anywhere in Sydney and delivered to your Bankstown home.",
+            "url": "Marketplace pickup",
+            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Bankstown Central & store pickups",
+            "text": "Furniture and appliances collected from Bankstown Central and local furniture stores.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "One lounge, bed, wardrobe or dining set moved locally or across Sydney.",
+            "url": "Single item delivery",
+            "link_label": "/pages/single-item-delivery-sydney"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washing machines",
+            "text": "Appliances moved upright, with straps and protective blankets.",
+            "url": "Appliance delivery",
+            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Minutes from our base",
+            "text": "Punchbowl to Bankstown is a short drive, which keeps local jobs quick and same-day bookings realistic."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Units and granny flats",
+            "text": "Lots of walk-up units and granny flats around Bankstown. Tell us about stairs and side access."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Busy shopping strips",
+            "text": "Chapel Road and around Bankstown Central get busy. A note about parking or a driveway helps us plan."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Quick routes out",
+            "text": "The M5 and Hume Highway connect Bankstown to Liverpool, the airport and the city."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a man and van cost in Bankstown?",
+            "answer": "<p>It depends on the items, stairs or lift, the distance and timing. Because we're based nearby, local jobs are quick. We give a fixed price before you book.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you come today?",
+            "answer": "<p>Often, yes. Bankstown is close to our base, so same-day slots are easier to fit in. Call early and we'll confirm.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move granny flats and units?",
+            "answer": "<p>Yes. Small moves are our speciality. Tell us about stairs and side access so we bring the right gear.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up a single item?",
+            "answer": "<p>Yes, there's no minimum job size. One couch or one fridge is a normal job for us.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect something I bought on Marketplace?",
+            "answer": "<p>Yes. Send us the listing and the seller's suburb, and we'll arrange pickup and delivery to your door.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped in blankets and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Man With a Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Small moves and single items."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Liverpool",
+            "url": "/pages/man-and-van-liverpool",
+            "description": "Liverpool, Casula and the new estates."
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "suburb_name": "Bankstown",
+        "phone": "0469 717 535",
+        "service_type": "Man and van, furniture removals and delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 18,
+        "live_open": "Taking same-day bookings in Bankstown now",
+        "live_closed": "Book now for tomorrow in Bankstown",
+        "live_fallback": "Same-day pickups available in Bankstown",
+        "kicker": "Bankstown · Canterbury-Bankstown",
+        "heading": "Man and Van <em>Bankstown</em>",
+        "subheading": "We're based in Punchbowl, just minutes from Bankstown, so local pickups, small moves and same-day deliveries are what we do best. Fixed prices, careful movers.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
+        "hero_alt": "Titan Express van loaded with wrapped furniture near Bankstown",
+        "hero_badge_title": "Based minutes away in Punchbowl",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Local Man and Van Jobs Around Bankstown",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Bankstown Is Our Home Turf",
+        "local_body": "<p>Titan Express is based in Punchbowl, right next door. That means <strong>short travel times, easier same-day slots and movers who know the local streets</strong>, from the busy shopping strips to the quiet cul-de-sacs.</p><p>Whether it's one couch from a neighbour on Marketplace or a granny flat move in Yagoona, tell us the details and we'll give you a fixed price.</p>",
+        "steps_heading": "Book a Local Man and Van in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Bankstown",
+        "gallery_1": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "gallery_2": "shopify://shop_images/Moving_Service_Sydney.png",
+        "gallery_3": "shopify://shop_images/single-item-delivery-sydney_jpg.jpg",
+        "gallery_4": "shopify://shop_images/Sofa_Removalist.png",
+        "nearby_heading": "Man and Van Near Bankstown",
+        "nearby_intro": "We cover every suburb around Bankstown and Punchbowl.",
+        "nearby_suburbs": "Punchbowl, Yagoona, Greenacre, Condell Park, Bass Hill, Georges Hall, Chester Hill, Padstow, Revesby, Birrong, Lakemba, Belmore",
+        "price_heading": "What Affects Your Bankstown Man and Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Bankstown Man and Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Bankstown",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Man and Van Bankstown Questions",
+        "links_heading": "More Ways We Can Help"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

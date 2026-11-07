@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Terraces & narrow stairs",
+            "text": "Sofas and beds carried up tight terrace staircases, with straps and careful handling.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree pickups",
+            "text": "The Inner West is full of great second-hand finds. We collect from the seller for you.",
+            "url": "Marketplace pickup",
+            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Share-house & studio moves",
+            "text": "Rooms, studios and one-bedders moved in one trip.",
+            "url": "Small moves",
+            "link_label": "/pages/man-with-a-van-sydney"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA Tempe pickups",
+            "text": "IKEA Tempe is right on the edge of the Inner West. We collect and deliver your order.",
+            "url": "IKEA pickup",
+            "link_label": "/pages/ikea-pickup-delivery-sydney"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "One couch, bed or bookcase moved, with no minimum job size.",
+            "url": "Couch delivery",
+            "link_label": "/pages/couch-delivery-sydney"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washing machines",
+            "text": "Appliances moved upright through narrow hallways.",
+            "url": "Appliance delivery",
+            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Tight terrace staircases",
+            "text": "Steep, narrow stairs are normal here. Send door and stair widths for big pieces if you can."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Permit parking, no driveways",
+            "text": "Most streets have permit zones and no off-street loading. A note about parking helps us plan."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Warehouse and apartment conversions",
+            "text": "Converted warehouses and new apartments often have lifts with booking rules."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA Tempe on the doorstep",
+            "text": "Quick runs from IKEA Tempe to anywhere in the Inner West."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you get a sofa up a narrow terrace staircase?",
+            "answer": "<p>Usually, yes. Send us the sofa's size and, if you can, the width of the door and stairs. We'll tell you before moving day if it looks tight.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "What about parking on my street?",
+            "answer": "<p>Many Inner West streets have permit parking and no driveways. Tell us about parking when you book so we can plan the closest safe spot.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a man and van cost in the Inner West?",
+            "answer": "<p>It depends on the items, stairs, parking, distance and timing. We give a fixed price before you book.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up from IKEA Tempe?",
+            "answer": "<p>Yes. Send us your order details and we'll collect it and deliver it home.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move single items?",
+            "answer": "<p>Yes, with no minimum job size. One couch or one bookcase is a normal job for us.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Couch Delivery Sydney",
+            "url": "/pages/couch-delivery-sydney",
+            "description": "Sofas and lounges moved safely."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "IKEA Pickup & Delivery Sydney",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "description": "Tempe, Rhodes and Marsden Park."
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "suburb_name": "Inner West",
+        "phone": "0469 717 535",
+        "service_type": "Man and van, furniture removals and delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 18,
+        "live_open": "Taking same-day bookings in Inner West now",
+        "live_closed": "Book now for tomorrow in Inner West",
+        "live_fallback": "Same-day pickups available in Inner West",
+        "kicker": "Inner West · Newtown to Ashfield",
+        "heading": "Man and Van <em>Inner West</em>",
+        "subheading": "Terraces, narrow staircases and tight streets are everyday jobs for us. Single items, small moves and Marketplace pickups across Newtown, Marrickville, Leichhardt and the Inner West.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/Moving_Service_Sydney.png",
+        "hero_alt": "Titan Express van loaded with furniture for an Inner West move",
+        "hero_badge_title": "Terrace and apartment specialists",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Man and Van Jobs Across the Inner West",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Inner West Moves Need a Different Plan",
+        "local_body": "<p>Victorian terraces, narrow hallways, steep stairs and streets with <strong>permit parking and no driveways</strong> make Inner West moves trickier than most. A sofa that fits easily in a Hills house might need a different angle, or a door off its hinges, here.</p><p>Tell us about stairs, doorways and parking when you book, and we'll arrive with the right plan and a fixed price.</p>",
+        "steps_heading": "Book an Inner West Man and Van in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Inner West",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Inner West Suburbs We Cover",
+        "nearby_intro": "Every Inner West suburb, every day.",
+        "nearby_suburbs": "Newtown, Marrickville, Enmore, Stanmore, Petersham, Leichhardt, Annandale, Balmain, Rozelle, Dulwich Hill, Summer Hill, Ashfield",
+        "price_heading": "What Affects Your Inner West Man and Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Inner West Man and Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Newtown",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Man and Van Inner West Questions",
+        "links_heading": "More Ways We Can Help"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

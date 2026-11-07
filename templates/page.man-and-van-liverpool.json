@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "New-home moves",
+            "text": "Moving into a new build in Edmondson Park, Austral or Leppington? We handle small moves and furniture drops.",
+            "url": "Small moves",
+            "link_label": "/pages/man-with-a-van-sydney"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store & warehouse pickups",
+            "text": "Furniture collected from Westfield Liverpool, local homemaker stores and warehouses.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree pickups",
+            "text": "We collect from sellers across Sydney and deliver to your Liverpool home.",
+            "url": "Marketplace pickup",
+            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "One sofa, bed or wardrobe moved, with no minimum job size.",
+            "url": "Single item delivery",
+            "link_label": "/pages/single-item-delivery-sydney"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment moves",
+            "text": "Units around the Liverpool CBD and Warwick Farm with lifts and loading areas.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washing machines",
+            "text": "Heavy appliances moved upright and placed where you need them.",
+            "url": "Appliance delivery",
+            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "New estates and new streets",
+            "text": "Edmondson Park, Austral and Leppington keep adding streets. Share a pin or landmark if your street is brand new."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "CBD apartments",
+            "text": "Liverpool's city centre has more apartments every year. Tell us about lift bookings and loading areas."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "M5, M7 and Hume Highway",
+            "text": "Fast links to Bankstown, Campbelltown, Parramatta and the city keep cross-Sydney jobs quick."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Big-box furniture runs",
+            "text": "Collect from several stores in one trip. List them in your quote and we'll plan the run."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a man and van cost in Liverpool?",
+            "answer": "<p>It depends on the items, stairs or lift, the distance and timing. We give you a fixed price before you book, so there are no surprises.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you deliver to a brand-new estate?",
+            "answer": "<p>Yes. If your street is new and not on every map yet, send a map pin or a nearby landmark when you book.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up from several stores in one trip?",
+            "answer": "<p>Yes. List the stores and items in your quote request and we'll plan one run and price it together.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you do same-day jobs in Liverpool?",
+            "answer": "<p>Often, yes. It depends on the day's schedule, so call or send your request early.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move just one item?",
+            "answer": "<p>Yes. Single items are a normal job for us, with no minimum size.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Man With a Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Small moves and single items."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Bankstown",
+            "url": "/pages/man-and-van-bankstown",
+            "description": "Our home turf, minutes from Punchbowl."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "suburb_name": "Liverpool",
+        "phone": "0469 717 535",
+        "service_type": "Man and van, furniture removals and delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 18,
+        "live_open": "Taking same-day bookings in Liverpool now",
+        "live_closed": "Book now for tomorrow in Liverpool",
+        "live_fallback": "Same-day pickups available in Liverpool",
+        "kicker": "Liverpool · South West Sydney",
+        "heading": "Man and Van <em>Liverpool</em>",
+        "subheading": "Furniture pickups, small moves and new-home deliveries across Liverpool, Casula, Moorebank and the growing estates of South West Sydney. Fixed prices, careful movers.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_Sydney_removalist.png",
+        "hero_alt": "Titan Express man and van ready for a Liverpool furniture removal",
+        "hero_badge_title": "South West Sydney pickups and deliveries",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Man and Van Jobs Around Liverpool",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Liverpool Is Growing Fast. So Are the Moves.",
+        "local_body": "<p>South West Sydney has some of the fastest-growing suburbs in the state. New estates mean <strong>fresh driveways, new streets that maps don't always know, and lots of flat-pack furniture</strong> arriving at once.</p><p>Send us your address and any access notes, and we'll plan the route, the gear and a fixed price.</p>",
+        "steps_heading": "Book a Man and Van in Liverpool in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Liverpool",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Man and Van Near Liverpool",
+        "nearby_intro": "We cover Liverpool and every suburb around it.",
+        "nearby_suburbs": "Casula, Moorebank, Prestons, Edmondson Park, Hoxton Park, Green Valley, Chipping Norton, Warwick Farm, Lurnea, Cecil Hills, Austral, Leppington",
+        "price_heading": "What Affects Your Liverpool Man and Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Liverpool Man and Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Liverpool",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Man and Van Liverpool Questions",
+        "links_heading": "More Ways We Can Help"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

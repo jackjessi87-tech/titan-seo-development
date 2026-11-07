@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Flat-pack furniture",
+            "text": "PAX wardrobes, beds, bookcases and drawers in their boxes, however many there are.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Sofas & armchairs",
+            "text": "Big boxed sofas and modular pieces that won't fit in a hatchback.",
+            "url": "Couch delivery",
+            "link_label": "/pages/couch-delivery-sydney"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Click & collect orders",
+            "text": "Send us your order number and pickup time and we'll collect it for you.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day pickups",
+            "text": "Need it today? Call before midday and we'll check same-day availability.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Mattresses & bulky items",
+            "text": "Mattresses, bed bases and kitchen items carried in and placed in the right room.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Second-hand IKEA",
+            "text": "Bought used IKEA on Marketplace? We collect from the seller too.",
+            "url": "Marketplace pickup",
+            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA Tempe",
+            "text": "Close to the Inner West, the city and the Eastern Suburbs."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA Rhodes",
+            "text": "Handy for Ryde, the North Shore, Homebush and Parramatta."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA Marsden Park",
+            "text": "For Blacktown, the Hills, Penrith and the north-west."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Carried in, not left at the kerb",
+            "text": "We carry boxes inside and upstairs to the room you choose."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up my IKEA order for me?",
+            "answer": "<p>Yes. Send us your order details and pickup time. We collect it from IKEA Tempe, Rhodes or Marsden Park and deliver it to you.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Which IKEA stores do you collect from?",
+            "answer": "<p>All three in Sydney: Tempe, Rhodes and Marsden Park.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you assemble IKEA furniture?",
+            "answer": "<p>Our job is pickup and delivery. We carry everything into the room you choose so it's ready to assemble.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you deliver IKEA furniture the same day?",
+            "answer": "<p>Often, yes. It depends on the day's schedule and your order being ready, so call early.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does IKEA pickup and delivery cost?",
+            "answer": "<p>It depends on how much you bought, the store, your delivery suburb and stairs. We give a fixed price before you book.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my order insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care and strapped securely in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Couch Delivery Sydney",
+            "url": "/pages/couch-delivery-sydney",
+            "description": "Sofas and lounges moved safely."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Inner West",
+            "url": "/pages/man-and-van-inner-west",
+            "description": "Terraces and tight stairs, done right."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Blacktown",
+            "url": "/pages/man-and-van-blacktown",
+            "description": "Blacktown, Marsden Park and The Ponds."
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "IKEA furniture pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 18,
+        "live_open": "Taking same-day IKEA pickups now",
+        "live_closed": "Book now for an IKEA pickup tomorrow",
+        "live_fallback": "Same-day IKEA pickups available",
+        "kicker": "IKEA Tempe · Rhodes · Marsden Park",
+        "heading": "IKEA Pickup &amp; Delivery <em>Sydney</em>",
+        "subheading": "Bought it but can't fit it in the car? We collect your IKEA order from Tempe, Rhodes or Marsden Park and deliver it to your door anywhere in Sydney.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/1000013354.jpg",
+        "hero_alt": "Titan Express van loaded with flat-pack furniture for an IKEA delivery",
+        "hero_badge_title": "Flat-packs, wardrobes and sofas",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What did you buy?",
+        "intents_heading": "IKEA Items We Pick Up Every Week",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Why People Use Us Instead of Hiring a Trailer",
+        "local_body": "<p>A big IKEA haul usually means <strong>long boxes that don't fit in the car, heavy cartons and stairs at home</strong>. Hiring a trailer means ropes, a tow bar and doing the lifting yourself.</p><p>We collect from the store, load everything safely and carry it into the room you choose. You just send the order details.</p>",
+        "steps_heading": "Get Your IKEA Order Home in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Send your order, the store and your delivery suburb. Add stairs or lift details.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "We collect from IKEA and carry everything into your home.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_2": "shopify://shop_images/1000013354.jpg",
+        "gallery_3": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
+        "gallery_4": "shopify://shop_images/Delivery_Service_man_and_Van.png",
+        "nearby_heading": "IKEA Delivery Anywhere in Sydney",
+        "nearby_intro": "We deliver from all three Sydney IKEA stores to every region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, South West Sydney, Sutherland Shire",
+        "price_heading": "What Affects Your IKEA Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your IKEA Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "IKEA Tempe",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "IKEA Pickup and Delivery Questions",
+        "links_heading": "More Ways We Can Help"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

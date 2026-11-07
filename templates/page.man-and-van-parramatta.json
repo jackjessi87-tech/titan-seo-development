@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment moves",
+            "text": "High-rise units around the Parramatta CBD, Parramatta Square and the river, with lifts and loading docks.",
+            "url": "Small moves",
+            "link_label": "/pages/man-with-a-van-sydney"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "A sofa, bed, desk or dining table moved across Parramatta or to anywhere in Sydney.",
+            "url": "Single item delivery",
+            "link_label": "/pages/single-item-delivery-sydney"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree pickups",
+            "text": "Bought something from a seller in Granville, Merrylands or North Parramatta? We collect it for you.",
+            "url": "Marketplace pickup",
+            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Westfield & store pickups",
+            "text": "Furniture and homewares collected from Westfield Parramatta and stores along the Great Western Highway.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washing machines",
+            "text": "Heavy appliances moved upright on trolleys, straight into your laundry or kitchen.",
+            "url": "Appliance delivery",
+            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Student & share-house moves",
+            "text": "Rooms near Western Sydney University and Westmead Hospital, moved in one trip.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Lift and loading-dock bookings",
+            "text": "Many towers need the lift booked through building management. Send us your time slot and we'll work to it."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Clearways and CBD parking",
+            "text": "Church Street, the CBD and Westmead have clearways and tight parking. A note about parking helps us plan."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Walk-ups in Harris Park and Granville",
+            "text": "Older three-storey walk-ups are common here. Tell us how many flights and we'll bring straps and an extra hand."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Fast links across Sydney",
+            "text": "The M4, James Ruse Drive and the Great Western Highway connect Parramatta to the city, the Hills and the west."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a man and van cost in Parramatta?",
+            "answer": "<p>It depends on what you're moving, lifts or stairs at each end, the distance and timing. We give a fixed price before you book. Send your details or call 0469 717 535.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you book the lift and loading dock for my apartment?",
+            "answer": "<p>Building management usually books lifts and docks for residents. Book your slot, send us the time and any building rules, and we'll arrive ready to work within it.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move just one item in Parramatta?",
+            "answer": "<p>Yes. Single items are a normal job for us: one couch, one bed or one fridge, with no minimum job size.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you do same-day man and van jobs in Parramatta?",
+            "answer": "<p>Often, yes. It depends on that day's schedule, so call or send your request early and we'll confirm.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up a Marketplace item and bring it to my Parramatta apartment?",
+            "answer": "<p>Yes. Send us the listing and the seller's suburb. We arrange pickup with the seller and deliver it up to your unit.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care, and every piece is wrapped in blankets and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Man With a Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Small moves and single items."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "suburb_name": "Parramatta",
+        "phone": "0469 717 535",
+        "service_type": "Man and van, furniture removals and delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 18,
+        "live_open": "Taking same-day bookings in Parramatta now",
+        "live_closed": "Book now for tomorrow in Parramatta",
+        "live_fallback": "Same-day pickups available in Parramatta",
+        "kicker": "Parramatta · Western Sydney",
+        "heading": "Man and Van <em>Parramatta</em>",
+        "subheading": "A large van and two careful movers for single items, apartment moves and Marketplace pickups in Parramatta, Westmead, Harris Park and nearby. Fixed prices, often same day.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "hero_alt": "Titan Express man and van loaded for a Parramatta furniture delivery",
+        "hero_badge_title": "Parramatta apartment and house moves",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Man and Van Jobs We Do Every Week in Parramatta",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Parramatta Moves Are Mostly Apartments. We Plan for That.",
+        "local_body": "<p>Parramatta has more apartments than almost anywhere outside the Sydney CBD, and most buildings have <strong>booked lifts, loading docks and strict time slots</strong>. Getting those details right before moving day is what keeps a job on time and on budget.</p><p>Tell us the building, lift and dock details when you book. We'll plan the arrival time, bring the right trolleys and protect the lift with blankets.</p>",
+        "steps_heading": "Book a Man and Van in Parramatta in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Parramatta",
+        "gallery_1": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_2": "shopify://shop_images/1000013354.jpg",
+        "gallery_3": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
+        "gallery_4": "shopify://shop_images/Delivery_Service_man_and_Van.png",
+        "nearby_heading": "Man and Van Near Parramatta",
+        "nearby_intro": "We also cover the suburbs around Parramatta every day.",
+        "nearby_suburbs": "Westmead, Harris Park, North Parramatta, Rosehill, Granville, Merrylands, Northmead, Rydalmere, Wentworthville, Oatlands, Dundas, Ermington",
+        "price_heading": "What Affects Your Parramatta Man and Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Parramatta Man and Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Parramatta",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Man and Van Parramatta Questions",
+        "links_heading": "More Ways We Can Help"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

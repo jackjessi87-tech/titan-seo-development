@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA Marsden Park pickups",
+            "text": "Too big for the car? We collect your IKEA order from Marsden Park and deliver it home.",
+            "url": "IKEA pickup",
+            "link_label": "/pages/ikea-pickup-delivery-sydney"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "New-estate moves",
+            "text": "Small moves into Schofields, Box Hill, Riverstone and Marsden Park.",
+            "url": "Small moves",
+            "link_label": "/pages/man-with-a-van-sydney"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree pickups",
+            "text": "We collect from the seller and deliver to your door.",
+            "url": "Marketplace pickup",
+            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "A lounge, bed or dining table moved, with no minimum size.",
+            "url": "Single item delivery",
+            "link_label": "/pages/single-item-delivery-sydney"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Westpoint & store pickups",
+            "text": "Furniture and homewares collected from Westpoint Blacktown and local stores.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washing machines",
+            "text": "Heavy appliances moved upright and placed where you need them.",
+            "url": "Appliance delivery",
+            "link_label": "/pages/fridge-washing-machine-delivery-sydney"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA Marsden Park runs",
+            "text": "Order online or in store, then send us the pickup details. We collect and bring it home."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "New streets in the estates",
+            "text": "Marsden Park, Schofields and Box Hill keep growing. A map pin helps if your street is new."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "M7, M4 and Great Western Highway",
+            "text": "Quick links to Parramatta, Penrith, the Hills and the rest of Sydney."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Two-storey homes",
+            "text": "Many new homes have bedrooms upstairs. Tell us about stairs and we'll bring straps and an extra hand."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up my order from IKEA Marsden Park?",
+            "answer": "<p>Yes. Send us the order details and pickup time. We collect it and deliver it to your home in Blacktown or anywhere in Sydney.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a man and van cost in Blacktown?",
+            "answer": "<p>It depends on the items, stairs or lift, the distance and timing. We give a fixed price before you book.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you deliver to the new estates?",
+            "answer": "<p>Yes, including Marsden Park, Schofields, Box Hill and Riverstone. Send a map pin if your street is brand new.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you do same-day jobs?",
+            "answer": "<p>Often, yes. It depends on that day's schedule, so call or send your request early.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move single items?",
+            "answer": "<p>Yes, with no minimum job size. One couch or one fridge is a normal job for us.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "IKEA Pickup & Delivery Sydney",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "description": "Tempe, Rhodes and Marsden Park."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Removalists Castle Hill",
+            "url": "/pages/removalists-castle-hill",
+            "description": "Removals across the Hills District."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Parramatta",
+            "url": "/pages/man-and-van-parramatta",
+            "description": "Apartments, CBD towers and Westmead."
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "suburb_name": "Blacktown",
+        "phone": "0469 717 535",
+        "service_type": "Man and van, furniture removals and delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 18,
+        "live_open": "Taking same-day bookings in Blacktown now",
+        "live_closed": "Book now for tomorrow in Blacktown",
+        "live_fallback": "Same-day pickups available in Blacktown",
+        "kicker": "Blacktown · Western Sydney",
+        "heading": "Man and Van <em>Blacktown</em>",
+        "subheading": "Single items, small moves and IKEA Marsden Park pickups across Blacktown, Seven Hills, The Ponds and the new north-west estates. Fixed prices, careful movers.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "hero_alt": "Titan Express van with appliances loaded for a Blacktown delivery",
+        "hero_badge_title": "Blacktown and north-west pickups",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Man and Van Jobs Around Blacktown",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "From Westpoint to Marsden Park, We Know the North-West",
+        "local_body": "<p>Blacktown mixes established suburbs like Seven Hills and Kings Langley with <strong>brand-new estates in Marsden Park, Schofields and Box Hill</strong>. New homes mean lots of new furniture, and many families need a hand getting it home from IKEA or a Marketplace seller.</p><p>Tell us where it's coming from and where it's going, and we'll quote a fixed price.</p>",
+        "steps_heading": "Book a Man and Van in Blacktown in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Blacktown",
+        "gallery_1": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "gallery_2": "shopify://shop_images/Moving_Service_Sydney.png",
+        "gallery_3": "shopify://shop_images/single-item-delivery-sydney_jpg.jpg",
+        "gallery_4": "shopify://shop_images/Sofa_Removalist.png",
+        "nearby_heading": "Man and Van Near Blacktown",
+        "nearby_intro": "We cover Blacktown and the whole north-west.",
+        "nearby_suburbs": "Seven Hills, Kings Langley, Quakers Hill, Marayong, Doonside, Rooty Hill, Glenwood, Stanhope Gardens, The Ponds, Marsden Park, Schofields, Riverstone",
+        "price_heading": "What Affects Your Blacktown Man and Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Blacktown Man and Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Blacktown",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Man and Van Blacktown Questions",
+        "links_heading": "More Ways We Can Help"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & freezers",
+            "text": "Including tall and French-door fridges, kept upright the whole way.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Washing machines & dryers",
+            "text": "Front and top loaders moved on trolleys with straps.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace appliances",
+            "text": "Bought a second-hand fridge or washer? We collect it from the seller.",
+            "url": "Marketplace pickup",
+            "link_label": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store pickups",
+            "text": "Collected from appliance stores and warehouses across Sydney.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs & apartments",
+            "text": "Up stairs and into lifts with the right equipment and two movers.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day appliance jobs",
+            "text": "Fridge died? Call before midday and we'll check same-day availability.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and narrow doorways",
+            "text": "Send us the appliance size and any tight spots so we plan the route in."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment lifts",
+            "text": "Book your lift if needed and send us the time. We protect the lift and floors."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Placed in position",
+            "text": "We put it in the kitchen or laundry where you want it, ready for you to connect."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Anywhere in Sydney",
+            "text": "From appliance stores and sellers to your home, across every region."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move fridges upright?",
+            "answer": "<p>Yes. Fridges stay upright on an appliance trolley and are strapped in the van for the whole trip.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move a washing machine up stairs?",
+            "answer": "<p>Yes. Tell us how many flights there are and we'll bring the right trolley and two movers.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you connect or install appliances?",
+            "answer": "<p>We place the appliance where you want it. Plumbing and electrical connection should be done by a licensed tradesperson.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does fridge delivery cost in Sydney?",
+            "answer": "<p>It depends on the appliance, stairs or lift, the distance and timing. We give a fixed price before you book.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up a fridge I bought on Marketplace?",
+            "answer": "<p>Yes. Send us the seller's suburb and we'll arrange the pickup.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my appliance insured?",
+            "answer": "<p>Yes. It's covered while it's in our care, wrapped and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Man With a Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Small moves and single items."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Fridge and appliance pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 18,
+        "live_open": "Taking same-day appliance jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Same-day appliance delivery available",
+        "kicker": "Sydney-wide · Appliances",
+        "heading": "Fridge &amp; Washing Machine Delivery <em>Sydney</em>",
+        "subheading": "Fridges, washing machines and dryers picked up and delivered across Sydney. Moved upright on proper trolleys, strapped in and placed where you need them.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "hero_alt": "Titan Express mover loading a washing machine into the van on a trolley",
+        "hero_badge_title": "Moved upright, strapped in",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What appliance?",
+        "intents_heading": "Appliances We Move Every Week",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Appliances Need the Right Gear, Not Just Strong Arms",
+        "local_body": "<p>Fridges and washing machines are heavy, awkward and easy to damage. We move them <strong>upright on appliance trolleys, strapped in and wrapped</strong>, so they arrive working and without dents or scratched floors.</p><p>Tell us the appliance, both addresses and any stairs or tight doorways, and we'll give you a fixed price.</p>",
+        "steps_heading": "Move an Appliance in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Appliance Delivery Across Sydney",
+        "nearby_intro": "We pick up and deliver appliances in every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Appliance Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Appliance Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Fridge and Washing Machine Delivery Questions",
+        "links_heading": "More Ways We Can Help"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
