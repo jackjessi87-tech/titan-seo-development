@@ -68,7 +68,7 @@
             "region-parramatta-west": { "type": "_feature-grid-item", "settings": { "heading": "Parramatta & Western Sydney", "text": "Parramatta, Westmead, Auburn, Merrylands, Blacktown, Mount Druitt and Penrith.", "icon": "location" } },
             "region-ryde-north-shore": { "type": "_feature-grid-item", "settings": { "heading": "Ryde & North Shore", "text": "Ryde, Macquarie Park, Epping, Chatswood, Lane Cove, North Sydney and Hornsby.", "icon": "location" } },
             "region-northern-beaches": { "type": "_feature-grid-item", "settings": { "heading": "Northern Beaches", "text": "Manly, Dee Why, Brookvale, Narrabeen, Mona Vale and Frenchs Forest.", "icon": "location" } },
-            "region-hills": { "type": "_feature-grid-item", "settings": { "heading": "Hills District", "text": "Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill and Glenhaven.", "icon": "location" } },
+            "region-hills": { "type": "_feature-grid-item", "settings": { "heading": "Hills District", "text": "Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill and Glenhaven. See our Castle Hill removalists page below.", "icon": "location" } },
             "region-south-west": { "type": "_feature-grid-item", "settings": { "heading": "South West Sydney", "text": "Liverpool, Fairfield, Cabramatta, Casula, Prestons, Leppington and Campbelltown.", "icon": "location" } },
             "region-st-george-shire": { "type": "_feature-grid-item", "settings": { "heading": "St George & Sutherland Shire", "text": "Hurstville, Kogarah, Rockdale, Sutherland, Miranda and Cronulla.", "icon": "location" } }
           },
@@ -199,6 +199,7 @@
         "related_links_block": {
           "type": "related-links",
           "blocks": {
+            "link-castle-hill": { "type": "_related-link-item", "settings": { "label": "Removalists Castle Hill", "url": "/pages/removalists-castle-hill", "description": "Same-day removals and furniture delivery across Castle Hill and the Hills District." } },
             "link-ryde": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Ryde", "url": "/pages/furniture-delivery-ryde", "description": "Pickups and deliveries in Ryde, Macquarie Park and nearby suburbs." } },
             "link-homebush": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Homebush", "url": "/pages/furniture-delivery-homebush", "description": "Removals and deliveries in Homebush, Strathfield and the Inner West." } },
             "link-darlinghurst": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Darlinghurst", "url": "/pages/furniture-delivery-darlinghurst", "description": "Apartment-friendly deliveries in Darlinghurst and the inner city." } },
@@ -206,7 +207,7 @@
             "link-marketplace": { "type": "_related-link-item", "settings": { "label": "Facebook Marketplace Pickup & Delivery", "url": "/pages/facebook-marketplace-pickup-delivery-sydney", "description": "We collect from the seller and deliver to your door." } },
             "link-couch": { "type": "_related-link-item", "settings": { "label": "Couch Delivery Sydney", "url": "/pages/couch-delivery-sydney", "description": "Sofas, lounges and sofa beds moved without a scratch." } }
           },
-          "block_order": ["link-ryde", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-couch"],
+          "block_order": ["link-castle-hill", "link-ryde", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-couch"],
           "settings": {
             "heading": "<h2>Local Pages and Services</h2>",
             "color_scheme": "scheme-1",
