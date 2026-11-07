@@ -1,0 +1,778 @@
+{%- doc -%}
+  Titan Express local landing page (one suburb or area).
+  Reusable: every suburb page is a new JSON template with this one section and
+  its own settings and blocks. Built with HTML, CSS and Liquid; the small script
+  at the end only adds the live Sydney-time status and the step-by-step quote
+  form. Without JavaScript the form shows all fields and still submits.
+  Quote requests use Shopify's contact form, so they arrive in the store's
+  contact inbox like the other quote forms.
+  Schema output: Service, WebPage, BreadcrumbList, FAQPage only.
+{%- enddoc -%}
+
+{%- liquid
+  assign s = section.settings
+  assign uid = section.id
+  assign phone_digits = s.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
+  assign phone_intl = phone_digits | remove_first: '0' | prepend: '+61'
+  assign nearby = s.nearby_suburbs | split: ','
+  assign intents = section.blocks | where: 'type', 'intent'
+  assign local_points = section.blocks | where: 'type', 'local_point'
+  assign faqs = section.blocks | where: 'type', 'faq'
+  assign links = section.blocks | where: 'type', 'link'
+  assign form_id = 'LocalQuote-' | append: uid
+-%}
+
+{%- capture icon_sofa -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="M5 19v2M19 19v2"/></svg>{%- endcapture -%}
+{%- capture icon_box -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>{%- endcapture -%}
+{%- capture icon_tag -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>{%- endcapture -%}
+{%- capture icon_store -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9"/><path d="M10 21v-5h4v5"/></svg>{%- endcapture -%}
+{%- capture icon_fridge -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14M9 5v2M9 13v3"/></svg>{%- endcapture -%}
+{%- capture icon_bolt -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>{%- endcapture -%}
+{%- capture icon_stairs -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h5v-5h5v-5h5V6h3"/></svg>{%- endcapture -%}
+{%- capture icon_building -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg>{%- endcapture -%}
+{%- capture icon_route -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/></svg>{%- endcapture -%}
+{%- capture icon_parking -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>{%- endcapture -%}
+{%- capture icon_shield -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>{%- endcapture -%}
+{%- capture icon_phone -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>{%- endcapture -%}
+{%- capture icon_arrow -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>{%- endcapture -%}
+{%- capture icon_star -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>{%- endcapture -%}
+{%- capture icon_pin -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>{%- endcapture -%}
+
+<div class="tll" id="tll-{{ uid }}" data-open-hour="{{ s.open_hour }}" data-close-hour="{{ s.close_hour }}">
+
+  {%- comment -%} Live status strip {%- endcomment -%}
+  <div class="tll-live" role="status">
+    <span class="tll-live__dot" aria-hidden="true"></span>
+    <span class="tll-live__text" data-live-text>{{ s.live_fallback }}</span>
+    <span class="tll-live__time" data-live-time></span>
+    <a class="tll-live__call" href="tel:{{ phone_intl }}">{{ icon_phone }}<span>{{ s.phone }}</span></a>
+  </div>
+
+  {%- comment -%} Breadcrumbs {%- endcomment -%}
+  <nav class="tll-crumbs tll-wrap" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      {%- if s.parent_label != blank and s.parent_url != blank -%}
+        <li><a href="{{ s.parent_url }}">{{ s.parent_label }}</a></li>
+      {%- endif -%}
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  {%- comment -%} Hero {%- endcomment -%}
+  <section class="tll-hero">
+    <div class="tll-hero__grid-bg" aria-hidden="true"></div>
+    <div class="tll-wrap tll-hero__inner">
+      <div class="tll-hero__copy">
+        <p class="tll-kicker">{{ icon_pin }}<span>{{ s.kicker }}</span></p>
+        <h1 class="tll-h1">{{ s.heading }}</h1>
+        <p class="tll-hero__sub">{{ s.subheading }}</p>
+
+        <div class="tll-hero__ctas">
+          <a class="tll-btn tll-btn--call" href="tel:{{ phone_intl }}">
+            <span class="tll-btn__icon">{{ icon_phone }}</span>
+            <span class="tll-btn__label"><small>Tap to call now</small>{{ s.phone }}</span>
+          </a>
+          <a class="tll-btn tll-btn--ghost" href="#tll-quote-{{ uid }}">Get my fixed price {{ icon_arrow }}</a>
+        </div>
+
+        <ul class="tll-trust" role="list">
+          {%- if s.rating_text != blank -%}<li>{{ icon_star }}<span>{{ s.rating_text }}</span></li>{%- endif -%}
+          {%- if s.trust_1 != blank -%}<li>{{ icon_shield }}<span>{{ s.trust_1 }}</span></li>{%- endif -%}
+          {%- if s.trust_2 != blank -%}<li>{{ icon_bolt }}<span>{{ s.trust_2 }}</span></li>{%- endif -%}
+        </ul>
+      </div>
+
+      <div class="tll-hero__media">
+        {%- if s.hero_image != blank -%}
+          {%- assign hero_alt = s.hero_image.alt | default: s.hero_alt -%}
+          {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
+        {%- endif -%}
+        <div class="tll-glass tll-hero__badge">
+          <span class="tll-live__dot" aria-hidden="true"></span>
+          <div><strong>{{ s.hero_badge_title }}</strong><span>{{ s.hero_badge_text }}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Search-intent cards {%- endcomment -%}
+  {%- if intents.size > 0 -%}
+    <section class="tll-section tll-wrap" aria-labelledby="tll-intents-{{ uid }}">
+      <p class="tll-eyebrow">{{ s.intents_eyebrow }}</p>
+      <h2 id="tll-intents-{{ uid }}" class="tll-h2">{{ s.intents_heading }}</h2>
+      <ul class="tll-cards" role="list">
+        {%- for block in intents -%}
+          <li class="tll-card" {{ block.shopify_attributes }}>
+            <span class="tll-card__icon">
+              {%- case block.settings.icon -%}
+                {%- when 'sofa' -%}{{ icon_sofa }}
+                {%- when 'box' -%}{{ icon_box }}
+                {%- when 'tag' -%}{{ icon_tag }}
+                {%- when 'store' -%}{{ icon_store }}
+                {%- when 'fridge' -%}{{ icon_fridge }}
+                {%- when 'bolt' -%}{{ icon_bolt }}
+                {%- when 'stairs' -%}{{ icon_stairs }}
+                {%- when 'building' -%}{{ icon_building }}
+                {%- else -%}{{ icon_box }}
+              {%- endcase -%}
+            </span>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+            {%- if block.settings.url != blank -%}
+              <a class="tll-card__link" href="{{ block.settings.url }}">{{ block.settings.link_label | default: 'Learn more' }} {{ icon_arrow }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Local knowledge {%- endcomment -%}
+  <section class="tll-section tll-local" aria-labelledby="tll-local-{{ uid }}">
+    <div class="tll-wrap tll-local__inner">
+      <div class="tll-local__copy">
+        <p class="tll-eyebrow">{{ s.local_eyebrow }}</p>
+        <h2 id="tll-local-{{ uid }}" class="tll-h2">{{ s.local_heading }}</h2>
+        <div class="tll-rte">{{ s.local_body }}</div>
+      </div>
+      {%- if local_points.size > 0 -%}
+        <ul class="tll-points" role="list">
+          {%- for block in local_points -%}
+            <li class="tll-glass tll-point" {{ block.shopify_attributes }}>
+              <span class="tll-point__icon">
+                {%- case block.settings.icon -%}
+                  {%- when 'stairs' -%}{{ icon_stairs }}
+                  {%- when 'building' -%}{{ icon_building }}
+                  {%- when 'route' -%}{{ icon_route }}
+                  {%- when 'parking' -%}{{ icon_parking }}
+                  {%- when 'store' -%}{{ icon_store }}
+                  {%- else -%}{{ icon_pin }}
+                {%- endcase -%}
+              </span>
+              <div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} Steps {%- endcomment -%}
+  <section class="tll-section tll-wrap" aria-labelledby="tll-steps-{{ uid }}">
+    <p class="tll-eyebrow">How it works</p>
+    <h2 id="tll-steps-{{ uid }}" class="tll-h2">{{ s.steps_heading }}</h2>
+    <ol class="tll-steps">
+      <li><span class="tll-steps__n">01</span><h3>{{ s.step_1_title }}</h3><p>{{ s.step_1_text }}</p></li>
+      <li><span class="tll-steps__n">02</span><h3>{{ s.step_2_title }}</h3><p>{{ s.step_2_text }}</p></li>
+      <li><span class="tll-steps__n">03</span><h3>{{ s.step_3_title }}</h3><p>{{ s.step_3_text }}</p></li>
+    </ol>
+  </section>
+
+  {%- comment -%} Gallery of real job photos {%- endcomment -%}
+  {%- if s.gallery_1 != blank or s.gallery_2 != blank -%}
+    <section class="tll-section tll-wrap" aria-labelledby="tll-gallery-{{ uid }}">
+      <p class="tll-eyebrow">Real vans, real jobs</p>
+      <h2 id="tll-gallery-{{ uid }}" class="tll-h2">{{ s.gallery_heading }}</h2>
+      <div class="tll-gallery">
+        {%- assign gallery = 'gallery_1,gallery_2,gallery_3,gallery_4' | split: ',' -%}
+        {%- for key in gallery -%}
+          {%- assign img = s[key] -%}
+          {%- if img != blank -%}
+            <figure class="tll-gallery__item">
+              {%- assign img_alt = img.alt | default: s.gallery_alt -%}
+              {{ img | image_url: width: 640 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw', widths: '320, 480, 640', alt: img_alt }}
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Nearby suburbs {%- endcomment -%}
+  <section class="tll-section tll-wrap" aria-labelledby="tll-near-{{ uid }}">
+    <p class="tll-eyebrow">Service area</p>
+    <h2 id="tll-near-{{ uid }}" class="tll-h2">{{ s.nearby_heading }}</h2>
+    <p class="tll-lead">{{ s.nearby_intro }}</p>
+    <ul class="tll-chips" role="list">
+      {%- for sub in nearby -%}
+        {%- assign sub_t = sub | strip -%}
+        {%- if sub_t != blank -%}<li>{{ icon_pin }}<span>{{ sub_t }}</span></li>{%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </section>
+
+  {%- comment -%} Price factors {%- endcomment -%}
+  <section class="tll-section tll-wrap" aria-labelledby="tll-price-{{ uid }}">
+    <div class="tll-price">
+      <div>
+        <p class="tll-eyebrow tll-eyebrow--light">Pricing</p>
+        <h2 id="tll-price-{{ uid }}" class="tll-h2">{{ s.price_heading }}</h2>
+        <p>{{ s.price_text }}</p>
+      </div>
+      <ul class="tll-price__list" role="list">
+        <li>{{ icon_box }}<span>What you're moving</span></li>
+        <li>{{ icon_stairs }}<span>Stairs or lift at each end</span></li>
+        <li>{{ icon_route }}<span>Pickup and delivery suburbs</span></li>
+        <li>{{ icon_bolt }}<span>Same-day or booked ahead</span></li>
+      </ul>
+      <div class="tll-price__ctas">
+        <a class="tll-btn tll-btn--call" href="tel:{{ phone_intl }}"><span class="tll-btn__icon">{{ icon_phone }}</span><span class="tll-btn__label"><small>Fastest price</small>{{ s.phone }}</span></a>
+        <a class="tll-btn tll-btn--light" href="#tll-quote-{{ uid }}">Send details online {{ icon_arrow }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Quote form (Shopify contact form, step-by-step with JS) {%- endcomment -%}
+  <section class="tll-section tll-wrap" id="tll-quote-{{ uid }}" aria-labelledby="tll-quote-h-{{ uid }}">
+    <div class="tll-quote">
+      <div class="tll-quote__intro">
+        <p class="tll-eyebrow">Free quote · No obligation</p>
+        <h2 id="tll-quote-h-{{ uid }}" class="tll-h2">{{ s.form_heading }}</h2>
+        <p>{{ s.form_text }}</p>
+        <a class="tll-quote__call" href="tel:{{ phone_intl }}">{{ icon_phone }}<span>Prefer to talk? <strong>{{ s.phone }}</strong></span></a>
+      </div>
+
+      {%- form 'contact', id: form_id, class: 'tll-form' -%}
+        <input type="hidden" name="contact[source]" value="{{ page.title }} – local page quote">
+        {%- if form.posted_successfully? -%}
+          <div class="tll-form__success" tabindex="-1" autofocus>
+            {{ icon_shield }}
+            <h3>Request received!</h3>
+            <p>{{ s.form_success }}</p>
+            <a class="tll-btn tll-btn--call" href="tel:{{ phone_intl }}"><span class="tll-btn__icon">{{ icon_phone }}</span><span class="tll-btn__label"><small>Need it today?</small>{{ s.phone }}</span></a>
+          </div>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="tll-form__error" tabindex="-1" autofocus>{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+
+          <div class="tll-progress" aria-hidden="true"><span data-progress></span></div>
+          <p class="tll-form__step-label" data-step-label aria-live="polite"></p>
+
+          <fieldset class="tll-step" data-step="1">
+            <legend>Where are we moving it?</legend>
+            <div class="tll-row">
+              <label class="tll-field"><span>Pickup suburb</span>
+                <input type="text" name="contact[pickup_suburb]" value="{{ s.default_pickup }}" autocomplete="address-level2" required></label>
+              <label class="tll-field"><span>Delivery suburb</span>
+                <input type="text" name="contact[delivery_suburb]" placeholder="e.g. Kellyville" autocomplete="off" required></label>
+            </div>
+            <label class="tll-field"><span>What are you moving?</span>
+              <textarea name="contact[body]" rows="3" placeholder="e.g. 3-seater sofa and a queen bed" required></textarea></label>
+          </fieldset>
+
+          <fieldset class="tll-step" data-step="2">
+            <legend>Access and timing</legend>
+            <p class="tll-field__hint">Stairs or lift at pickup?</p>
+            <div class="tll-options">
+              <label><input type="radio" name="contact[pickup_access]" value="Ground floor" checked><span>Ground floor</span></label>
+              <label><input type="radio" name="contact[pickup_access]" value="Stairs"><span>Stairs</span></label>
+              <label><input type="radio" name="contact[pickup_access]" value="Lift"><span>Lift</span></label>
+            </div>
+            <p class="tll-field__hint">Stairs or lift at delivery?</p>
+            <div class="tll-options">
+              <label><input type="radio" name="contact[delivery_access]" value="Ground floor" checked><span>Ground floor</span></label>
+              <label><input type="radio" name="contact[delivery_access]" value="Stairs"><span>Stairs</span></label>
+              <label><input type="radio" name="contact[delivery_access]" value="Lift"><span>Lift</span></label>
+            </div>
+            <label class="tll-field"><span>Preferred date</span>
+              <input type="date" name="contact[preferred_date]"></label>
+          </fieldset>
+
+          <fieldset class="tll-step" data-step="3">
+            <legend>Where should we send your price?</legend>
+            <label class="tll-field"><span>Your name</span>
+              <input type="text" name="contact[name]" autocomplete="name" required></label>
+            <div class="tll-row">
+              <label class="tll-field"><span>Mobile</span>
+                <input type="tel" name="contact[phone]" autocomplete="tel" inputmode="tel" required></label>
+              <label class="tll-field"><span>Email</span>
+                <input type="email" name="contact[email]" autocomplete="email" required></label>
+            </div>
+          </fieldset>
+
+          <div class="tll-form__nav">
+            <button type="button" class="tll-btn tll-btn--ghost" data-back hidden>Back</button>
+            <button type="button" class="tll-btn tll-btn--primary" data-next hidden>Next {{ icon_arrow }}</button>
+            <button type="submit" class="tll-btn tll-btn--primary" data-submit>{{ s.form_button }} {{ icon_arrow }}</button>
+          </div>
+          <p class="tll-form__fine">We only use your details to quote your job.</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </section>
+
+  {%- comment -%} FAQ {%- endcomment -%}
+  {%- if faqs.size > 0 -%}
+    <section class="tll-section tll-wrap tll-faq" aria-labelledby="tll-faq-{{ uid }}">
+      <p class="tll-eyebrow">FAQ</p>
+      <h2 id="tll-faq-{{ uid }}" class="tll-h2">{{ s.faq_heading }}</h2>
+      <div class="tll-faq__list">
+        {%- for block in faqs -%}
+          <details class="tll-faq__item" {{ block.shopify_attributes }}>
+            <summary><h3>{{ block.settings.question }}</h3><span class="tll-faq__plus" aria-hidden="true"></span></summary>
+            <div class="tll-rte">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Related pages {%- endcomment -%}
+  {%- if links.size > 0 -%}
+    <section class="tll-section tll-wrap" aria-labelledby="tll-links-{{ uid }}">
+      <h2 id="tll-links-{{ uid }}" class="tll-h2">{{ s.links_heading }}</h2>
+      <ul class="tll-links" role="list">
+        {%- for block in links -%}
+          <li {{ block.shopify_attributes }}><a href="{{ block.settings.url }}"><strong>{{ block.settings.label }}</strong><span>{{ block.settings.description }}</span>{{ icon_arrow }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Sticky mobile action bar {%- endcomment -%}
+  <div class="tll-dock">
+    <a class="tll-dock__call" href="tel:{{ phone_intl }}">{{ icon_phone }}<span>Call {{ s.phone }}</span></a>
+    <a class="tll-dock__quote" href="#tll-quote-{{ uid }}">Quote</a>
+  </div>
+</div>
+
+{%- comment -%} Structured data built from the visible content {%- endcomment -%}
+{%- capture faq_json -%}
+  {%- for block in faqs -%}
+    {"@type":"Question","name":{{ block.settings.question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.answer | strip_html | strip | json }}}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": {{ page.title | json }},
+      "serviceType": {{ s.service_type | json }},
+      "description": {{ s.subheading | json }},
+      "url": {{ shop.url | append: page.url | json }},
+      "areaServed": [
+        {"@type": "Place", "name": {{ s.suburb_name | append: ', NSW' | json }}}
+        {%- for sub in nearby -%}{%- assign sub_t = sub | strip -%}{%- if sub_t != blank -%},{"@type": "Place", "name": {{ sub_t | append: ', NSW' | json }}}{%- endif -%}{%- endfor -%}
+      ],
+      "provider": {"@type": "Organization", "name": {{ shop.name | json }}, "url": {{ shop.url | json }}, "telephone": {{ phone_intl | json }}}
+    },
+    {
+      "@type": "WebPage",
+      "name": {{ page.title | json }},
+      "url": {{ shop.url | append: page.url | json }},
+      "description": {{ page.metafields.global.description_tag | default: s.subheading | json }}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": {{ shop.url | json }}}
+        {%- if s.parent_label != blank and s.parent_url != blank -%}
+        ,{"@type": "ListItem", "position": 2, "name": {{ s.parent_label | json }}, "item": {{ shop.url | append: s.parent_url | json }}}
+        ,{"@type": "ListItem", "position": 3, "name": {{ page.title | json }}, "item": {{ shop.url | append: page.url | json }}}
+        {%- else -%}
+        ,{"@type": "ListItem", "position": 2, "name": {{ page.title | json }}, "item": {{ shop.url | append: page.url | json }}}
+        {%- endif -%}
+      ]
+    }
+    {%- if faqs.size > 0 -%}
+    ,{"@type": "FAQPage", "mainEntity": [{{ faq_json }}]}
+    {%- endif -%}
+  ]
+}
+</script>
+
+<script>
+  (function () {
+    var root = document.getElementById('tll-{{ uid }}');
+    if (!root) return;
+
+    /* Live Sydney time and booking status */
+    var textEl = root.querySelector('[data-live-text]');
+    var timeEl = root.querySelector('[data-live-time]');
+    var open = parseInt(root.dataset.openHour, 10) || 8;
+    var close = parseInt(root.dataset.closeHour, 10) || 18;
+    function tick() {
+      try {
+        var now = new Date();
+        var parts = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', hour: 'numeric', minute: '2-digit', weekday: 'short', hour12: true }).format(now);
+        var hour = parseInt(new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', hour: 'numeric', hour12: false }).format(now), 10);
+        timeEl.textContent = 'Sydney ' + parts;
+        var live = hour >= open && hour < close;
+        root.classList.toggle('is-after-hours', !live);
+        textEl.textContent = live ? {{ s.live_open | json }} : {{ s.live_closed | json }};
+      } catch (e) {}
+    }
+    tick();
+    setInterval(tick, 30000);
+
+    /* Step-by-step quote form */
+    var form = root.querySelector('.tll-form');
+    if (!form) return;
+    var steps = [].slice.call(form.querySelectorAll('[data-step]'));
+    if (!steps.length) return;
+    var back = form.querySelector('[data-back]');
+    var next = form.querySelector('[data-next]');
+    var submit = form.querySelector('[data-submit]');
+    var bar = form.querySelector('[data-progress]');
+    var label = form.querySelector('[data-step-label]');
+    var current = 0;
+    form.classList.add('is-stepped');
+    function show(i) {
+      current = i;
+      steps.forEach(function (st, n) { st.hidden = n !== i; });
+      back.hidden = i === 0;
+      next.hidden = i === steps.length - 1;
+      submit.hidden = i !== steps.length - 1;
+      if (bar) bar.style.width = ((i + 1) / steps.length * 100) + '%';
+      if (label) label.textContent = 'Step ' + (i + 1) + ' of ' + steps.length;
+    }
+    function valid(st) {
+      var fields = [].slice.call(st.querySelectorAll('input, textarea, select'));
+      for (var k = 0; k < fields.length; k++) {
+        if (!fields[k].checkValidity()) { fields[k].reportValidity(); return false; }
+      }
+      return true;
+    }
+    next.addEventListener('click', function () {
+      if (valid(steps[current])) { show(current + 1); var f = steps[current].querySelector('input, textarea'); if (f) f.focus(); }
+    });
+    back.addEventListener('click', function () { show(current - 1); });
+    show(0);
+  })();
+</script>
+
+{% stylesheet %}
+  .tll {
+    --tll-red: #e30613;
+    --tll-red-2: #ff1744;
+    --tll-ink: #0b0b0f;
+    --tll-ink-2: #15151c;
+    --tll-text: rgba(0, 0, 0, 0.82);
+    --tll-muted: #5b5b66;
+    --tll-line: rgba(0, 0, 0, 0.08);
+    --tll-soft: #f6f6f8;
+    --tll-green: #22c55e;
+    --tll-radius: 18px;
+    --tll-grad: linear-gradient(135deg, var(--tll-red) 0%, var(--tll-red-2) 100%);
+    font-family: Inter, var(--font-body--family, sans-serif);
+    color: var(--tll-text);
+    background: #fff;
+    overflow-x: clip;
+  }
+  .tll *, .tll *::before, .tll *::after { box-sizing: border-box; }
+  .tll svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .tll-wrap { width: min(1180px, 100% - 32px); margin-inline: auto; }
+  .tll-section { padding-block: clamp(48px, 7vw, 88px); }
+  .tll h3 { margin: 0; }
+
+  /* Live strip */
+  .tll-live {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+    padding: 9px 16px; background: var(--tll-ink); color: #fff; font-size: 0.875rem; font-weight: 500;
+  }
+  .tll-live__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--tll-green); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); flex-shrink: 0; }
+  .tll.is-after-hours .tll-live__dot { background: #f59e0b; }
+  .tll-live__time { opacity: 0.65; }
+  .tll-live__call { display: inline-flex; align-items: center; gap: 6px; color: #fff; font-weight: 700; text-decoration: none; padding: 4px 12px; border-radius: 999px; background: var(--tll-grad); }
+
+  /* Breadcrumbs */
+  .tll-crumbs ol { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 14px 0 0; margin: 0; font-size: 0.85rem; color: var(--tll-muted); }
+  .tll-crumbs li + li::before { content: "/"; margin-right: 6px; opacity: 0.5; }
+  .tll-crumbs a { color: inherit; }
+
+  /* Hero */
+  .tll-hero { position: relative; margin-top: 14px; background: radial-gradient(1200px 500px at 85% -10%, rgba(227, 6, 19, 0.35), transparent 60%), radial-gradient(800px 400px at -10% 110%, rgba(255, 23, 68, 0.18), transparent 60%), var(--tll-ink); color: #fff; overflow: hidden; }
+  .tll-hero__grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(ellipse at 70% 30%, #000 20%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 20%, transparent 75%); pointer-events: none; }
+  .tll-hero__inner { position: relative; display: grid; gap: 36px; padding-block: clamp(40px, 7vw, 96px); }
+  @media (min-width: 900px) { .tll-hero__inner { grid-template-columns: 1.15fr 0.85fr; align-items: center; } }
+  .tll-kicker { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; padding: 6px 14px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 999px; background: rgba(255, 255, 255, 0.06); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb3bb; }
+  .tll-h1 { margin: 0 0 16px; font-size: clamp(2.5rem, 5vw + 1rem, 4.75rem); line-height: 1.02; font-weight: 800; letter-spacing: -0.03em; text-wrap: balance; }
+  .tll-h1 em { font-style: normal; background: var(--tll-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .tll-hero__sub { margin: 0 0 28px; max-width: 34em; font-size: clamp(1.05rem, 0.4vw + 1rem, 1.25rem); line-height: 1.55; color: rgba(255, 255, 255, 0.78); }
+  .tll-hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+  .tll-trust { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; margin: 0; padding: 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.82); }
+  .tll-trust li { display: inline-flex; align-items: center; gap: 7px; }
+  .tll-trust li:first-child svg { fill: #fbbf24; stroke: #fbbf24; }
+  .tll-hero__media { position: relative; }
+  .tll-hero__img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; max-height: 560px; object-fit: cover; border-radius: 26px; border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55); }
+  .tll-hero__badge { position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+  .tll-hero__badge strong { display: block; font-size: 0.95rem; }
+  .tll-hero__badge span { font-size: 0.82rem; opacity: 0.8; }
+  .tll-glass { background: rgba(20, 20, 28, 0.55); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 16px; backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); color: #fff; }
+
+  /* Buttons */
+  .tll-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 12px 22px; border: 0; border-radius: 14px; font: inherit; font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer; transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease; }
+  .tll-btn:hover, .tll-btn:focus-visible { transform: translateY(-2px); }
+  .tll-btn:focus-visible, .tll a:focus-visible, .tll summary:focus-visible, .tll input:focus-visible, .tll textarea:focus-visible { outline: 3px solid #ffb3bb; outline-offset: 3px; }
+  .tll-btn--call { background: var(--tll-grad); color: #fff; padding-left: 10px; box-shadow: 0 10px 30px rgba(227, 6, 19, 0.4); }
+  .tll-btn--call:hover { box-shadow: 0 14px 38px rgba(227, 6, 19, 0.55); }
+  .tll-btn__icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: rgba(255, 255, 255, 0.18); }
+  .tll-btn__label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; font-size: 1.15rem; letter-spacing: 0.01em; }
+  .tll-btn__label small { font-size: 0.72rem; font-weight: 600; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.06em; }
+  .tll-btn--ghost { background: rgba(255, 255, 255, 0.08); color: inherit; border: 1px solid rgba(255, 255, 255, 0.22); }
+  .tll-quote .tll-btn--ghost, .tll-form .tll-btn--ghost { background: var(--tll-soft); border-color: var(--tll-line); color: var(--tll-ink); }
+  .tll-btn--primary { background: var(--tll-grad); color: #fff; box-shadow: 0 10px 26px rgba(227, 6, 19, 0.35); }
+  .tll-btn--light { background: #fff; color: var(--tll-ink); }
+
+  /* Headings */
+  .tll-eyebrow { margin: 0 0 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tll-red); }
+  .tll-eyebrow--light { color: #ffb3bb; }
+  .tll-h2 { margin: 0 0 14px; font-size: clamp(1.75rem, 2.2vw + 1rem, 2.75rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; color: var(--tll-ink); text-wrap: balance; }
+  .tll-lead { margin: 0 0 24px; max-width: 46em; color: var(--tll-muted); font-size: 1.05rem; line-height: 1.6; }
+  .tll-rte p { margin: 0 0 14px; line-height: 1.7; font-size: 1.05rem; }
+  .tll-rte strong { color: var(--tll-ink); background: linear-gradient(transparent 60%, rgba(227, 6, 19, 0.16) 60%); }
+
+  /* Intent cards */
+  .tll-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; list-style: none; margin: 28px 0 0; padding: 0; }
+  .tll-card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: var(--tll-radius); background: var(--tll-soft); border: 1px solid var(--tll-line); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+  .tll-card:hover { transform: translateY(-4px); border-color: rgba(227, 6, 19, 0.35); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08); }
+  .tll-card__icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--tll-ink); color: #fff; }
+  .tll-card__icon svg { width: 24px; height: 24px; }
+  .tll-card h3 { font-size: 1.15rem; color: var(--tll-ink); }
+  .tll-card p { margin: 0; color: var(--tll-muted); line-height: 1.55; }
+  .tll-card__link { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--tll-red); text-decoration: none; }
+
+  /* Local section */
+  .tll-local { background: var(--tll-ink); color: rgba(255, 255, 255, 0.85); }
+  .tll-local .tll-h2 { color: #fff; }
+  .tll-local .tll-eyebrow { color: #ffb3bb; }
+  .tll-local .tll-rte strong { color: #fff; background: linear-gradient(transparent 60%, rgba(255, 23, 68, 0.45) 60%); }
+  .tll-local__inner { display: grid; gap: 32px; }
+  @media (min-width: 900px) { .tll-local__inner { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .tll-points { display: grid; gap: 12px; list-style: none; margin: 0; padding: 0; }
+  .tll-point { display: flex; gap: 14px; padding: 18px; }
+  .tll-point__icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--tll-grad); color: #fff; flex-shrink: 0; }
+  .tll-point h3 { font-size: 1.02rem; margin-bottom: 4px; }
+  .tll-point p { margin: 0; font-size: 0.95rem; line-height: 1.5; opacity: 0.8; }
+
+  /* Steps */
+  .tll-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; list-style: none; margin: 28px 0 0; padding: 0; counter-reset: none; }
+  .tll-steps li { position: relative; padding: 26px; border-radius: var(--tll-radius); border: 1px solid var(--tll-line); background: linear-gradient(180deg, #fff, var(--tll-soft)); }
+  .tll-steps__n { display: inline-block; margin-bottom: 14px; font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; background: var(--tll-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .tll-steps h3 { font-size: 1.15rem; color: var(--tll-ink); margin-bottom: 6px; }
+  .tll-steps p { margin: 0; color: var(--tll-muted); line-height: 1.55; }
+
+  /* Gallery */
+  .tll-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
+  @media (min-width: 900px) { .tll-gallery { grid-template-columns: repeat(4, 1fr); } }
+  .tll-gallery__item { margin: 0; overflow: hidden; border-radius: 16px; background: var(--tll-soft); }
+  .tll-gallery__item img { display: block; width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 0.4s ease; }
+  .tll-gallery__item:hover img { transform: scale(1.04); }
+
+  /* Chips */
+  .tll-chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
+  .tll-chips li { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; background: var(--tll-soft); border: 1px solid var(--tll-line); font-weight: 600; color: var(--tll-ink); }
+  .tll-chips svg { color: var(--tll-red); width: 1em; height: 1em; }
+
+  /* Price panel */
+  .tll-price { display: grid; gap: 24px; padding: clamp(24px, 4vw, 48px); border-radius: 28px; color: rgba(255, 255, 255, 0.85); background: radial-gradient(600px 300px at 100% 0%, rgba(255, 23, 68, 0.45), transparent 60%), var(--tll-ink-2); }
+  @media (min-width: 900px) { .tll-price { grid-template-columns: 1.1fr 1fr; align-items: center; } .tll-price__ctas { grid-column: 1 / -1; } }
+  .tll-price .tll-h2 { color: #fff; }
+  .tll-price p { margin: 0; line-height: 1.6; }
+  .tll-price__list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; list-style: none; margin: 0; padding: 0; }
+  .tll-price__list li { display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 14px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); font-weight: 600; font-size: 0.95rem; color: #fff; }
+  .tll-price__list svg { color: #ff8a98; }
+  .tll-price__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Quote form */
+  .tll-quote { display: grid; gap: 28px; padding: clamp(20px, 4vw, 44px); border-radius: 28px; background: var(--tll-soft); border: 1px solid var(--tll-line); }
+  @media (min-width: 900px) { .tll-quote { grid-template-columns: 0.8fr 1.2fr; } }
+  .tll-quote__intro p { margin: 0 0 18px; color: var(--tll-muted); line-height: 1.6; }
+  .tll-quote__call { display: inline-flex; align-items: center; gap: 10px; color: var(--tll-ink); text-decoration: none; font-size: 1.05rem; }
+  .tll-quote__call svg { color: var(--tll-red); }
+  .tll-form { display: grid; gap: 16px; padding: clamp(18px, 3vw, 28px); border-radius: 20px; background: #fff; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.07); }
+  .tll-progress { height: 6px; border-radius: 99px; background: var(--tll-soft); overflow: hidden; display: none; }
+  .tll-form.is-stepped .tll-progress { display: block; }
+  .tll-progress span { display: block; height: 100%; width: 33%; background: var(--tll-grad); border-radius: inherit; transition: width 0.3s ease; }
+  .tll-form__step-label { margin: 0; font-size: 0.8rem; font-weight: 700; color: var(--tll-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .tll-form__step-label:empty { display: none; }
+  .tll-step { display: grid; gap: 14px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .tll-step[hidden] { display: none; }
+  .tll-step legend { padding: 0; margin-bottom: 4px; font-size: 1.25rem; font-weight: 800; color: var(--tll-ink); }
+  .tll-row { display: grid; gap: 14px; }
+  @media (min-width: 600px) { .tll-row { grid-template-columns: 1fr 1fr; } }
+  .tll-field { display: grid; gap: 6px; font-weight: 600; font-size: 0.92rem; color: var(--tll-ink); }
+  .tll-field input, .tll-field textarea { width: 100%; min-height: 52px; padding: 13px 16px; border: 1.5px solid #d9d9e0; border-radius: 14px; background: #fff; font: inherit; font-size: 16px; font-weight: 500; color: var(--tll-ink); transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+  .tll-field textarea { resize: vertical; }
+  .tll-field input:focus, .tll-field textarea:focus { border-color: var(--tll-red); box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.12); outline: none; }
+  .tll-field__hint { margin: 0; font-weight: 600; font-size: 0.92rem; color: var(--tll-ink); }
+  .tll-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tll-options label { position: relative; }
+  .tll-options input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .tll-options span { display: grid; place-items: center; min-height: 48px; padding: 8px; border: 1.5px solid #d9d9e0; border-radius: 12px; font-weight: 600; font-size: 0.92rem; text-align: center; transition: all 0.15s ease; }
+  .tll-options input:checked + span { border-color: var(--tll-red); background: rgba(227, 6, 19, 0.06); color: var(--tll-red); }
+  .tll-options input:focus-visible + span { outline: 3px solid #ffb3bb; outline-offset: 2px; }
+  .tll-form__nav { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+  .tll-form__nav .tll-btn { flex: 1 1 auto; }
+  .tll-form__nav [hidden] { display: none; }
+  .tll-form__fine { margin: 0; font-size: 0.8rem; color: var(--tll-muted); text-align: center; }
+  .tll-form__error { padding: 12px 14px; border-radius: 12px; background: #fef2f2; color: #991b1b; font-weight: 600; }
+  .tll-form__success { display: grid; gap: 12px; justify-items: start; }
+  .tll-form__success > svg { width: 44px; height: 44px; color: var(--tll-green); }
+  .tll-form__success h3 { font-size: 1.4rem; color: var(--tll-ink); }
+  .tll-form__success p { margin: 0; color: var(--tll-muted); }
+
+  /* FAQ */
+  .tll-faq__list { display: grid; gap: 10px; margin-top: 24px; max-width: 860px; }
+  .tll-faq__item { border-radius: 16px; border: 1px solid var(--tll-line); background: #fff; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .tll-faq__item[open] { border-color: rgba(227, 6, 19, 0.35); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06); }
+  .tll-faq__item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; cursor: pointer; list-style: none; }
+  .tll-faq__item summary::-webkit-details-marker { display: none; }
+  .tll-faq__item h3 { font-size: 1.05rem; color: var(--tll-ink); }
+  .tll-faq__plus { position: relative; width: 28px; height: 28px; border-radius: 50%; background: var(--tll-soft); flex-shrink: 0; }
+  .tll-faq__plus::before, .tll-faq__plus::after { content: ""; position: absolute; top: 50%; left: 50%; width: 12px; height: 2px; background: var(--tll-red); transform: translate(-50%, -50%); transition: transform 0.2s ease; }
+  .tll-faq__plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .tll-faq__item[open] .tll-faq__plus::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .tll-faq__item .tll-rte { padding: 0 20px 18px; color: var(--tll-muted); }
+
+  /* Related links */
+  .tll-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; list-style: none; margin: 20px 0 0; padding: 0; }
+  .tll-links a { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; height: 100%; padding: 18px 20px; border-radius: 16px; border: 1px solid var(--tll-line); color: var(--tll-ink); text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease; }
+  .tll-links a:hover, .tll-links a:focus-visible { border-color: var(--tll-red); transform: translateY(-2px); }
+  .tll-links strong { grid-column: 1; }
+  .tll-links span { grid-column: 1; font-size: 0.9rem; color: var(--tll-muted); }
+  .tll-links svg { grid-column: 2; grid-row: 1 / span 2; color: var(--tll-red); }
+
+  /* Mobile dock */
+  .tll-dock { position: fixed; z-index: 40; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 8px; border-radius: 18px; background: rgba(11, 11, 15, 0.82); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
+  .tll-dock a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 18px; border-radius: 12px; font-weight: 800; text-decoration: none; }
+  .tll-dock__call { background: var(--tll-grad); color: #fff; }
+  .tll-dock__quote { background: #fff; color: var(--tll-ink); }
+  @media (min-width: 900px) { .tll-dock { display: none; } }
+  @media (max-width: 899px) { .tll { padding-bottom: 84px; } }
+
+  /* Motion, only when the visitor allows it */
+  @media (prefers-reduced-motion: no-preference) {
+    .tll-live__dot { animation: tll-pulse 2s infinite; }
+    .tll-hero__copy > * { animation: tll-rise 0.7s ease both; }
+    .tll-hero__copy > *:nth-child(2) { animation-delay: 0.06s; }
+    .tll-hero__copy > *:nth-child(3) { animation-delay: 0.12s; }
+    .tll-hero__copy > *:nth-child(4) { animation-delay: 0.18s; }
+    .tll-hero__media { animation: tll-rise 0.9s 0.1s ease both; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tll *, .tll *::before, .tll *::after { transition: none !important; animation: none !important; }
+  }
+  @keyframes tll-pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+  @keyframes tll-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Titan local landing",
+  "tag": "section",
+  "class": "titan-local-landing",
+  "settings": [
+    { "type": "header", "content": "Basics" },
+    { "type": "text", "id": "suburb_name", "label": "Suburb or area name", "default": "Castle Hill" },
+    { "type": "text", "id": "phone", "label": "Phone number", "default": "0469 717 535" },
+    { "type": "text", "id": "service_type", "label": "Service type (schema)", "default": "Furniture removals and delivery" },
+    { "type": "text", "id": "parent_label", "label": "Breadcrumb parent label", "default": "Areas We Serve" },
+    { "type": "text", "id": "parent_url", "label": "Breadcrumb parent URL", "default": "/pages/areas-we-serve" },
+    { "type": "header", "content": "Live strip" },
+    { "type": "range", "id": "open_hour", "label": "Same-day bookings from (hour)", "min": 0, "max": 23, "step": 1, "default": 7 },
+    { "type": "range", "id": "close_hour", "label": "Same-day bookings until (hour)", "min": 1, "max": 24, "step": 1, "default": 18 },
+    { "type": "text", "id": "live_open", "label": "Text during booking hours", "default": "Taking same-day bookings now" },
+    { "type": "text", "id": "live_closed", "label": "Text after hours", "default": "Book now for tomorrow" },
+    { "type": "text", "id": "live_fallback", "label": "Text without JavaScript", "default": "Same-day removals available" },
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Castle Hill · Hills District" },
+    { "type": "inline_richtext", "id": "heading", "label": "H1 (italic text shows in red)", "default": "Removalists <em>Castle Hill</em>" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "rating_text", "label": "Rating text (must be real)", "default": "5.0 on Google · 59 reviews" },
+    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Fully insured" },
+    { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Same-day available" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero photo" },
+    { "type": "text", "id": "hero_alt", "label": "Hero photo alt text" },
+    { "type": "text", "id": "hero_badge_title", "label": "Photo badge title", "default": "Hills District pickups and deliveries" },
+    { "type": "text", "id": "hero_badge_text", "label": "Photo badge text", "default": "Two movers · blankets · trolleys · straps" },
+    { "type": "header", "content": "Search-intent cards" },
+    { "type": "text", "id": "intents_eyebrow", "label": "Eyebrow", "default": "What do you need moved?" },
+    { "type": "text", "id": "intents_heading", "label": "Heading" },
+    { "type": "header", "content": "Local knowledge" },
+    { "type": "text", "id": "local_eyebrow", "label": "Eyebrow", "default": "Local know-how" },
+    { "type": "text", "id": "local_heading", "label": "Heading" },
+    { "type": "richtext", "id": "local_body", "label": "Body" },
+    { "type": "header", "content": "Steps" },
+    { "type": "text", "id": "steps_heading", "label": "Heading" },
+    { "type": "text", "id": "step_1_title", "label": "Step 1 title" },
+    { "type": "text", "id": "step_1_text", "label": "Step 1 text" },
+    { "type": "text", "id": "step_2_title", "label": "Step 2 title" },
+    { "type": "text", "id": "step_2_text", "label": "Step 2 text" },
+    { "type": "text", "id": "step_3_title", "label": "Step 3 title" },
+    { "type": "text", "id": "step_3_text", "label": "Step 3 text" },
+    { "type": "header", "content": "Gallery" },
+    { "type": "text", "id": "gallery_heading", "label": "Heading" },
+    { "type": "text", "id": "gallery_alt", "label": "Fallback alt text" },
+    { "type": "image_picker", "id": "gallery_1", "label": "Photo 1" },
+    { "type": "image_picker", "id": "gallery_2", "label": "Photo 2" },
+    { "type": "image_picker", "id": "gallery_3", "label": "Photo 3" },
+    { "type": "image_picker", "id": "gallery_4", "label": "Photo 4" },
+    { "type": "header", "content": "Nearby suburbs" },
+    { "type": "text", "id": "nearby_heading", "label": "Heading" },
+    { "type": "text", "id": "nearby_intro", "label": "Intro" },
+    { "type": "textarea", "id": "nearby_suburbs", "label": "Suburbs (comma-separated)" },
+    { "type": "header", "content": "Pricing panel" },
+    { "type": "text", "id": "price_heading", "label": "Heading" },
+    { "type": "textarea", "id": "price_text", "label": "Text" },
+    { "type": "header", "content": "Quote form" },
+    { "type": "text", "id": "form_heading", "label": "Heading" },
+    { "type": "textarea", "id": "form_text", "label": "Text" },
+    { "type": "text", "id": "default_pickup", "label": "Pre-filled pickup suburb", "default": "Castle Hill" },
+    { "type": "text", "id": "form_button", "label": "Submit button", "default": "Get my fixed price" },
+    { "type": "textarea", "id": "form_success", "label": "Success message", "default": "We'll text or email your fixed price shortly." },
+    { "type": "header", "content": "FAQ and links" },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading" },
+    { "type": "text", "id": "links_heading", "label": "Related links heading", "default": "More ways we can help" }
+  ],
+  "blocks": [
+    {
+      "type": "intent",
+      "name": "Intent card",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "box", "options": [
+          { "value": "sofa", "label": "Sofa" }, { "value": "box", "label": "Box" }, { "value": "tag", "label": "Marketplace tag" },
+          { "value": "store", "label": "Store" }, { "value": "fridge", "label": "Fridge" }, { "value": "bolt", "label": "Same-day" },
+          { "value": "stairs", "label": "Stairs" }, { "value": "building", "label": "Building" } ] },
+        { "type": "text", "id": "title", "label": "Title (H3)" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "text", "id": "link_label", "label": "Link label" }
+      ]
+    },
+    {
+      "type": "local_point",
+      "name": "Local point",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "pin", "options": [
+          { "value": "pin", "label": "Pin" }, { "value": "stairs", "label": "Stairs" }, { "value": "building", "label": "Building" },
+          { "value": "route", "label": "Route" }, { "value": "parking", "label": "Parking" }, { "value": "store", "label": "Store" } ] },
+        { "type": "text", "id": "title", "label": "Title (H3)" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "Related link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "url", "label": "URL" },
+        { "type": "text", "id": "description", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Titan local landing" }]
+}
+{% endschema %}
