@@ -199,6 +199,7 @@
         "related_links_block": {
           "type": "related-links",
           "blocks": {
+            "link-furniture-pickup": { "type": "_related-link-item", "settings": { "label": "Furniture Pickup & Delivery Sydney", "url": "/pages/furniture-pickup-delivery-sydney", "description": "Same-day collection and delivery across Sydney, 7am to 7pm." } },
             "link-castle-hill": { "type": "_related-link-item", "settings": { "label": "Removalists Castle Hill", "url": "/pages/removalists-castle-hill", "description": "Same-day removals and furniture delivery across Castle Hill and the Hills District." } },
             "link-parramatta": { "type": "_related-link-item", "settings": { "label": "Man and Van Parramatta", "url": "/pages/man-and-van-parramatta", "description": "Apartment moves, single items and Marketplace pickups in Parramatta." } },
             "link-bankstown": { "type": "_related-link-item", "settings": { "label": "Man and Van Bankstown", "url": "/pages/man-and-van-bankstown", "description": "Local same-day removals in Bankstown, Yagoona and Greenacre." } },
@@ -215,7 +216,7 @@
             "link-marketplace": { "type": "_related-link-item", "settings": { "label": "Facebook Marketplace Pickup & Delivery", "url": "/pages/facebook-marketplace-pickup-delivery-sydney", "description": "We collect from the seller and deliver to your door." } },
             "link-couch": { "type": "_related-link-item", "settings": { "label": "Couch Delivery Sydney", "url": "/pages/couch-delivery-sydney", "description": "Sofas, lounges and sofa beds moved without a scratch." } }
           },
-          "block_order": ["link-castle-hill", "link-parramatta", "link-bankstown", "link-liverpool", "link-blacktown", "link-inner-west", "link-ikea", "link-single-item", "link-appliances", "link-ryde", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-couch"],
+          "block_order": ["link-furniture-pickup", "link-castle-hill", "link-parramatta", "link-bankstown", "link-liverpool", "link-blacktown", "link-inner-west", "link-ikea", "link-single-item", "link-appliances", "link-ryde", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-couch"],
           "settings": {
             "heading": "<h2>Local Pages and Services</h2>",
             "color_scheme": "scheme-1",
