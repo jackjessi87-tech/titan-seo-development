@@ -200,6 +200,14 @@
           "type": "related-links",
           "blocks": {
             "link-castle-hill": { "type": "_related-link-item", "settings": { "label": "Removalists Castle Hill", "url": "/pages/removalists-castle-hill", "description": "Same-day removals and furniture delivery across Castle Hill and the Hills District." } },
+            "link-parramatta": { "type": "_related-link-item", "settings": { "label": "Man and Van Parramatta", "url": "/pages/man-and-van-parramatta", "description": "Apartment moves, single items and Marketplace pickups in Parramatta." } },
+            "link-bankstown": { "type": "_related-link-item", "settings": { "label": "Man and Van Bankstown", "url": "/pages/man-and-van-bankstown", "description": "Local same-day removals in Bankstown, Yagoona and Greenacre." } },
+            "link-liverpool": { "type": "_related-link-item", "settings": { "label": "Man and Van Liverpool", "url": "/pages/man-and-van-liverpool", "description": "Small moves and deliveries in Liverpool, Casula and the new estates." } },
+            "link-blacktown": { "type": "_related-link-item", "settings": { "label": "Man and Van Blacktown", "url": "/pages/man-and-van-blacktown", "description": "IKEA Marsden Park pickups and local moves around Blacktown." } },
+            "link-inner-west": { "type": "_related-link-item", "settings": { "label": "Man and Van Inner West", "url": "/pages/man-and-van-inner-west", "description": "Terraces and tight stairs in Newtown, Marrickville and Leichhardt." } },
+            "link-ikea": { "type": "_related-link-item", "settings": { "label": "IKEA Pickup & Delivery Sydney", "url": "/pages/ikea-pickup-delivery-sydney", "description": "We collect from IKEA Tempe, Rhodes or Marsden Park and deliver home." } },
+            "link-single-item": { "type": "_related-link-item", "settings": { "label": "Single Item Delivery Sydney", "url": "/pages/single-item-delivery-sydney", "description": "One item, one fixed price. No minimum job size." } },
+            "link-appliances": { "type": "_related-link-item", "settings": { "label": "Fridge & Washing Machine Delivery Sydney", "url": "/pages/fridge-washing-machine-delivery-sydney", "description": "Appliances moved upright on trolleys, with straps and blankets." } },
             "link-ryde": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Ryde", "url": "/pages/furniture-delivery-ryde", "description": "Pickups and deliveries in Ryde, Macquarie Park and nearby suburbs." } },
             "link-homebush": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Homebush", "url": "/pages/furniture-delivery-homebush", "description": "Removals and deliveries in Homebush, Strathfield and the Inner West." } },
             "link-darlinghurst": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Darlinghurst", "url": "/pages/furniture-delivery-darlinghurst", "description": "Apartment-friendly deliveries in Darlinghurst and the inner city." } },
@@ -207,7 +215,7 @@
             "link-marketplace": { "type": "_related-link-item", "settings": { "label": "Facebook Marketplace Pickup & Delivery", "url": "/pages/facebook-marketplace-pickup-delivery-sydney", "description": "We collect from the seller and deliver to your door." } },
             "link-couch": { "type": "_related-link-item", "settings": { "label": "Couch Delivery Sydney", "url": "/pages/couch-delivery-sydney", "description": "Sofas, lounges and sofa beds moved without a scratch." } }
           },
-          "block_order": ["link-castle-hill", "link-ryde", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-couch"],
+          "block_order": ["link-castle-hill", "link-parramatta", "link-bankstown", "link-liverpool", "link-blacktown", "link-inner-west", "link-ikea", "link-single-item", "link-appliances", "link-ryde", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-couch"],
           "settings": {
             "heading": "<h2>Local Pages and Services</h2>",
             "color_scheme": "scheme-1",
