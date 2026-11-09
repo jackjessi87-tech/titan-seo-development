@@ -279,9 +279,9 @@
             "preview_tag": "Residential Moves",
             "preview_size_mobile": 120,
             "preview_radius": 4,
-            "heading_line_1": "SAME DAY",
-            "heading_line_2": "FURNITURE REMOVALIST",
-            "heading_line_3": "SYDNEY 24/7",
+            "heading_line_1": "SAME-DAY",
+            "heading_line_2": "FURNITURE PICKUP & DELIVERY",
+            "heading_line_3": "SYDNEY",
             "show_arrow": true,
             "heading_size_mobile": 30,
             "heading_size_desktop": 64,
@@ -797,6 +797,305 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "titan_home_hub": {
+      "type": "titan-home-hub",
+      "blocks": {
+        "service_1": {
+          "type": "service",
+          "settings": {
+            "title": "Furniture Pickup & Delivery",
+            "text": "One item or a small load collected and delivered the same day anywhere in Sydney.",
+            "url": "/pages/furniture-pickup-delivery-sydney"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "title": "Single Item Delivery",
+            "text": "One couch, bed, wardrobe or table. No minimum job size and one fixed price.",
+            "url": "/pages/single-item-delivery-sydney"
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "title": "Facebook Marketplace & Gumtree Pickup",
+            "text": "Bought it online? We collect from the seller and bring it to your door.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "title": "IKEA Pickup & Delivery",
+            "text": "We collect your order from IKEA Tempe, Rhodes or Marsden Park and carry it inside.",
+            "url": "/pages/ikea-pickup-delivery-sydney"
+          }
+        },
+        "service_5": {
+          "type": "service",
+          "settings": {
+            "title": "Couch & Sofa Delivery",
+            "text": "Couches, sofas and modular lounges wrapped, strapped and carried in.",
+            "url": "/pages/couch-delivery-sydney"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "title": "Fridge & Washing Machine Delivery",
+            "text": "Heavy appliances moved upright on trolleys with straps and blankets.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney"
+          }
+        },
+        "service_7": {
+          "type": "service",
+          "settings": {
+            "title": "Bed & Mattress Delivery",
+            "text": "Beds, bases and mattresses delivered and placed in the right room.",
+            "url": "/pages/bed-mattress-delivery-sydney"
+          }
+        },
+        "service_8": {
+          "type": "service",
+          "settings": {
+            "title": "Man With a Van Sydney",
+            "text": "Two movers and a large van for small moves and part loads.",
+            "url": "/pages/man-with-a-van-sydney"
+          }
+        },
+        "service_9": {
+          "type": "service",
+          "settings": {
+            "title": "Small Removals",
+            "text": "Studios, units, granny flats and a few rooms at a fixed price.",
+            "url": "/pages/small-removals-sydney"
+          }
+        },
+        "service_10": {
+          "type": "service",
+          "settings": {
+            "title": "Same-Day Removalists",
+            "text": "Need it moved today? Call early and we will check the earliest slot.",
+            "url": "/pages/same-day-removalists-sydney"
+          }
+        },
+        "area_1": {
+          "type": "area",
+          "settings": {
+            "title": "Bankstown",
+            "text": "Our home base near Punchbowl",
+            "url": "/pages/man-and-van-bankstown"
+          }
+        },
+        "area_2": {
+          "type": "area",
+          "settings": {
+            "title": "Parramatta",
+            "text": "Apartments, Westmead, Harris Park",
+            "url": "/pages/man-and-van-parramatta"
+          }
+        },
+        "area_3": {
+          "type": "area",
+          "settings": {
+            "title": "Liverpool",
+            "text": "Casula, Moorebank, new estates",
+            "url": "/pages/man-and-van-liverpool"
+          }
+        },
+        "area_4": {
+          "type": "area",
+          "settings": {
+            "title": "Blacktown",
+            "text": "Marsden Park, The Ponds",
+            "url": "/pages/man-and-van-blacktown"
+          }
+        },
+        "area_5": {
+          "type": "area",
+          "settings": {
+            "title": "Inner West",
+            "text": "Newtown, Marrickville, Leichhardt",
+            "url": "/pages/man-and-van-inner-west"
+          }
+        },
+        "area_6": {
+          "type": "area",
+          "settings": {
+            "title": "Castle Hill & the Hills",
+            "text": "Baulkham Hills, Kellyville",
+            "url": "/pages/removalists-castle-hill"
+          }
+        },
+        "area_7": {
+          "type": "area",
+          "settings": {
+            "title": "Sutherland Shire",
+            "text": "Cronulla, Miranda, Caringbah",
+            "url": "/pages/removalists-sutherland-shire"
+          }
+        },
+        "area_8": {
+          "type": "area",
+          "settings": {
+            "title": "Eastern Suburbs",
+            "text": "Bondi, Randwick, Coogee",
+            "url": "/pages/removalists-eastern-suburbs"
+          }
+        },
+        "area_9": {
+          "type": "area",
+          "settings": {
+            "title": "Northern Beaches",
+            "text": "Manly, Dee Why, Mona Vale",
+            "url": "/pages/removalists-northern-beaches"
+          }
+        },
+        "area_10": {
+          "type": "area",
+          "settings": {
+            "title": "All Sydney areas",
+            "text": "See every region we cover",
+            "url": "/pages/areas-we-serve"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does furniture pickup and delivery cost in Sydney?",
+            "answer": "<p>It depends on the item, the distance between the two suburbs, stairs or lifts, and timing. We give you a fixed price before we start, so there is no hourly meter. Call 0469 717 535 or send your details for a quick price.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up and deliver furniture today?",
+            "answer": "<p>Often, yes. We do same-day pickups across Sydney, 7 days a week. Call early in the day and we will confirm the earliest time we can get there.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you deliver just one item?",
+            "answer": "<p>Yes. Single items are most of our work, such as one couch, one bed, one fridge or one table. There is no minimum job size.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect my Facebook Marketplace or Gumtree purchase?",
+            "answer": "<p>Yes. Send us the listing and the seller's suburb. We arrange a time with the seller, collect the item, and deliver it to your home.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you collect from stores like IKEA and Bunnings?",
+            "answer": "<p>Yes. We collect click and collect and in-store orders from IKEA, Bunnings, Harvey Norman, Amart, Fantastic Furniture, Freedom, JB Hi-Fi and other stores and warehouses across Sydney.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you carry furniture up stairs or into an apartment?",
+            "answer": "<p>Yes. Two movers carry items up stairs and into lifts. Tell us about stairs, lifts and parking at both ends so we bring the right gear.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Items are covered while in our care, and everything is wrapped in blankets and strapped in the van.</p>"
+          }
+        },
+        "faq_8": {
+          "type": "faq",
+          "settings": {
+            "question": "Which areas of Sydney do you cover?",
+            "answer": "<p>All of Greater Sydney, including Western Sydney, South West Sydney, the Inner West, the Eastern Suburbs, the North Shore, the Northern Beaches, the Hills District and the Sutherland Shire. We are based in Punchbowl.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I book?",
+            "answer": "<p>Call 0469 717 535 or send your pickup and delivery suburbs, what you are moving and any stairs. We reply with a fixed price and the earliest time.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "service_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "service_5",
+        "service_6",
+        "service_7",
+        "service_8",
+        "service_9",
+        "service_10",
+        "area_1",
+        "area_2",
+        "area_3",
+        "area_4",
+        "area_5",
+        "area_6",
+        "area_7",
+        "area_8",
+        "area_9",
+        "area_10",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9"
+      ],
+      "settings": {
+        "business_name": "Titan Express",
+        "phone": "0469 717 535",
+        "street": "48 Dudley St",
+        "locality": "Punchbowl",
+        "postcode": "2196",
+        "quote_url": "/pages/furniture-pickup-delivery-sydney",
+        "qa_eyebrow": "In short",
+        "qa_heading": "Furniture Pickup and Delivery Across Sydney",
+        "qa_text": "<p>Titan Express is a Sydney furniture pickup and delivery service based in Punchbowl. Two careful movers and a large van collect single items, Facebook Marketplace and Gumtree buys, and store orders from IKEA, Bunnings and other retailers, then deliver them anywhere in Greater Sydney, often the same day. You get a fixed price before we start. We are rated 5.0 on Google.</p>",
+        "fact_1": "Two movers and a large van",
+        "fact_2": "Fixed price before we start",
+        "fact_3": "Same-day pickups, 7 days",
+        "fact_4": "No minimum job size",
+        "fact_5": "Fully insured, blankets and straps",
+        "fact_6": "5.0 on Google · 59 reviews",
+        "services_eyebrow": "Our services",
+        "services_heading": "What We Pick Up and Deliver",
+        "services_intro": "From one couch to a small move, these are the jobs we do every day across Sydney.",
+        "stores_eyebrow": "Store collection",
+        "stores_heading": "Bought It In Store? We Will Collect It",
+        "stores_text": "<p>Too big for the car, or no time to wait at the loading dock? Send us your order number and pickup time. We collect from the store or warehouse and carry it into your home, often the same day.</p>",
+        "stores": "IKEA Tempe, IKEA Rhodes, IKEA Marsden Park, Bunnings, Harvey Norman, Amart Furniture, Fantastic Furniture, Freedom, JB Hi-Fi, The Good Guys, Officeworks, Costco, Kmart, Furniture warehouses",
+        "steps_heading": "Book a Pickup in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you are moving, and any stairs or lift.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "price_heading": "What Affects Your Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things:",
+        "compare_heading": "Titan Express vs a Big Removal Truck vs Doing It Yourself",
+        "areas_heading": "Furniture Delivery Across Greater Sydney",
+        "areas_intro": "We pick up and deliver in every Sydney region. Choose your area for local details.",
+        "regions": "Penrith, Campbelltown, Ryde, Chatswood, North Shore, Sydney CBD, Strathfield, Hurstville, Canterbury, Auburn",
+        "faq_heading": "Furniture Pickup and Delivery Questions",
+        "final_heading": "Need Something Moved Today?",
+        "final_text": "Call now for a fixed price. Two movers and a large van, across Sydney, 7 days a week."
+      }
     }
   },
   "order": [
@@ -810,6 +1109,7 @@
     "1782123485603199c3",
     "17821243135a5f6c20",
     "17821252068f79aa64",
+    "titan_home_hub",
     "17835921926aecae97",
     "178359242106600ace"
   ]

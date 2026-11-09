@@ -23,6 +23,12 @@
 >
 
 {%- liquid
+  assign is_home = false
+  if request.page_type == 'index'
+    assign is_home = true
+    assign page_title = 'Furniture Pickup & Delivery Sydney | Man & Van | Titan Express'
+    assign page_description = 'Same-day furniture pickup & delivery across Sydney: single items, Marketplace, IKEA & Bunnings collections. Two movers, fixed price. Call 0469 717 535.'
+  endif
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
@@ -111,7 +117,7 @@
   {{ page_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless page_title contains shop.name or is_home %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 <link

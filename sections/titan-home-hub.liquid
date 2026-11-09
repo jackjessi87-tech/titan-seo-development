@@ -1,0 +1,349 @@
+{%- doc -%}
+  Titan Express homepage hub. Adds the crawlable content the homepage lacked:
+  a quick answer for AI search, service and area links, store collection,
+  a comparison table, how it works, price factors, FAQs and schema
+  (MovingCompany, WebSite, FAQPage). Pure HTML/CSS/Liquid, no JavaScript.
+{%- enddoc -%}
+
+{%- liquid
+  assign s = section.settings
+  assign phone_digits = s.phone | remove: ' '
+  assign phone_intl = phone_digits | remove_first: '0' | prepend: '+61'
+  assign services = section.blocks | where: 'type', 'service'
+  assign areas = section.blocks | where: 'type', 'area'
+  assign faqs = section.blocks | where: 'type', 'faq'
+  assign stores = s.stores | split: ','
+  assign regions = s.regions | split: ','
+-%}
+
+<div class="thh" id="thh-{{ section.id }}">
+
+  {%- if s.qa_heading != blank -%}
+  <section class="thh-band thh-band--soft" aria-labelledby="thh-qa-{{ section.id }}">
+    <div class="thh-wrap thh-qa">
+      <p class="thh-eyebrow">{{ s.qa_eyebrow }}</p>
+      <h2 id="thh-qa-{{ section.id }}" class="thh-h2">{{ s.qa_heading }}</h2>
+      <div class="thh-qa__text">{{ s.qa_text }}</div>
+      <ul class="thh-facts">
+        {%- for i in (1..6) -%}
+          {%- assign key = 'fact_' | append: i -%}
+          {%- if s[key] != blank -%}<li>{{ s[key] }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+      <div class="thh-ctas">
+        <a class="thh-btn thh-btn--call" href="tel:{{ phone_intl }}">Call {{ s.phone }}</a>
+        <a class="thh-btn thh-btn--ghost" href="{{ s.quote_url }}">Get a fixed price</a>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if services.size > 0 -%}
+  <section class="thh-band" aria-labelledby="thh-svc-{{ section.id }}">
+    <div class="thh-wrap">
+      <p class="thh-eyebrow">{{ s.services_eyebrow }}</p>
+      <h2 id="thh-svc-{{ section.id }}" class="thh-h2">{{ s.services_heading }}</h2>
+      {%- if s.services_intro != blank -%}<p class="thh-intro">{{ s.services_intro }}</p>{%- endif -%}
+      <ul class="thh-grid thh-grid--svc">
+        {%- for b in services -%}
+          <li class="thh-card" {{ b.shopify_attributes }}>
+            <h3 class="thh-card__title"><a href="{{ b.settings.url }}">{{ b.settings.title }}</a></h3>
+            <p>{{ b.settings.text }}</p>
+            <a class="thh-card__more" href="{{ b.settings.url }}" aria-hidden="true" tabindex="-1">See details &rarr;</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if s.stores_heading != blank -%}
+  <section class="thh-band thh-band--dark" aria-labelledby="thh-st-{{ section.id }}">
+    <div class="thh-wrap thh-split">
+      <div>
+        <p class="thh-eyebrow">{{ s.stores_eyebrow }}</p>
+        <h2 id="thh-st-{{ section.id }}" class="thh-h2">{{ s.stores_heading }}</h2>
+        <div class="thh-body">{{ s.stores_text }}</div>
+      </div>
+      <ul class="thh-chips" aria-label="Stores we collect from">
+        {%- for st in stores -%}{%- assign st_t = st | strip -%}{%- if st_t != blank -%}<li>{{ st_t }}</li>{%- endif -%}{%- endfor -%}
+      </ul>
+    </div>
+  </section>
+  {%- endif -%}
+
+  <section class="thh-band" aria-labelledby="thh-how-{{ section.id }}">
+    <div class="thh-wrap thh-split thh-split--top">
+      <div>
+        <p class="thh-eyebrow">How it works</p>
+        <h2 id="thh-how-{{ section.id }}" class="thh-h2">{{ s.steps_heading }}</h2>
+        <ol class="thh-steps">
+          <li><strong>{{ s.step_1_title }}</strong><span>{{ s.step_1_text }}</span></li>
+          <li><strong>{{ s.step_2_title }}</strong><span>{{ s.step_2_text }}</span></li>
+          <li><strong>{{ s.step_3_title }}</strong><span>{{ s.step_3_text }}</span></li>
+        </ol>
+      </div>
+      <div class="thh-price">
+        <h3 class="thh-h3">{{ s.price_heading }}</h3>
+        <p>{{ s.price_text }}</p>
+        <ul>
+          <li><strong>The item</strong> Size, weight and how many pieces.</li>
+          <li><strong>The two suburbs</strong> Distance between pickup and delivery.</li>
+          <li><strong>Access</strong> Stairs, lifts and parking at both ends.</li>
+          <li><strong>Timing</strong> Same-day, a set time or a flexible window.</li>
+        </ul>
+        <a class="thh-btn thh-btn--call" href="tel:{{ phone_intl }}">Call for your price</a>
+      </div>
+    </div>
+  </section>
+
+  {%- if s.compare_heading != blank -%}
+  <section class="thh-band thh-band--soft" aria-labelledby="thh-cmp-{{ section.id }}">
+    <div class="thh-wrap">
+      <h2 id="thh-cmp-{{ section.id }}" class="thh-h2">{{ s.compare_heading }}</h2>
+      <div class="thh-table-wrap">
+        <table class="thh-table">
+          <thead><tr><th scope="col"></th><th scope="col">Titan Express</th><th scope="col">Big removal truck</th><th scope="col">Doing it yourself</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Best for</th><td>One item, a few pieces or a small move</td><td>Full house moves</td><td>Small items that fit in your car</td></tr>
+            <tr><th scope="row">Price</th><td>Fixed price agreed before we start</td><td>Usually hourly, often with a call-out fee</td><td>Trailer or van hire, fuel and your time</td></tr>
+            <tr><th scope="row">Same day</th><td>Often available, 7 days</td><td>Usually booked days ahead</td><td>Depends on hire availability</td></tr>
+            <tr><th scope="row">Marketplace and store pickups</th><td>We deal with the seller or store for you</td><td>Not always offered</td><td>You arrange and lift it</td></tr>
+            <tr><th scope="row">Lifting and stairs</th><td>Two movers, trolleys, blankets and straps</td><td>Larger crew than small jobs need</td><td>You and a friend</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if areas.size > 0 -%}
+  <section class="thh-band" aria-labelledby="thh-ar-{{ section.id }}">
+    <div class="thh-wrap">
+      <p class="thh-eyebrow">Areas we serve</p>
+      <h2 id="thh-ar-{{ section.id }}" class="thh-h2">{{ s.areas_heading }}</h2>
+      <p class="thh-intro">{{ s.areas_intro }}</p>
+      <ul class="thh-grid thh-grid--areas">
+        {%- for b in areas -%}
+          <li {{ b.shopify_attributes }}><a class="thh-area" href="{{ b.settings.url }}"><strong>{{ b.settings.title }}</strong><span>{{ b.settings.text }}</span></a></li>
+        {%- endfor -%}
+      </ul>
+      {%- if regions.size > 0 -%}
+        <p class="thh-regions"><strong>Also serving:</strong>
+          {% for r in regions %}{{ r | strip }}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+      {%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- if faqs.size > 0 -%}
+  <section class="thh-band thh-band--soft" aria-labelledby="thh-faq-{{ section.id }}">
+    <div class="thh-wrap thh-faq">
+      <p class="thh-eyebrow">FAQ</p>
+      <h2 id="thh-faq-{{ section.id }}" class="thh-h2">{{ s.faq_heading }}</h2>
+      {%- for b in faqs -%}
+        <details class="thh-faq__item" {{ b.shopify_attributes }} {% if forloop.first %}open{% endif %}>
+          <summary><h3 class="thh-faq__q">{{ b.settings.question }}</h3></summary>
+          <div class="thh-faq__a">{{ b.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  <section class="thh-band thh-band--dark thh-final">
+    <div class="thh-wrap">
+      <h2 class="thh-h2">{{ s.final_heading }}</h2>
+      <p>{{ s.final_text }}</p>
+      <div class="thh-ctas thh-ctas--center">
+        <a class="thh-btn thh-btn--call" href="tel:{{ phone_intl }}">Call {{ s.phone }}</a>
+        <a class="thh-btn thh-btn--light" href="{{ s.quote_url }}">Get a fixed price</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+{%- capture faq_json -%}
+  {%- for b in faqs -%}
+    {"@type":"Question","name":{{ b.settings.question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ b.settings.answer | strip_html | strip | json }}}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MovingCompany",
+      "@id": {{ shop.url | append: '/#business' | json }},
+      "name": {{ s.business_name | json }},
+      "url": {{ shop.url | json }},
+      "telephone": {{ phone_intl | json }},
+      "description": {{ s.qa_text | strip_html | strip | json }},
+      {%- if settings.logo -%}"logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }},{%- endif -%}
+      "address": {"@type": "PostalAddress", "streetAddress": {{ s.street | json }}, "addressLocality": {{ s.locality | json }}, "addressRegion": "NSW", "postalCode": {{ s.postcode | json }}, "addressCountry": "AU"},
+      "areaServed": [{"@type": "City", "name": "Sydney"}{%- for b in areas -%},{"@type": "Place", "name": {{ b.settings.title | append: ', NSW' | json }}}{%- endfor -%}],
+      "priceRange": "$$",
+      "makesOffer": [
+        {%- for b in services -%}{"@type": "Offer", "itemOffered": {"@type": "Service", "name": {{ b.settings.title | json }}, "url": {{ shop.url | append: b.settings.url | json }}}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
+      ]
+    },
+    {"@type": "WebSite", "@id": {{ shop.url | append: '/#website' | json }}, "url": {{ shop.url | json }}, "name": {{ s.business_name | json }}, "publisher": {"@id": {{ shop.url | append: '/#business' | json }}}}
+    {%- if faqs.size > 0 -%},{"@type": "FAQPage", "mainEntity": [{{ faq_json }}]}{%- endif -%}
+  ]
+}
+</script>
+
+{% stylesheet %}
+  .thh {
+    --thh-red: #e30613; --thh-red-2: #ff1744; --thh-ink: #0b0b0f; --thh-text: rgba(0,0,0,.82);
+    --thh-muted: #5b5b66; --thh-line: rgba(0,0,0,.08); --thh-soft: #f6f6f8; --thh-radius: 18px;
+    --thh-grad: linear-gradient(135deg, var(--thh-red) 0%, var(--thh-red-2) 100%);
+    font-family: Inter, var(--font-body--family, sans-serif); color: var(--thh-text); line-height: 1.6;
+  }
+  .thh-wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  .thh-band { padding: 64px 0; background: #fff; }
+  .thh-band--soft { background: var(--thh-soft); }
+  .thh-band--dark { background: radial-gradient(900px 400px at 90% -20%, rgba(227,6,19,.35), transparent 60%), var(--thh-ink); color: rgba(255,255,255,.86); }
+  .thh-band--dark .thh-h2 { color: #fff; }
+  .thh-eyebrow { margin: 0 0 10px; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--thh-red); }
+  .thh-band--dark .thh-eyebrow { color: #ff5a64; }
+  .thh-h2 { margin: 0 0 14px; font-size: clamp(1.6rem, 3.2vw, 2.4rem); line-height: 1.15; font-weight: 800; color: var(--thh-ink); letter-spacing: -.01em; }
+  .thh-h3 { margin: 0 0 8px; font-size: 1.2rem; font-weight: 800; color: var(--thh-ink); }
+  .thh-intro { max-width: 760px; margin: 0 0 28px; color: var(--thh-muted); font-size: 1.05rem; }
+  .thh-qa { max-width: 900px; }
+  .thh-qa__text p { font-size: 1.12rem; margin: 0 0 18px; }
+  .thh-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0 0 24px; }
+  .thh-facts li { background: #fff; border: 1px solid var(--thh-line); border-radius: 12px; padding: 12px 14px 12px 38px; position: relative; font-weight: 600; color: var(--thh-ink); }
+  .thh-facts li::before { content: ""; position: absolute; left: 14px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: var(--thh-grad); }
+  .thh-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .thh-ctas--center { justify-content: center; }
+  .thh-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 700; text-decoration: none; border: 1px solid transparent; }
+  .thh-btn--call { background: var(--thh-grad); color: #fff; box-shadow: 0 10px 26px rgba(227,6,19,.35); }
+  .thh-btn--ghost { background: #fff; border-color: var(--thh-line); color: var(--thh-ink); }
+  .thh-btn--light { background: #fff; color: var(--thh-ink); }
+  .thh-grid { display: grid; gap: 16px; list-style: none; padding: 0; margin: 0; }
+  .thh-grid--svc { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .thh-card { background: #fff; border: 1px solid var(--thh-line); border-radius: var(--thh-radius); padding: 20px; display: flex; flex-direction: column; transition: transform .15s, box-shadow .15s; }
+  .thh-card:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,0,0,.08); }
+  .thh-card__title { margin: 0 0 6px; font-size: 1.08rem; font-weight: 800; }
+  .thh-card__title a { color: var(--thh-ink); text-decoration: none; }
+  .thh-card p { margin: 0 0 12px; color: var(--thh-muted); font-size: .95rem; flex: 1; }
+  .thh-card__more { color: var(--thh-red); font-weight: 700; text-decoration: none; font-size: .9rem; }
+  .thh-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .thh-split--top { align-items: start; }
+  .thh-body p { margin: 0 0 12px; }
+  .thh-chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+  .thh-chips li { padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); color: #fff; font-weight: 600; font-size: .95rem; }
+  .thh-steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .thh-steps li { counter-increment: s; position: relative; padding: 4px 0 4px 56px; }
+  .thh-steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--thh-grad); color: #fff; font-weight: 800; display: grid; place-items: center; }
+  .thh-steps strong { display: block; color: var(--thh-ink); }
+  .thh-steps span { color: var(--thh-muted); }
+  .thh-price { background: var(--thh-soft); border-radius: var(--thh-radius); padding: 26px; }
+  .thh-price p { color: var(--thh-muted); margin: 0 0 12px; }
+  .thh-price ul { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 8px; }
+  .thh-price li strong { display: block; color: var(--thh-ink); }
+  .thh-table-wrap { overflow-x: auto; border-radius: var(--thh-radius); border: 1px solid var(--thh-line); background: #fff; }
+  .thh-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: .95rem; }
+  .thh-table th, .thh-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--thh-line); vertical-align: top; }
+  .thh-table thead th { background: var(--thh-ink); color: #fff; font-weight: 700; }
+  .thh-table thead th:nth-child(2) { background: var(--thh-red); }
+  .thh-table tbody th { color: var(--thh-ink); font-weight: 700; width: 22%; }
+  .thh-table td:nth-child(2) { font-weight: 600; color: var(--thh-ink); background: rgba(227,6,19,.04); }
+  .thh-grid--areas { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .thh-area { display: block; height: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--thh-line); text-decoration: none; background: #fff; }
+  .thh-area strong { display: block; color: var(--thh-ink); }
+  .thh-area span { color: var(--thh-muted); font-size: .88rem; }
+  .thh-area:hover { border-color: var(--thh-red); }
+  .thh-regions { margin: 20px 0 0; color: var(--thh-muted); }
+  .thh-faq { max-width: 860px; }
+  .thh-faq__item { background: #fff; border: 1px solid var(--thh-line); border-radius: 14px; margin: 0 0 10px; }
+  .thh-faq__item summary { cursor: pointer; list-style: none; padding: 16px 48px 16px 18px; position: relative; }
+  .thh-faq__item summary::-webkit-details-marker { display: none; }
+  .thh-faq__item summary::after { content: "+"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 1.4rem; color: var(--thh-red); font-weight: 700; }
+  .thh-faq__item[open] summary::after { content: "\2212"; }
+  .thh-faq__q { margin: 0; font-size: 1.02rem; font-weight: 700; color: var(--thh-ink); display: inline; }
+  .thh-faq__a { padding: 0 18px 16px; color: var(--thh-muted); }
+  .thh-faq__a p { margin: 0; }
+  .thh-final { text-align: center; }
+  .thh-final p { max-width: 640px; margin: 0 auto 22px; }
+  @media (max-width: 800px) {
+    .thh-band { padding: 44px 0; }
+    .thh-wrap { padding: 0 16px; }
+    .thh-split { grid-template-columns: 1fr; gap: 24px; }
+    .thh-btn { width: 100%; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Titan home hub",
+  "tag": "section",
+  "class": "section-titan-home-hub",
+  "settings": [
+    { "type": "header", "content": "Business" },
+    { "type": "text", "id": "business_name", "label": "Business name", "default": "Titan Express" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "street", "label": "Street address", "default": "48 Dudley St" },
+    { "type": "text", "id": "locality", "label": "Suburb", "default": "Punchbowl" },
+    { "type": "text", "id": "postcode", "label": "Postcode", "default": "2196" },
+    { "type": "text", "id": "quote_url", "label": "Quote link", "default": "/pages/furniture-pickup-delivery-sydney#quote" },
+    { "type": "header", "content": "Quick answer" },
+    { "type": "text", "id": "qa_eyebrow", "label": "Eyebrow", "default": "In short" },
+    { "type": "text", "id": "qa_heading", "label": "Heading" },
+    { "type": "richtext", "id": "qa_text", "label": "Answer" },
+    { "type": "text", "id": "fact_1", "label": "Fact 1" },
+    { "type": "text", "id": "fact_2", "label": "Fact 2" },
+    { "type": "text", "id": "fact_3", "label": "Fact 3" },
+    { "type": "text", "id": "fact_4", "label": "Fact 4" },
+    { "type": "text", "id": "fact_5", "label": "Fact 5" },
+    { "type": "text", "id": "fact_6", "label": "Fact 6" },
+    { "type": "header", "content": "Services" },
+    { "type": "text", "id": "services_eyebrow", "label": "Eyebrow", "default": "Our services" },
+    { "type": "text", "id": "services_heading", "label": "Heading" },
+    { "type": "textarea", "id": "services_intro", "label": "Intro" },
+    { "type": "header", "content": "Store collection" },
+    { "type": "text", "id": "stores_eyebrow", "label": "Eyebrow", "default": "Store collection" },
+    { "type": "text", "id": "stores_heading", "label": "Heading" },
+    { "type": "richtext", "id": "stores_text", "label": "Text" },
+    { "type": "textarea", "id": "stores", "label": "Stores (comma separated)" },
+    { "type": "header", "content": "Steps and price" },
+    { "type": "text", "id": "steps_heading", "label": "Steps heading" },
+    { "type": "text", "id": "step_1_title", "label": "Step 1 title" },
+    { "type": "text", "id": "step_1_text", "label": "Step 1 text" },
+    { "type": "text", "id": "step_2_title", "label": "Step 2 title" },
+    { "type": "text", "id": "step_2_text", "label": "Step 2 text" },
+    { "type": "text", "id": "step_3_title", "label": "Step 3 title" },
+    { "type": "text", "id": "step_3_text", "label": "Step 3 text" },
+    { "type": "text", "id": "price_heading", "label": "Price heading" },
+    { "type": "textarea", "id": "price_text", "label": "Price text" },
+    { "type": "header", "content": "Comparison" },
+    { "type": "text", "id": "compare_heading", "label": "Heading" },
+    { "type": "header", "content": "Areas" },
+    { "type": "text", "id": "areas_heading", "label": "Heading" },
+    { "type": "textarea", "id": "areas_intro", "label": "Intro" },
+    { "type": "textarea", "id": "regions", "label": "More regions (comma separated)" },
+    { "type": "header", "content": "FAQ and final call" },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading" },
+    { "type": "text", "id": "final_heading", "label": "Final heading" },
+    { "type": "textarea", "id": "final_text", "label": "Final text" }
+  ],
+  "blocks": [
+    { "type": "service", "name": "Service", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "text", "label": "Text" },
+      { "type": "text", "id": "url", "label": "Link (e.g. /pages/...)" }
+    ]},
+    { "type": "area", "name": "Area", "settings": [
+      { "type": "text", "id": "title", "label": "Area" },
+      { "type": "text", "id": "text", "label": "Short note" },
+      { "type": "text", "id": "url", "label": "Link" }
+    ]},
+    { "type": "faq", "name": "FAQ", "settings": [
+      { "type": "text", "id": "question", "label": "Question" },
+      { "type": "richtext", "id": "answer", "label": "Answer" }
+    ]}
+  ],
+  "presets": [{ "name": "Titan home hub" }]
+}
+{% endschema %}
