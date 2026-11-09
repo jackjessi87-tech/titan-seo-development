@@ -1,6 +1,9 @@
 {%- doc -%}
   Titan Express homepage hero. Holds the page's only H1, the main keyword
   copy, call and quote buttons, trust points and service links.
+  Effects are pure CSS and inline SVG. Motion is switched off for visitors
+  who ask for reduced motion. The LCP photo and H1 are never faded in, so
+  the animations do not delay Largest Contentful Paint.
   The small script only switches the live status text by Sydney time.
 {%- enddoc -%}
 
@@ -11,7 +14,29 @@
   assign chips = section.blocks | where: 'type', 'chip'
 -%}
 
+{%- capture i_phone -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>{%- endcapture -%}
+{%- capture i_arrow -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>{%- endcapture -%}
+{%- capture i_star -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>{%- endcapture -%}
+{%- capture i_shield -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>{%- endcapture -%}
+{%- capture i_team -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.2A5 5 0 0 1 21 19"/></svg>{%- endcapture -%}
+{%- capture i_clock -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>{%- endcapture -%}
+{%- capture i_truck -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>{%- endcapture -%}
+{%- capture i_box -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg>{%- endcapture -%}
+{%- capture i_tag -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>{%- endcapture -%}
+{%- capture i_store -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9M10 21v-5h4v5"/></svg>{%- endcapture -%}
+{%- capture i_sofa -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zM5 19v2M19 19v2"/></svg>{%- endcapture -%}
+{%- capture i_fridge -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14M9 5v2M9 13v3"/></svg>{%- endcapture -%}
+{%- capture i_pin -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>{%- endcapture -%}
+{%- capture i_check -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>{%- endcapture -%}
+
 <div class="tho" id="tho-{{ section.id }}" data-open="{{ s.open_hour }}" data-close="{{ s.close_hour }}">
+  <div class="tho-bg" aria-hidden="true">
+    <span class="tho-blob tho-blob--1"></span>
+    <span class="tho-blob tho-blob--2"></span>
+    <span class="tho-blob tho-blob--3"></span>
+    <span class="tho-grid"></span>
+  </div>
+
   <div class="tho-bar">
     <div class="tho-wrap tho-bar__in">
       <a class="tho-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
@@ -24,47 +49,100 @@
         <a href="/pages/furniture-pickup-delivery-sydney">Pickup &amp; Delivery</a>
         <a href="/pages/single-item-delivery-sydney">Single Item</a>
         <a href="/pages/facebook-marketplace-pickup-delivery-sydney">Marketplace</a>
-        <a href="/pages/ikea-pickup-delivery-sydney">IKEA</a>
+        <a href="/pages/ikea-pickup-delivery-sydney">Store Collection</a>
         <a href="/pages/areas-we-serve">Areas</a>
       </nav>
-      <a class="tho-btn tho-btn--call tho-btn--sm" href="tel:{{ phone_intl }}">{{ s.phone }}</a>
+      <a class="tho-btn tho-btn--call tho-btn--sm" href="tel:{{ phone_intl }}"><span class="tho-ring">{{ i_phone }}</span><span>{{ s.phone }}</span></a>
     </div>
   </div>
 
   <section class="tho-hero">
     <div class="tho-wrap tho-hero__grid">
       <div class="tho-hero__copy">
-        <p class="tho-live" role="status"><span class="tho-live__dot" aria-hidden="true"></span><span data-live>{{ s.live_fallback }}</span></p>
-        <h1 class="tho-h1">{{ s.heading }}</h1>
+        <p class="tho-live tho-in tho-d1" role="status"><span class="tho-live__dot" aria-hidden="true"></span><span data-live>{{ s.live_fallback }}</span></p>
+        <h1 class="tho-h1 tho-rise">{{ s.heading }}</h1>
         <p class="tho-sub">{{ s.subheading }}</p>
-        <div class="tho-ctas">
-          <a class="tho-btn tho-btn--call" href="tel:{{ phone_intl }}">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-            Call {{ s.phone }}
+
+        <ul class="tho-ticks tho-in tho-d2">
+          <li>{{ i_check }}Single items &amp; small loads</li>
+          <li>{{ i_check }}Marketplace &amp; Gumtree pickups</li>
+          <li>{{ i_check }}IKEA, Bunnings &amp; store collection</li>
+          <li>{{ i_check }}Fixed price, no hourly meter</li>
+        </ul>
+
+        <div class="tho-ctas tho-in tho-d3">
+          <a class="tho-btn tho-btn--call tho-btn--shine" href="tel:{{ phone_intl }}">
+            <span class="tho-ring">{{ i_phone }}</span>Call {{ s.phone }}
           </a>
-          <a class="tho-btn tho-btn--light" href="{{ s.quote_anchor }}">Get a fixed price</a>
+          <a class="tho-btn tho-btn--light" href="{{ s.quote_anchor }}">Get a fixed price <span class="tho-btn__arrow">{{ i_arrow }}</span></a>
         </div>
-        <ul class="tho-trust">
-          <li><strong>&#9733; 5.0</strong> on Google &middot; 59 reviews</li>
-          <li>Fully insured</li>
-          <li>Two movers &amp; large van</li>
-          <li>7 days, 7am&ndash;7pm</li>
+
+        <ul class="tho-trust tho-in tho-d4">
+          <li><span class="tho-trust__ic tho-trust__ic--star">{{ i_star }}</span><span><strong>5.0</strong> Google &middot; 59 reviews</span></li>
+          <li><span class="tho-trust__ic">{{ i_shield }}</span><span>Fully insured</span></li>
+          <li><span class="tho-trust__ic">{{ i_team }}</span><span>Two movers &amp; large van</span></li>
+          <li><span class="tho-trust__ic">{{ i_clock }}</span><span>7 days, 7am&ndash;7pm</span></li>
         </ul>
       </div>
+
       <div class="tho-hero__media">
-        {%- if s.image -%}
-          {{ s.image | image_url: width: 1000 | image_tag: alt: s.image_alt, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1000', sizes: '(min-width: 1180px) 500px, (min-width: 900px) 42vw, calc(100vw - 32px)', class: 'tho-img' }}
-        {%- endif -%}
-        <div class="tho-badge">
-          <strong>{{ s.badge_title }}</strong>
-          <span>{{ s.badge_text }}</span>
+        <div class="tho-frame">
+          <span class="tho-frame__glow" aria-hidden="true"></span>
+          {%- if s.image -%}
+            {{ s.image | image_url: width: 1000 | image_tag: alt: s.image_alt, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1000', sizes: '(min-width: 1180px) 500px, (min-width: 900px) 42vw, calc(100vw - 32px)', class: 'tho-img' }}
+          {%- endif -%}
+        </div>
+
+        <div class="tho-float tho-float--rating" aria-hidden="true">
+          <span class="tho-stars">{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}</span>
+          <strong>5.0 on Google</strong>
+          <span>59 verified reviews</span>
+        </div>
+
+        <div class="tho-float tho-float--route">
+          <svg class="tho-route" viewBox="0 0 220 70" aria-hidden="true">
+            <path class="tho-route__base" d="M14 52 C 60 10, 120 70, 206 20"/>
+            <path class="tho-route__line" d="M14 52 C 60 10, 120 70, 206 20"/>
+            <circle class="tho-route__a" cx="14" cy="52" r="6"/>
+            <circle class="tho-route__b" cx="206" cy="20" r="6"/>
+          </svg>
+          <div class="tho-route__meta">
+            <span class="tho-route__ic">{{ i_truck }}</span>
+            <div><strong>{{ s.badge_title }}</strong><span>{{ s.badge_text }}</span></div>
+          </div>
+        </div>
+
+        <div class="tho-float tho-float--price" aria-hidden="true">
+          <span class="tho-route__ic tho-route__ic--green">{{ i_check }}</span>
+          <div><strong>Fixed price</strong><span>Agreed before we start</span></div>
         </div>
       </div>
     </div>
+
     {%- if chips.size > 0 -%}
       <div class="tho-wrap">
-        <ul class="tho-chips" aria-label="Popular services">
-          {%- for c in chips -%}<li {{ c.shopify_attributes }}><a href="{{ c.settings.url }}">{{ c.settings.label }}</a></li>{%- endfor -%}
+        <ul class="tho-chips" aria-label="Popular furniture pickup and delivery services">
+          {%- for c in chips -%}
+            {%- assign l = c.settings.label | downcase -%}
+            {%- liquid
+              if l contains 'single'
+                assign ic = i_box
+              elsif l contains 'marketplace' or l contains 'gumtree'
+                assign ic = i_tag
+              elsif l contains 'ikea' or l contains 'store' or l contains 'bunnings'
+                assign ic = i_store
+              elsif l contains 'couch' or l contains 'sofa'
+                assign ic = i_sofa
+              elsif l contains 'fridge' or l contains 'washer'
+                assign ic = i_fridge
+              elsif l contains 'area' or l contains 'suburb'
+                assign ic = i_pin
+              else
+                assign ic = i_truck
+              endif
+            -%}
+            <li {{ c.shopify_attributes }}><a href="{{ c.settings.url }}"><span class="tho-chip__ic">{{ ic }}</span>{{ c.settings.label }}</a></li>
+          {%- endfor -%}
         </ul>
       </div>
     {%- endif -%}
@@ -85,54 +163,137 @@
 </script>
 
 {% stylesheet %}
-  .tho { --tho-red:#e30613; --tho-red-2:#ff1744; --tho-ink:#0b0b0f; --tho-grad:linear-gradient(135deg,var(--tho-red) 0%,var(--tho-red-2) 100%);
-    font-family: Inter, var(--font-body--family, sans-serif); color:#fff; background: radial-gradient(1100px 520px at 85% -10%, rgba(227,6,19,.38), transparent 60%), radial-gradient(800px 420px at -10% 110%, rgba(255,23,68,.18), transparent 60%), var(--tho-ink); }
-  .tho-wrap { max-width:1180px; margin:0 auto; padding:0 20px; }
-  .tho-bar { border-bottom:1px solid rgba(255,255,255,.08); }
+  .tho { --tho-red:#e30613; --tho-red-2:#ff1744; --tho-ink:#09090c; --tho-gold:#fbbf24; --tho-green:#22c55e;
+    --tho-grad:linear-gradient(135deg,var(--tho-red) 0%,var(--tho-red-2) 100%);
+    position:relative; overflow:hidden; isolation:isolate;
+    font-family: Inter, var(--font-body--family, sans-serif); color:#fff; background:var(--tho-ink); }
+  .tho svg { fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .tho-wrap { max-width:1200px; margin:0 auto; padding:0 20px; position:relative; }
+
+  /* Background: drifting colour blobs + fading grid */
+  .tho-bg { position:absolute; inset:0; z-index:-1; pointer-events:none; }
+  .tho-blob { position:absolute; border-radius:50%; filter:blur(70px); opacity:.55; will-change:transform; }
+  .tho-blob--1 { width:520px; height:520px; right:-120px; top:-160px; background:#e30613; animation:tho-drift 16s ease-in-out infinite alternate; }
+  .tho-blob--2 { width:420px; height:420px; left:-160px; bottom:-200px; background:#ff1744; opacity:.3; animation:tho-drift 20s ease-in-out infinite alternate-reverse; }
+  .tho-blob--3 { width:300px; height:300px; left:42%; top:30%; background:#7c1d2b; opacity:.35; animation:tho-drift 24s ease-in-out infinite alternate; }
+  @keyframes tho-drift { from { transform:translate3d(0,0,0) scale(1); } to { transform:translate3d(-40px,30px,0) scale(1.12); } }
+  .tho-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size:44px 44px; -webkit-mask-image:radial-gradient(ellipse 80% 70% at 60% 30%, #000 30%, transparent 80%); mask-image:radial-gradient(ellipse 80% 70% at 60% 30%, #000 30%, transparent 80%); }
+
+  /* Top bar */
+  .tho-bar { position:relative; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(9,9,12,.55); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
   .tho-bar__in { display:flex; align-items:center; gap:20px; min-height:72px; }
+  .tho-logo { text-decoration:none; flex-shrink:0; }
   .tho-logo img { display:block; height:44px; width:auto; border-radius:8px; }
   .tho-logo span { font-weight:800; font-size:1.2rem; color:#fff; }
-  .tho-logo { text-decoration:none; }
-  .tho-nav { display:flex; gap:22px; margin-left:auto; }
-  .tho-nav a { color:rgba(255,255,255,.8); text-decoration:none; font-weight:600; font-size:.95rem; }
-  .tho-nav a:hover { color:#fff; }
-  .tho-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:54px; padding:0 26px; border-radius:999px; font-weight:800; font-size:1.05rem; text-decoration:none; transition:transform .15s, box-shadow .15s; }
-  .tho-btn:hover { transform:translateY(-1px); }
-  .tho-btn svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; }
-  .tho-btn--call { background:var(--tho-grad); color:#fff; box-shadow:0 12px 32px rgba(227,6,19,.45); }
-  .tho-btn--light { background:#fff; color:var(--tho-ink); }
-  .tho-btn--sm { min-height:42px; padding:0 18px; font-size:.95rem; box-shadow:none; }
-  .tho-hero { padding:56px 0 40px; }
-  .tho-hero__grid { display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; }
-  .tho-live { display:inline-flex; align-items:center; gap:10px; margin:0 0 18px; padding:7px 14px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); font-weight:600; font-size:.9rem; }
-  .tho-live__dot { width:9px; height:9px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 0 rgba(34,197,94,.6); animation:tho-pulse 2s infinite; }
-  @keyframes tho-pulse { 0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)} 70%{box-shadow:0 0 0 10px rgba(34,197,94,0)} 100%{box-shadow:0 0 0 0 rgba(34,197,94,0)} }
-  .tho-h1 { margin:0 0 18px; font-size:clamp(2.2rem,5vw,3.8rem); line-height:1.05; font-weight:900; letter-spacing:-.02em; color:#fff; }
-  .tho-h1 em, .tho-h1 strong { font-style:normal; background:var(--tho-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .tho-sub { margin:0 0 28px; font-size:1.15rem; line-height:1.6; color:rgba(255,255,255,.78); max-width:600px; }
-  .tho-ctas { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:26px; }
-  .tho-trust { display:flex; flex-wrap:wrap; gap:8px 22px; list-style:none; padding:0; margin:0; color:rgba(255,255,255,.75); font-size:.92rem; }
-  .tho-trust li { position:relative; padding-left:18px; }
-  .tho-trust li::before { content:""; position:absolute; left:0; top:50%; width:8px; height:8px; margin-top:-4px; border-radius:50%; background:var(--tho-red-2); }
-  .tho-trust strong { color:#fbbf24; }
-  .tho-hero__media { position:relative; }
-  .tho-img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-radius:24px; box-shadow:0 30px 70px rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.08); }
-  .tho-badge { position:absolute; left:-18px; bottom:22px; background:#fff; color:var(--tho-ink); border-radius:16px; padding:14px 18px; box-shadow:0 16px 40px rgba(0,0,0,.35); max-width:260px; }
-  .tho-badge strong { display:block; font-weight:800; }
-  .tho-badge span { font-size:.88rem; color:#5b5b66; }
-  .tho-chips { display:flex; flex-wrap:wrap; gap:10px; list-style:none; padding:32px 0 0; margin:0; }
-  .tho-chips a { display:inline-block; padding:9px 16px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); color:#fff; text-decoration:none; font-weight:600; font-size:.92rem; }
-  .tho-chips a:hover { background:var(--tho-grad); border-color:transparent; }
+  .tho-nav { display:flex; gap:4px; margin-left:auto; }
+  .tho-nav a { position:relative; padding:8px 12px; border-radius:10px; color:rgba(255,255,255,.78); text-decoration:none; font-weight:600; font-size:.93rem; transition:color .2s, background .2s; }
+  .tho-nav a::after { content:""; position:absolute; left:12px; right:12px; bottom:4px; height:2px; border-radius:2px; background:var(--tho-grad); transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+  .tho-nav a:hover { color:#fff; background:rgba(255,255,255,.05); }
+  .tho-nav a:hover::after { transform:scaleX(1); }
+
+  /* Buttons */
+  .tho-btn { position:relative; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:56px; padding:0 26px; border-radius:999px; font-weight:800; font-size:1.05rem; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease; }
+  .tho-btn:hover { transform:translateY(-2px); }
+  .tho-btn svg { width:20px; height:20px; }
+  .tho-btn--call { background:var(--tho-grad); color:#fff; box-shadow:0 14px 34px rgba(227,6,19,.45), inset 0 1px 0 rgba(255,255,255,.25); }
+  .tho-btn--call:hover { box-shadow:0 18px 44px rgba(227,6,19,.6), inset 0 1px 0 rgba(255,255,255,.25); }
+  .tho-btn--shine::after { content:""; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent); transform:skewX(-20deg); animation:tho-shine 3.6s ease-in-out infinite; }
+  @keyframes tho-shine { 0%, 55% { left:-60%; } 100% { left:130%; } }
+  .tho-btn--light { background:#fff; color:var(--tho-ink); box-shadow:0 10px 28px rgba(0,0,0,.3); }
+  .tho-btn__arrow { display:inline-flex; transition:transform .2s ease; }
+  .tho-btn--light:hover .tho-btn__arrow { transform:translateX(4px); }
+  .tho-btn--sm { min-height:42px; padding:0 16px; font-size:.95rem; box-shadow:none; }
+  .tho-btn--sm svg { width:17px; height:17px; }
+  .tho-ring { display:inline-flex; animation:tho-ring 2.8s ease-in-out infinite; transform-origin:50% 50%; }
+  @keyframes tho-ring { 0%, 70%, 100% { transform:rotate(0); } 74% { transform:rotate(-14deg); } 78% { transform:rotate(12deg); } 82% { transform:rotate(-10deg); } 86% { transform:rotate(8deg); } 90% { transform:rotate(0); } }
+
+  /* Hero */
+  .tho-hero { padding:60px 0 44px; }
+  .tho-hero__grid { display:grid; grid-template-columns:1.08fr .92fr; gap:56px; align-items:center; }
+  .tho-live { display:inline-flex; align-items:center; gap:10px; margin:0 0 20px; padding:7px 15px 7px 12px; border-radius:999px; background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.35); color:#d1fae5; font-weight:600; font-size:.9rem; }
+  .tho-live__dot { width:9px; height:9px; border-radius:50%; background:var(--tho-green); animation:tho-pulse 2s infinite; }
+  @keyframes tho-pulse { 0% { box-shadow:0 0 0 0 rgba(34,197,94,.65); } 70% { box-shadow:0 0 0 11px rgba(34,197,94,0); } 100% { box-shadow:0 0 0 0 rgba(34,197,94,0); } }
+  .tho-h1 { margin:0 0 18px; font-size:clamp(2.3rem,5.2vw,4rem); line-height:1.04; font-weight:900; letter-spacing:-.025em; color:#fff; text-wrap:balance; }
+  .tho-h1 em { position:relative; font-style:normal; background:linear-gradient(90deg,#ff3b47,#ff1744,#ff7a59,#ff1744); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:tho-sheen 6s linear infinite; }
+  .tho-h1 em::after { content:""; position:absolute; left:0; right:0; bottom:.02em; height:.12em; border-radius:99px; background:var(--tho-grad); transform:scaleX(0); transform-origin:left; animation:tho-underline .9s .5s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes tho-sheen { to { background-position:200% center; } }
+  @keyframes tho-underline { to { transform:scaleX(1); } }
+  .tho-sub { margin:0 0 22px; font-size:1.14rem; line-height:1.62; color:rgba(255,255,255,.76); max-width:600px; }
+  .tho-ticks { display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; list-style:none; padding:0; margin:0 0 28px; max-width:600px; }
+  .tho-ticks li { display:flex; align-items:center; gap:9px; font-weight:600; font-size:.95rem; color:rgba(255,255,255,.9); }
+  .tho-ticks svg { flex:0 0 20px; width:20px; height:20px; padding:3px; border-radius:50%; background:rgba(34,197,94,.16); color:var(--tho-green); stroke-width:3; }
+  .tho-ctas { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px; }
+  .tho-trust { display:grid; grid-template-columns:repeat(4, auto); gap:14px 22px; justify-content:start; list-style:none; padding:0; margin:0; }
+  .tho-trust li { display:flex; align-items:center; gap:9px; color:rgba(255,255,255,.78); font-size:.88rem; line-height:1.25; }
+  .tho-trust strong { color:#fff; }
+  .tho-trust__ic { display:grid; place-items:center; flex:0 0 34px; height:34px; border-radius:10px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); }
+  .tho-trust__ic svg { width:17px; height:17px; }
+  .tho-trust__ic--star { color:var(--tho-gold); }
+  .tho-trust__ic--star svg { fill:currentColor; stroke:none; }
+
+  /* Media */
+  .tho-hero__media { position:relative; padding:18px 18px 18px 0; }
+  .tho-frame { position:relative; border-radius:28px; padding:6px; background:linear-gradient(140deg, rgba(255,255,255,.22), rgba(255,255,255,.03) 40%, rgba(227,6,19,.5)); box-shadow:0 40px 90px rgba(0,0,0,.55); transform:perspective(1200px) rotateY(-6deg) rotateX(2deg); transition:transform .5s ease; }
+  .tho-hero__media:hover .tho-frame { transform:perspective(1200px) rotateY(0) rotateX(0); }
+  .tho-frame__glow { position:absolute; inset:-30px; z-index:-1; border-radius:40px; background:radial-gradient(closest-side, rgba(227,6,19,.55), transparent); filter:blur(30px); }
+  .tho-img { display:block; width:100%; height:auto; aspect-ratio:4/3.4; object-fit:cover; border-radius:22px; }
+  .tho-float { position:absolute; z-index:2; display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:18px; background:rgba(255,255,255,.96); color:var(--tho-ink); box-shadow:0 18px 44px rgba(0,0,0,.35); animation:tho-bob 6s ease-in-out infinite; }
+  .tho-float strong { display:block; font-weight:800; font-size:.95rem; line-height:1.2; }
+  .tho-float span { font-size:.8rem; color:#5b5b66; }
+  .tho-float--rating { top:-6px; right:-6px; flex-direction:column; align-items:flex-start; gap:2px; animation-delay:-2s; }
+  .tho-stars { display:flex; gap:2px; color:var(--tho-gold); }
+  .tho-stars svg { width:15px; height:15px; fill:currentColor; stroke:none; }
+  .tho-float--route { left:-34px; bottom:26px; flex-direction:column; align-items:stretch; gap:6px; padding:12px 14px; width:250px; }
+  .tho-route { width:100%; height:56px; }
+  .tho-route__base { stroke:#e7e7ec; stroke-width:4; }
+  .tho-route__line { stroke:var(--tho-red); stroke-width:4; stroke-dasharray:260; stroke-dashoffset:260; animation:tho-draw 3.2s ease-in-out infinite; }
+  @keyframes tho-draw { 0% { stroke-dashoffset:260; } 55%, 85% { stroke-dashoffset:0; } 100% { stroke-dashoffset:-260; } }
+  .tho-route__a { fill:var(--tho-ink); stroke:#fff; stroke-width:3; }
+  .tho-route__b { fill:var(--tho-red); stroke:#fff; stroke-width:3; }
+  .tho-route__meta { display:flex; align-items:center; gap:10px; }
+  .tho-route__ic { display:grid; place-items:center; flex:0 0 36px; height:36px; border-radius:11px; background:var(--tho-grad); color:#fff; }
+  .tho-route__ic svg { width:19px; height:19px; }
+  .tho-route__ic--green { background:var(--tho-green); }
+  .tho-route__ic--green svg { stroke-width:3; }
+  .tho-float--price { right:-10px; bottom:-14px; animation-delay:-4s; }
+  @keyframes tho-bob { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+
+  /* Service chips */
+  .tho-chips { display:flex; flex-wrap:wrap; gap:10px; list-style:none; padding:40px 0 0; margin:0; }
+  .tho-chips a { display:inline-flex; align-items:center; gap:8px; padding:9px 16px 9px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:#fff; text-decoration:none; font-weight:600; font-size:.92rem; transition:background .2s, border-color .2s, transform .2s; }
+  .tho-chips a:hover { background:rgba(227,6,19,.22); border-color:rgba(255,23,68,.7); transform:translateY(-2px); }
+  .tho-chip__ic { display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--tho-grad); }
+  .tho-chip__ic svg { width:15px; height:15px; }
+
+  /* Entrance (never on the H1 text colour or the LCP photo) */
+  .tho-in { animation:tho-fade .7s cubic-bezier(.2,.8,.2,1) both; }
+  .tho-d1 { animation-delay:.05s; } .tho-d2 { animation-delay:.15s; } .tho-d3 { animation-delay:.25s; } .tho-d4 { animation-delay:.35s; }
+  @keyframes tho-fade { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  .tho-rise { animation:tho-rise .8s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes tho-rise { from { transform:translateY(18px); } to { transform:none; } }
+
+  @media (max-width: 1080px) { .tho-trust { grid-template-columns:repeat(2, auto); } }
   @media (max-width: 900px) {
     .tho-nav { display:none; }
     .tho-bar__in { justify-content:space-between; min-height:64px; }
-    .tho-hero { padding:32px 0 28px; }
-    .tho-hero__grid { grid-template-columns:1fr; gap:28px; }
+    .tho-hero { padding:34px 0 30px; }
+    .tho-hero__grid { grid-template-columns:1fr; gap:34px; }
+    .tho-ticks { grid-template-columns:1fr; }
     .tho-btn { width:100%; }
     .tho-btn--sm { width:auto; }
-    .tho-badge { left:12px; bottom:12px; }
+    .tho-hero__media { padding:14px 6px 30px; }
+    .tho-frame { transform:none; }
+    .tho-float--route { left:-2px; bottom:4px; width:220px; }
+    .tho-float--rating { right:0; top:0; }
+    .tho-float--price { display:none; }
+    .tho-blob--1 { width:340px; height:340px; }
   }
-  @media (max-width: 400px) { .tho-logo img { height:36px; } .tho-btn--sm { padding:0 12px; font-size:.85rem; } }
+  @media (max-width: 400px) { .tho-logo img { height:36px; } .tho-btn--sm { padding:0 12px; font-size:.85rem; } .tho-trust { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce) {
+    .tho *, .tho *::before, .tho *::after { animation:none !important; transition:none !important; }
+    .tho-h1 em::after { transform:scaleX(1); }
+    .tho-route__line { stroke-dashoffset:0; }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -142,7 +303,7 @@
   "class": "section-titan-home-hero",
   "settings": [
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
-    { "type": "text", "id": "quote_anchor", "label": "Quote button link", "default": "#main-quote" },
+    { "type": "text", "id": "quote_anchor", "label": "Quote button link", "default": "#instant-quote" },
     { "type": "range", "id": "open_hour", "label": "Open from (hour)", "min": 0, "max": 23, "step": 1, "default": 7 },
     { "type": "range", "id": "close_hour", "label": "Open until (hour)", "min": 1, "max": 24, "step": 1, "default": 19 },
     { "type": "text", "id": "live_open", "label": "Status during hours", "default": "Taking same-day bookings now" },
@@ -152,8 +313,8 @@
     { "type": "textarea", "id": "subheading", "label": "Subheading" },
     { "type": "image_picker", "id": "image", "label": "Photo" },
     { "type": "text", "id": "image_alt", "label": "Photo alt text" },
-    { "type": "text", "id": "badge_title", "label": "Photo badge title" },
-    { "type": "text", "id": "badge_text", "label": "Photo badge text" }
+    { "type": "text", "id": "badge_title", "label": "Route card title" },
+    { "type": "text", "id": "badge_text", "label": "Route card text" }
   ],
   "blocks": [
     { "type": "chip", "name": "Service link", "settings": [
