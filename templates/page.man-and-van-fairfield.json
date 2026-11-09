@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Couches & lounges",
+            "text": "Sofas and modulars moved in and out of Fairfield homes and units.",
+            "url": "/pages/couch-delivery-sydney",
+            "link_label": "Couch delivery"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Single items",
+            "text": "One bed, table or wardrobe. No minimum job size.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree",
+            "text": "Bought second-hand in or near Fairfield? We collect from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store collections",
+            "text": "Bunnings, IKEA and furniture store orders collected for you.",
+            "url": "/pages/bunnings-store-collection-sydney",
+            "link_label": "Store collection"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washers",
+            "text": "Appliances moved upright, strapped and carried in.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Small moves",
+            "text": "Studio, 1-bedroom and partial moves with two movers.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Wetherill Park outlets",
+            "text": "Furniture and bedding warehouses collected and delivered."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Cabramatta & Canley Vale",
+            "text": "Busy streets and tight parking, planned ahead."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "sofa",
+            "title": "Big family furniture",
+            "text": "Large lounges, dining sets and bunk beds moved carefully."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Units and townhouses",
+            "text": "Two movers for stairs and narrow hallways."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a man and van cost in Fairfield?",
+            "answer": "<p>It depends on what you're moving, the pickup and delivery suburbs, and stairs or lifts. We give a fixed price before you book, with no hourly surprises.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you do same-day pickups in Fairfield?",
+            "answer": "<p>Often, yes. Call before midday and we'll check the day's schedule.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move just one item?",
+            "answer": "<p>Yes. No minimum job size: one couch, one fridge or one bed is fine.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up from furniture warehouses in Wetherill Park?",
+            "answer": "<p>Yes. Send us the store or warehouse address and your order details.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you cover Cabramatta and Bonnyrigg?",
+            "answer": "<p>Yes, plus Canley Vale, Smithfield, Prairiewood and the rest of South West Sydney.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move a big dining set or bunk beds?",
+            "answer": "<p>Yes. We take legs off and dismantle simple items when needed.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Liverpool",
+            "url": "/pages/man-and-van-liverpool",
+            "description": "Liverpool and South West Sydney."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Bankstown",
+            "url": "/pages/man-and-van-bankstown",
+            "description": "Bankstown and Canterbury."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Bunnings & Store Collection",
+            "url": "/pages/bunnings-store-collection-sydney",
+            "description": "We collect from the store for you."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Fairfield",
+        "phone": "0469 717 535",
+        "service_type": "Man and van, furniture removals and delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day bookings in Fairfield now",
+        "live_closed": "Book now for tomorrow in Fairfield",
+        "live_fallback": "Same-day pickups available in Fairfield",
+        "kicker": "Fairfield · South West Sydney",
+        "heading": "Man and Van <em>Fairfield</em>",
+        "subheading": "Furniture pickups, family moves and store collections across Fairfield, Cabramatta, Smithfield and Wetherill Park. Fixed prices, two careful movers.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_Sydney_removalist.png",
+        "hero_alt": "Titan Express man and van ready for a Fairfield furniture pickup",
+        "hero_badge_title": "South West Sydney pickups and deliveries",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Man and Van Jobs Around Fairfield",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Fairfield Is Next Door to Sydney's Furniture Warehouses",
+        "local_body": "<p>Wetherill Park and Smithfield are <strong>full of furniture outlets, bedding stores and warehouses</strong>, and Fairfield homes often have big families and big furniture.</p><p>We collect from the warehouse or seller and carry it into your home, with a fixed price agreed first.</p>",
+        "steps_heading": "Book a Man and Van in Fairfield in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Fairfield",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Man and Van Near Fairfield",
+        "nearby_intro": "We cover Fairfield and every suburb around it.",
+        "nearby_suburbs": "Cabramatta, Canley Vale, Canley Heights, Fairfield Heights, Fairfield West, Smithfield, Wetherill Park, Prairiewood, Bonnyrigg, Villawood, Yennora, Guildford",
+        "price_heading": "What Affects Your Fairfield Man and Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Fairfield Man and Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Fairfield",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Man and Van Fairfield Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a man and van in Fairfield?",
+        "quick_answer": "<p>Titan Express provides man and van, furniture pickup and delivery in Fairfield and across South West Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 or send your suburbs for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

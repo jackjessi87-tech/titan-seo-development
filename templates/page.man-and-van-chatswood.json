@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Couches & lounges",
+            "text": "Sofas and modulars moved in and out of Chatswood homes and units.",
+            "url": "/pages/couch-delivery-sydney",
+            "link_label": "Couch delivery"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Single items",
+            "text": "One bed, table or wardrobe. No minimum job size.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree",
+            "text": "Bought second-hand in or near Chatswood? We collect from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store collections",
+            "text": "Bunnings, IKEA and furniture store orders collected for you.",
+            "url": "/pages/bunnings-store-collection-sydney",
+            "link_label": "Store collection"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washers",
+            "text": "Appliances moved upright, strapped and carried in.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "building",
+            "title": "Small moves",
+            "text": "Studio, 1-bedroom and partial moves with two movers.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment towers",
+            "text": "We work with building managers on dock times and lift padding."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Loading docks & parking",
+            "text": "We plan around dock bookings and tight street parking near the station."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Steep driveways",
+            "text": "Two movers and trolleys for split-level homes in Willoughby and Castlecrag."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Shop pickups",
+            "text": "Furniture bought at Chatswood's shopping centres collected and delivered."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does a man and van cost in Chatswood?",
+            "answer": "<p>It depends on what you're moving, the pickup and delivery suburbs, and stairs or lifts. We give a fixed price before you book, with no hourly surprises.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you do same-day pickups in Chatswood?",
+            "answer": "<p>Often, yes. Call before midday and we'll check the day's schedule.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move just one item?",
+            "answer": "<p>Yes. No minimum job size: one couch, one fridge or one bed is fine.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move furniture in and out of a Chatswood apartment?",
+            "answer": "<p>Yes. Send us the building name and any dock or lift booking rules and we'll schedule around them.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you need a lift booking?",
+            "answer": "<p>Many Chatswood buildings require one. Book the lift with your building manager and tell us the time slot.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Which suburbs near Chatswood do you cover?",
+            "answer": "<p>All of the Lower North Shore, including Willoughby, Artarmon, Lane Cove, Roseville and Lindfield.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Furniture Delivery Ryde",
+            "url": "/pages/furniture-delivery-ryde",
+            "description": "Ryde, Macquarie Park and Eastwood."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "Studio and 1-bedroom moves."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "IKEA Pickup & Delivery",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "description": "Rhodes is close to the North Shore."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Chatswood",
+        "phone": "0469 717 535",
+        "service_type": "Man and van, furniture removals and delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day bookings in Chatswood now",
+        "live_closed": "Book now for tomorrow in Chatswood",
+        "live_fallback": "Same-day pickups available in Chatswood",
+        "kicker": "Chatswood · the North Shore",
+        "heading": "Man and Van <em>Chatswood</em>",
+        "subheading": "Furniture pickups, apartment moves and single-item deliveries across Chatswood, Willoughby, Artarmon and the Lower North Shore. Fixed prices, two careful movers.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_Sydney_removalist.png",
+        "hero_alt": "Titan Express man and van ready for a Chatswood furniture pickup",
+        "hero_badge_title": "the North Shore pickups and deliveries",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Man and Van Jobs Around Chatswood",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Chatswood Moves Mean Towers, Lifts and Loading Docks",
+        "local_body": "<p>Much of Chatswood is <strong>high-rise apartments with loading docks, lift bookings and building rules</strong>, while the leafy streets around it have steep driveways and tight parking.</p><p>Tell us your building's dock and lift details and we'll plan the time, protect the lift and give you a fixed price.</p>",
+        "steps_heading": "Book a Man and Van in Chatswood in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Chatswood",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Man and Van Near Chatswood",
+        "nearby_intro": "We cover Chatswood and every suburb around it.",
+        "nearby_suburbs": "Willoughby, Artarmon, Naremburn, St Leonards, Lane Cove, Roseville, Lindfield, Killara, Castle Cove, Castlecrag, Northbridge, Gordon",
+        "price_heading": "What Affects Your Chatswood Man and Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Chatswood Man and Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Chatswood",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Man and Van Chatswood Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a man and van in Chatswood?",
+        "quick_answer": "<p>Titan Express provides man and van, furniture pickup and delivery in Chatswood and across the North Shore, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 or send your suburbs for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
