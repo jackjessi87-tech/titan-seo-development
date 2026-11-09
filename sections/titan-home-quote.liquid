@@ -1,0 +1,228 @@
+{%- doc -%}
+  Titan Express homepage quote wizard. Three steps (service, job, contact)
+  on Shopify's contact form, so requests arrive in the store's contact inbox.
+  Without JavaScript every step shows at once and the form still submits.
+{%- enddoc -%}
+
+{%- liquid
+  assign s = section.settings
+  assign phone_digits = s.phone | remove: ' '
+  assign phone_intl = phone_digits | remove_first: '0' | prepend: '+61'
+  assign uid = section.id
+-%}
+
+<section class="thq" id="instant-quote" aria-labelledby="thq-h-{{ uid }}">
+  <div class="thq-wrap thq-grid">
+    <div class="thq-copy">
+      <p class="thq-eyebrow">{{ s.eyebrow }}</p>
+      <h2 id="thq-h-{{ uid }}" class="thq-h2">{{ s.heading }}</h2>
+      <p class="thq-sub">{{ s.subheading }}</p>
+      <ul class="thq-points">
+        <li><span>1</span><div><strong>Choose your service</strong>Pickup &amp; delivery, single item, store collection or Marketplace.</div></li>
+        <li><span>2</span><div><strong>Tell us about the job</strong>Suburbs, item, stairs or lift and your date.</div></li>
+        <li><span>3</span><div><strong>Get a fixed price</strong>We reply by text or email, usually fast in business hours.</div></li>
+      </ul>
+      <p class="thq-or">Prefer to talk? <a href="tel:{{ phone_intl }}">Call {{ s.phone }}</a></p>
+    </div>
+
+    <div class="thq-card" data-thq>
+      {%- form 'contact', id: 'home-quote', class: 'thq-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="thq-done" role="status" tabindex="-1">
+            <div class="thq-done__icon" aria-hidden="true">&#10003;</div>
+            <h3>Thanks, your request is in</h3>
+            <p>We'll text or email your fixed price shortly. Need it moved today? Call <a href="tel:{{ phone_intl }}">{{ s.phone }}</a>.</p>
+          </div>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="thq-error" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <input type="hidden" name="contact[source]" value="Homepage instant quote">
+
+          <div class="thq-progress" aria-hidden="true"><div class="thq-progress__bar" data-thq-bar></div></div>
+          <p class="thq-stepnote" data-thq-note>Step 1 of 3</p>
+
+          <fieldset class="thq-step is-active" data-step="1">
+            <legend class="thq-legend">What do you need?</legend>
+            <div class="thq-tiles">
+              {%- assign opts = 'Furniture Pickup & Delivery|Single Item Delivery|Store Collection (IKEA, Bunnings etc.)|Facebook Marketplace / Gumtree Pickup' | split: '|' -%}
+              {%- assign icons = 'truck|sofa|store|tag' | split: '|' -%}
+              {%- for o in opts -%}
+                <label class="thq-tile">
+                  <input type="radio" name="contact[service]" value="{{ o }}" {% if forloop.first %}checked{% endif %} required>
+                  <span class="thq-tile__in">
+                    <span class="thq-tile__icon" aria-hidden="true">
+                      {%- case icons[forloop.index0] -%}
+                        {%- when 'truck' -%}<svg viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+                        {%- when 'sofa' -%}<svg viewBox="0 0 24 24"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg>
+                        {%- when 'store' -%}<svg viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9"/></svg>
+                        {%- else -%}<svg viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+                      {%- endcase -%}
+                    </span>
+                    <span class="thq-tile__t">{{ o }}</span>
+                  </span>
+                </label>
+              {%- endfor -%}
+            </div>
+            <label class="thq-field"><span>What are we moving?</span>
+              <textarea name="contact[body]" rows="2" placeholder="e.g. 3-seater sofa from Marketplace, or IKEA order #123" required></textarea></label>
+            <button type="button" class="thq-btn thq-btn--primary" data-next>Next: suburbs &amp; date</button>
+          </fieldset>
+
+          <fieldset class="thq-step" data-step="2">
+            <legend class="thq-legend">Where and when?</legend>
+            <div class="thq-row">
+              <label class="thq-field"><span>Pickup suburb</span>
+                <input type="text" name="contact[pickup_suburb]" placeholder="e.g. Bankstown" autocomplete="off" required></label>
+              <label class="thq-field"><span>Delivery suburb</span>
+                <input type="text" name="contact[delivery_suburb]" placeholder="e.g. Parramatta" autocomplete="off" required></label>
+            </div>
+            <div class="thq-row">
+              <label class="thq-field"><span>Stairs or lift?</span>
+                <select name="contact[stairs_or_lift]" aria-label="Stairs or lift">
+                  <option>Ground floor both ends</option><option>Stairs at pickup</option><option>Stairs at delivery</option><option>Stairs both ends</option><option>Lift available</option>
+                </select></label>
+              <label class="thq-field"><span>Preferred date</span>
+                <input type="date" name="contact[preferred_date]"></label>
+            </div>
+            <div class="thq-nav">
+              <button type="button" class="thq-btn thq-btn--ghost" data-back>Back</button>
+              <button type="button" class="thq-btn thq-btn--primary" data-next>Next: your details</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="thq-step" data-step="3">
+            <legend class="thq-legend">Where should we send your price?</legend>
+            <label class="thq-field"><span>Your name</span>
+              <input type="text" name="contact[name]" autocomplete="name" required></label>
+            <div class="thq-row">
+              <label class="thq-field"><span>Mobile</span>
+                <input type="tel" name="contact[phone]" autocomplete="tel" inputmode="tel" placeholder="04xx xxx xxx" required></label>
+              <label class="thq-field"><span>Email</span>
+                <input type="email" name="contact[email]" autocomplete="email" required></label>
+            </div>
+            <div class="thq-summary" data-thq-summary hidden></div>
+            <div class="thq-nav">
+              <button type="button" class="thq-btn thq-btn--ghost" data-back>Back</button>
+              <button type="submit" class="thq-btn thq-btn--primary">Get my fixed price</button>
+            </div>
+          </fieldset>
+          <p class="thq-fine">No obligation. Fixed price before we start. We never share your details.</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var card = document.querySelector('#instant-quote [data-thq]');
+    if (!card) return;
+    var form = card.querySelector('form');
+    var steps = card.querySelectorAll('.thq-step');
+    if (!form || !steps.length) { var d = card.querySelector('.thq-done'); if (d) d.focus(); return; }
+    card.classList.add('is-js');
+    var bar = card.querySelector('[data-thq-bar]'), note = card.querySelector('[data-thq-note]'), sum = card.querySelector('[data-thq-summary]');
+    var cur = 0;
+    function val(n) { var el = form.querySelector('[name="contact[' + n + ']"]:checked') || form.querySelector('[name="contact[' + n + ']"]'); return el ? el.value.trim() : ''; }
+    function show(i) {
+      steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+      cur = i; bar.style.width = ((i + 1) / steps.length * 100) + '%'; note.textContent = 'Step ' + (i + 1) + ' of ' + steps.length;
+      if (i === steps.length - 1 && sum) {
+        sum.hidden = false;
+        sum.textContent = val('service') + ' · ' + (val('pickup_suburb') || '?') + ' → ' + (val('delivery_suburb') || '?') + (val('preferred_date') ? ' · ' + val('preferred_date') : '');
+      }
+    }
+    function ok(i) {
+      var fields = steps[i].querySelectorAll('input, textarea, select');
+      for (var k = 0; k < fields.length; k++) { if (!fields[k].checkValidity()) { fields[k].reportValidity(); return false; } }
+      return true;
+    }
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('[data-next]')) { if (ok(cur)) { show(cur + 1); steps[cur].querySelector('input, textarea, select').focus({ preventScroll: true }); } }
+      if (e.target.closest('[data-back]')) show(cur - 1);
+    });
+    show(0);
+  })();
+</script>
+
+{% stylesheet %}
+  .thq { --thq-red:#e30613; --thq-red-2:#ff1744; --thq-ink:#0b0b0f; --thq-muted:#5b5b66; --thq-line:rgba(0,0,0,.1); --thq-soft:#f6f6f8;
+    --thq-grad:linear-gradient(135deg,var(--thq-red) 0%,var(--thq-red-2) 100%);
+    font-family: Inter, var(--font-body--family, sans-serif); background: linear-gradient(180deg,#fff 0%,var(--thq-soft) 100%); padding:64px 0; color:rgba(0,0,0,.82); scroll-margin-top:16px; }
+  .thq-wrap { max-width:1180px; margin:0 auto; padding:0 20px; }
+  .thq-grid { display:grid; grid-template-columns:.9fr 1.1fr; gap:48px; align-items:start; }
+  .thq-eyebrow { margin:0 0 10px; font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--thq-red); }
+  .thq-h2 { margin:0 0 14px; font-size:clamp(1.7rem,3.4vw,2.6rem); line-height:1.12; font-weight:900; color:var(--thq-ink); letter-spacing:-.01em; }
+  .thq-sub { margin:0 0 24px; font-size:1.08rem; color:var(--thq-muted); }
+  .thq-points { list-style:none; padding:0; margin:0 0 22px; display:grid; gap:14px; }
+  .thq-points li { display:flex; gap:14px; align-items:flex-start; }
+  .thq-points li > span { flex:0 0 34px; height:34px; border-radius:50%; background:var(--thq-grad); color:#fff; font-weight:800; display:grid; place-items:center; }
+  .thq-points strong { display:block; color:var(--thq-ink); }
+  .thq-points div { color:var(--thq-muted); font-size:.95rem; }
+  .thq-or { margin:0; color:var(--thq-muted); }
+  .thq-or a { color:var(--thq-red); font-weight:800; text-decoration:none; }
+  .thq-card { position:relative; background:#fff; border-radius:24px; padding:28px; box-shadow:0 30px 70px rgba(11,11,15,.14), 0 0 0 1px var(--thq-line); }
+  .thq-card::before { content:""; position:absolute; inset:-2px; border-radius:26px; padding:2px; background:var(--thq-grad); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:.55; pointer-events:none; }
+  .thq-progress { height:6px; border-radius:99px; background:var(--thq-soft); overflow:hidden; margin-bottom:8px; }
+  .thq-progress__bar { height:100%; width:33%; background:var(--thq-grad); border-radius:99px; transition:width .35s ease; }
+  .thq-stepnote { margin:0 0 14px; font-size:.82rem; font-weight:700; color:var(--thq-muted); }
+  .thq-step { border:0; padding:0; margin:0 0 6px; min-width:0; }
+  .thq-card.is-js .thq-step { display:none; }
+  .thq-card.is-js .thq-step.is-active { display:block; animation:thq-in .3s ease; }
+  .thq-card:not(.is-js) .thq-progress, .thq-card:not(.is-js) .thq-stepnote, .thq-card:not(.is-js) [data-next], .thq-card:not(.is-js) [data-back] { display:none; }
+  @keyframes thq-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+  .thq-legend { padding:0; margin:0 0 14px; font-size:1.2rem; font-weight:800; color:var(--thq-ink); }
+  .thq-tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+  .thq-tile { position:relative; cursor:pointer; }
+  .thq-tile input { position:absolute; opacity:0; pointer-events:none; }
+  .thq-tile__in { display:flex; flex-direction:column; gap:8px; height:100%; padding:14px; border-radius:16px; border:1.5px solid var(--thq-line); background:#fff; transition:border-color .15s, box-shadow .15s, transform .15s; }
+  .thq-tile:hover .thq-tile__in { transform:translateY(-1px); }
+  .thq-tile input:checked + .thq-tile__in { border-color:var(--thq-red); box-shadow:0 0 0 3px rgba(227,6,19,.12); background:rgba(227,6,19,.03); }
+  .thq-tile input:focus-visible + .thq-tile__in { outline:2px solid var(--thq-red); outline-offset:2px; }
+  .thq-tile__icon { width:38px; height:38px; border-radius:12px; background:var(--thq-soft); display:grid; place-items:center; }
+  .thq-tile input:checked + .thq-tile__in .thq-tile__icon { background:var(--thq-grad); }
+  .thq-tile__icon svg { width:22px; height:22px; fill:none; stroke:var(--thq-ink); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .thq-tile input:checked + .thq-tile__in .thq-tile__icon svg { stroke:#fff; }
+  .thq-tile__t { font-weight:700; color:var(--thq-ink); font-size:.92rem; line-height:1.3; }
+  .thq-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .thq-field { display:block; margin:0 0 12px; }
+  .thq-field > span { display:block; margin:0 0 6px; font-size:.86rem; font-weight:700; color:var(--thq-ink); }
+  .thq-field input, .thq-field textarea, .thq-field select { width:100%; box-sizing:border-box; min-height:48px; padding:12px 14px; border-radius:12px; border:1.5px solid var(--thq-line); background:#fff; font:inherit; font-size:16px; color:var(--thq-ink); }
+  .thq-field textarea { resize:vertical; }
+  .thq-field input:focus, .thq-field textarea:focus, .thq-field select:focus { outline:none; border-color:var(--thq-red); box-shadow:0 0 0 3px rgba(227,6,19,.12); }
+  .thq-btn { display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 24px; border-radius:999px; border:0; font:inherit; font-weight:800; font-size:1rem; cursor:pointer; }
+  .thq-btn--primary { width:100%; background:var(--thq-grad); color:#fff; box-shadow:0 12px 28px rgba(227,6,19,.35); }
+  .thq-btn--ghost { background:var(--thq-soft); color:var(--thq-ink); }
+  .thq-nav { display:grid; grid-template-columns:auto 1fr; gap:10px; }
+  .thq-summary { margin:0 0 12px; padding:12px 14px; border-radius:12px; background:var(--thq-soft); font-weight:600; color:var(--thq-ink); font-size:.92rem; }
+  .thq-fine { margin:12px 0 0; text-align:center; font-size:.82rem; color:var(--thq-muted); }
+  .thq-error { margin:0 0 12px; padding:12px 14px; border-radius:12px; background:#fff1f2; color:#9f1239; }
+  .thq-done { text-align:center; padding:24px 8px; }
+  .thq-done__icon { width:64px; height:64px; margin:0 auto 14px; border-radius:50%; background:var(--thq-grad); color:#fff; font-size:2rem; display:grid; place-items:center; }
+  .thq-done h3 { margin:0 0 8px; color:var(--thq-ink); }
+  .thq-done a { color:var(--thq-red); font-weight:800; }
+  @media (max-width: 900px) {
+    .thq { padding:40px 0; }
+    .thq-wrap { padding:0 16px; }
+    .thq-grid { grid-template-columns:1fr; gap:24px; }
+    .thq-card { padding:20px; }
+    .thq-points { display:none; }
+  }
+  @media (max-width: 480px) { .thq-row { grid-template-columns:1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Titan home quote",
+  "tag": "div",
+  "class": "section-titan-home-quote",
+  "settings": [
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Instant quote" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get Your Fixed Price in 60 Seconds" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" }
+  ],
+  "presets": [{ "name": "Titan home quote" }]
+}
+{% endschema %}

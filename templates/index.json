@@ -200,7 +200,8 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
+      },
+      "disabled": true
     },
     "178152505238a9bab5": {
       "type": "_blocks",
@@ -1163,7 +1164,7 @@
       ],
       "settings": {
         "phone": "0469 717 535",
-        "quote_anchor": "#main-quote",
+        "quote_anchor": "#instant-quote",
         "open_hour": 7,
         "close_hour": 19,
         "live_open": "Taking same-day bookings now",
@@ -1176,10 +1177,20 @@
         "badge_title": "Pickups every day, 7am to 7pm",
         "badge_text": "Two movers · blankets · trolleys · straps"
       }
+    },
+    "titan_home_quote": {
+      "type": "titan-home-quote",
+      "settings": {
+        "phone": "0469 717 535",
+        "eyebrow": "Instant quote",
+        "heading": "Request Your Fixed Price in 60 Seconds",
+        "subheading": "Furniture pickup and delivery, single items, store collection from IKEA and Bunnings, and Facebook Marketplace pickups across Sydney. Tell us the job and we send a fixed price, no hourly meter."
+      }
     }
   },
   "order": [
     "titan_home_hero",
+    "titan_home_quote",
     "17820952195463b177",
     "17855470940f586504",
     "blocks_pp44rW",

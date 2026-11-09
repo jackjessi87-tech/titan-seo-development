@@ -53,7 +53,7 @@
       </div>
       <div class="tho-hero__media">
         {%- if s.image -%}
-          {{ s.image | image_url: width: 1200 | image_tag: alt: s.image_alt, loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 520px, 100vw', class: 'tho-img' }}
+          {{ s.image | image_url: width: 1000 | image_tag: alt: s.image_alt, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1000', sizes: '(min-width: 1180px) 500px, (min-width: 900px) 42vw, calc(100vw - 32px)', class: 'tho-img' }}
         {%- endif -%}
         <div class="tho-badge">
           <strong>{{ s.badge_title }}</strong>
