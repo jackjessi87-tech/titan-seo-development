@@ -1,0 +1,166 @@
+{%- doc -%}
+  Titan Express homepage hero. Holds the page's only H1, the main keyword
+  copy, call and quote buttons, trust points and service links.
+  The small script only switches the live status text by Sydney time.
+{%- enddoc -%}
+
+{%- liquid
+  assign s = section.settings
+  assign phone_digits = s.phone | remove: ' '
+  assign phone_intl = phone_digits | remove_first: '0' | prepend: '+61'
+  assign chips = section.blocks | where: 'type', 'chip'
+-%}
+
+<div class="tho" id="tho-{{ section.id }}" data-open="{{ s.open_hour }}" data-close="{{ s.close_hour }}">
+  <div class="tho-bar">
+    <div class="tho-wrap tho-bar__in">
+      <a class="tho-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+        {%- if settings.logo -%}
+          {%- assign logo_w = settings.logo.aspect_ratio | times: 44 | round -%}
+          {{ settings.logo | image_url: width: 360 | image_tag: alt: 'Titan Express furniture pickup and delivery Sydney', height: 44, width: logo_w, loading: 'eager' }}
+        {%- else -%}<span>Titan Express</span>{%- endif -%}
+      </a>
+      <nav class="tho-nav" aria-label="Main">
+        <a href="/pages/furniture-pickup-delivery-sydney">Pickup &amp; Delivery</a>
+        <a href="/pages/single-item-delivery-sydney">Single Item</a>
+        <a href="/pages/facebook-marketplace-pickup-delivery-sydney">Marketplace</a>
+        <a href="/pages/ikea-pickup-delivery-sydney">IKEA</a>
+        <a href="/pages/areas-we-serve">Areas</a>
+      </nav>
+      <a class="tho-btn tho-btn--call tho-btn--sm" href="tel:{{ phone_intl }}">{{ s.phone }}</a>
+    </div>
+  </div>
+
+  <section class="tho-hero">
+    <div class="tho-wrap tho-hero__grid">
+      <div class="tho-hero__copy">
+        <p class="tho-live" role="status"><span class="tho-live__dot" aria-hidden="true"></span><span data-live>{{ s.live_fallback }}</span></p>
+        <h1 class="tho-h1">{{ s.heading }}</h1>
+        <p class="tho-sub">{{ s.subheading }}</p>
+        <div class="tho-ctas">
+          <a class="tho-btn tho-btn--call" href="tel:{{ phone_intl }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            Call {{ s.phone }}
+          </a>
+          <a class="tho-btn tho-btn--light" href="{{ s.quote_anchor }}">Get a fixed price</a>
+        </div>
+        <ul class="tho-trust">
+          <li><strong>&#9733; 5.0</strong> on Google &middot; 59 reviews</li>
+          <li>Fully insured</li>
+          <li>Two movers &amp; large van</li>
+          <li>7 days, 7am&ndash;7pm</li>
+        </ul>
+      </div>
+      <div class="tho-hero__media">
+        {%- if s.image -%}
+          {{ s.image | image_url: width: 1200 | image_tag: alt: s.image_alt, loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 520px, 100vw', class: 'tho-img' }}
+        {%- endif -%}
+        <div class="tho-badge">
+          <strong>{{ s.badge_title }}</strong>
+          <span>{{ s.badge_text }}</span>
+        </div>
+      </div>
+    </div>
+    {%- if chips.size > 0 -%}
+      <div class="tho-wrap">
+        <ul class="tho-chips" aria-label="Popular services">
+          {%- for c in chips -%}<li {{ c.shopify_attributes }}><a href="{{ c.settings.url }}">{{ c.settings.label }}</a></li>{%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </section>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('tho-{{ section.id }}');
+    if (!root) return;
+    var el = root.querySelector('[data-live]');
+    try {
+      var h = parseInt(new Intl.DateTimeFormat('en-AU', { hour: 'numeric', hour12: false, timeZone: 'Australia/Sydney' }).format(new Date()), 10);
+      var open = parseInt(root.dataset.open, 10), close = parseInt(root.dataset.close, 10);
+      el.textContent = (h >= open && h < close) ? {{ s.live_open | json }} : {{ s.live_closed | json }};
+    } catch (e) {}
+  })();
+</script>
+
+{% stylesheet %}
+  .tho { --tho-red:#e30613; --tho-red-2:#ff1744; --tho-ink:#0b0b0f; --tho-grad:linear-gradient(135deg,var(--tho-red) 0%,var(--tho-red-2) 100%);
+    font-family: Inter, var(--font-body--family, sans-serif); color:#fff; background: radial-gradient(1100px 520px at 85% -10%, rgba(227,6,19,.38), transparent 60%), radial-gradient(800px 420px at -10% 110%, rgba(255,23,68,.18), transparent 60%), var(--tho-ink); }
+  .tho-wrap { max-width:1180px; margin:0 auto; padding:0 20px; }
+  .tho-bar { border-bottom:1px solid rgba(255,255,255,.08); }
+  .tho-bar__in { display:flex; align-items:center; gap:20px; min-height:72px; }
+  .tho-logo img { display:block; height:44px; width:auto; border-radius:8px; }
+  .tho-logo span { font-weight:800; font-size:1.2rem; color:#fff; }
+  .tho-logo { text-decoration:none; }
+  .tho-nav { display:flex; gap:22px; margin-left:auto; }
+  .tho-nav a { color:rgba(255,255,255,.8); text-decoration:none; font-weight:600; font-size:.95rem; }
+  .tho-nav a:hover { color:#fff; }
+  .tho-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:54px; padding:0 26px; border-radius:999px; font-weight:800; font-size:1.05rem; text-decoration:none; transition:transform .15s, box-shadow .15s; }
+  .tho-btn:hover { transform:translateY(-1px); }
+  .tho-btn svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; }
+  .tho-btn--call { background:var(--tho-grad); color:#fff; box-shadow:0 12px 32px rgba(227,6,19,.45); }
+  .tho-btn--light { background:#fff; color:var(--tho-ink); }
+  .tho-btn--sm { min-height:42px; padding:0 18px; font-size:.95rem; box-shadow:none; }
+  .tho-hero { padding:56px 0 40px; }
+  .tho-hero__grid { display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; }
+  .tho-live { display:inline-flex; align-items:center; gap:10px; margin:0 0 18px; padding:7px 14px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); font-weight:600; font-size:.9rem; }
+  .tho-live__dot { width:9px; height:9px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 0 rgba(34,197,94,.6); animation:tho-pulse 2s infinite; }
+  @keyframes tho-pulse { 0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)} 70%{box-shadow:0 0 0 10px rgba(34,197,94,0)} 100%{box-shadow:0 0 0 0 rgba(34,197,94,0)} }
+  .tho-h1 { margin:0 0 18px; font-size:clamp(2.2rem,5vw,3.8rem); line-height:1.05; font-weight:900; letter-spacing:-.02em; color:#fff; }
+  .tho-h1 em, .tho-h1 strong { font-style:normal; background:var(--tho-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .tho-sub { margin:0 0 28px; font-size:1.15rem; line-height:1.6; color:rgba(255,255,255,.78); max-width:600px; }
+  .tho-ctas { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:26px; }
+  .tho-trust { display:flex; flex-wrap:wrap; gap:8px 22px; list-style:none; padding:0; margin:0; color:rgba(255,255,255,.75); font-size:.92rem; }
+  .tho-trust li { position:relative; padding-left:18px; }
+  .tho-trust li::before { content:""; position:absolute; left:0; top:50%; width:8px; height:8px; margin-top:-4px; border-radius:50%; background:var(--tho-red-2); }
+  .tho-trust strong { color:#fbbf24; }
+  .tho-hero__media { position:relative; }
+  .tho-img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-radius:24px; box-shadow:0 30px 70px rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.08); }
+  .tho-badge { position:absolute; left:-18px; bottom:22px; background:#fff; color:var(--tho-ink); border-radius:16px; padding:14px 18px; box-shadow:0 16px 40px rgba(0,0,0,.35); max-width:260px; }
+  .tho-badge strong { display:block; font-weight:800; }
+  .tho-badge span { font-size:.88rem; color:#5b5b66; }
+  .tho-chips { display:flex; flex-wrap:wrap; gap:10px; list-style:none; padding:32px 0 0; margin:0; }
+  .tho-chips a { display:inline-block; padding:9px 16px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); color:#fff; text-decoration:none; font-weight:600; font-size:.92rem; }
+  .tho-chips a:hover { background:var(--tho-grad); border-color:transparent; }
+  @media (max-width: 900px) {
+    .tho-nav { display:none; }
+    .tho-bar__in { justify-content:space-between; min-height:64px; }
+    .tho-hero { padding:32px 0 28px; }
+    .tho-hero__grid { grid-template-columns:1fr; gap:28px; }
+    .tho-btn { width:100%; }
+    .tho-btn--sm { width:auto; }
+    .tho-badge { left:12px; bottom:12px; }
+  }
+  @media (max-width: 400px) { .tho-logo img { height:36px; } .tho-btn--sm { padding:0 12px; font-size:.85rem; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Titan home hero",
+  "tag": "section",
+  "class": "section-titan-home-hero",
+  "settings": [
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "quote_anchor", "label": "Quote button link", "default": "#main-quote" },
+    { "type": "range", "id": "open_hour", "label": "Open from (hour)", "min": 0, "max": 23, "step": 1, "default": 7 },
+    { "type": "range", "id": "close_hour", "label": "Open until (hour)", "min": 1, "max": 24, "step": 1, "default": 19 },
+    { "type": "text", "id": "live_open", "label": "Status during hours", "default": "Taking same-day bookings now" },
+    { "type": "text", "id": "live_closed", "label": "Status after hours", "default": "Book now for tomorrow from 7am" },
+    { "type": "text", "id": "live_fallback", "label": "Status without JavaScript", "default": "Same-day pickups available" },
+    { "type": "inline_richtext", "id": "heading", "label": "H1 (italic shows in red)", "default": "Same-Day Furniture Pickup &amp; Delivery in <em>Sydney</em>" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "image_alt", "label": "Photo alt text" },
+    { "type": "text", "id": "badge_title", "label": "Photo badge title" },
+    { "type": "text", "id": "badge_text", "label": "Photo badge text" }
+  ],
+  "blocks": [
+    { "type": "chip", "name": "Service link", "settings": [
+      { "type": "text", "id": "label", "label": "Label" },
+      { "type": "text", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "Titan home hero" }]
+}
+{% endschema %}

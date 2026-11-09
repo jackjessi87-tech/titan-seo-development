@@ -268,7 +268,8 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {}
+          "blocks": {},
+          "disabled": true
         },
         "ai_gen_block_fff943e_fN7MBC": {
           "type": "ai_gen_block_fff943e",
@@ -333,7 +334,8 @@
             "section_padding_top_desktop": 40,
             "section_padding_bottom_desktop": 80
           },
-          "blocks": {}
+          "blocks": {},
+          "disabled": true
         },
         "ai_gen_block_4b99b9e_YTnBJz": {
           "type": "ai_gen_block_4b99b9e",
@@ -1096,9 +1098,88 @@
         "final_heading": "Need Something Moved Today?",
         "final_text": "Call now for a fixed price. Two movers and a large van, across Sydney, 7 days a week."
       }
+    },
+    "titan_home_hero": {
+      "type": "titan-home-hero",
+      "blocks": {
+        "chip_1": {
+          "type": "chip",
+          "settings": {
+            "label": "Furniture pickup & delivery",
+            "url": "/pages/furniture-pickup-delivery-sydney"
+          }
+        },
+        "chip_2": {
+          "type": "chip",
+          "settings": {
+            "label": "Single item delivery",
+            "url": "/pages/single-item-delivery-sydney"
+          }
+        },
+        "chip_3": {
+          "type": "chip",
+          "settings": {
+            "label": "Facebook Marketplace pickup",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney"
+          }
+        },
+        "chip_4": {
+          "type": "chip",
+          "settings": {
+            "label": "IKEA & Bunnings collection",
+            "url": "/pages/ikea-pickup-delivery-sydney"
+          }
+        },
+        "chip_5": {
+          "type": "chip",
+          "settings": {
+            "label": "Couch delivery",
+            "url": "/pages/couch-delivery-sydney"
+          }
+        },
+        "chip_6": {
+          "type": "chip",
+          "settings": {
+            "label": "Fridge & washer delivery",
+            "url": "/pages/fridge-washing-machine-delivery-sydney"
+          }
+        },
+        "chip_7": {
+          "type": "chip",
+          "settings": {
+            "label": "Man and van Sydney",
+            "url": "/pages/man-with-a-van-sydney"
+          }
+        }
+      },
+      "block_order": [
+        "chip_1",
+        "chip_2",
+        "chip_3",
+        "chip_4",
+        "chip_5",
+        "chip_6",
+        "chip_7"
+      ],
+      "settings": {
+        "phone": "0469 717 535",
+        "quote_anchor": "#main-quote",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day bookings now",
+        "live_closed": "Book now for tomorrow from 7am",
+        "live_fallback": "Same-day pickups available",
+        "heading": "Same-Day Furniture Pickup &amp; Delivery in <em>Sydney</em>",
+        "subheading": "Man and van furniture delivery for single items, Facebook Marketplace pickups and IKEA, Bunnings and store collections. Two careful movers, a large van and a fixed price before we start, anywhere in Greater Sydney.",
+        "image": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
+        "image_alt": "Titan Express van loaded with wrapped furniture for a Sydney pickup and delivery",
+        "badge_title": "Pickups every day, 7am to 7pm",
+        "badge_text": "Two movers · blankets · trolleys · straps"
+      }
     }
   },
   "order": [
+    "titan_home_hero",
     "17820952195463b177",
     "17855470940f586504",
     "blocks_pp44rW",
@@ -1108,8 +1189,8 @@
     "1782099501ccad0658",
     "1782123485603199c3",
     "17821243135a5f6c20",
-    "17821252068f79aa64",
     "titan_home_hub",
+    "17821252068f79aa64",
     "17835921926aecae97",
     "178359242106600ace"
   ]
