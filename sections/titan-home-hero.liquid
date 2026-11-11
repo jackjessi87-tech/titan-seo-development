@@ -34,7 +34,7 @@
 {%- capture i_home -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></svg>{%- endcapture -%}
 {%- capture i_thin -%}<svg class="tho-thin" viewBox="0 0 30 14" aria-hidden="true"><path d="M1 7h27M22 1l6 6-6 6"/></svg>{%- endcapture -%}
 {%- capture digits -%}{%- assign chars = s.phone | split: '' -%}{%- for c in chars -%}{%- if c == ' ' -%}&nbsp;{%- else -%}<span style="animation-delay:{{ forloop.index0 | times: 0.09 }}s">{{ c }}</span>{%- endif -%}{%- endfor -%}{%- endcapture -%}
-{%- capture callbtn -%}<a class="tho-call tho-shine" href="tel:{{ phone_intl }}"><span class="tho-ringer">{{ i_phone }}</span><span class="tho-call__txt"><span class="tho-call__lbl">Tap to call &middot; fixed price</span><span class="tho-call__num" aria-label="{{ s.phone }}">{{ digits }}</span></span>{{ i_thin }}</a>{%- endcapture -%}
+{%- capture callbtn -%}<a class="tho-call tho-shine" href="tel:{{ phone_intl }}"><span class="tho-ringer">{{ i_phone }}</span><span class="tho-call__txt"><span class="tho-call__lbl">%%LBL%%</span><span class="tho-call__num" aria-label="{{ s.phone }}">{{ digits }}</span></span>{{ i_thin }}</a>{%- endcapture -%}
 
 <div class="tho" id="tho-{{ section.id }}">
   <div class="tho-bar">
@@ -52,7 +52,7 @@
         <a href="/pages/ikea-pickup-delivery-sydney">Store Collection</a>
         <a href="/pages/areas-we-serve">Areas</a>
       </nav>
-      <a class="tho-hcall" href="tel:{{ phone_intl }}">{{ i_phone }}<span>Call now</span></a>
+      <a class="tho-hcall" href="tel:{{ phone_intl }}">{{ i_phone }}<span>Call for delivery</span></a>
     </div>
   </div>
 
@@ -86,7 +86,8 @@
       <div class="tho-copy">
         <h1 class="tho-h1">{{ s.heading }}</h1>
         <p class="tho-sub">Couch, bed, fridge or a Marketplace buy. Call now for a fixed price on the phone and two movers at your door, often today.</p>
-        {{ callbtn }}
+        {{ callbtn | replace: '%%LBL%%', 'Call for furniture pickup &amp; delivery' }}
+        <p class="tho-for">Couches &middot; beds &middot; fridges &middot; Marketplace &amp; IKEA pickups &middot; small moves</p>
         <ul class="tho-proof">
           <li><span class="tho-stars">{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}</span><strong>5.0</strong>&nbsp;&middot; 59 Google reviews</li>
           <li>{{ i_check }}Fully insured</li>
@@ -98,7 +99,7 @@
 
   <div class="tho-ticker" aria-hidden="true"><div>
     {%- for i in (1..2) -%}
-      <span>{{ i_phone }}CALL {{ s.phone }}</span><span>SAME-DAY PICKUP</span><span>FIXED PRICE ON THE PHONE</span><span>2 MOVERS + LARGE VAN</span><span>7 DAYS</span>
+      <span>{{ i_phone }}CALL {{ s.phone }} FOR FURNITURE PICKUP &amp; DELIVERY</span><span>MAN &amp; VAN</span><span>MARKETPLACE &amp; IKEA PICKUPS</span><span>SAME-DAY PICKUP</span><span>FIXED PRICE ON THE PHONE</span><span>2 MOVERS + LARGE VAN</span><span>7 DAYS</span>
     {%- endfor -%}
   </div></div>
 
@@ -125,15 +126,15 @@
       <p class="tho-eyebrow">How it works</p>
       <h2 class="tho-h2">Booked in one call</h2>
       <ol class="tho-steps">
-        <li><span class="tho-n">1</span><div><strong>Call {{ s.phone }}</strong><p>Tell us the item and the two suburbs. About 2 minutes.</p></div></li>
+        <li><span class="tho-n">1</span><div><strong>Call {{ s.phone }}</strong><p>Tell us what furniture needs moving and the two suburbs. About 2 minutes.</p></div></li>
         <li><span class="tho-n">2</span><div><strong>Fixed price on the phone</strong><p>No hourly meter. The price we say is the price you pay.</p></div></li>
         <li><span class="tho-n">3</span><div><strong>We pick it up, often today</strong><p>Two movers wrap, strap and carry it into the room you choose.</p></div></li>
       </ol>
-      <div class="tho-steps__cta">{{ callbtn }}</div>
+      <div class="tho-steps__cta">{{ callbtn | replace: '%%LBL%%', 'Call to book your furniture pickup' }}</div>
     </div>
   </section>
 
-  <div class="tho-callbar">{{ callbtn }}</div>
+  <div class="tho-callbar">{{ callbtn | replace: '%%LBL%%', 'Furniture pickup &amp; delivery &middot; tap to call' }}</div>
 </div>
 
 {% stylesheet %}
@@ -192,7 +193,8 @@
   @keyframes tho-wave { 0% { transform:scale(1); opacity:.7; } 100% { transform:scale(1.9); opacity:0; } }
   @keyframes tho-shake { 0%,60%,100% { transform:rotate(0); } 64% { transform:rotate(-16deg); } 68% { transform:rotate(14deg); } 72% { transform:rotate(-10deg); } 76% { transform:rotate(8deg); } 80% { transform:rotate(0); } }
   .tho-call__txt { display:flex; flex-direction:column; min-width:0; }
-  .tho-call__lbl { font-size:.78rem; font-weight:600; color:var(--mut); }
+  .tho-call__lbl { font-size:.8rem; font-weight:800; color:var(--b6); line-height:1.25; }
+  .tho-for { margin:12px 0 0; font-size:.86rem; font-weight:600; color:#a9c3f5; }
   .tho-call__num { font-size:1.45rem; font-weight:900; letter-spacing:.02em; line-height:1.15; color:var(--b9); white-space:nowrap; }
   .tho-call__num span { display:inline-block; animation:tho-hop 2.4s ease-in-out infinite; }
   @keyframes tho-hop { 0%,30%,100% { transform:translateY(0); opacity:1; } 12% { transform:translateY(-4px); opacity:.55; } }
@@ -256,7 +258,8 @@
     .tho-callbar { display:none; }
     body:has(.tho-callbar) { padding-bottom:0; }
   }
-  @media (max-width: 360px) { .tho-call__num { font-size:1.25rem; } .tho-hcall span { display:none; } }
+  @media (max-width: 380px) { .tho-call__num { font-size:1.25rem; } .tho-call__lbl { font-size:.74rem; } }
+  @media (max-width: 340px) { .tho-hcall span { display:none; } }
   @media (prefers-reduced-motion: reduce) {
     .tho *, .tho *::before, .tho *::after { animation:none !important; transition:none !important; }
   }
