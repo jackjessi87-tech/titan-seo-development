@@ -344,7 +344,7 @@
             "card_width": 260,
             "desktop_bottom": 20,
             "desktop_right": 20,
-            "mobile_bottom": 20,
+            "mobile_bottom": 92,
             "brand_name": "Titan Express Removalist",
             "headline": "Need Furniture Moved Today?",
             "availability_text": "Available Today",
@@ -355,17 +355,17 @@
             "border_radius": 12,
             "button_radius": 8,
             "card_background": "#ffffff",
-            "brand_color": "#000000",
+            "brand_color": "#071a3d",
             "text_color": "#000000",
             "live_dot_color": "#00c853",
-            "call_button_bg": "#c62828",
+            "call_button_bg": "#0b5cff",
             "call_button_text_color": "#ffffff",
-            "call_button_hover_bg": "#b71c1c",
+            "call_button_hover_bg": "#0a2a63",
             "quote_button_bg": "#ffffff",
             "quote_button_text_color": "#000000",
-            "quote_button_border": "#c62828",
+            "quote_button_border": "#0b5cff",
             "quote_button_hover_bg": "#f5f5f5",
-            "quote_button_hover_border": "#b71c1c",
+            "quote_button_hover_border": "#0a2a63",
             "brand_size": 12,
             "headline_size": 14,
             "availability_size": 11,
@@ -648,9 +648,9 @@
             "heading_alignment": "left",
             "heading_spacing": 16,
             "section_padding": 24,
-            "background_color": "#f8fafc",
+            "background_color": "#f5f8ff",
             "background_gradient_color": "#ffffff",
-            "shape_color": "#dc2626",
+            "shape_color": "#0b5cff",
             "heading_color": "#000000",
             "card_width": 100,
             "card_gap": 14,
@@ -658,16 +658,16 @@
             "card_border_radius": 12,
             "card_background": "#ffffff",
             "accent_border_width": 4,
-            "accent_color": "#dc2626",
+            "accent_color": "#0b5cff",
             "image_size": 105,
             "image_border_radius": 8,
             "badge_font_size": 12,
             "badge_border_radius": 12,
-            "badge_background": "#dc2626",
+            "badge_background": "#0b5cff",
             "badge_text_color": "#ffffff",
             "route_font_size": 14,
-            "route_color": "#1f2937",
-            "route_shine_color": "#dc2626",
+            "route_color": "#071a3d",
+            "route_shine_color": "#0b5cff",
             "job_1_enabled": true,
             "job_1_image": "shopify://shop_images/Sofa_Removalist.png",
             "job_1_type": "Sofa Delivery",
@@ -703,9 +703,9 @@
             "cta_padding": 14,
             "cta_border_radius": 8,
             "cta_spacing": 20,
-            "cta_background": "#dc2626",
+            "cta_background": "#0b5cff",
             "cta_text_color": "#ffffff",
-            "cta_hover_background": "#b91c1c"
+            "cta_hover_background": "#0a2a63"
           },
           "blocks": {}
         }
@@ -1106,50 +1106,57 @@
         "chip_1": {
           "type": "chip",
           "settings": {
-            "label": "Furniture pickup & delivery",
-            "url": "/pages/furniture-pickup-delivery-sydney"
+            "label": "Couch & sofa",
+            "url": "/pages/couch-delivery-sydney"
           }
         },
         "chip_2": {
           "type": "chip",
           "settings": {
-            "label": "Single item delivery",
-            "url": "/pages/single-item-delivery-sydney"
+            "label": "Marketplace pickup",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney"
           }
         },
         "chip_3": {
           "type": "chip",
           "settings": {
-            "label": "Facebook Marketplace pickup",
-            "url": "/pages/facebook-marketplace-pickup-delivery-sydney"
+            "label": "IKEA & Bunnings",
+            "url": "/pages/ikea-pickup-delivery-sydney"
           }
         },
         "chip_4": {
           "type": "chip",
           "settings": {
-            "label": "IKEA & Bunnings collection",
-            "url": "/pages/ikea-pickup-delivery-sydney"
+            "label": "Single item",
+            "url": "/pages/single-item-delivery-sydney"
           }
         },
         "chip_5": {
           "type": "chip",
           "settings": {
-            "label": "Couch delivery",
-            "url": "/pages/couch-delivery-sydney"
+            "label": "Fridge & washer",
+            "url": "/pages/fridge-washing-machine-delivery-sydney"
           }
         },
         "chip_6": {
           "type": "chip",
           "settings": {
-            "label": "Fridge & washer delivery",
-            "url": "/pages/fridge-washing-machine-delivery-sydney"
+            "label": "Bed & mattress",
+            "url": "/pages/bed-mattress-delivery-sydney"
           }
         },
         "chip_7": {
           "type": "chip",
           "settings": {
-            "label": "Man and van Sydney",
+            "label": "Man and van",
             "url": "/pages/man-with-a-van-sydney"
+          }
+        },
+        "chip_8": {
+          "type": "chip",
+          "settings": {
+            "label": "Small removals",
+            "url": "/pages/small-removals-sydney"
           }
         }
       },
@@ -1160,7 +1167,8 @@
         "chip_4",
         "chip_5",
         "chip_6",
-        "chip_7"
+        "chip_7",
+        "chip_8"
       ],
       "settings": {
         "phone": "0469 717 535",
@@ -1169,9 +1177,9 @@
         "close_hour": 19,
         "live_open": "Taking same-day bookings now",
         "live_closed": "Book now for tomorrow from 7am",
-        "live_fallback": "Same-day pickups available",
+        "live_fallback": "Same-day pickups today",
         "heading": "Same-Day Furniture Pickup &amp; Delivery in <em>Sydney</em>",
-        "subheading": "Man and van furniture delivery for single items, Facebook Marketplace pickups and IKEA, Bunnings and store collections. Two careful movers, a large van and a fixed price before we start, anywhere in Greater Sydney.",
+        "subheading": "Couch, bed, fridge or a Marketplace buy. Call now for a fixed price on the phone and two movers at your door, often today.",
         "image": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
         "image_alt": "Titan Express van loaded with wrapped furniture for a Sydney pickup and delivery",
         "badge_title": "Same-day pickup & delivery",
@@ -1190,7 +1198,6 @@
   },
   "order": [
     "titan_home_hero",
-    "titan_home_quote",
     "17820952195463b177",
     "17855470940f586504",
     "blocks_pp44rW",
@@ -1201,6 +1208,7 @@
     "1782123485603199c3",
     "17821243135a5f6c20",
     "titan_home_hub",
+    "titan_home_quote",
     "17821252068f79aa64",
     "17835921926aecae97",
     "178359242106600ace"
