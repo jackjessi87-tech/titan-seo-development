@@ -81,11 +81,11 @@
         {%- if s.image -%}
           {{ s.image | image_url: width: 1000 | image_tag: alt: s.image_alt, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1000', sizes: '(min-width: 1180px) 540px, (min-width: 900px) 45vw, calc(100vw - 32px)', class: 'tho-img' }}
         {%- endif -%}
-        <span class="tho-tag"><i></i>{{ s.live_fallback }}</span>
+        <span class="tho-tag"><i></i>Same-day pickups today</span>
       </div>
       <div class="tho-copy">
         <h1 class="tho-h1">{{ s.heading }}</h1>
-        <p class="tho-sub">{{ s.subheading }}</p>
+        <p class="tho-sub">Couch, bed, fridge or a Marketplace buy. Call now for a fixed price on the phone and two movers at your door, often today.</p>
         {{ callbtn }}
         <ul class="tho-proof">
           <li><span class="tho-stars">{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}</span><strong>5.0</strong>&nbsp;&middot; 59 Google reviews</li>
@@ -102,41 +102,22 @@
     {%- endfor -%}
   </div></div>
 
-  {%- if chips.size > 0 -%}
-    <section class="tho-sec">
-      <div class="tho-wrap">
-        <p class="tho-eyebrow">Pick your job</p>
-        <h2 class="tho-h2">What do you need moved?</h2>
-        <ul class="tho-jobs">
-          {%- for c in chips -%}
-            {%- assign l = c.settings.label | downcase -%}
-            {%- liquid
-              if l contains 'single'
-                assign ic = i_box
-              elsif l contains 'marketplace' or l contains 'gumtree'
-                assign ic = i_tag
-              elsif l contains 'ikea' or l contains 'store' or l contains 'bunnings'
-                assign ic = i_store
-              elsif l contains 'couch' or l contains 'sofa'
-                assign ic = i_sofa
-              elsif l contains 'fridge' or l contains 'washer'
-                assign ic = i_fridge
-              elsif l contains 'bed' or l contains 'mattress'
-                assign ic = i_bed
-              elsif l contains 'removal' or l contains 'move'
-                assign ic = i_home
-              elsif l contains 'area' or l contains 'suburb'
-                assign ic = i_pin
-              else
-                assign ic = i_truck
-              endif
-            -%}
-            <li {{ c.shopify_attributes }}><a class="tho-job" href="{{ c.settings.url }}"><span class="tho-job__ic">{{ ic }}</span><span class="tho-job__t">{{ c.settings.label }}</span>{{ i_thin }}</a></li>
-          {%- endfor -%}
-        </ul>
-      </div>
-    </section>
-  {%- endif -%}
+  <section class="tho-sec">
+    <div class="tho-wrap">
+      <p class="tho-eyebrow">Pick your job</p>
+      <h2 class="tho-h2">What do you need moved?</h2>
+      <ul class="tho-jobs">
+          <li><a class="tho-job" href="/pages/couch-delivery-sydney"><span class="tho-job__ic">{{ i_sofa }}</span><span class="tho-job__t">Couch &amp; sofa</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/facebook-marketplace-pickup-delivery-sydney"><span class="tho-job__ic">{{ i_tag }}</span><span class="tho-job__t">Marketplace pickup</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/ikea-pickup-delivery-sydney"><span class="tho-job__ic">{{ i_store }}</span><span class="tho-job__t">IKEA &amp; Bunnings</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/single-item-delivery-sydney"><span class="tho-job__ic">{{ i_box }}</span><span class="tho-job__t">Single item</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/fridge-washing-machine-delivery-sydney"><span class="tho-job__ic">{{ i_fridge }}</span><span class="tho-job__t">Fridge &amp; washer</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/bed-mattress-delivery-sydney"><span class="tho-job__ic">{{ i_bed }}</span><span class="tho-job__t">Bed &amp; mattress</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/man-with-a-van-sydney"><span class="tho-job__ic">{{ i_truck }}</span><span class="tho-job__t">Man and van</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/small-removals-sydney"><span class="tho-job__ic">{{ i_home }}</span><span class="tho-job__t">Small removals</span>{{ i_thin }}</a></li>
+      </ul>
+    </div>
+  </section>
 
   <svg class="tho-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 240 70, 480 0, 720 26 S 1200 60, 1440 20 V60 H0z" fill="#f5f8ff"/></svg>
   <section class="tho-sec tho-sec--soft">
@@ -259,6 +240,10 @@
   .tho-callbar .tho-call__num { color:#fff; font-size:1.3rem; }
   .tho-callbar .tho-thin { color:#fff; }
   body:has(.tho-callbar) { padding-bottom:76px; }
+  /* The new call bar replaces the floating lead card on phones; card turns blue on desktop */
+  @media (max-width: 899px) { body:has(.tho-callbar) div[class^="titan-facebook-card-"] { display:none !important; } }
+  [class*="titan-facebook-card-button-call-"] { background-color:#0b5cff !important; }
+  [class*="titan-facebook-card-quote-btn-"] { border-color:#0b5cff !important; }
 
   @media (min-width: 900px) {
     .tho-nav { display:flex; }

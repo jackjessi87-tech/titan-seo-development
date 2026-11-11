@@ -138,7 +138,7 @@
   .ai-recent-jobs-{{ ai_gen_id }} {
     display: block;
     width: 100%;
-    background: linear-gradient(135deg, {{ block.settings.background_color }} 0%, {{ block.settings.background_gradient_color }} 100%);
+    background: linear-gradient(135deg, #f5f8ff 0%, {{ block.settings.background_gradient_color }} 100%);
     padding: {{ block.settings.section_padding }}px 16px;
     position: relative;
     overflow: hidden;
@@ -151,7 +151,7 @@
     right: -100px;
     width: 300px;
     height: 300px;
-    background: {{ block.settings.shape_color }};
+    background: #0b5cff;
     border-radius: 50%;
     opacity: 0.1;
     z-index: 0;
@@ -164,7 +164,7 @@
     left: -80px;
     width: 250px;
     height: 250px;
-    background: {{ block.settings.shape_color }};
+    background: #0b5cff;
     border-radius: 50%;
     opacity: 0.08;
     z-index: 0;
@@ -199,7 +199,7 @@
     border-radius: {{ block.settings.card_border_radius }}px;
     padding: {{ block.settings.card_padding }}px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    border-left: {{ block.settings.accent_border_width }}px solid {{ block.settings.accent_color }};
+    border-left: {{ block.settings.accent_border_width }}px solid #0b5cff;
     position: relative;
     width: {{ block.settings.card_width }}%;
     max-width: 100%;
@@ -213,12 +213,12 @@
 
   .ai-recent-jobs-route-{{ ai_gen_id }} {
     font-size: {{ block.settings.route_font_size }}px;
-    color: {{ block.settings.route_color }};
+    color: #071a3d;
     margin: 0 0 12px 0;
     font-weight: 600;
     position: relative;
     display: inline-block;
-    background: linear-gradient(90deg, {{ block.settings.route_color }} 0%, {{ block.settings.route_shine_color }} 50%, {{ block.settings.route_color }} 100%);
+    background: linear-gradient(90deg, #071a3d 0%, #0b5cff 50%, #071a3d 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -254,7 +254,7 @@
 
   .ai-recent-jobs-badge-{{ ai_gen_id }} {
     display: inline-block;
-    background-color: {{ block.settings.badge_background }};
+    background-color: #0b5cff;
     color: {{ block.settings.badge_text_color }};
     font-size: {{ block.settings.badge_font_size }}px;
     font-weight: 600;
@@ -269,7 +269,7 @@
 
   .ai-recent-jobs-cta-link-{{ ai_gen_id }} {
     display: inline-block;
-    background-color: {{ block.settings.cta_background }};
+    background-color: #0b5cff;
     color: {{ block.settings.cta_text_color }};
     font-size: {{ block.settings.cta_font_size }}px;
     font-weight: 600;
@@ -281,7 +281,7 @@
   }
 
   .ai-recent-jobs-cta-link-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.cta_hover_background }};
+    background-color: #0a2a63;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(11, 92, 255, 0.4);
   }
