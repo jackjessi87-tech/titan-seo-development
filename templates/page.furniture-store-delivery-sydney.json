@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Furniture stores",
+            "text": "Couches, beds and tables collected from furniture showrooms and warehouses.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Appliance stores",
+            "text": "Fridges, washers and TVs collected from appliance retailers.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA orders",
+            "text": "Click and collect orders from Tempe, Rhodes and Marsden Park.",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "link_label": "IKEA pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Bunnings & hardware",
+            "text": "Outdoor furniture, BBQs and bulky hardware orders.",
+            "url": "/pages/bunnings-store-collection-sydney",
+            "link_label": "Bunnings collection"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Clearance & floor stock",
+            "text": "Bought a floor model that has to go today? We can collect it.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day collection",
+            "text": "Call in the morning and we'll check what we can do today.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Pickup counter and docks",
+            "text": "We handle the collection desk or loading dock for you."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Carried inside",
+            "text": "Two movers carry it in, including stairs and lifts."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Loading zones",
+            "text": "Tell us about parking at your place and we plan around it."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "All of Sydney",
+            "text": "Store pickups and deliveries in every Sydney region, 7 days a week."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect an order from any furniture store?",
+            "answer": "<p>Yes, from any Sydney store or warehouse that lets someone collect on your behalf. Have your order number or receipt ready.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "What do I need to give the store?",
+            "answer": "<p>Most stores need the order number and your name. Some ask you to tell them a courier is collecting. Check with the store, then call us.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect and deliver the same day?",
+            "answer": "<p>Often, yes. Call before midday and we'll check same-day availability.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you carry the furniture inside?",
+            "answer": "<p>Yes. We carry it into the room you choose, including up stairs or in a lift.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you assemble furniture?",
+            "answer": "<p>We deliver boxed items to the room you choose. Ask when you call if you also need assembly.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does store pickup and delivery cost?",
+            "answer": "<p>It depends on the items, stairs or lift, the distance and timing. Call 0469 717 535 for a fixed price before you book.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Bunnings & Store Collection",
+            "url": "/pages/bunnings-store-collection-sydney",
+            "description": "We collect your store order."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "IKEA Pickup & Delivery",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "description": "Tempe, Rhodes and Marsden Park."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Furniture store pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day store pickups now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Same-day store pickup available",
+        "kicker": "Sydney-wide · Store to door",
+        "heading": "Furniture Store Pickup &amp; Delivery <em>Sydney</em>",
+        "subheading": "Bought furniture or an appliance and the store's delivery is weeks away? We collect your order from the store or warehouse and deliver it to your home, often the same day.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
+        "hero_alt": "Titan Express van loaded with wrapped furniture for a Sydney pickup and delivery",
+        "hero_badge_title": "Store to your door, often same day",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "Where did you buy it?",
+        "intents_heading": "Store Orders We Collect Every Week",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Why Wait Weeks for Store Delivery?",
+        "local_body": "<p>Many stores quote long delivery windows or only deliver to the door. If your order is <strong>paid for and ready to collect</strong>, we can pick it up for you and carry it into the room you choose, often on the same day.</p><p>Have your order number or receipt ready so the store releases it to us.</p>",
+        "steps_heading": "Get a Store Order Collected in 3 Steps",
+        "step_1_title": "Call us",
+        "step_1_text": "Tell us what you're moving, both suburbs and any stairs or lift. It takes about a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "You get a fixed price on the phone and the earliest time we can be there.",
+        "step_3_title": "We pick up and deliver",
+        "step_3_text": "Two movers load, strap, deliver and carry it into the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Store Pickup and Delivery Across Sydney",
+        "nearby_intro": "We collect from stores and deliver in every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Store Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Store Pickup Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Furniture Store Delivery Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a store order collected in Sydney?",
+        "quick_answer": "<p>Titan Express provides furniture store pickup and delivery across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Furniture pickups",
+            "text": "One item or a van load collected and delivered across Sydney.",
+            "url": "/pages/furniture-pickup-delivery-sydney",
+            "link_label": "Furniture pickup"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Small moves",
+            "text": "Studios, units and share-house rooms moved in one trip.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree",
+            "text": "We collect from the seller so you do not need to hire a van.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store collections",
+            "text": "IKEA, Bunnings and furniture store orders collected for you.",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "link_label": "IKEA pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Appliances",
+            "text": "Fridges and washers moved upright on a trolley.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day runs",
+            "text": "Call in the morning and we'll check what we can do today.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "We drive, you relax",
+            "text": "No licence, deposit, fuel or tolls to sort out on your side."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Loading included",
+            "text": "Two movers load and unload, including stairs and lifts."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Parking and access",
+            "text": "Tell us about loading zones or tight driveways and we plan around them."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "All of Sydney",
+            "text": "Pickups and deliveries in every Sydney region, 7 days a week."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Does the van come with a driver?",
+            "answer": "<p>Yes. Every job includes the van, a driver and a second mover. You do not drive or lift anything.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How big is the van?",
+            "answer": "<p>It is a large high-roof van that fits a couch, a fridge, a bed and boxes in one load. Tell us what you have and we will confirm it fits.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it cheaper than hiring a van myself?",
+            "answer": "<p>For one item or a small load it often is, once you add fuel, tolls, the deposit and your own time. Call for a fixed price and compare.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I hire the van and driver for the same day?",
+            "answer": "<p>Often, yes. Call before midday and we'll check same-day availability.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you charge by the hour?",
+            "answer": "<p>No. We give you a fixed price for the job before we start.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I come along in the van?",
+            "answer": "<p>Ask us when you call. It depends on the job and the seats available that day.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Man With a Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Small moves and single items."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "Studios, units and part moves."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Van and driver hire",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day van jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Same-day van and driver available",
+        "kicker": "Sydney-wide · Van with driver",
+        "heading": "Van and Driver Hire <em>Sydney</em>",
+        "subheading": "Skip the hire-van paperwork. You get a large van, a driver and a second mover who load, drive and unload for you, at a fixed price agreed on the phone.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "hero_alt": "Titan Express man and van loaded for a Parramatta furniture delivery",
+        "hero_badge_title": "Van, driver and a second mover",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need the van for?",
+        "intents_heading": "Jobs People Hire Our Van and Driver For",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Van Hire Without the Driving, Lifting or Fuel",
+        "local_body": "<p>Hiring a van yourself means a deposit, a licence check, fuel, tolls, parking and doing all the lifting. With us you get <strong>the van, the driver and a second mover</strong> for one fixed price.</p><p>We bring blankets, straps and trolleys, and we carry everything in at the other end.</p>",
+        "steps_heading": "Book a Van and Driver in 3 Steps",
+        "step_1_title": "Call us",
+        "step_1_text": "Tell us what you're moving, both suburbs and any stairs or lift. It takes about a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "You get a fixed price on the phone and the earliest time we can be there.",
+        "step_3_title": "We pick up and deliver",
+        "step_3_text": "Two movers load, strap, deliver and carry it into the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Van and Driver Hire Across Sydney",
+        "nearby_intro": "Our van and movers work in every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Van and Driver Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Van and Driver Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Van and Driver Hire Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a van and driver in Sydney?",
+        "quick_answer": "<p>Titan Express provides van and driver hire across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

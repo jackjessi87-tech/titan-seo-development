@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Front loaders",
+            "text": "Heavy front loaders moved on an appliance trolley by two movers.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Top loaders",
+            "text": "Top loaders collected, strapped upright and delivered to your laundry.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Dryers",
+            "text": "Dryers and washer-dryer combos moved with the same care.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace washers",
+            "text": "Bought a second-hand machine? We collect it from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store pickups",
+            "text": "Collected from appliance stores and warehouses across Sydney.",
+            "url": "/pages/bunnings-store-collection-sydney",
+            "link_label": "Store collection"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs & units",
+            "text": "Up stairs and into lifts with two movers and the right trolley.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and tight laundries",
+            "text": "Tell us about steps, narrow doors or a laundry cupboard so we bring the right gear."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment lifts",
+            "text": "Book your lift if the building needs it and send us the time."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Placed in your laundry",
+            "text": "We put it where you want it, ready for you to connect."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Anywhere in Sydney",
+            "text": "From stores and sellers to your home, across every region."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move a washing machine up or down stairs?",
+            "answer": "<p>Yes. Tell us how many flights there are and we'll send two movers with an appliance trolley.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you disconnect and reconnect the washing machine?",
+            "answer": "<p>Please disconnect and drain it before we arrive. We place it in position at the other end. Any plumbing work should be done by a licensed tradesperson.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Should I fit transit bolts to a front loader?",
+            "answer": "<p>If you still have the transit bolts, fit them before we arrive. They hold the drum steady. If not, we still move it upright and strapped.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up a washing machine from a store or Marketplace seller?",
+            "answer": "<p>Yes. Give us the store or the seller's suburb and we collect it for you.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does washing machine delivery cost in Sydney?",
+            "answer": "<p>It depends on the machine, stairs or lift, the distance and timing. Call 0469 717 535 for a fixed price before you book.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you deliver a washing machine the same day?",
+            "answer": "<p>Often, yes. Call before midday and we'll check what we can do today.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Fridge & Washing Machine Delivery",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "description": "Appliances moved upright."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Washing machine and dryer pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day washer jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Same-day washing machine delivery available",
+        "kicker": "Sydney-wide · Washers & dryers",
+        "heading": "Washing Machine Delivery <em>Sydney</em>",
+        "subheading": "Front loaders, top loaders and dryers picked up from a store, a Marketplace seller or your old place and delivered to your laundry. Two movers, an appliance trolley and a fixed price on the phone.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "hero_alt": "Titan Express mover loading a washing machine into the van on a trolley",
+        "hero_badge_title": "Moved on a trolley, strapped in",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What needs moving?",
+        "intents_heading": "Washers and Dryers We Move Every Week",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "A Washing Machine Is Heavier Than It Looks",
+        "local_body": "<p>A front loader can weigh 70 kg or more, and most of that weight sits low and off-centre. We move it <strong>upright on an appliance trolley, strapped and wrapped</strong>, so the drum, the door and your floors are protected.</p><p>Tell us the machine, both suburbs and any stairs, and you get a fixed price on the phone.</p>",
+        "steps_heading": "Move a Washing Machine in 3 Steps",
+        "step_1_title": "Call us",
+        "step_1_text": "Tell us what you're moving, both suburbs and any stairs or lift. It takes about a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "You get a fixed price on the phone and the earliest time we can be there.",
+        "step_3_title": "We pick up and deliver",
+        "step_3_text": "Two movers load, strap, deliver and carry it into the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Washing Machine Delivery Across Sydney",
+        "nearby_intro": "We pick up and deliver washers and dryers in every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Washing Machine Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Washing Machine Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Washing Machine Delivery Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a washing machine moved in Sydney?",
+        "quick_answer": "<p>Titan Express provides washing machine and dryer pickup and delivery across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Wardrobes",
+            "text": "Two and three-door wardrobes carried upright by two movers.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Chests of drawers",
+            "text": "Drawers taped or removed so nothing slides in transit.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Bookcases & cabinets",
+            "text": "Display cabinets, TV units and bookcases wrapped in blankets.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "IKEA PAX & flat packs",
+            "text": "Flat-pack wardrobes collected from IKEA and delivered.",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "link_label": "IKEA pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace wardrobes",
+            "text": "We collect from the seller and deliver to your door.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs & low ceilings",
+            "text": "Tell us the height and we plan how it gets up the stairs.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and landings",
+            "text": "Send us the wardrobe height and stair details so we plan the turn."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment lifts",
+            "text": "We check the wardrobe fits the lift before the day."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Placed in your bedroom",
+            "text": "We stand it where you want it, away from the wall if you ask."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Anywhere in Sydney",
+            "text": "From stores and sellers to your home, across every region."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move a wardrobe in one piece?",
+            "answer": "<p>Usually, yes. Tell us the height and the tightest doorway or stairwell and we will confirm on the phone.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need to empty the wardrobe?",
+            "answer": "<p>Yes, please empty it and the drawers before we arrive. It is lighter and safer to carry.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you take a wardrobe up stairs?",
+            "answer": "<p>Yes. Two movers carry it. Tell us how many flights and whether there is a turn.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you assemble flat-pack wardrobes?",
+            "answer": "<p>We deliver flat packs to the room you choose. Ask when you call if you also need assembly.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does wardrobe delivery cost in Sydney?",
+            "answer": "<p>It depends on the size, stairs or lift, the distance and timing. Call 0469 717 535 for a fixed price before you book.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you deliver a wardrobe the same day?",
+            "answer": "<p>Often, yes. Call before midday and we'll check same-day availability.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Bed & Mattress Delivery",
+            "url": "/pages/bed-mattress-delivery-sydney",
+            "description": "Beds, bases and mattresses."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "IKEA Pickup & Delivery",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "description": "Tempe, Rhodes and Marsden Park."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Wardrobe and cabinet pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day wardrobe jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Same-day wardrobe delivery available",
+        "kicker": "Sydney-wide · Wardrobes & drawers",
+        "heading": "Wardrobe Delivery <em>Sydney</em>",
+        "subheading": "Wardrobes, chests of drawers, bookcases and cabinets collected and delivered to your bedroom by two movers. Tall, heavy pieces are our everyday work.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/removals_Sydney_removalist.png",
+        "hero_alt": "Titan Express man and van ready for a Chatswood furniture pickup",
+        "hero_badge_title": "Tall pieces moved by two movers",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What needs moving?",
+        "intents_heading": "Wardrobes and Cabinets We Move Every Week",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Tall Furniture Needs a Plan Before It Moves",
+        "local_body": "<p>A wardrobe that came into a room in pieces does not always go out in one. Tell us <strong>the height, the stairs and the tightest doorway</strong>, and we work out on the phone whether it moves whole or needs a door or shelf taken off.</p><p>Two movers carry it, wrapped in blankets, into the room you choose.</p>",
+        "steps_heading": "Move a Wardrobe in 3 Steps",
+        "step_1_title": "Call us",
+        "step_1_text": "Tell us what you're moving, both suburbs and any stairs or lift. It takes about a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "You get a fixed price on the phone and the earliest time we can be there.",
+        "step_3_title": "We pick up and deliver",
+        "step_3_text": "Two movers load, strap, deliver and carry it into the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Wardrobe Delivery Across Sydney",
+        "nearby_intro": "We pick up and deliver wardrobes and cabinets in every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Wardrobe Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Wardrobe Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Wardrobe Delivery Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a wardrobe moved in Sydney?",
+        "quick_answer": "<p>Titan Express provides wardrobe and cabinet pickup and delivery across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

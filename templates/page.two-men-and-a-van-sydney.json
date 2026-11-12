@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Heavy single items",
+            "text": "Couches, beds and wardrobes that need two people to lift safely.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Small moves",
+            "text": "Studios, one-bedroom units and share-house rooms in one trip.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washers",
+            "text": "Appliances moved upright on a trolley by two movers.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace pickups",
+            "text": "We collect from the seller and deliver to your door.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs & walk-ups",
+            "text": "Two movers make stairs and tight landings safe.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day jobs",
+            "text": "Call in the morning and we'll check what we can do today.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Safe on stairs",
+            "text": "Two movers carry heavy items up and down stairs properly."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Units and lifts",
+            "text": "Book your lift if needed and send us the time."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "parking",
+            "title": "Parking and access",
+            "text": "Tell us about loading zones or tight streets and we plan around them."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "All of Sydney",
+            "text": "Pickups and deliveries in every Sydney region, 7 days a week."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I always get two movers?",
+            "answer": "<p>Yes. Every job is done by two movers, so you never need to help lift.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "What fits in the van?",
+            "answer": "<p>A large high-roof van that takes a couch, a fridge, a bed and boxes in one load. Tell us what you have and we will confirm it fits.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you charge by the hour?",
+            "answer": "<p>No. You get a fixed price for the job before we start.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can two men and a van move a whole house?",
+            "answer": "<p>We are best for single items, studios, one-bedroom units and part moves. For a full house, a removal truck is usually the better choice.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I book for today?",
+            "answer": "<p>Often, yes. Call before midday and we'll check same-day availability.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Are my things insured?",
+            "answer": "<p>Yes. They're covered while they're in our care, wrapped and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Man With a Van Sydney",
+            "url": "/pages/man-with-a-van-sydney",
+            "description": "Small moves and single items."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "Studios, units and part moves."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Same-Day Removalists Sydney",
+            "url": "/pages/same-day-removalists-sydney",
+            "description": "Last-minute and urgent jobs."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Two men and a van removals and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Two movers taking same-day jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Two men and a van available same-day",
+        "kicker": "Sydney-wide · 2 movers + large van",
+        "heading": "Two Men and a Van <em>Sydney</em>",
+        "subheading": "Two careful movers and a large van for the jobs that are too big for you and too small for a removal truck. Single items, small moves and pickups, at a fixed price agreed on the phone.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/Moving_Service_Sydney.png",
+        "hero_alt": "Titan Express van loaded with furniture for an Inner West move",
+        "hero_badge_title": "Two movers on every job",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "What Two Men and a Van Can Do",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Why Two Movers Matter",
+        "local_body": "<p>One person and a van can drive your couch across town, but someone still has to lift the other end. We send <strong>two movers on every job</strong>, so nothing is dragged, dropped or left at the kerb.</p><p>You do not need to help carry anything.</p>",
+        "steps_heading": "Book Two Men and a Van in 3 Steps",
+        "step_1_title": "Call us",
+        "step_1_text": "Tell us what you're moving, both suburbs and any stairs or lift. It takes about a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "You get a fixed price on the phone and the earliest time we can be there.",
+        "step_3_title": "We pick up and deliver",
+        "step_3_text": "Two movers load, strap, deliver and carry it into the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Two Men and a Van Across Sydney",
+        "nearby_intro": "Our two-mover crew works in every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Two Men and a Van Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Two Men and a Van Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Two Men and a Van Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need two men and a van in Sydney?",
+        "quick_answer": "<p>Titan Express provides two men and a van removals and delivery across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
