@@ -198,8 +198,28 @@
       </div>
 
       <div class="tll-hero__media">
-        {%- if pg == 'fridge-washing-machine-delivery-sydney' -%}
-          <img class="tll-hero__img" src="{{ 'titan-fridge-washer-van.jpg' | asset_url }}" width="900" height="1200" loading="eager" fetchpriority="high" alt="Fridge and washing machine loaded upright in the Titan Express van">
+        {%- liquid
+          assign hero_asset = blank
+          case pg
+            when 'fridge-washing-machine-delivery-sydney'
+              assign hero_asset = 'titan-fridge-washer-van.jpg'
+              assign hero_asset_alt = 'Fridge and washing machine loaded upright in the Titan Express van'
+            when 'couch-delivery'
+              assign hero_asset = 'titan-job-sofa.jpg'
+              assign hero_asset_alt = 'Leather sofa strapped upright in the Titan Express van'
+            when 'washing-machine-delivery-sydney'
+              assign hero_asset = 'titan-job-washer-fridge.jpg'
+              assign hero_asset_alt = 'Wrapped fridge, washing machine and mattress loaded in the Titan Express van'
+            when 'wardrobe-delivery-sydney', 'student-removals-sydney'
+              assign hero_asset = 'titan-job-room.jpg'
+              assign hero_asset_alt = 'Blanket-wrapped furniture, a chest of drawers and an exercise bike strapped in the van'
+            when 'furniture-courier-sydney', 'two-men-and-a-van-sydney', 'van-and-driver-hire-sydney'
+              assign hero_asset = 'titan-job-wrapped.jpg'
+              assign hero_asset_alt = 'Two blanket-wrapped items strapped in the Titan Express van outside an apartment block'
+          endcase
+        -%}
+        {%- if hero_asset != blank -%}
+          <img class="tll-hero__img" src="{{ hero_asset | asset_url }}" width="900" height="1120" loading="eager" fetchpriority="high" alt="{{ hero_asset_alt }}">
         {%- elsif s.hero_image != blank -%}
           {%- assign hero_alt = s.hero_image.alt | default: s.hero_alt -%}
           {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
@@ -236,7 +256,21 @@
       <ul class="tll-cards" role="list">
         {%- for block in intents -%}
           <li class="tll-card" {{ block.shopify_attributes }}>
-            <span class="tll-card__icon">
+            {%- liquid
+              assign th = blank
+              case block.settings.icon
+                when 'sofa'
+                  assign th = 'titan-th-sofa.jpg'
+                when 'fridge'
+                  assign th = 'titan-th-fridge.jpg'
+                when 'box'
+                  assign th = 'titan-th-box.jpg'
+                when 'tag'
+                  assign th = 'titan-th-wrap.jpg'
+              endcase
+            -%}
+            {%- if th != blank -%}<img class="tll-card__photo" src="{{ th | asset_url }}" width="240" height="240" loading="lazy" alt="">{%- endif -%}
+            <span class="tll-card__icon{% if th != blank %} tll-card__icon--on-photo{% endif %}">
               {%- case block.settings.icon -%}
                 {%- when 'sofa' -%}{{ icon_sofa }}
                 {%- when 'box' -%}{{ icon_box }}
@@ -955,6 +989,9 @@
   .tll-cstrip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-block: 8px 28px; padding: 16px 18px; border-radius: 18px; background: linear-gradient(135deg, #071a3d 0%, #0a2a63 100%); box-shadow: 0 12px 30px rgba(7, 26, 61, 0.18); }
   .tll-cstrip p { margin: 0; flex: 1 1 240px; color: #fff; font-weight: 700; font-size: 1.02rem; line-height: 1.35; }
   @media (max-width: 640px) { .tll-cstrip .tll-btn--call { width: 100%; justify-content: flex-start; } }
+
+  .tll-card__photo { display: block; width: calc(100% + 48px); max-width: none; height: 150px; margin: -24px -24px 0; object-fit: cover; border-radius: var(--tll-radius) var(--tll-radius) 0 0; }
+  .tll-card__icon--on-photo { margin-top: -40px; border: 3px solid #fff; }
 {% endstylesheet %}
 
 {% schema %}
