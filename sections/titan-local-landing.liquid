@@ -60,6 +60,34 @@
 -%}
 {%- capture icon_thin -%}<svg class="tll-thin" viewBox="0 0 30 14" aria-hidden="true"><path d="M1 7h27M22 1l6 6-6 6"/></svg>{%- endcapture -%}
 {%- capture dial -%}{%- assign chars = s.phone | split: '' -%}{%- for c in chars -%}{%- if c == ' ' -%}&nbsp;{%- else -%}<span style="animation-delay:{{ forloop.index0 | times: 0.09 }}s">{{ c }}</span>{%- endif -%}{%- endfor -%}{%- endcapture -%}
+
+{%- liquid
+  case pg
+    when 'bed-mattress-delivery-sydney'
+      assign moves = 'Queen & king mattresses|Bed frames|Bases & ensembles|Bunk beds|Bedheads|Marketplace beds'
+    when 'bunnings-store-collection-sydney'
+      assign moves = 'Bunnings orders|Outdoor furniture|BBQs|Flat packs|Click & collect orders|Furniture store pickups'
+    when 'fridge-washing-machine-delivery-sydney'
+      assign moves = 'Fridges|French-door fridges|Freezers|Washing machines|Dryers|Dishwashers'
+    when 'gumtree-pickup-delivery-sydney'
+      assign moves = 'Gumtree couches|Beds & mattresses|Fridges|Dining tables|Wardrobes|Desks'
+    when 'ikea-pickup-delivery-sydney'
+      assign moves = 'Flat packs|PAX wardrobes|Beds & mattresses|Sofas|Click & collect orders|Tempe, Rhodes, Marsden Park'
+    when 'man-with-a-van'
+      assign moves = 'Single items|Small moves|Marketplace pickups|Store pickups|Student moves|Office items'
+    when 'same-day-removalists-sydney'
+      assign moves = 'Same-day moves|Last-minute jobs|Single items|Small loads|Marketplace pickups|Urgent deliveries'
+    when 'single-item-delivery-sydney'
+      assign moves = 'One couch|One bed|One fridge|One table|One wardrobe|One washing machine'
+    when 'small-removals-sydney'
+      assign moves = 'Studios|1-bedroom units|Share-house rooms|Part loads|Storage runs|Student moves'
+    else
+      assign moves = 'Couches|Beds & mattresses|Fridges & washers|Marketplace buys|IKEA & store orders|Small moves'
+  endcase
+  assign moves = moves | split: '|'
+-%}
+{%- capture icon_van -%}<svg viewBox="0 0 32 24" aria-hidden="true"><path d="M2 5h17v12H2z"/><path d="M19 9h6l5 5v3H19z"/><circle cx="8" cy="18.5" r="2.6"/><circle cx="24" cy="18.5" r="2.6"/></svg>{%- endcapture -%}
+{%- capture icon_check -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>{%- endcapture -%}
 {%- capture icon_sofa -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="M5 19v2M19 19v2"/></svg>{%- endcapture -%}
 {%- capture icon_box -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>{%- endcapture -%}
 {%- capture icon_tag -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>{%- endcapture -%}
@@ -129,7 +157,9 @@
       </div>
 
       <div class="tll-hero__media">
-        {%- if s.hero_image != blank -%}
+        {%- if pg == 'fridge-washing-machine-delivery-sydney' -%}
+          <img class="tll-hero__img" src="{{ 'titan-fridge-washer-van.jpg' | asset_url }}" width="900" height="1200" loading="eager" fetchpriority="high" alt="Fridge and washing machine loaded upright in the Titan Express van">
+        {%- elsif s.hero_image != blank -%}
           {%- assign hero_alt = s.hero_image.alt | default: s.hero_alt -%}
           {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
         {%- endif -%}
@@ -140,6 +170,22 @@
       </div>
     </div>
   </section>
+
+  {%- comment -%} Delivery tracker + what we move {%- endcomment -%}
+  <div class="tll-wrap tll-track" aria-label="How your delivery runs">
+    <div class="tll-track__line" aria-hidden="true"><span class="tll-track__van">{{ icon_van }}</span></div>
+    <ol class="tll-track__steps" role="list">
+      <li><b>1</b><div><strong>Call</strong><span>Fixed price on the phone</span></div></li>
+      <li><b>2</b><div><strong>Pickup</strong><span>Two movers load the van</span></div></li>
+      <li><b>3</b><div><strong>On the way</strong><span>Strapped in and wrapped</span></div></li>
+      <li><b>4</b><div><strong>Delivered</strong><span>Carried into your room</span></div></li>
+    </ol>
+    <div class="tll-moves">
+      <span class="tll-moves__lbl">We move</span>
+      <ul role="list">{%- for m in moves -%}<li>{{ icon_check }}{{ m | escape }}</li>{%- endfor -%}</ul>
+      <a class="tll-moves__call" href="tel:{{ phone_intl }}">{{ icon_phone }}<span>Call {{ s.phone }}</span></a>
+    </div>
+  </div>
 
   {%- comment -%} Search-intent cards {%- endcomment -%}
   {%- if intents.size > 0 -%}
@@ -783,6 +829,37 @@
   @keyframes tll-hop { 0%, 30%, 100% { transform: translateY(0); opacity: 1; } 12% { transform: translateY(-3px); opacity: 0.55; } }
   @keyframes tll-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
   @keyframes tll-sweep { 0%, 50% { left: -60%; } 100% { left: 130%; } }
+
+  /* Delivery tracker + what we move */
+  .tll-track { position: relative; z-index: 2; margin-top: -26px; margin-bottom: 8px; padding: 16px 16px 14px; background: #fff; border: 1px solid #dbe6ff; border-radius: 18px; box-shadow: 0 14px 34px rgba(7, 26, 61, 0.10); }
+  .tll-track__line { position: relative; height: 30px; margin: 0 4px 8px; }
+  .tll-track__line::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 3px dashed #b9cdfa; }
+  .tll-track__van { position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 44px; height: 30px; border-radius: 9px; background: #0b5cff; box-shadow: 0 4px 10px rgba(11, 92, 255, 0.35); }
+  .tll .tll-track__van svg { width: 26px; height: 20px; stroke: #fff; fill: none; stroke-width: 1.8; }
+  .tll-track__steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .tll-track__steps li { display: flex; gap: 8px; align-items: flex-start; min-width: 0; }
+  .tll-track__steps b { flex: 0 0 24px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #e8f0ff; color: #0b5cff; font-size: 0.78rem; }
+  .tll-track__steps strong { display: block; font-size: 0.92rem; color: #071a3d; line-height: 1.2; }
+  .tll-track__steps span { display: block; font-size: 0.78rem; color: #5a6782; line-height: 1.3; }
+  .tll-moves { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #e8f0ff; }
+  .tll-moves__lbl { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #0b5cff; }
+  .tll-moves ul { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; flex: 1 1 320px; }
+  .tll-moves li { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 999px; background: #f5f8ff; border: 1px solid #dbe6ff; font-size: 0.82rem; font-weight: 600; color: #0a2a63; }
+  .tll .tll-moves li svg { width: 13px; height: 13px; stroke: #0b5cff; stroke-width: 3; fill: none; }
+  .tll-moves__call { display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border-radius: 999px; background: #0b5cff; color: #fff; font-weight: 800; font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
+  .tll .tll-moves__call svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; }
+  @media (max-width: 640px) {
+    .tll-track { padding: 14px 12px 12px; }
+    .tll-track__steps { gap: 6px; }
+    .tll-track__steps li { flex-direction: column; align-items: center; text-align: center; gap: 4px; }
+    .tll-track__steps strong { font-size: 0.78rem; }
+    .tll-track__steps span { display: none; }
+    .tll-moves__call { width: 100%; justify-content: center; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tll-track__van { animation: tll-drive 7s ease-in-out infinite; }
+  }
+  @keyframes tll-drive { 0% { left: 0; } 85%, 100% { left: calc(100% - 44px); } }
 {% endstylesheet %}
 
 {% schema %}
