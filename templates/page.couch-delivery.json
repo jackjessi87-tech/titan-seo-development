@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "2 and 3-seater sofas",
+            "text": "The everyday couch job, carried by two movers and wrapped in blankets.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Modular & L-shaped lounges",
+            "text": "Sections separated, moved and put back together in your room.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Recliners & sofa beds",
+            "text": "Heavy mechanisms strapped shut so nothing opens in transit.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace couches",
+            "text": "We collect from the seller and deliver to your door.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store & IKEA sofas",
+            "text": "Collected from furniture stores and IKEA across Sydney.",
+            "url": "/pages/ikea-pickup-delivery-sydney",
+            "link_label": "IKEA pickup"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs & tight doorways",
+            "text": "Feet off, doors off or up on end. We work out the way in.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairwells and turns",
+            "text": "Send us the couch length and stair details so we plan the carry."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment lifts",
+            "text": "We check the couch fits the lift before the day."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Placed in your room",
+            "text": "We set it down where you want it and refit the feet."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Anywhere in Sydney",
+            "text": "From stores and sellers to your home, across every region."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does couch delivery cost in Sydney?",
+            "answer": "<p>It depends on the couch, stairs or lift, the distance and timing. Call 0469 717 535 for a fixed price before you book.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you deliver a couch the same day?",
+            "answer": "<p>Often, yes. Call before midday and we'll check same-day availability.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up a couch I bought on Marketplace?",
+            "answer": "<p>Yes. Give us the seller's suburb and we collect it for you.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What if the couch doesn't fit through the door?",
+            "answer": "<p>Tell us the couch size and the tightest doorway when you call. We can remove feet, stand it on end or take a door off its hinges if needed.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move modular and L-shaped lounges?",
+            "answer": "<p>Yes. We separate the sections, move them and put them back together in your room.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my couch protected in the van?",
+            "answer": "<p>Yes. It's wrapped in blankets, strapped in and covered while it's in our care.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Bed & Mattress Delivery",
+            "url": "/pages/bed-mattress-delivery-sydney",
+            "description": "Beds, bases and mattresses."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Couch and sofa pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day couch jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Same-day couch delivery available",
+        "kicker": "Sydney-wide · Couches & sofas",
+        "heading": "Couch Delivery <em>Sydney</em>",
+        "subheading": "Sofas, lounges, modulars and recliners picked up from a store, a Marketplace seller or your old place and delivered into your lounge room. Two movers, blankets and a fixed price on the phone.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/Sofa_Removalist.png",
+        "hero_alt": "Grey sofa on a trolley beside the open Titan Express van",
+        "hero_badge_title": "Wrapped, strapped and carried in",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What kind of couch?",
+        "intents_heading": "Couches and Sofas We Move Every Week",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Getting a Couch Through the Door Is the Real Job",
+        "local_body": "<p>Driving a couch across Sydney is the easy part. The hard part is <strong>stairwells, lift sizes and the turn into the lounge room</strong>. Tell us the couch size and the tightest spot, and we plan it on the phone before we arrive.</p><p>Two movers carry it, wrapped in blankets, so the fabric, your walls and your floors stay clean.</p>",
+        "steps_heading": "Move a Couch in 3 Steps",
+        "step_1_title": "Call us",
+        "step_1_text": "Tell us what you're moving, both suburbs and any stairs or lift. It takes about a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "You get a fixed price on the phone and the earliest time we can be there.",
+        "step_3_title": "We pick up and deliver",
+        "step_3_text": "Two movers load, strap, deliver and carry it into the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Couch Delivery Across Sydney",
+        "nearby_intro": "We pick up and deliver couches in every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Couch Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Couch Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Couch Delivery Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a couch moved in Sydney?",
+        "quick_answer": "<p>Titan Express provides couch and sofa pickup and delivery across Sydney, 7 days a week from 7am to 7pm. You get two careful movers, a large van and a fixed price before we start, with same-day bookings often available. Call 0469 717 535 for a quick price.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

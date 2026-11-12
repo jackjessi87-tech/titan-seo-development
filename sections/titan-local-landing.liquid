@@ -47,6 +47,10 @@
       assign svc = 'single item delivery'
     when 'small-removals-sydney'
       assign svc = 'small removals'
+    when 'couch-delivery'
+      assign svc = 'couch delivery'
+    when 'marketplace-pickup-delivery'
+      assign svc = 'Marketplace pickup'
     when 'washing-machine-delivery-sydney'
       assign svc = 'washing machine delivery'
     when 'furniture-courier-sydney'
@@ -97,6 +101,10 @@
       assign moves = 'One couch|One bed|One fridge|One table|One wardrobe|One washing machine'
     when 'small-removals-sydney'
       assign moves = 'Studios|1-bedroom units|Share-house rooms|Part loads|Storage runs|Student moves'
+    when 'couch-delivery'
+      assign moves = '2 & 3-seater sofas|Modular lounges|Recliners|Sofa beds|Armchairs|Marketplace couches'
+    when 'marketplace-pickup-delivery'
+      assign moves = 'Couches|Beds & mattresses|Tables & chairs|Fridges & washers|Wardrobes|Free finds'
     when 'washing-machine-delivery-sydney'
       assign moves = 'Front loaders|Top loaders|Dryers|Washer-dryer combos|Marketplace washers|Store pickups'
     when 'furniture-courier-sydney'
@@ -892,6 +900,44 @@
     .tll-track__van { animation: tll-drive 7s ease-in-out infinite; }
   }
   @keyframes tll-drive { 0% { left: 0; } 85%, 100% { left: calc(100% - 44px); } }
+
+  /* Blue + orange delivery theme */
+  .tll { --tll-acc: #ff7a1a; --tll-acc-2: #ffa24d; --tll-acc-grad: linear-gradient(135deg, #ff7a1a 0%, #ffa24d 100%); }
+  .tll-hero { background: radial-gradient(900px 420px at -5% 105%, rgba(255, 122, 26, 0.28), transparent 60%), radial-gradient(1200px 500px at 85% -10%, rgba(11, 92, 255, 0.4), transparent 60%), var(--tll-ink); }
+  .tll-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(255, 255, 255, 0.13) 1.3px, transparent 1.4px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(115deg, transparent 35%, #000 100%); mask-image: linear-gradient(115deg, transparent 35%, #000 100%); }
+  .tll-hero__inner { position: relative; z-index: 1; }
+  .tll-art__run { stroke: #ffa24d; }
+  .tll-art g[fill="#8fb4ff"] { fill: #ffa24d; }
+  .tll-art__rings { stroke: rgba(255, 162, 77, 0.45); }
+  .tll-h1 em { background: var(--tll-acc-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .tll-kicker { color: #ffd0a6; border-color: rgba(255, 162, 77, 0.4); }
+  .tll .tll-kicker svg { stroke: #ffa24d; }
+  .tll-btn--call, .tll-dock__call, .tll-moves__call, .tll-live__call { background: var(--tll-acc-grad) !important; color: #071a3d !important; }
+  .tll-btn--call { box-shadow: 0 10px 30px rgba(255, 122, 26, 0.45); }
+  .tll-btn--call:hover { box-shadow: 0 14px 38px rgba(255, 122, 26, 0.6); }
+  .tll .tll-btn--call svg, .tll .tll-dock__call svg, .tll .tll-moves__call svg, .tll .tll-live__call svg { stroke: #071a3d; }
+  .tll-btn--call .tll-btn__icon, .tll-dock__call .tll-ringer--sm { background: rgba(7, 26, 61, 0.14); }
+  .tll-ringer::before, .tll-ringer::after { border-color: rgba(7, 26, 61, 0.55); }
+  .tll-shine::after { background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent); }
+  .tll-track__van { background: var(--tll-acc-grad); box-shadow: 0 4px 10px rgba(255, 122, 26, 0.4); }
+  .tll .tll-track__van svg { stroke: #071a3d; fill: rgba(7, 26, 61, 0.12); }
+  .tll-track__line::before { border-top-color: #ffc999; }
+  .tll-track__steps b { background: #fff1e5; color: #d95f00; }
+  .tll .tll-moves li svg { stroke: #ff7a1a; }
+  .tll-moves__lbl { color: #d95f00; }
+  /* duotone icon tiles */
+  .tll-card { position: relative; overflow: hidden; }
+  .tll-card::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #0b5cff, #ff7a1a); opacity: 0; transition: opacity 0.2s; }
+  .tll-card:hover::before { opacity: 1; }
+  .tll-card__icon, .tll-point__icon { position: relative; display: grid !important; place-items: center; width: 58px !important; height: 58px !important; border-radius: 18px !important; background: linear-gradient(145deg, #0b5cff 0%, #0a2a63 100%) !important; box-shadow: 0 10px 22px rgba(11, 92, 255, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
+  .tll-card__icon::after, .tll-point__icon::after { content: ""; position: absolute; right: -5px; top: -5px; width: 18px; height: 18px; border-radius: 50%; background: var(--tll-acc-grad); border: 3px solid #fff; }
+  .tll-point__icon::after { border-color: #0a2a63; }
+  .tll .tll-card__icon svg, .tll .tll-point__icon svg { width: 30px; height: 30px; stroke: #fff; stroke-width: 1.7; fill: rgba(255, 255, 255, 0.2); }
+  .tll-steps__n { background: var(--tll-acc-grad) !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; }
+  .tll-eyebrow::before { content: ""; display: inline-block; width: 22px; height: 3px; margin-right: 8px; vertical-align: middle; border-radius: 2px; background: var(--tll-acc-grad); }
+  .tll-rte strong { background: linear-gradient(transparent 60%, rgba(255, 122, 26, 0.25) 60%); }
+  .tll-card__link { color: #d95f00; }
+  .tll .tll-card__link svg { stroke: #d95f00; }
 {% endstylesheet %}
 
 {% schema %}
