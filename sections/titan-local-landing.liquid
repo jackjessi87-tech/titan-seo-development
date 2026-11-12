@@ -146,6 +146,7 @@
 
 <div class="tll" id="tll-{{ uid }}" data-open-hour="{{ s.open_hour }}" data-close-hour="{{ s.close_hour }}">
 
+{%- capture cstrip -%}<div class="tll-wrap tll-cstrip"><p>%%T%%</p><a class="tll-btn tll-btn--call tll-shine" href="tel:{{ phone_intl }}"><span class="tll-btn__icon tll-ringer">{{ icon_phone }}</span><span class="tll-btn__label"><small>Call for {{ svc_esc }}</small><span class="tll-dial" aria-label="{{ s.phone }}">{{ dial }}</span></span>{{ icon_thin }}</a></div>{%- endcapture -%}
   {%- comment -%} Live status strip {%- endcomment -%}
   <div class="tll-live" role="status">
     <span class="tll-live__dot" aria-hidden="true"></span>
@@ -259,6 +260,8 @@
     </section>
   {%- endif -%}
 
+  {{ cstrip | replace: '%%T%%', 'See your job here? One call gets you a fixed price.' }}
+
   {%- comment -%} Quick answer: short, direct summary for searchers and AI answers {%- endcomment -%}
   {%- if s.quick_answer != blank -%}
     <section class="tll-section tll-wrap" aria-labelledby="tll-qa-{{ uid }}">
@@ -300,6 +303,8 @@
     </div>
   </section>
 
+  {{ cstrip | replace: '%%T%%', 'Tell us the tricky bits on the phone and we plan around them.' }}
+
   {%- comment -%} Steps {%- endcomment -%}
   <section class="tll-section tll-wrap" aria-labelledby="tll-steps-{{ uid }}">
     <p class="tll-eyebrow">How it works</p>
@@ -310,6 +315,8 @@
       <li><span class="tll-steps__n">03</span><h3>{{ s.step_3_title }}</h3><p>{{ s.step_3_text }}</p></li>
     </ol>
   </section>
+
+  {{ cstrip | replace: '%%T%%', 'Step one takes a minute. Call now.' }}
 
   {%- comment -%} Comparison table {%- endcomment -%}
   {%- if compare_rows.size > 0 -%}
@@ -332,6 +339,8 @@
     </section>
   {%- endif -%}
 
+  {{ cstrip | replace: '%%T%%', 'Small job? You do not need a big truck. Call us.' }}
+
   {%- comment -%} Gallery of real job photos {%- endcomment -%}
   {%- if s.gallery_1 != blank or s.gallery_2 != blank -%}
     <section class="tll-section tll-wrap" aria-labelledby="tll-gallery-{{ uid }}">
@@ -351,6 +360,8 @@
       </div>
     </section>
   {%- endif -%}
+
+  {{ cstrip | replace: '%%T%%', 'Want your job done like this? Call for a fixed price.' }}
 
   {%- comment -%} Nearby suburbs {%- endcomment -%}
   <section class="tll-section tll-wrap" aria-labelledby="tll-near-{{ uid }}">
@@ -481,6 +492,8 @@
       </div>
     </section>
   {%- endif -%}
+
+  {{ cstrip | replace: '%%T%%', 'Still have a question? Ask us on the phone.' }}
 
   {%- comment -%} Related pages {%- endcomment -%}
   {%- if links.size > 0 -%}
@@ -938,6 +951,10 @@
   .tll-rte strong { background: linear-gradient(transparent 60%, rgba(255, 122, 26, 0.25) 60%); }
   .tll-card__link { color: #d95f00; }
   .tll .tll-card__link svg { stroke: #d95f00; }
+
+  .tll-cstrip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-block: 8px 28px; padding: 16px 18px; border-radius: 18px; background: linear-gradient(135deg, #071a3d 0%, #0a2a63 100%); box-shadow: 0 12px 30px rgba(7, 26, 61, 0.18); }
+  .tll-cstrip p { margin: 0; flex: 1 1 240px; color: #fff; font-weight: 700; font-size: 1.02rem; line-height: 1.35; }
+  @media (max-width: 640px) { .tll-cstrip .tll-btn--call { width: 100%; justify-content: flex-start; } }
 {% endstylesheet %}
 
 {% schema %}
