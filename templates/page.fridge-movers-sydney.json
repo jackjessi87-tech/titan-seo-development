@@ -1,0 +1,351 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "French-door & side-by-side",
+            "text": "Large double-door fridges up to 150 kg, moved upright by two movers.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Upright & top-mount fridges",
+            "text": "Everyday kitchen fridges collected and delivered the same day.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Bar fridges & wine fridges",
+            "text": "Small fridges with glass doors wrapped and carried with care.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Chest & upright freezers",
+            "text": "Garage and laundry freezers moved on an appliance trolley.",
+            "url": "",
+            "link_label": ""
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace & Gumtree fridges",
+            "text": "Bought a second-hand fridge? We collect it from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "New fridges from the store",
+            "text": "Collected from Harvey Norman, The Good Guys, JB Hi-Fi or any appliance store.",
+            "url": "/pages/furniture-store-delivery-sydney",
+            "link_label": "Store pickup"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and walk-ups",
+            "text": "Two movers and a stair-rated trolley take it up or down one step at a time."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "building",
+            "title": "Apartment lifts",
+            "text": "We check the fridge fits your lift and protect the lift walls and floor."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Placed in position",
+            "text": "Stood in the kitchen, laundry or garage spot you choose, ready to plug in."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Straight to your door",
+            "text": "Your fridge goes directly from pickup to delivery, never through a depot."
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Washing Machine Delivery Sydney",
+            "url": "/pages/washing-machine-delivery-sydney",
+            "description": "Washers and dryers moved on a trolley."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, one fixed price."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One fridge or a few appliances",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you are charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Fridge kept upright",
+            "ours": "Always, on an appliance trolley",
+            "theirs": "Depends on the crew"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does it cost to move a fridge in Sydney?",
+            "answer": "<p>It depends on the size of the fridge, stairs or a lift at either end, the distance and the time you need it done. Call 0469 717 535 with those details and you get a fixed price on the phone, with no hourly meter and no surprise fees.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move fridges upright?",
+            "answer": "<p>Yes, always. Our fridge movers keep every fridge upright on an appliance trolley and strap it upright in the van. We never lay a fridge on its side.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "How long should I wait before turning my fridge back on?",
+            "answer": "<p>Because we keep it upright, the wait is short. As a simple rule, let it stand for a couple of hours before you plug it in, and check your fridge manual for the exact time. A fridge that has been laid down needs much longer.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move a fridge up or down stairs?",
+            "answer": "<p>Yes. Tell us how many flights and whether there is a turn or landing. Two movers take it one step at a time on a stair-rated trolley, with the fridge strapped so it cannot tip.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Will my French-door fridge fit through the doorway?",
+            "answer": "<p>Measure the tightest doorway and the fridge depth before you call. If it is close, French-door handles and sometimes the doors can be removed to get through. We plan it on the phone so there are no surprises on the day.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need to empty and defrost the fridge first?",
+            "answer": "<p>Yes. Empty it, take out loose shelves and drawers, and turn it off the night before so the freezer can defrost and dry. It keeps the fridge lighter and stops water leaking in the van.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up a fridge I bought on Marketplace or Gumtree?",
+            "answer": "<p>Yes. Give us the seller's suburb and a pickup time. We collect it, check it is standing upright and bring it to your kitchen.</p>"
+          }
+        },
+        "faq_8": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect a new fridge from the store?",
+            "answer": "<p>Yes. Once it is paid for, we collect it from the store or warehouse with your order number and deliver it, often the same day.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you connect the water line or ice maker?",
+            "answer": "<p>We place the fridge in position and plug it in if you like. Plumbed-in water lines and ice makers should be connected by a licensed plumber.</p>"
+          }
+        },
+        "faq_10": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you take my old fridge away?",
+            "answer": "<p>We can move your old fridge to another address, a family member, a buyer or a storage unit. Tell us when you call.</p>"
+          }
+        },
+        "faq_11": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move a fridge the same day?",
+            "answer": "<p>Often, yes. Call before midday and we'll check what we can do today, 7 days a week.</p>"
+          }
+        },
+        "faq_12": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my fridge insured while you move it?",
+            "answer": "<p>Yes. Your fridge is covered while it is in our care, strapped and wrapped in our van.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11",
+        "faq_12",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Fridge movers and fridge removals",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Fridge movers taking same-day jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Same-day fridge moves available",
+        "kicker": "Sydney-wide · Fridge movers",
+        "heading": "Fridge Movers &amp; Removalists <em>Sydney</em>",
+        "subheading": "Two careful fridge movers, an appliance trolley and a large van. French-door, side-by-side, upright and bar fridges moved upright, strapped, wrapped and placed exactly where you want them, with a fixed price agreed on the phone.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Moved upright, never on its side",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "hero_alt": "Titan Express mover loading a washing machine into the van on a trolley",
+        "hero_badge_title": "Upright, strapped and wrapped",
+        "hero_badge_text": "Two movers · appliance trolley · blankets · straps",
+        "intents_eyebrow": "What fridge?",
+        "intents_heading": "Fridges Our Fridge Removalists Move Every Week",
+        "local_eyebrow": "Our safety promise",
+        "local_heading": "Your Fridge Arrives Working, Your Home Without a Scratch",
+        "local_body": "<p>A fridge is one of the heaviest and most fragile things in your home. Lay it down, drop it on a step or let the doors swing open, and you can end up with a dented door, a cracked shelf, a gouged floor or a fridge that will not cool.</p><p>That is why our fridge movers follow the same routine on every job: <strong>the fridge stays upright the whole way, it rides on a proper appliance trolley, the doors are strapped shut, and it is wrapped in thick moving blankets</strong> before it leaves the room. Two movers control it on every step, in every lift and through every doorway, and it is strapped to the wall of the van so it cannot shift in transit.</p><p>At your place we protect door frames and floors, carry it into the kitchen, garage or laundry you choose and stand it in position, ready for you to plug in. Your fridge is covered while it is in our care.</p>",
+        "steps_heading": "Book Your Fridge Movers in 3 Steps",
+        "step_1_title": "Call us",
+        "step_1_text": "Tell us the fridge type, both suburbs and any stairs, lift or tight doorway. It takes about a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "You get a fixed price on the phone and the earliest time our fridge movers can be there.",
+        "step_3_title": "We move it safely",
+        "step_3_text": "Upright on a trolley, doors strapped, wrapped in blankets and placed where you want it.",
+        "gallery_heading": "Fridges We Have Moved Around Sydney",
+        "gallery_alt": "Titan Express fridge removal job in Sydney",
+        "gallery_1": "shopify://shop_images/Sofa_Removalist.png",
+        "gallery_2": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
+        "gallery_3": "shopify://shop_images/removals_sydney_man_and_van.png",
+        "gallery_4": "shopify://shop_images/Moving_Service_Sydney.png",
+        "nearby_heading": "Fridge Movers Across Sydney",
+        "nearby_intro": "Our fridge removalists collect and deliver fridges in every Sydney region, 7 days a week.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects the Cost of Moving a Fridge?",
+        "price_text": "There is no hourly meter running. We work out one fixed price from four things, and you hear it on the phone before you book.",
+        "form_heading": "Get Your Fridge Moving Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Fridge Movers Sydney: Your Questions Answered",
+        "links_heading": "More Ways Our Movers Can Help",
+        "quick_answer_heading": "Need fridge movers in Sydney?",
+        "quick_answer": "<p>Titan Express are fridge movers and fridge removalists covering all of Sydney, 7 days a week from 7am to 7pm. Two movers bring an appliance trolley, straps and blankets, keep your fridge upright the whole way and place it where you want it. You get a fixed price on the phone before we start, and same-day fridge moves are often available. Call 0469 717 535.</p>",
+        "compare_heading": "Fridge Movers vs a Big Removal Truck",
+        "compare_intro": "Moving one fridge does not need a full removal crew. Here is how a fridge mover compares.",
+        "compare_us_label": "Titan fridge movers",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

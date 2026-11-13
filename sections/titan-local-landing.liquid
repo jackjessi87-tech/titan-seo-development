@@ -33,6 +33,8 @@
       assign svc = 'Bunnings & store collection'
     when 'fridge-washing-machine-delivery-sydney'
       assign svc = 'fridge & washer delivery'
+    when 'fridge-movers-sydney'
+      assign svc = 'fridge movers'
     when 'furniture-pickup-delivery-sydney'
       assign svc = 'furniture pickup & delivery'
     when 'gumtree-pickup-delivery-sydney'
@@ -89,6 +91,8 @@
       assign moves = 'Bunnings orders|Outdoor furniture|BBQs|Flat packs|Click & collect orders|Furniture store pickups'
     when 'fridge-washing-machine-delivery-sydney'
       assign moves = 'Fridges|French-door fridges|Freezers|Washing machines|Dryers|Dishwashers'
+    when 'fridge-movers-sydney'
+      assign moves = 'French-door fridges|Side-by-side fridges|Upright fridges|Bar fridges|Freezers|Marketplace fridges'
     when 'gumtree-pickup-delivery-sydney'
       assign moves = 'Gumtree couches|Beds & mattresses|Fridges|Dining tables|Wardrobes|Desks'
     when 'ikea-pickup-delivery-sydney'
@@ -201,6 +205,9 @@
         {%- liquid
           assign hero_asset = blank
           case pg
+            when 'fridge-movers-sydney'
+              assign hero_asset = 'titan-job-french-fridge.jpg'
+              assign hero_asset_alt = 'Fridge movers Sydney: French-door fridge standing upright in the Titan Express van with an appliance trolley'
             when 'fridge-washing-machine-delivery-sydney'
               assign hero_asset = 'titan-job-french-fridge.jpg'
               assign hero_asset_alt = 'French-door fridge standing upright in the Titan Express van with a trolley ready'
@@ -370,6 +377,10 @@
   </section>
 
   {{ cstrip | replace: '%%T%%', 'Tell us the tricky bits on the phone and we plan around them.' }}
+
+  {%- if pg == 'fridge-movers-sydney' -%}
+    {%- render 'titan-fridge-guide', cstrip: cstrip, phone_intl: phone_intl -%}
+  {%- endif -%}
 
   {%- comment -%} Steps {%- endcomment -%}
   <section class="tll-section tll-wrap" aria-labelledby="tll-steps-{{ uid }}">
