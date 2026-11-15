@@ -25,6 +25,12 @@
   assign alt_tail = ' - ' | append: page.title | append: ', Titan Express'
   assign page_abs = shop.url | append: page.url
   assign biz_maps = 'https://maps.google.com/?cid=1568429248109187940'
+  assign pr1_l = s.price_1_label | default: 'Single item, local'
+  assign pr1_v = s.price_1_from | default: '160'
+  assign pr2_l = s.price_2_label | default: 'Marketplace pickup and delivery'
+  assign pr2_v = s.price_2_from | default: '170'
+  assign pr3_l = s.price_3_label | default: 'Several items or a small move'
+  assign pr3_v = s.price_3_from | default: '300'
   assign form_id = 'LocalQuote-' | append: uid
 -%}
 
@@ -493,6 +499,16 @@
       endfor
     -%}
     {%- if sib_html != '' -%}<p class="tll-lead tll-near__also">More for {{ area }}:</p><ul class="tll-chips" role="list">{{ sib_html }}</ul>{%- endif -%}
+    {%- liquid
+      assign svc_list = 'Sofa & Couch Delivery|/pages/couch-delivery-sydney,Fridge & Washer Delivery|/pages/fridge-washing-machine-delivery-sydney,Marketplace Pickup|/pages/facebook-marketplace-pickup-delivery-sydney,IKEA Pickup & Delivery|/pages/ikea-pickup-delivery-sydney,Single Item Delivery|/pages/single-item-delivery-sydney,Small Removals|/pages/small-removals-sydney,Same-Day Removals|/pages/same-day-removals-sydney,Bed & Mattress Delivery|/pages/bed-mattress-delivery-sydney,Furniture Store Pickup|/pages/furniture-store-delivery-sydney,Wardrobe Delivery|/pages/wardrobe-delivery-sydney' | split: ','
+    -%}
+    <h3 class="tll-h3 tll-near__also">Popular services in {{ area }}</h3>
+    <ul class="tll-chips" role="list">
+      {%- for it in svc_list -%}
+        {%- assign parts = it | split: '|' -%}
+        {%- unless page.url == parts[1] -%}<li><a href="{{ parts[1] }}">{{ parts[0] }} {{ area }}</a></li>{%- endunless -%}
+      {%- endfor -%}
+    </ul>
     <div class="tll-map">
       <iframe title="Map of {{ area | escape }}, NSW, service area for {{ page.title | escape }}" src="https://maps.google.com/maps?q={{ area_q }}&z={% if area == 'Sydney' %}10{% else %}13{% endif %}&output=embed" width="600" height="320" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </div>
@@ -505,6 +521,15 @@
         <p class="tll-eyebrow tll-eyebrow--light">Pricing</p>
         <h2 id="tll-price-{{ uid }}" class="tll-h2">{{ s.price_heading }}</h2>
         <p>{{ s.price_text }}</p>
+        <table class="tll-pguide">
+          <caption>Typical {{ area }} prices</caption>
+          <tbody>
+            <tr><th scope="row">{{ pr1_l }}</th><td>from ${{ pr1_v }}</td></tr>
+            <tr><th scope="row">{{ pr2_l }}</th><td>from ${{ pr2_v }}</td></tr>
+            <tr><th scope="row">{{ pr3_l }}</th><td>from ${{ pr3_v }}</td></tr>
+          </tbody>
+        </table>
+        <p class="tll-pguide__note">Your exact price is fixed before we start.</p>
       </div>
       <ul class="tll-price__list" role="list">
         <li>{{ icon_box }}<span>What you're moving</span></li>
@@ -701,6 +726,11 @@
         {%- for sub in nearby -%}{%- assign sub_t = sub | strip -%}{%- if sub_t != blank -%},{"@type": "Place", "name": {{ sub_t | append: ', NSW' | json }}}{%- endif -%}{%- endfor -%}
       ],
       "provider": {"@id": {{ shop.url | append: '/#business' | json }}},
+      "offers": [
+        {"@type": "Offer", "name": {{ pr1_l | append: ', ' | append: area | json }}, "priceCurrency": "AUD", "priceSpecification": {"@type": "PriceSpecification", "minPrice": {{ pr1_v | json }}, "priceCurrency": "AUD"}, "areaServed": {"@id": {{ page_abs | append: '#area' | json }}}},
+        {"@type": "Offer", "name": {{ pr2_l | append: ', ' | append: area | json }}, "priceCurrency": "AUD", "priceSpecification": {"@type": "PriceSpecification", "minPrice": {{ pr2_v | json }}, "priceCurrency": "AUD"}, "areaServed": {"@id": {{ page_abs | append: '#area' | json }}}},
+        {"@type": "Offer", "name": {{ pr3_l | append: ', ' | append: area | json }}, "priceCurrency": "AUD", "priceSpecification": {"@type": "PriceSpecification", "minPrice": {{ pr3_v | json }}, "priceCurrency": "AUD"}, "areaServed": {"@id": {{ page_abs | append: '#area' | json }}}}
+      ],
       "availableChannel": {"@type": "ServiceChannel", "servicePhone": {"@type": "ContactPoint", "telephone": {{ phone_intl | json }}, "contactType": "bookings", "areaServed": "AU"}, "serviceUrl": {{ page_abs | json }}}
     },
     {
@@ -931,6 +961,12 @@
   .tll-chips svg { color: var(--tll-red); width: 1em; height: 1em; }
   .tll-chips a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
   .tll-near__also { margin-top: 22px; }
+  h3.tll-near__also { margin-bottom: 12px; font-size: 1.15rem; }
+  .tll-pguide { width: 100%; margin-top: 18px; border-collapse: collapse; color: #fff; }
+  .tll-pguide caption { text-align: left; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .tll-pguide th, .tll-pguide td { padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.14); text-align: left; font-weight: 500; }
+  .tll-pguide td { text-align: right; font-weight: 700; white-space: nowrap; }
+  .tll-pguide__note { margin-top: 8px !important; font-size: .9rem; opacity: .8; }
   .tll-map { margin-top: 22px; border-radius: 16px; overflow: hidden; border: 1px solid var(--tll-line); }
   .tll-map iframe { display: block; width: 100%; height: 320px; border: 0; }
 
@@ -1208,6 +1244,12 @@
     { "type": "header", "content": "Pricing panel" },
     { "type": "text", "id": "price_heading", "label": "Heading" },
     { "type": "textarea", "id": "price_text", "label": "Text" },
+    { "type": "text", "id": "price_1_label", "label": "Price guide row 1", "default": "Single item, local" },
+    { "type": "text", "id": "price_1_from", "label": "Row 1 from ($)", "default": "160" },
+    { "type": "text", "id": "price_2_label", "label": "Price guide row 2", "default": "Marketplace pickup and delivery" },
+    { "type": "text", "id": "price_2_from", "label": "Row 2 from ($)", "default": "170" },
+    { "type": "text", "id": "price_3_label", "label": "Price guide row 3", "default": "Several items or a small move" },
+    { "type": "text", "id": "price_3_from", "label": "Row 3 from ($)", "default": "300" },
     { "type": "header", "content": "Quote form" },
     { "type": "text", "id": "form_heading", "label": "Heading" },
     { "type": "textarea", "id": "form_text", "label": "Text" },
