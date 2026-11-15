@@ -475,7 +475,9 @@
             assign c1 = 'furniture-delivery-' | append: sh
             assign c2 = 'man-and-van-' | append: sh
             assign c3 = 'removalists-' | append: sh
-            if pages[c1].title != blank and c1 != page.handle
+            if page.handle contains 'removalists' and pages[c3].title != blank and c3 != page.handle
+              assign sub_url = pages[c3].url
+            elsif pages[c1].title != blank and c1 != page.handle
               assign sub_url = pages[c1].url
             elsif pages[c2].title != blank and c2 != page.handle
               assign sub_url = pages[c2].url

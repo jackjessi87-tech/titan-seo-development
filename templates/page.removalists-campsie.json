@@ -1,0 +1,306 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Small moves in Campsie",
+            "text": "A studio, a room or a few pieces of furniture in one trip.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Apartment & unit moves",
+            "text": "Lifts, loading docks and walk-ups handled with straps and trolleys.",
+            "url": "/pages/man-with-a-van-sydney",
+            "link_label": "Man and van"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single item removals",
+            "text": "One sofa, bed, wardrobe or fridge, no minimum job size.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace pickups",
+            "text": "We collect from the seller and bring it to your place.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day removals",
+            "text": "Last-minute moves, often booked and done the same day.",
+            "url": "/pages/same-day-removalists-sydney",
+            "link_label": "Same-day removalists"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Student & share-house moves",
+            "text": "A bed, desk and boxes moved between rooms or houses.",
+            "url": "/pages/student-removals-sydney",
+            "link_label": "Student removals"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Campsie Centre pickups",
+            "text": "Store orders collected and delivered to your door."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Tell us about access",
+            "text": "Walk-up units are common, so tell us the floor when you book."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Quick to reach",
+            "text": "Beamish Street, Canterbury Road and the M5 get us to Campsie fast."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and lifts",
+            "text": "Tell us the floor and any lift and we bring the right gear."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much do removalists cost in Campsie?",
+            "answer": "<p>Single items start from $160 and small moves from $300. Your exact price depends on the items, stairs or lift and distance, and it's fixed before we start.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Is there a removalist near me in Campsie?",
+            "answer": "<p>Yes. We cover Campsie and the surrounding suburbs every day, and we're based in Punchbowl, so we can often be there the same day.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you do small moves and single items?",
+            "answer": "<p>Yes. Small moves and single items are our speciality, with no minimum job size.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move me today?",
+            "answer": "<p>Often, yes. Same-day jobs depend on that day's schedule, so call or send your request early.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move apartments with stairs?",
+            "answer": "<p>Yes. Tell us the floor and whether there's a lift and we bring straps, blankets and a trolley.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Are my things insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Removalists Near Me",
+            "url": "/pages/removalists-near-me",
+            "description": "Find a local removalist by suburb."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "A few rooms or a handful of items."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Furniture Delivery Cost",
+            "url": "/pages/furniture-delivery-cost-sydney",
+            "description": "Prices from $160, fixed before we start."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Campsie",
+        "phone": "0469 717 535",
+        "service_type": "Removalists, small moves, man and van and furniture removals",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day removals in Campsie now",
+        "live_closed": "Book your Campsie removal for tomorrow",
+        "live_fallback": "Same-day removals available in Campsie",
+        "kicker": "Local removalist · Canterbury-Bankstown",
+        "heading": "Removalists <em>Campsie</em>",
+        "subheading": "Local removalists in Campsie for small moves, apartments, single items and Marketplace pickups around Clemton Park, Belmore and nearby. Fixed price, careful handling, often same day.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/titan-sofa-truck-loading.webp",
+        "hero_alt": "Titan Express removalists loading a wrapped sofa for a move in Campsie",
+        "hero_badge_title": "Campsie removalists",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Removals We Do in Campsie",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Your Local Removalist in Campsie",
+        "local_body": "<p>Campsie has walk-up unit blocks and family homes. We're the local removalist for the jobs a big removal truck is too much for: a room or two, an apartment, a few pieces of furniture or a single item from Campsie Centre.</p><p>With Beamish Street, Canterbury Road and the M5 close by, we can often reach Campsie the same day. You get a fixed price before we start, with no hourly surprises.</p>",
+        "steps_heading": "Book a Removalist in Campsie in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Blacktown",
+        "gallery_1": "",
+        "gallery_2": "",
+        "gallery_3": "",
+        "gallery_4": "",
+        "nearby_heading": "Removalists Near Campsie",
+        "nearby_intro": "We cover Campsie and every suburb around it.",
+        "nearby_suburbs": "Clemton Park, Belmore, Canterbury, Ashbury, Kingsgrove, Earlwood, Lakemba, Croydon Park",
+        "price_heading": "What Affects Your Campsie Removal Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Campsie Removalist Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Campsie",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Removalists Campsie Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need a removalist in Campsie?",
+        "quick_answer": "<p>Titan Express is a local man and van removalist covering Campsie and all of Sydney, 7 days a week from 7am to 7pm. We do small moves, apartments, single items and Marketplace pickups, with a fixed price before we start. Call 0469 717 535.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck",
+        "postcode": "2194",
+        "latitude": "-33.9120",
+        "longitude": "151.1030"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

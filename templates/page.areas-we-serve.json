@@ -1005,6 +1005,216 @@
       "block_order": [
         "suburb_delivery_links_block"
       ]
+    },
+    "removalist_links": {
+      "type": "_blocks",
+      "blocks": {
+        "removalist_links_block": {
+          "type": "related-links",
+          "settings": {
+            "heading": "<h2>Removalists by Suburb</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 24
+          },
+          "blocks": {
+            "link-removalists-ashfield": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Ashfield",
+                "url": "/pages/removalists-ashfield",
+                "description": "Small moves, apartments and single items in Ashfield."
+              }
+            },
+            "link-removalists-glebe": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Glebe",
+                "url": "/pages/removalists-glebe",
+                "description": "Small moves, apartments and single items in Glebe."
+              }
+            },
+            "link-removalists-burwood": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Burwood",
+                "url": "/pages/removalists-burwood",
+                "description": "Small moves, apartments and single items in Burwood."
+              }
+            },
+            "link-removalists-strathfield": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Strathfield",
+                "url": "/pages/removalists-strathfield",
+                "description": "Small moves, apartments and single items in Strathfield."
+              }
+            },
+            "link-removalists-marrickville": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Marrickville",
+                "url": "/pages/removalists-marrickville",
+                "description": "Small moves, apartments and single items in Marrickville."
+              }
+            },
+            "link-removalists-newtown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Newtown",
+                "url": "/pages/removalists-newtown",
+                "description": "Small moves, apartments and single items in Newtown."
+              }
+            },
+            "link-removalists-leichhardt": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Leichhardt",
+                "url": "/pages/removalists-leichhardt",
+                "description": "Small moves, apartments and single items in Leichhardt."
+              }
+            },
+            "link-removalists-campsie": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Campsie",
+                "url": "/pages/removalists-campsie",
+                "description": "Small moves, apartments and single items in Campsie."
+              }
+            },
+            "link-removalists-lakemba": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Lakemba",
+                "url": "/pages/removalists-lakemba",
+                "description": "Small moves, apartments and single items in Lakemba."
+              }
+            },
+            "link-removalists-punchbowl": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Punchbowl",
+                "url": "/pages/removalists-punchbowl",
+                "description": "Small moves, apartments and single items in Punchbowl."
+              }
+            },
+            "link-removalists-hurstville": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Hurstville",
+                "url": "/pages/removalists-hurstville",
+                "description": "Small moves, apartments and single items in Hurstville."
+              }
+            },
+            "link-removalists-kogarah": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Kogarah",
+                "url": "/pages/removalists-kogarah",
+                "description": "Small moves, apartments and single items in Kogarah."
+              }
+            },
+            "link-removalists-rockdale": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Rockdale",
+                "url": "/pages/removalists-rockdale",
+                "description": "Small moves, apartments and single items in Rockdale."
+              }
+            },
+            "link-removalists-auburn": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Auburn",
+                "url": "/pages/removalists-auburn",
+                "description": "Small moves, apartments and single items in Auburn."
+              }
+            },
+            "link-removalists-ryde": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Ryde",
+                "url": "/pages/removalists-ryde",
+                "description": "Small moves, apartments and single items in Ryde."
+              }
+            },
+            "link-removalists-hornsby": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Hornsby",
+                "url": "/pages/removalists-hornsby",
+                "description": "Small moves, apartments and single items in Hornsby."
+              }
+            },
+            "link-removalists-bondi": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Bondi",
+                "url": "/pages/removalists-bondi",
+                "description": "Small moves, apartments and single items in Bondi."
+              }
+            },
+            "link-removalists-randwick": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Randwick",
+                "url": "/pages/removalists-randwick",
+                "description": "Small moves, apartments and single items in Randwick."
+              }
+            },
+            "link-removalists-parramatta": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Parramatta",
+                "url": "/pages/removalists-parramatta",
+                "description": "Small moves, apartments and single items in Parramatta."
+              }
+            },
+            "link-removalists-bankstown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Bankstown",
+                "url": "/pages/removalists-bankstown",
+                "description": "Small moves, apartments and single items in Bankstown."
+              }
+            },
+            "link-removalists-near-me": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Near Me",
+                "url": "/pages/removalists-near-me",
+                "description": "Find a local removalist by suburb."
+              }
+            }
+          },
+          "block_order": [
+            "link-removalists-ashfield",
+            "link-removalists-glebe",
+            "link-removalists-burwood",
+            "link-removalists-strathfield",
+            "link-removalists-marrickville",
+            "link-removalists-newtown",
+            "link-removalists-leichhardt",
+            "link-removalists-campsie",
+            "link-removalists-lakemba",
+            "link-removalists-punchbowl",
+            "link-removalists-hurstville",
+            "link-removalists-kogarah",
+            "link-removalists-rockdale",
+            "link-removalists-auburn",
+            "link-removalists-ryde",
+            "link-removalists-hornsby",
+            "link-removalists-bondi",
+            "link-removalists-randwick",
+            "link-removalists-parramatta",
+            "link-removalists-bankstown",
+            "link-removalists-near-me"
+          ]
+        }
+      },
+      "block_order": [
+        "removalist_links_block"
+      ]
     }
   },
   "order": [
@@ -1018,6 +1228,7 @@
     "recent_jobs",
     "faq",
     "suburb_delivery_links",
+    "removalist_links",
     "related_links",
     "quote_form",
     "final_cta",
