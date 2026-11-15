@@ -5,10 +5,16 @@
       "blocks": {
         "breadcrumbs_block": {
           "type": "breadcrumbs",
-          "settings": { "color_scheme": "scheme-1", "padding-block-start": 16, "padding-block-end": 8 }
+          "settings": {
+            "color_scheme": "scheme-1",
+            "padding-block-start": 16,
+            "padding-block-end": 8
+          }
         }
       },
-      "block_order": ["breadcrumbs_block"],
+      "block_order": [
+        "breadcrumbs_block"
+      ],
       "settings": {}
     },
     "hero": {
@@ -36,7 +42,9 @@
           }
         }
       },
-      "block_order": ["hero_block"],
+      "block_order": [
+        "hero_block"
+      ],
       "settings": {}
     },
     "intro": {
@@ -53,7 +61,9 @@
           }
         }
       },
-      "block_order": ["intro_block"],
+      "block_order": [
+        "intro_block"
+      ],
       "settings": {}
     },
     "regions": {
@@ -62,17 +72,90 @@
         "regions_block": {
           "type": "feature-grid",
           "blocks": {
-            "region-canterbury-bankstown": { "type": "_feature-grid-item", "settings": { "heading": "Canterbury-Bankstown", "text": "Our home base: Punchbowl, Bankstown, Lakemba, Campsie, Canterbury, Revesby and Padstow.", "icon": "map" } },
-            "region-inner-west": { "type": "_feature-grid-item", "settings": { "heading": "Inner West", "text": "Newtown, Marrickville, Leichhardt, Ashfield, Burwood, Strathfield and Homebush.", "icon": "location" } },
-            "region-eastern-cbd": { "type": "_feature-grid-item", "settings": { "heading": "Eastern Suburbs & CBD", "text": "Sydney CBD, Surry Hills, Darlinghurst, Paddington, Bondi, Randwick and Maroubra.", "icon": "location" } },
-            "region-parramatta-west": { "type": "_feature-grid-item", "settings": { "heading": "Parramatta & Western Sydney", "text": "Parramatta, Westmead, Auburn, Merrylands, Blacktown, Mount Druitt and Penrith.", "icon": "location" } },
-            "region-ryde-north-shore": { "type": "_feature-grid-item", "settings": { "heading": "Ryde & North Shore", "text": "Ryde, Macquarie Park, Epping, Chatswood, Lane Cove, North Sydney and Hornsby.", "icon": "location" } },
-            "region-northern-beaches": { "type": "_feature-grid-item", "settings": { "heading": "Northern Beaches", "text": "Manly, Dee Why, Brookvale, Narrabeen, Mona Vale and Frenchs Forest.", "icon": "location" } },
-            "region-hills": { "type": "_feature-grid-item", "settings": { "heading": "Hills District", "text": "Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill and Glenhaven. See our Castle Hill removalists page below.", "icon": "location" } },
-            "region-south-west": { "type": "_feature-grid-item", "settings": { "heading": "South West Sydney", "text": "Liverpool, Fairfield, Cabramatta, Casula, Prestons, Leppington and Campbelltown.", "icon": "location" } },
-            "region-st-george-shire": { "type": "_feature-grid-item", "settings": { "heading": "St George & Sutherland Shire", "text": "Hurstville, Kogarah, Rockdale, Sutherland, Miranda and Cronulla.", "icon": "location" } }
+            "region-canterbury-bankstown": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Canterbury-Bankstown",
+                "text": "Our home base: Punchbowl, Bankstown, Lakemba, Campsie, Canterbury, Revesby and Padstow.",
+                "icon": "map"
+              }
+            },
+            "region-inner-west": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Inner West",
+                "text": "Newtown, Marrickville, Leichhardt, Ashfield, Burwood, Strathfield and Homebush.",
+                "icon": "location"
+              }
+            },
+            "region-eastern-cbd": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Eastern Suburbs & CBD",
+                "text": "Sydney CBD, Surry Hills, Darlinghurst, Paddington, Bondi, Randwick and Maroubra.",
+                "icon": "location"
+              }
+            },
+            "region-parramatta-west": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Parramatta & Western Sydney",
+                "text": "Parramatta, Westmead, Auburn, Merrylands, Blacktown, Mount Druitt and Penrith.",
+                "icon": "location"
+              }
+            },
+            "region-ryde-north-shore": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Ryde & North Shore",
+                "text": "Ryde, Macquarie Park, Epping, Chatswood, Lane Cove, North Sydney and Hornsby.",
+                "icon": "location"
+              }
+            },
+            "region-northern-beaches": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Northern Beaches",
+                "text": "Manly, Dee Why, Brookvale, Narrabeen, Mona Vale and Frenchs Forest.",
+                "icon": "location"
+              }
+            },
+            "region-hills": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Hills District",
+                "text": "Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill and Glenhaven. See our Castle Hill removalists page below.",
+                "icon": "location"
+              }
+            },
+            "region-south-west": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "South West Sydney",
+                "text": "Liverpool, Fairfield, Cabramatta, Casula, Prestons, Leppington and Campbelltown.",
+                "icon": "location"
+              }
+            },
+            "region-st-george-shire": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "St George & Sutherland Shire",
+                "text": "Hurstville, Kogarah, Rockdale, Sutherland, Miranda and Cronulla.",
+                "icon": "location"
+              }
+            }
           },
-          "block_order": ["region-canterbury-bankstown", "region-inner-west", "region-eastern-cbd", "region-parramatta-west", "region-ryde-north-shore", "region-northern-beaches", "region-hills", "region-south-west", "region-st-george-shire"],
+          "block_order": [
+            "region-canterbury-bankstown",
+            "region-inner-west",
+            "region-eastern-cbd",
+            "region-parramatta-west",
+            "region-ryde-north-shore",
+            "region-northern-beaches",
+            "region-hills",
+            "region-south-west",
+            "region-st-george-shire"
+          ],
           "settings": {
             "heading": "<h2>Sydney Regions We Cover Every Day</h2>",
             "color_scheme": "scheme-1",
@@ -81,7 +164,9 @@
           }
         }
       },
-      "block_order": ["regions_block"],
+      "block_order": [
+        "regions_block"
+      ],
       "settings": {}
     },
     "services": {
@@ -90,14 +175,63 @@
         "services_block": {
           "type": "feature-grid",
           "blocks": {
-            "svc-single": { "type": "_feature-grid-item", "settings": { "heading": "Single-item delivery", "text": "One couch, one fridge or one wardrobe. No minimum job size.", "icon": "single-item" } },
-            "svc-marketplace": { "type": "_feature-grid-item", "settings": { "heading": "Marketplace & Gumtree pickups", "text": "We collect from the seller and deliver to your door.", "icon": "marketplace" } },
-            "svc-small-moves": { "type": "_feature-grid-item", "settings": { "heading": "Small moves", "text": "Studios, units and partial moves with two careful movers.", "icon": "two-workers" } },
-            "svc-appliances": { "type": "_feature-grid-item", "settings": { "heading": "Appliances", "text": "Fridges, washing machines and other heavy, awkward items.", "icon": "trolley" } },
-            "svc-store": { "type": "_feature-grid-item", "settings": { "heading": "Store pickups", "text": "IKEA, furniture stores and warehouses, delivered the same day where possible.", "icon": "van" } },
-            "svc-stairs": { "type": "_feature-grid-item", "settings": { "heading": "Stairs & apartments", "text": "Walk-ups, lifts and tight hallways handled with straps and blankets.", "icon": "stairs" } }
+            "svc-single": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Single-item delivery",
+                "text": "One couch, one fridge or one wardrobe. No minimum job size.",
+                "icon": "single-item"
+              }
+            },
+            "svc-marketplace": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Marketplace & Gumtree pickups",
+                "text": "We collect from the seller and deliver to your door.",
+                "icon": "marketplace"
+              }
+            },
+            "svc-small-moves": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Small moves",
+                "text": "Studios, units and partial moves with two careful movers.",
+                "icon": "two-workers"
+              }
+            },
+            "svc-appliances": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Appliances",
+                "text": "Fridges, washing machines and other heavy, awkward items.",
+                "icon": "trolley"
+              }
+            },
+            "svc-store": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Store pickups",
+                "text": "IKEA, furniture stores and warehouses, delivered the same day where possible.",
+                "icon": "van"
+              }
+            },
+            "svc-stairs": {
+              "type": "_feature-grid-item",
+              "settings": {
+                "heading": "Stairs & apartments",
+                "text": "Walk-ups, lifts and tight hallways handled with straps and blankets.",
+                "icon": "stairs"
+              }
+            }
           },
-          "block_order": ["svc-single", "svc-marketplace", "svc-small-moves", "svc-appliances", "svc-store", "svc-stairs"],
+          "block_order": [
+            "svc-single",
+            "svc-marketplace",
+            "svc-small-moves",
+            "svc-appliances",
+            "svc-store",
+            "svc-stairs"
+          ],
           "settings": {
             "heading": "<h2>What We Move in Every Area</h2>",
             "color_scheme": "scheme-1",
@@ -106,7 +240,9 @@
           }
         }
       },
-      "block_order": ["services_block"],
+      "block_order": [
+        "services_block"
+      ],
       "settings": {}
     },
     "how_it_works": {
@@ -115,11 +251,33 @@
         "how_it_works_block": {
           "type": "process-steps",
           "blocks": {
-            "step-1": { "type": "_process-step-item", "settings": { "heading": "Send your two suburbs", "text": "Tell us the pickup and delivery suburbs, the item and any stairs or lift access." } },
-            "step-2": { "type": "_process-step-item", "settings": { "heading": "Get a fixed price", "text": "We reply with a fixed price and the earliest time we can be there, often the same day." } },
-            "step-3": { "type": "_process-step-item", "settings": { "heading": "We pick up and deliver", "text": "Your items are wrapped, strapped and delivered carefully, wherever you are in Sydney." } }
+            "step-1": {
+              "type": "_process-step-item",
+              "settings": {
+                "heading": "Send your two suburbs",
+                "text": "Tell us the pickup and delivery suburbs, the item and any stairs or lift access."
+              }
+            },
+            "step-2": {
+              "type": "_process-step-item",
+              "settings": {
+                "heading": "Get a fixed price",
+                "text": "We reply with a fixed price and the earliest time we can be there, often the same day."
+              }
+            },
+            "step-3": {
+              "type": "_process-step-item",
+              "settings": {
+                "heading": "We pick up and deliver",
+                "text": "Your items are wrapped, strapped and delivered carefully, wherever you are in Sydney."
+              }
+            }
           },
-          "block_order": ["step-1", "step-2", "step-3"],
+          "block_order": [
+            "step-1",
+            "step-2",
+            "step-3"
+          ],
           "settings": {
             "heading": "<h2>Booking a Removalist Anywhere in Sydney in 3 Steps</h2>",
             "color_scheme": "scheme-1",
@@ -128,7 +286,9 @@
           }
         }
       },
-      "block_order": ["how_it_works_block"],
+      "block_order": [
+        "how_it_works_block"
+      ],
       "settings": {}
     },
     "service_areas": {
@@ -146,7 +306,9 @@
           }
         }
       },
-      "block_order": ["service_areas_block"],
+      "block_order": [
+        "service_areas_block"
+      ],
       "settings": {}
     },
     "recent_jobs": {
@@ -164,7 +326,9 @@
           }
         }
       },
-      "block_order": ["recent_jobs_block"],
+      "block_order": [
+        "recent_jobs_block"
+      ],
       "settings": {}
     },
     "faq": {
@@ -173,15 +337,65 @@
         "faq_block": {
           "type": "service-faq",
           "blocks": {
-            "faq-1": { "type": "_faq-item", "settings": { "question": "Do you cover my suburb?", "answer": "<p>We cover all of Greater Sydney, from the Northern Beaches to the Sutherland Shire and from the Eastern Suburbs out to Penrith and Campbelltown. Send your pickup and delivery suburbs in a quote request and we'll confirm availability.</p>" } },
-            "faq-2": { "type": "_faq-item", "settings": { "question": "Does it cost more if my suburbs are far apart?", "answer": "<p>Distance is one factor, along with the items, stairs or lifts, parking and timing. We quote a fixed price for your exact pickup and delivery suburbs, so you know the full cost before you book.</p>" } },
-            "faq-3": { "type": "_faq-item", "settings": { "question": "Can you do same-day pickups anywhere in Sydney?", "answer": "<p>Often, yes. Same-day availability depends on that day's schedule, so the earlier you send your request, the better the chance we can fit you in today.</p>" } },
-            "faq-4": { "type": "_faq-item", "settings": { "question": "Do you handle apartments with stairs or lifts?", "answer": "<p>Yes. Tell us how many flights of stairs there are, or whether a lift needs booking, at both addresses. We bring straps, trolleys and blankets for tight stairwells and lifts.</p>" } },
-            "faq-5": { "type": "_faq-item", "settings": { "question": "What about parking and loading zones?", "answer": "<p>Let us know if there's a driveway, a loading dock or only street parking. In busy areas like the CBD, Surry Hills or Bondi, a note about parking helps us plan the job and keep your price accurate.</p>" } },
-            "faq-6": { "type": "_faq-item", "settings": { "question": "Is my furniture insured while you move it?", "answer": "<p>Yes, your items are covered while they're in our care, and every item is wrapped in protective blankets and strapped in the van.</p>" } },
-            "faq-7": { "type": "_faq-item", "settings": { "question": "How do I get a price?", "answer": "<p>Fill in the quote form on this page or call 0469 717 535. Include both suburbs, the items, stairs or lift details and your preferred date, and we'll reply with a fixed price.</p>" } }
+            "faq-1": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Do you cover my suburb?",
+                "answer": "<p>We cover all of Greater Sydney, from the Northern Beaches to the Sutherland Shire and from the Eastern Suburbs out to Penrith and Campbelltown. Send your pickup and delivery suburbs in a quote request and we'll confirm availability.</p>"
+              }
+            },
+            "faq-2": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Does it cost more if my suburbs are far apart?",
+                "answer": "<p>Distance is one factor, along with the items, stairs or lifts, parking and timing. We quote a fixed price for your exact pickup and delivery suburbs, so you know the full cost before you book.</p>"
+              }
+            },
+            "faq-3": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Can you do same-day pickups anywhere in Sydney?",
+                "answer": "<p>Often, yes. Same-day availability depends on that day's schedule, so the earlier you send your request, the better the chance we can fit you in today.</p>"
+              }
+            },
+            "faq-4": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Do you handle apartments with stairs or lifts?",
+                "answer": "<p>Yes. Tell us how many flights of stairs there are, or whether a lift needs booking, at both addresses. We bring straps, trolleys and blankets for tight stairwells and lifts.</p>"
+              }
+            },
+            "faq-5": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "What about parking and loading zones?",
+                "answer": "<p>Let us know if there's a driveway, a loading dock or only street parking. In busy areas like the CBD, Surry Hills or Bondi, a note about parking helps us plan the job and keep your price accurate.</p>"
+              }
+            },
+            "faq-6": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "Is my furniture insured while you move it?",
+                "answer": "<p>Yes, your items are covered while they're in our care, and every item is wrapped in protective blankets and strapped in the van.</p>"
+              }
+            },
+            "faq-7": {
+              "type": "_faq-item",
+              "settings": {
+                "question": "How do I get a price?",
+                "answer": "<p>Fill in the quote form on this page or call 0469 717 535. Include both suburbs, the items, stairs or lift details and your preferred date, and we'll reply with a fixed price.</p>"
+              }
+            }
           },
-          "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7"],
+          "block_order": [
+            "faq-1",
+            "faq-2",
+            "faq-3",
+            "faq-4",
+            "faq-5",
+            "faq-6",
+            "faq-7"
+          ],
           "settings": {
             "heading": "<h2>Sydney Removalist Questions, Answered</h2>",
             "color_scheme": "scheme-1",
@@ -190,7 +404,9 @@
           }
         }
       },
-      "block_order": ["faq_block"],
+      "block_order": [
+        "faq_block"
+      ],
       "settings": {}
     },
     "related_links": {
@@ -199,35 +415,252 @@
         "related_links_block": {
           "type": "related-links",
           "blocks": {
-            "link-furniture-pickup": { "type": "_related-link-item", "settings": { "label": "Furniture Pickup & Delivery Sydney", "url": "/pages/furniture-pickup-delivery-sydney", "description": "Same-day collection and delivery across Sydney, 7am to 7pm." } },
-            "link-same-day": { "type": "_related-link-item", "settings": {"label": "Same-Day Removalists Sydney", "url": "/pages/same-day-removalists-sydney", "description": "Last-minute moves across Sydney, 7am to 7pm."} },
-            "link-small-removals": { "type": "_related-link-item", "settings": {"label": "Small Removals Sydney", "url": "/pages/small-removals-sydney", "description": "Studios, units, rooms and part moves."} },
-            "link-bed": { "type": "_related-link-item", "settings": {"label": "Bed & Mattress Delivery Sydney", "url": "/pages/bed-mattress-delivery-sydney", "description": "Beds, frames and mattresses delivered to the bedroom."} },
-            "link-sutherland": { "type": "_related-link-item", "settings": {"label": "Removalists Sutherland Shire", "url": "/pages/removalists-sutherland-shire", "description": "Cronulla, Miranda, Caringbah and the Shire."} },
-            "link-eastern": { "type": "_related-link-item", "settings": {"label": "Removalists Eastern Suburbs", "url": "/pages/removalists-eastern-suburbs", "description": "Bondi, Randwick, Coogee and Paddington."} },
-            "link-northern-beaches": { "type": "_related-link-item", "settings": {"label": "Removalists Northern Beaches", "url": "/pages/removalists-northern-beaches", "description": "Manly, Dee Why, Brookvale and Mona Vale."} },
-            "link-castle-hill": { "type": "_related-link-item", "settings": { "label": "Removalists Castle Hill", "url": "/pages/removalists-castle-hill", "description": "Same-day removals and furniture delivery across Castle Hill and the Hills District." } },
-            "link-parramatta": { "type": "_related-link-item", "settings": { "label": "Man and Van Parramatta", "url": "/pages/man-and-van-parramatta", "description": "Apartment moves, single items and Marketplace pickups in Parramatta." } },
-            "link-bankstown": { "type": "_related-link-item", "settings": { "label": "Man and Van Bankstown", "url": "/pages/man-and-van-bankstown", "description": "Local same-day removals in Bankstown, Yagoona and Greenacre." } },
-            "link-liverpool": { "type": "_related-link-item", "settings": { "label": "Man and Van Liverpool", "url": "/pages/man-and-van-liverpool", "description": "Small moves and deliveries in Liverpool, Casula and the new estates." } },
-            "link-blacktown": { "type": "_related-link-item", "settings": { "label": "Man and Van Blacktown", "url": "/pages/man-and-van-blacktown", "description": "IKEA Marsden Park pickups and local moves around Blacktown." } },
-            "link-inner-west": { "type": "_related-link-item", "settings": { "label": "Man and Van Inner West", "url": "/pages/man-and-van-inner-west", "description": "Terraces and tight stairs in Newtown, Marrickville and Leichhardt." } },
-            "link-ikea": { "type": "_related-link-item", "settings": { "label": "IKEA Pickup & Delivery Sydney", "url": "/pages/ikea-pickup-delivery-sydney", "description": "We collect from IKEA Tempe, Rhodes or Marsden Park and deliver home." } },
-            "link-single-item": { "type": "_related-link-item", "settings": { "label": "Single Item Delivery Sydney", "url": "/pages/single-item-delivery-sydney", "description": "One item, one fixed price. No minimum job size." } },
-            "link-appliances": { "type": "_related-link-item", "settings": { "label": "Fridge & Washing Machine Delivery Sydney", "url": "/pages/fridge-washing-machine-delivery-sydney", "description": "Appliances moved upright on trolleys, with straps and blankets." } },
-            "link-ryde": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Ryde", "url": "/pages/furniture-delivery-ryde", "description": "Pickups and deliveries in Ryde, Macquarie Park and nearby suburbs." } },
-            "link-homebush": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Homebush", "url": "/pages/furniture-delivery-homebush", "description": "Removals and deliveries in Homebush, Strathfield and the Inner West." } },
-            "link-darlinghurst": { "type": "_related-link-item", "settings": { "label": "Furniture Delivery Darlinghurst", "url": "/pages/furniture-delivery-darlinghurst", "description": "Apartment-friendly deliveries in Darlinghurst and the inner city." } },
-            "link-man-van": { "type": "_related-link-item", "settings": { "label": "Man With a Van Sydney", "url": "/pages/man-with-a-van-sydney", "description": "Small moves and single items with a van and careful movers." } },
-            "link-marketplace": { "type": "_related-link-item", "settings": { "label": "Facebook Marketplace Pickup & Delivery", "url": "/pages/facebook-marketplace-pickup-delivery-sydney", "description": "We collect from the seller and deliver to your door." } },
-            "link-chatswood": { "type": "_related-link-item", "settings": { "label": "Man and Van Chatswood", "url": "/pages/man-and-van-chatswood", "description": "Apartment moves and pickups in Chatswood, Willoughby and the North Shore." } },
-            "link-lidcombe": { "type": "_related-link-item", "settings": { "label": "Man and Van Lidcombe", "url": "/pages/man-and-van-lidcombe", "description": "Unit moves and IKEA Rhodes pickups in Lidcombe, Auburn and Olympic Park." } },
-            "link-fairfield": { "type": "_related-link-item", "settings": { "label": "Man and Van Fairfield", "url": "/pages/man-and-van-fairfield", "description": "Warehouse pickups and moves in Fairfield, Cabramatta and Wetherill Park." } },
-            "link-bunnings": { "type": "_related-link-item", "settings": { "label": "Bunnings & Store Collection Sydney", "url": "/pages/bunnings-store-collection-sydney", "description": "We collect your Bunnings or store order and deliver it home." } },
-            "link-gumtree": { "type": "_related-link-item", "settings": { "label": "Gumtree Pickup & Delivery Sydney", "url": "/pages/gumtree-pickup-delivery-sydney", "description": "We collect from the Gumtree seller and deliver to your door." } },
-            "link-couch": { "type": "_related-link-item", "settings": { "label": "Couch Delivery Sydney", "url": "/pages/couch-delivery-sydney", "description": "Sofas, lounges and sofa beds moved without a scratch." } }
+            "link-furniture-pickup": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Pickup & Delivery Sydney",
+                "url": "/pages/furniture-pickup-delivery-sydney",
+                "description": "Same-day collection and delivery across Sydney, 7am to 7pm."
+              }
+            },
+            "link-same-day": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Same-Day Removalists Sydney",
+                "url": "/pages/same-day-removalists-sydney",
+                "description": "Last-minute moves across Sydney, 7am to 7pm."
+              }
+            },
+            "link-small-removals": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Small Removals Sydney",
+                "url": "/pages/small-removals-sydney",
+                "description": "Studios, units, rooms and part moves."
+              }
+            },
+            "link-bed": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Bed & Mattress Delivery Sydney",
+                "url": "/pages/bed-mattress-delivery-sydney",
+                "description": "Beds, frames and mattresses delivered to the bedroom."
+              }
+            },
+            "link-sutherland": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Sutherland Shire",
+                "url": "/pages/removalists-sutherland-shire",
+                "description": "Cronulla, Miranda, Caringbah and the Shire."
+              }
+            },
+            "link-eastern": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Eastern Suburbs",
+                "url": "/pages/removalists-eastern-suburbs",
+                "description": "Bondi, Randwick, Coogee and Paddington."
+              }
+            },
+            "link-northern-beaches": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Northern Beaches",
+                "url": "/pages/removalists-northern-beaches",
+                "description": "Manly, Dee Why, Brookvale and Mona Vale."
+              }
+            },
+            "link-castle-hill": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Removalists Castle Hill",
+                "url": "/pages/removalists-castle-hill",
+                "description": "Same-day removals and furniture delivery across Castle Hill and the Hills District."
+              }
+            },
+            "link-parramatta": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Parramatta",
+                "url": "/pages/man-and-van-parramatta",
+                "description": "Apartment moves, single items and Marketplace pickups in Parramatta."
+              }
+            },
+            "link-bankstown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Bankstown",
+                "url": "/pages/man-and-van-bankstown",
+                "description": "Local same-day removals in Bankstown, Yagoona and Greenacre."
+              }
+            },
+            "link-liverpool": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Liverpool",
+                "url": "/pages/man-and-van-liverpool",
+                "description": "Small moves and deliveries in Liverpool, Casula and the new estates."
+              }
+            },
+            "link-blacktown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Blacktown",
+                "url": "/pages/man-and-van-blacktown",
+                "description": "IKEA Marsden Park pickups and local moves around Blacktown."
+              }
+            },
+            "link-inner-west": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Inner West",
+                "url": "/pages/man-and-van-inner-west",
+                "description": "Terraces and tight stairs in Newtown, Marrickville and Leichhardt."
+              }
+            },
+            "link-ikea": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "IKEA Pickup & Delivery Sydney",
+                "url": "/pages/ikea-pickup-delivery-sydney",
+                "description": "We collect from IKEA Tempe, Rhodes or Marsden Park and deliver home."
+              }
+            },
+            "link-single-item": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Single Item Delivery Sydney",
+                "url": "/pages/single-item-delivery-sydney",
+                "description": "One item, one fixed price. No minimum job size."
+              }
+            },
+            "link-appliances": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Fridge & Washing Machine Delivery Sydney",
+                "url": "/pages/fridge-washing-machine-delivery-sydney",
+                "description": "Appliances moved upright on trolleys, with straps and blankets."
+              }
+            },
+            "link-ryde": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Ryde",
+                "url": "/pages/furniture-delivery-ryde",
+                "description": "Pickups and deliveries in Ryde, Macquarie Park and nearby suburbs."
+              }
+            },
+            "link-homebush": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Homebush",
+                "url": "/pages/furniture-delivery-homebush",
+                "description": "Removals and deliveries in Homebush, Strathfield and the Inner West."
+              }
+            },
+            "link-darlinghurst": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Darlinghurst",
+                "url": "/pages/furniture-delivery-darlinghurst",
+                "description": "Apartment-friendly deliveries in Darlinghurst and the inner city."
+              }
+            },
+            "link-man-van": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man With a Van Sydney",
+                "url": "/pages/man-with-a-van-sydney",
+                "description": "Small moves and single items with a van and careful movers."
+              }
+            },
+            "link-marketplace": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Facebook Marketplace Pickup & Delivery",
+                "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+                "description": "We collect from the seller and deliver to your door."
+              }
+            },
+            "link-chatswood": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Chatswood",
+                "url": "/pages/man-and-van-chatswood",
+                "description": "Apartment moves and pickups in Chatswood, Willoughby and the North Shore."
+              }
+            },
+            "link-lidcombe": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Lidcombe",
+                "url": "/pages/man-and-van-lidcombe",
+                "description": "Unit moves and IKEA Rhodes pickups in Lidcombe, Auburn and Olympic Park."
+              }
+            },
+            "link-fairfield": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Fairfield",
+                "url": "/pages/man-and-van-fairfield",
+                "description": "Warehouse pickups and moves in Fairfield, Cabramatta and Wetherill Park."
+              }
+            },
+            "link-bunnings": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Bunnings & Store Collection Sydney",
+                "url": "/pages/bunnings-store-collection-sydney",
+                "description": "We collect your Bunnings or store order and deliver it home."
+              }
+            },
+            "link-gumtree": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Gumtree Pickup & Delivery Sydney",
+                "url": "/pages/gumtree-pickup-delivery-sydney",
+                "description": "We collect from the Gumtree seller and deliver to your door."
+              }
+            },
+            "link-couch": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Couch Delivery Sydney",
+                "url": "/pages/couch-delivery-sydney",
+                "description": "Sofas, lounges and sofa beds moved without a scratch."
+              }
+            }
           },
-          "block_order": ["link-furniture-pickup", "link-same-day", "link-small-removals", "link-bed", "link-sutherland", "link-eastern", "link-northern-beaches", "link-castle-hill", "link-parramatta", "link-bankstown", "link-liverpool", "link-fairfield", "link-blacktown", "link-inner-west", "link-ikea", "link-bunnings", "link-single-item", "link-appliances", "link-ryde", "link-chatswood", "link-lidcombe", "link-homebush", "link-darlinghurst", "link-man-van", "link-marketplace", "link-gumtree", "link-couch"],
+          "block_order": [
+            "link-furniture-pickup",
+            "link-same-day",
+            "link-small-removals",
+            "link-bed",
+            "link-sutherland",
+            "link-eastern",
+            "link-northern-beaches",
+            "link-castle-hill",
+            "link-parramatta",
+            "link-bankstown",
+            "link-liverpool",
+            "link-fairfield",
+            "link-blacktown",
+            "link-inner-west",
+            "link-ikea",
+            "link-bunnings",
+            "link-single-item",
+            "link-appliances",
+            "link-ryde",
+            "link-chatswood",
+            "link-lidcombe",
+            "link-homebush",
+            "link-darlinghurst",
+            "link-man-van",
+            "link-marketplace",
+            "link-gumtree",
+            "link-couch"
+          ],
           "settings": {
             "heading": "<h2>Local Pages and Services</h2>",
             "color_scheme": "scheme-1",
@@ -236,7 +669,9 @@
           }
         }
       },
-      "block_order": ["related_links_block"],
+      "block_order": [
+        "related_links_block"
+      ],
       "settings": {}
     },
     "quote_form": {
@@ -255,7 +690,9 @@
           }
         }
       },
-      "block_order": ["quote_form_block"],
+      "block_order": [
+        "quote_form_block"
+      ],
       "settings": {}
     },
     "final_cta": {
@@ -274,7 +711,9 @@
           }
         }
       },
-      "block_order": ["final_cta_block"],
+      "block_order": [
+        "final_cta_block"
+      ],
       "settings": {}
     },
     "schema": {
@@ -290,7 +729,9 @@
           }
         }
       },
-      "block_order": ["schema_block"],
+      "block_order": [
+        "schema_block"
+      ],
       "settings": {}
     },
     "floating_quote_bar": {
@@ -298,12 +739,163 @@
       "blocks": {
         "floating_quote_bar_block": {
           "type": "floating-quote-bar",
-          "settings": { "button_text": "Get a Free Quote", "quote_anchor": "#main-quote", "color_scheme": "scheme-1" }
+          "settings": {
+            "button_text": "Get a Free Quote",
+            "quote_anchor": "#main-quote",
+            "color_scheme": "scheme-1"
+          }
         }
       },
-      "block_order": ["floating_quote_bar_block"],
+      "block_order": [
+        "floating_quote_bar_block"
+      ],
       "settings": {}
+    },
+    "suburb_delivery_links": {
+      "type": "_blocks",
+      "blocks": {
+        "suburb_delivery_links_block": {
+          "type": "related-links",
+          "settings": {
+            "heading": "<h2>Furniture Delivery by Suburb</h2>",
+            "color_scheme": "scheme-1",
+            "padding-block-start": 48,
+            "padding-block-end": 24
+          },
+          "blocks": {
+            "link-fd-blacktown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Blacktown",
+                "url": "/pages/furniture-delivery-blacktown",
+                "description": "Sofas, fridges and Marketplace pickups around Blacktown and Marsden Park."
+              }
+            },
+            "link-fd-mount-druitt": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Mount Druitt",
+                "url": "/pages/furniture-delivery-mount-druitt",
+                "description": "Furniture delivery in Mount Druitt, Minchinbury and Rooty Hill."
+              }
+            },
+            "link-fd-penrith": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Penrith",
+                "url": "/pages/furniture-delivery-penrith",
+                "description": "Same-day furniture delivery across Penrith, Kingswood and Jamisontown."
+              }
+            },
+            "link-fd-st-marys": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery St Marys",
+                "url": "/pages/furniture-delivery-st-marys",
+                "description": "Couches, beds and appliances delivered around St Marys and Colyton."
+              }
+            },
+            "link-fd-rooty-hill": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Rooty Hill",
+                "url": "/pages/furniture-delivery-rooty-hill",
+                "description": "Local furniture pickup and delivery in Rooty Hill and Plumpton."
+              }
+            },
+            "link-fd-seven-hills": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Seven Hills",
+                "url": "/pages/furniture-delivery-seven-hills",
+                "description": "Furniture delivery in Seven Hills, Toongabbie and Kings Langley."
+              }
+            },
+            "link-fd-doonside": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Doonside",
+                "url": "/pages/furniture-delivery-doonside",
+                "description": "Sofa, fridge and Marketplace deliveries in Doonside and Woodcroft."
+              }
+            },
+            "link-fd-wetherill-park": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Wetherill Park",
+                "url": "/pages/furniture-delivery-wetherill-park",
+                "description": "Store and Marketplace pickups around Wetherill Park and Prairiewood."
+              }
+            },
+            "link-fd-merrylands": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Merrylands",
+                "url": "/pages/furniture-delivery-merrylands",
+                "description": "Furniture delivery in Merrylands, Guildford and Granville."
+              }
+            },
+            "link-fd-campbelltown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Campbelltown",
+                "url": "/pages/furniture-delivery-campbelltown",
+                "description": "Furniture delivery across Campbelltown, Leumeah and Macarthur."
+              }
+            },
+            "link-fd-rouse-hill": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Rouse Hill",
+                "url": "/pages/furniture-delivery-rouse-hill",
+                "description": "Sofas and appliances delivered around Rouse Hill and Kellyville."
+              }
+            },
+            "link-fd-richmond": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Richmond",
+                "url": "/pages/furniture-delivery-richmond",
+                "description": "Furniture delivery in Richmond, Windsor and the Hawkesbury."
+              }
+            }
+          },
+          "block_order": [
+            "link-fd-blacktown",
+            "link-fd-mount-druitt",
+            "link-fd-penrith",
+            "link-fd-st-marys",
+            "link-fd-rooty-hill",
+            "link-fd-seven-hills",
+            "link-fd-doonside",
+            "link-fd-wetherill-park",
+            "link-fd-merrylands",
+            "link-fd-campbelltown",
+            "link-fd-rouse-hill",
+            "link-fd-richmond"
+          ]
+        }
+      },
+      "block_order": [
+        "suburb_delivery_links_block"
+      ]
     }
   },
-  "order": ["breadcrumbs", "hero", "intro", "regions", "services", "how_it_works", "service_areas", "recent_jobs", "faq", "related_links", "quote_form", "final_cta", "schema", "floating_quote_bar"]
+  "order": [
+    "breadcrumbs",
+    "hero",
+    "intro",
+    "regions",
+    "services",
+    "how_it_works",
+    "service_areas",
+    "recent_jobs",
+    "faq",
+    "suburb_delivery_links",
+    "related_links",
+    "quote_form",
+    "final_cta",
+    "schema",
+    "floating_quote_bar"
+  ]
 }
