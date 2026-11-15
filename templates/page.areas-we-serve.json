@@ -757,7 +757,7 @@
         "suburb_delivery_links_block": {
           "type": "related-links",
           "settings": {
-            "heading": "<h2>Furniture Delivery by Suburb</h2>",
+            "heading": "<h2>Furniture Delivery and Man and Van by Suburb</h2>",
             "color_scheme": "scheme-1",
             "padding-block-start": 48,
             "padding-block-end": 24
@@ -858,6 +858,118 @@
                 "url": "/pages/furniture-delivery-richmond",
                 "description": "Furniture delivery in Richmond, Windsor and the Hawkesbury."
               }
+            },
+            "link-furniture-delivery-parramatta": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Parramatta",
+                "url": "/pages/furniture-delivery-parramatta",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Parramatta."
+              }
+            },
+            "link-furniture-delivery-liverpool": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Liverpool",
+                "url": "/pages/furniture-delivery-liverpool",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Liverpool."
+              }
+            },
+            "link-furniture-delivery-castle-hill": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Castle Hill",
+                "url": "/pages/furniture-delivery-castle-hill",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Castle Hill."
+              }
+            },
+            "link-furniture-delivery-bankstown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Bankstown",
+                "url": "/pages/furniture-delivery-bankstown",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Bankstown."
+              }
+            },
+            "link-furniture-delivery-fairfield": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Fairfield",
+                "url": "/pages/furniture-delivery-fairfield",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Fairfield."
+              }
+            },
+            "link-furniture-delivery-baulkham-hills": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Baulkham Hills",
+                "url": "/pages/furniture-delivery-baulkham-hills",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Baulkham Hills."
+              }
+            },
+            "link-furniture-delivery-marsden-park": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Marsden Park",
+                "url": "/pages/furniture-delivery-marsden-park",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Marsden Park."
+              }
+            },
+            "link-furniture-delivery-kellyville": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Kellyville",
+                "url": "/pages/furniture-delivery-kellyville",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Kellyville."
+              }
+            },
+            "link-man-and-van-mount-druitt": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Mount Druitt",
+                "url": "/pages/man-and-van-mount-druitt",
+                "description": "Small moves, single items and Marketplace pickups in Mount Druitt."
+              }
+            },
+            "link-man-and-van-penrith": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Penrith",
+                "url": "/pages/man-and-van-penrith",
+                "description": "Small moves, single items and Marketplace pickups in Penrith."
+              }
+            },
+            "link-man-and-van-rooty-hill": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Rooty Hill",
+                "url": "/pages/man-and-van-rooty-hill",
+                "description": "Small moves, single items and Marketplace pickups in Rooty Hill."
+              }
+            },
+            "link-man-and-van-seven-hills": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Seven Hills",
+                "url": "/pages/man-and-van-seven-hills",
+                "description": "Small moves, single items and Marketplace pickups in Seven Hills."
+              }
+            },
+            "link-man-and-van-st-marys": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van St Marys",
+                "url": "/pages/man-and-van-st-marys",
+                "description": "Small moves, single items and Marketplace pickups in St Marys."
+              }
+            },
+            "link-man-and-van-campbelltown": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Man and Van Campbelltown",
+                "url": "/pages/man-and-van-campbelltown",
+                "description": "Small moves, single items and Marketplace pickups in Campbelltown."
+              }
             }
           },
           "block_order": [
@@ -872,7 +984,21 @@
             "link-fd-merrylands",
             "link-fd-campbelltown",
             "link-fd-rouse-hill",
-            "link-fd-richmond"
+            "link-fd-richmond",
+            "link-furniture-delivery-parramatta",
+            "link-furniture-delivery-liverpool",
+            "link-furniture-delivery-castle-hill",
+            "link-furniture-delivery-bankstown",
+            "link-furniture-delivery-fairfield",
+            "link-furniture-delivery-baulkham-hills",
+            "link-furniture-delivery-marsden-park",
+            "link-furniture-delivery-kellyville",
+            "link-man-and-van-mount-druitt",
+            "link-man-and-van-penrith",
+            "link-man-and-van-rooty-hill",
+            "link-man-and-van-seven-hills",
+            "link-man-and-van-st-marys",
+            "link-man-and-van-campbelltown"
           ]
         }
       },
