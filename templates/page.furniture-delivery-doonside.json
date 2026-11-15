@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Sofa & couch delivery in Doonside",
+            "text": "Lounges, modular couches and recliners wrapped in blankets and delivered to the room you choose.",
+            "url": "/pages/couch-delivery-sydney",
+            "link_label": "Couch delivery"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & washing machines",
+            "text": "Moved upright on a trolley and placed where you need them.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace pickups in Doonside",
+            "text": "Bought something on Marketplace or Gumtree? We collect from the seller and bring it home.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Westpoint Blacktown pickups",
+            "text": "Furniture collected from Westpoint Blacktown and Bunnings Minchinbury and delivered to your door.",
+            "url": "/pages/furniture-store-delivery-sydney",
+            "link_label": "Store pickup"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Single furniture items",
+            "text": "A bed, wardrobe or dining table moved, with no minimum size.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Small moves",
+            "text": "A few rooms or a handful of items moved in one trip.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small moves"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "store",
+            "title": "Westpoint Blacktown runs",
+            "text": "Buy in store or online, send us the pickup details, and we collect and deliver it."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Tell us about access",
+            "text": "Bungarribee has new streets, so send a map pin if your address is new."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Fast routes in and out",
+            "text": "The M7, M4 and Great Western Highway get us to Doonside quickly."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and lifts",
+            "text": "Tell us about stairs or a lift and we bring straps, blankets and a trolley."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you do sofa and couch delivery in Doonside?",
+            "answer": "<p>Yes. We deliver sofas, couches, modular lounges and recliners in Doonside every week. Each piece is wrapped in blankets and carried to the room you choose.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does furniture delivery cost in Doonside?",
+            "answer": "<p>It depends on the items, stairs or lift, the distance and timing. We give you a fixed price before we start, with no hourly surprises.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you pick up from Marketplace or Gumtree in Doonside?",
+            "answer": "<p>Yes. Send us the seller's suburb and a photo of the item. We collect it and deliver it to your door, often the same day.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you do same-day delivery?",
+            "answer": "<p>Often, yes. It depends on that day's schedule, so call or send your request early.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you deliver fridges and washing machines?",
+            "answer": "<p>Yes. Fridges are moved upright on a trolley and washing machines are strapped in so they arrive safely.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my furniture insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped and strapped in the van.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Couch Delivery Sydney",
+            "url": "/pages/couch-delivery-sydney",
+            "description": "Sofas, lounges and modular couches."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Fridge & Washer Delivery",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "description": "Appliances moved upright and safely."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Man and Van Blacktown",
+            "url": "/pages/man-and-van-blacktown",
+            "description": "Another local page near you."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Doonside",
+        "phone": "0469 717 535",
+        "service_type": "Furniture pickup and delivery, sofa and couch delivery, fridge and washing machine delivery",
+        "parent_label": "Areas We Serve",
+        "parent_url": "/pages/areas-we-serve",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking same-day bookings in Doonside now",
+        "live_closed": "Book now for tomorrow in Doonside",
+        "live_fallback": "Same-day pickups available in Doonside",
+        "kicker": "Doonside · Western Sydney",
+        "heading": "Furniture Delivery <em>Doonside</em>",
+        "subheading": "Sofa, couch, bed and fridge delivery in Doonside. Store, Marketplace and Gumtree pickups across Woodcroft, Glendenning and nearby. Fixed prices, careful handling, often same day.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/titan-sofa-truck-loading.webp",
+        "hero_alt": "Titan Express movers loading a blanket-wrapped sofa for furniture delivery in Doonside",
+        "hero_badge_title": "Doonside furniture delivery",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What do you need moved?",
+        "intents_heading": "Furniture Delivery Jobs Around Doonside",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "We Know Doonside and the Western Sydney",
+        "local_body": "<p>Doonside has family homes and the newer Bungarribee estate. We deliver sofas, couches, beds, fridges and washing machines here every week, from <strong>Westpoint Blacktown</strong>, Bunnings Minchinbury, Marketplace sellers and private homes.</p><p>With the M7, M4 and Great Western Highway close by, we can reach Doonside quickly from anywhere in Sydney and often fit your job in the same day.</p>",
+        "steps_heading": "Book Furniture Delivery in Doonside in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express furniture delivery job in Doonside",
+        "gallery_1": "shopify://shop_images/mAN_LOADING_THE_aPPLIANCES.png",
+        "gallery_2": "shopify://shop_images/Moving_Service_Sydney.png",
+        "gallery_3": "shopify://shop_images/single-item-delivery-sydney_jpg.jpg",
+        "gallery_4": "shopify://shop_images/Sofa_Removalist.png",
+        "nearby_heading": "Furniture Delivery Near Doonside",
+        "nearby_intro": "We cover Doonside and every suburb around it.",
+        "nearby_suburbs": "Woodcroft, Glendenning, Blacktown, Rooty Hill, Eastern Creek, Bungarribee, Hassall Grove, Plumpton",
+        "price_heading": "What Affects Your Doonside Delivery Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Doonside Furniture Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "Doonside",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Furniture Delivery Doonside Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need furniture delivered in Doonside?",
+        "quick_answer": "<p>Titan Express provides furniture pickup and delivery in Doonside and across Sydney, 7 days a week from 7am to 7pm. We deliver sofas, couches, beds, fridges and washing machines, collect from stores like Westpoint Blacktown and from Marketplace or Gumtree sellers, and give you a fixed price before we start. Call 0469 717 535.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
