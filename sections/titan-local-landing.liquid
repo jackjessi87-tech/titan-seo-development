@@ -438,6 +438,7 @@
           {%- if img != blank -%}
             <figure class="tll-gallery__item">
               {%- assign img_alt = img.alt | default: s.gallery_alt | default: 'Titan Express job photo' -%}
+              {%- if img_alt.size > 90 and s.gallery_alt != blank -%}{%- assign img_alt = s.gallery_alt -%}{%- endif -%}
               {%- if img_alt contains area -%}
                 {%- assign img_alt = img_alt | append: ' (photo ' | append: forloop.index | append: ')' -%}
               {%- else -%}
