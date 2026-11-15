@@ -293,7 +293,10 @@
         "compare_heading": "Man and Van vs a Big Removal Truck",
         "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
         "compare_us_label": "Titan man and van",
-        "compare_them_label": "Big removal truck"
+        "compare_them_label": "Big removal truck",
+        "postcode": "2753",
+        "latitude": "-33.5990",
+        "longitude": "150.7510"
       }
     }
   },

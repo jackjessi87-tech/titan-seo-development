@@ -20,6 +20,11 @@
   assign faqs = section.blocks | where: 'type', 'faq'
   assign links = section.blocks | where: 'type', 'link'
   assign compare_rows = section.blocks | where: 'type', 'compare_row'
+  assign area = s.suburb_name | default: 'Sydney'
+  assign area_q = area | append: ' NSW' | url_param_escape
+  assign alt_tail = ' - ' | append: page.title | append: ', Titan Express'
+  assign page_abs = shop.url | append: page.url
+  assign biz_maps = 'https://maps.google.com/?cid=1568429248109187940'
   assign form_id = 'LocalQuote-' | append: uid
 -%}
 
@@ -256,9 +261,12 @@
           endcase
         -%}
         {%- if hero_asset != blank -%}
-          <img class="tll-hero__img" src="{{ hero_asset | asset_url }}" width="900" height="1120" loading="eager" fetchpriority="high" alt="{{ hero_asset_alt }}">
+          {%- assign hero_alt_final = hero_asset_alt | append: alt_tail -%}
+          <img class="tll-hero__img" src="{{ hero_asset | asset_url }}" width="900" height="1120" loading="eager" fetchpriority="high" alt="{{ hero_alt_final | escape }}">
         {%- elsif s.hero_image != blank -%}
-          {%- assign hero_alt = s.hero_image.alt | default: s.hero_alt -%}
+          {%- assign hero_alt = s.hero_alt | default: s.hero_image.alt | default: page.title -%}
+          {%- unless hero_alt contains area -%}{%- assign hero_alt = hero_alt | append: ' in ' | append: area -%}{%- endunless -%}
+          {%- assign hero_alt_final = hero_alt -%}
           {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
         {%- endif -%}
         <div class="tll-glass tll-hero__badge">
@@ -429,7 +437,8 @@
           {%- assign img = s[key] -%}
           {%- if img != blank -%}
             <figure class="tll-gallery__item">
-              {%- assign img_alt = img.alt | default: s.gallery_alt -%}
+              {%- assign img_alt = img.alt | default: s.gallery_alt | default: 'Titan Express job photo' -%}
+              {%- assign img_alt = img_alt | append: alt_tail | append: ' (' | append: area | append: ' photo ' | append: forloop.index | append: ')' -%}
               {{ img | image_url: width: 640 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw', widths: '320, 480, 640', alt: img_alt }}
             </figure>
           {%- endif -%}
@@ -448,9 +457,41 @@
     <ul class="tll-chips" role="list">
       {%- for sub in nearby -%}
         {%- assign sub_t = sub | strip -%}
-        {%- if sub_t != blank -%}<li>{{ icon_pin }}<span>{{ sub_t }}</span></li>{%- endif -%}
+        {%- if sub_t != blank -%}
+          {%- liquid
+            assign sh = sub_t | handleize
+            assign sub_url = blank
+            assign c1 = 'furniture-delivery-' | append: sh
+            assign c2 = 'man-and-van-' | append: sh
+            assign c3 = 'removalists-' | append: sh
+            if pages[c1].id and c1 != page.handle
+              assign sub_url = pages[c1].url
+            elsif pages[c2].id and c2 != page.handle
+              assign sub_url = pages[c2].url
+            elsif pages[c3].id and c3 != page.handle
+              assign sub_url = pages[c3].url
+            endif
+          -%}
+          <li>{{ icon_pin }}{%- if sub_url != blank -%}<a href="{{ sub_url }}">{{ sub_t }}</a>{%- else -%}<span>{{ sub_t }}</span>{%- endif -%}</li>
+        {%- endif -%}
       {%- endfor -%}
     </ul>
+    {%- liquid
+      assign area_h = area | handleize
+      assign sib_html = ''
+      assign sib_list = 'furniture-delivery-,man-and-van-,removalists-' | split: ','
+      for pre in sib_list
+        assign sh2 = pre | append: area_h
+        if pages[sh2].id and sh2 != page.handle
+          assign sib_html = sib_html | append: '<li><a href="' | append: pages[sh2].url | append: '">' | append: pages[sh2].title | append: '</a></li>'
+        endif
+      endfor
+    -%}
+    {%- if sib_html != '' -%}<p class="tll-lead tll-near__also">More for {{ area }}:</p><ul class="tll-chips" role="list">{{ sib_html }}</ul>{%- endif -%}
+    <div class="tll-map">
+      <iframe title="Map of {{ area | escape }}, NSW, service area for {{ page.title | escape }}" src="https://maps.google.com/maps?q={{ area_q }}&z={% if area == 'Sydney' %}10{% else %}13{% endif %}&output=embed" width="600" height="320" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+    <p class="tll-map__note">Titan Express is based in Punchbowl NSW 2195 and drives to {{ area }} every week. <a href="{{ biz_maps }}" target="_blank" rel="noopener">See us on Google Maps</a>.</p>
   </section>
 
   {%- comment -%} Price factors {%- endcomment -%}
@@ -601,22 +642,72 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+    {%- liquid
+      assign img_main = blank
+      if hero_asset != blank
+        assign img_main = hero_asset | asset_url | prepend: 'https:'
+      elsif s.hero_image != blank
+        assign img_main = s.hero_image | image_url: width: 1200 | prepend: 'https:'
+      endif
+    -%}
+    {
+      "@type": "MovingCompany",
+      "@id": {{ shop.url | append: '/#business' | json }},
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      "telephone": {{ phone_intl | json }},
+      "priceRange": "$$",
+      "address": {"@type": "PostalAddress", "streetAddress": "48 Dudley St", "addressLocality": "Punchbowl", "addressRegion": "NSW", "postalCode": "2195", "addressCountry": "AU"},
+      "hasMap": {{ biz_maps | json }},
+      "sameAs": [{{ biz_maps | json }}]
+    },
+    {
+      "@type": "Place",
+      "@id": {{ page_abs | append: '#area' | json }},
+      "name": {{ area | append: ', NSW' | json }},
+      {%- if s.postcode != blank -%}"address": {"@type": "PostalAddress", "addressLocality": {{ area | json }}, "addressRegion": "NSW", "postalCode": {{ s.postcode | json }}, "addressCountry": "AU"},{%- endif -%}
+      {%- if s.latitude != blank and s.longitude != blank -%}"geo": {"@type": "GeoCoordinates", "latitude": {{ s.latitude | json }}, "longitude": {{ s.longitude | json }}},{%- endif -%}
+      "hasMap": {{ 'https://maps.google.com/maps?q=' | append: area_q | json }},
+      "containedInPlace": {"@type": "AdministrativeArea", "name": "Greater Sydney, NSW"}
+    },
+    {%- if img_main != blank -%}
+    {
+      "@type": "ImageObject",
+      "@id": {{ page_abs | append: '#primaryimage' | json }},
+      "url": {{ img_main | json }},
+      "contentUrl": {{ img_main | json }},
+      "caption": {{ hero_alt_final | json }},
+      "name": {{ hero_alt_final | json }},
+      "contentLocation": {"@id": {{ page_abs | append: '#area' | json }}},
+      "representativeOfPage": true,
+      "creator": {"@id": {{ shop.url | append: '/#business' | json }}},
+      "copyrightHolder": {"@id": {{ shop.url | append: '/#business' | json }}}
+    },
+    {%- endif -%}
     {
       "@type": "Service",
+      "@id": {{ page_abs | append: '#service' | json }},
+      {%- if img_main != blank -%}"image": {"@id": {{ page_abs | append: '#primaryimage' | json }}},{%- endif -%}
       "name": {{ page.title | json }},
       "serviceType": {{ s.service_type | json }},
       "description": {{ s.subheading | json }},
       "url": {{ shop.url | append: page.url | json }},
       "areaServed": [
-        {"@type": "Place", "name": {{ s.suburb_name | append: ', NSW' | json }}}
+        {"@id": {{ page_abs | append: '#area' | json }}}
         {%- for sub in nearby -%}{%- assign sub_t = sub | strip -%}{%- if sub_t != blank -%},{"@type": "Place", "name": {{ sub_t | append: ', NSW' | json }}}{%- endif -%}{%- endfor -%}
       ],
-      "provider": {"@type": "Organization", "name": {{ shop.name | json }}, "url": {{ shop.url | json }}, "telephone": {{ phone_intl | json }}}
+      "provider": {"@id": {{ shop.url | append: '/#business' | json }}},
+      "availableChannel": {"@type": "ServiceChannel", "servicePhone": {"@type": "ContactPoint", "telephone": {{ phone_intl | json }}, "contactType": "bookings", "areaServed": "AU"}, "serviceUrl": {{ page_abs | json }}}
     },
     {
       "@type": "WebPage",
+      "@id": {{ page_abs | json }},
       "name": {{ page.title | json }},
-      "url": {{ shop.url | append: page.url | json }},
+      "url": {{ page_abs | json }},
+      "inLanguage": "en-AU",
+      "about": {"@id": {{ page_abs | append: '#service' | json }}},
+      "contentLocation": {"@id": {{ page_abs | append: '#area' | json }}},
+      {%- if img_main != blank -%}"primaryImageOfPage": {"@id": {{ page_abs | append: '#primaryimage' | json }}},{%- endif -%}
       "description": {{ page.metafields.global.description_tag | default: s.subheading | json }}
     },
     {
@@ -834,6 +925,12 @@
   .tll-chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
   .tll-chips li { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; background: var(--tll-soft); border: 1px solid var(--tll-line); font-weight: 600; color: var(--tll-ink); }
   .tll-chips svg { color: var(--tll-red); width: 1em; height: 1em; }
+  .tll-chips a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .tll-near__also { margin-top: 22px; }
+  .tll-map { margin-top: 22px; border-radius: 16px; overflow: hidden; border: 1px solid var(--tll-line); }
+  .tll-map iframe { display: block; width: 100%; height: 320px; border: 0; }
+  .tll-map__note { margin-top: 10px; font-size: .95rem; color: var(--tll-ink); }
+  .tll-map__note a { color: var(--tll-red); font-weight: 600; }
 
   /* Price panel */
   .tll-price { display: grid; gap: 24px; padding: clamp(24px, 4vw, 48px); border-radius: 28px; color: rgba(255, 255, 255, 0.85); background: radial-gradient(600px 300px at 100% 0%, rgba(47, 123, 255, 0.45), transparent 60%), var(--tll-ink-2); }
@@ -1048,6 +1145,9 @@
   "settings": [
     { "type": "header", "content": "Basics" },
     { "type": "text", "id": "suburb_name", "label": "Suburb or area name", "default": "Castle Hill" },
+    { "type": "text", "id": "postcode", "label": "Postcode (schema)" },
+    { "type": "text", "id": "latitude", "label": "Latitude (schema)" },
+    { "type": "text", "id": "longitude", "label": "Longitude (schema)" },
     { "type": "text", "id": "phone", "label": "Phone number", "default": "0469 717 535" },
     { "type": "text", "id": "service_type", "label": "Service type (schema)", "default": "Furniture removals and delivery" },
     { "type": "text", "id": "parent_label", "label": "Breadcrumb parent label", "default": "Areas We Serve" },
