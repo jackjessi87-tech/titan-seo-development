@@ -438,7 +438,11 @@
           {%- if img != blank -%}
             <figure class="tll-gallery__item">
               {%- assign img_alt = img.alt | default: s.gallery_alt | default: 'Titan Express job photo' -%}
-              {%- assign img_alt = img_alt | append: alt_tail | append: ' (' | append: area | append: ' photo ' | append: forloop.index | append: ')' -%}
+              {%- if img_alt contains area -%}
+                {%- assign img_alt = img_alt | append: ' (photo ' | append: forloop.index | append: ')' -%}
+              {%- else -%}
+                {%- assign img_alt = img_alt | append: alt_tail -%}
+              {%- endif -%}
               {{ img | image_url: width: 640 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw', widths: '320, 480, 640', alt: img_alt }}
             </figure>
           {%- endif -%}
@@ -464,11 +468,11 @@
             assign c1 = 'furniture-delivery-' | append: sh
             assign c2 = 'man-and-van-' | append: sh
             assign c3 = 'removalists-' | append: sh
-            if pages[c1].id and c1 != page.handle
+            if pages[c1].title != blank and c1 != page.handle
               assign sub_url = pages[c1].url
-            elsif pages[c2].id and c2 != page.handle
+            elsif pages[c2].title != blank and c2 != page.handle
               assign sub_url = pages[c2].url
-            elsif pages[c3].id and c3 != page.handle
+            elsif pages[c3].title != blank and c3 != page.handle
               assign sub_url = pages[c3].url
             endif
           -%}
@@ -482,7 +486,7 @@
       assign sib_list = 'furniture-delivery-,man-and-van-,removalists-' | split: ','
       for pre in sib_list
         assign sh2 = pre | append: area_h
-        if pages[sh2].id and sh2 != page.handle
+        if pages[sh2].title != blank and sh2 != page.handle
           assign sib_html = sib_html | append: '<li><a href="' | append: pages[sh2].url | append: '">' | append: pages[sh2].title | append: '</a></li>'
         endif
       endfor
