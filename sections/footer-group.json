@@ -175,11 +175,11 @@
         "social_links_Ew63Kq": {
           "type": "social-links",
           "settings": {
-            "facebook_url": "https://www.facebook.com/",
-            "instagram_url": "https://www.instagram.com/",
-            "youtube_url": "https://www.youtube.com/",
-            "tiktok_url": "https://www.tiktok.com/",
-            "twitter_url": "https://x.com/",
+            "facebook_url": "",
+            "instagram_url": "",
+            "youtube_url": "",
+            "tiktok_url": "",
+            "twitter_url": "",
             "threads_url": "",
             "linkedin_url": "",
             "bluesky_url": "",
@@ -214,113 +214,176 @@
         "service_link_1": {
           "type": "service_link",
           "settings": {
+            "label": "Furniture Delivery Sydney",
+            "url": "/pages/furniture-pickup-delivery-sydney"
+          }
+        },
+        "service_link_2": {
+          "type": "service_link",
+          "settings": {
             "label": "Couch Delivery Sydney",
             "url": "/pages/couch-delivery-sydney"
           }
         },
-        "service_link_2": {
+        "service_link_3": {
           "type": "service_link",
           "settings": {
             "label": "Man and Van Sydney",
             "url": "/pages/man-with-a-van-sydney"
           }
         },
-        "service_link_3": {
-          "type": "service_link",
-          "settings": {
-            "label": "Removalist Sydney",
-            "url": ""
-          }
-        },
         "service_link_4": {
           "type": "service_link",
           "settings": {
-            "label": "Furniture Delivery Sydney",
-            "url": ""
+            "label": "Furniture Removalists Sydney",
+            "url": "/pages/areas-we-serve"
           }
         },
         "service_link_5": {
           "type": "service_link",
           "settings": {
             "label": "Facebook Marketplace Pickup",
-            "url": ""
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney"
           }
         },
         "service_link_6": {
           "type": "service_link",
           "settings": {
-            "label": "Single Item Delivery",
-            "url": ""
+            "label": "Fridge & Washer Delivery",
+            "url": "/pages/fridge-washing-machine-delivery-sydney"
           }
         },
         "service_link_7": {
           "type": "service_link",
           "settings": {
-            "label": "Small Moves",
-            "url": ""
+            "label": "Single Item Delivery",
+            "url": "/pages/single-item-delivery-sydney"
           }
         },
         "service_link_8": {
           "type": "service_link",
           "settings": {
-            "label": "Same-Day Delivery",
-            "url": ""
+            "label": "Small Removals",
+            "url": "/pages/small-removals-sydney"
+          }
+        },
+        "service_link_9": {
+          "type": "service_link",
+          "settings": {
+            "label": "Same-Day Removalists",
+            "url": "/pages/same-day-removalists-sydney"
+          }
+        },
+        "service_link_10": {
+          "type": "service_link",
+          "settings": {
+            "label": "IKEA Pickup & Delivery",
+            "url": "/pages/ikea-pickup-delivery-sydney"
           }
         },
         "area_link_1": {
           "type": "area_link",
           "settings": {
-            "label": "Inner West",
-            "url": ""
+            "label": "Furniture Delivery Parramatta",
+            "url": "/pages/furniture-delivery-parramatta"
           }
         },
         "area_link_2": {
           "type": "area_link",
           "settings": {
-            "label": "Eastern Suburbs",
-            "url": ""
+            "label": "Furniture Delivery Blacktown",
+            "url": "/pages/furniture-delivery-blacktown"
           }
         },
         "area_link_3": {
           "type": "area_link",
           "settings": {
-            "label": "Northern Beaches",
-            "url": ""
+            "label": "Furniture Delivery Penrith",
+            "url": "/pages/furniture-delivery-penrith"
           }
         },
         "area_link_4": {
           "type": "area_link",
           "settings": {
-            "label": "North Shore",
-            "url": ""
+            "label": "Furniture Delivery Liverpool",
+            "url": "/pages/furniture-delivery-liverpool"
           }
         },
         "area_link_5": {
           "type": "area_link",
           "settings": {
-            "label": "Western Sydney",
-            "url": ""
+            "label": "Furniture Delivery Campbelltown",
+            "url": "/pages/furniture-delivery-campbelltown"
           }
         },
         "area_link_6": {
           "type": "area_link",
           "settings": {
-            "label": "Outer West",
-            "url": ""
+            "label": "Furniture Delivery Bankstown",
+            "url": "/pages/furniture-delivery-bankstown"
           }
         },
         "area_link_7": {
           "type": "area_link",
           "settings": {
-            "label": "Southern Sydney",
-            "url": ""
+            "label": "Furniture Delivery Fairfield",
+            "url": "/pages/furniture-delivery-fairfield"
           }
         },
         "area_link_8": {
           "type": "area_link",
           "settings": {
-            "label": "Hills District",
-            "url": ""
+            "label": "Furniture Delivery Castle Hill",
+            "url": "/pages/furniture-delivery-castle-hill"
+          }
+        },
+        "area_link_9": {
+          "type": "area_link",
+          "settings": {
+            "label": "Man and Van Mount Druitt",
+            "url": "/pages/man-and-van-mount-druitt"
+          }
+        },
+        "area_link_10": {
+          "type": "area_link",
+          "settings": {
+            "label": "Man and Van St Marys",
+            "url": "/pages/man-and-van-st-marys"
+          }
+        },
+        "area_link_11": {
+          "type": "area_link",
+          "settings": {
+            "label": "Removalists Inner West",
+            "url": "/pages/man-and-van-inner-west"
+          }
+        },
+        "area_link_12": {
+          "type": "area_link",
+          "settings": {
+            "label": "Removalists Eastern Suburbs",
+            "url": "/pages/removalists-eastern-suburbs"
+          }
+        },
+        "area_link_13": {
+          "type": "area_link",
+          "settings": {
+            "label": "Removalists Northern Beaches",
+            "url": "/pages/removalists-northern-beaches"
+          }
+        },
+        "area_link_14": {
+          "type": "area_link",
+          "settings": {
+            "label": "Removalists Sutherland Shire",
+            "url": "/pages/removalists-sutherland-shire"
+          }
+        },
+        "area_link_15": {
+          "type": "area_link",
+          "settings": {
+            "label": "All Sydney areas",
+            "url": "/pages/areas-we-serve"
           }
         }
       },
@@ -333,6 +396,8 @@
         "service_link_6",
         "service_link_7",
         "service_link_8",
+        "service_link_9",
+        "service_link_10",
         "area_link_1",
         "area_link_2",
         "area_link_3",
@@ -340,7 +405,14 @@
         "area_link_5",
         "area_link_6",
         "area_link_7",
-        "area_link_8"
+        "area_link_8",
+        "area_link_9",
+        "area_link_10",
+        "area_link_11",
+        "area_link_12",
+        "area_link_13",
+        "area_link_14",
+        "area_link_15"
       ],
       "settings": {
         "brand_name": "Titan Express removalist",

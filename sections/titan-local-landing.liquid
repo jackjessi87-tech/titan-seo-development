@@ -509,6 +509,28 @@
         {%- unless page.url == parts[1] -%}<li><a href="{{ parts[1] }}">{{ parts[0] }} {{ area }}</a></li>{%- endunless -%}
       {%- endfor -%}
     </ul>
+    {%- if area == 'Sydney' -%}
+      {%- assign sub_all = 'Parramatta,Blacktown,Penrith,Liverpool,Campbelltown,Bankstown,Fairfield,Castle Hill,Baulkham Hills,Kellyville,Rouse Hill,Marsden Park,Mount Druitt,St Marys,Rooty Hill,Seven Hills,Doonside,Merrylands,Wetherill Park,Richmond,Chatswood,Lidcombe,Inner West' | split: ',' -%}
+      <h3 class="tll-h3 tll-near__also">Local pages across Sydney</h3>
+      <ul class="tll-chips" role="list">
+        {%- for sn in sub_all -%}
+          {%- liquid
+            assign sh3 = sn | handleize
+            assign u3 = blank
+            assign l3 = 'furniture-delivery-' | append: sh3
+            assign m3 = 'man-and-van-' | append: sh3
+            if pages[l3].title != blank
+              assign u3 = pages[l3].url
+              assign t3 = pages[l3].title
+            elsif pages[m3].title != blank
+              assign u3 = pages[m3].url
+              assign t3 = pages[m3].title
+            endif
+          -%}
+          {%- if u3 != blank -%}<li><a href="{{ u3 }}">{{ t3 }}</a></li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
     <div class="tll-map">
       <iframe title="Map of {{ area | escape }}, NSW, service area for {{ page.title | escape }}" src="https://maps.google.com/maps?q={{ area_q }}&z={% if area == 'Sydney' %}10{% else %}13{% endif %}&output=embed" width="600" height="320" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </div>
