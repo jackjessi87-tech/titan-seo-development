@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges",
+            "text": "Moved upright on a trolley, door taped shut.",
+            "url": "/pages/fridge-movers-sydney",
+            "link_label": "Fridge movers"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Washing machines",
+            "text": "Strapped in and placed in the laundry.",
+            "url": "/pages/washing-machine-delivery-sydney",
+            "link_label": "Washer delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Dryers & dishwashers",
+            "text": "Carried in and put where you need them.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Freezers",
+            "text": "Chest and upright freezers moved safely.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Second hand appliances",
+            "text": "Marketplace whitegoods collected from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store collections",
+            "text": "New appliances collected from the store today.",
+            "url": "/pages/furniture-store-delivery-sydney",
+            "link_label": "Store pickup"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "fridge",
+            "title": "Upright on a trolley",
+            "text": "Fridges travel upright to protect the compressor."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs handled",
+            "text": "Tell us about stairs so we bring the right trolley."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Placed where you want",
+            "text": "Kitchen, laundry or garage."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Anywhere in Sydney",
+            "text": "Store, seller or home, across Sydney."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you deliver fridges and washing machines?",
+            "answer": "<p>Yes. Fridges are moved upright and washers are strapped in so they arrive safely.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you move dishwashers, dryers and freezers?",
+            "answer": "<p>Yes. We move all common household appliances.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you connect the appliance?",
+            "answer": "<p>No. We carry it in and place it. Plumbing, gas and hard-wired electrical connections need a licensed tradesperson.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does appliance delivery cost?",
+            "answer": "<p>It depends on the appliance, stairs and distance. You get a fixed price before we start.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you collect a second hand fridge from Marketplace?",
+            "answer": "<p>Yes. Send the seller's suburb and a photo and we collect it.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it insured?",
+            "answer": "<p>Yes. Your appliance is covered while it's in our care.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Fridge & Washer Delivery",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "description": "Heavy appliances moved upright."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Furniture Store Pickup",
+            "url": "/pages/furniture-store-delivery-sydney",
+            "description": "Store orders collected and delivered."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Appliance and whitegoods pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking appliance jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Taking appliance jobs now",
+        "kicker": "Sydney-wide · Whitegoods moved upright",
+        "heading": "Appliance Delivery <em>Sydney</em>",
+        "subheading": "Fridges, washing machines, dryers, dishwashers and freezers picked up and delivered across Sydney. Moved upright on a trolley, strapped in, placed where you want them.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/titan-sofa-truck-loading.webp",
+        "hero_alt": "Titan Express movers loading a wrapped load for an appliance delivery in Sydney",
+        "hero_badge_title": "Whitegoods, moved upright",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What's your one item?",
+        "intents_heading": "Appliances We Deliver",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "Appliances Need the Right Handling",
+        "local_body": "<p>Fridges should travel upright and washing machines need their drum secured, so we move whitegoods on an appliance trolley and strap them in the van.</p><p>We carry them in and place them where you want them. Connecting plumbing or gas is not included, so have the old appliance disconnected before we arrive.</p>",
+        "steps_heading": "Book Appliance Delivery in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "",
+        "gallery_2": "",
+        "gallery_3": "",
+        "gallery_4": "",
+        "nearby_heading": "Appliance Delivery Across Sydney",
+        "nearby_intro": "We cover every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Appliance Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Appliance Delivery Sydney Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need appliance delivery in Sydney?",
+        "quick_answer": "<p>Titan Express provides appliance and whitegoods pickup and delivery across Sydney, 7 days a week from 7am to 7pm. You get a fixed price before we start. Call 0469 717 535.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

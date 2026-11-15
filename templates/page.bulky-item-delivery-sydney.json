@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "Large sofas & modulars",
+            "text": "Big lounges and modular couches wrapped and carried in.",
+            "url": "/pages/couch-delivery-sydney",
+            "link_label": "Couch delivery"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Wardrobes & drawers",
+            "text": "Tall, heavy pieces moved with straps and a trolley.",
+            "url": "/pages/wardrobe-delivery-sydney",
+            "link_label": "Wardrobe delivery"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Dining tables & desks",
+            "text": "Tables, desks and sideboards moved without scratches.",
+            "url": "/pages/dining-table-delivery-sydney",
+            "link_label": "Table delivery"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Fridges & whitegoods",
+            "text": "Heavy appliances moved upright.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Gym equipment",
+            "text": "Treadmills, bikes and weight benches moved safely.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Bulky Marketplace buys",
+            "text": "Big finds collected from the seller.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "box",
+            "title": "Large van",
+            "text": "Room for big sofas, wardrobes and appliances."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs and lifts",
+            "text": "Tell us about access so we bring the right gear."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "pin",
+            "title": "Carried inside",
+            "text": "Placed in the room you choose, not left at the kerb."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "Anywhere in Sydney",
+            "text": "From the Hills to the Shire and the CBD to Penrith."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you deliver bulky items couriers won't take?",
+            "answer": "<p>Yes. Large and heavy furniture and appliances are our everyday work.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does bulky item delivery cost in Sydney?",
+            "answer": "<p>It depends on the item, the access at each end and the distance. You get a fixed price before we start.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you move gym equipment?",
+            "answer": "<p>Yes. Treadmills, exercise bikes and benches can be moved. Very heavy machines may need to be partly taken apart.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you take items up stairs?",
+            "answer": "<p>Yes. Tell us about the stairs when you book so we bring the right gear.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you do it today?",
+            "answer": "<p>Often, yes. Send your request early and we'll confirm.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it insured?",
+            "answer": "<p>Yes. Your items are covered while they're in our care.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, no minimum job size."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Couch Delivery Sydney",
+            "url": "/pages/couch-delivery-sydney",
+            "description": "Sofas and lounges moved safely."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Fridge & Washer Delivery",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "description": "Heavy appliances moved upright."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Bulky and large item pickup and delivery",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Taking bulky item jobs now",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Taking bulky item jobs now",
+        "kicker": "Sydney-wide · Large and heavy items",
+        "heading": "Bulky Item Delivery <em>Sydney</em>",
+        "subheading": "Large, heavy or awkward items that couriers won't take: sofas, wardrobes, dining tables, fridges and gym gear, picked up and delivered across Sydney for a fixed price.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/titan-sofa-truck-loading.webp",
+        "hero_alt": "Titan Express movers loading a large wrapped sofa for a bulky item delivery in Sydney",
+        "hero_badge_title": "Big, heavy, awkward: no problem",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What's your one item?",
+        "intents_heading": "Bulky Items We Move",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "When a Courier Says It's Too Big",
+        "local_body": "<p>Most parcel couriers have weight and size limits, and furniture is usually over them. We run a large van with blankets, straps and trolleys, so bulky and heavy items are our everyday work.</p><p>Tell us the item, the size if you know it, and any stairs, and you get a fixed price before we start.</p>",
+        "steps_heading": "Book Bulky Item Delivery in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "",
+        "gallery_2": "",
+        "gallery_3": "",
+        "gallery_4": "",
+        "nearby_heading": "Bulky Item Delivery Across Sydney",
+        "nearby_intro": "We cover every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Bulky Item Delivery Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Bulky Item Delivery Sydney Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need bulky item delivery in Sydney?",
+        "quick_answer": "<p>Titan Express provides bulky and large item pickup and delivery across Sydney, 7 days a week from 7am to 7pm. You get a fixed price before we start. Call 0469 717 535.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

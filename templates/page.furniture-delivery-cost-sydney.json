@@ -1,0 +1,303 @@
+{
+  "sections": {
+    "main": {
+      "type": "titan-local-landing",
+      "blocks": {
+        "intent_1": {
+          "type": "intent",
+          "settings": {
+            "icon": "sofa",
+            "title": "One item",
+            "text": "A sofa, bed, table or fridge, from $160.",
+            "url": "/pages/single-item-delivery-sydney",
+            "link_label": "Single item delivery"
+          }
+        },
+        "intent_2": {
+          "type": "intent",
+          "settings": {
+            "icon": "tag",
+            "title": "Marketplace pickup",
+            "text": "Collected from the seller and delivered, from $170.",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "link_label": "Marketplace pickup"
+          }
+        },
+        "intent_3": {
+          "type": "intent",
+          "settings": {
+            "icon": "box",
+            "title": "Several items or a small move",
+            "text": "A few pieces or a room, from $300.",
+            "url": "/pages/small-removals-sydney",
+            "link_label": "Small removals"
+          }
+        },
+        "intent_4": {
+          "type": "intent",
+          "settings": {
+            "icon": "fridge",
+            "title": "Appliances",
+            "text": "Fridges and washers moved upright.",
+            "url": "/pages/fridge-washing-machine-delivery-sydney",
+            "link_label": "Appliance delivery"
+          }
+        },
+        "intent_5": {
+          "type": "intent",
+          "settings": {
+            "icon": "store",
+            "title": "Store pickups",
+            "text": "Store orders collected and delivered.",
+            "url": "/pages/furniture-store-delivery-sydney",
+            "link_label": "Store pickup"
+          }
+        },
+        "intent_6": {
+          "type": "intent",
+          "settings": {
+            "icon": "bolt",
+            "title": "Same-day jobs",
+            "text": "Need it today? Ask for a same-day price.",
+            "url": "/pages/same-day-furniture-delivery-sydney",
+            "link_label": "Same-day delivery"
+          }
+        },
+        "point_1": {
+          "type": "local_point",
+          "settings": {
+            "icon": "box",
+            "title": "The items",
+            "text": "Size, weight and how many pieces."
+          }
+        },
+        "point_2": {
+          "type": "local_point",
+          "settings": {
+            "icon": "stairs",
+            "title": "Stairs or lift",
+            "text": "Each flight of stairs adds handling time."
+          }
+        },
+        "point_3": {
+          "type": "local_point",
+          "settings": {
+            "icon": "route",
+            "title": "The distance",
+            "text": "Pickup and delivery suburbs."
+          }
+        },
+        "point_4": {
+          "type": "local_point",
+          "settings": {
+            "icon": "bolt",
+            "title": "The timing",
+            "text": "Same-day or booked ahead."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does furniture delivery cost in Sydney?",
+            "answer": "<p>Single items start from $160, Marketplace pickup and delivery from $170, and several items or a small move from $300. Your exact price is fixed before we start.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you charge by the hour?",
+            "answer": "<p>No. You get one fixed price for the job, with no hourly surprises.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "What makes the price go up?",
+            "answer": "<p>More or larger items, stairs without a lift, longer distances and very short notice can all change the price.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I get an exact price?",
+            "answer": "<p>Send the pickup and delivery suburbs, a photo of the items and details of any stairs. We reply with a fixed price, usually within minutes.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Is there a call-out fee?",
+            "answer": "<p>No. The fixed price is the price you pay.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "How can I keep the cost down?",
+            "answer": "<p>Have the items ready near the door and a hand at each end for very heavy pieces.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Single Item Delivery Sydney",
+            "url": "/pages/single-item-delivery-sydney",
+            "description": "One item, no minimum job size."
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Marketplace Pickup & Delivery",
+            "url": "/pages/facebook-marketplace-pickup-delivery-sydney",
+            "description": "We collect from the seller for you."
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Small Removals Sydney",
+            "url": "/pages/small-removals-sydney",
+            "description": "A few rooms or a handful of items."
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Areas We Serve",
+            "url": "/pages/areas-we-serve",
+            "description": "Every Sydney region we cover."
+          }
+        },
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Best for",
+            "ours": "One item, a few pieces or a small move",
+            "theirs": "Full house moves"
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "How you're charged",
+            "ours": "Fixed price agreed before we start",
+            "theirs": "Often by the hour, sometimes with call-out or travel fees"
+          }
+        },
+        "compare_3": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Same-day jobs",
+            "ours": "Often available, 7 days, 7am to 7pm",
+            "theirs": "Usually booked days or weeks ahead"
+          }
+        },
+        "compare_4": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Marketplace and store pickups",
+            "ours": "We collect from the seller or store for you",
+            "theirs": "Not always offered"
+          }
+        },
+        "compare_5": {
+          "type": "compare_row",
+          "settings": {
+            "feature": "Crew and gear",
+            "ours": "Two movers, blankets, straps and trolleys",
+            "theirs": "Bigger crew and truck than small jobs need"
+          }
+        }
+      },
+      "block_order": [
+        "intent_1",
+        "intent_2",
+        "intent_3",
+        "intent_4",
+        "intent_5",
+        "intent_6",
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "compare_1",
+        "compare_2",
+        "compare_3",
+        "compare_4",
+        "compare_5"
+      ],
+      "settings": {
+        "suburb_name": "Sydney",
+        "phone": "0469 717 535",
+        "service_type": "Furniture delivery pricing and quotes",
+        "parent_label": "",
+        "parent_url": "",
+        "open_hour": 7,
+        "close_hour": 19,
+        "live_open": "Quoting now, reply in minutes",
+        "live_closed": "Book now for tomorrow",
+        "live_fallback": "Quoting now, reply in minutes",
+        "kicker": "Sydney-wide · Fixed prices, no hourly rate",
+        "heading": "Furniture Delivery Cost <em>Sydney</em>",
+        "subheading": "How much does furniture delivery cost in Sydney? Single items start from $160, Marketplace pickups from $170 and small moves from $300. Get your exact fixed price in minutes.",
+        "rating_text": "5.0 on Google · 59 reviews",
+        "trust_1": "Fully insured",
+        "trust_2": "Same-day available",
+        "hero_image": "shopify://shop_images/titan-sofa-truck-loading.webp",
+        "hero_alt": "Titan Express movers loading a wrapped sofa, fixed-price furniture delivery in Sydney",
+        "hero_badge_title": "Fixed price before we start",
+        "hero_badge_text": "Two movers · blankets · trolleys · straps",
+        "intents_eyebrow": "What's your one item?",
+        "intents_heading": "Get a Price for Your Job",
+        "local_eyebrow": "Local know-how",
+        "local_heading": "What Goes Into Your Price",
+        "local_body": "<p>We don't charge by the hour. Your price is fixed before we start and depends on four things: what you're moving, the stairs or lift at each end, the distance between the two suburbs, and the timing.</p><p>Send the two suburbs, a photo of the items and any stairs, and we reply with a fixed price, usually within minutes during business hours.</p>",
+        "steps_heading": "Book Furniture Delivery Cost in 3 Steps",
+        "step_1_title": "Send your details",
+        "step_1_text": "Pickup and delivery suburbs, what you're moving, and any stairs or lift. About a minute.",
+        "step_2_title": "Get a fixed price",
+        "step_2_text": "We reply fast with a fixed price and the earliest time we can be there.",
+        "step_3_title": "We move it carefully",
+        "step_3_text": "Wrapped, strapped and placed in the room you choose.",
+        "gallery_heading": "Our Vans at Work",
+        "gallery_alt": "Titan Express pickup and delivery job in Sydney",
+        "gallery_1": "",
+        "gallery_2": "",
+        "gallery_3": "",
+        "gallery_4": "",
+        "nearby_heading": "Furniture Delivery Cost Across Sydney",
+        "nearby_intro": "We cover every Sydney region.",
+        "nearby_suburbs": "Inner West, Eastern Suburbs, Sydney CBD, North Shore, Northern Beaches, Hills District, Parramatta, Western Sydney, Canterbury-Bankstown, South West Sydney, St George, Sutherland Shire",
+        "price_heading": "What Affects Your Price?",
+        "price_text": "No hourly guesswork. We quote a fixed price based on four things. The more you tell us, the more accurate your price.",
+        "form_heading": "Get Your Furniture Delivery Cost Price",
+        "form_text": "Three quick steps. We reply with a fixed price, usually fast during business hours.",
+        "default_pickup": "",
+        "form_button": "Get my fixed price",
+        "form_success": "Thanks! We'll text or email your fixed price shortly. Need it moved today? Call us now.",
+        "faq_heading": "Furniture Delivery Cost Sydney Questions",
+        "links_heading": "More Ways We Can Help",
+        "quick_answer_heading": "Need furniture delivery cost in Sydney?",
+        "quick_answer": "<p>Titan Express provides furniture delivery pricing and quotes across Sydney, 7 days a week from 7am to 7pm. You get a fixed price before we start. Call 0469 717 535.</p>",
+        "compare_heading": "Man and Van vs a Big Removal Truck",
+        "compare_intro": "Not every job needs a full removal truck. Here's how a man and van compares for smaller jobs.",
+        "compare_us_label": "Titan man and van",
+        "compare_them_label": "Big removal truck"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
