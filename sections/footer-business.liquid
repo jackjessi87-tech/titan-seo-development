@@ -85,16 +85,10 @@
         <nav class="titan-footer__col" aria-label="{{ section.settings.services_heading | escape }}">
           <h2 class="titan-footer__heading">{{ section.settings.services_heading | escape }}</h2>
           <ul class="titan-footer__list" role="list">
-            {%- for block in service_link_blocks -%}
-              {%- if block.settings.label != blank -%}
-                <li class="titan-footer__list-item" {{ block.shopify_attributes }}>
-                  {%- if block.settings.url != blank -%}
-                    <a class="titan-footer__link" href="{{ block.settings.url }}">{{ block.settings.label | escape }}</a>
-                  {%- else -%}
-                    <span class="titan-footer__link titan-footer__link--static">{{ block.settings.label | escape }}</span>
-                  {%- endif -%}
-                </li>
-              {%- endif -%}
+            {%- assign ft_service_links = 'Furniture Delivery Sydney|/pages/furniture-pickup-delivery-sydney,Couch Delivery Sydney|/pages/couch-delivery-sydney,Man and Van Sydney|/pages/man-with-a-van-sydney,Furniture Removalists Sydney|/pages/areas-we-serve,Facebook Marketplace Pickup|/pages/facebook-marketplace-pickup-delivery-sydney,Fridge & Washer Delivery|/pages/fridge-washing-machine-delivery-sydney,Single Item Delivery|/pages/single-item-delivery-sydney,Small Removals|/pages/small-removals-sydney,Same-Day Removalists|/pages/same-day-removalists-sydney,IKEA Pickup & Delivery|/pages/ikea-pickup-delivery-sydney' | split: ',' -%}
+            {%- for it in ft_service_links -%}
+              {%- assign itp = it | split: '|' -%}
+              <li class="titan-footer__list-item"><a class="titan-footer__link" href="{{ itp[1] }}">{{ itp[0] | escape }}</a></li>
             {%- endfor -%}
           </ul>
         </nav>
@@ -105,16 +99,10 @@
         <nav class="titan-footer__col" aria-label="{{ section.settings.areas_heading | escape }}">
           <h2 class="titan-footer__heading">{{ section.settings.areas_heading | escape }}</h2>
           <ul class="titan-footer__list" role="list">
-            {%- for block in area_link_blocks -%}
-              {%- if block.settings.label != blank -%}
-                <li class="titan-footer__list-item" {{ block.shopify_attributes }}>
-                  {%- if block.settings.url != blank -%}
-                    <a class="titan-footer__link" href="{{ block.settings.url }}">{{ block.settings.label | escape }}</a>
-                  {%- else -%}
-                    <span class="titan-footer__link titan-footer__link--static">{{ block.settings.label | escape }}</span>
-                  {%- endif -%}
-                </li>
-              {%- endif -%}
+            {%- assign ft_area_links = 'Furniture Delivery Parramatta|/pages/furniture-delivery-parramatta,Furniture Delivery Blacktown|/pages/furniture-delivery-blacktown,Furniture Delivery Penrith|/pages/furniture-delivery-penrith,Furniture Delivery Liverpool|/pages/furniture-delivery-liverpool,Furniture Delivery Campbelltown|/pages/furniture-delivery-campbelltown,Furniture Delivery Bankstown|/pages/furniture-delivery-bankstown,Furniture Delivery Fairfield|/pages/furniture-delivery-fairfield,Furniture Delivery Castle Hill|/pages/furniture-delivery-castle-hill,Man and Van Mount Druitt|/pages/man-and-van-mount-druitt,Man and Van St Marys|/pages/man-and-van-st-marys,Removalists Inner West|/pages/man-and-van-inner-west,Removalists Eastern Suburbs|/pages/removalists-eastern-suburbs,Removalists Northern Beaches|/pages/removalists-northern-beaches,Removalists Sutherland Shire|/pages/removalists-sutherland-shire,All Sydney areas|/pages/areas-we-serve' | split: ',' -%}
+            {%- for it in ft_area_links -%}
+              {%- assign itp = it | split: '|' -%}
+              <li class="titan-footer__list-item"><a class="titan-footer__link" href="{{ itp[1] }}">{{ itp[0] | escape }}</a></li>
             {%- endfor -%}
           </ul>
         </nav>
