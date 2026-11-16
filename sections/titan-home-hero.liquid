@@ -238,10 +238,10 @@
       <div class="tho-msg__body">
         <p class="tho-msg__bubble">Hi! What would you like moved? Tap an option and send us a text. We'll reply with a fixed price.</p>
         <div class="tho-msg__chips">
-          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for two movers and a truck. Items: ' | url_encode }}">Two men &amp; truck</a>
-          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for one man and a mini truck. Item: ' | url_encode }}">One man &amp; mini truck</a>
-          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a Marketplace pickup. From suburb: ' | url_encode }}">Marketplace pickup</a>
-          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a fridge or washing machine moved. From: ' | url_encode }}">Fridge or washer</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for two movers and a truck. Items: ' | url_encode | replace: '+', '%20' }}">Two men &amp; truck</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for one man and a mini truck. Item: ' | url_encode | replace: '+', '%20' }}">One man &amp; mini truck</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a Marketplace pickup. From suburb: ' | url_encode | replace: '+', '%20' }}">Marketplace pickup</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a fridge or washing machine moved. From: ' | url_encode | replace: '+', '%20' }}">Fridge or washer</a>
         </div>
         <a class="tho-msg__form" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-tho-msg-close>Or use the 60-second quote form</a>
       </div>
