@@ -213,7 +213,8 @@
   .thq-label { margin:14px 0 8px; font-size:.86rem; font-weight:800; }
   .thq-label small { font-weight:600; color:var(--thq-muted); }
   .thq-seg { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-  .thq-seg label { position:relative; cursor:pointer; }
+  .thq-seg label { position:relative; display:block; cursor:pointer; }
+  .thq-seg span { box-sizing:border-box; width:100%; }
   .thq-seg input { position:absolute; opacity:0; pointer-events:none; }
   .thq-seg span { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; height:100%; min-height:46px; padding:10px 8px; border-radius:14px; border:1.5px solid var(--thq-line); background:#fff; text-align:center; transition:border-color .15s, background .15s, box-shadow .15s; }
   .thq-seg span svg { width:24px; height:24px; color:var(--thq-b); }
