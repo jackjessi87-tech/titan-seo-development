@@ -13,7 +13,19 @@
   assign phone_digits = s.phone | remove: ' '
   assign phone_intl = phone_digits | remove_first: '0' | prepend: '+61'
   assign chips = section.blocks | where: 'type', 'chip'
+  assign hero_img = images['titan-two-movers-truck-hero.webp']
+  assign hero_alt = 'Two Titan Express movers loading a wrapped sofa into a furniture truck in Sydney'
+  if hero_img == blank
+    assign hero_img = s.image
+    assign hero_alt = s.image_alt
+  endif
+  assign sms_base = 'sms:' | append: phone_intl | append: '?&body='
 -%}
+{%- capture i_chat -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>{%- endcapture -%}
+{%- capture i_bolt -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>{%- endcapture -%}
+{%- capture i_close -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>{%- endcapture -%}
+{%- capture i_stairs -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h5v-5h5v-5h5V5h3"/></svg>{%- endcapture -%}
+{%- capture i_wallet -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h13v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M16 14h.01"/></svg>{%- endcapture -%}
 
 {%- capture i_phone -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>{%- endcapture -%}
 {%- capture i_arrow -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>{%- endcapture -%}
@@ -78,8 +90,8 @@
     </svg>
     <div class="tho-wrap tho-hero__grid">
       <div class="tho-photo">
-        {%- if s.image -%}
-          {{ s.image | image_url: width: 1000 | image_tag: alt: s.image_alt, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1000', sizes: '(min-width: 1180px) 540px, (min-width: 900px) 45vw, calc(100vw - 32px)', class: 'tho-img' }}
+        {%- if hero_img != blank -%}
+          {{ hero_img | image_url: width: 1024 | image_tag: alt: hero_alt, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1024', sizes: '(min-width: 1180px) 540px, (min-width: 900px) 45vw, calc(100vw - 32px)', class: 'tho-img' }}
         {%- endif -%}
         <span class="tho-tag"><i></i>Same-day pickups today</span>
         <span class="tho-ribbon">Insured &middot; Wrapped &middot; Strapped</span>
@@ -87,8 +99,12 @@
       </div>
       <div class="tho-copy">
         <h1 class="tho-h1">{{ s.heading }}</h1>
-        <p class="tho-sub">Couch, bed, fridge or a Marketplace buy. Call now for a fixed price on the phone and two movers at your door, often today.</p>
+        <p class="tho-sub">Couch, bed, fridge or a Marketplace buy. Book <strong>two movers and a truck</strong> for heavy jobs and stairs, or save with a <strong>budget one man and mini truck</strong>. Fixed price, often today.</p>
         {{ callbtn | replace: '%%LBL%%', 'Call for furniture pickup &amp; delivery' }}
+        <div class="tho-ctas2">
+          <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}">{{ i_bolt }}<span>Quick quote in 60 seconds</span></a>
+          <a class="tho-qbtn tho-qbtn--ghost" href="#tho-crew">{{ i_team }}<span>Compare crews</span></a>
+        </div>
         <p class="tho-for">Couches &middot; beds &middot; fridges &middot; Marketplace &amp; IKEA pickups &middot; small moves</p>
         <ul class="tho-proof">
           <li><span class="tho-stars">{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}</span><strong>5.0</strong>&nbsp;&middot; 59 Google reviews</li>
@@ -104,6 +120,82 @@
       <span>{{ i_phone }}CALL {{ s.phone }} FOR FURNITURE PICKUP &amp; DELIVERY</span><span>MAN &amp; VAN</span><span>MARKETPLACE &amp; IKEA PICKUPS</span><span>SAME-DAY PICKUP</span><span>FIXED PRICE ON THE PHONE</span><span>2 MOVERS + LARGE VAN</span><span>7 DAYS</span>
     {%- endfor -%}
   </div></div>
+
+  <section class="tho-sec tho-crew" id="tho-crew">
+    <div class="tho-wrap">
+      <p class="tho-eyebrow">Choose your crew</p>
+      <h2 class="tho-h2">Two movers for the heavy lifting, or one man to save</h2>
+      <p class="tho-crew__lead">Every job is a fixed price agreed before we start. No hourly meter, no surprises.</p>
+      <div class="tho-crew__grid">
+        <article class="tho-card tho-card--pro">
+          <span class="tho-card__badge">Most popular</span>
+          <svg class="tho-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <defs><linearGradient id="tho-gt-{{ section.id }}" x1="0" x2="1"><stop offset="0" stop-color="#2f7bff"/><stop offset="1" stop-color="#0b5cff"/></linearGradient></defs>
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="150" y="40" width="120" height="96" rx="8" fill="url(#tho-gt-{{ section.id }})"/>
+            <path d="M270 70h22l18 24v42h-40z" fill="#0a2a63"/><rect x="278" y="78" width="16" height="14" rx="2" fill="#8fb4ff"/>
+            <rect x="160" y="52" width="100" height="6" rx="3" fill="rgba(255,255,255,.35)"/>
+            <circle cx="182" cy="140" r="13" fill="#071a3d"/><circle cx="182" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="282" cy="140" r="13" fill="#071a3d"/><circle cx="282" cy="140" r="5" fill="#cfe0ff"/>
+            <rect class="tho-ill__sofa" x="58" y="92" width="92" height="30" rx="8" fill="#5a6782"/><rect class="tho-ill__sofa" x="62" y="82" width="84" height="16" rx="6" fill="#6b7896"/>
+            <path class="tho-ill__sofa" d="M58 92h92" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-dasharray="4 6"/>
+            <g fill="#0b5cff"><circle cx="40" cy="70" r="9"/><rect x="31" y="80" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="32" y="112" width="6" height="34" rx="3"/><rect x="42" y="112" width="6" height="34" rx="3"/></g>
+            <g fill="#0b5cff"><circle cx="166" cy="70" r="9"/><rect x="157" y="80" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="158" y="112" width="6" height="34" rx="3"/><rect x="168" y="112" width="6" height="34" rx="3"/></g>
+            <path d="M48 92l12 4M158 92l-10 4" stroke="#0b5cff" stroke-width="6" stroke-linecap="round"/>
+            <g class="tho-ill__spark" fill="#fbbf24"><circle cx="100" cy="58" r="3"/><circle cx="118" cy="46" r="2"/><circle cx="84" cy="44" r="2"/></g>
+          </svg>
+          <h3 class="tho-card__t">{{ i_team }}Two Men &amp; Truck</h3>
+          <p class="tho-card__d">Full service for heavy and bulky furniture. We do all the lifting, stairs and tight corners.</p>
+          <ul class="tho-card__l">
+            <li>{{ i_check }}Sofas, fridges, wardrobes and full rooms</li>
+            <li>{{ i_check }}Stairs, lifts and narrow hallways handled</li>
+            <li>{{ i_check }}Blankets, straps and trolleys included</li>
+            <li>{{ i_check }}You don't lift a thing</li>
+          </ul>
+          <div class="tho-card__foot">
+            <span class="tho-card__price">Fixed price<small>quoted in minutes</small></span>
+            <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-crew="Two men and truck">{{ i_bolt }}<span>Quote two movers</span></a>
+          </div>
+        </article>
+        <article class="tho-card tho-card--eco">
+          <span class="tho-card__badge tho-card__badge--eco">Budget friendly</span>
+          <svg class="tho-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="140" y="62" width="104" height="74" rx="8" fill="#0a2a63"/>
+            <path d="M244 82h20l16 20v34h-36z" fill="#2f7bff"/><rect x="250" y="88" width="14" height="12" rx="2" fill="#cfe0ff"/>
+            <rect x="150" y="72" width="84" height="5" rx="2.5" fill="rgba(255,255,255,.25)"/>
+            <circle cx="170" cy="140" r="12" fill="#071a3d"/><circle cx="170" cy="140" r="4.5" fill="#cfe0ff"/>
+            <circle cx="258" cy="140" r="12" fill="#071a3d"/><circle cx="258" cy="140" r="4.5" fill="#cfe0ff"/>
+            <rect x="74" y="72" width="40" height="64" rx="4" fill="#e8f0ff" stroke="#8fb4ff" stroke-width="2"/>
+            <path d="M74 96h40M84 80v8M84 102v10" stroke="#8fb4ff" stroke-width="2" stroke-linecap="round"/>
+            <path class="tho-ill__trolley" d="M66 60v82h52" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="118" cy="146" r="6" fill="#071a3d"/>
+            <g fill="#2f7bff"><circle cx="44" cy="74" r="9"/><rect x="35" y="84" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="36" y="116" width="6" height="30" rx="3"/><rect x="46" y="116" width="6" height="30" rx="3"/></g>
+            <path d="M52 94l14-30" stroke="#2f7bff" stroke-width="6" stroke-linecap="round"/>
+            <g fill="#22c55e"><circle cx="292" cy="40" r="16" opacity=".15"/><path d="M285 40l5 5 9-10" stroke="#22c55e" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </svg>
+          <h3 class="tho-card__t">{{ i_truck }}One Man &amp; Mini Truck</h3>
+          <p class="tho-card__d">The budget option for single items and light loads. You give a hand at both ends and save.</p>
+          <ul class="tho-card__l">
+            <li>{{ i_check }}Single items and Marketplace pickups</li>
+            <li>{{ i_check }}Appliances moved upright on a trolley</li>
+            <li>{{ i_check }}Ground floor or a helper on the stairs</li>
+            <li>{{ i_check }}Lowest price for small jobs</li>
+          </ul>
+          <div class="tho-card__foot">
+            <span class="tho-card__price">From $160<small>single item, local</small></span>
+            <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-crew="One man and mini truck">{{ i_bolt }}<span>Quote one man</span></a>
+          </div>
+        </article>
+      </div>
+      <ul class="tho-crew__trust">
+        <li>{{ i_shield }}Fully insured</li><li>{{ i_clock }}7 days, 7am to 7pm</li><li>{{ i_wallet }}Fixed price, pay on the day</li><li>{{ i_stairs }}Stairs and lifts no problem</li>
+      </ul>
+    </div>
+  </section>
 
   <section class="tho-sec">
     <div class="tho-wrap">
@@ -135,6 +227,47 @@
       <div class="tho-steps__cta">{{ callbtn | replace: '%%LBL%%', 'Call to book your furniture pickup' }}</div>
     </div>
   </section>
+
+  <div class="tho-msg" data-tho-msg>
+    <div class="tho-msg__panel" id="tho-msg-panel-{{ section.id }}" role="dialog" aria-label="Message us for a quote" hidden>
+      <div class="tho-msg__head">
+        <span class="tho-msg__av">{{ i_truck }}<i></i></span>
+        <div><strong>Titan Express</strong><small>Typically replies in minutes</small></div>
+        <button type="button" class="tho-msg__x" data-tho-msg-close aria-label="Close">{{ i_close }}</button>
+      </div>
+      <div class="tho-msg__body">
+        <p class="tho-msg__bubble">Hi! What would you like moved? Tap an option and send us a text. We'll reply with a fixed price.</p>
+        <div class="tho-msg__chips">
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for two movers and a truck. Items: ' | url_encode }}">Two men &amp; truck</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for one man and a mini truck. Item: ' | url_encode }}">One man &amp; mini truck</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a Marketplace pickup. From suburb: ' | url_encode }}">Marketplace pickup</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a fridge or washing machine moved. From: ' | url_encode }}">Fridge or washer</a>
+        </div>
+        <a class="tho-msg__form" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-tho-msg-close>Or use the 60-second quote form</a>
+      </div>
+    </div>
+    <button type="button" class="tho-msg__btn" data-tho-msg-open aria-expanded="false" aria-controls="tho-msg-panel-{{ section.id }}">{{ i_chat }}<span>Message us for a quote</span><i class="tho-msg__dot"></i></button>
+  </div>
+  <script>
+    (function () {
+      var w = document.querySelector('[data-tho-msg]'); if (!w) return;
+      var p = w.querySelector('.tho-msg__panel'), b = w.querySelector('[data-tho-msg-open]');
+      function set(open) { p.hidden = !open; b.setAttribute('aria-expanded', open); w.classList.toggle('is-open', open); }
+      b.addEventListener('click', function () { set(p.hidden); });
+      w.querySelectorAll('[data-tho-msg-close]').forEach(function (x) { x.addEventListener('click', function () { set(false); }); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+      setTimeout(function () { w.classList.add('is-nudge'); }, 6000);
+      document.querySelectorAll('[data-crew]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          var crew = a.getAttribute('data-crew');
+          setTimeout(function () {
+            var f = document.querySelector('#instant-quote textarea, #instant-quote [name*="body" i], #instant-quote [name*="Body"]');
+            if (f && !f.value) { f.value = crew + ': '; }
+          }, 400);
+        });
+      });
+    })();
+  </script>
 
   <div class="tho-callbar">{{ callbtn | replace: '%%LBL%%', 'Furniture pickup &amp; delivery &middot; tap to call' }}</div>
 </div>
@@ -242,6 +375,69 @@
   .tho-steps__cta .tho-call__lbl { color:#a9c3f5; }
   .tho-steps__cta .tho-thin { color:#fff; }
 
+  /* Hero quote buttons */
+  .tho-sub strong { color:#fff; }
+  .tho-ctas2 { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .tho-qbtn { display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:14px; background:linear-gradient(135deg, #22c55e, #16a34a); color:#fff; font-weight:800; font-size:.95rem; text-decoration:none; box-shadow:0 10px 24px rgba(22,163,74,.35); transition:transform .2s, box-shadow .2s; }
+  .tho-qbtn:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(22,163,74,.45); }
+  .tho-qbtn svg { width:18px; height:18px; fill:currentColor; stroke:none; }
+  .tho-qbtn--ghost { background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.35); box-shadow:none; }
+  .tho-qbtn--ghost svg { fill:none; stroke:currentColor; }
+
+  /* Choose your crew */
+  .tho-crew { background:linear-gradient(180deg, #f5f8ff, #fff); }
+  .tho-crew__lead { margin:-6px 0 20px; color:var(--mut); font-size:1rem; }
+  .tho-crew__grid { display:grid; gap:16px; }
+  .tho-card { position:relative; display:flex; flex-direction:column; padding:20px; border-radius:22px; background:#fff; border:1px solid var(--line); box-shadow:0 18px 44px rgba(11,40,99,.08); overflow:hidden; transition:transform .25s, box-shadow .25s; }
+  .tho-card:hover { transform:translateY(-4px); box-shadow:0 26px 60px rgba(11,40,99,.14); }
+  .tho-card--pro { border:2px solid var(--b6); background:linear-gradient(180deg, #fff, #f5f8ff); }
+  .tho-card--pro::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, var(--b5), var(--b6)); }
+  .tho-card--eco::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, #22c55e, #16a34a); }
+  .tho-card__badge { position:absolute; top:16px; right:16px; padding:5px 12px; border-radius:999px; background:var(--b6); color:#fff; font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+  .tho-card__badge--eco { background:#16a34a; }
+  .tho .tho-ill { display:block; width:100%; height:auto; max-height:170px; margin:6px 0 10px; stroke:none; }
+  .tho-ill__sofa { animation:tho-lift 3.2s ease-in-out infinite; }
+  @keyframes tho-lift { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+  .tho-ill__spark circle { animation:tho-twinkle 2.2s ease-in-out infinite; } .tho-ill__spark circle:nth-child(2) { animation-delay:.6s; } .tho-ill__spark circle:nth-child(3) { animation-delay:1.2s; }
+  @keyframes tho-twinkle { 0%,100% { opacity:.2; } 50% { opacity:1; } }
+  .tho-card__t { display:flex; align-items:center; gap:10px; margin:0 0 6px; font-size:1.3rem; font-weight:900; color:var(--b9); }
+  .tho-card__t svg { width:26px; height:26px; padding:5px; box-sizing:content-box; border-radius:10px; background:var(--b1); color:var(--b6); }
+  .tho-card--eco .tho-card__t svg { background:#dcfce7; color:#16a34a; }
+  .tho-card__d { margin:0 0 12px; color:var(--mut); line-height:1.5; }
+  .tho-card__l { display:grid; gap:7px; list-style:none; padding:0; margin:0 0 18px; }
+  .tho-card__l li { display:flex; gap:8px; align-items:flex-start; font-weight:600; font-size:.93rem; color:var(--ink); }
+  .tho-card__l svg { flex:0 0 18px; width:18px; height:18px; stroke-width:3; color:var(--b6); margin-top:1px; }
+  .tho-card--eco .tho-card__l svg { color:#16a34a; }
+  .tho-card__foot { margin-top:auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding-top:14px; border-top:1px dashed var(--line); }
+  .tho-card__price { display:flex; flex-direction:column; font-size:1.35rem; font-weight:900; color:var(--b9); line-height:1.1; }
+  .tho-card__price small { font-size:.75rem; font-weight:600; color:var(--mut); }
+  .tho-card--pro .tho-qbtn { background:linear-gradient(135deg, var(--b5), var(--b6)); box-shadow:0 10px 24px rgba(11,92,255,.3); }
+  .tho-crew__trust { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; list-style:none; padding:0; margin:20px 0 0; }
+  .tho-crew__trust li { display:flex; align-items:center; gap:8px; padding:12px; border-radius:14px; background:#fff; border:1px solid var(--line); font-weight:700; font-size:.88rem; color:var(--b9); }
+  .tho-crew__trust svg { flex:0 0 20px; width:20px; height:20px; color:var(--b6); }
+
+  /* Message-us bubble (Google Ads style) */
+  .tho-msg { position:fixed; right:16px; bottom:96px; z-index:70; display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
+  .tho-msg__btn { position:relative; display:inline-flex; align-items:center; gap:9px; padding:12px 18px 12px 14px; border:0; border-radius:999px; background:linear-gradient(135deg, #1a73e8, #0b5cff); color:#fff; font:800 .92rem Inter, sans-serif; cursor:pointer; box-shadow:0 14px 34px rgba(11,92,255,.45); }
+  .tho-msg__btn svg { width:22px; height:22px; }
+  .tho-msg__dot { position:absolute; top:6px; right:8px; width:10px; height:10px; border-radius:50%; background:#22c55e; border:2px solid #fff; animation:tho-pulse 2s infinite; }
+  .tho-msg.is-nudge:not(.is-open) .tho-msg__btn { animation:tho-bob 1.4s ease-in-out 3; }
+  @keyframes tho-bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+  .tho-msg__panel { width:min(340px, calc(100vw - 32px)); border-radius:20px; background:#fff; box-shadow:0 30px 70px rgba(7,26,61,.35); overflow:hidden; border:1px solid var(--line); }
+  .tho-msg__panel[hidden] { display:none; }
+  .tho-msg__head { display:flex; align-items:center; gap:10px; padding:14px; background:linear-gradient(135deg, var(--b8), var(--b9)); color:#fff; }
+  .tho-msg__head strong { display:block; font-size:.98rem; } .tho-msg__head small { color:#a9c3f5; font-size:.76rem; }
+  .tho-msg__av { position:relative; display:grid; place-items:center; flex:0 0 40px; height:40px; border-radius:50%; background:#fff; color:var(--b6); }
+  .tho-msg__av svg { width:22px; height:22px; } .tho-msg__av i { position:absolute; right:0; bottom:0; width:10px; height:10px; border-radius:50%; background:#22c55e; border:2px solid #fff; }
+  .tho-msg__x { margin-left:auto; display:grid; place-items:center; width:32px; height:32px; border:0; border-radius:50%; background:rgba(255,255,255,.12); color:#fff; cursor:pointer; }
+  .tho-msg__x svg { width:16px; height:16px; }
+  .tho-msg__body { padding:14px; background:var(--b0); }
+  .tho-msg__bubble { margin:0 0 12px; padding:12px 14px; border-radius:4px 16px 16px 16px; background:#fff; border:1px solid var(--line); font-size:.92rem; line-height:1.45; color:var(--ink); }
+  .tho-msg__chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .tho-msg__chips a { padding:9px 13px; border-radius:999px; background:#fff; border:1.5px solid var(--b6); color:var(--b6); font-weight:800; font-size:.85rem; text-decoration:none; transition:background .2s, color .2s; }
+  .tho-msg__chips a:hover { background:var(--b6); color:#fff; }
+  .tho-msg__form { display:block; margin-top:12px; font-size:.84rem; font-weight:700; color:var(--b6); text-align:center; }
+
   /* Sticky phone call bar (phones only) */
   .tho-callbar { position:fixed; left:0; right:0; bottom:0; z-index:60; padding:8px 12px calc(8px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.96); border-top:1px solid var(--line); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
   .tho-callbar .tho-call { max-width:none; padding:8px 16px 8px 8px; background:var(--b6); box-shadow:0 8px 22px rgba(11,92,255,.35); }
@@ -262,6 +458,10 @@
     .tho-hero__grid { grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
     .tho-photo { order:2; aspect-ratio:4/3.4; box-shadow:0 40px 80px rgba(0,0,0,.4); }
     .tho-jobs { grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; }
+    .tho-crew__grid { grid-template-columns:1fr 1fr; gap:24px; }
+    .tho-card { padding:28px; }
+    .tho-crew__trust { grid-template-columns:repeat(4, 1fr); }
+    .tho-msg { bottom:24px; right:24px; }
     .tho-steps { grid-template-columns:repeat(3, 1fr); }
     .tho-sec { padding:60px 0; }
     .tho-callbar { display:none; }
@@ -269,6 +469,7 @@
   }
   @media (max-width: 380px) { .tho-call__num { font-size:1.25rem; } .tho-call__lbl { font-size:.74rem; } }
   @media (max-width: 340px) { .tho-hcall span { display:none; } }
+  @media (max-width: 480px) { .tho-msg__btn span { display:none; } .tho-msg__btn { padding:14px; } }
   @media (prefers-reduced-motion: reduce) {
     .tho *, .tho *::before, .tho *::after { animation:none !important; transition:none !important; }
   }
