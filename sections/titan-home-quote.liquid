@@ -202,7 +202,7 @@
     }
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { ph.textContent = EX[0]; } else { tick(); }
     body.addEventListener('focus', function () { ph.textContent = ''; });
-    var KW = [['Sofa / lounge', /sofa|couch|lounge|modular|recliner|chaise/i], ['Bed & mattress', /beds?|bed ?frame|bedhead|mattress|ensemble/i], ['Fridge', /fridge|freezer/i], ['Washer / dryer', /wash|dryer|laundry/i], ['Table & chairs', /table|chair|desk/i], ['Wardrobe / drawers', /wardrobe|drawer|dresser|cabinet|tallboy|bookcase|shelf/i], ['Boxes', /box|bag|carton/i], ['Marketplace item', /marketplace|gumtree|facebook/i]];
+    var KW = [['Sofa / lounge', /sofa|couch|lounge|modular|recliner|chaise/i], ['Bed & mattress', /\bbeds?\b|bed ?frame|bedhead|mattress|ensemble/i], ['Fridge', /fridge|freezer/i], ['Washer / dryer', /wash|dryer|laundry/i], ['Table & chairs', /table|chair|desk/i], ['Wardrobe / drawers', /wardrobe|drawer|dresser|cabinet|tallboy|bookcase|shelf/i], ['Boxes', /box|bag|carton/i], ['Marketplace item', /marketplace|gumtree|facebook/i]];
     function detect() {
       var v = body.value, found = [];
       KW.forEach(function (k) {
