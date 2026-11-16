@@ -240,8 +240,8 @@
         var r = sec.getBoundingClientRect(), h = window.innerHeight || document.documentElement.clientHeight;
         document.documentElement.classList.toggle('thq-in-view', r.top < h * 0.8 && r.bottom > h * 0.2);
       }
-      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
-      window.addEventListener('scroll', onScroll, { passive: true });
+      function onScroll() { if (!ticking) { ticking = true; setTimeout(check, 60); } }
+      document.addEventListener('scroll', onScroll, { passive: true, capture: true });
       window.addEventListener('resize', onScroll);
       card.addEventListener('focusin', check);
       check();
