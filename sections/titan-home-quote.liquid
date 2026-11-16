@@ -28,6 +28,7 @@
       <aside class="thq-live" data-thq-live aria-live="polite">
         <p class="thq-live__t">Your job</p>
         <ul>
+          <li><span>Move</span><b data-sum="type">A few items</b></li>
           <li><span>Crew</span><b data-sum="crew">Two men &amp; truck</b></li>
           <li><span>Items</span><b data-sum="items">Tap what you're moving</b></li>
           <li><span>Route</span><b data-sum="route">Pickup → Delivery</b></li>
@@ -56,6 +57,32 @@
           <fieldset class="thq-step is-active" data-step="1">
             <legend class="thq-legend"><span class="thq-n">1</span>Your job</legend>
 
+            <p class="thq-label">What kind of move?</p>
+            <div class="thq-types" data-thq-types>
+              <label><input type="radio" name="contact[move_type]" value="House or unit move"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg><b>House or unit move</b><small>Removalists</small></span></label>
+              <label><input type="radio" name="contact[move_type]" value="A few items" checked><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg><b>A few items</b><small>Small move</small></span></label>
+              <label><input type="radio" name="contact[move_type]" value="Single item delivery"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg><b>Single item</b><small>Delivery</small></span></label>
+              <label><input type="radio" name="contact[move_type]" value="Marketplace or store pickup"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><b>Pickup &amp; deliver</b><small>Marketplace, store</small></span></label>
+            </div>
+
+            <div class="thq-beds" data-thq-beds>
+              <p class="thq-label">How many bedrooms?</p>
+              <div class="thq-seg thq-seg--sm">
+                {%- assign beds = 'Studio,1 bed,2 beds,3 beds,4+ beds' | split: ',' -%}
+                {%- for b in beds -%}<label><input type="radio" name="contact[bedrooms]" value="{{ b }}"><span><b>{{ b }}</b></span></label>{%- endfor -%}
+              </div>
+            </div>
+
+            <div class="thq-smart">
+              <label class="thq-smart__lbl" for="thq-desc-{{ uid }}">Tell us what needs moving</label>
+              <div class="thq-smart__box">
+                <svg class="thq-smart__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+                <textarea id="thq-desc-{{ uid }}" name="contact[body]" rows="3" data-thq-body aria-describedby="thq-desc-tip-{{ uid }}"></textarea>
+                <span class="thq-smart__ph" data-thq-ph aria-hidden="true"></span>
+              </div>
+              <p class="thq-smart__tip" id="thq-desc-tip-{{ uid }}" data-thq-detected>Type it your way. We'll pick out the items for you.</p>
+            </div>
+
             <p class="thq-label">Who do you need?</p>
             <div class="thq-seg thq-seg--crew">
               <label><input type="radio" name="contact[crew]" value="Two men and truck" checked><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="7" r="3"/><circle cx="16" cy="7" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M12 20c0-3.3 1.8-6 4-6s6 2.7 6 6"/></svg><b>Two men &amp; truck</b><small>Heavy items, stairs</small></span></label>
@@ -63,7 +90,7 @@
               <label><input type="radio" name="contact[crew]" value="Not sure, please advise"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5h.01"/></svg><b>Not sure</b><small>We'll advise</small></span></label>
             </div>
 
-            <p class="thq-label">What are you moving? <small>Tap all that apply</small></p>
+            <p class="thq-label">Quick add <small>Tap anything else that's coming</small></p>
             <div class="thq-chips" data-thq-chips>
               {%- assign items = 'Sofa / lounge,Bed & mattress,Fridge,Washer / dryer,Table & chairs,Wardrobe / drawers,Boxes,Marketplace item,Other' | split: ',' -%}
               {%- for it in items -%}<button type="button" class="thq-chip" aria-pressed="false" data-item="{{ it }}">{{ it }}</button>{%- endfor -%}
@@ -89,8 +116,6 @@
             </div>
             <label class="thq-field thq-date" data-thq-date><span>Date</span><input type="date" name="contact[preferred_date]"></label>
 
-            <label class="thq-field"><span>Anything else? <small>(optional)</small></span>
-              <textarea name="contact[body]" rows="2" placeholder="e.g. 3-seater from Marketplace, seller on 2nd floor" data-thq-body></textarea></label>
             <button type="button" class="thq-btn thq-btn--primary" data-next>Next: where to send your price <span aria-hidden="true">→</span></button>
           </fieldset>
 
@@ -139,6 +164,8 @@
       var w = radio('when'); var dt = q('[name="contact[preferred_date]"]').value;
       sum('when', w === 'Pick a date' ? (dt || 'Pick a date') : w);
       card.classList.toggle('show-date', w === 'Pick a date');
+      var mt = radio('move_type'); card.classList.toggle('is-house', mt === 'House or unit move');
+      sum('type', mt + (mt === 'House or unit move' && radio('bedrooms') ? ' · ' + radio('bedrooms') : ''));
       sum('price', crew.indexOf('One man') === 0 ? 'One man & mini truck: from $160, fixed price sent in minutes' : crew.indexOf('Two') === 0 ? 'Two movers: fixed price sent in minutes' : "We'll suggest the right crew and price");
     }
     function show(i) {
@@ -161,12 +188,49 @@
       if (e.target.closest('[data-next]')) { if (ok(cur)) { show(cur + 1); var f1 = steps[cur].querySelector('input'); if (f1) f1.focus({ preventScroll: true }); } }
       if (e.target.closest('[data-back]')) show(cur - 1);
     });
+    var body = q('[data-thq-body]'), ph = card.querySelector('[data-thq-ph]'), det = card.querySelector('[data-thq-detected]');
+    var EX = ['3 bedroom house move from Bankstown to Parramatta, fridge and washer too', 'Just a 3-seater sofa I bought on Marketplace', 'Queen bed, mattress and a wardrobe, second floor no lift', 'IKEA order to collect from Tempe, 6 boxes and a desk', 'Fridge and washing machine to my new unit tomorrow'];
+    var ei = 0, ci = 0, del = false, typer = null;
+    function tick() {
+      if (body.value || document.activeElement === body) { ph.textContent = ''; typer = setTimeout(tick, 600); return; }
+      var s = EX[ei];
+      ci += del ? -1 : 1; ph.textContent = s.slice(0, ci);
+      var wait = del ? 18 : 45;
+      if (!del && ci >= s.length) { del = true; wait = 1700; }
+      if (del && ci <= 0) { del = false; ei = (ei + 1) % EX.length; wait = 350; }
+      typer = setTimeout(tick, wait);
+    }
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { ph.textContent = EX[0]; } else { tick(); }
+    body.addEventListener('focus', function () { ph.textContent = ''; });
+    var KW = [['Sofa / lounge', /sofa|couch|lounge|modular|recliner|chaise/i], ['Bed & mattress', /bed|mattress|ensemble/i], ['Fridge', /fridge|freezer/i], ['Washer / dryer', /wash|dryer|laundry/i], ['Table & chairs', /table|chair|desk/i], ['Wardrobe / drawers', /wardrobe|drawer|dresser|cabinet|tallboy|bookcase|shelf/i], ['Boxes', /box|bag|carton/i], ['Marketplace item', /marketplace|gumtree|facebook/i]];
+    function detect() {
+      var v = body.value, found = [];
+      KW.forEach(function (k) {
+        var chip = card.querySelector('[data-item="' + k[0] + '"]');
+        if (k[1].test(v)) { found.push(k[0]); if (chip && chip.getAttribute('aria-pressed') !== 'true') { chip.setAttribute('aria-pressed', 'true'); chip.dataset.auto = '1'; picked.push(k[0]); } }
+        else if (chip && chip.dataset.auto === '1') { chip.setAttribute('aria-pressed', 'false'); delete chip.dataset.auto; picked = picked.filter(function (x) { return x !== k[0]; }); }
+      });
+      var house = /\b(\d|one|two|three|four)\s*(bed|bedroom|br)\b|house|unit move|apartment move|whole|full move|shifting/i.test(v);
+      if (house) { var hm = q('input[name="contact[move_type]"][value="House or unit move"]'); if (hm && !hm.checked && !body.dataset.typeTouched) { hm.checked = true; } }
+      det.innerHTML = found.length ? 'Spotted: <b>' + found.join('</b> · <b>') + '</b>' : "Type it your way. We'll pick out the items for you.";
+      det.classList.toggle('is-on', found.length > 0);
+    }
+    body.addEventListener('input', function () { detect(); refresh(); });
+    card.querySelectorAll('input[name="contact[move_type]"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        body.dataset.typeTouched = '1';
+        var heavy = r.value === 'House or unit move';
+        var crew = q('input[name="contact[crew]"][value="' + (heavy ? 'Two men and truck' : (r.value === 'Single item delivery' ? 'One man and mini truck' : radio('crew'))) + '"]');
+        if (crew) crew.checked = true;
+        refresh();
+      });
+    });
     form.addEventListener('input', refresh);
     form.addEventListener('change', refresh);
     form.addEventListener('submit', function () {
       var b = q('[data-thq-body]');
-      var head = 'Crew: ' + radio('crew') + (picked.length ? ' | Items: ' + picked.join(', ') : '');
-      if (b.value.indexOf('Crew:') !== 0) b.value = head + (b.value ? ' | Notes: ' + b.value : '');
+      var head = 'Move: ' + radio('move_type') + (radio('bedrooms') && radio('move_type') === 'House or unit move' ? ' (' + radio('bedrooms') + ')' : '') + ' | Crew: ' + radio('crew') + (picked.length ? ' | Items: ' + picked.join(', ') : '');
+      if (b.value.indexOf('Move:') !== 0) b.value = head + (b.value ? ' | Customer wrote: ' + b.value : '');
     });
     refresh(); show(0);
   })();
@@ -222,6 +286,30 @@
   .thq-seg input:checked + span { border-color:var(--thq-b); background:#eef4ff; box-shadow:0 0 0 3px rgba(11,92,255,.12); }
   .thq-seg input:focus-visible + span { outline:2px solid var(--thq-b); outline-offset:2px; }
   .thq-seg--sm { grid-template-columns:repeat(auto-fit, minmax(92px, 1fr)); }
+  .thq-types { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+  .thq-types label { position:relative; display:block; cursor:pointer; }
+  .thq-types input { position:absolute; opacity:0; pointer-events:none; }
+  .thq-types span { box-sizing:border-box; width:100%; height:100%; display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:10px; align-items:center; padding:12px; border-radius:16px; border:1.5px solid var(--thq-line); background:#fff; transition:all .15s; }
+  .thq-types svg { grid-row:1 / span 2; width:36px; height:36px; padding:7px; box-sizing:border-box; border-radius:12px; background:#eef4ff; color:var(--thq-b); }
+  .thq-types b { font-size:.9rem; line-height:1.2; } .thq-types small { font-size:.74rem; color:var(--thq-muted); font-weight:600; }
+  .thq-types input:checked + span { border-color:var(--thq-b); background:#eef4ff; box-shadow:0 0 0 3px rgba(11,92,255,.12); }
+  .thq-types input:checked + span svg { background:var(--thq-grad); color:#fff; }
+  .thq-types input:focus-visible + span { outline:2px solid var(--thq-b); outline-offset:2px; }
+  .thq-beds { display:none; } .thq-card.is-house .thq-beds, .thq-card:not(.is-js) .thq-beds { display:block; }
+  .thq-smart { margin-top:14px; }
+  .thq-smart__lbl { display:block; margin:0 0 8px; font-size:.95rem; font-weight:900; }
+  .thq-smart__box { position:relative; border-radius:18px; padding:2px; background:linear-gradient(135deg,#2f7bff,#22c55e,#0b5cff); background-size:200% 200%; animation:thq-glow 6s ease infinite; }
+  @keyframes thq-glow { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+  .thq-smart__box textarea { display:block; width:100%; box-sizing:border-box; min-height:104px; padding:16px 16px 16px 46px; border:0; border-radius:16px; background:#fff; font:inherit; font-size:16px; line-height:1.5; color:var(--thq-ink); resize:vertical; }
+  .thq-smart__box textarea:focus { outline:none; box-shadow:0 0 0 4px rgba(11,92,255,.15); }
+  .thq-smart__ic { position:absolute; left:16px; top:18px; width:20px; height:20px; color:var(--thq-b); z-index:1; pointer-events:none; }
+  .thq-smart__ph { position:absolute; left:48px; right:16px; top:18px; color:#8a97b3; font-size:16px; line-height:1.5; pointer-events:none; }
+  .thq-smart__ph::after { content:""; display:inline-block; width:2px; height:1.1em; margin-left:2px; vertical-align:-2px; background:var(--thq-b); animation:thq-caret 1s steps(1) infinite; }
+  .thq-smart__ph:empty::after { display:none; }
+  @keyframes thq-caret { 50% { opacity:0; } }
+  .thq-smart__tip { margin:8px 2px 0; font-size:.82rem; color:var(--thq-muted); font-weight:600; }
+  .thq-smart__tip.is-on { color:var(--thq-g); }
+  .thq-smart__tip b { color:var(--thq-ink); }
   .thq-chips { display:flex; flex-wrap:wrap; gap:8px; }
   .thq-chip { padding:9px 14px; border-radius:999px; border:1.5px solid var(--thq-line); background:#fff; color:var(--thq-ink); font:inherit; font-weight:700; font-size:.86rem; cursor:pointer; transition:all .15s; }
   .thq-chip[aria-pressed="true"] { background:var(--thq-b); border-color:var(--thq-b); color:#fff; box-shadow:0 6px 14px rgba(11,92,255,.25); }
