@@ -44,6 +44,19 @@
 
 {%- capture i_bed -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V6M3 13h18v5M21 13a3 3 0 0 0-3-3h-8v3"/><circle cx="7" cy="10" r="1.8"/></svg>{%- endcapture -%}
 {%- capture i_home -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></svg>{%- endcapture -%}
+{%- comment -%} Duotone removalist icons: soft fill (.d), bold strokes, one accent (.a) {%- endcomment -%}
+{%- capture j_sofa -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M9 22v-5a6 6 0 0 1 6-6h18a6 6 0 0 1 6 6v5"/><path class="d" d="M5 26a4 4 0 0 1 8 0v4h22v-4a4 4 0 0 1 8 0v8a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M9 22v-5a6 6 0 0 1 6-6h18a6 6 0 0 1 6 6v5M5 26a4 4 0 0 1 8 0v4h22v-4a4 4 0 0 1 8 0v8a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4zM10 38v3M38 38v3"/><path class="a" d="M2 15h4M1 20h3"/></svg>{%- endcapture -%}
+{%- capture j_tag -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M8 10h16l16 16-14 14L8 24z"/><path d="M8 10h16l16 16-14 14L8 24zM24 10l-4-4"/><circle class="a" cx="16" cy="18" r="2.5"/><path class="a" d="M24 30l6-6"/><path d="M34 40h10M39 35v10"/></svg>{%- endcapture -%}
+{%- capture j_store -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M8 20h32v20H8z"/><path d="M6 18l3-10h30l3 10M6 18a6 6 0 0 0 12 0 6 6 0 0 0 12 0 6 6 0 0 0 12 0M8 22v18h32V22"/><path class="d" d="M20 40v-9h8v9"/><path d="M20 40v-9h8v9"/><path class="a" d="M14 8l-1 10M34 8l1 10"/></svg>{%- endcapture -%}
+{%- capture j_box -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M24 6 40 14v20l-16 8-16-8V14z"/><path d="M24 6 40 14v20l-16 8-16-8V14zM8 14l16 8 16-8M24 22v20"/><path class="a" d="M16 10l16 8v6"/></svg>{%- endcapture -%}
+{%- capture j_fridge -%}<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="d" x="13" y="4" width="20" height="34" rx="3"/><rect x="13" y="4" width="20" height="34" rx="3"/><path d="M13 17h20M18 9v4M18 22v6"/><path class="a" d="M37 10v30h-8M33 44a2.5 2.5 0 1 0 0-.01"/><circle class="a" cx="33" cy="42" r="2.5"/></svg>{%- endcapture -%}
+{%- capture j_bed -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M6 26h36v10H6z"/><path d="M6 12v28M6 26h36v14M42 26a6 6 0 0 0-6-6H20v6"/><circle class="d" cx="13" cy="20" r="4"/><circle cx="13" cy="20" r="4"/><path class="a" d="M24 10h4l-4 5h4M31 6h3l-3 4h3"/></svg>{%- endcapture -%}
+{%- capture j_truck -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M6 12h22v20H6zM28 18h8l6 7v7H28z"/><path d="M6 12h22v20H6zM28 18h8l6 7v7H28"/><circle cx="14" cy="35" r="4"/><circle cx="34" cy="35" r="4"/><path class="a" d="M1 18h3M0 24h4M2 30h2"/><path d="M12 20h10M12 25h6"/></svg>{%- endcapture -%}
+{%- capture j_home -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M8 22 24 8l16 14v18H8z"/><path d="M4 24 24 7l20 17M8 21v19h32V21"/><rect class="d" x="18" y="26" width="12" height="10" rx="1"/><rect x="18" y="26" width="12" height="10" rx="1"/><path class="a" d="M18 31h12M24 26v-3"/></svg>{%- endcapture -%}
+{%- capture j_shield -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M24 4 39 10v12c0 11-15 20-15 20S9 33 9 22V10z"/><path d="M24 4 39 10v12c0 11-15 20-15 20S9 33 9 22V10z"/><path class="a" d="m17 24 5 5 9-10"/></svg>{%- endcapture -%}
+{%- capture j_clock -%}<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="d" cx="24" cy="25" r="17"/><circle cx="24" cy="25" r="17"/><path class="a" d="M24 15v10l7 5"/><path d="M19 4h10M24 4v4"/></svg>{%- endcapture -%}
+{%- capture j_wallet -%}<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="d" x="5" y="13" width="38" height="28" rx="5"/><rect x="5" y="13" width="38" height="28" rx="5"/><path d="M10 13l20-7 4 7"/><path class="d" d="M31 22h12v10H31a5 5 0 0 1 0-10z"/><path d="M31 22h12v10H31a5 5 0 0 1 0-10z"/><circle class="a" cx="32" cy="27" r="2"/></svg>{%- endcapture -%}
+{%- capture j_stairs -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M5 42h10v-9h9v-9h9v-9h10v27z"/><path d="M5 42h10v-9h9v-9h9v-9h10"/><path class="a" d="M10 26l6-6M16 20h-5M16 20v5"/></svg>{%- endcapture -%}
 {%- capture i_thin -%}<svg class="tho-thin" viewBox="0 0 30 14" aria-hidden="true"><path d="M1 7h27M22 1l6 6-6 6"/></svg>{%- endcapture -%}
 {%- capture digits -%}{%- assign chars = s.phone | split: '' -%}{%- for c in chars -%}{%- if c == ' ' -%}&nbsp;{%- else -%}<span style="animation-delay:{{ forloop.index0 | times: 0.09 }}s">{{ c }}</span>{%- endif -%}{%- endfor -%}{%- endcapture -%}
 {%- capture callbtn -%}<a class="tho-call tho-shine" href="tel:{{ phone_intl }}"><span class="tho-ringer">{{ i_phone }}</span><span class="tho-call__txt"><span class="tho-call__lbl">%%LBL%%</span><span class="tho-call__num" aria-label="{{ s.phone }}">{{ digits }}</span></span>{{ i_thin }}</a>{%- endcapture -%}
@@ -192,7 +205,7 @@
         </article>
       </div>
       <ul class="tho-crew__trust">
-        <li>{{ i_shield }}Fully insured</li><li>{{ i_clock }}7 days, 7am to 7pm</li><li>{{ i_wallet }}Fixed price, pay on the day</li><li>{{ i_stairs }}Stairs and lifts no problem</li>
+        <li><span class="tho-ti">{{ j_shield }}</span>Fully insured</li><li><span class="tho-ti">{{ j_clock }}</span>7 days, 7am to 7pm</li><li><span class="tho-ti">{{ j_wallet }}</span>Fixed price, pay on the day</li><li><span class="tho-ti">{{ j_stairs }}</span>Stairs and lifts no problem</li>
       </ul>
     </div>
   </section>
@@ -202,14 +215,14 @@
       <p class="tho-eyebrow">Pick your job</p>
       <h2 class="tho-h2">What do you need moved?</h2>
       <ul class="tho-jobs">
-          <li><a class="tho-job" href="/pages/couch-delivery-sydney"><span class="tho-job__ic">{{ i_sofa }}</span><span class="tho-job__t">Couch &amp; sofa</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/facebook-marketplace-pickup-delivery-sydney"><span class="tho-job__ic">{{ i_tag }}</span><span class="tho-job__t">Marketplace pickup</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/ikea-pickup-delivery-sydney"><span class="tho-job__ic">{{ i_store }}</span><span class="tho-job__t">IKEA &amp; Bunnings</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/single-item-delivery-sydney"><span class="tho-job__ic">{{ i_box }}</span><span class="tho-job__t">Single item</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/fridge-washing-machine-delivery-sydney"><span class="tho-job__ic">{{ i_fridge }}</span><span class="tho-job__t">Fridge &amp; washer</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/bed-mattress-delivery-sydney"><span class="tho-job__ic">{{ i_bed }}</span><span class="tho-job__t">Bed &amp; mattress</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/man-with-a-van-sydney"><span class="tho-job__ic">{{ i_truck }}</span><span class="tho-job__t">Man and van</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/small-removals-sydney"><span class="tho-job__ic">{{ i_home }}</span><span class="tho-job__t">Small removals</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/couch-delivery-sydney"><span class="tho-job__ic">{{ j_sofa }}</span><span class="tho-job__t">Couch &amp; sofa</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/facebook-marketplace-pickup-delivery-sydney"><span class="tho-job__ic">{{ j_tag }}</span><span class="tho-job__t">Marketplace pickup</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/ikea-pickup-delivery-sydney"><span class="tho-job__ic">{{ j_store }}</span><span class="tho-job__t">IKEA &amp; Bunnings</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/single-item-delivery-sydney"><span class="tho-job__ic">{{ j_box }}</span><span class="tho-job__t">Single item</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/fridge-washing-machine-delivery-sydney"><span class="tho-job__ic">{{ j_fridge }}</span><span class="tho-job__t">Fridge &amp; washer</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/bed-mattress-delivery-sydney"><span class="tho-job__ic">{{ j_bed }}</span><span class="tho-job__t">Bed &amp; mattress</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/man-with-a-van-sydney"><span class="tho-job__ic">{{ j_truck }}</span><span class="tho-job__t">Man and van</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/small-removals-sydney"><span class="tho-job__ic">{{ j_home }}</span><span class="tho-job__t">Small removals</span>{{ i_thin }}</a></li>
       </ul>
     </div>
   </section>
@@ -261,8 +274,8 @@
         a.addEventListener('click', function () {
           var crew = a.getAttribute('data-crew');
           setTimeout(function () {
-            var f = document.querySelector('#instant-quote textarea, #instant-quote [name*="body" i], #instant-quote [name*="Body"]');
-            if (f && !f.value) { f.value = crew + ': '; }
+            var r = document.querySelector('#instant-quote input[name="contact[crew]"][value="' + crew + '"]');
+            if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
           }, 400);
         });
       });
@@ -359,8 +372,17 @@
   .tho-jobs { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; list-style:none; padding:0; margin:0; }
   .tho-job { display:flex; align-items:center; gap:10px; min-height:64px; padding:12px; border-radius:14px; background:#fff; border:1px solid var(--line); color:var(--ink); text-decoration:none; font-weight:800; font-size:.9rem; line-height:1.2; transition:border-color .2s, transform .2s, box-shadow .2s; }
   .tho-job:hover { border-color:var(--b6); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,92,255,.12); }
-  .tho-job__ic { display:grid; place-items:center; flex:0 0 38px; height:38px; border-radius:10px; background:var(--b1); color:var(--b6); }
-  .tho-job__ic svg { width:20px; height:20px; }
+  .tho-job__ic { position:relative; display:grid; place-items:center; flex:0 0 48px; height:48px; border-radius:14px; background:linear-gradient(145deg, #eef4ff, #dbe8ff); color:var(--b8); box-shadow:inset 0 1px 0 #fff, 0 6px 14px rgba(11,92,255,.14); transition:transform .25s, background .25s; }
+  .tho-job__ic::after { content:""; position:absolute; inset:0; border-radius:inherit; border:1px solid rgba(11,92,255,.14); }
+  .tho .tho-job__ic svg, .tho .tho-ti svg { width:30px; height:30px; stroke-width:2.4; }
+  .tho .tho-job__ic svg .d, .tho .tho-ti svg .d { fill:#9cc0ff; stroke:none; opacity:.55; }
+  .tho .tho-job__ic svg .a, .tho .tho-ti svg .a { stroke:#16a34a; }
+  .tho .tho-job__ic svg circle.a, .tho .tho-ti svg circle.a { fill:#16a34a; stroke:none; }
+  .tho-job:hover .tho-job__ic { transform:rotate(-6deg) scale(1.06); background:linear-gradient(145deg, #2f7bff, #0b5cff); color:#fff; }
+  .tho .tho-job:hover .tho-job__ic svg .d { fill:#fff; opacity:.25; }
+  .tho .tho-job:hover .tho-job__ic svg .a { stroke:#86efac; }
+  .tho-ti { display:grid; place-items:center; flex:0 0 40px; height:40px; border-radius:12px; background:linear-gradient(145deg, #eef4ff, #dbe8ff); color:var(--b8); }
+  .tho .tho-ti svg { width:26px; height:26px; }
   .tho-job__t { min-width:0; }
   .tho .tho-job .tho-thin { flex:0 0 16px; width:16px; height:10px; color:var(--b6); animation:none; }
   .tho .tho-job:hover .tho-thin { animation:tho-nudge 1.2s ease-in-out infinite; }
@@ -414,7 +436,7 @@
   .tho-card--pro .tho-qbtn { background:linear-gradient(135deg, var(--b5), var(--b6)); box-shadow:0 10px 24px rgba(11,92,255,.3); }
   .tho-crew__trust { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; list-style:none; padding:0; margin:20px 0 0; }
   .tho-crew__trust li { display:flex; align-items:center; gap:8px; padding:12px; border-radius:14px; background:#fff; border:1px solid var(--line); font-weight:700; font-size:.88rem; color:var(--b9); }
-  .tho-crew__trust svg { flex:0 0 20px; width:20px; height:20px; color:var(--b6); }
+  .tho-crew__trust li { gap:10px; }
 
   /* Message-us bubble (Google Ads style) */
   .tho-msg { position:fixed; right:16px; bottom:96px; z-index:70; display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
