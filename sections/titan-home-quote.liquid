@@ -233,10 +233,18 @@
     });
     refresh(); show(0);
     var sec = document.getElementById('instant-quote');
-    if (sec && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) {
-        document.documentElement.classList.toggle('thq-in-view', en[0].isIntersecting);
-      }, { threshold: 0.15 }).observe(sec);
+    if (sec) {
+      var ticking = false;
+      function check() {
+        ticking = false;
+        var r = sec.getBoundingClientRect(), h = window.innerHeight || document.documentElement.clientHeight;
+        document.documentElement.classList.toggle('thq-in-view', r.top < h * 0.8 && r.bottom > h * 0.2);
+      }
+      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      card.addEventListener('focusin', check);
+      check();
     }
   })();
 </script>
