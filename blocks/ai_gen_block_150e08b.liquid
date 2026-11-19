@@ -1,19 +1,20 @@
 {% doc %}
-  Recent jobs showcase (rebuilt 2026-11-17). Bento photo grid of real-style Titan Express jobs
-  from Shopify Files, with job labels, crew badges, a stats strip and quote/call buttons.
-  Shows on every device. The old per-job settings below are kept so the template stays valid.
+  Homepage photo showcase: "How your furniture travels with us" (rebuilt 2026-11-20).
+  Same square photo grid as the landing pages (2 across on phones, 4 on desktop), using the
+  homepage photos from Shopify Files plus four real load photos from the theme assets.
+  The old per-job settings below are kept so the template stays valid.
 {% enddoc %}
 {%- liquid
   assign rj_id = block.id | replace: '_', '' | downcase
-  assign rj_jobs = 'titan-two-movers-truck-hero.webp|Sofa pickup & delivery|Shrink-wrapped and carried by two movers|2 movers,titan-mattress-delivery-truck.webp|Mattress delivery|Wrapped and walked up the ramp|2 movers,titan-fridge-trolley-ramp.webp|Fridge move|Kept upright on an appliance trolley|Trolley,titan-dining-table-two-movers.webp|Dining table delivery|Wrapped legs and all, no scratches|2 movers' | split: ','
+  assign rj_items = 'f|titan-two-movers-truck-hero.webp|Two movers and the truck;a|titan-load-sofas-wrapped-van.jpg|Sofas shrink-wrapped for the trip;f|titan-fridge-trolley-ramp.webp|Fridges moved upright;a|titan-load-fridge-washer-wrapped.jpg|Fridge and washer wrapped;f|titan-dining-table-two-movers.webp|Tables carried by two;a|titan-load-blankets-straps-trolley.jpg|Blankets, straps and a trolley;f|titan-mattress-delivery-truck.webp|Beds and mattresses;a|titan-load-fridge-washer-van.jpg|Appliances loaded upright' | split: ';'
 -%}
 <section class="rj" id="recent-jobs" {{ block.shopify_attributes }} aria-labelledby="rj-h-{{ rj_id }}">
   <div class="rj-wrap">
     <div class="rj-head">
       <div>
-        <p class="rj-eyebrow"><span class="rj-live"></span>On the road this week</p>
-        <h2 class="rj-h2" id="rj-h-{{ rj_id }}">Recent jobs across Sydney</h2>
-        <p class="rj-sub">Every item wrapped, strapped and placed where you want it. This is how your furniture travels.</p>
+        <p class="rj-eyebrow">Wrapped, strapped, delivered</p>
+        <h2 class="rj-h2" id="rj-h-{{ rj_id }}">How your furniture travels with us</h2>
+        <p class="rj-sub">Every item is wrapped, strapped and placed where you want it. Real loads from our trucks and vans across Sydney.</p>
       </div>
       <div class="rj-stats" role="list">
         <div role="listitem"><strong>5.0</strong><span>Google rating</span></div>
@@ -22,20 +23,23 @@
       </div>
     </div>
     <div class="rj-grid">
-      {%- for j in rj_jobs -%}
-        {%- assign f = j | split: '|' -%}
-        {%- assign img = images[f[0]] -%}
-        {%- assign rj_alt = f[1] | append: ' by Titan Express in Sydney - ' | append: f[2] -%}
-        <figure class="rj-card rj-card--{{ forloop.index }}">
+      {%- for it in rj_items -%}
+        {%- assign f = it | split: '|' -%}
+        {%- assign rj_alt = f[2] | append: ' - Titan Express removalists Sydney' -%}
+        {%- if f[0] == 'f' -%}
+          {%- assign img = images[f[1]] -%}
           {%- if img != blank -%}
-            {{ img | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 40vw, 92vw', alt: rj_alt, class: 'rj-img' }}
+            <figure class="rj-shot">
+              {{ img | image_url: width: 640 | image_tag: loading: 'lazy', widths: '320, 480, 640', sizes: '(min-width: 900px) 25vw, 50vw', alt: rj_alt }}
+              <figcaption>{{ f[2] }}</figcaption>
+            </figure>
           {%- endif -%}
-          <span class="rj-badge">{{ f[3] }}</span>
-          <figcaption class="rj-cap">
-            <strong>{{ f[1] }}</strong>
-            <span>{{ f[2] }}</span>
-          </figcaption>
-        </figure>
+        {%- else -%}
+          <figure class="rj-shot">
+            <img src="{{ f[1] | asset_url }}" width="800" height="800" loading="lazy" alt="{{ rj_alt | escape }}">
+            <figcaption>{{ f[2] }}</figcaption>
+          </figure>
+        {%- endif -%}
       {%- endfor -%}
     </div>
     <div class="rj-cta">
@@ -49,26 +53,18 @@
   .rj { --rj-b9:#071a3d; --rj-b6:#0b5cff; --rj-b5:#2f7bff; --rj-mut:#5a6782; font-family: Inter, var(--font-body--family, sans-serif); padding:56px 0; background:radial-gradient(900px 400px at 100% 0%, rgba(47,123,255,.10), transparent 60%), #f5f8ff; width:100%; }
   .rj-wrap { max-width:1180px; margin:0 auto; padding:0 16px; }
   .rj-head { display:grid; gap:18px; margin-bottom:22px; }
-  .rj-eyebrow { display:inline-flex; align-items:center; gap:8px; margin:0 0 6px; font-size:.75rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--rj-b6); }
-  .rj-live { width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 0 rgba(34,197,94,.6); animation:rj-pulse 2s infinite; }
-  @keyframes rj-pulse { 70% { box-shadow:0 0 0 9px rgba(34,197,94,0); } 100% { box-shadow:0 0 0 0 rgba(34,197,94,0); } }
-  .rj-h2 { margin:0 0 8px; font-size:clamp(1.5rem,5.6vw,2.4rem); line-height:1.1; font-weight:900; letter-spacing:-.015em; color:var(--rj-b9); }
+  .rj-eyebrow { margin:0 0 6px; font-size:.75rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--rj-b6); }
+  .rj-h2 { margin:0 0 8px; font-size:clamp(1.45rem,5.6vw,2.2rem); line-height:1.12; font-weight:900; letter-spacing:-.015em; color:var(--rj-b9); }
   .rj-sub { margin:0; color:var(--rj-mut); font-size:1rem; line-height:1.5; max-width:560px; }
   .rj-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
   .rj-stats > div { padding:12px; border-radius:16px; background:#fff; border:1px solid #dfe6f3; text-align:center; box-shadow:0 8px 20px rgba(11,40,99,.06); }
   .rj-stats strong { display:block; font-size:1.5rem; font-weight:900; color:var(--rj-b6); line-height:1.1; }
   .rj-stats span { font-size:.75rem; font-weight:700; color:var(--rj-mut); }
-  .rj-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .rj-card { position:relative; margin:0; overflow:hidden; border-radius:20px; aspect-ratio:1/1; background:#dbe8ff; box-shadow:0 16px 36px rgba(7,26,61,.16); isolation:isolate; }
-  .rj-card--1 { grid-column:1 / -1; aspect-ratio:16/10; }
-  .rj-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
-  .rj-card:hover .rj-img { transform:scale(1.06); }
-  .rj-card::after { content:""; position:absolute; inset:45% 0 0 0; background:linear-gradient(180deg, transparent, rgba(7,26,61,.85)); z-index:1; pointer-events:none; }
-  .rj-badge { position:absolute; top:10px; left:10px; z-index:2; padding:5px 10px; border-radius:999px; background:rgba(255,255,255,.92); color:var(--rj-b6); font-size:.72rem; font-weight:800; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
-  .rj-cap { position:absolute; left:12px; right:12px; bottom:10px; z-index:2; color:#fff; }
-  .rj-cap strong { display:block; font-size:.98rem; font-weight:800; line-height:1.2; }
-  .rj-cap span { display:block; font-size:.78rem; color:#cfe0ff; line-height:1.3; margin-top:2px; }
-  .rj-card--1 .rj-cap strong { font-size:1.25rem; }
+  .rj-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; }
+  .rj-shot { position:relative; margin:0; overflow:hidden; border-radius:16px; background:#e8f0ff; aspect-ratio:1; box-shadow:0 12px 28px rgba(7,26,61,.12); }
+  .rj-shot img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+  .rj-shot:hover img { transform:scale(1.05); }
+  .rj-shot figcaption { position:absolute; left:0; right:0; bottom:0; padding:22px 12px 10px; background:linear-gradient(180deg, transparent, rgba(7,26,61,.78)); color:#fff; font-weight:800; font-size:.86rem; line-height:1.25; }
   .rj-cta { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
   .rj-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 22px; border-radius:999px; font-weight:800; font-size:1rem; text-decoration:none; transition:transform .2s, box-shadow .2s; }
   .rj-btn:hover { transform:translateY(-2px); }
@@ -77,14 +73,11 @@
   .rj-btn--q svg { fill:currentColor; stroke:none; }
   .rj-btn--c { background:#fff; color:var(--rj-b6); border:1.5px solid var(--rj-b6); }
   @media (min-width: 900px) {
-    .rj { padding:80px 0; }
+    .rj { padding:72px 0; }
     .rj-head { grid-template-columns:1.4fr 1fr; align-items:end; }
-    .rj-grid { grid-template-columns:1.3fr 1fr 1fr; grid-template-rows:repeat(2, 230px); gap:16px; }
-    .rj-card { aspect-ratio:auto; }
-    .rj-card--1 { grid-column:1; grid-row:1 / span 2; aspect-ratio:auto; }
-    .rj-card--4 { grid-column:2 / span 2; }
+    .rj-grid { grid-template-columns:repeat(4, minmax(0, 1fr)); gap:16px; }
   }
-  @media (prefers-reduced-motion: reduce) { .rj *, .rj *::after { animation:none !important; transition:none !important; } }
+  @media (prefers-reduced-motion: reduce) { .rj * { transition:none !important; } }
 {% endstyle %}
 
 {% schema %}
