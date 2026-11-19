@@ -838,7 +838,7 @@
       <div class="tll-quote__intro">
         <p class="tll-eyebrow">Free quote · No obligation</p>
         <h2 id="tll-quote-h-{{ uid }}" class="tll-h2">{{ s.form_heading }}</h2>
-        <p>{{ s.form_text }}</p>
+        <p>{{ s.form_text | replace: 'Three quick steps', 'Four quick steps' }}</p>
       </div>
       <div class="tll-quote__actions">
         <a class="tlh-qbtn tlh-qbtn--lg" href="#tll-quote-{{ uid }}">{{ icon_bolt }}<span>Start my free quote</span></a>
@@ -1593,7 +1593,7 @@
     .tll-hero__copy { display:contents; }
     .tll-hero__inner { grid-template-areas:"kicker" "h1" "quote" "sub" "more" "media"; }
     .tll-hero .tll-kicker { grid-area:kicker; justify-self:start; margin:0; }
-    .tll-hero .tll-h1 { grid-area:h1; margin:0; }
+    .tll-hero .tll-h1 { grid-area:h1; margin:0 0 6px; }
     .tll-hero__sub { grid-area:sub; }
   }
   .tll-hq { grid-area:quote; min-width:0; scroll-margin-top:84px; border-radius:22px; background:#fff; color:var(--b9); box-shadow:0 24px 60px rgba(0,0,0,.4), 0 0 0 5px rgba(143,180,255,.22); }
