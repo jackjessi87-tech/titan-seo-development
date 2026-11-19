@@ -1237,6 +1237,10 @@
       }, 120);
     });
     window.addEventListener('pageshow', function () { submit.classList.remove('is-sending'); });
+    /* The call bar steps aside while the quote card is on screen, so it never covers the Next button */
+    if (card && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { root.classList.toggle('is-quoting', en[0].isIntersecting && en[0].intersectionRatio > 0.2); }, { threshold: [0, 0.2, 0.5] }).observe(card);
+    }
     syncMove();
     show(0, false);
   })();
@@ -1750,6 +1754,8 @@
   .tll-hq .tll-hero__media::after { top:auto; right:0; bottom:0; left:0; width:auto; height:72%; border:0; border-radius:0; opacity:1; background:linear-gradient(180deg, transparent, rgba(7,26,61,.85)); z-index:2; }
   .tll-hq .tlh-tag { top:10px; bottom:auto; left:10px; padding:6px 10px; font-size:.74rem; }
   .tll-hq .tlh-ribbon { top:18px; right:-58px; font-size:.62rem; }
+  @media (max-width: 899px) { .tll-hq .tlh-ribbon { display:none; } }
+  .tll.is-quoting .tll-dock { display:none; }
   .tll-hq .tll-hq__title { position:absolute; z-index:3; left:16px; right:16px; top:calc(var(--hq-photo) - 40px); color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.5); }
   .tll .tll-hq .tll-hq__title svg { color:#4ade80; }
   .tll-hq__meta { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:24px; }
