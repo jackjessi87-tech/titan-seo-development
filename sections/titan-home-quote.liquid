@@ -1,5 +1,5 @@
 {%- doc -%}
-  Titan Express all-in-one quote (rebuilt 2026-11-17). Tap-to-pick crew, items, access and timing,
+  Titan Express quote band and quote styles. The form itself is snippets/titan-home-quote-card.liquid, rendered in the homepage hero. Was: all-in-one quote (rebuilt 2026-11-17). Tap-to-pick crew, items, access and timing,
   type two suburbs, then name and number. A live summary card shows the job as it is built.
   Uses Shopify's contact form, so requests arrive in the store inbox. Without JavaScript every field
   still shows and the form still submits.
@@ -14,249 +14,21 @@
   assign sms = 'sms:' | append: phone_intl | append: '?&body=' | append: sms_body
 -%}
 
-<section class="thq" id="instant-quote" aria-labelledby="thq-h-{{ uid }}">
-  <div class="thq-wrap thq-grid">
+<section class="thq thq--band" id="quote-ways" aria-labelledby="thq-h-{{ uid }}">
+  <div class="thq-wrap">
     <div class="thq-copy">
       <p class="thq-eyebrow"><span class="thq-dot"></span>{{ s.eyebrow | default: 'Instant quote' }}</p>
       <h2 id="thq-h-{{ uid }}" class="thq-h2">Your fixed price in 60 seconds</h2>
-      <p class="thq-sub">Tap a few options, add your two suburbs and we'll text you a fixed price. No hourly meter, no obligation.</p>
+      <p class="thq-sub">Call, text us a photo, or use the quick form at the top of the page. Fixed price before we start, no hourly meter, no obligation.</p>
       <div class="thq-ways" role="list">
         <a role="listitem" class="thq-way" href="tel:{{ phone_intl }}"><span class="thq-way__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><span><strong>Call</strong><small>{{ s.phone }}</small></span></a>
         <a role="listitem" class="thq-way" href="{{ sms }}"><span class="thq-way__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></svg></span><span><strong>Text</strong><small>Send a photo</small></span></a>
-        <a role="listitem" class="thq-way is-on" href="#thq-form-{{ uid }}"><span class="thq-way__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span><strong>Quick form</strong><small>60 seconds</small></span></a>
+        <a role="listitem" class="thq-way is-on" href="#instant-quote"><span class="thq-way__ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span><strong>Quick form</strong><small>60 seconds</small></span></a>
       </div>
-      <aside class="thq-live" data-thq-live aria-live="polite">
-        <p class="thq-live__t">Your job</p>
-        <ul>
-          <li><span>Move</span><b data-sum="type">A few items</b></li>
-          <li><span>Crew</span><b data-sum="crew">Two men &amp; truck</b></li>
-          <li><span>Items</span><b data-sum="items">Tap what you're moving</b></li>
-          <li><span>Route</span><b data-sum="route">Pickup → Delivery</b></li>
-          <li><span>When</span><b data-sum="when">Tomorrow</b></li>
-        </ul>
-        <p class="thq-live__p" data-sum="price">Two movers: fixed price sent in minutes</p>
-      </aside>
-    </div>
-
-    <div class="thq-card" data-thq id="thq-form-{{ uid }}">
-      {%- assign thq_img = images['titan-sofa-truck-loading.webp'] -%}
-      {%- if thq_img != blank -%}
-        <div class="thq-photo">
-          {{ thq_img | image_url: width: 900 | image_tag: alt: 'Titan Express movers loading a sofa into the truck', loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 560px, calc(100vw - 32px)' }}
-          <span class="thq-photo__tag"><i></i>Two or three movers &middot; trucks and vans</span>
-          <span class="thq-photo__t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Get your fixed price</span>
-        </div>
-      {%- endif -%}
-      {%- form 'contact', id: 'home-quote', class: 'thq-form' -%}
-        {%- if form.posted_successfully? -%}
-          <div class="thq-done" role="status" tabindex="-1">
-            <div class="thq-done__icon" aria-hidden="true">&#10003;</div>
-            <h3>Thanks, your request is in</h3>
-            <p>We'll text your fixed price shortly. Need it moved today? Call <a href="tel:{{ phone_intl }}">{{ s.phone }}</a>.</p>
-          </div>
-        {%- else -%}
-          {%- if form.errors -%}<div class="thq-error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
-          <input type="hidden" name="contact[source]" value="Homepage all-in-one quote">
-          <input type="hidden" name="contact[service]" value="Two men and truck" data-thq-service>
-          <input type="hidden" name="contact[items]" value="" data-thq-items>
-
-          <div class="thq-progress" aria-hidden="true"><div class="thq-progress__bar" data-thq-bar></div></div>
-
-          <fieldset class="thq-step is-active" data-step="1">
-            <legend class="thq-legend"><span class="thq-n">1</span>Your job</legend>
-
-            <p class="thq-label">What kind of move?</p>
-            <div class="thq-types" data-thq-types>
-              <label><input type="radio" name="contact[move_type]" value="House or unit move"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg><b>House or unit move</b><small>Removalists</small></span></label>
-              <label><input type="radio" name="contact[move_type]" value="A few items" checked><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg><b>A few items</b><small>Small move</small></span></label>
-              <label><input type="radio" name="contact[move_type]" value="Single item delivery"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg><b>Single item</b><small>Delivery</small></span></label>
-              <label><input type="radio" name="contact[move_type]" value="Marketplace or store pickup"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><b>Pickup &amp; deliver</b><small>Marketplace, store</small></span></label>
-            </div>
-
-            <div class="thq-beds" data-thq-beds>
-              <p class="thq-label">How many bedrooms?</p>
-              <div class="thq-seg thq-seg--sm">
-                {%- assign beds = 'Studio,1 bed,2 beds,3 beds,4+ beds' | split: ',' -%}
-                {%- for b in beds -%}<label><input type="radio" name="contact[bedrooms]" value="{{ b }}"><span><b>{{ b }}</b></span></label>{%- endfor -%}
-              </div>
-            </div>
-
-            <div class="thq-smart">
-              <label class="thq-smart__lbl" for="thq-desc-{{ uid }}">Tell us what needs moving</label>
-              <div class="thq-smart__box">
-                <svg class="thq-smart__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
-                <textarea id="thq-desc-{{ uid }}" name="contact[body]" rows="3" data-thq-body aria-describedby="thq-desc-tip-{{ uid }}"></textarea>
-                <span class="thq-smart__ph" data-thq-ph aria-hidden="true"></span>
-              </div>
-              <p class="thq-smart__tip" id="thq-desc-tip-{{ uid }}" data-thq-detected>Type it your way. We'll pick out the items for you.</p>
-            </div>
-
-            <p class="thq-label">Who do you need?</p>
-            <div class="thq-seg thq-seg--crew">
-              <label><input type="radio" name="contact[crew]" value="Two men and truck" checked><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="7" r="3"/><circle cx="16" cy="7" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M12 20c0-3.3 1.8-6 4-6s6 2.7 6 6"/></svg><b>Two men &amp; truck</b><small>Heavy items, stairs</small></span></label>
-              <label><input type="radio" name="contact[crew]" value="Three men and 8 tonne truck"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="8" r="2.5"/><circle cx="12" cy="6.5" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M1.5 20c0-2.8 2-5 4.5-5M22.5 20c0-2.8-2-5-4.5-5M7 20c0-3.3 2.2-6 5-6s5 2.7 5 6"/></svg><b>Three men &amp; 8T truck</b><small>Full moves</small></span></label>
-              <label><input type="radio" name="contact[crew]" value="One man and mini truck"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg><b>One man &amp; mini truck or van</b><small>Budget friendly</small></span></label>
-              <label><input type="radio" name="contact[crew]" value="Not sure, please advise"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5h.01"/></svg><b>Not sure</b><small>We'll advise</small></span></label>
-            </div>
-
-            <div class="thq-chips" data-thq-chips hidden>
-              {%- assign items = 'Sofa / lounge,Bed & mattress,Fridge,Washer / dryer,Table & chairs,Wardrobe / drawers,Boxes,Marketplace item,Other' | split: ',' -%}
-              {%- for it in items -%}<button type="button" class="thq-chip" aria-pressed="false" data-item="{{ it }}">{{ it }}</button>{%- endfor -%}
-            </div>
-
-            <div class="thq-row">
-              <label class="thq-field"><span>Pickup suburb</span>
-                <input type="text" name="contact[pickup_suburb]" placeholder="e.g. Pyrmont" autocomplete="off" required data-thq-from></label>
-              <label class="thq-field"><span>Delivery suburb</span>
-                <input type="text" name="contact[delivery_suburb]" placeholder="e.g. Ryde" autocomplete="off" required data-thq-to></label>
-            </div>
-
-            <p class="thq-label">Stairs or lift?</p>
-            <div class="thq-seg thq-seg--sm">
-              {%- assign acc = 'Ground floor,Stairs,Lift' | split: ',' -%}
-              {%- for a in acc -%}<label><input type="radio" name="contact[stairs_or_lift]" value="{{ a }}" {% if forloop.first %}checked{% endif %}><span><b>{{ a }}</b></span></label>{%- endfor -%}
-            </div>
-
-            <p class="thq-label">When?</p>
-            <div class="thq-seg thq-seg--sm" data-thq-when>
-              {%- assign wh = 'Today,Tomorrow,This week,Pick a date' | split: ',' -%}
-              {%- for w in wh -%}<label><input type="radio" name="contact[when]" value="{{ w }}" {% if forloop.index == 2 %}checked{% endif %}><span><b>{{ w }}</b></span></label>{%- endfor -%}
-            </div>
-            <label class="thq-field thq-date" data-thq-date><span>Date</span><input type="date" name="contact[preferred_date]"></label>
-
-            <button type="button" class="thq-btn thq-btn--primary" data-next>Next: where to send your price <span aria-hidden="true">→</span></button>
-          </fieldset>
-
-          <fieldset class="thq-step" data-step="2">
-            <legend class="thq-legend"><span class="thq-n">2</span>Where should we send your price?</legend>
-            <label class="thq-field"><span>Your name</span>
-              <input type="text" name="contact[name]" autocomplete="name" required></label>
-            <div class="thq-row">
-              <label class="thq-field"><span>Mobile</span>
-                <input type="tel" name="contact[phone]" autocomplete="tel" inputmode="tel" placeholder="04xx xxx xxx" required></label>
-              <label class="thq-field"><span>Email</span>
-                <input type="email" name="contact[email]" autocomplete="email" required></label>
-            </div>
-            <div class="thq-nav">
-              <button type="button" class="thq-btn thq-btn--ghost" data-back>Back</button>
-              <button type="submit" class="thq-btn thq-btn--primary">Get my fixed price</button>
-            </div>
-          </fieldset>
-          <p class="thq-fine"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>No obligation. Fixed price before we start. Pay on the day.</p>
-        {%- endif -%}
-      {%- endform -%}
     </div>
   </div>
 </section>
 
-<script>
-  (function () {
-    var card = document.querySelector('#instant-quote [data-thq]');
-    if (!card) return;
-    var form = card.querySelector('form'), steps = card.querySelectorAll('.thq-step');
-    if (!form || !steps.length) { var d = card.querySelector('.thq-done'); if (d) d.focus(); return; }
-    card.classList.add('is-js');
-    var bar = card.querySelector('[data-thq-bar]'), live = document.querySelector('#instant-quote [data-thq-live]');
-    var cur = 0, picked = [];
-    function q(sel) { return form.querySelector(sel); }
-    function radio(n) { var el = q('[name="contact[' + n + ']"]:checked'); return el ? el.value : ''; }
-    function sum(k, v) { var el = live && live.querySelector('[data-sum="' + k + '"]'); if (el) el.textContent = v; }
-    function refresh() {
-      var crew = radio('crew');
-      q('[data-thq-service]').value = crew;
-      q('[data-thq-items]').value = picked.join(', ');
-      sum('crew', crew.replace(' and ', ' & '));
-      sum('items', picked.length ? picked.join(', ') : "Tap what you're moving");
-      var f = q('[data-thq-from]').value.trim(), t = q('[data-thq-to]').value.trim();
-      sum('route', (f || 'Pickup') + ' → ' + (t || 'Delivery'));
-      var w = radio('when'); var dt = q('[name="contact[preferred_date]"]').value;
-      sum('when', w === 'Pick a date' ? (dt || 'Pick a date') : w);
-      card.classList.toggle('show-date', w === 'Pick a date');
-      var mt = radio('move_type'); card.classList.toggle('is-house', mt === 'House or unit move');
-      sum('type', mt + (mt === 'House or unit move' && radio('bedrooms') ? ' · ' + radio('bedrooms') : ''));
-      sum('price', crew.indexOf('Three') === 0 ? 'Three movers and an 8 tonne truck: fixed quote for your whole move' : crew.indexOf('One man') === 0 ? 'One man & mini truck: budget friendly, fixed price sent in minutes' : crew.indexOf('Two') === 0 ? 'Two movers: fixed price sent in minutes' : "We'll suggest the right crew and price");
-    }
-    function show(i) {
-      steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
-      cur = i; bar.style.width = ((i + 1) / steps.length * 100) + '%';
-    }
-    function ok(i) {
-      var fields = steps[i].querySelectorAll('input, textarea, select');
-      for (var k = 0; k < fields.length; k++) { if (!fields[k].checkValidity()) { fields[k].reportValidity(); return false; } }
-      return true;
-    }
-    card.addEventListener('click', function (e) {
-      var chip = e.target.closest('[data-item]');
-      if (chip) {
-        var v = chip.getAttribute('data-item'), on = chip.getAttribute('aria-pressed') !== 'true';
-        chip.setAttribute('aria-pressed', on);
-        picked = on ? picked.concat(v) : picked.filter(function (x) { return x !== v; });
-        refresh();
-      }
-      if (e.target.closest('[data-next]')) { if (ok(cur)) { show(cur + 1); var f1 = steps[cur].querySelector('input'); if (f1) f1.focus({ preventScroll: true }); } }
-      if (e.target.closest('[data-back]')) show(cur - 1);
-    });
-    var body = q('[data-thq-body]'), ph = card.querySelector('[data-thq-ph]'), det = card.querySelector('[data-thq-detected]');
-    var EX = ['3 bedroom house move from Bankstown to Parramatta, fridge and washer too', 'Just a 3-seater sofa I bought on Marketplace', 'Queen bed, mattress and a wardrobe, second floor no lift', 'IKEA order to collect from Tempe, 6 boxes and a desk', 'Fridge and washing machine to my new unit tomorrow'];
-    var ei = 0, ci = 0, del = false, typer = null;
-    function tick() {
-      if (body.value || document.activeElement === body) { ph.textContent = ''; typer = setTimeout(tick, 600); return; }
-      var s = EX[ei];
-      ci += del ? -1 : 1; ph.textContent = s.slice(0, ci);
-      var wait = del ? 18 : 45;
-      if (!del && ci >= s.length) { del = true; wait = 1700; }
-      if (del && ci <= 0) { del = false; ei = (ei + 1) % EX.length; wait = 350; }
-      typer = setTimeout(tick, wait);
-    }
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { ph.textContent = EX[0]; } else { tick(); }
-    body.addEventListener('focus', function () { ph.textContent = ''; });
-    var KW = [['Sofa / lounge', /sofa|couch|lounge|modular|recliner|chaise/i], ['Bed & mattress', /\bbeds?\b|bed ?frame|bedhead|mattress|ensemble/i], ['Fridge', /fridge|freezer/i], ['Washer / dryer', /wash|dryer|laundry/i], ['Table & chairs', /table|chair|desk/i], ['Wardrobe / drawers', /wardrobe|drawer|dresser|cabinet|tallboy|bookcase|shelf/i], ['Boxes', /box|bag|carton/i], ['Marketplace item', /marketplace|gumtree|facebook/i]];
-    function detect() {
-      var v = body.value, found = [];
-      KW.forEach(function (k) {
-        var chip = card.querySelector('[data-item="' + k[0] + '"]');
-        if (k[1].test(v)) { found.push(k[0]); if (chip && chip.getAttribute('aria-pressed') !== 'true') { chip.setAttribute('aria-pressed', 'true'); chip.dataset.auto = '1'; picked.push(k[0]); } }
-        else if (chip && chip.dataset.auto === '1') { chip.setAttribute('aria-pressed', 'false'); delete chip.dataset.auto; picked = picked.filter(function (x) { return x !== k[0]; }); }
-      });
-      var house = /\b(\d|one|two|three|four)\s*(bed|bedroom|br)\b|house|unit move|apartment move|whole|full move|shifting/i.test(v);
-      if (house) { var hm = q('input[name="contact[move_type]"][value="House or unit move"]'); if (hm && !hm.checked && !body.dataset.typeTouched) { hm.checked = true; } }
-      det.innerHTML = found.length ? 'Spotted: <b>' + found.join('</b> · <b>') + '</b>' : "Type it your way. We'll pick out the items for you.";
-      det.classList.toggle('is-on', found.length > 0);
-    }
-    body.addEventListener('input', function () { detect(); refresh(); });
-    card.querySelectorAll('input[name="contact[move_type]"]').forEach(function (r) {
-      r.addEventListener('change', function () {
-        body.dataset.typeTouched = '1';
-        var heavy = r.value === 'House or unit move';
-        var crew = q('input[name="contact[crew]"][value="' + (heavy ? 'Two men and truck' : (r.value === 'Single item delivery' ? 'One man and mini truck' : radio('crew'))) + '"]');
-        if (crew) crew.checked = true;
-        refresh();
-      });
-    });
-    form.addEventListener('input', refresh);
-    form.addEventListener('change', refresh);
-    form.addEventListener('submit', function () {
-      var b = q('[data-thq-body]');
-      var head = 'Move: ' + radio('move_type') + (radio('bedrooms') && radio('move_type') === 'House or unit move' ? ' (' + radio('bedrooms') + ')' : '') + ' | Crew: ' + radio('crew') + (picked.length ? ' | Items: ' + picked.join(', ') : '');
-      if (b.value.indexOf('Move:') !== 0) b.value = head + (b.value ? ' | Customer wrote: ' + b.value : '');
-    });
-    refresh(); show(0);
-    var sec = document.getElementById('instant-quote');
-    if (sec) {
-      var ticking = false;
-      function check() {
-        ticking = false;
-        var r = sec.getBoundingClientRect(), h = window.innerHeight || document.documentElement.clientHeight;
-        document.documentElement.classList.toggle('thq-in-view', r.top < h * 0.8 && r.bottom > h * 0.2);
-      }
-      function onScroll() { if (!ticking) { ticking = true; setTimeout(check, 60); } }
-      document.addEventListener('scroll', onScroll, { passive: true, capture: true });
-      window.addEventListener('resize', onScroll);
-      card.addEventListener('focusin', check);
-      check();
-    }
-  })();
-</script>
 
 {% stylesheet %}
   .thq { --thq-b:#0b5cff; --thq-b2:#2f7bff; --thq-ink:#071a3d; --thq-muted:#5a6782; --thq-line:#dfe6f3; --thq-soft:#f5f8ff; --thq-g:#16a34a;
@@ -382,6 +154,11 @@
   .thq-photo__tag { position:absolute; z-index:1; top:12px; left:12px; display:flex; align-items:center; gap:7px; padding:6px 11px; border-radius:999px; background:rgba(255,255,255,.95); color:#071a3d; font-size:.76rem; font-weight:800; }
   .thq-photo__tag i { width:8px; height:8px; border-radius:50%; background:#22c55e; }
   @media (max-width: 899px) { .thq-photo { height:140px; margin:-18px -18px 14px; } .thq-photo__t { left:16px; font-size:1.15rem; } }
+  /* The form now lives in the homepage hero; this section is a short call, text or form band (2026-11-20) */
+  .thq--band { padding:52px 0; }
+  .thq--band .thq-copy { max-width:720px; margin:0 auto; text-align:center; }
+  .thq--band .thq-ways { max-width:560px; margin:0 auto; text-align:left; }
+  .thq-nav .thq-btn[data-next] { flex:1 1 auto; }
 {% endstylesheet %}
 
 {% schema %}
