@@ -21,6 +21,9 @@
   assign links = section.blocks | where: 'type', 'link'
   assign compare_rows = section.blocks | where: 'type', 'compare_row'
   assign area = s.suburb_name | default: 'Sydney'
+  if area == 'Sydney'
+    assign nearby = 'Sydney CBD,Pyrmont,Glebe,Inner West,Ryde,Chatswood,North Shore,Eastern Suburbs,Northern Beaches,Parramatta,Canterbury-Bankstown,St George,Sutherland Shire,Western Sydney,South West Sydney' | split: ','
+  endif
   assign area_q = area | append: ' NSW' | url_param_escape
   assign alt_tail = ' - ' | append: page.title | append: ', Titan Express'
   assign page_abs = shop.url | append: page.url
@@ -250,19 +253,35 @@
               <legend>Where from, and where to?</legend>
               <div class="tll-route">
                 <label class="tll-field"><span>Pickup suburb</span>
-                  <input type="text" name="contact[pickup_suburb]" value="{{ s.default_pickup }}" placeholder="e.g. Castle Hill" list="tll-subs-{{ uid }}" autocomplete="off" autocapitalize="words" enterkeyhint="next" required data-from></label>
+                  <input type="text" name="contact[pickup_suburb]" value="{{ s.default_pickup }}" placeholder="e.g. Pyrmont" list="tll-subs-{{ uid }}" autocomplete="off" autocapitalize="words" enterkeyhint="next" required data-from></label>
                 <label class="tll-field tll-field--to"><span>Delivery suburb</span>
-                  <input type="text" name="contact[delivery_suburb]" placeholder="e.g. Kellyville" list="tll-subs-{{ uid }}" autocomplete="off" autocapitalize="words" enterkeyhint="next" required data-to></label>
+                  <input type="text" name="contact[delivery_suburb]" placeholder="e.g. Chatswood" list="tll-subs-{{ uid }}" autocomplete="off" autocapitalize="words" enterkeyhint="next" required data-to></label>
               </div>
               <datalist id="tll-subs-{{ uid }}">
-                {%- assign subs = 'Alexandria,Ashfield,Auburn,Balmain,Bankstown,Baulkham Hills,Bella Vista,Belmore,Blacktown,Bondi,Bondi Junction,Botany,Brookvale,Burwood,Cabramatta,Camden,Campbelltown,Campsie,Canterbury,Caringbah,Carlingford,Castle Hill,Casula,Chatswood,Cherrybrook,Chullora,Concord,Coogee,Cronulla,Crows Nest,Dee Why,Doonside,Drummoyne,Dural,Earlwood,Eastwood,Emu Plains,Enmore,Epping,Erskineville,Fairfield,Five Dock,Glebe,Glenmore Park,Glenwood,Granville,Greenacre,Guildford,Homebush,Hornsby,Hurstville,Ingleburn,Kellyville,Kensington,Kings Langley,Kingsford,Kogarah,Lakemba,Lane Cove,Leichhardt,Leppington,Lidcombe,Liverpool,Macquarie Park,Manly,Maroubra,Marrickville,Marsden Park,Mascot,Meadowbank,Merrylands,Minto,Miranda,Mona Vale,Mosman,Mount Druitt,Narellan,Neutral Bay,Newtown,North Ryde,North Sydney,Northmead,Oran Park,Paddington,Padstow,Parramatta,Pennant Hills,Penrith,Punchbowl,Pymble,Pyrmont,Quakers Hill,Randwick,Redfern,Revesby,Rhodes,Richmond,Riverstone,Rockdale,Rooty Hill,Roselands,Rosebery,Rosehill,Rouse Hill,Ryde,Schofields,Seven Hills,Silverwater,Smithfield,St Ives,St Leonards,St Marys,Stanhope Gardens,Strathfield,Surry Hills,Sutherland,Sydney CBD,Sylvania,Telopea,The Ponds,Toongabbie,Ultimo,Villawood,Waterloo,Wentworthville,West Pennant Hills,West Ryde,Westmead,Wetherill Park,Whalan,Windsor,Wolli Creek,Woolloomooloo,Zetland' | split: ',' -%}
+                {%- assign subs = 'Pyrmont,Glebe,Ryde,Chatswood,Ultimo,Sydney CBD,Surry Hills,Newtown,Redfern,Waterloo,Zetland,Alexandria,Balmain,Leichhardt,Marrickville,Enmore,Erskineville,North Sydney,Crows Nest,Neutral Bay,Mosman,Lane Cove,St Leonards,Macquarie Park,North Ryde,West Ryde,Meadowbank,Eastwood,Epping,Rhodes,Concord,Five Dock,Drummoyne,Burwood,Strathfield,Ashfield,Homebush,Bondi,Bondi Junction,Paddington,Randwick,Coogee,Kensington,Kingsford,Maroubra,Mascot,Rosebery,Botany,Woolloomooloo,Wolli Creek,Rockdale,Kogarah,Hurstville,Earlwood,Campsie,Canterbury,Belmore,Lakemba,Punchbowl,Roselands,Bankstown,Padstow,Revesby,Greenacre,Chullora,Auburn,Lidcombe,Silverwater,Granville,Merrylands,Guildford,Parramatta,Westmead,Northmead,Wentworthville,Toongabbie,Rosehill,Telopea,Carlingford,Pennant Hills,Hornsby,Pymble,St Ives,Manly,Dee Why,Brookvale,Mona Vale,Miranda,Caringbah,Cronulla,Sutherland,Sylvania,Blacktown,Seven Hills,Doonside,Rooty Hill,Mount Druitt,Whalan,St Marys,Penrith,Emu Plains,Glenmore Park,Quakers Hill,Schofields,Riverstone,Marsden Park,Richmond,Windsor,Fairfield,Cabramatta,Smithfield,Wetherill Park,Villawood,Liverpool,Casula,Ingleburn,Minto,Campbelltown,Leppington,Oran Park,Narellan,Camden' | split: ',' -%}
                 {%- for sb in subs -%}<option value="{{ sb }}">{%- endfor -%}
               </datalist>
             </fieldset>
 
             <fieldset class="tll-step" data-step="items">
-              <legend>What are we moving?</legend>
-              <div class="tll-chips" data-items>
+              <legend data-items-legend>What are we moving?</legend>
+              <div class="tll-items tll-items--home" data-home>
+                <label class="tll-chip"><input type="checkbox" value="Studio or small apartment move"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V9l8-6 8 6v12z"/><path d="M10 21v-6h4v6"/></svg>Studio / small</span></label>
+                <label class="tll-chip"><input type="checkbox" value="1 bedroom apartment move"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 15h18M3 18v2M21 18v2"/><path d="M8 9V7h8v2"/></svg>1 bedroom</span></label>
+                <label class="tll-chip"><input type="checkbox" value="2 bedroom apartment move"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 15h18M3 18v2M21 18v2"/><path d="M6 9V7h5v2M13 9V7h5v2"/></svg>2 bedroom</span></label>
+              </div>
+              <input type="hidden" name="contact[move_type]" value="" disabled data-move-out>
+              <div class="tll-home__extra" data-move-extra hidden>
+                <p class="tll-field__hint">Roughly how many boxes?</p>
+                <div class="tll-options tll-options--4">
+                  <label><input type="radio" name="tll-boxes" value="Under 10"><span>Under 10</span></label>
+                  <label><input type="radio" name="tll-boxes" value="10 to 25"><span>10 to 25</span></label>
+                  <label><input type="radio" name="tll-boxes" value="25 or more"><span>25 or more</span></label>
+                  <label><input type="radio" name="tll-boxes" value="Not sure yet"><span>Not sure</span></label>
+                </div>
+              </div>
+              <p class="tll-field__hint tll-items__label" data-items-label>Or just a few items? Tap all that apply</p>
+              <div class="tll-items" data-items>
                 <label class="tll-chip"><input type="checkbox" value="Sofa or couch"{% if pre_item == 'Sofa or couch' %} checked{% endif %}><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v3h12v-3a2 2 0 0 1 4 0v5H2z"/><path d="M5 18v2M19 18v2"/></svg>Sofa</span></label>
                 <label class="tll-chip"><input type="checkbox" value="Fridge"{% if pre_item == 'Fridge' %} checked{% endif %}><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M6 10h12M9 6v2M9 13v3"/></svg>Fridge</span></label>
                 <label class="tll-chip"><input type="checkbox" value="Washing machine"{% if pre_item == 'Washing machine' %} checked{% endif %}><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13.5" r="4"/><path d="M8 6.5h.01M11 6.5h.01"/></svg>Washer</span></label>
@@ -776,7 +795,7 @@
       {%- endfor -%}
     </ul>
     {%- if area == 'Sydney' -%}
-      {%- assign sub_all = 'Parramatta,Blacktown,Penrith,Liverpool,Campbelltown,Bankstown,Fairfield,Castle Hill,Baulkham Hills,Kellyville,Rouse Hill,Marsden Park,Mount Druitt,St Marys,Rooty Hill,Seven Hills,Doonside,Merrylands,Wetherill Park,Richmond,Chatswood,Lidcombe,Inner West' | split: ',' -%}
+      {%- assign sub_all = 'Chatswood,Glebe,Ryde,Newtown,Inner West,Bondi,Eastern Suburbs,Burwood,Ashfield,Lidcombe,Auburn,Campsie,Parramatta,Bankstown,Merrylands,Fairfield,Liverpool,Blacktown,Seven Hills,Mount Druitt,Penrith,Campbelltown' | split: ',' -%}
       <h3 class="tll-h3 tll-near__also">Local pages across Sydney</h3>
       <ul class="tll-chips" role="list">
         {%- for sn in sub_all -%}
@@ -785,12 +804,16 @@
             assign u3 = blank
             assign l3 = 'furniture-delivery-' | append: sh3
             assign m3 = 'man-and-van-' | append: sh3
+            assign r3 = 'removalists-' | append: sh3
             if pages[l3].title != blank
               assign u3 = pages[l3].url
               assign t3 = pages[l3].title
             elsif pages[m3].title != blank
               assign u3 = pages[m3].url
               assign t3 = pages[m3].title
+            elsif pages[r3].title != blank
+              assign u3 = pages[r3].url
+              assign t3 = pages[r3].title
             endif
           -%}
           {%- if u3 != blank -%}<li><a href="{{ u3 }}">{{ t3 }}</a></li>{%- endif -%}
@@ -1041,6 +1064,11 @@
     var details = form.querySelector('[data-details]');
     var bodyOut = form.querySelector('[data-body-out]');
     var chips = [].slice.call(form.querySelectorAll('[data-items] input'));
+    var homes = [].slice.call(form.querySelectorAll('[data-home] input'));
+    var moveOut = form.querySelector('[data-move-out]');
+    var moveExtra = form.querySelector('[data-move-extra]');
+    var itemsLabel = form.querySelector('[data-items-label]');
+    var itemsLegend = form.querySelector('[data-items-legend]');
     var dateWrap = form.querySelector('[data-date]');
     var dateInput = dateWrap ? dateWrap.querySelector('input') : null;
     var recap = form.querySelector('[data-recap]');
@@ -1071,6 +1099,25 @@
       try { return new Date(dateInput.value + 'T00:00').toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' }); } catch (e) { return dateInput.value; }
     }
     function clearErr() { if (err) { err.hidden = true; err.textContent = ''; } }
+    /* Home move: picking a studio, 1 or 2 bedroom turns the step into removalist questions */
+    function move() { var h = homes.filter(function (c) { return c.checked; })[0]; return h ? h.value : ''; }
+    function boxes() { var b = form.querySelector('[name="tll-boxes"]:checked'); return b ? b.value : ''; }
+    function syncMove() {
+      var m = move();
+      form.classList.toggle('is-move', !!m);
+      if (moveOut) { moveOut.disabled = !m; moveOut.value = m; }
+      if (moveExtra) moveExtra.hidden = !m;
+      if (!m) [].slice.call(form.querySelectorAll('[name="tll-boxes"]')).forEach(function (r) { r.checked = false; });
+      if (itemsLegend) itemsLegend.textContent = m ? 'Tell us about your move' : 'What are we moving?';
+      if (itemsLabel) itemsLabel.textContent = m ? 'Big items coming with you (tap all that apply)' : 'Or just a few items? Tap all that apply';
+      if (details) details.placeholder = m ? 'e.g. queen bed, 3-seater sofa, fridge and about 15 boxes' : 'e.g. 3-seater leather sofa and a queen bed';
+    }
+    homes.forEach(function (c) {
+      c.addEventListener('change', function () {
+        if (c.checked) homes.forEach(function (o) { if (o !== c) o.checked = false; });
+        syncMove(); clearErr();
+      });
+    });
     function fail(msg, el) {
       if (err) { err.textContent = msg; err.hidden = false; }
       if (el) { try { el.focus(); } catch (e) {} }
@@ -1093,7 +1140,7 @@
         if (!from.value.trim()) return fail('Please enter the pickup suburb.', from);
         if (!to.value.trim()) return fail('Please enter the delivery suburb.', to);
       } else if (k === 'items') {
-        if (!items().length && !(details && details.value.trim())) return fail('Tap at least one item, or add a short note.', details);
+        if (!move() && !items().length && !(details && details.value.trim())) return fail('Tap your home size or at least one item, or add a short note.', details);
       } else if (k === 'access') {
         if (!picked('when')) return fail('Please choose when you need it.');
         if (picked('when') === 'Pick a date' && !dateInput.value) return fail('Please pick a date.', dateInput);
@@ -1116,7 +1163,9 @@
       if (label) label.textContent = 'Step ' + (i + 1) + ' of ' + steps.length;
       if (recap && last) {
         var bits = [field('pickup_suburb').value.trim() + ' to ' + field('delivery_suburb').value.trim()];
-        var it = items(); if (it.length) bits.push(it.length > 2 ? it.length + ' items' : it.join(', '));
+        var it = items(), mv = move();
+        if (mv) bits.push(mv.replace(' apartment', ''));
+        else if (it.length) bits.push(it.length > 2 ? it.length + ' items' : it.join(', '));
         var w = whenText(); if (w) bits.push(w);
         recapText.textContent = bits.join(' · ');
         recap.hidden = false;
@@ -1141,8 +1190,12 @@
         if (!check(i)) { e.preventDefault(); show(i, false); check(i); return; }
       }
       if (bodyOut) {
-        var it = items(), d = details ? details.value.trim() : '';
-        bodyOut.value = it.join(', ') + (it.length && d ? '. ' : '') + d;
+        var it = items(), d = details ? details.value.trim() : '', mv = move(), bx = boxes(), parts = [];
+        if (mv) parts.push(mv);
+        if (mv && bx) parts.push('Boxes: ' + bx);
+        if (it.length) parts.push((mv ? 'Big items: ' : '') + it.join(', '));
+        if (d) parts.push(d);
+        bodyOut.value = parts.join('. ');
       }
       submit.classList.add('is-sending');
     });
@@ -1159,6 +1212,7 @@
       }, 120);
     });
     window.addEventListener('pageshow', function () { submit.classList.remove('is-sending'); });
+    syncMove();
     show(0, false);
   })();
 </script>
@@ -1618,8 +1672,13 @@
   .tll-route .tll-field { position:relative; }
   .tll-route .tll-field::before { content:""; position:absolute; left:-26px; bottom:19px; width:14px; height:14px; border-radius:50%; border:3px solid var(--b6); background:#fff; }
   .tll-route .tll-field--to::before { border-color:#16a34a; background:#16a34a; box-shadow:0 0 0 3px #dcfce7; }
-  .tll-chips { display:none; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; }
-  .tll-form.is-stepped .tll-chips { display:grid; }
+  .tll-items { display:none; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; }
+  .tll-form.is-stepped .tll-items { display:grid; }
+  .tll-items--home .tll-chip span { min-height:64px; }
+  .tll-items__label { margin-top:2px; }
+  .tll-form:not(.is-stepped) .tll-items__label { display:none; }
+  .tll-home__extra { display:grid; gap:8px; }
+  .tll-home__extra[hidden] { display:none; }
   .tll-hq .tll-chip, .tll-hq .tll-options label { position:relative; display:block; width:100%; }
   .tll-chip input { position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer; }
   .tll-chip span { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; min-height:70px; padding:8px 4px; border:1.5px solid #d5deee; border-radius:14px; background:#fff; font-weight:700; font-size:.8rem; line-height:1.15; text-align:center; color:var(--b9); transition:border-color .15s ease, background-color .15s ease, transform .15s ease; }
