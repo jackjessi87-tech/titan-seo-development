@@ -430,20 +430,31 @@
           <li class="tll-card" {{ block.shopify_attributes }}>
             {%- liquid
               assign th = blank
+              assign thf = blank
               case block.settings.icon
                 when 'sofa'
                   assign th = 'titan-th-sofa.jpg'
+                  assign thf = 'titan-sofa-truck-loading.webp'
                 when 'fridge'
                   assign th = 'titan-th-fridge.jpg'
+                  assign thf = 'titan-fridge-trolley-ramp.webp'
                 when 'box'
                   assign th = 'titan-th-box.jpg'
+                  assign thf = 'titan-mattress-delivery-truck.webp'
                 when 'tag'
                   assign th = 'titan-th-wrap.jpg'
+                  assign thf = 'titan-two-movers-truck-hero.webp'
                 when 'store'
                   assign th = 'titan-th-store.jpg'
+                  assign thf = 'titan-dining-table-two-movers.webp'
               endcase
+              assign thi = blank
+              if thf != blank
+                assign thi = images[thf]
+              endif
             -%}
-            {%- if th != blank -%}<img class="tll-card__photo" src="{{ th | asset_url }}" width="240" height="240" loading="lazy" alt="">{%- endif -%}
+            {%- if thi != blank -%}{{ thi | image_url: width: 480 | image_tag: loading: 'lazy', widths: '240, 360, 480', sizes: '(min-width: 900px) 25vw, 92vw', alt: '', class: 'tll-card__photo' }}
+            {%- elsif th != blank -%}<img class="tll-card__photo" src="{{ th | asset_url }}" width="240" height="240" loading="lazy" alt="">{%- endif -%}
             <span class="tll-card__icon{% if th != blank %} tll-card__icon--on-photo{% endif %}">
               {%- case block.settings.icon -%}
                 {%- when 'sofa' -%}{{ icon_sofa }}
