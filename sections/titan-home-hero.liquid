@@ -138,6 +138,7 @@
       <p class="tho-eyebrow">Choose your crew</p>
       <h2 class="tho-h2">Removalists, trucks and crews sized to your job</h2>
       <p class="tho-crew__lead">Every job is a fixed price agreed before we start. No hourly meter, no surprises.</p>
+      <p class="tho-crew__swipe" aria-hidden="true">Swipe to compare all three &rarr;</p>
       <div class="tho-crew__grid">
         <article class="tho-card tho-card--pro">
           <span class="tho-card__badge">Most popular</span>
@@ -498,7 +499,7 @@
   body:has(.tho-callbar) { padding-bottom:76px; }
   /* The new call bar replaces the floating lead card on phones; card turns blue on desktop */
   @media (max-width: 899px) { body:has(.tho-callbar) div[class^="titan-facebook-card-"] { display:none !important; } }
-  body:has(.tho-msg) div[class^="titan-facebook-card-"] { display:none !important; }
+  body:has(.tho-msg) [class^="titan-facebook-card-"] { display:none !important; }
   [class*="titan-facebook-card-button-call-"] { background-color:#0b5cff !important; }
   [class*="titan-facebook-card-quote-btn-"] { border-color:#0b5cff !important; }
 
@@ -548,6 +549,14 @@
     .tho-hero__grid--quote { grid-template-columns:minmax(0, 1fr) minmax(0, 1.02fr); grid-template-rows:auto 1fr; grid-template-areas:"copy quote" "more quote"; gap:22px 48px; align-items:start; }
     .tho-hero__grid--quote .tho-h1 { font-size:clamp(2.2rem, 4.1vw, 3.3rem); }
     .tho-hero .thq-photo { height:290px; }
+  }
+  /* Phones: the three crew cards sit side by side and swipe, instead of a very long stack (2026-11-20) */
+  .tho-crew__swipe { display:none; margin:-8px 0 12px; font-size:.82rem; font-weight:800; color:var(--b6); }
+  @media (max-width: 699px) {
+    .tho-crew__swipe { display:block; }
+    .tho-crew__grid { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:86%; gap:12px; margin:0 -16px; padding:4px 16px 16px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .tho-crew__grid::-webkit-scrollbar { display:none; }
+    .tho-card { scroll-snap-align:center; }
   }
 {% endstylesheet %}
 

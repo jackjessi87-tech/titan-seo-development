@@ -454,6 +454,7 @@
       <p class="tlh-eyebrow">Choose your crew</p>
       <h2 class="tlh-h2" id="tlh-crew-h-{{ uid }}">Removalists, trucks and crews sized to your job</h2>
       <p class="tlh-crew__lead">Every job is a fixed price agreed before we start. No hourly meter, no surprises.</p>
+      <p class="tlh-crew__swipe" aria-hidden="true">Swipe to compare all three &rarr;</p>
       <div class="tlh-crew__grid">
         <article class="tlh-card tlh-card--pro">
           <span class="tlh-card__badge">Most popular</span>
@@ -1765,6 +1766,14 @@
   .tlh-card__badge--big { background:var(--b9); }
   @media (min-width: 900px) { .tll-hq { --hq-photo:190px; } .tll-hq .tll-hq__title { left:26px; top:calc(var(--hq-photo) - 48px); } }
   @media (min-width: 1040px) { .tlh-crew__grid { grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; } .tlh-card { padding:22px; } }
+  /* Phones: the three crew cards sit side by side and swipe, instead of a very long stack (2026-11-20) */
+  .tlh-crew__swipe { display:none; margin:-8px 0 12px; font-size:.82rem; font-weight:800; color:var(--b6); }
+  @media (max-width: 699px) {
+    .tlh-crew__swipe { display:block; }
+    .tlh-crew__grid { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:86%; gap:12px; margin:0 -16px; padding:4px 16px 16px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .tlh-crew__grid::-webkit-scrollbar { display:none; }
+    .tlh-card { scroll-snap-align:center; }
+  }
 {% endstylesheet %}
 
 {% schema %}

@@ -72,19 +72,12 @@
   </section>
   {%- endif -%}
 
+  {%- comment -%} Pricing: the three booking steps are shown once, higher up the page {%- endcomment -%}
   <section class="thh-band" aria-labelledby="thh-how-{{ section.id }}">
-    <div class="thh-wrap thh-split thh-split--top">
-      <div>
-        <p class="thh-eyebrow">How it works</p>
-        <h2 id="thh-how-{{ section.id }}" class="thh-h2">{{ s.steps_heading }}</h2>
-        <ol class="thh-steps">
-          <li><strong>{{ s.step_1_title }}</strong><span>{{ s.step_1_text }}</span></li>
-          <li><strong>{{ s.step_2_title }}</strong><span>{{ s.step_2_text }}</span></li>
-          <li><strong>{{ s.step_3_title }}</strong><span>{{ s.step_3_text }}</span></li>
-        </ol>
-      </div>
-      <div class="thh-price">
-        <h3 class="thh-h3">{{ s.price_heading }}</h3>
+    <div class="thh-wrap">
+      <div class="thh-price thh-price--wide">
+        <p class="thh-eyebrow">Pricing</p>
+        <h2 id="thh-how-{{ section.id }}" class="thh-h2">{{ s.price_heading }}</h2>
         <p>{{ s.price_text }}</p>
         <ul>
           <li><strong>The item</strong> Size, weight and how many pieces.</li>
@@ -100,16 +93,17 @@
   {%- if s.compare_heading != blank -%}
   <section class="thh-band thh-band--soft" aria-labelledby="thh-cmp-{{ section.id }}">
     <div class="thh-wrap">
-      <h2 id="thh-cmp-{{ section.id }}" class="thh-h2">{{ s.compare_heading }}</h2>
+      <h2 id="thh-cmp-{{ section.id }}" class="thh-h2">Titan Express vs Hourly Removalists vs Doing It Yourself</h2>
       <div class="thh-table-wrap">
         <table class="thh-table">
-          <thead><tr><th scope="col"></th><th scope="col">Titan Express</th><th scope="col">Big removal truck</th><th scope="col">Doing it yourself</th></tr></thead>
+          <thead><tr><th scope="col"></th><th scope="col">Titan Express</th><th scope="col">Hourly removalists</th><th scope="col">Doing it yourself</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Best for</th><td>One item, a few pieces or a small move</td><td>Full house moves</td><td>Small items that fit in your car</td></tr>
+            <tr><th scope="row">Best for</th><td>One item through to a full apartment or house move</td><td>Full house moves</td><td>Small items that fit in your car</td></tr>
             <tr><th scope="row">Price</th><td>Fixed price agreed before we start</td><td>Usually hourly, often with a call-out fee</td><td>Trailer or van hire, fuel and your time</td></tr>
+            <tr><th scope="row">Vehicles</th><td>Van, mini truck or 8 tonne truck to suit the job</td><td>One large truck</td><td>Whatever you can borrow or hire</td></tr>
             <tr><th scope="row">Same day</th><td>Often available, 7 days</td><td>Usually booked days ahead</td><td>Depends on hire availability</td></tr>
             <tr><th scope="row">Marketplace and store pickups</th><td>We deal with the seller or store for you</td><td>Not always offered</td><td>You arrange and lift it</td></tr>
-            <tr><th scope="row">Lifting and stairs</th><td>Two movers, trolleys, blankets and straps</td><td>Larger crew than small jobs need</td><td>You and a friend</td></tr>
+            <tr><th scope="row">Lifting and stairs</th><td>Two or three movers, trolleys, blankets and straps</td><td>Crew sized for big moves</td><td>You and a friend</td></tr>
           </tbody>
         </table>
       </div>
@@ -217,7 +211,7 @@
   .thh-facts li::before { content: ""; position: absolute; left: 14px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: var(--thh-grad); }
   .thh-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
   .thh-ctas--center { justify-content: center; }
-  .thh-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 700; text-decoration: none; border: 1px solid transparent; }
+  .thh-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 14px; font-weight: 700; text-decoration: none; border: 1px solid transparent; }
   .thh-btn--call { background: var(--thh-grad); color: #fff; box-shadow: 0 10px 26px rgba(11,92,255,.35); }
   .thh-btn--ghost { background: #fff; border-color: var(--thh-line); color: var(--thh-ink); }
   .thh-btn--light { background: #fff; color: var(--thh-ink); }
@@ -273,6 +267,8 @@
     .thh-split { grid-template-columns: 1fr; gap: 24px; }
     .thh-btn { width: 100%; }
   }
+  .thh-price--wide .thh-h2 { margin-bottom: 8px; }
+  @media (min-width: 800px) { .thh-price--wide { padding: 36px; } .thh-price--wide ul { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
 {% endstylesheet %}
 
 {% schema %}
