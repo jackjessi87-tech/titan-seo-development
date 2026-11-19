@@ -112,13 +112,13 @@
       </div>
       <div class="tho-copy">
         <h1 class="tho-h1">{{ s.heading }}</h1>
-        <p class="tho-sub">Couch, bed, fridge or a Marketplace buy. Book <strong>two movers and a truck</strong> for heavy jobs and stairs, or save with a <strong>budget one man and mini truck</strong>. Fixed price, often today.</p>
+        <p class="tho-sub">Sydney removalists for furniture, appliances and home moves. Book <strong>two or three movers with a truck</strong> for heavy items, stairs and full moves, or a <strong>mini truck or van with one man</strong> for single items. Fixed price, often today.</p>
         {{ callbtn | replace: '%%LBL%%', 'Call for furniture pickup &amp; delivery' }}
         <div class="tho-ctas2">
           <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}">{{ i_bolt }}<span>Quick quote in 60 seconds</span></a>
           <a class="tho-qbtn tho-qbtn--ghost" href="#tho-crew">{{ i_team }}<span>Compare crews</span></a>
         </div>
-        <p class="tho-for">Couches &middot; beds &middot; fridges &middot; Marketplace &amp; IKEA pickups &middot; small moves</p>
+        <p class="tho-for">Couches &middot; beds &middot; fridges &middot; Marketplace &amp; IKEA pickups &middot; apartment and house moves</p>
         <ul class="tho-proof">
           <li><span class="tho-stars">{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}</span><strong>5.0</strong>&nbsp;&middot; 59 Google reviews</li>
           <li>{{ i_check }}Fully insured</li>
@@ -130,14 +130,14 @@
 
   <div class="tho-ticker" aria-hidden="true"><div>
     {%- for i in (1..2) -%}
-      <span>{{ i_phone }}CALL {{ s.phone }} FOR FURNITURE PICKUP &amp; DELIVERY</span><span>MAN &amp; VAN</span><span>MARKETPLACE &amp; IKEA PICKUPS</span><span>SAME-DAY PICKUP</span><span>FIXED PRICE ON THE PHONE</span><span>2 MOVERS + LARGE VAN</span><span>7 DAYS</span>
+      <span>{{ i_phone }}CALL {{ s.phone }} FOR FURNITURE PICKUP &amp; DELIVERY</span><span>REMOVALISTS &amp; TRUCKS</span><span>MARKETPLACE &amp; IKEA PICKUPS</span><span>SAME-DAY PICKUP</span><span>FIXED PRICE ON THE PHONE</span><span>2 OR 3 MOVERS + TRUCK</span><span>7 DAYS</span>
     {%- endfor -%}
   </div></div>
 
   <section class="tho-sec tho-crew" id="tho-crew">
     <div class="tho-wrap">
       <p class="tho-eyebrow">Choose your crew</p>
-      <h2 class="tho-h2">Two movers for the heavy lifting, or one man to save</h2>
+      <h2 class="tho-h2">Removalists, trucks and crews sized to your job</h2>
       <p class="tho-crew__lead">Every job is a fixed price agreed before we start. No hourly meter, no surprises.</p>
       <div class="tho-crew__grid">
         <article class="tho-card tho-card--pro">
@@ -172,6 +172,34 @@
             <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-crew="Two men and truck">{{ i_bolt }}<span>Quote two movers</span></a>
           </div>
         </article>
+        <article class="tho-card tho-card--big">
+          <span class="tho-card__badge tho-card__badge--big">Full moves</span>
+          <svg class="tho-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="120" y="22" width="150" height="114" rx="8" fill="#071a3d"/>
+            <rect x="132" y="34" width="126" height="6" rx="3" fill="rgba(255,255,255,.28)"/>
+            <rect x="150" y="60" width="90" height="42" rx="9" fill="#0b5cff"/>
+            <text x="195" y="91" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="900" fill="#ffffff" stroke="none">8T</text>
+            <path d="M270 58h22l20 30v48h-42z" fill="#0b5cff"/><rect x="278" y="66" width="18" height="18" rx="2" fill="#cfe0ff"/>
+            <circle cx="150" cy="140" r="13" fill="#071a3d"/><circle cx="150" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="236" cy="140" r="13" fill="#071a3d"/><circle cx="236" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="294" cy="140" r="13" fill="#071a3d"/><circle cx="294" cy="140" r="5" fill="#cfe0ff"/>
+            <g fill="#0b5cff"><circle cx="30" cy="74" r="8"/><rect x="22" y="83" width="16" height="32" rx="6"/><circle cx="62" cy="74" r="8"/><rect x="54" y="83" width="16" height="32" rx="6"/><circle cx="94" cy="74" r="8"/><rect x="86" y="83" width="16" height="32" rx="6"/></g>
+            <g fill="#071a3d"><rect x="23" y="113" width="6" height="33" rx="3"/><rect x="31" y="113" width="6" height="33" rx="3"/><rect x="55" y="113" width="6" height="33" rx="3"/><rect x="63" y="113" width="6" height="33" rx="3"/><rect x="87" y="113" width="6" height="33" rx="3"/><rect x="95" y="113" width="6" height="33" rx="3"/></g>
+          </svg>
+          <h3 class="tho-card__t">{{ i_truck }}Three Men &amp; 8 Tonne Truck</h3>
+          <p class="tho-card__d">For apartment and house moves and big loads. Everything goes in one trip, wrapped and strapped.</p>
+          <ul class="tho-card__l">
+            <li>{{ i_check }}Apartment, unit and house moves</li>
+            <li>{{ i_check }}Mirrors, glass and marble wrapped with care</li>
+            <li>{{ i_check }}Lifts, loading docks and stairs handled</li>
+            <li>{{ i_check }}Blankets, shrink wrap and straps included</li>
+          </ul>
+          <div class="tho-card__foot">
+            <span class="tho-card__price">Fixed quote<small>for your whole move</small></span>
+            <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-crew="Three men and 8 tonne truck">{{ i_bolt }}<span>Quote a full move</span></a>
+          </div>
+        </article>
         <article class="tho-card tho-card--eco">
           <span class="tho-card__badge tho-card__badge--eco">Budget friendly</span>
           <svg class="tho-ill" viewBox="0 0 320 170" aria-hidden="true">
@@ -190,7 +218,7 @@
             <path d="M52 94l14-30" stroke="#2f7bff" stroke-width="6" stroke-linecap="round"/>
             <g fill="#22c55e"><circle cx="292" cy="40" r="16" opacity=".15"/><path d="M285 40l5 5 9-10" stroke="#22c55e" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
           </svg>
-          <h3 class="tho-card__t">{{ i_truck }}One Man &amp; Mini Truck</h3>
+          <h3 class="tho-card__t">{{ i_truck }}One Man &amp; Mini Truck or Van</h3>
           <p class="tho-card__d">The budget option for single items and light loads. You give a hand at both ends and save.</p>
           <ul class="tho-card__l">
             <li>{{ i_check }}Single items and Marketplace pickups</li>
@@ -221,8 +249,8 @@
           <li><a class="tho-job" href="/pages/single-item-delivery-sydney"><span class="tho-job__ic">{{ j_box }}</span><span class="tho-job__t">Single item</span>{{ i_thin }}</a></li>
           <li><a class="tho-job" href="/pages/fridge-washing-machine-delivery-sydney"><span class="tho-job__ic">{{ j_fridge }}</span><span class="tho-job__t">Fridge &amp; washer</span>{{ i_thin }}</a></li>
           <li><a class="tho-job" href="/pages/bed-mattress-delivery-sydney"><span class="tho-job__ic">{{ j_bed }}</span><span class="tho-job__t">Bed &amp; mattress</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/man-with-a-van-sydney"><span class="tho-job__ic">{{ j_truck }}</span><span class="tho-job__t">Man and van</span>{{ i_thin }}</a></li>
-          <li><a class="tho-job" href="/pages/small-removals-sydney"><span class="tho-job__ic">{{ j_home }}</span><span class="tho-job__t">Small removals</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/man-with-a-van-sydney"><span class="tho-job__ic">{{ j_truck }}</span><span class="tho-job__t">Van &amp; mini truck</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/small-removals-sydney"><span class="tho-job__ic">{{ j_home }}</span><span class="tho-job__t">Home &amp; unit moves</span>{{ i_thin }}</a></li>
       </ul>
     </div>
   </section>
@@ -496,6 +524,11 @@
   @media (prefers-reduced-motion: reduce) {
     .tho *, .tho *::before, .tho *::after { animation:none !important; transition:none !important; }
   }
+  /* Three crews (2026-11-20) */
+  .tho-card--big { border:2px solid var(--b9); }
+  .tho-card--big::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, var(--b9), var(--b6)); }
+  .tho-card__badge--big { background:var(--b9); }
+  @media (min-width: 1040px) { .tho-crew__grid { grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; } .tho-card { padding:22px; } }
 {% endstylesheet %}
 
 {% schema %}

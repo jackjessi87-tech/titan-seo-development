@@ -114,7 +114,7 @@
 >
 
 <title>
-  {{ page_title }}
+  {%- if is_home -%}Furniture Pickup &amp; Delivery Sydney | Removalists &amp; Trucks | Titan Express{%- else -%}{{ page_title }}{%- endif -%}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
   {%- unless page_title contains shop.name or is_home %} &ndash; {{ shop.name }}{% endunless -%}

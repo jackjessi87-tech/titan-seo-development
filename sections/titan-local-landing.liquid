@@ -228,6 +228,93 @@
         endif
       -%}
       <div class="tll-hq" id="tll-quote-{{ uid }}">
+        <div class="tll-hero__media tll-hq__photo">
+        {%- liquid
+          assign hero_asset = blank
+          case pg
+            when 'fridge-movers-sydney'
+              assign hero_asset = 'titan-job-french-fridge.jpg'
+              assign hero_asset_alt = 'Fridge movers Sydney: French-door fridge standing upright in the Titan Express van with an appliance trolley'
+            when 'fridge-washing-machine-delivery-sydney'
+              assign hero_asset = 'titan-job-french-fridge.jpg'
+              assign hero_asset_alt = 'French-door fridge standing upright in the Titan Express van with a trolley ready'
+            when 'couch-delivery'
+              assign hero_asset = 'titan-job-sofa.jpg'
+              assign hero_asset_alt = 'Leather sofa strapped upright in the Titan Express van'
+            when 'marketplace-pickup-delivery'
+              assign hero_asset = 'titan-job-kerb-pickup.jpg'
+              assign hero_asset_alt = 'Sofa sections and a coffee table waiting on the kerb beside the Titan Express van'
+            when 'washing-machine-delivery-sydney'
+              assign hero_asset = 'titan-job-washer-dock.jpg'
+              assign hero_asset_alt = 'Wrapped fridge and front-loader washing machine on a dolly behind the Titan Express van'
+            when 'bed-mattress-delivery-sydney'
+              assign hero_asset = 'titan-job-mattress.jpg'
+              assign hero_asset_alt = 'Mattress, boxed washing machine and wrapped furniture strapped in the van on an evening job'
+            when 'furniture-store-delivery-sydney', 'ikea-pickup-delivery-sydney'
+              assign hero_asset = 'titan-job-boxed.jpg'
+              assign hero_asset_alt = 'Boxed furniture store order strapped upright in the Titan Express van'
+            when 'bunnings-store-collection-sydney'
+              assign hero_asset = 'titan-job-store-box.jpg'
+              assign hero_asset_alt = 'Boxed fridge from a store beside the open Titan Express van'
+            when 'dining-table-delivery-sydney'
+              assign hero_asset = 'titan-job-tables.jpg'
+              assign hero_asset_alt = 'Two outdoor tables and stools stacked and strapped in the Titan Express van'
+            when 'small-removals-sydney'
+              assign hero_asset = 'titan-job-small-load.jpg'
+              assign hero_asset_alt = 'Cabinet, cupboard, chair and a box strapped in the van on a small move'
+            when 'single-item-delivery-sydney', 'gumtree-pickup-delivery-sydney'
+              assign hero_asset = 'titan-job-sofa-dolly.jpg'
+              assign hero_asset_alt = 'Sofa standing on a dolly beside the open Titan Express van'
+            when 'furniture-pickup-delivery-sydney'
+              assign hero_asset = 'titan-job-wrapped-sofas.jpg'
+              assign hero_asset_alt = 'Shrink-wrapped sofas loaded in the Titan Express van with a trolley'
+            when 'man-with-a-van'
+              assign hero_asset = 'titan-job-van-load.jpg'
+              assign hero_asset_alt = 'Blanket-wrapped furniture, a trolley and an exercise bike loaded in the van'
+            when 'same-day-removalists-sydney'
+              assign hero_asset = 'titan-job-freezer.jpg'
+              assign hero_asset_alt = 'Blanket-wrapped furniture and a chest freezer strapped in the Titan Express van'
+            when 'wardrobe-delivery-sydney', 'student-removals-sydney'
+              assign hero_asset = 'titan-job-room.jpg'
+              assign hero_asset_alt = 'Blanket-wrapped furniture, a chest of drawers and an exercise bike strapped in the van'
+            when 'furniture-courier-sydney', 'two-men-and-a-van-sydney', 'van-and-driver-hire-sydney'
+              assign hero_asset = 'titan-job-wrapped.jpg'
+              assign hero_asset_alt = 'Two blanket-wrapped items strapped in the Titan Express van outside an apartment block'
+          endcase
+        -%}
+        {%- liquid
+          assign home_file = 'titan-two-movers-truck-hero.webp'
+          assign home_alt = 'Two Titan Express movers loading wrapped furniture into the truck'
+          if pg contains 'fridge' or pg contains 'washing' or pg contains 'appliance'
+            assign home_file = 'titan-fridge-trolley-ramp.webp'
+            assign home_alt = 'Titan Express fridge delivery, fridge on a trolley at the truck ramp'
+          elsif pg contains 'bed' or pg contains 'mattress'
+            assign home_file = 'titan-mattress-delivery-truck.webp'
+            assign home_alt = 'Titan Express mattress delivery, mattress loaded at the truck'
+          elsif pg contains 'table' or pg contains 'desk'
+            assign home_file = 'titan-dining-table-two-movers.webp'
+            assign home_alt = 'Two Titan Express movers carrying a dining table'
+          elsif pg contains 'couch' or pg contains 'sofa' or pg contains 'marketplace' or pg contains 'gumtree' or pg contains 'furniture'
+            assign home_file = 'titan-sofa-truck-loading.webp'
+            assign home_alt = 'Titan Express movers loading a sofa into the truck'
+          endif
+          assign home_img = images[home_file]
+        -%}
+        {%- if home_img != blank -%}
+          {%- assign hero_alt_final = home_alt | append: alt_tail -%}
+          {{ home_img | image_url: width: 1024 | image_tag: alt: hero_alt_final, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1024', sizes: '(min-width: 900px) 42vw, calc(100vw - 32px)', class: 'tll-hero__img' }}
+        {%- elsif hero_asset != blank -%}
+          {%- assign hero_alt_final = hero_asset_alt | append: alt_tail -%}
+          <img class="tll-hero__img" src="{{ hero_asset | asset_url }}" width="900" height="1120" loading="eager" fetchpriority="high" alt="{{ hero_alt_final | escape }}">
+        {%- elsif s.hero_image != blank -%}
+          {%- assign hero_alt = s.hero_alt | default: s.hero_image.alt | default: page.title -%}
+          {%- unless hero_alt contains area -%}{%- assign hero_alt = hero_alt | append: ' in ' | append: area -%}{%- endunless -%}
+          {%- assign hero_alt_final = hero_alt -%}
+          {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
+        {%- endif -%}
+        <span class="tlh-tag"><i></i>Same-day pickups today</span>
+        <span class="tlh-ribbon">Insured &middot; Wrapped &middot; Strapped</span>
+      </div>
         {%- form 'contact', id: form_id, class: 'tll-form' -%}
           <input type="hidden" name="contact[source]" value="{{ page.title }} – local page quote">
           {%- if form.posted_successfully? -%}
@@ -238,16 +325,13 @@
               <a class="tll-btn tll-btn--call tll-shine" href="tel:{{ phone_intl }}"><span class="tll-btn__icon tll-ringer">{{ icon_phone }}</span><span class="tll-btn__label"><small>Need {{ svc_esc }} today?</small><span class="tll-dial" aria-label="{{ s.phone }}">{{ dial }}</span></span>{{ icon_thin }}</a>
             </div>
           {%- else -%}
-            <div class="tll-hq__head">
-              <p class="tll-hq__title">{{ icon_bolt }}<span>Get your free quote</span></p>
-              <p class="tll-hq__sub">About a minute &middot; No obligation</p>
-            </div>
+            <p class="tll-hq__title">{{ icon_bolt }}<span>Get your free quote</span></p>
             {%- if form.errors -%}
               <div class="tll-form__error" tabindex="-1" autofocus>{{ form.errors | default_errors }}</div>
             {%- endif -%}
 
             <div class="tll-progress" aria-hidden="true"><span data-progress></span></div>
-            <p class="tll-form__step-label" data-step-label aria-live="polite"></p>
+            <div class="tll-hq__meta"><p class="tll-form__step-label" data-step-label aria-live="polite"></p><p class="tll-hq__sub">About a minute &middot; No obligation</p></div>
 
             <fieldset class="tll-step" data-step="route">
               <legend>Where from, and where to?</legend>
@@ -360,93 +444,6 @@
         </ul>
       </div>
 
-      <div class="tll-hero__media">
-        {%- liquid
-          assign hero_asset = blank
-          case pg
-            when 'fridge-movers-sydney'
-              assign hero_asset = 'titan-job-french-fridge.jpg'
-              assign hero_asset_alt = 'Fridge movers Sydney: French-door fridge standing upright in the Titan Express van with an appliance trolley'
-            when 'fridge-washing-machine-delivery-sydney'
-              assign hero_asset = 'titan-job-french-fridge.jpg'
-              assign hero_asset_alt = 'French-door fridge standing upright in the Titan Express van with a trolley ready'
-            when 'couch-delivery'
-              assign hero_asset = 'titan-job-sofa.jpg'
-              assign hero_asset_alt = 'Leather sofa strapped upright in the Titan Express van'
-            when 'marketplace-pickup-delivery'
-              assign hero_asset = 'titan-job-kerb-pickup.jpg'
-              assign hero_asset_alt = 'Sofa sections and a coffee table waiting on the kerb beside the Titan Express van'
-            when 'washing-machine-delivery-sydney'
-              assign hero_asset = 'titan-job-washer-dock.jpg'
-              assign hero_asset_alt = 'Wrapped fridge and front-loader washing machine on a dolly behind the Titan Express van'
-            when 'bed-mattress-delivery-sydney'
-              assign hero_asset = 'titan-job-mattress.jpg'
-              assign hero_asset_alt = 'Mattress, boxed washing machine and wrapped furniture strapped in the van on an evening job'
-            when 'furniture-store-delivery-sydney', 'ikea-pickup-delivery-sydney'
-              assign hero_asset = 'titan-job-boxed.jpg'
-              assign hero_asset_alt = 'Boxed furniture store order strapped upright in the Titan Express van'
-            when 'bunnings-store-collection-sydney'
-              assign hero_asset = 'titan-job-store-box.jpg'
-              assign hero_asset_alt = 'Boxed fridge from a store beside the open Titan Express van'
-            when 'dining-table-delivery-sydney'
-              assign hero_asset = 'titan-job-tables.jpg'
-              assign hero_asset_alt = 'Two outdoor tables and stools stacked and strapped in the Titan Express van'
-            when 'small-removals-sydney'
-              assign hero_asset = 'titan-job-small-load.jpg'
-              assign hero_asset_alt = 'Cabinet, cupboard, chair and a box strapped in the van on a small move'
-            when 'single-item-delivery-sydney', 'gumtree-pickup-delivery-sydney'
-              assign hero_asset = 'titan-job-sofa-dolly.jpg'
-              assign hero_asset_alt = 'Sofa standing on a dolly beside the open Titan Express van'
-            when 'furniture-pickup-delivery-sydney'
-              assign hero_asset = 'titan-job-wrapped-sofas.jpg'
-              assign hero_asset_alt = 'Shrink-wrapped sofas loaded in the Titan Express van with a trolley'
-            when 'man-with-a-van'
-              assign hero_asset = 'titan-job-van-load.jpg'
-              assign hero_asset_alt = 'Blanket-wrapped furniture, a trolley and an exercise bike loaded in the van'
-            when 'same-day-removalists-sydney'
-              assign hero_asset = 'titan-job-freezer.jpg'
-              assign hero_asset_alt = 'Blanket-wrapped furniture and a chest freezer strapped in the Titan Express van'
-            when 'wardrobe-delivery-sydney', 'student-removals-sydney'
-              assign hero_asset = 'titan-job-room.jpg'
-              assign hero_asset_alt = 'Blanket-wrapped furniture, a chest of drawers and an exercise bike strapped in the van'
-            when 'furniture-courier-sydney', 'two-men-and-a-van-sydney', 'van-and-driver-hire-sydney'
-              assign hero_asset = 'titan-job-wrapped.jpg'
-              assign hero_asset_alt = 'Two blanket-wrapped items strapped in the Titan Express van outside an apartment block'
-          endcase
-        -%}
-        {%- liquid
-          assign home_file = 'titan-two-movers-truck-hero.webp'
-          assign home_alt = 'Two Titan Express movers loading wrapped furniture into the truck'
-          if pg contains 'fridge' or pg contains 'washing' or pg contains 'appliance'
-            assign home_file = 'titan-fridge-trolley-ramp.webp'
-            assign home_alt = 'Titan Express fridge delivery, fridge on a trolley at the truck ramp'
-          elsif pg contains 'bed' or pg contains 'mattress'
-            assign home_file = 'titan-mattress-delivery-truck.webp'
-            assign home_alt = 'Titan Express mattress delivery, mattress loaded at the truck'
-          elsif pg contains 'table' or pg contains 'desk'
-            assign home_file = 'titan-dining-table-two-movers.webp'
-            assign home_alt = 'Two Titan Express movers carrying a dining table'
-          elsif pg contains 'couch' or pg contains 'sofa' or pg contains 'marketplace' or pg contains 'gumtree' or pg contains 'furniture'
-            assign home_file = 'titan-sofa-truck-loading.webp'
-            assign home_alt = 'Titan Express movers loading a sofa into the truck'
-          endif
-          assign home_img = images[home_file]
-        -%}
-        {%- if home_img != blank -%}
-          {%- assign hero_alt_final = home_alt | append: alt_tail -%}
-          {{ home_img | image_url: width: 1024 | image_tag: alt: hero_alt_final, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1024', sizes: '(min-width: 900px) 42vw, calc(100vw - 32px)', class: 'tll-hero__img' }}
-        {%- elsif hero_asset != blank -%}
-          {%- assign hero_alt_final = hero_asset_alt | append: alt_tail -%}
-          <img class="tll-hero__img" src="{{ hero_asset | asset_url }}" width="900" height="1120" loading="eager" fetchpriority="high" alt="{{ hero_alt_final | escape }}">
-        {%- elsif s.hero_image != blank -%}
-          {%- assign hero_alt = s.hero_alt | default: s.hero_image.alt | default: page.title -%}
-          {%- unless hero_alt contains area -%}{%- assign hero_alt = hero_alt | append: ' in ' | append: area -%}{%- endunless -%}
-          {%- assign hero_alt_final = hero_alt -%}
-          {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
-        {%- endif -%}
-        <span class="tlh-tag"><i></i>Same-day pickups today</span>
-        <span class="tlh-ribbon">Insured &middot; Wrapped &middot; Strapped</span>
-      </div>
     </div>
   </section>
 
@@ -455,7 +452,7 @@
   <section class="tlh-sec tlh-crew" id="tlh-crew-{{ uid }}" aria-labelledby="tlh-crew-h-{{ uid }}">
     <div class="tll-wrap">
       <p class="tlh-eyebrow">Choose your crew</p>
-      <h2 class="tlh-h2" id="tlh-crew-h-{{ uid }}">Two movers for the heavy lifting, or one man to save</h2>
+      <h2 class="tlh-h2" id="tlh-crew-h-{{ uid }}">Removalists, trucks and crews sized to your job</h2>
       <p class="tlh-crew__lead">Every job is a fixed price agreed before we start. No hourly meter, no surprises.</p>
       <div class="tlh-crew__grid">
         <article class="tlh-card tlh-card--pro">
@@ -488,6 +485,34 @@
             <a class="tlh-qbtn" data-crew="Two men and truck" href="#tll-quote-{{ uid }}">{{ icon_bolt }}<span>Quote two movers</span></a>
           </div>
         </article>
+        <article class="tlh-card tlh-card--big">
+          <span class="tlh-card__badge tlh-card__badge--big">Full moves</span>
+          <svg class="tlh-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="120" y="22" width="150" height="114" rx="8" fill="#071a3d"/>
+            <rect x="132" y="34" width="126" height="6" rx="3" fill="rgba(255,255,255,.28)"/>
+            <rect x="150" y="60" width="90" height="42" rx="9" fill="#0b5cff"/>
+            <text x="195" y="91" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="900" fill="#ffffff" stroke="none">8T</text>
+            <path d="M270 58h22l20 30v48h-42z" fill="#0b5cff"/><rect x="278" y="66" width="18" height="18" rx="2" fill="#cfe0ff"/>
+            <circle cx="150" cy="140" r="13" fill="#071a3d"/><circle cx="150" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="236" cy="140" r="13" fill="#071a3d"/><circle cx="236" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="294" cy="140" r="13" fill="#071a3d"/><circle cx="294" cy="140" r="5" fill="#cfe0ff"/>
+            <g fill="#0b5cff"><circle cx="30" cy="74" r="8"/><rect x="22" y="83" width="16" height="32" rx="6"/><circle cx="62" cy="74" r="8"/><rect x="54" y="83" width="16" height="32" rx="6"/><circle cx="94" cy="74" r="8"/><rect x="86" y="83" width="16" height="32" rx="6"/></g>
+            <g fill="#071a3d"><rect x="23" y="113" width="6" height="33" rx="3"/><rect x="31" y="113" width="6" height="33" rx="3"/><rect x="55" y="113" width="6" height="33" rx="3"/><rect x="63" y="113" width="6" height="33" rx="3"/><rect x="87" y="113" width="6" height="33" rx="3"/><rect x="95" y="113" width="6" height="33" rx="3"/></g>
+          </svg>
+          <h3 class="tlh-card__t">{{ tlh_truck }}Three Men &amp; 8 Tonne Truck</h3>
+          <p class="tlh-card__d">For apartment and house moves and big loads. Everything goes in one trip, wrapped and strapped.</p>
+          <ul class="tlh-card__l">
+            <li>{{ icon_check }}Apartment, unit and house moves</li>
+            <li>{{ icon_check }}Mirrors, glass and marble wrapped with care</li>
+            <li>{{ icon_check }}Lifts, loading docks and stairs handled</li>
+            <li>{{ icon_check }}Blankets, shrink wrap and straps included</li>
+          </ul>
+          <div class="tlh-card__foot">
+            <span class="tlh-card__price">Fixed quote<small>for your whole move</small></span>
+            <a class="tlh-qbtn" href="#tll-quote-{{ uid }}" data-crew="Three men and 8 tonne truck">{{ icon_bolt }}<span>Quote a full move</span></a>
+          </div>
+        </article>
         <article class="tlh-card tlh-card--eco">
           <span class="tlh-card__badge tlh-card__badge--eco">Budget friendly</span>
           <svg class="tlh-ill" viewBox="0 0 320 170" aria-hidden="true">
@@ -503,7 +528,7 @@
             <g fill="#2f7bff"><circle cx="44" cy="74" r="9"/><rect x="35" y="84" width="18" height="34" rx="7"/></g>
             <g fill="#071a3d"><rect x="36" y="116" width="6" height="30" rx="3"/><rect x="46" y="116" width="6" height="30" rx="3"/></g>
           </svg>
-          <h3 class="tlh-card__t">{{ tlh_truck }}One Man &amp; Mini Truck</h3>
+          <h3 class="tlh-card__t">{{ tlh_truck }}One Man &amp; Mini Truck or Van</h3>
           <p class="tlh-card__d">The budget option for single items and light loads. You give a hand at both ends and save.</p>
           <ul class="tlh-card__l">
             <li>{{ icon_check }}Single items and Marketplace pickups</li>
@@ -1638,14 +1663,14 @@
     .tlh-trust { grid-template-columns:repeat(4, 1fr); }
   }
   /* ===== Hero quote card (2026-11-20): the quote form sits in the hero, one question per step ===== */
-  .tll-hero__inner { grid-template-areas:"copy" "quote" "more" "media"; gap:16px; }
+  .tll-hero__inner { grid-template-areas:"copy" "quote" "more"; gap:16px; }
   .tll-hero__copy { grid-area:copy; min-width:0; }
   .tll-hero__more { grid-area:more; min-width:0; }
   .tll-hero__media { grid-area:media; order:0; }
   .tll-hero__sub { margin:0; }
   @media (max-width: 899px) {
     .tll-hero__copy { display:contents; }
-    .tll-hero__inner { grid-template-areas:"kicker" "h1" "quote" "sub" "more" "media"; }
+    .tll-hero__inner { grid-template-areas:"kicker" "h1" "quote" "sub" "more"; }
     .tll-hero .tll-kicker { grid-area:kicker; justify-self:start; margin:0; }
     .tll-hero .tll-h1 { grid-area:h1; margin:0 0 6px; }
     .tll-hero__sub { grid-area:sub; }
@@ -1711,13 +1736,29 @@
   .tll-quote__actions { display:grid; gap:16px; justify-items:start; }
   .tlh-qbtn--lg { padding:16px 24px; font-size:1.05rem; }
   @media (min-width: 900px) {
-    .tll-hero__inner { grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); grid-template-rows:auto auto 1fr; grid-template-areas:"copy quote" "more quote" "more media"; gap:22px 48px; align-items:start; padding-block:44px 56px; }
+    .tll-hero__inner { grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); grid-template-rows:auto 1fr; grid-template-areas:"copy quote" "more quote"; gap:22px 48px; align-items:start; padding-block:44px 56px; }
     .tll-hero__media { order:0; aspect-ratio:16 / 8.5; }
     .tll-hq .tll-form { gap:15px; padding:26px 26px 22px; }
     .tll-hq__title { font-size:1.4rem; }
     .tll-hq .tll-step legend { font-size:1.25rem; }
     .tll-chip span { min-height:78px; font-size:.85rem; }
   }
+  /* Photo merged into the top of the quote card, three crews (2026-11-20) */
+  .tll-hq { position:relative; overflow:hidden; --hq-photo:128px; }
+  .tll-hq .tll-hero__media { grid-area:auto; order:0; height:var(--hq-photo); aspect-ratio:auto; border:0; border-radius:0; box-shadow:none; }
+  .tll-hq .tll-hero__media::before { display:none; }
+  .tll-hq .tll-hero__media::after { top:auto; right:0; bottom:0; left:0; width:auto; height:72%; border:0; border-radius:0; opacity:1; background:linear-gradient(180deg, transparent, rgba(7,26,61,.85)); z-index:2; }
+  .tll-hq .tlh-tag { top:10px; bottom:auto; left:10px; padding:6px 10px; font-size:.74rem; }
+  .tll-hq .tlh-ribbon { top:18px; right:-58px; font-size:.62rem; }
+  .tll-hq .tll-hq__title { position:absolute; z-index:3; left:16px; right:16px; top:calc(var(--hq-photo) - 40px); color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.5); }
+  .tll .tll-hq .tll-hq__title svg { color:#4ade80; }
+  .tll-hq__meta { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:24px; }
+  .tll-hq .tll-form { padding-top:14px; }
+  .tlh-card--big { border:2px solid var(--b9); }
+  .tlh-card--big::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, var(--b9), var(--b6)); }
+  .tlh-card__badge--big { background:var(--b9); }
+  @media (min-width: 900px) { .tll-hq { --hq-photo:190px; } .tll-hq .tll-hq__title { left:26px; top:calc(var(--hq-photo) - 48px); } }
+  @media (min-width: 1040px) { .tlh-crew__grid { grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; } .tlh-card { padding:22px; } }
 {% endstylesheet %}
 
 {% schema %}
