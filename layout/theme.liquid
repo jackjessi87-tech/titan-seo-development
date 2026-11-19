@@ -7,13 +7,11 @@
 >
   <head>
     {%- render 'titan-google-ads' -%}
-    {%- if settings.favicon != blank -%}
-      <link
-        rel="icon"
-        type="image/png"
-        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
-      >
-    {%- endif -%}
+    {%- comment -%} Titan Express truck favicon (2026-11-19), served from theme assets {%- endcomment -%}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'titan-favicon-32.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ 'titan-favicon-48.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ 'titan-favicon-192.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'titan-favicon-180.png' | asset_url }}">
 
     {% # theme-check-disable RemoteAsset %}
     {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
