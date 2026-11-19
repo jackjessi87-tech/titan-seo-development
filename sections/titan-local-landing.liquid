@@ -159,6 +159,8 @@
 {%- capture icon_star -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>{%- endcapture -%}
 {%- capture icon_pin -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>{%- endcapture -%}
 
+{%- capture tlh_team -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.2A5 5 0 0 1 21 19"/></svg>{%- endcapture -%}
+{%- capture tlh_truck -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>{%- endcapture -%}
 <div class="tll" id="tll-{{ uid }}" data-open-hour="{{ s.open_hour }}" data-close-hour="{{ s.close_hour }}">
 
 {%- capture cstrip -%}<div class="tll-wrap tll-cstrip"><p>%%T%%</p><a class="tll-btn tll-btn--call tll-shine" href="tel:{{ phone_intl }}"><span class="tll-btn__icon tll-ringer">{{ icon_phone }}</span><span class="tll-btn__label"><small>Call for {{ svc_esc }}</small><span class="tll-dial" aria-label="{{ s.phone }}">{{ dial }}</span></span>{{ icon_thin }}</a></div>{%- endcapture -%}
@@ -202,7 +204,10 @@
 
         <div class="tll-hero__ctas">
           <a class="tll-btn tll-btn--call tll-shine" href="tel:{{ phone_intl }}"><span class="tll-btn__icon tll-ringer">{{ icon_phone }}</span><span class="tll-btn__label"><small>Call for {{ svc_esc }}</small><span class="tll-dial" aria-label="{{ s.phone }}">{{ dial }}</span></span>{{ icon_thin }}</a>
-          <a class="tll-btn tll-btn--ghost" href="#tll-quote-{{ uid }}">Get my fixed price {{ icon_arrow }}</a>
+        </div>
+        <div class="tlh-ctas2">
+          <a class="tlh-qbtn" href="#tll-quote-{{ uid }}">{{ icon_bolt }}<span>Quick quote in 60 seconds</span></a>
+          <a class="tlh-qbtn tlh-qbtn--ghost" href="#tlh-crew-{{ uid }}">{{ tlh_team }}<span>Compare crews</span></a>
         </div>
 
         <ul class="tll-trust" role="list">
@@ -266,7 +271,28 @@
               assign hero_asset_alt = 'Two blanket-wrapped items strapped in the Titan Express van outside an apartment block'
           endcase
         -%}
-        {%- if hero_asset != blank -%}
+        {%- liquid
+          assign home_file = 'titan-two-movers-truck-hero.webp'
+          assign home_alt = 'Two Titan Express movers loading wrapped furniture into the truck'
+          if pg contains 'fridge' or pg contains 'washing' or pg contains 'appliance'
+            assign home_file = 'titan-fridge-trolley-ramp.webp'
+            assign home_alt = 'Titan Express fridge delivery, fridge on a trolley at the truck ramp'
+          elsif pg contains 'bed' or pg contains 'mattress'
+            assign home_file = 'titan-mattress-delivery-truck.webp'
+            assign home_alt = 'Titan Express mattress delivery, mattress loaded at the truck'
+          elsif pg contains 'table' or pg contains 'desk'
+            assign home_file = 'titan-dining-table-two-movers.webp'
+            assign home_alt = 'Two Titan Express movers carrying a dining table'
+          elsif pg contains 'couch' or pg contains 'sofa' or pg contains 'marketplace' or pg contains 'gumtree' or pg contains 'furniture'
+            assign home_file = 'titan-sofa-truck-loading.webp'
+            assign home_alt = 'Titan Express movers loading a sofa into the truck'
+          endif
+          assign home_img = images[home_file]
+        -%}
+        {%- if home_img != blank -%}
+          {%- assign hero_alt_final = home_alt | append: alt_tail -%}
+          {{ home_img | image_url: width: 1024 | image_tag: alt: hero_alt_final, loading: 'eager', fetchpriority: 'high', widths: '360, 480, 640, 800, 1024', sizes: '(min-width: 900px) 42vw, calc(100vw - 32px)', class: 'tll-hero__img' }}
+        {%- elsif hero_asset != blank -%}
           {%- assign hero_alt_final = hero_asset_alt | append: alt_tail -%}
           <img class="tll-hero__img" src="{{ hero_asset | asset_url }}" width="900" height="1120" loading="eager" fetchpriority="high" alt="{{ hero_alt_final | escape }}">
         {%- elsif s.hero_image != blank -%}
@@ -275,10 +301,105 @@
           {%- assign hero_alt_final = hero_alt -%}
           {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
         {%- endif -%}
-        <div class="tll-glass tll-hero__badge">
-          <span class="tll-live__dot" aria-hidden="true"></span>
-          <div><strong>{{ s.hero_badge_title }}</strong><span>{{ s.hero_badge_text }}</span></div>
-        </div>
+        <span class="tlh-tag"><i></i>Same-day pickups today</span>
+        <span class="tlh-ribbon">Insured &middot; Wrapped &middot; Strapped</span>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} Choose your crew, same cards as the homepage {%- endcomment -%}
+  <section class="tlh-sec tlh-crew" id="tlh-crew-{{ uid }}" aria-labelledby="tlh-crew-h-{{ uid }}">
+    <div class="tll-wrap">
+      <p class="tlh-eyebrow">Choose your crew</p>
+      <h2 class="tlh-h2" id="tlh-crew-h-{{ uid }}">Two movers for the heavy lifting, or one man to save</h2>
+      <p class="tlh-crew__lead">Every job is a fixed price agreed before we start. No hourly meter, no surprises.</p>
+      <div class="tlh-crew__grid">
+        <article class="tlh-card tlh-card--pro">
+          <span class="tlh-card__badge">Most popular</span>
+          <svg class="tlh-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <defs><linearGradient id="tlh-gt-{{ uid }}" x1="0" x2="1"><stop offset="0" stop-color="#2f7bff"/><stop offset="1" stop-color="#0b5cff"/></linearGradient></defs>
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="184" y="40" width="96" height="96" rx="8" fill="url(#tlh-gt-{{ uid }})"/>
+            <path d="M280 70h18l16 24v42h-34z" fill="#0a2a63"/><rect x="286" y="78" width="14" height="14" rx="2" fill="#8fb4ff"/>
+            <rect x="194" y="52" width="76" height="6" rx="3" fill="rgba(255,255,255,.35)"/>
+            <circle cx="208" cy="140" r="13" fill="#071a3d"/><circle cx="208" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="292" cy="140" r="13" fill="#071a3d"/><circle cx="292" cy="140" r="5" fill="#cfe0ff"/>
+            <rect class="tlh-ill__sofa" x="58" y="92" width="92" height="30" rx="8" fill="#5a6782"/><rect class="tlh-ill__sofa" x="62" y="82" width="84" height="16" rx="6" fill="#6b7896"/>
+            <g fill="#0b5cff"><circle cx="40" cy="70" r="9"/><rect x="31" y="80" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="32" y="112" width="6" height="34" rx="3"/><rect x="42" y="112" width="6" height="34" rx="3"/></g>
+            <g fill="#0b5cff"><circle cx="166" cy="70" r="9"/><rect x="157" y="80" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="158" y="112" width="6" height="34" rx="3"/><rect x="168" y="112" width="6" height="34" rx="3"/></g>
+            <g fill="#fbbf24"><circle cx="100" cy="58" r="3"/><circle cx="118" cy="46" r="2"/><circle cx="84" cy="44" r="2"/></g>
+          </svg>
+          <h3 class="tlh-card__t">{{ tlh_team }}Two Men &amp; Truck</h3>
+          <p class="tlh-card__d">Full service for heavy and bulky furniture. We do all the lifting, stairs and tight corners.</p>
+          <ul class="tlh-card__l">
+            <li>{{ icon_check }}Sofas, fridges, wardrobes and full rooms</li>
+            <li>{{ icon_check }}Stairs, lifts and narrow hallways handled</li>
+            <li>{{ icon_check }}Blankets, straps and trolleys included</li>
+            <li>{{ icon_check }}You don't lift a thing</li>
+          </ul>
+          <div class="tlh-card__foot">
+            <span class="tlh-card__price">Fixed price<small>quoted in minutes</small></span>
+            <a class="tlh-qbtn" href="#tll-quote-{{ uid }}">{{ icon_bolt }}<span>Quote two movers</span></a>
+          </div>
+        </article>
+        <article class="tlh-card tlh-card--eco">
+          <span class="tlh-card__badge tlh-card__badge--eco">Budget friendly</span>
+          <svg class="tlh-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="140" y="62" width="104" height="74" rx="8" fill="#0a2a63"/>
+            <path d="M244 82h20l16 20v34h-36z" fill="#2f7bff"/><rect x="250" y="88" width="14" height="12" rx="2" fill="#cfe0ff"/>
+            <rect x="150" y="72" width="84" height="5" rx="2.5" fill="rgba(255,255,255,.25)"/>
+            <circle cx="170" cy="140" r="12" fill="#071a3d"/><circle cx="170" cy="140" r="4.5" fill="#cfe0ff"/>
+            <circle cx="258" cy="140" r="12" fill="#071a3d"/><circle cx="258" cy="140" r="4.5" fill="#cfe0ff"/>
+            <rect x="74" y="72" width="40" height="64" rx="4" fill="#e8f0ff" stroke="#8fb4ff" stroke-width="2"/>
+            <path d="M66 60v82h52" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="118" cy="146" r="6" fill="#071a3d"/>
+            <g fill="#2f7bff"><circle cx="44" cy="74" r="9"/><rect x="35" y="84" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="36" y="116" width="6" height="30" rx="3"/><rect x="46" y="116" width="6" height="30" rx="3"/></g>
+          </svg>
+          <h3 class="tlh-card__t">{{ tlh_truck }}One Man &amp; Mini Truck</h3>
+          <p class="tlh-card__d">The budget option for single items and light loads. You give a hand at both ends and save.</p>
+          <ul class="tlh-card__l">
+            <li>{{ icon_check }}Single items and Marketplace pickups</li>
+            <li>{{ icon_check }}Appliances moved upright on a trolley</li>
+            <li>{{ icon_check }}Ground floor or a helper on the stairs</li>
+            <li>{{ icon_check }}Lowest price for small jobs</li>
+          </ul>
+          <div class="tlh-card__foot">
+            <span class="tlh-card__price">Budget friendly<small>best value for small jobs</small></span>
+            <a class="tlh-qbtn" href="#tll-quote-{{ uid }}">{{ icon_bolt }}<span>Quote one man</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Homepage photo grid {%- endcomment -%}
+  {%- liquid
+    assign tlh_files = 'titan-two-movers-truck-hero.webp|titan-sofa-truck-loading.webp|titan-fridge-trolley-ramp.webp|titan-dining-table-two-movers.webp|titan-mattress-delivery-truck.webp' | split: '|'
+    assign tlh_caps = 'Two movers and the truck|Sofas wrapped and loaded|Fridges moved upright|Tables carried by two|Beds and mattresses' | split: '|'
+    assign tlh_shown = 0
+  -%}
+  <section class="tlh-sec" aria-labelledby="tlh-jobs-h-{{ uid }}">
+    <div class="tll-wrap">
+      <p class="tlh-eyebrow">Recent jobs</p>
+      <h2 class="tlh-h2" id="tlh-jobs-h-{{ uid }}">How we move it in {{ area }}</h2>
+      <div class="tlh-grid">
+        {%- for f in tlh_files -%}
+          {%- assign gi = images[f] -%}
+          {%- if gi != blank and f != home_file and tlh_shown < 4 -%}
+            {%- assign tlh_shown = tlh_shown | plus: 1 -%}
+            {%- assign gcap = tlh_caps[forloop.index0] -%}
+            {%- assign galt = gcap | append: ' - Titan Express ' | append: area -%}
+            <figure class="tlh-shot">
+              {{ gi | image_url: width: 640 | image_tag: loading: 'lazy', widths: '320, 480, 640', sizes: '(min-width: 900px) 25vw, 50vw', alt: galt }}
+              <figcaption>{{ gcap }}</figcaption>
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
   </section>
@@ -433,7 +554,9 @@
   {{ cstrip | replace: '%%T%%', 'Small job? You do not need a big truck. Call us.' }}
 
   {%- comment -%} Gallery of real job photos {%- endcomment -%}
-  {%- if s.gallery_1 != blank or s.gallery_2 != blank -%}
+  {%- assign tlh_old_gallery = false -%}
+  {%- if tlh_shown == 0 -%}{%- if s.gallery_1 != blank or s.gallery_2 != blank -%}{%- assign tlh_old_gallery = true -%}{%- endif -%}{%- endif -%}
+  {%- if tlh_old_gallery -%}
     <section class="tll-section tll-wrap" aria-labelledby="tll-gallery-{{ uid }}">
       <p class="tll-eyebrow">Real vans, real jobs</p>
       <h2 id="tll-gallery-{{ uid }}" class="tll-h2">{{ s.gallery_heading }}</h2>
@@ -697,7 +820,9 @@
   "@graph": [
     {%- liquid
       assign img_main = blank
-      if hero_asset != blank
+      if home_img != blank
+        assign img_main = home_img | image_url: width: 1200 | prepend: 'https:'
+      elsif hero_asset != blank
         assign img_main = hero_asset | asset_url | prepend: 'https:'
       elsif s.hero_image != blank
         assign img_main = s.hero_image | image_url: width: 1200 | prepend: 'https:'
@@ -1198,6 +1323,67 @@
 
   .tll-card__photo { display: block; width: calc(100% + 48px); max-width: none; height: 150px; margin: -24px -24px 0; object-fit: cover; border-radius: var(--tll-radius) var(--tll-radius) 0 0; }
   .tll-card__icon--on-photo { margin-top: -40px; border: 3px solid #fff; }
+
+  /* ===== Homepage look (2026-11-19): same palette, photo frame, buttons and crew cards as the homepage ===== */
+  .tll { --b9:#071a3d; --b8:#0a2a63; --b6:#0b5cff; --b5:#2f7bff; --b1:#e8f0ff; --b0:#f5f8ff; --ink:#0b1630; --mut:#5a6782; --line:#dfe6f3;
+    --tll-acc:#22c55e; --tll-acc-2:#16a34a; --tll-acc-grad:linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+  .tll-hero { background:linear-gradient(180deg, var(--b8), var(--b9)); }
+  .tll-h1 em { background:none; -webkit-background-clip:border-box; background-clip:border-box; color:#8fb4ff; -webkit-text-fill-color:#8fb4ff; }
+  .tll-kicker { color:#cfe0ff; border-color:rgba(143,180,255,.4); }
+  .tll .tll-kicker svg { stroke:#8fb4ff; }
+  .tll-btn--call, .tll-dock__call, .tll-moves__call, .tll-live__call { color:#fff !important; }
+  .tll-track__van { box-shadow:0 4px 10px rgba(22,163,74,.4); }
+  .tll-hero__inner { gap:22px; padding-block:20px 30px; }
+  .tll-hero__ctas { margin-bottom:0; }
+  .tll-hero__media { order:-1; overflow:hidden; border-radius:22px; border:3px solid rgba(255,255,255,.22); aspect-ratio:16/10; box-shadow:0 24px 60px rgba(0,0,0,.45), 0 0 0 6px rgba(11,92,255,.18); animation:none !important; }
+  .tll-hero__media::before { top:12px; left:16px; width:34px; height:34px; border-color:#fff; border-width:3px 0 0 3px; border-top-left-radius:10px; opacity:.9; z-index:3; }
+  .tll-hero__media::after { bottom:12px; right:12px; width:34px; height:34px; border-color:#fff; border-width:0 3px 3px 0; border-bottom-right-radius:10px; opacity:.9; z-index:3; }
+  .tll-hero__img { width:100%; height:100%; aspect-ratio:auto; max-height:none; object-fit:cover; border-radius:0; border:0; box-shadow:none; }
+  .tlh-tag { position:absolute; left:10px; bottom:10px; z-index:3; display:flex; align-items:center; gap:7px; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,.95); color:var(--b9); font-size:.8rem; font-weight:700; }
+  .tlh-tag i { width:8px; height:8px; border-radius:50%; background:#22c55e; }
+  .tlh-ribbon { position:absolute; top:22px; right:-52px; z-index:3; transform:rotate(35deg); padding:7px 58px; background:linear-gradient(90deg, var(--b6), var(--b5)); color:#fff; font-size:.7rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; box-shadow:0 6px 16px rgba(0,0,0,.3); white-space:nowrap; }
+  .tlh-ctas2 { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 22px; }
+  .tlh-qbtn { display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:14px; background:linear-gradient(135deg, #22c55e, #16a34a); color:#fff !important; font-weight:800; font-size:.95rem; text-decoration:none; box-shadow:0 10px 24px rgba(22,163,74,.35); transition:transform .2s, box-shadow .2s; }
+  .tlh-qbtn:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(22,163,74,.45); }
+  .tll .tlh-qbtn svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .tlh-qbtn--ghost { background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.35); box-shadow:none; }
+  .tlh-sec { padding:34px 0; background:#fff; }
+  .tlh-eyebrow { margin:0 0 6px; font-size:.75rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--b6); }
+  .tlh-h2 { margin:0 0 16px; font-size:clamp(1.45rem,5.6vw,2.2rem); line-height:1.12; font-weight:900; letter-spacing:-.015em; color:var(--b9); }
+  .tlh-crew { background:linear-gradient(180deg, #f5f8ff, #fff); }
+  .tlh-crew__lead { margin:-6px 0 20px; color:var(--mut); font-size:1rem; }
+  .tlh-crew__grid { display:grid; gap:16px; }
+  .tlh-card { position:relative; display:flex; flex-direction:column; padding:20px; border-radius:22px; background:#fff; border:1px solid var(--line); box-shadow:0 18px 44px rgba(11,40,99,.08); overflow:hidden; }
+  .tlh-card--pro { border:2px solid var(--b6); background:linear-gradient(180deg, #fff, #f5f8ff); }
+  .tlh-card--pro::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, var(--b5), var(--b6)); }
+  .tlh-card--eco::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, #22c55e, #16a34a); }
+  .tlh-card__badge { position:absolute; top:16px; right:16px; padding:5px 12px; border-radius:999px; background:var(--b6); color:#fff; font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+  .tlh-card__badge--eco { background:#16a34a; }
+  .tll .tlh-ill { display:block; width:100%; height:auto; max-height:170px; margin:6px 0 10px; stroke:none; }
+  .tlh-card__t { display:flex; align-items:center; gap:10px; margin:0 0 6px; font-size:1.3rem; font-weight:900; color:var(--b9); }
+  .tll .tlh-card__t svg { width:26px; height:26px; padding:5px; box-sizing:content-box; border-radius:10px; background:var(--b1); color:var(--b6); fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .tll .tlh-card--eco .tlh-card__t svg { background:#dcfce7; color:#16a34a; }
+  .tlh-card__d { margin:0 0 12px; color:var(--mut); line-height:1.5; }
+  .tlh-card__l { display:grid; gap:7px; list-style:none; padding:0; margin:0 0 18px; }
+  .tlh-card__l li { display:flex; gap:8px; align-items:flex-start; font-weight:600; font-size:.93rem; color:var(--ink); }
+  .tll .tlh-card__l svg { flex:0 0 18px; width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; color:var(--b6); margin-top:1px; }
+  .tll .tlh-card--eco .tlh-card__l svg { color:#16a34a; }
+  .tlh-card__foot { margin-top:auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding-top:14px; border-top:1px dashed var(--line); }
+  .tlh-card__price { display:flex; flex-direction:column; font-size:1.35rem; font-weight:900; color:var(--b9); line-height:1.1; }
+  .tlh-card__price small { font-size:.75rem; font-weight:600; color:var(--mut); }
+  .tlh-card--pro .tlh-qbtn { background:linear-gradient(135deg, var(--b5), var(--b6)); box-shadow:0 10px 24px rgba(11,92,255,.3); }
+  .tlh-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+  .tlh-shot { position:relative; margin:0; overflow:hidden; border-radius:16px; background:var(--b0); aspect-ratio:1; }
+  .tlh-shot img { display:block; width:100%; height:100%; object-fit:cover; }
+  .tlh-shot figcaption { position:absolute; left:0; right:0; bottom:0; padding:22px 12px 10px; background:linear-gradient(180deg, transparent, rgba(7,26,61,.78)); color:#fff; font-weight:800; font-size:.86rem; }
+  @media (min-width: 900px) {
+    .tll-hero__inner { grid-template-columns:1fr 1fr; gap:48px; padding-block:56px 64px; }
+    .tll-hero__media { order:2; aspect-ratio:4/3.4; box-shadow:0 40px 80px rgba(0,0,0,.4); }
+    .tlh-sec { padding:60px 0; }
+    .tlh-crew__grid { grid-template-columns:1fr 1fr; gap:24px; }
+    .tlh-card { padding:28px; }
+    .tlh-grid { grid-template-columns:repeat(4, 1fr); }
+  }
 {% endstylesheet %}
 
 {% schema %}
