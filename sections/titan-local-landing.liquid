@@ -159,6 +159,10 @@
 {%- capture icon_star -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>{%- endcapture -%}
 {%- capture icon_pin -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>{%- endcapture -%}
 
+{%- capture tlj_shield -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M24 4 39 10v12c0 11-15 20-15 20S9 33 9 22V10z"/><path d="M24 4 39 10v12c0 11-15 20-15 20S9 33 9 22V10z"/><path class="a" d="m17 24 5 5 9-10"/></svg>{%- endcapture -%}
+{%- capture tlj_clock -%}<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="d" cx="24" cy="25" r="17"/><circle cx="24" cy="25" r="17"/><path class="a" d="M24 15v10l7 5"/><path d="M19 4h10M24 4v4"/></svg>{%- endcapture -%}
+{%- capture tlj_wallet -%}<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="d" x="5" y="13" width="38" height="28" rx="5"/><rect x="5" y="13" width="38" height="28" rx="5"/><path d="M10 13l20-7 4 7"/><path class="d" d="M31 22h12v10H31a5 5 0 0 1 0-10z"/><path d="M31 22h12v10H31a5 5 0 0 1 0-10z"/><circle class="a" cx="32" cy="27" r="2"/></svg>{%- endcapture -%}
+{%- capture tlj_stairs -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M5 42h10v-9h9v-9h9v-9h10v27z"/><path d="M5 42h10v-9h9v-9h9v-9h10"/><path class="a" d="M10 26l6-6M16 20h-5M16 20v5"/></svg>{%- endcapture -%}
 {%- capture tlh_team -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.2A5 5 0 0 1 21 19"/></svg>{%- endcapture -%}
 {%- capture tlh_truck -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>{%- endcapture -%}
 <div class="tll" id="tll-{{ uid }}" data-open-hour="{{ s.open_hour }}" data-close-hour="{{ s.close_hour }}">
@@ -374,6 +378,12 @@
           </div>
         </article>
       </div>
+      <ul class="tlh-trust" role="list">
+        <li><span class="tlh-ti">{{ tlj_shield }}</span>Fully insured</li>
+        <li><span class="tlh-ti">{{ tlj_clock }}</span>7 days, 7am to 7pm</li>
+        <li><span class="tlh-ti">{{ tlj_wallet }}</span>Fixed price, pay on the day</li>
+        <li><span class="tlh-ti">{{ tlj_stairs }}</span>Stairs and lifts no problem</li>
+      </ul>
     </div>
   </section>
 
@@ -1383,6 +1393,13 @@
   .tlh-card__price { display:flex; flex-direction:column; font-size:1.35rem; font-weight:900; color:var(--b9); line-height:1.1; }
   .tlh-card__price small { font-size:.75rem; font-weight:600; color:var(--mut); }
   .tlh-card--pro .tlh-qbtn { background:linear-gradient(135deg, var(--b5), var(--b6)); box-shadow:0 10px 24px rgba(11,92,255,.3); }
+  .tlh-trust { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; list-style:none; padding:0; margin:20px 0 0; }
+  .tlh-trust li { display:flex; align-items:center; gap:10px; padding:12px; border-radius:14px; background:#fff; border:1px solid var(--line); font-weight:700; font-size:.88rem; color:var(--b9); }
+  .tlh-ti { display:grid; place-items:center; flex:0 0 40px; height:40px; border-radius:12px; background:linear-gradient(145deg, #eef4ff, #dbe8ff); color:var(--b8); }
+  .tll .tlh-ti svg { width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+  .tll .tlh-ti svg .d { fill:#9cc0ff; stroke:none; opacity:.55; }
+  .tll .tlh-ti svg .a { stroke:#16a34a; }
+  .tll .tlh-ti svg circle.a { fill:#16a34a; stroke:none; }
   .tlh-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
   .tlh-shot { position:relative; margin:0; overflow:hidden; border-radius:16px; background:var(--b0); aspect-ratio:1; }
   .tlh-shot img { display:block; width:100%; height:100%; object-fit:cover; }
@@ -1394,6 +1411,7 @@
     .tlh-crew__grid { grid-template-columns:1fr 1fr; gap:24px; }
     .tlh-card { padding:28px; }
     .tlh-grid { grid-template-columns:repeat(4, 1fr); }
+    .tlh-trust { grid-template-columns:repeat(4, 1fr); }
   }
 {% endstylesheet %}
 
