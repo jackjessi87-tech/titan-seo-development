@@ -1050,6 +1050,14 @@
                 "url": "/pages/furniture-delivery-bondi-junction",
                 "description": "Sofa, fridge and Marketplace pickup delivery in Bondi Junction."
               }
+            },
+            "link-furniture-delivery-dee-why": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Dee Why",
+                "url": "/pages/furniture-delivery-dee-why",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Dee Why."
+              }
             }
           },
           "block_order": [
@@ -1073,6 +1081,7 @@
             "link-furniture-delivery-baulkham-hills",
             "link-furniture-delivery-marsden-park",
             "link-furniture-delivery-kellyville",
+            "link-furniture-delivery-dee-why",
             "link-furniture-delivery-chatswood",
             "link-furniture-delivery-ryde",
             "link-furniture-delivery-hornsby",
