@@ -970,6 +970,86 @@
                 "url": "/pages/man-and-van-campbelltown",
                 "description": "Small moves, single items and Marketplace pickups in Campbelltown."
               }
+            },
+            "link-furniture-delivery-chatswood": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Chatswood",
+                "url": "/pages/furniture-delivery-chatswood",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Chatswood."
+              }
+            },
+            "link-furniture-delivery-ryde": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Ryde",
+                "url": "/pages/furniture-delivery-ryde",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Ryde."
+              }
+            },
+            "link-furniture-delivery-hornsby": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Hornsby",
+                "url": "/pages/furniture-delivery-hornsby",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Hornsby."
+              }
+            },
+            "link-furniture-delivery-hurstville": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Hurstville",
+                "url": "/pages/furniture-delivery-hurstville",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Hurstville."
+              }
+            },
+            "link-furniture-delivery-rhodes": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Rhodes",
+                "url": "/pages/furniture-delivery-rhodes",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Rhodes."
+              }
+            },
+            "link-furniture-delivery-burwood": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Burwood",
+                "url": "/pages/furniture-delivery-burwood",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Burwood."
+              }
+            },
+            "link-furniture-delivery-cabramatta": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Cabramatta",
+                "url": "/pages/furniture-delivery-cabramatta",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Cabramatta."
+              }
+            },
+            "link-furniture-delivery-miranda": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Miranda",
+                "url": "/pages/furniture-delivery-miranda",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Miranda."
+              }
+            },
+            "link-furniture-delivery-maroubra": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Maroubra",
+                "url": "/pages/furniture-delivery-maroubra",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Maroubra."
+              }
+            },
+            "link-furniture-delivery-bondi-junction": {
+              "type": "_related-link-item",
+              "settings": {
+                "label": "Furniture Delivery Bondi Junction",
+                "url": "/pages/furniture-delivery-bondi-junction",
+                "description": "Sofa, fridge and Marketplace pickup delivery in Bondi Junction."
+              }
             }
           },
           "block_order": [
@@ -993,6 +1073,16 @@
             "link-furniture-delivery-baulkham-hills",
             "link-furniture-delivery-marsden-park",
             "link-furniture-delivery-kellyville",
+            "link-furniture-delivery-chatswood",
+            "link-furniture-delivery-ryde",
+            "link-furniture-delivery-hornsby",
+            "link-furniture-delivery-hurstville",
+            "link-furniture-delivery-rhodes",
+            "link-furniture-delivery-burwood",
+            "link-furniture-delivery-cabramatta",
+            "link-furniture-delivery-miranda",
+            "link-furniture-delivery-maroubra",
+            "link-furniture-delivery-bondi-junction",
             "link-man-and-van-mount-druitt",
             "link-man-and-van-penrith",
             "link-man-and-van-rooty-hill",
