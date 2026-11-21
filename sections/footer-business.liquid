@@ -38,14 +38,22 @@
   endif
 %}
 
+{%- comment -%}
+  Footer colours are the brand palette used by the homepage hero and quote form (navy, blue, green button, amber stars).
+  They are hard-coded on purpose: the footer's colour settings live in sections/footer-group.json, which does not
+  sync from GitHub, so the old white / black / red values there could not be changed from here.
+{%- endcomment -%}
 <footer
   class="titan-footer"
   style="
-    --tf-bg: {{ section.settings.background_color }};
-    --tf-text: {{ section.settings.text_color }};
-    --tf-muted: {{ section.settings.muted_text_color }};
-    --tf-accent: {{ section.settings.accent_color }};
-    --tf-border: {{ section.settings.border_color }};
+    --tf-bg: #071a3d;
+    --tf-text: #ffffff;
+    --tf-muted: #a9c3f5;
+    --tf-accent: #8fb4ff;
+    --tf-border: rgba(207, 224, 255, 0.18);
+    --tf-star: #fbbf24;
+    --tf-cta-a: #22c55e;
+    --tf-cta-b: #16a34a;
     --tf-pad-top: {{ section.settings.padding_top }}px;
     --tf-pad-bottom: {{ section.settings.padding_bottom }}px;
   "
@@ -273,6 +281,7 @@
 {% stylesheet %}
   .titan-footer {
     background-color: var(--tf-bg);
+    border-top: 1px solid var(--tf-border);
     color: var(--tf-text);
     padding-top: var(--tf-pad-top);
     padding-bottom: var(--tf-pad-bottom);
@@ -429,8 +438,9 @@
     justify-content: center;
     min-height: 48px;
     padding: 0 28px;
-    background-color: var(--tf-accent);
-    color: #131313;
+    background: linear-gradient(135deg, var(--tf-cta-a), var(--tf-cta-b));
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(22, 163, 74, 0.3);
     font-weight: 700;
     font-size: 0.9375rem;
     text-decoration: none;
@@ -472,7 +482,7 @@
   }
 
   .titan-footer__icon--star {
-    color: var(--tf-accent);
+    color: var(--tf-star);
   }
 
   .titan-footer__rating-text {
