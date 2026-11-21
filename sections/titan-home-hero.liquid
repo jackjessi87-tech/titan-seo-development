@@ -107,6 +107,7 @@
         <h1 class="tho-h1">Sydney Removalists &amp; <em>Same-Day</em> Furniture Pickup &amp; Delivery</h1>
         <p class="tho-sub">Your local removalist team for furniture, appliances and home moves across Sydney. <strong>Two or three movers with a truck</strong> for heavy items, stairs and full moves, or <strong>one man with a mini truck or van</strong> for single items. Fixed price before we start, often today.</p>
       </div>
+      <div class="tho-topcall">{{ callbtn | replace: '%%LBL%%', 'Call now &middot; fixed price on the phone' }}</div>
       <div class="thq tho-quote" id="instant-quote">
         {%- render 'titan-home-quote-card', phone: s.phone, phone_intl: phone_intl, uid: section.id -%}
       </div>
@@ -538,9 +539,15 @@
   .tho-hero .tho-quote .thq-card { box-shadow:0 24px 60px rgba(0,0,0,.4), 0 0 0 5px rgba(143,180,255,.22); }
   .tho-kicker { display:inline-flex; align-items:center; gap:8px; margin:0 0 12px; padding:6px 13px; border-radius:999px; border:1px solid rgba(143,180,255,.4); background:rgba(255,255,255,.06); color:#cfe0ff; font-size:.76rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; }
   .tho-kicker i { width:8px; height:8px; border-radius:50%; background:#22c55e; }
+  .tho-topcall { display:none; }
   @media (max-width: 899px) {
     .tho-hero__grid--quote .tho-copy { display:contents; }
-    .tho-hero__grid--quote { grid-template-areas:"kicker" "h1" "quote" "sub" "more"; }
+    .tho-hero__grid--quote { grid-template-areas:"kicker" "h1" "call" "quote" "sub" "more"; }
+    /* Compact call button above the quote form, phones only (2026-11-21) */
+    .tho-topcall { display:block; grid-area:call; min-width:0; }
+    .tho-topcall .tho-call { max-width:none; gap:12px; padding:8px 14px 8px 8px; border-radius:16px; }
+    .tho-topcall .tho-ringer { flex-basis:42px; height:42px; }
+    .tho-topcall .tho-call__num { font-size:1.3rem; }
     .tho-hero__grid--quote .tho-kicker { grid-area:kicker; justify-self:start; margin:0; }
     .tho-hero__grid--quote .tho-h1 { grid-area:h1; margin:0 0 4px; }
     .tho-hero__grid--quote .tho-sub { grid-area:sub; }
