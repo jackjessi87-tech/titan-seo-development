@@ -230,6 +230,41 @@ window.TITAN_ICONS = {
     <circle class="f s" cx="44" cy="16" r="8"/>
     <path class="a s" d="M30 56v-9a14 14 0 0 1 28 0v9z"/>
     <path class="s" d="M22 35l-3 6M44 32l3 6"/>`,
+  buffet: `
+    <rect class="f s" x="12" y="7" width="40" height="21" rx="2"/>
+    <path class="s" d="M32 7v21M12 17.5h40"/>
+    <rect class="w" x="8" y="28" width="48" height="20" rx="3"/>
+    <path class="s" d="M24 28v20M40 28v20"/>
+    <circle class="a" cx="20" cy="38" r="2"/><circle class="a" cx="44" cy="38" r="2"/>
+    <path class="s" d="M12 48v6M52 48v6"/>`,
+  ottoman: `
+    <rect class="f s" x="11" y="25" width="42" height="19" rx="6"/>
+    <rect class="a" x="15" y="19" width="34" height="8" rx="4"/>
+    <path class="s" d="M18 44v7M46 44v7"/>`,
+  bunkbed: `
+    <path class="s" d="M10 7v48M54 7v48"/>
+    <rect class="f s" x="10" y="17" width="44" height="8" rx="2"/>
+    <rect class="f s" x="10" y="40" width="44" height="8" rx="2"/>
+    <rect class="a" x="14" y="12" width="12" height="5" rx="2.5"/>
+    <rect class="a" x="14" y="35" width="12" height="5" rx="2.5"/>
+    <path class="s" d="M42 25v15M48 25v15M42 30h6M42 35h6"/>`,
+  shelving: `
+    <rect class="w" x="14" y="6" width="36" height="50" rx="2"/>
+    <path class="s" d="M14 18.5h36M14 31h36M14 43.5h36M18 56v3M46 56v3"/>
+    <rect class="a" x="18" y="10" width="9" height="8.5" rx="1"/>
+    <rect class="f s" x="31" y="35" width="14" height="8.5" rx="1"/>
+    <rect class="f" x="20" y="24" width="8" height="7" rx="1"/>`,
+  pooltable: `
+    <rect class="f s" x="5" y="17" width="54" height="25" rx="4"/>
+    <rect class="w" x="10" y="22" width="44" height="15" rx="2"/>
+    <circle class="a" cx="25" cy="29.5" r="3.2"/><circle class="f s" cx="39" cy="29.5" r="3.2"/>
+    <path class="s" d="M11 42v11M53 42v11"/>`,
+  pram: `
+    <path class="a" d="M10 30a18 18 0 0 1 18-18v18z"/>
+    <path class="f s" d="M10 30h34v4a8 8 0 0 1-8 8H18a8 8 0 0 1-8-8z"/>
+    <path class="s" d="M44 30l4-14h6"/>
+    <circle class="w" cx="18" cy="50" r="5"/><circle class="w" cx="38" cy="50" r="5"/>
+    <path class="s" d="M18 42v3M38 42v3"/>`,
   unsure: `
     <circle class="f s" cx="32" cy="32" r="24"/>
     <path class="as" d="M25 26a7 7 0 1 1 10 6.3c-2 1-3 2.4-3 4.7" style="stroke-width:3.2"/>

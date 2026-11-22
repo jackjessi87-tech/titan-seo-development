@@ -12,25 +12,25 @@
 
   // ---------- catalogue ----------
   var SIZES = ['Single', 'King single', 'Double', 'Queen', 'King'];
-  var CATS = [['all', 'All'], ['living', 'Living'], ['bed', 'Bedroom'], ['kitchen', 'Kitchen & laundry'], ['office', 'Office'], ['outdoor', 'Outdoor'], ['boxes', 'Boxes & more']];
+  var CATS = [['all', 'All'], ['custom', '+ Your own item'], ['living', 'Living'], ['bed', 'Bedroom'], ['kitchen', 'Kitchen & laundry'], ['office', 'Office'], ['outdoor', 'Outdoor'], ['boxes', 'Boxes & more']];
   var ITEMS = [
     { k: 'sofa', n: 'Sofa', c: 'living', v: ['2 seater', '3 seater', 'L-shape / modular', 'Sofa bed'] }, { k: 'armchair', n: 'Armchair / recliner', c: 'living' },
     { k: 'coffee', n: 'Coffee table', c: 'living' }, { k: 'tv', n: 'TV', c: 'living', v: ['Up to 55 inch', '65 inch and over'] }, { k: 'tvunit', n: 'TV unit', c: 'living' },
     { k: 'bookcase', n: 'Bookcase', c: 'living' }, { k: 'sidetable', n: 'Side table', c: 'living' }, { k: 'rug', n: 'Rug', c: 'living' }, { k: 'lamp', n: 'Floor lamp', c: 'living' },
-    { k: 'mirror', n: 'Mirror', c: 'living' }, { k: 'artwork', n: 'Artwork', c: 'living' },
+    { k: 'mirror', n: 'Mirror', c: 'living' }, { k: 'buffet', n: 'Buffet / hutch', c: 'living' }, { k: 'ottoman', n: 'Ottoman', c: 'living' }, { k: 'shelving', n: 'Shelving unit', c: 'living' }, { k: 'artwork', n: 'Artwork', c: 'living' },
     { k: 'bed', n: 'Bed frame', c: 'bed', v: SIZES }, { k: 'mattress', n: 'Mattress', c: 'bed', v: SIZES }, { k: 'wardrobe', n: 'Wardrobe', c: 'bed', v: ['1 door', '2 door', '3 door or more'] },
-    { k: 'dresser', n: 'Chest of drawers', c: 'bed' }, { k: 'bedside', n: 'Bedside table', c: 'bed' }, { k: 'cot', n: 'Cot', c: 'bed' },
+    { k: 'dresser', n: 'Chest of drawers', c: 'bed' }, { k: 'bedside', n: 'Bedside table', c: 'bed' }, { k: 'cot', n: 'Cot', c: 'bed' }, { k: 'bunkbed', n: 'Bunk bed', c: 'bed' },
     { k: 'dining', n: 'Dining table', c: 'kitchen', v: ['4 seater', '6 seater', '8 seater or more'] }, { k: 'chair', n: 'Dining chair', c: 'kitchen' },
     { k: 'fridge', n: 'Fridge', c: 'kitchen', v: ['Bar fridge', 'Single door', 'Double / French door'] }, { k: 'washer', n: 'Washing machine', c: 'kitchen' },
     { k: 'dryer', n: 'Dryer', c: 'kitchen' }, { k: 'dishwasher', n: 'Dishwasher', c: 'kitchen' }, { k: 'microwave', n: 'Microwave', c: 'kitchen' }, { k: 'barstool', n: 'Bar stool', c: 'kitchen' },
     { k: 'desk', n: 'Desk', c: 'office', v: ['Standard', 'Corner / L-shape', 'Standing desk'] }, { k: 'officechair', n: 'Office chair', c: 'office' },
     { k: 'filing', n: 'Filing cabinet', c: 'office' }, { k: 'monitor', n: 'Computer / monitor', c: 'office' },
     { k: 'outdoor', n: 'Outdoor setting', c: 'outdoor' }, { k: 'bbq', n: 'BBQ', c: 'outdoor' }, { k: 'bike', n: 'Bike', c: 'outdoor' }, { k: 'treadmill', n: 'Treadmill / gym', c: 'outdoor' },
-    { k: 'plant', n: 'Pot plant', c: 'outdoor' }, { k: 'box', n: 'Box', c: 'boxes', v: ['Small', 'Medium', 'Large'] }, { k: 'suitcase', n: 'Suitcase / bag', c: 'boxes' },
+    { k: 'plant', n: 'Pot plant', c: 'outdoor' }, { k: 'pooltable', n: 'Pool table', c: 'outdoor' }, { k: 'pram', n: 'Pram', c: 'boxes' }, { k: 'box', n: 'Box', c: 'boxes', v: ['Small', 'Medium', 'Large'] }, { k: 'suitcase', n: 'Suitcase / bag', c: 'boxes' },
     { k: 'tub', n: 'Storage tub', c: 'boxes' }, { k: 'piano', n: 'Piano', c: 'boxes', v: ['Keyboard / digital', 'Upright piano'] }, { k: 'other', n: 'Something else', c: 'boxes', custom: true }
   ];
   var BYK = {}; ITEMS.forEach(function (i) { BYK[i.k] = i; });
-  var HEAVY = ['fridge', 'washer', 'dryer', 'dishwasher', 'piano', 'wardrobe', 'treadmill', 'dresser'];
+  var HEAVY = ['fridge', 'washer', 'dryer', 'dishwasher', 'piano', 'wardrobe', 'treadmill', 'dresser', 'buffet', 'pooltable', 'bunkbed'];
 
   // ---------- state ----------
   var KEY = 'tx-quote-v1';
@@ -213,9 +213,9 @@
 
   // ---------- step 3: items ----------
   var cat = 'all', cq = 1, grid = q('[data-q-grid]');
-  q('[data-q-cats]').innerHTML = CATS.map(function (c) { return '<button type="button" data-c="' + c[0] + '" class="' + (c[0] === 'all' ? 'on' : '') + '">' + c[1] + '</button>'; }).join('');
+  q('[data-q-cats]').innerHTML = CATS.map(function (c) { return '<button type="button" data-c="' + c[0] + '" class="' + (c[0] === 'all' ? 'on' : '') + (c[0] === 'custom' ? ' own' : '') + '">' + c[1] + '</button>'; }).join('');
   q('[data-q-cats]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; cat = b.getAttribute('data-c'); q('[data-q-find]').value = '';
-    qa('[data-q-cats] button').forEach(function (x) { x.classList.toggle('on', x === b); }); renderGrid(); });
+    qa('[data-q-cats] button').forEach(function (x) { x.classList.toggle('on', x === b); }); renderGrid(); if (cat === 'custom') q('[data-q-custom]').focus(); });
   q('[data-q-find]').addEventListener('input', function () { if (this.value) { cat = 'all'; qa('[data-q-cats] button').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-c') === 'all'); }); } renderGrid(); });
   var qtyOf = function (k) { var n = 0; for (var id in st.items) if (st.items[id].k === k) n += st.items[id].q; return n; };
   function addItem(id, k, n, v, d) {
@@ -224,6 +224,13 @@
   }
   function renderGrid() {
     var t = q('[data-q-find]').value.trim().toLowerCase();
+    q('.txq-custom').classList.toggle('hl', cat === 'custom');
+    if (cat === 'custom') {
+      var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0; });
+      grid.innerHTML = '<div class="txq-own"><b>Can\u2019t see your item?</b><span>Small or large, we move it all. Type it in the box above, set how many, then tap Add.</span></div>' +
+        own.map(function (id) { var it = st.items[id]; return '<div class="txq-tile on" role="button" tabindex="0" data-own="' + esc(id) + '"><span class="q">' + it.q + '</span>' + icon('other') + '<div class="nm">' + esc(it.n) + '</div><div class="more">Tap to add one more</div></div>'; }).join('');
+      return;
+    }
     var list = ITEMS.filter(function (i) { return (cat === 'all' || i.c === cat) && (!t || (i.n + ' ' + (i.v || []).join(' ')).toLowerCase().indexOf(t) > -1); });
     grid.innerHTML = list.length ? list.map(function (i) { return '<div class="txq-tile" role="button" tabindex="0" data-k="' + i.k + '"><span class="q"></span>' + icon(i.k) + '<div class="nm">' + i.n + '</div><div class="more">' + (i.v ? 'Choose size' : '&nbsp;') + '</div></div>'; }).join('')
       : '<div class="txq-empty">No match. Add “' + esc(q('[data-q-find]').value) + '” as your own item above.</div>';
@@ -231,7 +238,9 @@
   }
   function renderTiles() { qa('.txq-tile').forEach(function (t) { var n = qtyOf(t.getAttribute('data-k')); t.classList.toggle('on', n > 0); t.querySelector('.q').textContent = n; }); }
   grid.addEventListener('click', function (e) {
-    var t = e.target.closest('.txq-tile'); if (!t) return; var it = BYK[t.getAttribute('data-k')];
+    var t = e.target.closest('.txq-tile'); if (!t) return;
+    var oid = t.getAttribute('data-own'); if (oid) { var o = st.items[oid]; if (o) { addItem(oid, o.k, o.n, o.v, 1); renderGrid(); } return; }
+    var it = BYK[t.getAttribute('data-k')];
     if (it.custom) { q('[data-q-custom]').focus(); return toast('Type the item name, then tap Add'); }
     if (it.v) return openSheet(it);
     addItem(it.k, it.k, it.n, '', 1); if (navigator.vibrate) navigator.vibrate(8);
@@ -255,7 +264,7 @@
   function addCustom() {
     var v = q('[data-q-custom]').value.trim(); if (!v) { q('[data-q-custom]').focus(); return toast('Type an item name first'); }
     var n = v.charAt(0).toUpperCase() + v.slice(1); addItem('custom:' + n.toLowerCase(), 'other', n, '', cq);
-    toast('Added ' + cq + ' × ' + n); q('[data-q-custom]').value = ''; cq = 1; q('[data-q-cq]').textContent = 1;
+    toast('Added ' + cq + ' × ' + n); q('[data-q-custom]').value = ''; cq = 1; q('[data-q-cq]').textContent = 1; if (cat === 'custom') renderGrid();
   }
   q('[data-q-cadd]').addEventListener('click', addCustom);
   q('[data-q-custom]').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addCustom(); } });

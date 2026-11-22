@@ -213,3 +213,11 @@ textarea.txq-inp { resize: vertical; min-height: 84px; }
 .txq-form { display: none; }
 @media (min-width: 700px) { .txq-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .txq *, .txq *::before, .txq *::after { animation: none !important; transition: none !important; } .txq-tick path { stroke-dashoffset: 0; } }
+
+/* "+ Your own item" tab */
+.txq-cats button.own { border-color: var(--r); color: var(--r); }
+.txq-cats button.own.on { background: var(--r); border-color: var(--r); color: #fff; }
+.txq-custom.hl { box-shadow: 0 0 0 3px rgba(225, 38, 28, .25); border-radius: 16px; }
+.txq-own { grid-column: 1 / -1; display: grid; gap: 4px; padding: 16px; border-radius: 16px; background: #fff; border: 1.5px dashed var(--ln); }
+.txq-own span { color: #5d6475; font-size: .92rem; }
+.txq button.txq-add { color: #fff !important; }
