@@ -32,7 +32,7 @@
       </ul>
       <div class="thh-ctas">
         <a class="thh-btn thh-btn--call" href="tel:{{ phone_intl }}">Call {{ s.phone }}</a>
-        <a class="thh-btn thh-btn--ghost" href="{{ s.quote_url }}">Get a fixed price</a>
+        <a class="thh-btn thh-btn--ghost" href="{{ s.quote_url }}">Get an instant estimate</a>
       </div>
     </div>
   </section>
@@ -91,6 +91,7 @@
   </section>
 
   {%- if s.compare_heading != blank -%}
+  {%- if s.show_compare != false -%}
   <section class="thh-band thh-band--soft" aria-labelledby="thh-cmp-{{ section.id }}">
     <div class="thh-wrap">
       <h2 id="thh-cmp-{{ section.id }}" class="thh-h2">Titan Express vs Hourly Removalists vs Doing It Yourself</h2>
@@ -109,6 +110,7 @@
       </div>
     </div>
   </section>
+  {%- endif -%}
   {%- endif -%}
 
   {%- if areas.size > 0 and s.show_areas != false -%}
@@ -152,7 +154,7 @@
       <p>{{ s.final_text }}</p>
       <div class="thh-ctas thh-ctas--center">
         <a class="thh-btn thh-btn--call" href="tel:{{ phone_intl }}">Call {{ s.phone }}</a>
-        <a class="thh-btn thh-btn--light" href="{{ s.quote_url }}">Get a fixed price</a>
+        <a class="thh-btn thh-btn--light" href="{{ s.quote_url }}">Get an instant estimate</a>
       </div>
     </div>
   </section>
@@ -282,6 +284,7 @@
     { "type": "header", "content": "Business" },
     { "type": "checkbox", "id": "show_services", "label": "Show the services list", "default": true },
     { "type": "checkbox", "id": "show_areas", "label": "Show the areas list", "default": true },
+    { "type": "checkbox", "id": "show_compare", "label": "Show the comparison table", "default": true },
     { "type": "checkbox", "id": "show_final", "label": "Show the closing call banner", "default": true },
     { "type": "text", "id": "business_name", "label": "Business name", "default": "Titan Express" },
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },

@@ -6,7 +6,7 @@
 {{ 'tx-quote.css' | asset_url | stylesheet_tag: preload: false }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
 {%- assign s = section.settings -%}
-<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}">
+<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}" data-rate-first="{{ s.rate_first }}" data-rate-block="{{ s.rate_block }}" data-after-first="{{ s.after_first }}" data-after-block="{{ s.after_block }}">
   <header class="txq-top">
     <div class="txq-row">
       <button class="txq-ib" type="button" data-q-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -81,12 +81,13 @@
       <div class="txq-dates" data-q-dates></div>
       <div class="txq-lbl" style="margin-top:14px">Preferred time</div>
       <div class="txq-seg txq-seg--2" data-q-times></div>
+      <div class="txq-est" data-q-est aria-live="polite"></div>
     </section>
 
     <!-- 5 details -->
     <section class="txq-s" data-s="5" hidden>
       <p class="txq-eb">Step 4</p><h2 class="txq-h">Your details</h2>
-      <p class="txq-lede">We'll text you a fixed price. No obligation.</p>
+      <p class="txq-lede">We text you to confirm the time. Nothing to pay now.</p>
       <div class="txq-note"><svg viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
         <span>Photos help us give an exact price. After sending, text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>, no rush.</span></div>
       <div class="txq-field"><label for="txq-name">Name</label><input class="txq-inp" id="txq-name" autocomplete="name" placeholder="First name is fine"></div>
@@ -98,7 +99,7 @@
     <!-- 6 review -->
     <section class="txq-s" data-s="6" hidden>
       <p class="txq-eb">Step 5</p><h2 class="txq-h">Check and send</h2>
-      <p class="txq-lede">One fixed price by text. No hourly meter.</p>
+      <p class="txq-lede">Your estimate, how the hourly price works, and your booking details.</p>
       <div data-q-review></div>
     </section>
 
@@ -107,7 +108,7 @@
       <div class="txq-done">
         <div class="txq-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
         <h2 class="txq-h">Thanks, we've got it!</h2>
-        <p class="txq-lede">Sam from Titan Express will text you a fixed price shortly. Got photos? Text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>.</p>
+        <p class="txq-lede">Sam from Titan Express will text you shortly to confirm the time. Got photos? Text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>.</p>
         <a class="txq-cta" href="tel:{{ s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' }}">Call {{ s.phone }}</a>
       </div>
     </section>
@@ -136,6 +137,7 @@
     <input type="hidden" name="contact[stairs_or_lift]" data-f="access">
     <input type="hidden" name="contact[when]" data-f="when">
     <input type="hidden" name="contact[preferred_date]" data-f="date">
+    <input type="hidden" name="contact[estimate]" data-f="estimate">
     <input type="hidden" name="contact[body]" data-f="body">
   {%- endform -%}
 </div>
@@ -149,7 +151,12 @@
   "tag": "div",
   "class": "section-tx-quote",
   "settings": [
-    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" }
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "header", "content": "Hourly rates (dollars)" },
+    { "type": "number", "id": "rate_first", "label": "Weekday: first 30 minutes", "default": 99 },
+    { "type": "number", "id": "rate_block", "label": "Weekday: each extra 30 minutes", "default": 52 },
+    { "type": "number", "id": "after_first", "label": "Weekend / evening: first 30 minutes", "default": 198 },
+    { "type": "number", "id": "after_block", "label": "Weekend / evening: each extra 30 minutes", "default": 104 }
   ],
   "presets": [{ "name": "TX instant quote" }]
 }

@@ -34,7 +34,7 @@
 
   // ---------- state ----------
   var KEY = 'tx-quote-v1';
-  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, crew: '', ack: false, accessA: '', accessB: '', flightsA: 1, flightsB: 1, dis: false, date: '', time: '', name: '', phone: '', email: '', notes: '' }; };
+  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, crew: '', ack: false, accessA: '', accessB: '', flightsA: 1, flightsB: 1, dis: false, date: '', time: '', name: '', phone: '', email: '', notes: '', terms: false }; };
   var st = blank();
   try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && typeof saved === 'object') { for (var k in saved) st[k] = saved[k]; } } catch (e) {}
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
@@ -79,7 +79,7 @@
     q('[data-q-back]').toggleAttribute('data-hide', n === 1 || n === 7);
     q('[data-q-foot]').hidden = n === 2 || n === 7;
     q('[data-q-sum]').hidden = n !== 3;
-    next.textContent = n === 6 ? 'GET MY FIXED PRICE' : n === 1 ? 'SEE ROUTE' : 'NEXT';
+    next.textContent = n === 6 ? 'SEND BOOKING REQUEST' : n === 1 ? 'SEE ROUTE' : 'NEXT';
     if (n === 2) setTimeout(drawMap, 40);
     if (n === 3) { renderGrid(); renderList(); }
     if (n === 4) renderAccess();
@@ -95,6 +95,7 @@
     if (s === 1) ok = !!(st.from && st.to);
     if (s === 3) ok = count() > 0;
     if (s === 4) ok = !!(st.crew && (st.crew !== '1' || st.ack) && st.accessA && st.accessB && st.date);
+    if (s === 6) ok = !!st.terms;
     if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim());
     next.disabled = !ok;
     q('[data-q-sumn]').textContent = count();
@@ -283,6 +284,66 @@
   function closeSheet() { q('[data-q-scrim]').classList.remove('on'); q('[data-q-bsheet]').classList.remove('on'); }
   q('[data-q-scrim]').addEventListener('click', closeSheet);
 
+
+  // ---------- hourly price estimate ----------
+  var R = { f: +root.getAttribute('data-rate-first') || 99, b: +root.getAttribute('data-rate-block') || 52,
+            af: +root.getAttribute('data-after-first') || 198, ab: +root.getAttribute('data-after-block') || 104 };
+  // minutes to load and unload one item (both ends together), one mover with the customer helping
+  var MIN = { sofa: 12, armchair: 8, coffee: 5, tv: 6, tvunit: 8, bookcase: 8, sidetable: 3, rug: 3, lamp: 3, mirror: 4, artwork: 3, buffet: 15, ottoman: 4, shelving: 8,
+    bed: 12, mattress: 6, wardrobe: 15, dresser: 10, bedside: 3, cot: 8, bunkbed: 18, dining: 10, chair: 2, fridge: 12, washer: 12, dryer: 10, dishwasher: 12,
+    microwave: 3, barstool: 2, desk: 10, officechair: 3, filing: 8, monitor: 3, outdoor: 12, bbq: 12, bike: 4, treadmill: 18, plant: 3, pooltable: 40, pram: 3,
+    box: 2, suitcase: 1.5, tub: 2, piano: 12, other: 8 };
+  function itemMin(it) {
+    var m = MIN[it.k] || 8, v = it.v || '';
+    if (it.k === 'sofa') m = { '3 seater': 14, 'L-shape / modular': 22, 'Sofa bed': 18 }[v] || m;
+    if (it.k === 'tv' && /65/.test(v)) m = 8;
+    if ((it.k === 'bed' || it.k === 'mattress') && /^(Queen|King)$/.test(v)) m += 3;
+    if (it.k === 'wardrobe') m = { '1 door': 10, '3 door or more': 22 }[v] || m;
+    if (it.k === 'dining' && /8/.test(v)) m = 15;
+    if (it.k === 'fridge') m = { 'Bar fridge': 5, 'Double / French door': 18 }[v] || m;
+    if (it.k === 'desk' && /Corner/.test(v)) m = 15;
+    if (it.k === 'piano' && /Upright/.test(v)) m = 30;
+    if (it.k === 'box') m = { Small: 1.5, Large: 3 }[v] || 2;
+    return m;
+  }
+  function isAfter() {
+    if (st.time === 'Evening') return true;
+    if (!st.date) return false;
+    var p = st.date.split('-'), day = new Date(+p[0], p[1] - 1, +p[2]).getDay();
+    return day === 0 || day === 6;
+  }
+  var money = function (n) { return '$' + Math.round(n); };
+  var hm = function (m) { m = Math.round(m / 5) * 5; var h = Math.floor(m / 60), r = m % 60; return (h ? h + ' hr' + (r ? ' ' : '') : '') + (r ? r + ' min' : ''); };
+  function estimate() {
+    var h = 0; for (var id in st.items) h += itemMin(st.items[id]) * st.items[id].q;
+    var endF = function (e) { var a = st['access' + e]; return a === 'Stairs' ? 1 + 0.25 * st['flights' + e] : a === 'Lift' ? 1.1 : 1; };
+    h = h / 2 * endF('A') + h / 2 * endF('B');
+    if (st.crew === '2') h *= 0.7;
+    if (st.dis) h += 20;
+    var mins = Math.max(30, h + (st.route ? st.route.min * 1.3 : 25));
+    var blocks = Math.ceil(mins / 30), after = isAfter(), f = after ? R.af : R.f, b = after ? R.ab : R.b;
+    var lo = f + (blocks - 1) * b;
+    return { mins: mins, blocks: blocks, lo: lo, hi: lo + b, after: after, f: f, b: b };
+  }
+  var estTxt = function (e) { return money(e.lo) + ' to ' + money(e.hi); };
+  function renderEst() {
+    var el = q('[data-q-est]'); if (!el) return;
+    if (!count()) { el.innerHTML = ''; return; }
+    var e = estimate();
+    el.innerHTML = '<div class="txq-estc"><span class="lb">Estimated price</span><b>' + estTxt(e) + '</b>' +
+      '<span class="d">About ' + hm(e.mins) + ' including the drive. ' + (e.after ? 'Weekend / evening rate' : 'Weekday rate') + ': ' + money(e.f) + ' for the first 30 min, then ' + money(e.b) + ' per extra 30 min.' +
+      (st.crew === '2' ? ' Plus the second-mover fee, which we confirm by text.' : '') + '</span></div>';
+  }
+  function howHtml(e) {
+    return '<div class="txq-card txq-how"><b class="t">How the price works</b><ol>' +
+      '<li><b>' + money(R.f) + ' covers the first 30 minutes</b> on weekdays. After that it is ' + money(R.b) + ' for each extra 30 minutes, or part of it.</li>' +
+      '<li><b>Weekends, public holidays and evenings after 5pm</b> are ' + money(R.af) + ' for the first 30 minutes, then ' + money(R.ab) + ' for each extra 30 minutes.</li>' +
+      '<li><b>The clock starts</b> when we arrive at the pickup and stops when the last item is placed at the drop-off. You pay for the actual time, so the estimate is a guide.</li>' +
+      '<li><b>1 mover:</b> you help load and unload the heavy items. <b>2 movers:</b> an extra fee, which we confirm by text before the job.</li>' +
+      '<li><b>Extras at cost:</b> tolls, paid parking, and waiting time if the items are not ready.</li>' +
+      '<li><b>Nothing to pay now.</b> We text you to confirm the time before the job.</li></ol></div>';
+  }
+
   // ---------- step 4: crew, access, time ----------
   function crewAdvice() {
     var its = Object.keys(st.items).map(function (id) { return st.items[id]; });
@@ -295,8 +356,8 @@
   function iso(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
   function renderAccess() {
     var adv = crewAdvice();
-    var C = [['1', 'mover1', '1 mover + big van', 'Like most single-item jobs. You help load and unload the heavy items.', 'Standard price'],
-             ['2', 'mover2', '2 movers + big van', 'We do all the lifting, wrapping and carrying.', 'Extra fee applies']];
+    var C = [['1', 'mover1', '1 mover + big van', 'Like most single-item jobs. You help load and unload the heavy items.', 'From $' + R.f + ' for 30 min'],
+             ['2', 'mover2', '2 movers + big van', 'We do all the lifting, wrapping and carrying.', 'Extra fee, confirmed by text']];
     q('[data-q-crew]').innerHTML = C.map(function (c) { return '<button type="button" class="txq-crewc ' + (st.crew === c[0] ? 'on' : '') + '" data-v="' + c[0] + '">' + (adv.rec === c[0] ? '<span class="rec">RECOMMENDED</span>' : '') + icon(c[1]) +
       '<div><b>' + c[2] + '</b><span class="d">' + c[3] + '</span><span class="fee">' + c[4] + '</span></div><span class="radio"></span></button>'; }).join('');
     q('[data-q-crewhint]').textContent = adv.why;
@@ -312,9 +373,10 @@
     for (var i = 0; i < 14; i++) { var d = new Date(now); d.setDate(now.getDate() + i); var v = iso(d);
       html += '<button type="button" data-d="' + v + '" class="' + (st.date === v ? 'on' : '') + '"><small>' + (i === 0 ? 'Today' : i === 1 ? 'Tmrw' : d.toLocaleDateString('en-AU', { weekday: 'short' })) + '</small><b>' + d.getDate() + '</b><span>' + d.toLocaleDateString('en-AU', { month: 'short' }) + '</span></button>'; }
     q('[data-q-dates]').innerHTML = html;
-    var T = [['Morning', '7am to 11am'], ['Midday', '11am to 2pm'], ['Afternoon', '2pm to 6pm'], ['Flexible', 'Any time']];
+    var T = [['Morning', '7am to 11am'], ['Midday', '11am to 2pm'], ['Afternoon', '2pm to 5pm'], ['Evening', '5pm to 7pm, after-hours rate'], ['Flexible', 'Any time']];
     if (st.date === iso(now)) T.unshift(['ASAP', 'Next available today']);
     q('[data-q-times]').innerHTML = T.map(function (t) { return '<button type="button" class="' + (st.time === t[0] ? 'on' : '') + '" data-t="' + t[0] + '"><b>' + t[0] + '</b><small>' + t[1] + '</small></button>'; }).join('');
+    renderEst();
   }
   q('[data-q-crew]').addEventListener('click', function (e) { var b = e.target.closest('.txq-crewc'); if (!b) return; st.crew = b.getAttribute('data-v'); save(); renderAccess(); validate(); });
   q('[data-q-ack]').addEventListener('change', function () { st.ack = this.checked; save(); validate(); });
@@ -338,7 +400,10 @@
   function renderReview() {
     var its = Object.keys(st.items).map(function (id) { return st.items[id]; });
     var row = function (l, v) { return '<div class="r"><span class="mu">' + l + '</span><span>' + v + '</span></div>'; };
+    var e = estimate();
     q('[data-q-review]').innerHTML =
+      '<div class="txq-estc txq-estc--big"><span class="lb">Estimated price</span><b>' + estTxt(e) + '</b><span class="d">About ' + hm(e.mins) + ' including the drive, ' + (e.after ? 'weekend / evening rate' : 'weekday rate') + (st.crew === '2' ? ', plus the second-mover fee' : '') + '.</span></div>' + howHtml(e) +
+      '<label class="txq-ack txq-terms"><input type="checkbox" data-q-terms' + (st.terms ? ' checked' : '') + '><span>I understand the price is by time, from ' + money(e.f) + ' for the first 30 minutes, and the final amount depends on the actual time.</span></label>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Route</b><button type="button" data-go="1">Edit</button></div>' +
         '<div class="r"><span class="txq-pin txq-pin--a" style="width:22px;height:22px;font-size:11px">A</span><span>' + esc(st.from.text) + (st.unitA ? '<br><small>' + esc(st.unitA) + '</small>' : '') + '</span></div>' +
         '<div class="r"><span class="txq-pin txq-pin--b" style="width:22px;height:22px;font-size:11px">B</span><span>' + esc(st.to.text) + (st.unitB ? '<br><small>' + esc(st.unitB) + '</small>' : '') + '</span></div>' +
@@ -350,6 +415,7 @@
       '<div class="txq-card txq-rv"><div class="h"><b>Your details</b><button type="button" data-go="5">Edit</button></div>' +
         row('Name', esc(st.name)) + row('Mobile', esc(st.phone)) + row('Email', esc(st.email)) + (st.notes ? row('Notes', esc(st.notes)) : '') + '</div>';
     qa('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go'), true); }); });
+    q('[data-q-terms]').addEventListener('change', function () { st.terms = this.checked; save(); validate(); });
   }
   function submit() {
     var f = q('[data-q-form]'); if (!f) return;
@@ -359,8 +425,9 @@
     var when = fmtDate(st.date) + (st.time ? ', ' + st.time : '');
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', pickup); set('dropoff', dropoff);
     set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', access); set('when', when); set('date', st.date);
+    var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')'; set('estimate', estLine);
     set('body', ['Items: ' + itemsTxt().join(', '), 'Crew: ' + crewTxt() + (st.crew === '1' ? ', customer agreed to help load and unload' : ''), 'Access: ' + access,
-      'When: ' + when, st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
+      'When: ' + when, 'Estimate shown: ' + estLine, 'Customer agreed to the hourly terms', st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'SENDING…';
     try { sessionStorage.setItem('tx-quote-sent', '1'); } catch (e) {}
     f.submit();
