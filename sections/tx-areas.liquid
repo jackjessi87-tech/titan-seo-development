@@ -1,0 +1,73 @@
+{%- comment -%} Titan Express redesign: service areas. Region cards with suburb links (to the existing local pages). {%- endcomment -%}
+<section id="tx-areas" class="tx tx-band txa" aria-labelledby="txa-h-{{ section.id }}">
+  <div class="tx-wrap txa__grid">
+    <div class="txa__intro">
+      <p class="tx-eyebrow tx-reveal">{{ section.settings.eyebrow }}</p>
+      <h2 class="tx-h2 tx-reveal" id="txa-h-{{ section.id }}" style="--d:.05s">{{ section.settings.heading }}</h2>
+      <p class="tx-lede tx-reveal" style="--d:.1s">{{ section.settings.text }}</p>
+      <a class="tx-btn tx-btn--navy tx-reveal" style="--d:.15s; margin-top:26px" href="{{ section.settings.all_url }}">{{ section.settings.all_label }} {% render 'tx-icon', name: 'arrow' %}</a>
+      <svg class="txa__map" viewBox="0 0 320 220" aria-hidden="true">
+        <path d="M30 170c30-60 60-40 90-70s40-70 90-60 70 50 80 90" fill="none" stroke="#c9d3ea" stroke-width="2" stroke-dasharray="3 8"/>
+        <circle cx="30" cy="170" r="7" fill="#17357f"/><circle cx="120" cy="100" r="5" fill="#17357f" opacity=".5"/><circle cx="210" cy="40" r="5" fill="#17357f" opacity=".5"/>
+        <circle cx="290" cy="130" r="7" fill="#e1261c"/><circle cx="290" cy="130" r="14" fill="none" stroke="#e1261c" opacity=".35"><animate attributeName="r" values="8;18;8" dur="2.4s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
+    <ul class="txa__regions" role="list">
+      {%- for b in section.blocks -%}
+        <li class="txa__region tx-reveal" style="--d:{{ forloop.index0 | times: 0.05 }}s" {{ b.shopify_attributes }}>
+          <h3 class="tx-h3">{% render 'tx-icon', name: 'pin' %}{{ b.settings.title }}</h3>
+          <p>{{ b.settings.text }}</p>
+          {%- assign links = b.settings.links | newline_to_br | split: '<br />' -%}
+          <ul class="txa__subs" role="list">
+            {%- for l in links -%}{%- assign parts = l | strip | split: '|' -%}{%- if parts.size == 2 -%}
+              <li><a class="tx-chip" href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a></li>
+            {%- endif -%}{%- endfor -%}
+          </ul>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .txa__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+  .txa__intro { position: sticky; top: 100px; }
+  .txa__map { width: 100%; max-width: 360px; margin-top: 34px; }
+  .txa__regions { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .txa__region { background: var(--tx-grey); border-radius: var(--tx-r-lg); padding: 22px; border: 1px solid transparent; transition: border-color .3s, background .3s; }
+  .txa__region:hover { background: #fff; border-color: var(--tx-line); }
+  .txa__region .tx-h3 { display: flex; align-items: center; gap: 8px; }
+  .txa__region .tx-h3 .tx-ic { color: var(--tx-red); width: 20px; height: 20px; }
+  .txa__region p { margin: 6px 0 14px; color: var(--tx-muted); font-size: .94rem; }
+  .txa__subs { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .txa__subs .tx-chip { padding: 6px 12px; font-size: .86rem; }
+  @media (max-width: 899px) { .txa__grid { grid-template-columns: 1fr; } .txa__intro { position: static; } .txa__map { display: none; } }
+  @media (max-width: 599px) { .txa__regions { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "TX service areas",
+  "tag": "div",
+  "class": "section-tx-areas",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Service areas" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "All over Greater Sydney, 7 days" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Based in Punchbowl. We pick up and deliver right across Sydney, from the Northern Beaches to the Sutherland Shire and out west." },
+    { "type": "text", "id": "all_label", "label": "Button label", "default": "See all areas" },
+    { "type": "url", "id": "all_url", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "region",
+      "name": "Region",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Region" },
+        { "type": "text", "id": "text", "label": "Short line" },
+        { "type": "textarea", "id": "links", "label": "Suburb links", "info": "One per line: Suburb name | /pages/page-handle" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "TX service areas" }]
+}
+{% endschema %}

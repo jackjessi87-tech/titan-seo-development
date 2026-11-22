@@ -1,0 +1,94 @@
+{%- comment -%} Titan Express redesign: services grid. The first card can carry a photo and spans two columns on desktop. {%- endcomment -%}
+<section id="tx-services" class="tx tx-band txs" aria-labelledby="txs-h-{{ section.id }}">
+  <div class="tx-wrap">
+    <div class="tx-head">
+      <div>
+        <p class="tx-eyebrow tx-reveal">{{ section.settings.eyebrow }}</p>
+        <h2 class="tx-h2 tx-reveal" id="txs-h-{{ section.id }}" style="--d:.05s">{{ section.settings.heading }}</h2>
+        <p class="tx-lede tx-reveal" style="--d:.1s">{{ section.settings.text }}</p>
+      </div>
+      <a class="tx-link tx-reveal" href="{{ section.settings.all_url }}">{{ section.settings.all_label }} {% render 'tx-icon', name: 'arrow' %}</a>
+    </div>
+    <ul class="txs__grid" role="list">
+      {%- for b in section.blocks -%}
+        {%- assign has_img = false -%}{%- if forloop.first and b.settings.image != blank -%}{%- assign has_img = true -%}{%- endif -%}
+        <li class="txs__item{% if has_img %} txs__item--feature{% endif %} tx-reveal" style="--d:{{ forloop.index0 | times: 0.05 }}s" {{ b.shopify_attributes }}>
+          <a class="txs__card" href="{{ b.settings.url }}">
+            {%- if has_img -%}
+              <span class="txs__photo">{{ b.settings.image | image_url: width: 900 | image_tag: widths: '400, 600, 900', sizes: '(min-width: 1000px) 560px, 92vw', loading: 'lazy', alt: b.settings.image_alt }}</span>
+            {%- endif -%}
+            <span class="txs__body">
+              <span class="tx-ic-tile">{% render 'tx-icon', name: b.settings.icon %}</span>
+              <h3 class="tx-h3">{{ b.settings.title }}</h3>
+              <span class="txs__text">{{ b.settings.text }}</span>
+              <span class="txs__more">Learn more {% render 'tx-icon', name: 'arrow' %}</span>
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .txs__grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .txs__item--feature { grid-column: span 2; grid-row: span 2; }
+  .txs__card { position: relative; height: 100%; display: flex; flex-direction: column; text-decoration: none; background: #fff; border: 1px solid var(--tx-line);
+    border-radius: var(--tx-r-lg); overflow: hidden; transition: transform .35s var(--tx-ease), box-shadow .35s var(--tx-ease), border-color .35s; }
+  .txs__card:hover { transform: translateY(-4px); box-shadow: var(--tx-sh-2); border-color: transparent; }
+  .txs__card:focus-visible { outline: 3px solid #ffbf47; outline-offset: 3px; }
+  .txs__body { display: flex; flex-direction: column; gap: 10px; padding: 24px; flex: 1; }
+  .txs__body .tx-h3 { margin-top: 8px; }
+  .txs__text { color: var(--tx-muted); font-size: .96rem; flex: 1; }
+  .txs__more { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--tx-navy); font-size: .92rem; }
+  .txs__more .tx-ic { width: 18px; height: 18px; transition: transform .25s var(--tx-ease); }
+  .txs__card:hover .txs__more .tx-ic { transform: translateX(4px); }
+  .txs__card:hover .tx-ic-tile { background: var(--tx-navy); color: #fff; transform: rotate(-6deg); }
+  .txs__photo { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--tx-grey-2); }
+  .txs__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transition: transform 1s var(--tx-ease); }
+  .txs__card:hover .txs__photo img { transform: scale(1.04); }
+  .txs__item--feature .txs__photo { aspect-ratio: auto; flex: 1; min-height: 260px; position: relative; }
+  .txs__item--feature .txs__photo img { position: absolute; inset: 0; }
+  .txs__item--feature .txs__body { flex: none; }
+  @media (max-width: 999px) { .txs__grid { grid-template-columns: repeat(2, 1fr); } .txs__item--feature { grid-column: span 2; grid-row: auto; } .txs__item--feature .txs__photo { aspect-ratio: 16 / 9; flex: none; min-height: 0; } .txs__item--feature .txs__photo img { position: static; } }
+  @media (max-width: 599px) {
+    .txs__grid { grid-template-columns: 1fr; gap: 12px; }
+    .txs__item--feature { grid-column: auto; }
+    .txs__item:not(.txs__item--feature) .txs__body { display: grid; grid-template-columns: 52px 1fr; gap: 4px 14px; padding: 18px; }
+    .txs__item:not(.txs__item--feature) .tx-ic-tile { grid-row: span 3; }
+    .txs__item:not(.txs__item--feature) .tx-h3 { margin: 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "TX services",
+  "tag": "div",
+  "class": "section-tx-services",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What we move" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One item or a small move. Handled with care." },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Furniture, appliances and online buys, collected and delivered anywhere in Greater Sydney." },
+    { "type": "text", "id": "all_label", "label": "All services link label", "default": "Areas we serve" },
+    { "type": "url", "id": "all_url", "label": "All services link" }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "sofa", "options": [
+          { "value": "sofa", "label": "Sofa" }, { "value": "tag", "label": "Marketplace" }, { "value": "store", "label": "Store" },
+          { "value": "box", "label": "Box" }, { "value": "fridge", "label": "Fridge" }, { "value": "bed", "label": "Bed" },
+          { "value": "van", "label": "Van" }, { "value": "home", "label": "Home" }, { "value": "bolt", "label": "Same day" } ] },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Photo (first card only)" },
+        { "type": "text", "id": "image_alt", "label": "Photo alt text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "TX services" }]
+}
+{% endschema %}

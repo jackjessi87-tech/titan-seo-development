@@ -1,0 +1,156 @@
+{%- comment -%}
+  Titan Express instant quote (redesign 2026-11). A full-screen overlay opened by any [data-tx-open-quote] link or the hero quick start.
+  Sends through Shopify's contact form (same inbox and the same "New customer message" emails as the existing forms).
+  Address search and route use free test services (Photon, OSRM, Esri tiles). Switch to Google Maps with Titan's own key before going live.
+{%- endcomment -%}
+{{ 'tx-quote.css' | asset_url | stylesheet_tag: preload: false }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
+{%- assign s = section.settings -%}
+<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}">
+  <header class="txq-top">
+    <div class="txq-row">
+      <button class="txq-ib" type="button" data-q-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="txq-brand"><b id="txq-title">Instant quote</b><small data-q-steplbl>Step 1 of 5</small></div>
+      <button class="txq-ib" type="button" data-q-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="txq-prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </header>
+
+  <div class="txq-body">
+    <!-- 1 route -->
+    <section class="txq-s" data-s="1">
+      <p class="txq-eb">Step 1</p><h2 class="txq-h">Where from, where to?</h2>
+      <p class="txq-lede">Type a street, suburb or store, then pick it from the list.</p>
+      <div class="txq-card txq-addr">
+        <div class="txq-vline"></div>
+        <div class="txq-arow" data-row="from"><span class="txq-pin txq-pin--a">A</span><div class="txq-col"><label for="txq-from">Pickup</label><input id="txq-from" autocomplete="off" placeholder="e.g. IKEA Tempe or 12 George St"></div></div>
+        <div class="txq-arow" data-row="to"><span class="txq-pin txq-pin--b">B</span><div class="txq-col"><label for="txq-to">Drop-off</label><input id="txq-to" autocomplete="off" placeholder="e.g. Bondi Junction"></div></div>
+        <button class="txq-swap" type="button" data-q-swap aria-label="Swap pickup and drop-off"><svg viewBox="0 0 24 24"><path d="M7 4v16M7 4L3 8M7 4l4 4M17 20V4M17 20l-4-4M17 20l4-4"/></svg></button>
+      </div>
+      <div class="txq-card txq-sugg" data-q-sugg hidden></div>
+      <div class="txq-extra">
+        <button class="txq-tb" type="button" data-q-locate><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>Use my location</button>
+        <button class="txq-tb" type="button" data-q-unitbtn><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Unit, level or store name</button>
+      </div>
+      <div class="txq-unit" data-q-unit hidden>
+        <input class="txq-inp" data-q-unita placeholder="Pickup: unit, level, store or company (optional)">
+        <input class="txq-inp" data-q-unitb placeholder="Drop-off: unit, level or company (optional)">
+      </div>
+    </section>
+
+    <!-- 2 map -->
+    <section class="txq-s txq-s--map" data-s="2" hidden>
+      <div class="txq-mapwrap">
+        <div class="txq-map" data-q-map></div>
+        <div class="txq-card txq-floatcard"><div><i class="txq-dot" style="background:#17357f"></i><span data-q-fa></span></div><div><i class="txq-dot" style="background:#e1261c"></i><span data-q-fb></span></div></div>
+        <div class="txq-sheet">
+          <div class="txq-grab"></div>
+          <div class="txq-stats"><div><b data-q-km>…</b><span>driving distance</span></div><div><b data-q-min>…</b><span>drive time, no traffic</span></div></div>
+          <button class="txq-cta txq-cta--block" type="button" data-q-confirm>CONFIRM LOCATIONS</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 items -->
+    <section class="txq-s" data-s="3" hidden>
+      <p class="txq-eb">Step 2</p><h2 class="txq-h">What are we moving?</h2>
+      <p class="txq-lede">Tap each item. Tap again to add more.</p>
+      <div class="txq-custom">
+        <input class="txq-inp" data-q-custom placeholder="Item name…" aria-label="Add your own item">
+        <div class="txq-step"><button type="button" data-q-cm aria-label="Fewer">−</button><span data-q-cq>1</span><button type="button" data-q-cp aria-label="More">+</button></div>
+        <button class="txq-add" type="button" data-q-cadd>Add</button>
+      </div>
+      <div class="txq-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input class="txq-inp" data-q-find placeholder="Search items, e.g. fridge" autocomplete="off" aria-label="Search items"></div>
+      <div class="txq-cats" data-q-cats></div>
+      <div class="txq-grid" data-q-grid></div>
+      <h3 class="txq-h3" data-q-lh>Your list</h3>
+      <div class="txq-card txq-list" data-q-list></div>
+    </section>
+
+    <!-- 4 crew, access, time -->
+    <section class="txq-s" data-s="4" hidden>
+      <p class="txq-eb">Step 3</p><h2 class="txq-h">Crew, access and timing</h2>
+      <p class="txq-lede">So we bring the right crew and gear.</p>
+      <div class="txq-crew" data-q-crew></div>
+      <p class="txq-crewhint" data-q-crewhint></p>
+      <label class="txq-ack" data-q-ackwrap hidden><input type="checkbox" data-q-ack><span>I understand I need to help load and unload the heavy items at both ends.</span></label>
+      <div class="txq-card txq-acc"><div class="txq-acchd"><span class="txq-pin txq-pin--a">A</span><div><b>Pickup</b><small data-q-acca></small></div></div><div class="txq-lbl">How do we get the items out?</div><div class="txq-seg" data-q-seg="A"></div><div class="txq-fl" data-q-fl="A" hidden><span>Flights of stairs</span><div class="txq-step txq-step--sm"><button type="button">−</button><span>1</span><button type="button">+</button></div></div></div>
+      <div class="txq-card txq-acc"><div class="txq-acchd"><span class="txq-pin txq-pin--b">B</span><div><b>Drop-off</b><small data-q-accb></small></div></div><div class="txq-lbl">How do we get the items in?</div><div class="txq-seg" data-q-seg="B"></div><div class="txq-fl" data-q-fl="B" hidden><span>Flights of stairs</span><div class="txq-step txq-step--sm"><button type="button">−</button><span>1</span><button type="button">+</button></div></div></div>
+      <div class="txq-card txq-tog"><div><b>Dismantling or assembly</b><small>Bed frames, tables, wardrobes</small></div><button class="txq-sw" type="button" data-q-dis aria-label="Dismantling or assembly"></button></div>
+      <h3 class="txq-h3">When?</h3>
+      <div class="txq-dates" data-q-dates></div>
+      <div class="txq-lbl" style="margin-top:14px">Preferred time</div>
+      <div class="txq-seg txq-seg--2" data-q-times></div>
+    </section>
+
+    <!-- 5 details -->
+    <section class="txq-s" data-s="5" hidden>
+      <p class="txq-eb">Step 4</p><h2 class="txq-h">Your details</h2>
+      <p class="txq-lede">We'll text you a fixed price. No obligation.</p>
+      <div class="txq-note"><svg viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <span>Photos help us give an exact price. After sending, text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>, no rush.</span></div>
+      <div class="txq-field"><label for="txq-name">Name</label><input class="txq-inp" id="txq-name" autocomplete="name" placeholder="First name is fine"></div>
+      <div class="txq-field"><label for="txq-phone">Mobile</label><input class="txq-inp" id="txq-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="04xx xxx xxx"></div>
+      <div class="txq-field"><label for="txq-email">Email</label><input class="txq-inp" id="txq-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+      <div class="txq-field"><label for="txq-notes">Anything else? <span>(optional)</span></label><textarea class="txq-inp" id="txq-notes" rows="3" placeholder="e.g. narrow hallway, parking in the driveway"></textarea></div>
+    </section>
+
+    <!-- 6 review -->
+    <section class="txq-s" data-s="6" hidden>
+      <p class="txq-eb">Step 5</p><h2 class="txq-h">Check and send</h2>
+      <p class="txq-lede">One fixed price by text. No hourly meter.</p>
+      <div data-q-review></div>
+    </section>
+
+    <!-- 7 sent -->
+    <section class="txq-s" data-s="7" hidden>
+      <div class="txq-done">
+        <div class="txq-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+        <h2 class="txq-h">Thanks, we've got it!</h2>
+        <p class="txq-lede">Sam from Titan Express will text you a fixed price shortly. Got photos? Text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>.</p>
+        <a class="txq-cta" href="tel:{{ s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' }}">Call {{ s.phone }}</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="txq-foot" data-q-foot>
+    <div class="txq-sum" data-q-sum hidden><b data-q-sumn>0</b>items</div>
+    <button class="txq-cta" type="button" data-q-next disabled>NEXT</button>
+  </div>
+
+  <div class="txq-scrim" data-q-scrim></div>
+  <div class="txq-bsheet" data-q-bsheet role="dialog" aria-modal="true"></div>
+  <div class="txq-toast" data-q-toast></div>
+
+  {%- form 'contact', id: 'txq-form', class: 'txq-form', data-q-form: '' -%}
+    {%- if form.posted_successfully? -%}<span data-q-posted hidden></span>{%- endif -%}
+    {%- if form.errors -%}<span data-q-errors hidden>{{ form.errors | default_errors | strip_html | strip }}</span>{%- endif -%}
+    <input type="hidden" name="contact[source]" value="Instant quote (new design)">
+    <input type="hidden" name="contact[name]" data-f="name">
+    <input type="hidden" name="contact[email]" data-f="email">
+    <input type="hidden" name="contact[phone]" data-f="phone">
+    <input type="hidden" name="contact[pickup_suburb]" data-f="pickup">
+    <input type="hidden" name="contact[delivery_suburb]" data-f="dropoff">
+    <input type="hidden" name="contact[items]" data-f="items">
+    <input type="hidden" name="contact[crew]" data-f="crew">
+    <input type="hidden" name="contact[stairs_or_lift]" data-f="access">
+    <input type="hidden" name="contact[when]" data-f="when">
+    <input type="hidden" name="contact[preferred_date]" data-f="date">
+    <input type="hidden" name="contact[body]" data-f="body">
+  {%- endform -%}
+</div>
+<script src="{{ 'tx-quote-icons.js' | asset_url }}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+<script src="{{ 'tx-quote.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "TX instant quote",
+  "tag": "div",
+  "class": "section-tx-quote",
+  "settings": [
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" }
+  ],
+  "presets": [{ "name": "TX instant quote" }]
+}
+{% endschema %}

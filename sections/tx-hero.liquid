@@ -1,0 +1,199 @@
+{%- comment -%}
+  Titan Express redesign hero (2026-11). Loads the shared design system (tx-base.css / tx-base.js) and fonts for the tx-* sections.
+  Quick start: pickup + drop-off open the instant quote (section tx-quote). Without JavaScript the button goes to the quote page.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap">
+{{ 'tx-base.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tx-base.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign s = section.settings
+  assign phone_digits = s.phone | remove: ' '
+  assign phone_intl = phone_digits | remove_first: '0' | prepend: '+61'
+-%}
+<section class="tx txh" aria-labelledby="txh-title-{{ section.id }}">
+  <svg class="txh__route" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
+    <path id="txh-path-{{ section.id }}" d="M-40 520 C 200 470, 260 300, 470 330 S 760 470, 900 260 S 1120 90, 1260 120" />
+    <circle r="5"><animateMotion dur="9s" repeatCount="indefinite" rotate="auto"><mpath href="#txh-path-{{ section.id }}"/></animateMotion></circle>
+  </svg>
+  <div class="tx-wrap txh__grid">
+    <div class="txh__copy">
+      <p class="txh__live tx-reveal" data-open="{{ s.open_hour }}" data-close="{{ s.close_hour }}" data-on="{{ s.live_open | escape }}" data-off="{{ s.live_closed | escape }}">
+        <span class="txh__dot" aria-hidden="true"></span><span data-txh-live>{{ s.live_fallback }}</span>
+      </p>
+      <h1 class="tx-h1 tx-reveal" id="txh-title-{{ section.id }}" style="--d:.05s">{{ s.heading }}</h1>
+      <p class="tx-lede tx-reveal" style="--d:.1s">{{ s.subheading }}</p>
+
+      <form class="txh__qs tx-reveal" style="--d:.15s" action="{{ s.quote_url }}" method="get" data-tx-quickstart>
+        <div class="txh__qsrow">
+          <label class="txh__f"><span class="txh__pin txh__pin--a">A</span><span class="txh__fl">Pickup suburb</span>
+            <input name="from" type="text" autocomplete="off" placeholder="e.g. Parramatta" aria-label="Pickup suburb"></label>
+          <label class="txh__f"><span class="txh__pin txh__pin--b">B</span><span class="txh__fl">Drop-off suburb</span>
+            <input name="to" type="text" autocomplete="off" placeholder="e.g. Bondi" aria-label="Drop-off suburb"></label>
+        </div>
+        <button class="tx-btn txh__go" type="submit">Get instant quote {% render 'tx-icon', name: 'arrow' %}</button>
+      </form>
+
+      <div class="txh__ctas tx-reveal" style="--d:.2s" data-tx-hero-ctas>
+        <a class="tx-btn tx-btn--ghost" href="tel:{{ phone_intl }}">{% render 'tx-icon', name: 'phone' %}Call {{ s.phone }}</a>
+        <span class="txh__or">Fixed price on the phone, no hourly meter</span>
+      </div>
+
+      <ul class="txh__trust tx-reveal" style="--d:.25s" role="list">
+        <li><span class="tx-stars" aria-hidden="true">{% for i in (1..5) %}<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>{% endfor %}</span>
+          <b>{{ s.rating }}</b> on Google <span class="txh__muted">({{ s.review_count }} reviews)</span></li>
+        <li>{% render 'tx-icon', name: 'shield' %}Fully insured</li>
+        <li>{% render 'tx-icon', name: 'clock' %}7 days, same day</li>
+      </ul>
+    </div>
+
+    <div class="txh__media">
+      <div class="txh__img tx-imgreveal">
+        {%- if s.image != blank -%}
+          {{ s.image | image_url: width: 1400 | image_tag: widths: '480, 720, 960, 1200, 1400', sizes: '(min-width: 1000px) 560px, 92vw', loading: 'eager', fetchpriority: 'high', alt: s.image_alt }}
+        {%- endif -%}
+      </div>
+      <div class="txh__float txh__float--a tx-reveal" style="--d:.45s">
+        <span class="tx-ic-tile">{% render 'tx-icon', name: 'dollar' %}</span>
+        <span><b>Fixed price</b><small>Agreed before we start</small></span>
+      </div>
+      <div class="txh__float txh__float--b tx-reveal" style="--d:.6s">
+        <span class="tx-ic-tile txh__tile--red">{% render 'tx-icon', name: 'blanket' %}</span>
+        <span><b>Wrapped &amp; strapped</b><small>Blankets, straps, trolleys</small></span>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+  <div class="tx-wrap">
+    <ul class="txh__chips" role="list" aria-label="Popular services">
+      {%- for b in section.blocks -%}
+        <li {{ b.shopify_attributes }}><a class="tx-chip" href="{{ b.settings.url }}">{% render 'tx-icon', name: b.settings.icon %}{{ b.settings.label }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  <nav class="tx-actionbar" aria-label="Quick contact">
+    <a class="tx-btn tx-btn--navy" href="tel:{{ phone_intl }}">{% render 'tx-icon', name: 'phone' %}Call</a>
+    <a class="tx-btn" href="{{ s.quote_url }}" data-tx-open-quote>{% render 'tx-icon', name: 'bolt' %}Instant quote</a>
+  </nav>
+</section>
+
+<script>
+  (function () {
+    var el = document.querySelector('#shopify-section-{{ section.id }} .txh__live');
+    if (!el) return;
+    try {
+      var h = Number(new Intl.DateTimeFormat('en-AU', { hour: 'numeric', hourCycle: 'h23', timeZone: 'Australia/Sydney' }).format(new Date()));
+      var open = h >= Number(el.dataset.open) && h < Number(el.dataset.close);
+      el.classList.toggle('is-open', open);
+      el.querySelector('[data-txh-live]').textContent = open ? el.dataset.on : el.dataset.off;
+    } catch (e) {}
+  })();
+</script>
+
+{% stylesheet %}
+  .txh { position: relative; overflow: hidden; background: linear-gradient(180deg, #f4f5f8 0%, #fff 78%); padding: clamp(28px, 5vw, 72px) 0 clamp(36px, 5vw, 64px); }
+  .txh__route { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .55; }
+  .txh__route path { fill: none; stroke: #c9d3ea; stroke-width: 2; stroke-dasharray: 2 12; stroke-linecap: round; animation: txh-dash 30s linear infinite; }
+  .txh__route circle { fill: var(--tx-red); }
+  @keyframes txh-dash { to { stroke-dashoffset: -600; } }
+  .txh__grid { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .txh__live { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; padding: 7px 14px 7px 10px; border-radius: 999px; background: #fff;
+    border: 1px solid var(--tx-line); font-size: .9rem; font-weight: 600; color: var(--tx-charcoal); box-shadow: var(--tx-sh-1); }
+  .txh__dot { width: 9px; height: 9px; border-radius: 50%; background: #f59e0b; position: relative; }
+  .txh__live.is-open .txh__dot { background: var(--tx-ok); }
+  .txh__live.is-open .txh__dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--tx-ok); opacity: 0; animation: txh-ping 1.8s var(--tx-ease) infinite; }
+  @keyframes txh-ping { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(1.6); opacity: 0; } }
+  .txh .tx-h1 em { font-style: normal; color: var(--tx-red); }
+  .txh__qs { margin: 26px 0 0; padding: 10px; background: #fff; border: 1px solid var(--tx-line); border-radius: 22px; box-shadow: var(--tx-sh-2); display: grid; gap: 10px; max-width: 600px; }
+  .txh__qsrow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .txh__f { position: relative; display: block; background: var(--tx-grey); border-radius: 14px; padding: 9px 14px 9px 50px; cursor: text; border: 1.5px solid transparent; transition: border-color .2s, background .2s; }
+  .txh__f:focus-within { border-color: var(--tx-navy); background: #fff; }
+  .txh__pin { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+    color: #fff; font-size: 12px; font-weight: 800; }
+  .txh__pin--a { background: var(--tx-navy); } .txh__pin--b { background: var(--tx-red); }
+  .txh__fl { display: block; font-size: .74rem; font-weight: 700; color: var(--tx-muted); letter-spacing: .02em; }
+  .txh__f input { width: 100%; border: 0; outline: 0; background: transparent; padding: 1px 0 2px; font: 600 1rem var(--tx-font); color: var(--tx-ink); }
+  .txh__f input::placeholder { color: #9aa1b0; font-weight: 500; }
+  .txh__go { width: 100%; min-height: 56px; font-size: 1.05rem; }
+  .txh__ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+  .txh__or { font-size: .9rem; color: var(--tx-muted); }
+  .txh__trust { display: flex; flex-wrap: wrap; gap: 10px 22px; list-style: none; padding: 0; margin: 26px 0 0; font-size: .92rem; color: var(--tx-charcoal); font-weight: 500; }
+  .txh__trust li { display: inline-flex; align-items: center; gap: 8px; }
+  .txh__trust .tx-ic { width: 19px; height: 19px; color: var(--tx-navy); }
+  .txh__muted { color: var(--tx-muted); }
+  .txh__media { position: relative; }
+  .txh__img { border-radius: var(--tx-r-lg); overflow: hidden; aspect-ratio: 4 / 4.4; box-shadow: var(--tx-sh-3); background: #dfe5f1; }
+  .txh__img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; transform: scale(1.06); transition: transform 1.6s var(--tx-ease); }
+  .tx-js .txh__img.is-in img { transform: scale(1); }
+  .txh__float { position: absolute; display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; background: rgba(255, 255, 255, .94); backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); border-radius: 18px; box-shadow: var(--tx-sh-2); border: 1px solid rgba(255, 255, 255, .7); animation: txh-float 6s ease-in-out infinite; }
+  .txh__float b { display: block; font: 750 .98rem/1.2 var(--tx-font-head); color: var(--tx-ink); }
+  .txh__float small { display: block; font-size: .8rem; color: var(--tx-muted); }
+  .txh__float .tx-ic-tile { width: 44px; height: 44px; border-radius: 12px; }
+  .txh__float--a { left: -22px; bottom: 54px; }
+  .txh__float--b { right: -18px; top: 38px; animation-delay: -3s; }
+  .txh__tile--red { background: var(--tx-red-50); color: var(--tx-red); }
+  @keyframes txh-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+  .txh__chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: clamp(30px, 4vw, 48px) 0 0; }
+  @media (max-width: 999px) {
+    .txh__grid { grid-template-columns: 1fr; }
+    .txh__media { order: -1; margin: 0 4px; }
+    .txh__img { aspect-ratio: 16 / 11; }
+    .txh__float--a { left: 10px; bottom: -22px; }
+    .txh__float--b { right: 10px; top: 14px; }
+    .txh__live { margin-top: 24px; }
+  }
+  @media (max-width: 599px) {
+    .txh__qsrow { grid-template-columns: 1fr; }
+    .txh__float--b { display: none; }
+    .txh__float { padding: 9px 12px 9px 9px; }
+    .txh__ctas .tx-btn { width: 100%; }
+    .txh__or { width: 100%; text-align: center; }
+    .txh__chips { flex-wrap: nowrap; overflow-x: auto; margin-left: calc(var(--tx-gutter) * -1); margin-right: calc(var(--tx-gutter) * -1); padding: 2px var(--tx-gutter) 6px; scrollbar-width: none; }
+    .txh__chips::-webkit-scrollbar { display: none; }
+    .txh__chips li { flex: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "TX hero",
+  "tag": "div",
+  "class": "section-tx-hero",
+  "settings": [
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "quote_url", "label": "Quote page (no-JavaScript fallback)", "default": "/pages/furniture-pickup-delivery-sydney" },
+    { "type": "text", "id": "heading", "label": "Heading (H1)", "default": "Same-Day Furniture Pickup & Delivery in <em>Sydney</em>" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Couch, bed, fridge or a Marketplace buy. One fixed price before we start, and a careful crew at your door, often today." },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "image_alt", "label": "Photo alt text", "default": "Titan Express movers loading a blanket-wrapped sofa into the truck in Sydney" },
+    { "type": "text", "id": "rating", "label": "Google rating", "default": "5.0" },
+    { "type": "text", "id": "review_count", "label": "Google review count", "default": "59" },
+    { "type": "range", "id": "open_hour", "label": "Open from (hour)", "min": 0, "max": 23, "step": 1, "default": 7 },
+    { "type": "range", "id": "close_hour", "label": "Open until (hour)", "min": 1, "max": 24, "step": 1, "default": 19 },
+    { "type": "text", "id": "live_open", "label": "Status during hours", "default": "Taking same-day bookings now" },
+    { "type": "text", "id": "live_closed", "label": "Status after hours", "default": "Book now for tomorrow from 7am" },
+    { "type": "text", "id": "live_fallback", "label": "Status without JavaScript", "default": "Same-day pickups available" }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Service chip",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "sofa", "options": [
+          { "value": "sofa", "label": "Sofa" }, { "value": "tag", "label": "Marketplace" }, { "value": "store", "label": "Store" },
+          { "value": "box", "label": "Box" }, { "value": "fridge", "label": "Fridge" }, { "value": "bed", "label": "Bed" },
+          { "value": "van", "label": "Van" }, { "value": "home", "label": "Home" }, { "value": "bolt", "label": "Same day" } ] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "TX hero" }]
+}
+{% endschema %}

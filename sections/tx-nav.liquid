@@ -1,0 +1,104 @@
+{%- comment -%}
+  Titan Express redesign: sticky navigation (the theme header is switched off site-wide, so the redesign brings its own).
+  Desktop: logo, links, call + quote. Mobile: logo, call icon, menu button opening a full-screen menu.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign phone_intl = s.phone | remove: ' ' | remove_first: '0' | prepend: '+61'
+-%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap">
+{{ 'tx-base.css' | asset_url | stylesheet_tag }}
+<header class="tx txn" data-txn>
+  <div class="tx-wrap txn__bar">
+    <a class="txn__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+      {%- if settings.logo -%}{{ settings.logo | image_url: width: 96 | image_tag: width: 40, height: 40, alt: '', loading: 'eager' }}{%- endif -%}
+      <span><b>Titan Express</b><small>{{ s.tagline }}</small></span>
+    </a>
+    <nav class="txn__links" aria-label="Main">
+      {%- for b in section.blocks -%}<a href="{{ b.settings.url }}" {{ b.shopify_attributes }}>{{ b.settings.label }}</a>{%- endfor -%}
+    </nav>
+    <div class="txn__act">
+      <a class="txn__phone" href="tel:{{ phone_intl }}">{% render 'tx-icon', name: 'phone' %}<span>{{ s.phone }}</span></a>
+      <a class="tx-btn tx-btn--sm txn__quote" href="{{ s.quote_url }}" data-tx-open-quote>Instant quote</a>
+      <a class="txn__ib txn__ib--call" href="tel:{{ phone_intl }}" aria-label="Call {{ s.phone }}">{% render 'tx-icon', name: 'phone' %}</a>
+      <button class="txn__ib txn__menu" type="button" aria-expanded="false" aria-controls="txn-panel-{{ section.id }}" aria-label="Menu"><span class="txn__i-open">{% render 'tx-icon', name: 'menu' %}</span><span class="txn__i-close">{% render 'tx-icon', name: 'close' %}</span></button>
+    </div>
+  </div>
+  <div class="txn__panel" id="txn-panel-{{ section.id }}" hidden>
+    <nav aria-label="Mobile">
+      {%- for b in section.blocks -%}<a href="{{ b.settings.url }}">{{ b.settings.label }} {% render 'tx-icon', name: 'arrow' %}</a>{%- endfor -%}
+    </nav>
+    <div class="txn__pcta">
+      <a class="tx-btn tx-btn--block" href="{{ s.quote_url }}" data-tx-open-quote>{% render 'tx-icon', name: 'bolt' %}Get an instant quote</a>
+      <a class="tx-btn tx-btn--navy tx-btn--block" href="tel:{{ phone_intl }}">{% render 'tx-icon', name: 'phone' %}Call {{ s.phone }}</a>
+      <p>7 days, 7am to 7pm · Fixed prices · Greater Sydney</p>
+    </div>
+  </div>
+</header>
+<script>
+  (function () {
+    var h = document.querySelector('#shopify-section-{{ section.id }} [data-txn]'); if (!h) return;
+    var btn = h.querySelector('.txn__menu'), panel = h.querySelector('.txn__panel');
+    var set = function (o) { btn.setAttribute('aria-expanded', o); panel.hidden = !o; h.classList.toggle('is-open', o); document.documentElement.style.overflow = o ? 'hidden' : ''; };
+    btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+    panel.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    var on = function () { h.classList.toggle('is-scrolled', window.scrollY > 8); }; on(); window.addEventListener('scroll', on, { passive: true });
+  })();
+</script>
+
+{% stylesheet %}
+  .section-tx-nav { position: sticky; top: 0; z-index: 70; }
+  .txn { background: rgba(255, 255, 255, .86); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s; }
+  .txn.is-scrolled { border-color: var(--tx-line); box-shadow: 0 6px 24px rgba(15, 18, 24, .06); }
+  .txn__bar { display: flex; align-items: center; gap: 24px; height: 68px; }
+  .txn__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
+  .txn__brand img { width: 40px; height: 40px; border-radius: 50%; object-fit: contain; }
+  .txn__brand b { display: block; font: 800 1.05rem/1.1 var(--tx-font-head); color: var(--tx-ink); letter-spacing: -.02em; }
+  .txn__brand small { display: block; font-size: .72rem; color: var(--tx-muted); font-weight: 600; letter-spacing: .02em; }
+  .txn__links { display: flex; gap: 4px; margin-left: 12px; }
+  .txn__links a { padding: 8px 12px; border-radius: 10px; font-weight: 600; font-size: .94rem; color: var(--tx-charcoal); text-decoration: none; transition: background .2s, color .2s; }
+  .txn__links a:hover { background: var(--tx-grey); color: var(--tx-ink); }
+  .txn__act { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .txn__phone { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--tx-ink); text-decoration: none; }
+  .txn__phone .tx-ic { width: 18px; height: 18px; color: var(--tx-red); }
+  .txn__ib { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--tx-line); background: #fff; color: var(--tx-ink); place-items: center; cursor: pointer; }
+  .txn__ib > span { display: grid; }
+  .txn__i-close, .txn.is-open .txn__i-open { display: none !important; }
+  .txn.is-open .txn__i-close { display: grid !important; }
+  .txn__ib--call { background: var(--tx-red); border-color: var(--tx-red); color: #fff; }
+  .txn__panel { border-top: 1px solid var(--tx-line); background: #fff; height: calc(100dvh - 68px); overflow-y: auto; padding: 8px var(--tx-gutter) 32px; }
+  .txn__panel nav a { display: flex; align-items: center; justify-content: space-between; padding: 18px 4px; border-bottom: 1px solid var(--tx-line);
+    font: 700 1.3rem/1.2 var(--tx-font-head); color: var(--tx-ink); text-decoration: none; letter-spacing: -.01em; }
+  .txn__panel nav a .tx-ic { color: var(--tx-red); }
+  .txn__pcta { display: grid; gap: 10px; margin-top: 24px; }
+  .txn__pcta p { margin: 6px 0 0; text-align: center; color: var(--tx-muted); font-size: .88rem; }
+  @media (max-width: 1099px) { .txn__links { display: none; } }
+  @media (max-width: 799px) {
+    .txn__bar { height: 62px; gap: 12px; }
+    .txn .txn__phone, .txn .txn__quote { display: none; }
+    .txn__ib { display: grid; }
+    .txn__act { gap: 8px; }
+    .txn__panel { height: calc(100dvh - 62px); }
+  }
+  @media (max-width: 379px) { .txn__brand small { display: none; } .txn__brand img { width: 34px; height: 34px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "TX navigation",
+  "tag": "div",
+  "class": "section-tx-nav",
+  "settings": [
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "tagline", "label": "Tagline under the name", "default": "Furniture delivery · Sydney" },
+    { "type": "text", "id": "quote_url", "label": "Quote page (no-JavaScript fallback)", "default": "/pages/furniture-pickup-delivery-sydney" }
+  ],
+  "blocks": [
+    { "type": "link", "name": "Link", "settings": [ { "type": "text", "id": "label", "label": "Label" }, { "type": "text", "id": "url", "label": "Link" } ] }
+  ],
+  "presets": [{ "name": "TX navigation" }]
+}
+{% endschema %}

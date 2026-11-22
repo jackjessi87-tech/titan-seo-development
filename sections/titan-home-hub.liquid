@@ -38,7 +38,7 @@
   </section>
   {%- endif -%}
 
-  {%- if services.size > 0 -%}
+  {%- if services.size > 0 and s.show_services != false -%}
   <section class="thh-band" aria-labelledby="thh-svc-{{ section.id }}">
     <div class="thh-wrap">
       <p class="thh-eyebrow">{{ s.services_eyebrow }}</p>
@@ -111,7 +111,7 @@
   </section>
   {%- endif -%}
 
-  {%- if areas.size > 0 -%}
+  {%- if areas.size > 0 and s.show_areas != false -%}
   <section class="thh-band" aria-labelledby="thh-ar-{{ section.id }}">
     <div class="thh-wrap">
       <p class="thh-eyebrow">Areas we serve</p>
@@ -145,6 +145,7 @@
   </section>
   {%- endif -%}
 
+  {%- if s.show_final != false -%}
   <section class="thh-band thh-band--dark thh-final">
     <div class="thh-wrap">
       <h2 class="thh-h2">{{ s.final_heading }}</h2>
@@ -155,6 +156,7 @@
       </div>
     </div>
   </section>
+  {%- endif -%}
 </div>
 
 {%- capture faq_json -%}
@@ -278,6 +280,9 @@
   "class": "section-titan-home-hub",
   "settings": [
     { "type": "header", "content": "Business" },
+    { "type": "checkbox", "id": "show_services", "label": "Show the services list", "default": true },
+    { "type": "checkbox", "id": "show_areas", "label": "Show the areas list", "default": true },
+    { "type": "checkbox", "id": "show_final", "label": "Show the closing call banner", "default": true },
     { "type": "text", "id": "business_name", "label": "Business name", "default": "Titan Express" },
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
     { "type": "text", "id": "street", "label": "Street address", "default": "48 Dudley St" },
