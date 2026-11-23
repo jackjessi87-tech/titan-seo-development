@@ -23,6 +23,11 @@
         <input name="to" type="text" autocomplete="off" placeholder="Suburb or address" aria-label="Drop off suburb or address">
       </label>
       <button class="txb__go" type="submit">{{ s.button }} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      {%- if s.custom_url != blank -%}
+      <div class="txb__or"><span>or</span></div>
+      <a class="txb__custom" href="{{ s.custom_url }}">{{ s.custom_button }}</a>
+      <p class="txb__customsub">{{ s.custom_text }}</p>
+      {%- endif -%}
     </form>
     <ul class="txb__trust">
       <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>{{ s.point_1 }}</li>
@@ -57,6 +62,11 @@
   .txb__go:hover { background: #c71e15; }
   .txb__go:active { transform: scale(.985); }
   .txb__go svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .txb__or { display: flex; align-items: center; gap: 10px; margin: 12px 4px 10px; color: #9aa1b0; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .txb__or::before, .txb__or::after { content: ""; flex: 1; height: 1px; background: #e3e6ee; }
+  .txb__custom { display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; border: 2px solid #17357f; border-radius: 14px; padding: 14px 18px; color: #17357f !important; background: #fff; font: 800 1.02rem/1 Inter, sans-serif; text-decoration: none; }
+  .txb__custom:hover { background: #eef2fb; }
+  .txb__customsub { margin: 8px 4px 2px; text-align: center; font-size: .86rem; color: #5d6475; }
   .txb__trust { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; font-size: .9rem; color: rgba(255,255,255,.92); }
   .txb__trust li { display: inline-flex; align-items: center; gap: 6px; }
   .txb__trust svg { width: 16px; height: 16px; fill: none; stroke: #4ade80; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
@@ -75,7 +85,10 @@
     { "type": "text", "id": "heading_before", "label": "Heading", "default": "Book from just" },
     { "type": "text", "id": "heading_price", "label": "Heading price", "default": "$99" },
     { "type": "text", "id": "subheading", "label": "Line under heading", "default": "Tell us where from and where to. Let's see if we can help." },
-    { "type": "text", "id": "button", "label": "Button", "default": "Book pick up & drop off" },
+    { "type": "text", "id": "button", "label": "Button", "default": "Book online from $99" },
+    { "type": "text", "id": "custom_button", "label": "Custom quote button", "default": "Get a custom quote" },
+    { "type": "text", "id": "custom_text", "label": "Custom quote line", "default": "Tell us what you need moved and we'll send you a fixed price." },
+    { "type": "text", "id": "custom_url", "label": "Custom quote link", "info": "Leave empty to hide the custom quote button.", "default": "#home-quote" },
     { "type": "text", "id": "point_1", "label": "Tick 1", "default": "From $99 for the first 30 min" },
     { "type": "text", "id": "point_2", "label": "Tick 2", "default": "Same-day available" },
     { "type": "text", "id": "point_3", "label": "Tick 3", "default": "Wrapped & carried with care" },
