@@ -6,7 +6,7 @@
 {{ 'tx-quote.css' | asset_url | stylesheet_tag: preload: false }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
 {%- assign s = section.settings -%}
-<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}" data-rate-first="{{ s.rate_first }}" data-rate-block="{{ s.rate_block }}" data-after-first="{{ s.after_first }}" data-after-block="{{ s.after_block }}">
+<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}" data-rate-first="{{ s.rate_first }}" data-rate-block="{{ s.rate_block }}" data-after-first="{{ s.after_first }}" data-after-block="{{ s.after_block }}" data-pri-first="{{ s.pri_first }}" data-pri-block="{{ s.pri_block }}" data-exp-first="{{ s.exp_first }}" data-exp-block="{{ s.exp_block }}">
   <header class="txq-top">
     <div class="txq-row">
       <button class="txq-ib" type="button" data-q-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -94,11 +94,18 @@
       <div class="txq-card txq-acc"><div class="txq-acchd"><span class="txq-pin txq-pin--a">A</span><div><b>Pickup</b><small data-q-acca></small></div></div><div class="txq-lbl">How do we get the items out?</div><div class="txq-seg" data-q-seg="A"></div><div class="txq-fl" data-q-fl="A" hidden><span>Flights of stairs</span><div class="txq-step txq-step--sm"><button type="button">−</button><span>1</span><button type="button">+</button></div></div></div>
       <div class="txq-card txq-acc"><div class="txq-acchd"><span class="txq-pin txq-pin--b">B</span><div><b>Drop-off</b><small data-q-accb></small></div></div><div class="txq-lbl">How do we get the items in?</div><div class="txq-seg" data-q-seg="B"></div><div class="txq-fl" data-q-fl="B" hidden><span>Flights of stairs</span><div class="txq-step txq-step--sm"><button type="button">−</button><span>1</span><button type="button">+</button></div></div></div>
       <div class="txq-card txq-tog"><div><b>Dismantling or assembly</b><small>Bed frames, tables, wardrobes</small></div><button class="txq-sw" type="button" data-q-dis aria-label="Dismantling or assembly"></button></div>
-      <h3 class="txq-h3">When?</h3>
-      <div class="txq-dates" data-q-dates></div>
-      <div class="txq-lbl" style="margin-top:14px">Preferred time</div>
-      <div class="txq-seg txq-seg--2" data-q-times></div>
-      <div class="txq-est" data-q-est aria-live="polite"></div>
+      <!-- When is your booking for? (laid out like Yellow Express, 2026-11-24) -->
+      <h3 class="txq-wh">When is your booking for?</h3>
+      <div class="txq-when" data-q-when>
+        <button type="button" data-w="today"><b>Today</b><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><small data-q-todaymsg></small></button>
+        <button type="button" data-w="sched"><b>Schedule</b><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14l1.5 1.5 3-3M13.5 15.5h3"/></svg></button>
+      </div>
+      <div class="txq-dates" data-q-dates hidden></div>
+      <div class="txq-lbl txq-lbl--big">Select time</div>
+      <select class="txq-inp txq-timesel" data-q-timesel required aria-label="Pickup window start time"></select>
+      <div class="txq-winhd"><b>Choose a pickup window start time</b><button type="button" data-q-wininfo aria-label="What is the pickup window?"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg></button></div>
+      <p class="txq-wininfo" data-q-wininfotxt hidden>This is the earliest time we can arrive at the pickup. With Standard we come any time from then on the same day, Priority within 4 hours, and Express goes straight there. We text you when we are on the way.</p>
+      <div data-q-svc aria-live="polite"></div>
     </section>
 
     <!-- 5 details -->
@@ -173,7 +180,12 @@
     { "type": "number", "id": "rate_first", "label": "Weekday: first 30 minutes", "default": 99 },
     { "type": "number", "id": "rate_block", "label": "Weekday: each extra 30 minutes", "default": 52 },
     { "type": "number", "id": "after_first", "label": "Weekend / evening: first 30 minutes", "default": 198 },
-    { "type": "number", "id": "after_block", "label": "Weekend / evening: each extra 30 minutes", "default": 104 }
+    { "type": "number", "id": "after_block", "label": "Weekend / evening: each extra 30 minutes", "default": 104 },
+    { "type": "header", "content": "Faster services (weekdays before 5pm)" },
+    { "type": "number", "id": "pri_first", "label": "Priority (within 4 hours): first 30 minutes", "default": 154 },
+    { "type": "number", "id": "pri_block", "label": "Priority: each extra 30 minutes", "default": 81 },
+    { "type": "number", "id": "exp_first", "label": "Express (ASAP, direct): first 30 minutes", "default": 198 },
+    { "type": "number", "id": "exp_block", "label": "Express: each extra 30 minutes", "default": 104 }
   ],
   "presets": [{ "name": "TX instant quote" }]
 }

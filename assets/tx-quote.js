@@ -34,7 +34,7 @@
 
   // ---------- state ----------
   var KEY = 'tx-quote-v1';
-  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, crew: '', ack: false, accessA: '', accessB: '', flightsA: 1, flightsB: 1, dis: false, awayA: false, awayB: false, cnA: '', cpA: '', cnB: '', cpB: '', date: '', time: '', name: '', phone: '', email: '', notes: '', terms: false }; };
+  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, crew: '', ack: false, accessA: '', accessB: '', flightsA: 1, flightsB: 1, dis: false, today: true, svc: 'std', awayA: false, awayB: false, cnA: '', cpA: '', cnB: '', cpB: '', date: '', time: '', name: '', phone: '', email: '', notes: '', terms: false }; };
   var st = blank();
   try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && typeof saved === 'object') { for (var k in saved) st[k] = saved[k]; } } catch (e) {}
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
@@ -96,7 +96,7 @@
     var ok = true, s = st.step;
     if (s === 1) ok = !!(st.from && st.to);
     if (s === 3) ok = count() > 0;
-    if (s === 4) ok = !!(st.crew && (st.crew !== '1' || st.ack) && st.accessA && st.accessB && st.date);
+    if (s === 4) ok = !!(st.crew && (st.crew !== '1' || st.ack) && st.accessA && st.accessB && (st.today || st.date) && tMin(st.time) >= 0 && st.svc);
     if (s === 6) ok = !!st.terms;
     if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim());
     next.disabled = !ok;
@@ -316,6 +316,8 @@
 
   // ---------- hourly price estimate ----------
   var R = { f: +root.getAttribute('data-rate-first') || 99, b: +root.getAttribute('data-rate-block') || 52,
+            pf: +root.getAttribute('data-pri-first') || 154, pb: +root.getAttribute('data-pri-block') || 81,
+            xf: +root.getAttribute('data-exp-first') || 198, xb: +root.getAttribute('data-exp-block') || 104,
             af: +root.getAttribute('data-after-first') || 198, ab: +root.getAttribute('data-after-block') || 104 };
   // minutes to load and unload one item (both ends together), one mover with the customer helping
   var MIN = { sofa: 12, armchair: 8, coffee: 5, tv: 6, tvunit: 8, bookcase: 8, sidetable: 3, rug: 3, lamp: 3, mirror: 4, artwork: 3, buffet: 15, ottoman: 4, shelving: 8,
@@ -335,12 +337,26 @@
     if (it.k === 'box') m = { Small: 1.5, Large: 3 }[v] || 2;
     return m;
   }
+  // ---------- booking time (Today / Schedule, pickup window, service), like Yellow Express ----------
+  var SVC = { std: ['STANDARD', 'Same day delivery'], pri: ['PRIORITY', 'Within 4 hours'], exp: ['EXPRESS', 'ASAP, direct service'] };
+  var svcName = function (k) { var n = (SVC[k] || SVC.std)[0]; return n.charAt(0) + n.slice(1).toLowerCase(); };
+  var tMin = function (t) { var m = /^(\d{1,2}):(\d{2}) (am|pm)$/.exec(t || ''); if (!m) return -1; var h = +m[1] % 12 + (m[3] === 'pm' ? 12 : 0); return h * 60 + +m[2]; };
+  var tTxt = function (n) { var h = Math.floor(n / 60), m = n % 60; return ((h % 12) || 12) + ':' + ('0' + m).slice(-2) + ' ' + (h < 12 ? 'am' : 'pm'); };
+  var FIRST = 7 * 60, LAST = 18 * 60 + 30;
+  function earliestToday() { var d = new Date(), n = d.getHours() * 60 + d.getMinutes() + 45; return Math.max(FIRST, Math.ceil(n / 15) * 15); }
+  function todayOpen() { return earliestToday() <= LAST; }
+  function jobDate() { return st.today ? iso(new Date()) : st.date; }
   function isAfter() {
-    if (st.time === 'Evening') return true;
-    if (!st.date) return false;
-    var p = st.date.split('-'), day = new Date(+p[0], p[1] - 1, +p[2]).getDay();
+    if (tMin(st.time) >= 17 * 60) return true;
+    var d = jobDate(); if (!d) return false;
+    var p = d.split('-'), day = new Date(+p[0], p[1] - 1, +p[2]).getDay();
     return day === 0 || day === 6;
   }
+  function rateOf(k) {
+    if (isAfter()) return { f: R.af, b: R.ab, after: true };
+    return k === 'pri' ? { f: R.pf, b: R.pb } : k === 'exp' ? { f: R.xf, b: R.xb } : { f: R.f, b: R.b };
+  }
+  var whenTxt = function () { return (st.today ? 'Today' : fmtDate(st.date)) + (st.time ? ', pickup from ' + st.time : '') + ', ' + svcName(st.svc); };
   var money = function (n) { return '$' + Math.round(n); };
   var hm = function (m) { m = Math.round(m / 5) * 5; var h = Math.floor(m / 60), r = m % 60; return (h ? h + ' hr' + (r ? ' ' : '') : '') + (r ? r + ' min' : ''); };
   function estimate() {
@@ -350,7 +366,7 @@
     if (st.crew === '2') h *= 0.7;
     if (st.dis) h += 20;
     var mins = Math.max(30, h + (st.route ? st.route.min * 1.3 : 25));
-    var blocks = Math.ceil(mins / 30), after = isAfter(), f = after ? R.af : R.f, b = after ? R.ab : R.b;
+    var blocks = Math.ceil(mins / 30), rt = rateOf(st.svc), after = !!rt.after, f = rt.f, b = rt.b;
     var lo = f + (blocks - 1) * b;
     return { mins: mins, blocks: blocks, lo: lo, hi: lo + b, after: after, f: f, b: b };
   }
@@ -361,13 +377,14 @@
     el.innerHTML = rateBox(estimate(), '');
   }
   function rateBox(e, cls) {
-    return '<div class="txq-estc' + cls + '"><span class="lb">' + (e.after ? 'Weekend / evening rate' : 'Weekday rate') + '</span><b>From ' + money(e.f) + '</b>' +
+    return '<div class="txq-estc' + cls + '"><span class="lb">' + (e.after ? 'Weekend / evening rate' : svcName(st.svc) + ', weekday rate') + '</span><b>From ' + money(e.f) + '</b>' +
       '<span class="d">for the first 30 min, then ' + money(e.b) + ' per extra 30 min. You only pay for the actual time.' +
       (st.crew === '2' ? ' Plus the second-mover fee, which we confirm by text.' : '') + '</span></div>';
   }
   function howHtml(e) {
     return '<div class="txq-card txq-how"><b class="t">How the price works</b><ol>' +
       '<li><b>' + money(R.f) + ' covers the first 30 minutes</b> on weekdays. After that it is ' + money(R.b) + ' for each extra 30 minutes, or part of it.</li>' +
+      '<li><b>Faster service on weekdays:</b> Priority (within 4 hours) is ' + money(R.pf) + ' then ' + money(R.pb) + ' per extra 30 minutes; Express (ASAP, direct) is ' + money(R.xf) + ' then ' + money(R.xb) + '.</li>' +
       '<li><b>Weekends, public holidays and evenings after 5pm</b> are ' + money(R.af) + ' for the first 30 minutes, then ' + money(R.ab) + ' for each extra 30 minutes.</li>' +
       '<li><b>The clock starts</b> when we arrive at the pickup and stops when the last item is placed at the drop-off. You pay for the actual time.</li>' +
       '<li><b>1 mover:</b> you help load and unload the heavy items. <b>2 movers:</b> an extra fee, which we confirm by text before the job.</li>' +
@@ -400,14 +417,7 @@
       var fl = q('[data-q-fl="' + end + '"]'); fl.hidden = st[k] !== 'Stairs'; fl.querySelector('span:nth-child(2), .txq-step span').textContent = st['flights' + end];
     });
     q('[data-q-dis]').classList.toggle('on', !!st.dis);
-    var now = new Date(), html = '';
-    for (var i = 0; i < 14; i++) { var d = new Date(now); d.setDate(now.getDate() + i); var v = iso(d);
-      html += '<button type="button" data-d="' + v + '" class="' + (st.date === v ? 'on' : '') + '"><small>' + (i === 0 ? 'Today' : i === 1 ? 'Tmrw' : d.toLocaleDateString('en-AU', { weekday: 'short' })) + '</small><b>' + d.getDate() + '</b><span>' + d.toLocaleDateString('en-AU', { month: 'short' }) + '</span></button>'; }
-    q('[data-q-dates]').innerHTML = html;
-    var T = [['Morning', '7am to 11am'], ['Midday', '11am to 2pm'], ['Afternoon', '2pm to 5pm'], ['Evening', '5pm to 7pm, after-hours rate'], ['Flexible', 'Any time']];
-    if (st.date === iso(now)) T.unshift(['ASAP', 'Next available today']);
-    q('[data-q-times]').innerHTML = T.map(function (t) { return '<button type="button" class="' + (st.time === t[0] ? 'on' : '') + '" data-t="' + t[0] + '"><b>' + t[0] + '</b><small>' + t[1] + '</small></button>'; }).join('');
-    renderEst();
+    renderWhen();
   }
   q('[data-q-crew]').addEventListener('click', function (e) { var b = e.target.closest('.txq-crewc'); if (!b) return; st.crew = b.getAttribute('data-v'); save(); renderAccess(); validate(); });
   q('[data-q-ack]').addEventListener('change', function () { st.ack = this.checked; save(); validate(); });
@@ -417,8 +427,46 @@
       st['flights' + end] = Math.max(1, Math.min(10, st['flights' + end] + (b.textContent === '+' ? 1 : -1))); save(); renderAccess(); });
   });
   q('[data-q-dis]').addEventListener('click', function () { st.dis = !st.dis; save(); renderAccess(); });
-  q('[data-q-dates]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.date = b.getAttribute('data-d'); if (st.time === 'ASAP' && st.date !== iso(new Date())) st.time = ''; save(); renderAccess(); validate(); });
-  q('[data-q-times]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.time = b.getAttribute('data-t'); save(); renderAccess(); });
+  function renderWhen() {
+    var open = todayOpen();
+    if (st.today && !open) st.today = false;
+    qa('[data-q-when] button').forEach(function (b) { var t = b.getAttribute('data-w') === 'today'; b.classList.toggle('on', t ? !!st.today : !st.today); if (t) b.disabled = !open; });
+    q('[data-q-todaymsg]').textContent = open ? '' : 'Unavailable after ' + tTxt(LAST - 45);
+    var dates = q('[data-q-dates]'); dates.hidden = !!st.today;
+    if (!st.today) {
+      var now = new Date(), html = '';
+      for (var i = 1; i < 15; i++) { var d = new Date(now); d.setDate(now.getDate() + i); var v = iso(d);
+        html += '<button type="button" data-d="' + v + '" class="' + (st.date === v ? 'on' : '') + '"><small>' + (i === 1 ? 'Tmrw' : d.toLocaleDateString('en-AU', { weekday: 'short' })) + '</small><b>' + d.getDate() + '</b><span>' + d.toLocaleDateString('en-AU', { month: 'short' }) + '</span></button>'; }
+      dates.innerHTML = html;
+    }
+    var start = st.today ? earliestToday() : FIRST, opts = '<option value="">Choose a time</option>';
+    if (tMin(st.time) < start) st.time = '';
+    for (var m = start; m <= LAST; m += 15) { var t = tTxt(m); opts += '<option value="' + t + '"' + (st.time === t ? ' selected' : '') + '>' + t + (m >= 17 * 60 ? ' (after-hours rate)' : '') + '</option>'; }
+    q('[data-q-timesel]').innerHTML = opts; q('[data-q-timesel]').value = st.time || '';
+    renderSvc();
+  }
+  function renderSvc() {
+    var el = q('[data-q-svc]');
+    if (!st.time || (!st.today && !st.date)) { el.innerHTML = ''; renderEst(); return; }
+    var after = isAfter(); if (after) st.svc = 'std';
+    var day = st.today ? 'Today' : new Date(st.date + 'T00:00').toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' });
+    var keys = after ? ['std'] : ['std', 'pri', 'exp'];
+    el.innerHTML = '<div class="txq-svc"><div class="txq-svchd">* Pickup from ' + st.time + ' ' + (st.today ? 'Today' : 'on ' + day) + '</div>' +
+      keys.map(function (k) { var r = rateOf(k);
+        return '<button type="button" class="txq-svcr' + (st.svc === k ? ' on' : '') + '" data-svc="' + k + '">' +
+          (k === 'std' ? '<span class="bv">BEST<br>VALUE</span>' : '<span class="ic ' + k + '">' + (k === 'pri' ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' : '<svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>') + '</span>') +
+          '<span class="nm"><b>' + SVC[k][0] + '</b><small>' + (st.today ? 'Today' : day.split(' ')[0].replace(',', '')) + ' ' + st.time + '</small></span>' +
+          '<span class="ds">' + (after ? 'Weekend / evening rate' : SVC[k][1]) + '</span><span class="pr">From ' + money(r.f) + ' *</span></button>'; }).join('') + '</div>' +
+      (st.svc !== 'std' ? '<div class="txq-norush"><b>No rush?</b> Choose <b>Standard</b> for the best price on same day delivery.</div>' : '') +
+      '<p class="txq-tip">Tip: if your job is time critical, please call us on <a href="tel:' + PHONE.replace(/\s/g, '') + '">' + esc(PHONE) + '</a> so we can make sure we can help.</p>' +
+      '<p class="txq-foot2"><b>* The price covers the first 30 minutes,</b> with any extra time charged in 30-minute blocks at ' + money(rateOf(st.svc).b) + '. Tolls and paid parking are extra.</p>';
+    renderEst();
+  }
+  q('[data-q-when]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b || b.disabled) return; st.today = b.getAttribute('data-w') === 'today'; if (st.today) st.date = ''; save(); renderWhen(); validate(); });
+  q('[data-q-dates]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.date = b.getAttribute('data-d'); save(); renderWhen(); validate(); });
+  q('[data-q-timesel]').addEventListener('change', function () { st.time = this.value; save(); renderSvc(); validate(); });
+  q('[data-q-svc]').addEventListener('click', function (e) { var b = e.target.closest('[data-svc]'); if (!b) return; st.svc = b.getAttribute('data-svc'); save(); renderSvc(); validate(); });
+  q('[data-q-wininfo]').addEventListener('click', function () { var t = q('[data-q-wininfotxt]'); t.hidden = !t.hidden; });
 
   // ---------- step 5: details ----------
   ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#txq-' + k).addEventListener('input', function () { st[k] = this.value; save(); validate(); }); });
@@ -442,7 +490,7 @@
       '<div class="txq-card txq-rv"><div class="h"><b>Items · ' + count() + '</b><button type="button" data-go="3">Edit</button></div><div>' +
         its.map(function (it) { return '<span class="txq-pill">' + it.q + ' × ' + esc(it.n) + (it.v ? ' · ' + esc(it.v) : '') + '</span>'; }).join('') + '</div></div>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Crew, access and time</b><button type="button" data-go="4">Edit</button></div>' +
-        row('Crew', crewTxt()) + row('Pickup', accTxt('A')) + row('Drop-off', accTxt('B')) + row('When', fmtDate(st.date) + (st.time ? ', ' + st.time.toLowerCase() : '')) + (st.dis ? row('Extra', 'Dismantling / assembly') : '') + '</div>' +
+        row('Crew', crewTxt()) + row('Pickup', accTxt('A')) + row('Drop-off', accTxt('B')) + row('When', esc(whenTxt())) + (st.dis ? row('Extra', 'Dismantling / assembly') : '') + '</div>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Your details</b><button type="button" data-go="5">Edit</button></div>' +
         row('Name', esc(st.name)) + row('Mobile', esc(st.phone)) + row('Email', esc(st.email)) + (st.notes ? row('Notes', esc(st.notes)) : '') + '</div>';
     qa('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go'), true); }); });
@@ -454,7 +502,7 @@
     var pickup = st.from.text + (st.unitA ? ' (' + st.unitA + ')' : '') + (st.awayA ? ' - customer not there, ' + contactTxt('A') : ''),
         dropoff = st.to.text + (st.unitB ? ' (' + st.unitB + ')' : '') + (st.awayB ? ' - customer not there, ' + contactTxt('B') : '');
     var access = 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B');
-    var when = fmtDate(st.date) + (st.time ? ', ' + st.time : '');
+    var when = whenTxt() + ' (' + (rateOf(st.svc).after ? 'after-hours' : 'weekday') + ' rate, from ' + money(rateOf(st.svc).f) + ')';
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', pickup); set('dropoff', dropoff);
     set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', access); set('when', when); set('date', st.date);
     var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')'; set('estimate', 'Not shown to customer. Our guide: ' + estLine);
