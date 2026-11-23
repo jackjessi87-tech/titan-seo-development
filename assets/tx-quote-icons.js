@@ -1,4 +1,4 @@
-/* Titan Express quote item icons (duotone, 64 x 64). Classes: f tint fill, s navy outline, a red fill, w white fill, as red outline. */
+/* Titan Express quote item icons (duotone, 64 x 64). Classes: f tint fill, s navy outline, a blue fill, w white fill, as blue outline (blue and white set, 2026-11-24). */
 window.TITAN_ICONS = {
   sofa: `
     <rect class="f s" x="12" y="18" width="40" height="18" rx="5"/>

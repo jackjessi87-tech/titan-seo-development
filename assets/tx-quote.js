@@ -77,9 +77,11 @@
     qa('.txq-prog i').forEach(function (b, i) { b.classList.toggle('on', i < PROG[n]); });
     q('[data-q-steplbl]').textContent = LBL[n];
     q('[data-q-back]').toggleAttribute('data-hide', n === 1 || n === 7);
-    q('[data-q-foot]').hidden = n === 2 || n === 7;
+    q('[data-q-foot]').hidden = n === 1 || n === 2 || n === 7;
     q('[data-q-sum]').hidden = n !== 3;
     next.textContent = n === 6 ? 'SEND BOOKING REQUEST' : n === 1 ? 'SEE ROUTE' : 'NEXT';
+    root.classList.toggle('txq-white', n === 1);
+    if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); }
     if (n === 2) setTimeout(drawMap, 40);
     if (n === 3) { renderGrid(); renderList(); }
     if (n === 4) renderAccess();
@@ -111,7 +113,7 @@
   var pinSvg = '<svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
   function setAddr(key, val) {
     st[key] = val; st.route = null; q('#txq-' + key).value = val ? val.text : '';
-    q('[data-row="' + key + '"]').classList.toggle('done', !!val); save(); validate();
+    q('[data-row="' + key + '"]').classList.toggle('done', !!val); save(); validate(); drawPre();
   }
   function label(p) {
     var street = [p.housenumber, p.street].filter(Boolean).join(' ');
@@ -121,7 +123,7 @@
     return { main: main || place, sub: main ? sub : '' };
   }
   function search(key, text) {
-    var my = ++seq; active = key;
+    var my = ++seq; active = key; q('[data-q-slot="' + key + '"]').appendChild(sugg);
     sugg.innerHTML = [1, 2, 3].map(function () { return '<button type="button" disabled><span class="pi"></span><span style="flex:1"><div class="txq-skel" style="width:60%"></div><div class="txq-skel" style="width:85%;margin-top:7px;height:10px"></div></span></button>'; }).join('');
     sugg.hidden = false;
     fetch('https://photon.komoot.io/api/?limit=7&lang=en&lat=-33.87&lon=151.05&bbox=150.3,-34.5,151.6,-33.2&q=' + encodeURIComponent(text))
@@ -154,19 +156,36 @@
       timer = setTimeout(function () { search(key, v); }, 220);
     });
   });
-  q('[data-q-swap]').addEventListener('click', function () { var a = st.from, b = st.to; setAddr('from', b); setAddr('to', a); var u = st.unitA; st.unitA = st.unitB; st.unitB = u; q('[data-q-unita]').value = st.unitA; q('[data-q-unitb]').value = st.unitB; save(); });
-  q('[data-q-unitbtn]').addEventListener('click', function () { var u = q('[data-q-unit]'); u.hidden = !u.hidden; if (!u.hidden) q('[data-q-unita]').focus(); });
-  q('[data-q-unita]').addEventListener('input', function (e) { st.unitA = e.target.value; save(); });
-  q('[data-q-unitb]').addEventListener('input', function (e) { st.unitB = e.target.value; save(); });
-  q('[data-q-locate]').addEventListener('click', function () {
-    if (!navigator.geolocation) return toast('Location is not available on this device');
-    toast('Finding you…');
-    navigator.geolocation.getCurrentPosition(function (p) {
-      fetch('https://photon.komoot.io/reverse?lat=' + p.coords.latitude + '&lon=' + p.coords.longitude + '&lang=en').then(function (r) { return r.json(); }).then(function (j) {
-        var f = j.features && j.features[0]; if (!f) throw 0; var l = label(f.properties);
-        setAddr('from', { text: l.sub ? l.main + ', ' + l.sub : l.main, lat: p.coords.latitude, lon: p.coords.longitude }); toast('Pickup set to your location');
-      }).catch(function () { toast('Could not find an address here'); });
-    }, function () { toast('Location permission was declined'); }, { enableHighAccuracy: true, timeout: 9000 });
+  // "+ Add company name" under each address (Yellow Express style)
+  [['a', 'unitA'], ['b', 'unitB']].forEach(function (x) {
+    var inp = q('[data-q-unit' + x[0] + ']'), btn = q('[data-q-cobtn="' + x[0] + '"]');
+    if (st[x[1]]) { inp.value = st[x[1]]; inp.hidden = false; btn.parentNode.hidden = true; }
+    btn.addEventListener('click', function () { inp.hidden = false; btn.parentNode.hidden = true; inp.focus(); });
+    inp.addEventListener('input', function () { st[x[1]] = inp.value; save(); });
+  });
+  // small Sydney map under the address boxes, with the Confirm locations button on top
+  var pmap, player;
+  function drawPre() {
+    if (st.step !== 1 || !isOpen) return;
+    if (!window.L) return setTimeout(drawPre, 200);
+    var L = window.L;
+    if (!pmap) {
+      pmap = L.map(q('[data-q-premap]'), { zoomControl: false, scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false });
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Tiles &copy; Esri, HERE, Garmin, &copy; OpenStreetMap' }).addTo(pmap);
+    }
+    pmap.invalidateSize();
+    if (player) player.remove(); player = L.layerGroup().addTo(pmap);
+    var pts = [];
+    if (st.from) { pts.push([st.from.lat, st.from.lon]); L.marker(pts[pts.length - 1], { icon: pin('A', '#17357f') }).addTo(player); }
+    if (st.to) { pts.push([st.to.lat, st.to.lon]); L.marker(pts[pts.length - 1], { icon: pin('B', '#2563eb') }).addTo(player); }
+    if (pts.length === 2) pmap.fitBounds(pts, { padding: [50, 60], maxZoom: 14 });
+    else if (pts.length) pmap.setView(pts[0], 13);
+    else pmap.setView([-33.84, 151.1], 10);
+  }
+  q('[data-q-go1]').addEventListener('click', function () {
+    if (st.from && st.to) return go(2);
+    var miss = st.from ? 'to' : 'from'; q('#txq-' + miss).focus();
+    toast(miss === 'from' ? 'Type the pickup and pick it from the list' : 'Type the drop-off and pick it from the list');
   });
 
   // ---------- step 2: map ----------
@@ -192,7 +211,7 @@
     var a = [st.from.lat, st.from.lon], b = [st.to.lat, st.to.lon], pad = { paddingTopLeft: [30, 120], paddingBottomRight: [30, 210], maxZoom: 15 };
     map.fitBounds(L.latLngBounds([a, b]), pad);
     q('[data-q-km]').textContent = '…'; q('[data-q-min]').textContent = '…';
-    var done = function () { L.marker(a, { icon: pin('A', '#17357f') }).addTo(layer); L.marker(b, { icon: pin('B', '#e1261c') }).addTo(layer); };
+    var done = function () { L.marker(a, { icon: pin('A', '#17357f') }).addTo(layer); L.marker(b, { icon: pin('B', '#2563eb') }).addTo(layer); };
     var draw = function () {
       L.polyline(st.route.line, { color: '#fff', weight: 10, opacity: .95, className: 'txq-route' }).addTo(layer);
       L.polyline(st.route.line, { color: '#17357f', weight: 5.5, className: 'txq-route' }).addTo(layer);
@@ -435,7 +454,6 @@
 
   // ---------- start ----------
   if (st.from) setAddr('from', st.from); if (st.to) setAddr('to', st.to);
-  q('[data-q-unita]').value = st.unitA || ''; q('[data-q-unitb]').value = st.unitB || ''; if (st.unitA || st.unitB) q('[data-q-unit]').hidden = false;
   var posted = q('[data-q-posted]'), sent = false; try { sent = sessionStorage.getItem('tx-quote-sent') === '1'; } catch (e) {}
   if (posted && sent) { try { sessionStorage.removeItem('tx-quote-sent'); localStorage.removeItem(KEY); } catch (e) {} st = blank(); open(); go(7); }
   else if (q('[data-q-errors]') && sent) { try { sessionStorage.removeItem('tx-quote-sent'); } catch (e) {} open(); go(5); toast(q('[data-q-errors]').textContent || 'Please check your details'); }

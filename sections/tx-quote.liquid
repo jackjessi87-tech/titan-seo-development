@@ -17,24 +17,27 @@
   </header>
 
   <div class="txq-body">
-    <!-- 1 route -->
-    <section class="txq-s" data-s="1">
-      <p class="txq-eb">Step 1</p><h2 class="txq-h">Where from, where to?</h2>
-      <p class="txq-lede">Type a street, suburb or store, then pick it from the list.</p>
-      <div class="txq-card txq-addr">
-        <div class="txq-vline"></div>
-        <div class="txq-arow" data-row="from"><span class="txq-pin txq-pin--a">A</span><div class="txq-col"><label for="txq-from">Pickup</label><input id="txq-from" autocomplete="off" placeholder="e.g. IKEA Tempe or 12 George St"></div></div>
-        <div class="txq-arow" data-row="to"><span class="txq-pin txq-pin--b">B</span><div class="txq-col"><label for="txq-to">Drop-off</label><input id="txq-to" autocomplete="off" placeholder="e.g. Bondi Junction"></div></div>
-        <button class="txq-swap" type="button" data-q-swap aria-label="Swap pickup and drop-off"><svg viewBox="0 0 24 24"><path d="M7 4v16M7 4L3 8M7 4l4 4M17 20V4M17 20l-4-4M17 20l4-4"/></svg></button>
+    <!-- 1 route (laid out like the Yellow Express first screen, in Titan blue and white, 2026-11-24) -->
+    <section class="txq-s txq-s1" data-s="1">
+      <h2 class="txq-h txq-h--c">Where from,<br>where to?</h2>
+      <div class="txq-loc" data-row="from">
+        <div class="txq-lochd"><span class="txq-lic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><label for="txq-from">Pick up location</label></div>
+        <input class="txq-inp txq-locinp" id="txq-from" autocomplete="off" placeholder="e.g. company name, street or suburb">
+        <div data-q-slot="from"></div>
+        <input class="txq-inp txq-co" data-q-unita placeholder="Company name, unit or level" aria-label="Pickup company name, unit or level" hidden>
+        <div class="txq-cor"><button class="txq-cobtn" type="button" data-q-cobtn="a">+ Add company name</button></div>
+      </div>
+      <div class="txq-loc" data-row="to">
+        <div class="txq-lochd"><span class="txq-lic"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h14v9H5" /><path class="flag" d="M5 4h3.5v3H5zM12 4h3.5v3H12zM8.5 7H12v3H8.5zM15.5 7H19v3h-3.5zM5 10h3.5v3H5zM12 10h3.5v3H12z"/></svg></span><label for="txq-to">Drop off location</label></div>
+        <input class="txq-inp txq-locinp" id="txq-to" autocomplete="off" placeholder="e.g. company name, street or suburb">
+        <div data-q-slot="to"></div>
+        <input class="txq-inp txq-co" data-q-unitb placeholder="Company name, unit or level" aria-label="Drop-off company name, unit or level" hidden>
+        <div class="txq-cor"><button class="txq-cobtn" type="button" data-q-cobtn="b">+ Add company name</button></div>
       </div>
       <div class="txq-card txq-sugg" data-q-sugg hidden></div>
-      <div class="txq-extra">
-        <button class="txq-tb" type="button" data-q-locate><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>Use my location</button>
-        <button class="txq-tb" type="button" data-q-unitbtn><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Unit, level or store name</button>
-      </div>
-      <div class="txq-unit" data-q-unit hidden>
-        <input class="txq-inp" data-q-unita placeholder="Pickup: unit, level, store or company (optional)">
-        <input class="txq-inp" data-q-unitb placeholder="Drop-off: unit, level or company (optional)">
+      <div class="txq-premap">
+        <div class="txq-map" data-q-premap></div>
+        <button class="txq-cta txq-confirm1" type="button" data-q-go1>CONFIRM LOCATIONS</button>
       </div>
     </section>
 
@@ -42,7 +45,7 @@
     <section class="txq-s txq-s--map" data-s="2" hidden>
       <div class="txq-mapwrap">
         <div class="txq-map" data-q-map></div>
-        <div class="txq-card txq-floatcard"><div><i class="txq-dot" style="background:#17357f"></i><span data-q-fa></span></div><div><i class="txq-dot" style="background:#e1261c"></i><span data-q-fb></span></div></div>
+        <div class="txq-card txq-floatcard"><div><i class="txq-dot" style="background:#17357f"></i><span data-q-fa></span></div><div><i class="txq-dot" style="background:#2563eb"></i><span data-q-fb></span></div></div>
         <div class="txq-sheet">
           <div class="txq-grab"></div>
           <div class="txq-stats"><div><b data-q-km>…</b><span>driving distance</span></div><div><b data-q-min>…</b><span>drive time, no traffic</span></div></div>
@@ -54,9 +57,9 @@
     <!-- 3 items -->
     <section class="txq-s" data-s="3" hidden>
       <p class="txq-eb">Step 2</p><h2 class="txq-h">What are we moving?</h2>
-      <p class="txq-lede">Small or large, we move it all. Tap each item, tap again to add more, or add your own.</p>
+      <p class="txq-lede">Tap an item to add it. Can’t see it? Type it in the box below.</p>
       <div class="txq-custom">
-        <input class="txq-inp" data-q-custom placeholder="Item name…" aria-label="Add your own item">
+        <input class="txq-inp" data-q-custom placeholder="Your own item" aria-label="Add your own item">
         <div class="txq-step"><button type="button" data-q-cm aria-label="Fewer">−</button><span data-q-cq>1</span><button type="button" data-q-cp aria-label="More">+</button></div>
         <button class="txq-add" type="button" data-q-cadd>Add</button>
       </div>
@@ -69,8 +72,8 @@
 
     <!-- 4 crew, access, time -->
     <section class="txq-s" data-s="4" hidden>
-      <p class="txq-eb">Step 3</p><h2 class="txq-h">Crew, access and timing</h2>
-      <p class="txq-lede">So we bring the right crew and gear.</p>
+      <p class="txq-eb">Step 3</p><h2 class="txq-h">Crew, stairs and day</h2>
+      <p class="txq-lede">Pick what suits you.</p>
       <div class="txq-crew" data-q-crew></div>
       <p class="txq-crewhint" data-q-crewhint></p>
       <label class="txq-ack" data-q-ackwrap hidden><input type="checkbox" data-q-ack><span>I understand I need to help load and unload the heavy items at both ends.</span></label>
@@ -99,7 +102,7 @@
     <!-- 6 review -->
     <section class="txq-s" data-s="6" hidden>
       <p class="txq-eb">Step 5</p><h2 class="txq-h">Check and send</h2>
-      <p class="txq-lede">Your estimate, how the hourly price works, and your booking details.</p>
+      <p class="txq-lede">Check your estimate and details, then send.</p>
       <div data-q-review></div>
     </section>
 
