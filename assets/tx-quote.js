@@ -476,6 +476,17 @@
   var accTxt = function (e) { return st['access' + e] === 'Stairs' ? 'Stairs, ' + st['flights' + e] + ' flight' + (st['flights' + e] > 1 ? 's' : '') : (st['access' + e] || 'Not chosen'); };
   var fmtDate = function (v) { if (!v) return 'Not chosen'; var p = v.split('-'); return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
   var itemsTxt = function () { return Object.keys(st.items).map(function (id) { var it = st.items[id]; return it.q + ' x ' + it.n + (it.v ? ' (' + it.v + ')' : ''); }); };
+  function fillWallet() {
+    var w = q('[data-q-wallet]'); if (!w) return;
+    var J = jobInfo(), P = { 'Name': st.name.trim(), 'Mobile': st.phone.trim(), 'Email': st.email.trim(), 'Pickup': J.pickup, 'Drop-off': J.dropoff,
+      'Items': itemsTxt().join(', '), 'Crew': crewTxt(), 'Access': J.access, 'When': J.when };
+    if (st.dis) P['Extra'] = 'Dismantling / assembly';
+    if (st.notes.trim()) P['Notes'] = st.notes.trim();
+    if (st.route) P['Route'] = st.route.km + ' km, about ' + st.route.min + ' min drive';
+    P['_Time guide (not shown)'] = J.estLine;
+    q('[data-q-wprops]').innerHTML = Object.keys(P).map(function (k) { return '<input type="hidden" name="properties[' + esc(k) + ']" value="' + esc(P[k]) + '">'; }).join('');
+    w.classList.toggle('locked', !st.terms);
+  }
   function renderReview() {
     var its = Object.keys(st.items).map(function (id) { return st.items[id]; });
     var row = function (l, v) { return '<div class="r"><span class="mu">' + l + '</span><span>' + v + '</span></div>'; };
@@ -495,7 +506,8 @@
       '<div class="txq-card txq-rv"><div class="h"><b>Your details</b><button type="button" data-go="5">Edit</button></div>' +
         row('Name', esc(st.name)) + row('Mobile', esc(st.phone)) + row('Email', esc(st.email)) + (st.notes ? row('Notes', esc(st.notes)) : '') + '</div>';
     qa('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go'), true); }); });
-    q('[data-q-terms]').addEventListener('change', function () { st.terms = this.checked; save(); validate(); });
+    q('[data-q-terms]').addEventListener('change', function () { st.terms = this.checked; save(); validate(); fillWallet(); });
+    fillWallet();
     var alt = q('[data-q-nopay]'); if (alt) alt.addEventListener('click', function () { if (!st.terms) return toast('Please tick the box above first'); submit(); });
   }
   var DEP_V = (root.getAttribute('data-deposit-variant') || '').trim(), DEP = +root.getAttribute('data-deposit') || 99;

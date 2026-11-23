@@ -125,6 +125,21 @@
       <p class="txq-eb">Step 5</p><h2 class="txq-h">Check and send</h2>
       <p class="txq-lede">Check your details, then send.</p>
       <div data-q-review></div>
+      {%- comment -%} Shopify's own Google Pay / Apple Pay / Shop Pay buttons for the deposit, right on the form (2026-11-24) {%- endcomment -%}
+      {%- assign dep = all_products['titan-booking-deposit'] -%}
+      {%- if dep != blank and dep.available -%}
+      <div class="txq-wallet" data-q-wallet>
+        <p class="txq-wallet-h">Pay the {{ dep.price | money_without_trailing_zeros }} deposit in one tap</p>
+        {%- form 'product', dep, class: 'txq-walletform', data-q-walletform: '' -%}
+          <input type="hidden" name="id" value="{{ dep.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <div data-q-wprops></div>
+          {{ form | payment_button }}
+        {%- endform -%}
+        <div class="txq-walletlock" data-q-walletlock>Tick the box above first</div>
+        <p class="txq-wallet-or"><span>or pay by card with the red button below</span></p>
+      </div>
+      {%- endif -%}
     </section>
 
     <!-- 7 sent -->
