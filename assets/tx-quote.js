@@ -80,7 +80,7 @@
     q('[data-q-foot]').hidden = n === 1 || n === 2 || n === 7;
     q('[data-q-sum]').hidden = n !== 3;
     next.textContent = n === 6 ? 'SEND BOOKING REQUEST' : n === 1 ? 'SEE ROUTE' : 'NEXT';
-    root.classList.toggle('txq-white', n === 1);
+    root.classList.toggle('txq-white', n === 1 || n === 3);
     if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); }
     if (n === 2) setTimeout(drawMap, 40);
     if (n === 3) { renderGrid(); renderList(); }
@@ -232,40 +232,31 @@
   q('[data-q-confirm]').addEventListener('click', function () { go(3); });
 
   // ---------- step 3: items ----------
-  var cat = 'all', cq = 1, grid = q('[data-q-grid]');
-  q('[data-q-cats]').innerHTML = CATS.map(function (c) { return '<button type="button" data-c="' + c[0] + '" class="' + (c[0] === 'all' ? 'on' : '') + (c[0] === 'custom' ? ' own' : '') + '">' + c[1] + '</button>'; }).join('');
-  q('[data-q-cats]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; cat = b.getAttribute('data-c'); q('[data-q-find]').value = '';
-    qa('[data-q-cats] button').forEach(function (x) { x.classList.toggle('on', x === b); }); renderGrid(); if (cat === 'custom') q('[data-q-custom]').focus(); });
-  q('[data-q-find]').addEventListener('input', function () { if (this.value) { cat = 'all'; qa('[data-q-cats] button').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-c') === 'all'); }); } renderGrid(); });
+  // Item names as big buttons, like Yellow Express; the icon shows only once an item is picked (2026-11-24)
+  var cq = 1, grid = q('[data-q-grid]');
   var qtyOf = function (k) { var n = 0; for (var id in st.items) if (st.items[id].k === k) n += st.items[id].q; return n; };
   function addItem(id, k, n, v, d) {
     var cur = st.items[id] || { k: k, n: n, v: v || '', q: 0 }; cur.q = Math.max(0, Math.min(99, cur.q + d));
-    if (cur.q === 0) delete st.items[id]; else st.items[id] = cur; save(); renderTiles(); renderList(); validate();
+    if (cur.q === 0) delete st.items[id]; else st.items[id] = cur; save(); renderGrid(); renderList(); validate();
   }
+  var chip = function (attr, k, name, n) {
+    return '<button type="button" class="txq-chip' + (n ? ' on' : '') + '" ' + attr + '><span class="ci">' + icon(k) + '</span><span class="cn">' + name + '</span>' + (n ? '<span class="q">' + n + '</span>' : '') + '</button>';
+  };
   function renderGrid() {
-    var t = q('[data-q-find]').value.trim().toLowerCase();
-    q('.txq-custom').classList.toggle('hl', cat === 'custom');
-    if (cat === 'custom') {
-      var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0; });
-      grid.innerHTML = '<div class="txq-own"><b>Can\u2019t see your item?</b><span>Small or large, we move it all. Type it in the box above, set how many, then tap Add.</span></div>' +
-        own.map(function (id) { var it = st.items[id]; return '<div class="txq-tile on" role="button" tabindex="0" data-own="' + esc(id) + '"><span class="q">' + it.q + '</span>' + icon('other') + '<div class="nm">' + esc(it.n) + '</div><div class="more">Tap to add one more</div></div>'; }).join('');
-      return;
-    }
-    var list = ITEMS.filter(function (i) { return (cat === 'all' || i.c === cat) && (!t || (i.n + ' ' + (i.v || []).join(' ')).toLowerCase().indexOf(t) > -1); });
-    grid.innerHTML = list.length ? list.map(function (i) { return '<div class="txq-tile" role="button" tabindex="0" data-k="' + i.k + '"><span class="q"></span>' + icon(i.k) + '<div class="nm">' + i.n + '</div><div class="more">' + (i.v ? 'Choose size' : '&nbsp;') + '</div></div>'; }).join('')
-      : '<div class="txq-empty">No match. Add “' + esc(q('[data-q-find]').value) + '” as your own item above.</div>';
-    renderTiles();
+    var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0; });
+    grid.innerHTML = ITEMS.filter(function (i) { return !i.custom; }).map(function (i) { return chip('data-k="' + i.k + '"', i.k, i.n, qtyOf(i.k)); }).join('') +
+      own.map(function (id) { var it = st.items[id]; return chip('data-own="' + esc(id) + '"', 'other', esc(it.n), it.q); }).join('') +
+      '<button type="button" class="txq-chip txq-chip--own" data-k="other"><span class="cn">+ Something else</span></button>';
   }
-  function renderTiles() { qa('.txq-tile').forEach(function (t) { var n = qtyOf(t.getAttribute('data-k')); t.classList.toggle('on', n > 0); t.querySelector('.q').textContent = n; }); }
+  function renderTiles() { renderGrid(); }
   grid.addEventListener('click', function (e) {
-    var t = e.target.closest('.txq-tile'); if (!t) return;
-    var oid = t.getAttribute('data-own'); if (oid) { var o = st.items[oid]; if (o) { addItem(oid, o.k, o.n, o.v, 1); renderGrid(); } return; }
+    var t = e.target.closest('.txq-chip'); if (!t) return;
+    var oid = t.getAttribute('data-own'); if (oid) { var o = st.items[oid]; if (o) addItem(oid, o.k, o.n, o.v, 1); return; }
     var it = BYK[t.getAttribute('data-k')];
     if (it.custom) { q('[data-q-custom]').focus(); return toast('Type the item name, then tap Add'); }
     if (it.v) return openSheet(it);
     addItem(it.k, it.k, it.n, '', 1); if (navigator.vibrate) navigator.vibrate(8);
   });
-  grid.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('txq-tile')) { e.preventDefault(); e.target.click(); } });
   function renderList() {
     var ids = Object.keys(st.items), n = count();
     q('[data-q-lh]').textContent = ids.length ? 'Your list · ' + n + ' item' + (n === 1 ? '' : 's') : 'Your list';
@@ -283,8 +274,12 @@
   q('[data-q-cp]').addEventListener('click', function () { cq = Math.min(99, cq + 1); q('[data-q-cq]').textContent = cq; });
   function addCustom() {
     var v = q('[data-q-custom]').value.trim(); if (!v) { q('[data-q-custom]').focus(); return toast('Type an item name first'); }
-    var n = v.charAt(0).toUpperCase() + v.slice(1); addItem('custom:' + n.toLowerCase(), 'other', n, '', cq);
-    toast('Added ' + cq + ' × ' + n); q('[data-q-custom]').value = ''; cq = 1; q('[data-q-cq]').textContent = 1; if (cat === 'custom') renderGrid();
+    var n = v.charAt(0).toUpperCase() + v.slice(1), lc = v.toLowerCase().replace(/s$/, '');
+    var hit = ITEMS.filter(function (i) { return !i.custom && i.n.toLowerCase().replace(/s$/, '') === lc; })[0];
+    q('[data-q-custom]').value = '';
+    if (hit && hit.v) { cq = 1; q('[data-q-cq]').textContent = 1; return openSheet(hit); }
+    if (hit) addItem(hit.k, hit.k, hit.n, '', cq); else addItem('custom:' + n.toLowerCase(), 'other', n, '', cq);
+    toast('Added ' + cq + ' × ' + (hit ? hit.n : n)); cq = 1; q('[data-q-cq]').textContent = 1;
   }
   q('[data-q-cadd]').addEventListener('click', addCustom);
   q('[data-q-custom]').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addCustom(); } });
