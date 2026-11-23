@@ -448,15 +448,16 @@
   function renderSvc() {
     var el = q('[data-q-svc]');
     if (!st.time || (!st.today && !st.date)) { el.innerHTML = ''; renderEst(); return; }
-    var after = isAfter(); if (after) st.svc = 'std';
+    var after = isAfter(), fast = !after && !!st.today; if (!fast) st.svc = 'std';
     var day = st.today ? 'Today' : new Date(st.date + 'T00:00').toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' });
-    var keys = after ? ['std'] : ['std', 'pri', 'exp'];
+    var keys = fast ? ['std', 'pri', 'exp'] : ['std'];
     el.innerHTML = '<div class="txq-svc"><div class="txq-svchd">* Pickup from ' + st.time + ' ' + (st.today ? 'Today' : 'on ' + day) + '</div>' +
       keys.map(function (k) { var r = rateOf(k);
         return '<button type="button" class="txq-svcr' + (st.svc === k ? ' on' : '') + '" data-svc="' + k + '">' +
           (k === 'std' ? '<span class="bv">BEST<br>VALUE</span>' : '<span class="ic ' + k + '">' + (k === 'pri' ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' : '<svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>') + '</span>') +
           '<span class="nm"><b>' + SVC[k][0] + '</b><small>' + (st.today ? 'Today' : day.split(' ')[0].replace(',', '')) + ' ' + st.time + '</small></span>' +
-          '<span class="ds">' + (after ? 'Weekend / evening rate' : SVC[k][1]) + '</span><span class="pr">From ' + money(r.f) + ' *</span></button>'; }).join('') + '</div>' +
+          '<span class="ds">' + (after ? 'Weekend / evening rate' : !st.today ? 'Booked for your day and time' : SVC[k][1]) + '</span><span class="pr">From ' + money(r.f) + ' *</span></button>'; }).join('') + '</div>' +
+      (!st.today && !after ? '<div class="txq-norush"><b>Need it sooner?</b> Priority (within 4 hours) and Express (ASAP) are available when you book for <b>Today</b>.</div>' : '') +
       (st.svc !== 'std' ? '<div class="txq-norush"><b>No rush?</b> Choose <b>Standard</b> for the best price on same day delivery.</div>' : '') +
       '<p class="txq-tip">Tip: if your job is time critical, please call us on <a href="tel:' + PHONE.replace(/\s/g, '') + '">' + esc(PHONE) + '</a> so we can make sure we can help.</p>' +
       '<p class="txq-foot2"><b>* The price covers the first 30 minutes,</b> with any extra time charged in 30-minute blocks at ' + money(rateOf(st.svc).b) + '. Tolls and paid parking are extra.</p>';
