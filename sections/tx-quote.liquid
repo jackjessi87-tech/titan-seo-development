@@ -10,7 +10,9 @@
   <header class="txq-top">
     <div class="txq-row">
       <button class="txq-ib" type="button" data-q-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <img class="txq-logo" src="{{ 'titan-favicon-192.png' | asset_url }}" alt="Titan Express" width="40" height="40">
       <div class="txq-brand"><b id="txq-title">Instant quote</b><small data-q-steplbl>Step 1 of 5</small></div>
+      <a class="txq-help" href="tel:{{ s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' }}"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Need help?</a>
       <button class="txq-ib" type="button" data-q-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <div class="txq-prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -45,7 +47,7 @@
     <section class="txq-s txq-s--map" data-s="2" hidden>
       <div class="txq-mapwrap">
         <div class="txq-map" data-q-map></div>
-        <div class="txq-card txq-floatcard"><div><i class="txq-dot" style="background:#17357f"></i><span data-q-fa></span></div><div><i class="txq-dot" style="background:#2563eb"></i><span data-q-fb></span></div></div>
+        <div class="txq-card txq-floatcard"><div><i class="txq-dot" style="background:#17357f"></i><span data-q-fa></span></div><div><i class="txq-dot" style="background:#e1261c"></i><span data-q-fb></span></div></div>
         <div class="txq-sheet">
           <div class="txq-grab"></div>
           <div class="txq-stats"><div><b data-q-km>…</b><span>driving distance</span></div><div><b data-q-min>…</b><span>drive time, no traffic</span></div></div>

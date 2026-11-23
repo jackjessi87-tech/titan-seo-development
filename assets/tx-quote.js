@@ -177,7 +177,7 @@
     if (player) player.remove(); player = L.layerGroup().addTo(pmap);
     var pts = [];
     if (st.from) { pts.push([st.from.lat, st.from.lon]); L.marker(pts[pts.length - 1], { icon: pin('A', '#17357f') }).addTo(player); }
-    if (st.to) { pts.push([st.to.lat, st.to.lon]); L.marker(pts[pts.length - 1], { icon: pin('B', '#2563eb') }).addTo(player); }
+    if (st.to) { pts.push([st.to.lat, st.to.lon]); L.marker(pts[pts.length - 1], { icon: pin('B', '#e1261c') }).addTo(player); }
     if (pts.length === 2) pmap.fitBounds(pts, { padding: [50, 60], maxZoom: 14 });
     else if (pts.length) pmap.setView(pts[0], 13);
     else pmap.setView([-33.84, 151.1], 10);
@@ -211,7 +211,7 @@
     var a = [st.from.lat, st.from.lon], b = [st.to.lat, st.to.lon], pad = { paddingTopLeft: [30, 120], paddingBottomRight: [30, 210], maxZoom: 15 };
     map.fitBounds(L.latLngBounds([a, b]), pad);
     q('[data-q-km]').textContent = '…'; q('[data-q-min]').textContent = '…';
-    var done = function () { L.marker(a, { icon: pin('A', '#17357f') }).addTo(layer); L.marker(b, { icon: pin('B', '#2563eb') }).addTo(layer); };
+    var done = function () { L.marker(a, { icon: pin('A', '#17357f') }).addTo(layer); L.marker(b, { icon: pin('B', '#e1261c') }).addTo(layer); };
     var draw = function () {
       L.polyline(st.route.line, { color: '#fff', weight: 10, opacity: .95, className: 'txq-route' }).addTo(layer);
       L.polyline(st.route.line, { color: '#17357f', weight: 5.5, className: 'txq-route' }).addTo(layer);
