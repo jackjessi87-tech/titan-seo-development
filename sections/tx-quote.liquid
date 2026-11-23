@@ -114,10 +114,30 @@
       <p class="txq-lede">We text you to confirm the time. Nothing to pay now.</p>
       <div class="txq-note"><svg viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
         <span>Photos help us give an exact price. After sending, text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>, no rush.</span></div>
+      {%- comment -%} The details boxes sit inside Shopify's contact form: tapping one loads Shopify's invisible spam check (hCaptcha),
+      which the form needs before it can send. Job details travel in the hidden fields. {%- endcomment -%}
+      {%- form 'contact', id: 'txq-form', class: 'txq-cform', data-q-form: '' -%}
+    {%- if form.posted_successfully? -%}<span data-q-posted hidden></span>{%- endif -%}
+    {%- if form.errors -%}<span data-q-errors hidden>{{ form.errors | default_errors | strip_html | strip }}</span>{%- endif -%}
+    <input type="hidden" name="contact[source]" value="Instant quote (new design)">
+    <input type="hidden" name="contact[name]" data-f="name">
+    <input type="hidden" name="contact[email]" data-f="email">
+    <input type="hidden" name="contact[phone]" data-f="phone">
+    <input type="hidden" name="contact[pickup_suburb]" data-f="pickup">
+    <input type="hidden" name="contact[delivery_suburb]" data-f="dropoff">
+    <input type="hidden" name="contact[items]" data-f="items">
+    <input type="hidden" name="contact[crew]" data-f="crew">
+    <input type="hidden" name="contact[stairs_or_lift]" data-f="access">
+    <input type="hidden" name="contact[when]" data-f="when">
+    <input type="hidden" name="contact[preferred_date]" data-f="date">
+    <input type="hidden" name="contact[estimate]" data-f="estimate">
+    <input type="hidden" name="contact[body]" data-f="body">
+  
       <div class="txq-field"><label for="txq-name">Name</label><input class="txq-inp" id="txq-name" autocomplete="name" placeholder="First name is fine"></div>
       <div class="txq-field"><label for="txq-phone">Mobile</label><input class="txq-inp" id="txq-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="04xx xxx xxx"></div>
       <div class="txq-field"><label for="txq-email">Email</label><input class="txq-inp" id="txq-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
       <div class="txq-field"><label for="txq-notes">Anything else? <span>(optional)</span></label><textarea class="txq-inp" id="txq-notes" rows="3" placeholder="e.g. narrow hallway, parking in the driveway"></textarea></div>
+      {%- endform -%}
     </section>
 
     <!-- 6 review -->
@@ -127,7 +147,7 @@
       <div data-q-review></div>
       {%- comment -%} Shopify's own Google Pay / Apple Pay / Shop Pay buttons for the deposit, right on the form (2026-11-24) {%- endcomment -%}
       {%- assign dep = all_products['titan-booking-deposit'] -%}
-      {%- if dep != blank and dep.available -%}
+      {%- if dep != blank and dep.available and s.deposit_variant != blank -%}
       <div class="txq-wallet" data-q-wallet>
         <p class="txq-wallet-h">Pay the {{ dep.price | money_without_trailing_zeros }} deposit in one tap</p>
         {%- form 'product', dep, class: 'txq-walletform', data-q-walletform: '' -%}
@@ -162,23 +182,6 @@
   <div class="txq-bsheet" data-q-bsheet role="dialog" aria-modal="true"></div>
   <div class="txq-toast" data-q-toast></div>
 
-  {%- form 'contact', id: 'txq-form', class: 'txq-form', data-q-form: '' -%}
-    {%- if form.posted_successfully? -%}<span data-q-posted hidden></span>{%- endif -%}
-    {%- if form.errors -%}<span data-q-errors hidden>{{ form.errors | default_errors | strip_html | strip }}</span>{%- endif -%}
-    <input type="hidden" name="contact[source]" value="Instant quote (new design)">
-    <input type="hidden" name="contact[name]" data-f="name">
-    <input type="hidden" name="contact[email]" data-f="email">
-    <input type="hidden" name="contact[phone]" data-f="phone">
-    <input type="hidden" name="contact[pickup_suburb]" data-f="pickup">
-    <input type="hidden" name="contact[delivery_suburb]" data-f="dropoff">
-    <input type="hidden" name="contact[items]" data-f="items">
-    <input type="hidden" name="contact[crew]" data-f="crew">
-    <input type="hidden" name="contact[stairs_or_lift]" data-f="access">
-    <input type="hidden" name="contact[when]" data-f="when">
-    <input type="hidden" name="contact[preferred_date]" data-f="date">
-    <input type="hidden" name="contact[estimate]" data-f="estimate">
-    <input type="hidden" name="contact[body]" data-f="body">
-  {%- endform -%}
 </div>
 <script src="{{ 'tx-quote-icons.js' | asset_url }}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>

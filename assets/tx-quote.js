@@ -554,7 +554,8 @@
       'When: ' + when, 'Customer saw the rates only (from ' + money(e.f) + '). Our guide, not shown: ' + estLine, 'Customer agreed to the hourly terms', st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'SENDING…';
     try { sessionStorage.setItem('tx-quote-sent', '1'); } catch (e) {}
-    f.submit();
+    // requestSubmit fires the submit event, so Shopify's spam check (hCaptcha) can add its token; plain submit() skips it (2026-11-24)
+    if (f.requestSubmit) f.requestSubmit(); else f.querySelector('[type=submit]') ? f.querySelector('[type=submit]').click() : f.submit();
   }
 
   // ---------- start ----------
