@@ -348,16 +348,18 @@
   function renderEst() {
     var el = q('[data-q-est]'); if (!el) return;
     if (!count()) { el.innerHTML = ''; return; }
-    var e = estimate();
-    el.innerHTML = '<div class="txq-estc"><span class="lb">Estimated price</span><b>' + estTxt(e) + '</b>' +
-      '<span class="d">About ' + hm(e.mins) + ' including the drive. ' + (e.after ? 'Weekend / evening rate' : 'Weekday rate') + ': ' + money(e.f) + ' for the first 30 min, then ' + money(e.b) + ' per extra 30 min.' +
+    el.innerHTML = rateBox(estimate(), '');
+  }
+  function rateBox(e, cls) {
+    return '<div class="txq-estc' + cls + '"><span class="lb">' + (e.after ? 'Weekend / evening rate' : 'Weekday rate') + '</span><b>From ' + money(e.f) + '</b>' +
+      '<span class="d">for the first 30 min, then ' + money(e.b) + ' per extra 30 min. You only pay for the actual time.' +
       (st.crew === '2' ? ' Plus the second-mover fee, which we confirm by text.' : '') + '</span></div>';
   }
   function howHtml(e) {
     return '<div class="txq-card txq-how"><b class="t">How the price works</b><ol>' +
       '<li><b>' + money(R.f) + ' covers the first 30 minutes</b> on weekdays. After that it is ' + money(R.b) + ' for each extra 30 minutes, or part of it.</li>' +
       '<li><b>Weekends, public holidays and evenings after 5pm</b> are ' + money(R.af) + ' for the first 30 minutes, then ' + money(R.ab) + ' for each extra 30 minutes.</li>' +
-      '<li><b>The clock starts</b> when we arrive at the pickup and stops when the last item is placed at the drop-off. You pay for the actual time, so the estimate is a guide.</li>' +
+      '<li><b>The clock starts</b> when we arrive at the pickup and stops when the last item is placed at the drop-off. You pay for the actual time.</li>' +
       '<li><b>1 mover:</b> you help load and unload the heavy items. <b>2 movers:</b> an extra fee, which we confirm by text before the job.</li>' +
       '<li><b>Extras at cost:</b> tolls, paid parking, and waiting time if the items are not ready.</li>' +
       '<li><b>Nothing to pay now.</b> We text you to confirm the time before the job.</li></ol></div>';
@@ -421,7 +423,7 @@
     var row = function (l, v) { return '<div class="r"><span class="mu">' + l + '</span><span>' + v + '</span></div>'; };
     var e = estimate();
     q('[data-q-review]').innerHTML =
-      '<div class="txq-estc txq-estc--big"><span class="lb">Estimated price</span><b>' + estTxt(e) + '</b><span class="d">About ' + hm(e.mins) + ' including the drive, ' + (e.after ? 'weekend / evening rate' : 'weekday rate') + (st.crew === '2' ? ', plus the second-mover fee' : '') + '.</span></div>' + howHtml(e) +
+      rateBox(e, ' txq-estc--big') + howHtml(e) +
       '<label class="txq-ack txq-terms"><input type="checkbox" data-q-terms' + (st.terms ? ' checked' : '') + '><span>I understand the price is by time, from ' + money(e.f) + ' for the first 30 minutes, and the final amount depends on the actual time.</span></label>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Route</b><button type="button" data-go="1">Edit</button></div>' +
         '<div class="r"><span class="txq-pin txq-pin--a" style="width:22px;height:22px;font-size:11px">A</span><span>' + esc(st.from.text) + (st.unitA ? '<br><small>' + esc(st.unitA) + '</small>' : '') + '</span></div>' +
@@ -444,9 +446,9 @@
     var when = fmtDate(st.date) + (st.time ? ', ' + st.time : '');
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', pickup); set('dropoff', dropoff);
     set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', access); set('when', when); set('date', st.date);
-    var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')'; set('estimate', estLine);
+    var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')'; set('estimate', 'Not shown to customer. Our guide: ' + estLine);
     set('body', ['Items: ' + itemsTxt().join(', '), 'Crew: ' + crewTxt() + (st.crew === '1' ? ', customer agreed to help load and unload' : ''), 'Access: ' + access,
-      'When: ' + when, 'Estimate shown: ' + estLine, 'Customer agreed to the hourly terms', st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
+      'When: ' + when, 'Customer saw the rates only (from ' + money(e.f) + '). Our guide, not shown: ' + estLine, 'Customer agreed to the hourly terms', st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'SENDING…';
     try { sessionStorage.setItem('tx-quote-sent', '1'); } catch (e) {}
     f.submit();

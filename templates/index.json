@@ -538,7 +538,7 @@
           "type": "faq",
           "settings": {
             "question": "How much does furniture pickup and delivery cost in Sydney?",
-            "answer": "<p>We charge by time. Weekdays: $99 covers the first 30 minutes, then $52 for each extra 30 minutes. Weekends, public holidays and evenings: $198 for the first 30 minutes, then $104 for each extra 30 minutes. The instant quote shows an estimate based on your items, stairs and the drive. Call 0469 717 535 for help.</p>"
+            "answer": "<p>We charge by time. Weekdays: $99 covers the first 30 minutes, then $52 for each extra 30 minutes. Weekends, public holidays and evenings: $198 for the first 30 minutes, then $104 for each extra 30 minutes. You only pay for the actual time. Call 0469 717 535 for help.</p>"
           }
         },
         "faq_2": {
@@ -594,7 +594,7 @@
           "type": "faq",
           "settings": {
             "question": "How do I book?",
-            "answer": "<p>Use the instant quote or call 0469 717 535 with your pickup and delivery suburbs, what you are moving and any stairs. You see an estimate straight away and we text to confirm the earliest time.</p>"
+            "answer": "<p>Use the instant quote or call 0469 717 535 with your pickup and delivery suburbs, what you are moving and any stairs. We text you to confirm the earliest time.</p>"
           }
         }
       },
@@ -655,8 +655,8 @@
         "steps_heading": "Book a Pickup in 3 Steps",
         "step_1_title": "Send your details",
         "step_1_text": "Pickup and delivery suburbs, what you are moving, and any stairs or lift.",
-        "step_2_title": "See your estimate",
-        "step_2_text": "The instant quote shows an estimate, and we text to confirm the earliest time we can be there.",
+        "step_2_title": "See our rates",
+        "step_2_text": "From $99 for the first 30 minutes, and we text to confirm the earliest time we can be there.",
         "step_3_title": "We move it carefully",
         "step_3_text": "Wrapped, strapped and placed in the room you choose.",
         "price_heading": "What Affects Your Price?",
@@ -667,7 +667,7 @@
         "regions": "Penrith, Campbelltown, Ryde, Chatswood, North Shore, Sydney CBD, Strathfield, Hurstville, Canterbury, Auburn",
         "faq_heading": "Furniture Pickup and Delivery Questions",
         "final_heading": "Need Something Moved Today?",
-        "final_text": "Call now or get an instant estimate. A careful crew and a large van, across Sydney, 7 days a week.",
+        "final_text": "Call now or get an instant quote. A careful crew and a large van, across Sydney, 7 days a week.",
         "show_services": false,
         "show_areas": false,
         "show_final": false,
