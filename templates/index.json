@@ -686,10 +686,15 @@
       "settings": {
         "phone": "0469 717 535"
       }
+    },
+    "tx_book": {
+      "type": "tx-book",
+      "settings": {}
     }
   },
   "order": [
     "tx_nav",
+    "tx_book",
     "tx_hero",
     "tx_services",
     "tx_how",
