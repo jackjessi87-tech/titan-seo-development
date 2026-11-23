@@ -338,3 +338,5 @@ textarea.txq-inp { resize: vertical; min-height: 84px; }
 @media (max-width: 420px) { .txq-svcr { grid-template-columns: 50px 1.05fr .95fr auto; gap: 8px; padding: 14px 10px; } .txq-svcr .bv, .txq-svcr .ic { height: 42px; } .txq-svcr .ic { width: 42px; } .txq-svcr .ds { font-size: .78rem; } .txq-svcr .pr { font-size: .9rem; } .txq-svcr .nm b { font-size: .9rem; } }
 @media (max-width: 330px) { .txq-svcr { grid-template-columns: 46px 1fr auto; } .txq-svcr .ds { display: none; } }
 .txq-timesel:invalid, .txq-timesel option[value=""] { color: var(--mu); }
+/* Pay deposit & book (2026-11-24) */
+.txq .txq-nopay { display: block; margin-top: 8px; padding: 0; border: 0; background: none; color: var(--n); font-weight: 700; font-size: .86rem; text-decoration: underline; cursor: pointer; }

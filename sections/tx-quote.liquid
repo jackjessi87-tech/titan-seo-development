@@ -6,7 +6,7 @@
 {{ 'tx-quote.css' | asset_url | stylesheet_tag: preload: false }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
 {%- assign s = section.settings -%}
-<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}" data-rate-first="{{ s.rate_first }}" data-rate-block="{{ s.rate_block }}" data-after-first="{{ s.after_first }}" data-after-block="{{ s.after_block }}" data-pri-first="{{ s.pri_first }}" data-pri-block="{{ s.pri_block }}" data-exp-first="{{ s.exp_first }}" data-exp-block="{{ s.exp_block }}">
+<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}" data-rate-first="{{ s.rate_first }}" data-rate-block="{{ s.rate_block }}" data-after-first="{{ s.after_first }}" data-after-block="{{ s.after_block }}" data-pri-first="{{ s.pri_first }}" data-pri-block="{{ s.pri_block }}" data-exp-first="{{ s.exp_first }}" data-exp-block="{{ s.exp_block }}" data-deposit-variant="{{ s.deposit_variant }}" data-deposit="{{ s.deposit_amount }}">
   <header class="txq-top">
     <div class="txq-row">
       <button class="txq-ib" type="button" data-q-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -185,7 +185,10 @@
     { "type": "number", "id": "pri_first", "label": "Priority (within 4 hours): first 30 minutes", "default": 154 },
     { "type": "number", "id": "pri_block", "label": "Priority: each extra 30 minutes", "default": 81 },
     { "type": "number", "id": "exp_first", "label": "Express (ASAP, direct): first 30 minutes", "default": 198 },
-    { "type": "number", "id": "exp_block", "label": "Express: each extra 30 minutes", "default": 104 }
+    { "type": "number", "id": "exp_block", "label": "Express: each extra 30 minutes", "default": 104 },
+    { "type": "header", "content": "Pay to book (Shopify checkout)" },
+    { "type": "text", "id": "deposit_variant", "label": "Deposit product variant ID (leave empty to switch card payment off)", "default": "68154838843497" },
+    { "type": "number", "id": "deposit_amount", "label": "Deposit shown on the button (must match the product price)", "default": 99 }
   ],
   "presets": [{ "name": "TX instant quote" }]
 }

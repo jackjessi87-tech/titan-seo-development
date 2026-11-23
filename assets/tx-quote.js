@@ -79,7 +79,7 @@
     q('[data-q-back]').toggleAttribute('data-hide', n === 1 || n === 7);
     q('[data-q-foot]').hidden = n === 1 || n === 2 || n === 7;
     q('[data-q-sum]').hidden = n !== 3;
-    next.textContent = n === 6 ? 'SEND BOOKING REQUEST' : n === 1 ? 'SEE ROUTE' : 'NEXT';
+    next.textContent = n === 6 ? (DEP_V ? 'PAY ' + money(DEP) + ' DEPOSIT & BOOK' : 'SEND BOOKING REQUEST') : n === 1 ? 'SEE ROUTE' : 'NEXT';
     root.classList.toggle('txq-white', n === 1 || n === 3);
     if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); }
     if (n === 2) setTimeout(drawMap, 40);
@@ -105,7 +105,7 @@
   next.addEventListener('click', function () {
     if (next.disabled) return;
     var s = st.step;
-    if (s === 1) return go(2); if (s === 3) return go(4); if (s === 4) return go(5); if (s === 5) return go(6); if (s === 6) return submit();
+    if (s === 1) return go(2); if (s === 3) return go(4); if (s === 4) return go(5); if (s === 5) return go(6); if (s === 6) return DEP_V ? payBook() : submit();
   });
 
   // ---------- step 1: addresses ----------
@@ -482,6 +482,7 @@
     var e = estimate();
     q('[data-q-review]').innerHTML =
       rateBox(e, ' txq-estc--big') + howHtml(e) +
+      (DEP_V ? '<div class="txq-note"><span><b>' + money(DEP) + ' deposit to lock it in.</b> Pay securely by card on the next page. It comes off your final bill, and the rest is charged by time on the day. <button type="button" class="txq-nopay" data-q-nopay>Or send the request without paying</button></span></div>' : '') +
       '<label class="txq-ack txq-terms"><input type="checkbox" data-q-terms' + (st.terms ? ' checked' : '') + '><span>I understand the price is by time, from ' + money(e.f) + ' for the first 30 minutes, and the final amount depends on the actual time.</span></label>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Route</b><button type="button" data-go="1">Edit</button></div>' +
         '<div class="r"><span class="txq-pin txq-pin--a" style="width:22px;height:22px;font-size:11px">A</span><span>' + esc(st.from.text) + (st.unitA ? '<br><small>' + esc(st.unitA) + '</small>' : '') + (st.awayA ? '<br><small>' + esc(contactTxt('A')) + '</small>' : '') + '</span></div>' +
@@ -495,17 +496,39 @@
         row('Name', esc(st.name)) + row('Mobile', esc(st.phone)) + row('Email', esc(st.email)) + (st.notes ? row('Notes', esc(st.notes)) : '') + '</div>';
     qa('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go'), true); }); });
     q('[data-q-terms]').addEventListener('change', function () { st.terms = this.checked; save(); validate(); });
+    var alt = q('[data-q-nopay]'); if (alt) alt.addEventListener('click', function () { if (!st.terms) return toast('Please tick the box above first'); submit(); });
   }
-  function submit() {
-    var f = q('[data-q-form]'); if (!f) return;
-    var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
+  var DEP_V = (root.getAttribute('data-deposit-variant') || '').trim(), DEP = +root.getAttribute('data-deposit') || 99;
+  function jobInfo() {
     var pickup = st.from.text + (st.unitA ? ' (' + st.unitA + ')' : '') + (st.awayA ? ' - customer not there, ' + contactTxt('A') : ''),
         dropoff = st.to.text + (st.unitB ? ' (' + st.unitB + ')' : '') + (st.awayB ? ' - customer not there, ' + contactTxt('B') : '');
     var access = 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B');
     var when = whenTxt() + ' (' + (rateOf(st.svc).after ? 'after-hours' : 'weekday') + ' rate, from ' + money(rateOf(st.svc).f) + ')';
+    var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')';
+    return { pickup: pickup, dropoff: dropoff, access: access, when: when, e: e, estLine: estLine };
+  }
+  // Pay a deposit through Shopify checkout; the job details travel as line item properties on the order (2026-11-24)
+  function payBook() {
+    var J = jobInfo();
+    var props = { 'Name': st.name.trim(), 'Mobile': st.phone.trim(), 'Email': st.email.trim(), 'Pickup': J.pickup, 'Drop-off': J.dropoff, 'Items': itemsTxt().join(', '),
+      'Crew': crewTxt(), 'Access': J.access, 'When': J.when };
+    if (st.dis) props['Extra'] = 'Dismantling / assembly';
+    if (st.notes.trim()) props['Notes'] = st.notes.trim();
+    if (st.route) props['Route'] = st.route.km + ' km, about ' + st.route.min + ' min drive';
+    props['_Time guide (not shown)'] = J.estLine;
+    next.disabled = true; next.textContent = 'OPENING SECURE CHECKOUT…';
+    var post = function (u, body) { return fetch(u, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body || {}) }).then(function (r) { if (!r.ok) throw r; return r.json(); }); };
+    post('/cart/clear.js').then(function () { return post('/cart/add.js', { items: [{ id: +DEP_V, quantity: 1, properties: props }] }); })
+      .then(function () { try { sessionStorage.setItem('tx-quote-paid', '1'); } catch (x) {} location.href = '/checkout?checkout[email]=' + encodeURIComponent(st.email.trim()); })
+      .catch(function () { next.disabled = false; next.textContent = 'PAY ' + money(DEP) + ' DEPOSIT & BOOK'; toast('Checkout could not open. Please try again, or send the request without paying.'); });
+  }
+  function submit() {
+    var f = q('[data-q-form]'); if (!f) return;
+    var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
+    var J = jobInfo(), pickup = J.pickup, dropoff = J.dropoff, access = J.access, when = J.when, e = J.e, estLine = J.estLine;
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', pickup); set('dropoff', dropoff);
-    set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', access); set('when', when); set('date', st.date);
-    var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')'; set('estimate', 'Not shown to customer. Our guide: ' + estLine);
+    set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', access); set('when', when); set('date', jobDate());
+    set('estimate', 'Not shown to customer. Our guide: ' + estLine);
     set('body', ['Pickup: ' + pickup, 'Drop-off: ' + dropoff, 'Items: ' + itemsTxt().join(', '), 'Crew: ' + crewTxt() + (st.crew === '1' ? ', customer agreed to help load and unload' : ''), 'Access: ' + access,
       'When: ' + when, 'Customer saw the rates only (from ' + money(e.f) + '). Our guide, not shown: ' + estLine, 'Customer agreed to the hourly terms', st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'SENDING…';
