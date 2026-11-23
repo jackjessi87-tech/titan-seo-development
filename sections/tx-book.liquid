@@ -6,6 +6,7 @@
 {%- assign phone_intl = s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' -%}
 <section class="txb" aria-labelledby="txb-h-{{ section.id }}">
   <div class="txb__in">
+    {%- if s.show_logo -%}<a class="txb__logo" href="/" aria-label="Titan Express home"><img src="{{ 'titan-favicon-192.png' | asset_url }}" alt="Titan Express" width="56" height="56"></a>{%- endif -%}
     <p class="txb__eb">{{ s.eyebrow }}</p>
     <h2 class="txb__h" id="txb-h-{{ section.id }}">{{ s.heading_before }} <span>{{ s.heading_price }}</span></h2>
     <p class="txb__sub">{{ s.subheading }}</p>
@@ -35,6 +36,8 @@
 <style>
   .txb { background: linear-gradient(180deg, #0b1b44 0%, #17357f 100%); color: #fff; padding: clamp(28px, 6vw, 56px) 16px clamp(30px, 6vw, 60px); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   .txb__in { max-width: 560px; margin: 0 auto; text-align: center; }
+  .txb__logo { display: inline-block; margin: 0 0 12px; }
+  .txb__logo img { width: 56px; height: 56px; border-radius: 50%; background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.25); display: block; }
   .txb__eb { margin: 0 0 10px; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #ff8a83; }
   .txb__h { margin: 0; font: 800 clamp(2.1rem, 8vw, 3.2rem)/1.05 "Plus Jakarta Sans", Inter, sans-serif; letter-spacing: -.03em; color: #fff; }
   .txb__h span { color: #fff; background: #e1261c; padding: 0 .18em; border-radius: .18em; white-space: nowrap; }
@@ -67,6 +70,7 @@
   "tag": "div",
   "class": "section-tx-book",
   "settings": [
+    { "type": "checkbox", "id": "show_logo", "label": "Show Titan badge at top", "info": "Use when this section is the first thing on the page.", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Furniture pickup & delivery · Sydney" },
     { "type": "text", "id": "heading_before", "label": "Heading", "default": "Book from just" },
     { "type": "text", "id": "heading_price", "label": "Heading price", "default": "$99" },
