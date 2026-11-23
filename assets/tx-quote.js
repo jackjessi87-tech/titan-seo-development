@@ -34,7 +34,7 @@
 
   // ---------- state ----------
   var KEY = 'tx-quote-v1';
-  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, crew: '', ack: false, accessA: '', accessB: '', flightsA: 1, flightsB: 1, dis: false, date: '', time: '', name: '', phone: '', email: '', notes: '', terms: false }; };
+  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, crew: '', ack: false, accessA: '', accessB: '', flightsA: 1, flightsB: 1, dis: false, awayA: false, awayB: false, cnA: '', cpA: '', cnB: '', cpB: '', date: '', time: '', name: '', phone: '', email: '', notes: '', terms: false }; };
   var st = blank();
   try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && typeof saved === 'object') { for (var k in saved) st[k] = saved[k]; } } catch (e) {}
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
@@ -163,6 +163,16 @@
     btn.addEventListener('click', function () { inp.hidden = false; btn.parentNode.hidden = true; inp.focus(); });
     inp.addEventListener('input', function () { st[x[1]] = inp.value; save(); });
   });
+  // "I won't be at the pickup / drop-off location" -> contact name and number (like Yellow Express, 2026-11-24)
+  ['A', 'B'].forEach(function (e) {
+    var ck = q('[data-q-awayck="' + e + '"]'), box = q('[data-q-awayf="' + e + '"]'), cn = q('[data-q-cn="' + e + '"]'), cp = q('[data-q-cp2="' + e + '"]');
+    ck.checked = !!st['away' + e]; box.hidden = !ck.checked; cn.value = st['cn' + e] || ''; cp.value = st['cp' + e] || '';
+    ck.addEventListener('change', function () { st['away' + e] = ck.checked; box.hidden = !ck.checked; save(); if (ck.checked) cn.focus(); });
+    cn.addEventListener('input', function () { st['cn' + e] = cn.value; save(); });
+    cp.addEventListener('input', function () { st['cp' + e] = cp.value; save(); });
+  });
+  var contactOk = function (e) { return !st['away' + e] || ((st['cn' + e] || '').trim().length > 1 && (st['cp' + e] || '').replace(/\D/g, '').length >= 9); };
+  var contactTxt = function (e) { return st['away' + e] ? 'Contact: ' + (st['cn' + e] || '').trim() + ', ' + (st['cp' + e] || '').trim() : ''; };
   // small Sydney map under the address boxes, with the Confirm locations button on top
   var pmap, player;
   function drawPre() {
@@ -183,7 +193,12 @@
     else pmap.setView([-33.84, 151.1], 10);
   }
   q('[data-q-go1]').addEventListener('click', function () {
-    if (st.from && st.to) return go(2);
+    if (st.from && st.to) {
+      var bad = !contactOk('A') ? 'A' : !contactOk('B') ? 'B' : '';
+      if (!bad) return go(2);
+      q('[data-q-cn="' + bad + '"]').focus();
+      return toast(bad === 'A' ? 'Add the pickup contact name and number' : 'Add the drop-off contact name and number');
+    }
     var miss = st.from ? 'to' : 'from'; q('#txq-' + miss).focus();
     toast(miss === 'from' ? 'Type the pickup and pick it from the list' : 'Type the drop-off and pick it from the list');
   });
@@ -421,8 +436,8 @@
       rateBox(e, ' txq-estc--big') + howHtml(e) +
       '<label class="txq-ack txq-terms"><input type="checkbox" data-q-terms' + (st.terms ? ' checked' : '') + '><span>I understand the price is by time, from ' + money(e.f) + ' for the first 30 minutes, and the final amount depends on the actual time.</span></label>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Route</b><button type="button" data-go="1">Edit</button></div>' +
-        '<div class="r"><span class="txq-pin txq-pin--a" style="width:22px;height:22px;font-size:11px">A</span><span>' + esc(st.from.text) + (st.unitA ? '<br><small>' + esc(st.unitA) + '</small>' : '') + '</span></div>' +
-        '<div class="r"><span class="txq-pin txq-pin--b" style="width:22px;height:22px;font-size:11px">B</span><span>' + esc(st.to.text) + (st.unitB ? '<br><small>' + esc(st.unitB) + '</small>' : '') + '</span></div>' +
+        '<div class="r"><span class="txq-pin txq-pin--a" style="width:22px;height:22px;font-size:11px">A</span><span>' + esc(st.from.text) + (st.unitA ? '<br><small>' + esc(st.unitA) + '</small>' : '') + (st.awayA ? '<br><small>' + esc(contactTxt('A')) + '</small>' : '') + '</span></div>' +
+        '<div class="r"><span class="txq-pin txq-pin--b" style="width:22px;height:22px;font-size:11px">B</span><span>' + esc(st.to.text) + (st.unitB ? '<br><small>' + esc(st.unitB) + '</small>' : '') + (st.awayB ? '<br><small>' + esc(contactTxt('B')) + '</small>' : '') + '</span></div>' +
         (st.route ? '<div class="r"><span class="mu">Distance</span><span>' + st.route.km + ' km, about ' + st.route.min + ' min</span></div>' : '') + '</div>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Items · ' + count() + '</b><button type="button" data-go="3">Edit</button></div><div>' +
         its.map(function (it) { return '<span class="txq-pill">' + it.q + ' × ' + esc(it.n) + (it.v ? ' · ' + esc(it.v) : '') + '</span>'; }).join('') + '</div></div>' +
@@ -436,13 +451,14 @@
   function submit() {
     var f = q('[data-q-form]'); if (!f) return;
     var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
-    var pickup = st.from.text + (st.unitA ? ' (' + st.unitA + ')' : ''), dropoff = st.to.text + (st.unitB ? ' (' + st.unitB + ')' : '');
+    var pickup = st.from.text + (st.unitA ? ' (' + st.unitA + ')' : '') + (st.awayA ? ' - customer not there, ' + contactTxt('A') : ''),
+        dropoff = st.to.text + (st.unitB ? ' (' + st.unitB + ')' : '') + (st.awayB ? ' - customer not there, ' + contactTxt('B') : '');
     var access = 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B');
     var when = fmtDate(st.date) + (st.time ? ', ' + st.time : '');
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', pickup); set('dropoff', dropoff);
     set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', access); set('when', when); set('date', st.date);
     var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')'; set('estimate', 'Not shown to customer. Our guide: ' + estLine);
-    set('body', ['Items: ' + itemsTxt().join(', '), 'Crew: ' + crewTxt() + (st.crew === '1' ? ', customer agreed to help load and unload' : ''), 'Access: ' + access,
+    set('body', ['Pickup: ' + pickup, 'Drop-off: ' + dropoff, 'Items: ' + itemsTxt().join(', '), 'Crew: ' + crewTxt() + (st.crew === '1' ? ', customer agreed to help load and unload' : ''), 'Access: ' + access,
       'When: ' + when, 'Customer saw the rates only (from ' + money(e.f) + '). Our guide, not shown: ' + estLine, 'Customer agreed to the hourly terms', st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'SENDING…';
     try { sessionStorage.setItem('tx-quote-sent', '1'); } catch (e) {}

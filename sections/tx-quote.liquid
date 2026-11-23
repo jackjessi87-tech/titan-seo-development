@@ -28,6 +28,13 @@
         <div data-q-slot="from"></div>
         <input class="txq-inp txq-co" data-q-unita placeholder="Company name, unit or level" aria-label="Pickup company name, unit or level" hidden>
         <div class="txq-cor"><button class="txq-cobtn" type="button" data-q-cobtn="a">+ Add company name</button></div>
+        <div class="txq-away" data-q-away="A">
+          <label class="txq-awayck"><input type="checkbox" data-q-awayck="A"><span>I won't be at the pickup location</span></label>
+          <div class="txq-awayf" data-q-awayf="A" hidden>
+            <label>Contact name<input class="txq-inp" data-q-cn="A" autocomplete="off" placeholder="e.g. John Smith"></label>
+            <label>Contact number<input class="txq-inp" data-q-cp2="A" type="tel" inputmode="tel" autocomplete="off" placeholder="e.g. 0412 345 678"></label>
+          </div>
+        </div>
       </div>
       <div class="txq-loc" data-row="to">
         <div class="txq-lochd"><span class="txq-lic"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h14v9H5" /><path class="flag" d="M5 4h3.5v3H5zM12 4h3.5v3H12zM8.5 7H12v3H8.5zM15.5 7H19v3h-3.5zM5 10h3.5v3H5zM12 10h3.5v3H12z"/></svg></span><label for="txq-to">Drop off location</label></div>
@@ -35,6 +42,13 @@
         <div data-q-slot="to"></div>
         <input class="txq-inp txq-co" data-q-unitb placeholder="Company name, unit or level" aria-label="Drop-off company name, unit or level" hidden>
         <div class="txq-cor"><button class="txq-cobtn" type="button" data-q-cobtn="b">+ Add company name</button></div>
+        <div class="txq-away" data-q-away="B">
+          <label class="txq-awayck"><input type="checkbox" data-q-awayck="B"><span>I won't be at the drop-off location</span></label>
+          <div class="txq-awayf" data-q-awayf="B" hidden>
+            <label>Contact name<input class="txq-inp" data-q-cn="B" autocomplete="off" placeholder="e.g. John Smith"></label>
+            <label>Contact number<input class="txq-inp" data-q-cp2="B" type="tel" inputmode="tel" autocomplete="off" placeholder="e.g. 0412 345 678"></label>
+          </div>
+        </div>
       </div>
       <div class="txq-card txq-sugg" data-q-sugg hidden></div>
       <div class="txq-premap">

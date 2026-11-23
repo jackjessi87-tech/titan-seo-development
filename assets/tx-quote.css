@@ -288,3 +288,12 @@ textarea.txq-inp { resize: vertical; min-height: 84px; }
 .txq-chip.on .ci { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #fff; animation: txq-pop .25s ease; }
 .txq-chip .q { position: absolute; top: -9px; right: -9px; min-width: 25px; height: 25px; border-radius: 13px; background: var(--r); color: #fff; font-size: 12.5px; font-weight: 800; display: grid; place-items: center; padding: 0 7px; border: 2px solid #fff; }
 .txq-chip--own { border-style: dashed; border-color: var(--r); color: var(--r); box-shadow: none; }
+/* "I won't be at the location" + contact person (like Yellow Express, 2026-11-24) */
+.txq-away { margin-top: 10px; }
+.txq-loc:not(.done) .txq-away { display: none; }
+.txq-awayck { display: flex; align-items: center; gap: 10px; font-size: .95rem; color: var(--ink); cursor: pointer; }
+.txq-awayck input { width: 20px; height: 20px; accent-color: var(--n); flex: none; margin: 0; }
+.txq-awayf { display: grid; gap: 10px; margin-top: 10px; padding: 12px; border-radius: 10px; background: #f4f6fb; border: 1px solid var(--ln); }
+.txq-awayf[hidden] { display: none; }
+.txq-awayf label { display: grid; gap: 6px; font-size: .85rem; font-weight: 700; color: var(--ink); }
+.txq-awayf .txq-inp { border-radius: 8px; padding: 12px 14px; font-weight: 400; }
