@@ -482,7 +482,7 @@
     var e = estimate();
     q('[data-q-review]').innerHTML =
       rateBox(e, ' txq-estc--big') + howHtml(e) +
-      (DEP_V ? '<div class="txq-note"><span><b>' + money(DEP) + ' deposit to lock it in.</b> Pay securely by card on the next page. It comes off your final bill, and the rest is charged by time on the day. <button type="button" class="txq-nopay" data-q-nopay>Or send the request without paying</button></span></div>' : '') +
+      (DEP_V ? '<div class="txq-note"><span><b>' + money(DEP) + ' deposit to lock it in.</b> Your details are already filled in on the next page, so you just add your card or tap Google Pay or Apple Pay. It comes off your final bill, and the rest is charged by time on the day. <button type="button" class="txq-nopay" data-q-nopay>Or send the request without paying</button></span></div>' : '') +
       '<label class="txq-ack txq-terms"><input type="checkbox" data-q-terms' + (st.terms ? ' checked' : '') + '><span>I understand the price is by time, from ' + money(e.f) + ' for the first 30 minutes, and the final amount depends on the actual time.</span></label>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Route</b><button type="button" data-go="1">Edit</button></div>' +
         '<div class="r"><span class="txq-pin txq-pin--a" style="width:22px;height:22px;font-size:11px">A</span><span>' + esc(st.from.text) + (st.unitA ? '<br><small>' + esc(st.unitA) + '</small>' : '') + (st.awayA ? '<br><small>' + esc(contactTxt('A')) + '</small>' : '') + '</span></div>' +
@@ -516,11 +516,19 @@
     if (st.notes.trim()) props['Notes'] = st.notes.trim();
     if (st.route) props['Route'] = st.route.km + ' km, about ' + st.route.min + ' min drive';
     props['_Time guide (not shown)'] = J.estLine;
+    // Straight to a pre-filled Shopify checkout (cart permalink): name, email, phone and billing suburb are filled in,
+    // the job details go on the order as "Additional details" (2026-11-24, user: simpler checkout straight from the form)
+    var nm = st.name.trim().split(/\s+/), first = nm.shift() || '', last = nm.join(' ');
+    var pt = (st.from && st.from.text) || '', pc = /(?:^|,\s*)([^,]*?)\s*,?\s*(?:NSW|New South Wales)\s+(\d{4})\s*$/i.exec(pt), street = pt.split(',')[0].trim();
+    var Q = [['checkout[email]', st.email.trim()], ['checkout[billing_address][first_name]', first], ['checkout[billing_address][last_name]', last],
+      ['checkout[billing_address][phone]', st.phone.trim()], ['checkout[billing_address][country]', 'AU'], ['checkout[billing_address][province]', 'NSW']];
+    if (pc) { Q.push(['checkout[billing_address][city]', pc[1].replace(/^.*,\s*/, '')], ['checkout[billing_address][zip]', pc[2]]); if (/^\d/.test(street)) Q.push(['checkout[billing_address][address1]', street]); }
+    // name, email and phone are already in the checkout boxes; the private time guide never goes into the web address
+    Object.keys(props).forEach(function (k) { if (k.charAt(0) !== '_' && ['Name', 'Mobile', 'Email'].indexOf(k) < 0) Q.push(['attributes[' + k + ']', props[k]]); });
+    Q.push(['note', 'Instant quote booking. ' + J.when]);
     next.disabled = true; next.textContent = 'OPENING SECURE CHECKOUT…';
-    var post = function (u, body) { return fetch(u, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body || {}) }).then(function (r) { if (!r.ok) throw r; return r.json(); }); };
-    post('/cart/clear.js').then(function () { return post('/cart/add.js', { items: [{ id: +DEP_V, quantity: 1, properties: props }] }); })
-      .then(function () { try { sessionStorage.setItem('tx-quote-paid', '1'); } catch (x) {} location.href = '/checkout?checkout[email]=' + encodeURIComponent(st.email.trim()); })
-      .catch(function () { next.disabled = false; next.textContent = 'PAY ' + money(DEP) + ' DEPOSIT & BOOK'; toast('Checkout could not open. Please try again, or send the request without paying.'); });
+    try { sessionStorage.setItem('tx-quote-paid', '1'); } catch (x) {}
+    location.href = '/cart/' + DEP_V + ':1?' + Q.map(function (x) { return encodeURIComponent(x[0]) + '=' + encodeURIComponent(x[1]); }).join('&');
   }
   function submit() {
     var f = q('[data-q-form]'); if (!f) return;
