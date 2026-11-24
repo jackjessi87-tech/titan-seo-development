@@ -1,0 +1,101 @@
+{%- comment -%}
+  Hero card for the Quote form (no price), 2026-11-25: pick up + drop off and one button that opens the Quote form
+  (tq-quote.js listens for [data-tq-quickstart] forms and opens the form with both places filled in).
+  Made from the TX card (tx-book.liquid), which stays as it is; this one uses its own class names (tqb).
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign phone_intl = s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' -%}
+<section class="tqb" aria-labelledby="tqb-h-{{ section.id }}">
+  <div class="tqb__in">
+    {%- if s.show_logo -%}<a class="tqb__logo" href="/" aria-label="Titan Express home"><img src="{{ 'titan-favicon-192.png' | asset_url }}" alt="Titan Express" width="56" height="56"></a>{%- endif -%}
+    <p class="tqb__eb">{{ s.eyebrow }}</p>
+    <h2 class="tqb__h" id="tqb-h-{{ section.id }}">{{ s.heading_before }} <span>{{ s.heading_price }}</span></h2>
+    <p class="tqb__sub">{{ s.subheading }}</p>
+    <form class="tqb__card" action="{{ s.quote_url }}" method="get" data-tq-quickstart>
+      <label class="tqb__f">
+        <span class="tqb__pin tqb__pin--a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+        <span class="tqb__fl">Pick up from</span>
+        <input name="from" type="text" autocomplete="off" placeholder="Suburb or address" aria-label="Pick up suburb or address">
+      </label>
+      <div class="tqb__line" aria-hidden="true"></div>
+      <label class="tqb__f">
+        <span class="tqb__pin tqb__pin--b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h14v9H5"/></svg></span>
+        <span class="tqb__fl">Drop off at</span>
+        <input name="to" type="text" autocomplete="off" placeholder="Suburb or address" aria-label="Drop off suburb or address">
+      </label>
+      <button class="tqb__go" type="submit">{{ s.button }} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      {%- if s.custom_url != blank -%}
+      <div class="tqb__or"><span>or</span></div>
+      <a class="tqb__custom" href="{{ s.custom_url }}">{{ s.custom_button }}</a>
+      <p class="tqb__customsub">{{ s.custom_text }}</p>
+      {%- endif -%}
+    </form>
+    <ul class="tqb__trust">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>{{ s.point_1 }}</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>{{ s.point_2 }}</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>{{ s.point_3 }}</li>
+    </ul>
+    <p class="tqb__call">Prefer to talk? <a href="tel:{{ phone_intl }}">Call {{ s.phone }}</a></p>
+  </div>
+</section>
+
+<style>
+  .tqb { background: linear-gradient(180deg, #0b1b44 0%, #17357f 100%); color: #fff; padding: clamp(28px, 6vw, 56px) 16px clamp(30px, 6vw, 60px); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .tqb__in { max-width: 560px; margin: 0 auto; text-align: center; }
+  .tqb__logo { display: inline-block; margin: 0 0 12px; }
+  .tqb__logo img { width: 56px; height: 56px; border-radius: 50%; background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.25); display: block; }
+  .tqb__eb { margin: 0 0 10px; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #ff8a83; }
+  .tqb__h { margin: 0; font: 800 clamp(2.1rem, 8vw, 3.2rem)/1.05 "Plus Jakarta Sans", Inter, sans-serif; letter-spacing: -.03em; color: #fff; }
+  .tqb__h span { color: #fff; background: #e1261c; padding: 0 .18em; border-radius: .18em; white-space: nowrap; }
+  .tqb__sub { margin: 12px 0 22px; font-size: 1.08rem; color: rgba(255,255,255,.86); }
+  .tqb__card { background: #fff; border-radius: 18px; padding: 10px 12px 12px; box-shadow: 0 20px 50px rgba(0,0,0,.28); text-align: left; position: relative; }
+  .tqb__f { display: grid; grid-template-columns: 38px 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; padding: 8px 4px; cursor: text; }
+  .tqb__pin { grid-row: 1 / 3; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; }
+  .tqb__pin svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .tqb__pin--a { background: #fdecea; color: #e1261c; }
+  .tqb__pin--b { background: #e7ecfb; color: #17357f; }
+  .tqb__fl { font-size: .74rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #5d6475; }
+  .tqb__f input { width: 100%; border: 0; outline: 0; padding: 2px 0 4px; font-size: 16px; font-weight: 600; color: #0f1218; background: transparent; }
+  .tqb__f input::placeholder { color: #9aa1b0; font-weight: 500; }
+  .tqb__f:focus-within .tqb__fl { color: #17357f; }
+  .tqb__line { height: 1px; background: #e3e6ee; margin: 0 4px 0 54px; }
+  .tqb__go { width: 100%; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 14px; padding: 17px 18px; background: #e1261c; color: #fff; font: 800 1.08rem/1 Inter, sans-serif; letter-spacing: .01em; cursor: pointer; box-shadow: 0 10px 22px rgba(225,38,28,.35); transition: transform .08s, background .15s; }
+  .tqb__go:hover { background: #c71e15; }
+  .tqb__go:active { transform: scale(.985); }
+  .tqb__go svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .tqb__or { display: flex; align-items: center; gap: 10px; margin: 12px 4px 10px; color: #9aa1b0; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .tqb__or::before, .tqb__or::after { content: ""; flex: 1; height: 1px; background: #e3e6ee; }
+  .tqb__custom { display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; border: 2px solid #17357f; border-radius: 14px; padding: 14px 18px; color: #17357f !important; background: #fff; font: 800 1.02rem/1 Inter, sans-serif; text-decoration: none; }
+  .tqb__custom:hover { background: #eef2fb; }
+  .tqb__customsub { margin: 8px 4px 2px; text-align: center; font-size: .86rem; color: #5d6475; }
+  .tqb__trust { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; font-size: .9rem; color: rgba(255,255,255,.92); }
+  .tqb__trust li { display: inline-flex; align-items: center; gap: 6px; }
+  .tqb__trust svg { width: 16px; height: 16px; fill: none; stroke: #4ade80; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .tqb__call { margin: 14px 0 0; font-size: .92rem; color: rgba(255,255,255,.8); }
+  .tqb__call a { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+
+{% schema %}
+{
+  "name": "Quote card (no price)",
+  "tag": "div",
+  "class": "section-tq-book",
+  "settings": [
+    { "type": "checkbox", "id": "show_logo", "label": "Show Titan badge at top", "info": "Use when this section is the first thing on the page.", "default": false },
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Furniture pickup & delivery · Sydney" },
+    { "type": "text", "id": "heading_before", "label": "Heading", "default": "Get a fast," },
+    { "type": "text", "id": "heading_price", "label": "Heading highlight", "default": "free quote" },
+    { "type": "text", "id": "subheading", "label": "Line under heading", "default": "Tell us what you need moved. Add a photo and we'll text you a price." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Get my free quote" },
+    { "type": "text", "id": "custom_button", "label": "Custom quote button", "default": "Get a custom quote" },
+    { "type": "text", "id": "custom_text", "label": "Custom quote line", "default": "Tell us what you need moved and we'll send you a fixed price." },
+    { "type": "text", "id": "custom_url", "label": "Custom quote link", "info": "Leave empty to hide the second button." },
+    { "type": "text", "id": "point_1", "label": "Tick 1", "default": "Free quote, no obligation" },
+    { "type": "text", "id": "point_2", "label": "Tick 2", "default": "Same-day available" },
+    { "type": "text", "id": "point_3", "label": "Tick 3", "default": "Wrapped & carried with care" },
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "quote_url", "label": "Fallback quote page (if the quote form can't open)", "default": "/pages/furniture-pickup-delivery-sydney" }
+  ],
+  "presets": [{ "name": "Quote card (no price)" }]
+}
+{% endschema %}
