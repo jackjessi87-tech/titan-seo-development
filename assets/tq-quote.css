@@ -387,3 +387,11 @@ textarea.tqf-inp { resize: vertical; min-height: 84px; }
 .tqf-rvph { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
 .tqf-rvph img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; display: block; }
 @media (prefers-reduced-motion: reduce) { .tqf-ph--busy { animation: none; } }
+
+/* photo box at the top of the items step (2026-11-25): seen without scrolling */
+.tqf-photos { margin: 12px 0 16px; padding: 12px; }
+.tqf-phbtn { padding: 15px 14px; font-size: 1.02rem; background: var(--n); color: #fff; border-color: var(--n); box-shadow: 0 8px 18px rgba(23, 53, 127, .22); }
+.tqf-phbtn em { font-style: normal; font-size: .74rem; font-weight: 700; background: rgba(255, 255, 255, .2); border-radius: 999px; padding: 2px 9px; }
+.tqf-phsub { margin: 8px 2px 0; text-align: center; font-size: .86rem; }
+.tqf-phgrid { margin: 10px 0 0; }
+.tqf-rvadd { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; border: 1.5px dashed #b4c0dc; background: #f7f9fe; color: var(--n); border-radius: 10px; padding: 8px 12px; font-weight: 700; font-size: .86rem; }
