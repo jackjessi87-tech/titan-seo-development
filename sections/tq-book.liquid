@@ -32,7 +32,10 @@
         {%- if s.chip_2 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.500-3 8.300-7 10-4-1.700-7-5.500-7-10V6z"/><path d="M9 12l2 2 4-4.500"/></svg>{{ s.chip_2 }}</li>{%- endif -%}
       </ul>
     </div>
-    {%- if s.h1_text != blank -%}<h1 class="tqb__eb tqb__eb--h1">{{ s.h1_text }}</h1>{%- else -%}<p class="tqb__eb">{{ s.eyebrow }}</p>{%- endif -%}
+    {%- if s.h1_text != blank -%}<h1 class="tqb__eb tqb__eb--h1"><mark>{{ s.h1_text }}</mark></h1>{%- else -%}<p class="tqb__eb"><mark>{{ s.eyebrow }}</mark></p>{%- endif -%}
+    {%- if s.show_live -%}
+    <p class="tqb__live" data-tqb-live data-open="{{ s.open_hour }}" data-close="{{ s.close_hour }}" data-on="{{ s.live_open | escape }}" data-off="{{ s.live_closed | escape }}"><i aria-hidden="true"></i><span>{{ s.live_open }}</span></p>
+    {%- endif -%}
     <h2 class="tqb__h" id="tqb-h-{{ section.id }}">{{ s.heading_before }} <span>{{ s.heading_price }}</span></h2>
     <p class="tqb__sub">{{ s.subheading }}</p>
     <form class="tqb__card" action="{{ s.quote_url }}" method="get" data-tq-quickstart autocomplete="off">
@@ -90,6 +93,16 @@
     window.addEventListener('resize', onScroll);
     sec.addEventListener('focusin', check);
     check();
+    // same-day badge: open or closed by the time in Sydney, not the visitor's own clock
+    var live = sec.querySelector('[data-tqb-live]');
+    if (live) {
+      try {
+        var hr = parseInt(new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', hour: 'numeric', hourCycle: 'h23' }).format(new Date()), 10);
+        var open = hr >= +live.getAttribute('data-open') && hr < +live.getAttribute('data-close');
+        live.classList.toggle('is-off', !open);
+        live.querySelector('span').textContent = live.getAttribute(open ? 'data-on' : 'data-off');
+      } catch (e) {}
+    }
   })();
 </script>
 
@@ -157,6 +170,18 @@
   .tqb__call { margin: 16px 0 0; font-size: .92rem; color: rgba(255,255,255,.8); }
   .tqb__call a { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
   .tqb h1.tqb__eb--h1 { margin: 0 0 8px; padding: 0; font: 800 .76rem/1.4 Inter, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #ffb3ae; }
+  /* highlighter heading: navy words on a yellow marker stroke, like a hand-highlighted line */
+  .tqb .tqb__eb { font-size: .84rem; line-height: 2.05; letter-spacing: .08em; text-shadow: none; }
+  .tqb .tqb__eb mark { background: #fbbf24; color: #071a3d; padding: .2em .55em; border-radius: .35em; -webkit-box-decoration-break: clone; box-decoration-break: clone; box-shadow: 0 6px 16px rgba(0,0,0,.28); }
+  /* same-day badge under the heading */
+  .tqb__live { display: inline-flex; align-items: center; gap: 9px; margin: 4px 0 12px; padding: 7px 14px 7px 11px; border-radius: 999px; background: rgba(7,26,61,.62); border: 1px solid rgba(74,222,128,.55); color: #fff; font-size: .92rem; font-weight: 750; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  .tqb__live i { position: relative; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; flex: none; }
+  .tqb__live i::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid #22c55e; opacity: 0; animation: tqb-ping 1.8s ease-out infinite; }
+  .tqb__live.is-off { border-color: rgba(251,191,36,.6); }
+  .tqb__live.is-off i { background: #fbbf24; }
+  .tqb__live.is-off i::after { display: none; }
+  @keyframes tqb-ping { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .tqb__live i::after { animation: none; } }
   .tqb__nav { display: none; }
   /* wide screens: the photo fills the right side, the words and the card sit on the left */
   @media (min-width: 900px) {
@@ -190,6 +215,11 @@
     { "type": "text", "id": "chip_2", "label": "Badge 2", "default": "10+ years' experience" },
     { "type": "checkbox", "id": "show_nav", "label": "Show the menu on wide screens", "default": false },
     { "type": "text", "id": "h1_text", "label": "Main page heading (H1)", "info": "Shows as the small line above the big heading. Leave empty to use the small line below." },
+    { "type": "checkbox", "id": "show_live", "label": "Show the same-day badge", "default": true },
+    { "type": "text", "id": "live_open", "label": "Same-day badge during open hours", "default": "Same-day pickups available today" },
+    { "type": "text", "id": "live_closed", "label": "Same-day badge after hours", "default": "Book now for tomorrow from 7am" },
+    { "type": "range", "id": "open_hour", "label": "Same-day from (hour, Sydney time)", "min": 0, "max": 23, "step": 1, "default": 7 },
+    { "type": "range", "id": "close_hour", "label": "Same-day until (hour, Sydney time)", "min": 1, "max": 24, "step": 1, "default": 17 },
     { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Sydney removalists & delivery" },
     { "type": "text", "id": "heading_before", "label": "Heading", "default": "Get a fast," },
     { "type": "text", "id": "heading_price", "label": "Heading highlight", "default": "free quote" },
