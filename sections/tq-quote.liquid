@@ -7,6 +7,9 @@
 {{ 'tq-quote.css' | asset_url | stylesheet_tag: preload: false }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
 {%- assign s = section.settings -%}
+{%- assign ph_team = images['titan-two-movers-truck-hero.webp'] -%}
+{%- assign ph_gear = images['titan-fridge-trolley-ramp.webp'] -%}
+{%- assign ph_done = images['titan-dining-table-two-movers.webp'] -%}
 <div class="tqf" id="tqf" role="dialog" aria-modal="true" aria-labelledby="tqf-title" hidden data-phone="{{ s.phone }}" data-photo-variant="{{ s.photo_variant }}">
   <header class="tqf-top">
     <div class="tqf-row">
@@ -93,11 +96,12 @@
 
     <!-- 4 crew, access, time -->
     <section class="tqf-s" data-s="4" hidden>
-      <p class="tqf-eb">Step 3</p><h2 class="tqf-h">A few quick details</h2>
-      <p class="tqf-lede">Three taps and you're nearly done.</p>
-      <h3 class="tqf-h3 tqf-h3--q">How many movers?</h3>
-      <div class="tqf-crew" data-q-crew></div>
-      <p class="tqf-crewhint" data-q-crewhint></p>
+      <p class="tqf-eb">Step 3</p><h2 class="tqf-h">Stairs and day</h2>
+      <p class="tqf-lede">Two quick questions and you're nearly done.</p>
+      {%- if ph_gear != blank -%}
+      <div class="tqf-team"><img src="{{ ph_gear | image_url: width: 240 }}" alt="Titan Express removalists moving a wrapped fridge on a trolley" width="240" height="240" loading="lazy">
+        <div><b>We send the right team for your job</b><span>{{ s.team_line }}</span></div></div>
+      {%- endif -%}
       <h3 class="tqf-h3 tqf-h3--q">Any stairs?</h3>
       <div class="tqf-card tqf-stairs">
         <div class="tqf-strow"><div class="tqf-stl"><span class="tqf-pin tqf-pin--a">A</span><b>Pickup</b></div><div class="tqf-seg" data-q-seg="A"></div><div class="tqf-fl" data-q-fl="A" hidden></div></div>
@@ -118,6 +122,10 @@
     <section class="tqf-s" data-s="5" hidden>
       <p class="tqf-eb">Step 4</p><h2 class="tqf-h">Your details</h2>
       <p class="tqf-lede">So we can text you your price. Nothing to pay now.</p>
+      {%- if ph_team != blank -%}
+      <div class="tqf-team"><img src="{{ ph_team | image_url: width: 240 }}" alt="Two Titan Express removalists loading a wrapped sofa" width="240" height="240" loading="lazy">
+        <div><b>A real person prices your job</b><span>Sam and the team check your details and photos, then text you your price.</span></div></div>
+      {%- endif -%}
       {%- comment -%} The details boxes sit inside Shopify's contact form: tapping one loads Shopify's invisible spam check (hCaptcha),
       which the form needs before it can send. Job details travel in the hidden fields. {%- endcomment -%}
       {%- form 'contact', id: 'tqf-form', class: 'tqf-cform', data-q-form: '' -%}
@@ -157,6 +165,7 @@
       <div class="tqf-done">
         <div class="tqf-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
         <h2 class="tqf-h">Thanks, we've got it!</h2>
+        {%- if ph_done != blank -%}<img class="tqf-donep" src="{{ ph_done | image_url: width: 840 }}" alt="Two Titan Express removalists carrying a wrapped dining table" width="840" height="840" loading="lazy">{%- endif -%}
         <p class="tqf-lede">Sam from Titan Express will text you your price shortly.<span data-q-donephoto> Got photos? Text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a> and we can price it exactly.</span></p>
         <a class="tqf-cta" href="tel:{{ s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' }}">Call {{ s.phone }}</a>
       </div>
@@ -190,6 +199,7 @@
   "class": "section-tq-quote",
   "settings": [
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "team_line", "label": "Team line (stairs step)", "default": "Experienced removalists, 10+ years. Trolleys, ramps and blankets on the truck." },
     { "type": "header", "content": "Customer photos" },
     { "type": "text", "id": "photo_variant", "label": "Variant ID used to store photos", "info": "Leave empty to switch photo upload off.", "default": "68154838843497" }
   ],
