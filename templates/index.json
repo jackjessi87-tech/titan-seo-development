@@ -1195,7 +1195,9 @@
     },
     "tx_quote": {
       "type": "tx-quote",
-      "settings": {}
+      "settings": {
+        "deposit_variant": ""
+      }
     }
   },
   "order": [
