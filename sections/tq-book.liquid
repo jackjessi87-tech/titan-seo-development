@@ -63,8 +63,29 @@
     <p class="tqb__call">Prefer to talk? <a href="tel:{{ phone_intl }}">Call {{ s.phone }}</a></p>
   </div>
 </section>
+<script>
+  /* While the quote card is on screen, the floating call bar and the message bubble (from the homepage hero) step aside,
+     so nothing sits on top of the Pick up / Drop off boxes. They come back once the customer scrolls past the card.
+     The theme scrolls the body, not the window, hence the capture-phase listener (same as the old quote form). */
+  (function () {
+    var sec = document.currentScript.previousElementSibling; if (!sec || !sec.classList.contains('tqb')) return;
+    var card = sec.querySelector('.tqb__card') || sec, ticking = false, root = document.documentElement;
+    function check() {
+      ticking = false;
+      var h = window.innerHeight || root.clientHeight, top = sec.getBoundingClientRect().top, bottom = card.getBoundingClientRect().bottom;
+      root.classList.toggle('tqb-in-view', top < h * 0.8 && bottom > h * 0.12);
+    }
+    function onScroll() { if (!ticking) { ticking = true; setTimeout(check, 60); } }
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true });
+    window.addEventListener('resize', onScroll);
+    sec.addEventListener('focusin', check);
+    check();
+  })();
+</script>
 
 <style>
+  html.tqb-in-view .tho-callbar, html.tqb-in-view .tho-msg { opacity: 0 !important; visibility: hidden !important; transform: translateY(16px); pointer-events: none !important; }
+  .tho-callbar, .tho-msg { transition: opacity .25s, transform .25s, visibility .25s; }
   .tqb { position: relative; background: linear-gradient(180deg, #0b1b44 0%, #17357f 100%); color: #fff; padding: 20px 16px clamp(30px, 6vw, 60px); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   .tqb *, .tqb *::before, .tqb *::after { box-sizing: border-box; }
   /* team photo behind the top of the card: clear at the top, fading into navy where the text starts */
