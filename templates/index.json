@@ -12,7 +12,10 @@
     "tx_book": {
       "type": "tx-book",
       "settings": {
-        "show_logo": true
+        "show_logo": true,
+        "custom_button": "Get a free quote",
+        "custom_text": "Send your details and photos. We'll text you a price.",
+        "custom_url": "#quote-form"
       }
     },
     "17820952195463b177": {
@@ -1198,6 +1201,10 @@
       "settings": {
         "deposit_variant": ""
       }
+    },
+    "tq_quote": {
+      "type": "tq-quote",
+      "settings": {}
     }
   },
   "order": [
@@ -1217,6 +1224,7 @@
     "17821252068f79aa64",
     "17835921926aecae97",
     "178359242106600ace",
-    "tx_quote"
+    "tx_quote",
+    "tq_quote"
   ]
 }
