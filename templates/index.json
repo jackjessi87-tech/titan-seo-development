@@ -1186,22 +1186,9 @@
         "heading": "Request Your Fixed Price in 60 Seconds",
         "subheading": "Furniture pickup and delivery, single items, store collection from IKEA and Bunnings, and Facebook Marketplace pickups across Sydney. Tell us the job and we send a fixed price, no hourly meter."
       }
-    },
-    "tx_book": {
-      "type": "tx-book",
-      "settings": {
-        "show_logo": true
-      }
-    },
-    "tx_quote": {
-      "type": "tx-quote",
-      "settings": {
-        "deposit_variant": ""
-      }
     }
   },
   "order": [
-    "tx_book",
     "titan_home_hero",
     "titan_home_quote",
     "17820952195463b177",
@@ -1216,7 +1203,6 @@
     "titan_home_hub",
     "17821252068f79aa64",
     "17835921926aecae97",
-    "178359242106600ace",
-    "tx_quote"
+    "178359242106600ace"
   ]
 }
