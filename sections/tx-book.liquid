@@ -1,5 +1,5 @@
 {%- comment -%}
-  "Book from just $99" strip above the hero (2026-11-24, user request): pick up + drop off, one button that opens the instant quote
+  Quote strip above the hero (2026-11-24; reworded from "Book from just $99" to a free quote on 2026-11-25): pick up + drop off, one button that opens the quote form
   (tx-quote.js listens for [data-tx-quickstart] forms and opens the quote with both places filled in).
 {%- endcomment -%}
 {%- assign s = section.settings -%}
@@ -76,25 +76,25 @@
 
 {% schema %}
 {
-  "name": "TX book from $99",
+  "name": "TX quote strip",
   "tag": "div",
   "class": "section-tx-book",
   "settings": [
     { "type": "checkbox", "id": "show_logo", "label": "Show Titan badge at top", "info": "Use when this section is the first thing on the page.", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Furniture pickup & delivery · Sydney" },
-    { "type": "text", "id": "heading_before", "label": "Heading", "default": "Book from just" },
-    { "type": "text", "id": "heading_price", "label": "Heading price", "default": "$99" },
-    { "type": "text", "id": "subheading", "label": "Line under heading", "default": "Tell us where from and where to. Let's see if we can help." },
-    { "type": "text", "id": "button", "label": "Button", "default": "Book online from $99" },
+    { "type": "text", "id": "heading_before", "label": "Heading", "default": "Get a fast," },
+    { "type": "text", "id": "heading_price", "label": "Heading highlight", "default": "free quote" },
+    { "type": "text", "id": "subheading", "label": "Line under heading", "default": "Tell us where from and where to. It takes about a minute." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Get my free quote" },
     { "type": "text", "id": "custom_button", "label": "Custom quote button", "default": "Get a custom quote" },
     { "type": "text", "id": "custom_text", "label": "Custom quote line", "default": "Tell us what you need moved and we'll send you a fixed price." },
-    { "type": "text", "id": "custom_url", "label": "Custom quote link", "info": "Leave empty to hide the custom quote button.", "default": "#home-quote" },
-    { "type": "text", "id": "point_1", "label": "Tick 1", "default": "From $99 for the first 30 min" },
+    { "type": "text", "id": "custom_url", "label": "Custom quote link", "info": "Leave empty to hide the second button.", "default": "" },
+    { "type": "text", "id": "point_1", "label": "Tick 1", "default": "Fixed price, no surprises" },
     { "type": "text", "id": "point_2", "label": "Tick 2", "default": "Same-day available" },
     { "type": "text", "id": "point_3", "label": "Tick 3", "default": "Wrapped & carried with care" },
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
     { "type": "text", "id": "quote_url", "label": "Fallback quote page (if the quote form can't open)", "default": "/pages/furniture-pickup-delivery-sydney" }
   ],
-  "presets": [{ "name": "TX book from $99" }]
+  "presets": [{ "name": "TX quote strip" }]
 }
 {% endschema %}

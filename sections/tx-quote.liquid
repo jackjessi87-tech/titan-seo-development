@@ -1,17 +1,17 @@
 {%- comment -%}
-  Titan Express instant quote (redesign 2026-11). A full-screen overlay opened by any [data-tx-open-quote] link or the hero quick start.
+  Titan Express quote request form (redesign 2026-11; turned from an hourly-price form into a quote request on 2026-11-25). A full-screen overlay opened by any [data-tx-open-quote] link or the hero quick start.
   Sends through Shopify's contact form (same inbox and the same "New customer message" emails as the existing forms).
   Address search and route use free test services (Photon, OSRM, Esri tiles). Switch to Google Maps with Titan's own key before going live.
 {%- endcomment -%}
 {{ 'tx-quote.css' | asset_url | stylesheet_tag: preload: false }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
 {%- assign s = section.settings -%}
-<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}" data-rate-first="{{ s.rate_first }}" data-rate-block="{{ s.rate_block }}" data-after-first="{{ s.after_first }}" data-after-block="{{ s.after_block }}" data-pri-first="{{ s.pri_first }}" data-pri-block="{{ s.pri_block }}" data-exp-first="{{ s.exp_first }}" data-exp-block="{{ s.exp_block }}" data-deposit-variant="{{ s.deposit_variant }}" data-deposit="{{ s.deposit_amount }}">
+<div class="txq" id="txq" role="dialog" aria-modal="true" aria-labelledby="txq-title" hidden data-phone="{{ s.phone }}" data-photo-variant="{{ s.photo_variant }}">
   <header class="txq-top">
     <div class="txq-row">
       <button class="txq-ib" type="button" data-q-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <img class="txq-logo" src="{{ 'titan-favicon-192.png' | asset_url }}" alt="Titan Express" width="40" height="40">
-      <div class="txq-brand"><b id="txq-title">Instant quote</b><small data-q-steplbl>Step 1 of 5</small></div>
+      <div class="txq-brand"><b id="txq-title">Get a free quote</b><small data-q-steplbl>Step 1 of 5</small></div>
       <a class="txq-help" href="tel:{{ s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' }}"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Need help?</a>
       <button class="txq-ib" type="button" data-q-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
@@ -82,44 +82,48 @@
       <div class="txq-chips" data-q-grid></div>
       <h3 class="txq-h3" data-q-lh>Your list</h3>
       <div class="txq-card txq-list" data-q-list></div>
+      <div class="txq-photos" data-q-photos>
+        <div class="txq-phhd"><b>Add photos</b><span>optional</span></div>
+        <p class="txq-phsub">A quick photo of each item helps us give you an exact price.</p>
+        <div class="txq-phgrid" data-q-phgrid></div>
+        <label class="txq-phbtn"><input type="file" accept="image/*" multiple data-q-phinput hidden><svg viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13.5" r="3.5"/></svg><span data-q-phlbl>Add photos</span></label>
+        <p class="txq-phmsg" data-q-phmsg hidden></p>
+      </div>
     </section>
 
     <!-- 4 crew, access, time -->
     <section class="txq-s" data-s="4" hidden>
-      <p class="txq-eb">Step 3</p><h2 class="txq-h">Crew, stairs and day</h2>
-      <p class="txq-lede">Pick what suits you.</p>
+      <p class="txq-eb">Step 3</p><h2 class="txq-h">A few quick details</h2>
+      <p class="txq-lede">Three taps and you're nearly done.</p>
+      <h3 class="txq-h3 txq-h3--q">How many movers?</h3>
       <div class="txq-crew" data-q-crew></div>
       <p class="txq-crewhint" data-q-crewhint></p>
-      <label class="txq-ack" data-q-ackwrap hidden><input type="checkbox" data-q-ack><span>I understand I need to help load and unload the heavy items at both ends.</span></label>
-      <div class="txq-card txq-acc"><div class="txq-acchd"><span class="txq-pin txq-pin--a">A</span><div><b>Pickup</b><small data-q-acca></small></div></div><div class="txq-lbl">How do we get the items out?</div><div class="txq-seg" data-q-seg="A"></div><div class="txq-fl" data-q-fl="A" hidden><span>Flights of stairs</span><div class="txq-step txq-step--sm"><button type="button">−</button><span>1</span><button type="button">+</button></div></div></div>
-      <div class="txq-card txq-acc"><div class="txq-acchd"><span class="txq-pin txq-pin--b">B</span><div><b>Drop-off</b><small data-q-accb></small></div></div><div class="txq-lbl">How do we get the items in?</div><div class="txq-seg" data-q-seg="B"></div><div class="txq-fl" data-q-fl="B" hidden><span>Flights of stairs</span><div class="txq-step txq-step--sm"><button type="button">−</button><span>1</span><button type="button">+</button></div></div></div>
+      <h3 class="txq-h3 txq-h3--q">Any stairs?</h3>
+      <div class="txq-card txq-stairs">
+        <div class="txq-strow"><div class="txq-stl"><span class="txq-pin txq-pin--a">A</span><b>Pickup</b></div><div class="txq-seg" data-q-seg="A"></div><div class="txq-fl" data-q-fl="A" hidden></div></div>
+        <div class="txq-strow"><div class="txq-stl"><span class="txq-pin txq-pin--b">B</span><b>Drop-off</b></div><div class="txq-seg" data-q-seg="B"></div><div class="txq-fl" data-q-fl="B" hidden></div></div>
+      </div>
       <div class="txq-card txq-tog"><div><b>Dismantling or assembly</b><small>Bed frames, tables, wardrobes</small></div><button class="txq-sw" type="button" data-q-dis aria-label="Dismantling or assembly"></button></div>
-      <!-- When is your booking for? (laid out like Yellow Express, 2026-11-24) -->
-      <h3 class="txq-wh">When is your booking for?</h3>
-      <div class="txq-when" data-q-when>
+      <h3 class="txq-h3 txq-h3--q">When do you need it?</h3>
+      <div class="txq-when txq-when--sm" data-q-when>
         <button type="button" data-w="today"><b>Today</b><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><small data-q-todaymsg></small></button>
-        <button type="button" data-w="sched"><b>Schedule</b><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14l1.5 1.5 3-3M13.5 15.5h3"/></svg></button>
+        <button type="button" data-w="sched"><b>Pick a day</b><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14l1.5 1.5 3-3M13.5 15.5h3"/></svg></button>
       </div>
       <div class="txq-dates" data-q-dates hidden></div>
-      <div class="txq-lbl txq-lbl--big">Select time</div>
-      <select class="txq-inp txq-timesel" data-q-timesel required aria-label="Pickup window start time"></select>
-      <div class="txq-winhd"><b>Choose a pickup window start time</b><button type="button" data-q-wininfo aria-label="What is the pickup window?"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg></button></div>
-      <p class="txq-wininfo" data-q-wininfotxt hidden>This is the time we start the pickup. For a future date we come at your booked time. For today, Standard comes any time from then, Priority within 4 hours, and Express goes straight there. We text you when we are on the way.</p>
-      <div data-q-svc aria-live="polite"></div>
+      <div class="txq-lbl txq-lbl--big">Preferred time</div>
+      <select class="txq-inp txq-timesel" data-q-timesel aria-label="Preferred time"></select>
     </section>
 
     <!-- 5 details -->
     <section class="txq-s" data-s="5" hidden>
       <p class="txq-eb">Step 4</p><h2 class="txq-h">Your details</h2>
-      <p class="txq-lede">We text you to confirm the time. Nothing to pay now.</p>
-      <div class="txq-note"><svg viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
-        <span>Photos help us give an exact price. After sending, text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>, no rush.</span></div>
+      <p class="txq-lede">So we can text you your price. Nothing to pay now.</p>
       {%- comment -%} The details boxes sit inside Shopify's contact form: tapping one loads Shopify's invisible spam check (hCaptcha),
       which the form needs before it can send. Job details travel in the hidden fields. {%- endcomment -%}
       {%- form 'contact', id: 'txq-form', class: 'txq-cform', data-q-form: '' -%}
     {%- if form.posted_successfully? -%}<span data-q-posted hidden></span>{%- endif -%}
     {%- if form.errors -%}<span data-q-errors hidden>{{ form.errors | default_errors | strip_html | strip }}</span>{%- endif -%}
-    <input type="hidden" name="contact[source]" value="Instant quote (new design)">
+    <input type="hidden" name="contact[source]" value="Quote request (new form)">
     <input type="hidden" name="contact[name]" data-f="name">
     <input type="hidden" name="contact[email]" data-f="email">
     <input type="hidden" name="contact[phone]" data-f="phone">
@@ -130,7 +134,8 @@
     <input type="hidden" name="contact[stairs_or_lift]" data-f="access">
     <input type="hidden" name="contact[when]" data-f="when">
     <input type="hidden" name="contact[preferred_date]" data-f="date">
-    <input type="hidden" name="contact[estimate]" data-f="estimate">
+    <input type="hidden" name="contact[photos]" data-f="photos">
+    <input type="hidden" name="contact[time_guide]" data-f="estimate">
     <input type="hidden" name="contact[body]" data-f="body">
   
       <div class="txq-field"><label for="txq-name">Name</label><input class="txq-inp" id="txq-name" autocomplete="name" placeholder="First name is fine"></div>
@@ -143,23 +148,8 @@
     <!-- 6 review -->
     <section class="txq-s" data-s="6" hidden>
       <p class="txq-eb">Step 5</p><h2 class="txq-h">Check and send</h2>
-      <p class="txq-lede">Check your details, then send.</p>
+      <p class="txq-lede">Check your details, then send. We'll text you a fixed price.</p>
       <div data-q-review></div>
-      {%- comment -%} Shopify's own Google Pay / Apple Pay / Shop Pay buttons for the deposit, right on the form (2026-11-24) {%- endcomment -%}
-      {%- assign dep = all_products['titan-booking-deposit'] -%}
-      {%- if dep != blank and dep.available and s.deposit_variant != blank -%}
-      <div class="txq-wallet" data-q-wallet>
-        <p class="txq-wallet-h">Pay the {{ dep.price | money_without_trailing_zeros }} deposit in one tap</p>
-        {%- form 'product', dep, class: 'txq-walletform', data-q-walletform: '' -%}
-          <input type="hidden" name="id" value="{{ dep.selected_or_first_available_variant.id }}">
-          <input type="hidden" name="quantity" value="1">
-          <div data-q-wprops></div>
-          {{ form | payment_button }}
-        {%- endform -%}
-        <div class="txq-walletlock" data-q-walletlock>Tick the box above first</div>
-        <p class="txq-wallet-or"><span>or pay by card with the red button below</span></p>
-      </div>
-      {%- endif -%}
     </section>
 
     <!-- 7 sent -->
@@ -167,7 +157,7 @@
       <div class="txq-done">
         <div class="txq-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
         <h2 class="txq-h">Thanks, we've got it!</h2>
-        <p class="txq-lede">Sam from Titan Express will text you shortly to confirm the time. Got photos? Text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a>.</p>
+        <p class="txq-lede">Sam from Titan Express will text you your price shortly.<span data-q-donephoto> Got photos? Text them to <a href="sms:{{ s.phone | remove: ' ' }}">{{ s.phone }}</a> and we can price it exactly.</span></p>
         <a class="txq-cta" href="tel:{{ s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' }}">Call {{ s.phone }}</a>
       </div>
     </section>
@@ -189,25 +179,14 @@
 
 {% schema %}
 {
-  "name": "TX instant quote",
+  "name": "TX quote form",
   "tag": "div",
   "class": "section-tx-quote",
   "settings": [
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
-    { "type": "header", "content": "Hourly rates (dollars)" },
-    { "type": "number", "id": "rate_first", "label": "Weekday: first 30 minutes", "default": 99 },
-    { "type": "number", "id": "rate_block", "label": "Weekday: each extra 30 minutes", "default": 52 },
-    { "type": "number", "id": "after_first", "label": "Weekend / evening: first 30 minutes", "default": 198 },
-    { "type": "number", "id": "after_block", "label": "Weekend / evening: each extra 30 minutes", "default": 104 },
-    { "type": "header", "content": "Faster services (weekdays before 5pm)" },
-    { "type": "number", "id": "pri_first", "label": "Priority (within 4 hours): first 30 minutes", "default": 154 },
-    { "type": "number", "id": "pri_block", "label": "Priority: each extra 30 minutes", "default": 81 },
-    { "type": "number", "id": "exp_first", "label": "Express (ASAP, direct): first 30 minutes", "default": 198 },
-    { "type": "number", "id": "exp_block", "label": "Express: each extra 30 minutes", "default": 104 },
-    { "type": "header", "content": "Pay to book (Shopify checkout)" },
-    { "type": "text", "id": "deposit_variant", "label": "Deposit product variant ID (leave empty to switch card payment off)", "default": "68154838843497" },
-    { "type": "number", "id": "deposit_amount", "label": "Deposit shown on the button (must match the product price)", "default": 99 }
+    { "type": "header", "content": "Customer photos" },
+    { "type": "text", "id": "photo_variant", "label": "Variant ID used to store photos", "info": "Leave empty to switch photo upload off.", "default": "68154838843497" }
   ],
-  "presets": [{ "name": "TX instant quote" }]
+  "presets": [{ "name": "TX quote form" }]
 }
 {% endschema %}

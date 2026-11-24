@@ -1,4 +1,4 @@
-/* Titan Express instant quote overlay (redesign 2026-11). Plain JS, no build step.
+/* Titan Express quote request overlay (redesign 2026-11; a quote request, not an hourly-price form, since 2026-11-25). Plain JS, no build step.
    Opens from [data-tx-open-quote], the hero quick start form, or a #instant-quote link. Submits through Shopify's contact form. */
 (function () {
   var root = document.getElementById('txq');
@@ -33,10 +33,11 @@
   var HEAVY = ['fridge', 'washer', 'dryer', 'dishwasher', 'piano', 'wardrobe', 'treadmill', 'dresser', 'buffet', 'pooltable', 'bunkbed'];
 
   // ---------- state ----------
-  var KEY = 'tx-quote-v1';
-  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, crew: '', ack: false, accessA: '', accessB: '', flightsA: 1, flightsB: 1, dis: false, today: true, svc: 'std', awayA: false, awayB: false, cnA: '', cpA: '', cnB: '', cpB: '', date: '', time: '', name: '', phone: '', email: '', notes: '', terms: false }; };
+  var KEY = 'tx-quote-v2';
+  var blank = function () { return { step: 1, from: null, to: null, unitA: '', unitB: '', route: null, items: {}, photos: [], crew: '', accessA: 'No stairs', accessB: 'No stairs', flightsA: 1, flightsB: 1, dis: false, today: true, awayA: false, awayB: false, cnA: '', cpA: '', cnB: '', cpB: '', date: '', time: '', name: '', phone: '', email: '', notes: '' }; };
   var st = blank();
   try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && typeof saved === 'object') { for (var k in saved) st[k] = saved[k]; } } catch (e) {}
+  if (!Array.isArray(st.photos)) st.photos = [];
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   var count = function () { var n = 0; for (var id in st.items) n += st.items[id].q; return n; };
   var toastT; var toast = function (m) { var t = q('[data-q-toast]'); t.textContent = m; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on'); }, 1800); };
@@ -68,7 +69,7 @@
   });
 
   // ---------- navigation ----------
-  var LBL = { 1: 'Step 1 of 5 · Route', 2: 'Step 1 of 5 · Check the route', 3: 'Step 2 of 5 · Items', 4: 'Step 3 of 5 · Crew and access', 5: 'Step 4 of 5 · Your details', 6: 'Step 5 of 5 · Review', 7: 'Quote request sent' };
+  var LBL = { 1: 'Step 1 of 5 · Route', 2: 'Step 1 of 5 · Check the route', 3: 'Step 2 of 5 · Items', 4: 'Step 3 of 5 · Movers, stairs and day', 5: 'Step 4 of 5 · Your details', 6: 'Step 5 of 5 · Review', 7: 'Quote request sent' };
   var PROG = [0, 1, 1, 2, 3, 4, 5, 6];
   var next = q('[data-q-next]');
   function go(n, back) {
@@ -79,11 +80,11 @@
     q('[data-q-back]').toggleAttribute('data-hide', n === 1 || n === 7);
     q('[data-q-foot]').hidden = n === 1 || n === 2 || n === 7;
     q('[data-q-sum]').hidden = n !== 3;
-    next.textContent = n === 6 ? (DEP_V ? 'PAY ' + money(DEP) + ' DEPOSIT & BOOK' : 'SEND BOOKING REQUEST') : n === 1 ? 'SEE ROUTE' : 'NEXT';
+    next.textContent = n === 6 ? 'SEND QUOTE REQUEST' : n === 1 ? 'SEE ROUTE' : 'NEXT';
     root.classList.toggle('txq-white', n === 1 || n === 3);
     if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); }
     if (n === 2) setTimeout(drawMap, 40);
-    if (n === 3) { renderGrid(); renderList(); }
+    if (n === 3) { renderGrid(); renderList(); renderPhotos(); }
     if (n === 4) renderAccess();
     if (n === 5) ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#txq-' + k).value = st[k]; });
     if (n === 6) renderReview();
@@ -96,8 +97,7 @@
     var ok = true, s = st.step;
     if (s === 1) ok = !!(st.from && st.to);
     if (s === 3) ok = count() > 0;
-    if (s === 4) ok = !!(st.crew && (st.crew !== '1' || st.ack) && st.accessA && st.accessB && (st.today || st.date) && tMin(st.time) >= 0 && st.svc);
-    if (s === 6) ok = !!st.terms;
+    if (s === 4) ok = !!(st.crew && (st.today || st.date));
     if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim());
     next.disabled = !ok;
     q('[data-q-sumn]').textContent = count();
@@ -105,7 +105,7 @@
   next.addEventListener('click', function () {
     if (next.disabled) return;
     var s = st.step;
-    if (s === 1) return go(2); if (s === 3) return go(4); if (s === 4) return go(5); if (s === 5) return go(6); if (s === 6) return DEP_V ? payBook() : submit();
+    if (s === 1) return go(2); if (s === 3) return go(4); if (s === 4) return go(5); if (s === 5) return go(6); if (s === 6) return submit();
   });
 
   // ---------- step 1: addresses ----------
@@ -314,11 +314,7 @@
   q('[data-q-scrim]').addEventListener('click', closeSheet);
 
 
-  // ---------- hourly price estimate ----------
-  var R = { f: +root.getAttribute('data-rate-first') || 99, b: +root.getAttribute('data-rate-block') || 52,
-            pf: +root.getAttribute('data-pri-first') || 154, pb: +root.getAttribute('data-pri-block') || 81,
-            xf: +root.getAttribute('data-exp-first') || 198, xb: +root.getAttribute('data-exp-block') || 104,
-            af: +root.getAttribute('data-after-first') || 198, ab: +root.getAttribute('data-after-block') || 104 };
+  // ---------- our time guide: never shown to the customer, it goes in the enquiry email to help price the job ----------
   // minutes to load and unload one item (both ends together), one mover with the customer helping
   var MIN = { sofa: 12, armchair: 8, coffee: 5, tv: 6, tvunit: 8, bookcase: 8, sidetable: 3, rug: 3, lamp: 3, mirror: 4, artwork: 3, buffet: 15, ottoman: 4, shelving: 8,
     bed: 12, mattress: 6, wardrobe: 15, dresser: 10, bedside: 3, cot: 8, bunkbed: 18, dining: 10, chair: 2, fridge: 12, washer: 12, dryer: 10, dishwasher: 12,
@@ -337,27 +333,13 @@
     if (it.k === 'box') m = { Small: 1.5, Large: 3 }[v] || 2;
     return m;
   }
-  // ---------- booking time (Today / Schedule, pickup window, service), like Yellow Express ----------
-  var SVC = { std: ['STANDARD', 'Same day delivery'], pri: ['PRIORITY', 'Within 4 hours'], exp: ['EXPRESS', 'ASAP, direct service'] };
-  var svcName = function (k) { var n = (SVC[k] || SVC.std)[0]; return n.charAt(0) + n.slice(1).toLowerCase(); };
   var tMin = function (t) { var m = /^(\d{1,2}):(\d{2}) (am|pm)$/.exec(t || ''); if (!m) return -1; var h = +m[1] % 12 + (m[3] === 'pm' ? 12 : 0); return h * 60 + +m[2]; };
   var tTxt = function (n) { var h = Math.floor(n / 60), m = n % 60; return ((h % 12) || 12) + ':' + ('0' + m).slice(-2) + ' ' + (h < 12 ? 'am' : 'pm'); };
   var FIRST = 7 * 60, LAST = 18 * 60 + 30;
-  function earliestToday() { var d = new Date(), n = d.getHours() * 60 + d.getMinutes() + 45; return Math.max(FIRST, Math.ceil(n / 15) * 15); }
+  function earliestToday() { var d = new Date(), n = d.getHours() * 60 + d.getMinutes() + 45; return Math.max(FIRST, Math.ceil(n / 30) * 30); }
   function todayOpen() { return earliestToday() <= LAST; }
   function jobDate() { return st.today ? iso(new Date()) : st.date; }
-  function isAfter() {
-    if (tMin(st.time) >= 17 * 60) return true;
-    var d = jobDate(); if (!d) return false;
-    var p = d.split('-'), day = new Date(+p[0], p[1] - 1, +p[2]).getDay();
-    return day === 0 || day === 6;
-  }
-  function rateOf(k) {
-    if (isAfter()) return { f: R.af, b: R.ab, after: true };
-    return k === 'pri' ? { f: R.pf, b: R.pb } : k === 'exp' ? { f: R.xf, b: R.xb } : { f: R.f, b: R.b };
-  }
-  var whenTxt = function () { return (st.today ? 'Today' : fmtDate(st.date)) + (st.time ? ', pickup from ' + st.time : '') + ', ' + svcName(st.svc); };
-  var money = function (n) { return '$' + Math.round(n); };
+  var whenTxt = function () { return (st.today ? 'Today' : fmtDate(st.date)) + ', ' + (st.time ? 'around ' + st.time : 'any time'); };
   var hm = function (m) { m = Math.round(m / 5) * 5; var h = Math.floor(m / 60), r = m % 60; return (h ? h + ' hr' + (r ? ' ' : '') : '') + (r ? r + ' min' : ''); };
   function estimate() {
     var h = 0; for (var id in st.items) h += itemMin(st.items[id]) * st.items[id].q;
@@ -365,34 +347,69 @@
     h = h / 2 * endF('A') + h / 2 * endF('B');
     if (st.crew === '2') h *= 0.7;
     if (st.dis) h += 20;
-    var mins = Math.max(30, h + (st.route ? st.route.min * 1.3 : 25));
-    var blocks = Math.ceil(mins / 30), rt = rateOf(st.svc), after = !!rt.after, f = rt.f, b = rt.b;
-    var lo = f + (blocks - 1) * b;
-    return { mins: mins, blocks: blocks, lo: lo, hi: lo + b, after: after, f: f, b: b };
-  }
-  var estTxt = function (e) { return money(e.lo) + ' to ' + money(e.hi); };
-  function renderEst() {
-    var el = q('[data-q-est]'); if (!el) return;
-    if (!count()) { el.innerHTML = ''; return; }
-    el.innerHTML = rateBox(estimate(), '');
-  }
-  function rateBox(e, cls) {
-    return '<div class="txq-estc' + cls + '"><span class="lb">' + (e.after ? 'Weekend / evening rate' : svcName(st.svc) + ', weekday rate') + '</span><b>From ' + money(e.f) + '</b>' +
-      '<span class="d">for the first 30 min, then ' + money(e.b) + ' per extra 30 min. You only pay for the actual time.' +
-      (st.crew === '2' ? ' Plus the second-mover fee, which we confirm by text.' : '') + '</span></div>';
-  }
-  function howHtml(e) {
-    return '<div class="txq-card txq-how"><b class="t">How the price works</b><ol>' +
-      '<li><b>' + money(R.f) + ' covers the first 30 minutes</b> on weekdays. After that it is ' + money(R.b) + ' for each extra 30 minutes, or part of it.</li>' +
-      '<li><b>Faster service on weekdays:</b> Priority (within 4 hours) is ' + money(R.pf) + ' then ' + money(R.pb) + ' per extra 30 minutes; Express (ASAP, direct) is ' + money(R.xf) + ' then ' + money(R.xb) + '.</li>' +
-      '<li><b>Weekends, public holidays and evenings after 5pm</b> are ' + money(R.af) + ' for the first 30 minutes, then ' + money(R.ab) + ' for each extra 30 minutes.</li>' +
-      '<li><b>The clock starts</b> when we arrive at the pickup and stops when the last item is placed at the drop-off. You pay for the actual time.</li>' +
-      '<li><b>1 mover:</b> you help load and unload the heavy items. <b>2 movers:</b> an extra fee, which we confirm by text before the job.</li>' +
-      '<li><b>Extras at cost:</b> tolls, paid parking, and waiting time if the items are not ready.</li>' +
-      '<li><b>Nothing to pay now.</b> We text you to confirm the time before the job.</li></ol></div>';
+    return { mins: Math.max(30, h + (st.route ? st.route.min * 1.3 : 25)) };
   }
 
-  // ---------- step 4: crew, access, time ----------
+  // ---------- photos (2026-11-25) ----------
+  // Shopify's contact form cannot carry files. Each photo is shrunk on the phone, then stored in Titan's own Shopify store as a
+  // line-item file upload (added to the cart, then taken straight back out). The enquiry email gets the photo links. No outside service.
+  var PH_V = (root.getAttribute('data-photo-variant') || '').trim(), PH_MAX = 6, phBusy = 0, phQueue = Promise.resolve();
+  function shrink(file) {
+    return new Promise(function (res) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        try {
+          var k = Math.min(1, 1600 / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas');
+          c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+          c.toBlob(function (b) { res(b ? new File([b], 'photo.jpg', { type: 'image/jpeg' }) : file); }, 'image/jpeg', 0.82);
+        } catch (e) { res(file); }
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); res(file); };
+      img.src = url;
+    });
+  }
+  function uploadOne(file) {
+    return shrink(file).then(function (f) {
+      if (f.size > 18 * 1024 * 1024) throw new Error('too big');
+      var fd = new FormData(); fd.append('id', PH_V); fd.append('quantity', '1'); fd.append('properties[Photo]', f, f.name || 'photo.jpg');
+      return fetch('/cart/add.js', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+    }).then(function (r) { if (!r.ok) throw new Error('upload ' + r.status); return r.json(); }).then(function (j) {
+      var url = j && j.properties && j.properties.Photo;
+      var out = function () { return fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ id: j.key, quantity: 0 }) }).catch(function () {}); };
+      return out().then(function () { if (!/^https:\/\/cdn\.shopify\.com\//.test(url || '')) throw new Error('no link'); return url; });
+    });
+  }
+  function phMsg(t) { var m = q('[data-q-phmsg]'); m.textContent = t || ''; m.hidden = !t; }
+  function renderPhotos() {
+    var box = q('[data-q-photos]'); if (!box) return;
+    if (!PH_V) { box.hidden = true; return; }
+    var html = st.photos.map(function (u, i) { return '<div class="txq-ph"><img src="' + esc(u) + '" alt="Your photo ' + (i + 1) + '" loading="lazy"><button type="button" class="x" data-i="' + i + '" aria-label="Remove photo ' + (i + 1) + '">×</button></div>'; }).join('');
+    for (var b = 0; b < phBusy; b++) html += '<div class="txq-ph txq-ph--busy" aria-label="Uploading"></div>';
+    q('[data-q-phgrid]').innerHTML = html;
+    var full = st.photos.length + phBusy >= PH_MAX;
+    q('.txq-phbtn').hidden = full;
+    q('[data-q-phlbl]').textContent = phBusy ? 'Uploading…' : st.photos.length ? 'Add more photos' : 'Add photos';
+  }
+  (function () {
+    var inp = q('[data-q-phinput]'); if (!inp) return;
+    inp.addEventListener('change', function () {
+      var files = Array.prototype.slice.call(inp.files || []).filter(function (f) { return /^image\//.test(f.type) || /\.(jpe?g|png|heic|heif|webp)$/i.test(f.name); });
+      inp.value = ''; phMsg('');
+      var room = PH_MAX - st.photos.length - phBusy;
+      if (files.length > room) { files = files.slice(0, Math.max(0, room)); phMsg('Up to ' + PH_MAX + ' photos. You can text us any others.'); }
+      files.forEach(function (file) {
+        phBusy++;
+        phQueue = phQueue.then(function () { return uploadOne(file); }).then(function (url) { st.photos.push(url); save(); },
+          function () { phMsg('A photo did not upload. No problem, you can text it to ' + PHONE + ' after sending.'); })
+          .then(function () { phBusy--; renderPhotos(); });
+      });
+      renderPhotos();
+    });
+    q('[data-q-phgrid]').addEventListener('click', function (e) { var b = e.target.closest('.x'); if (!b) return; st.photos.splice(+b.getAttribute('data-i'), 1); save(); renderPhotos(); });
+  })();
+
+  // ---------- step 4: movers, stairs, day ----------
   function crewAdvice() {
     var its = Object.keys(st.items).map(function (id) { return st.items[id]; });
     var heavy = its.filter(function (it) { return HEAVY.indexOf(it.k) > -1 || /L-shape|French|King|Queen|3 door|Upright|8 seater/.test(it.v || ''); }).map(function (it) { return it.n.toLowerCase(); });
@@ -400,38 +417,37 @@
     if (heavy.length || stairs || count() >= 6) return { rec: '2', why: heavy.length ? 'We recommend two movers for the ' + heavy.filter(function (v, i, a) { return a.indexOf(v) === i; }).slice(0, 2).join(' and ') + '.' : stairs ? 'We recommend two movers because of the stairs.' : 'We recommend two movers for this many items.' };
     return { rec: '1', why: 'One mover and a big van is usually enough if you can lend a hand.' };
   }
-  var ACC = [['Ground floor', '<path d="M3 20h18M5 20V10l7-5 7 5v10"/><path d="M10 20v-5h4v5"/>'], ['Stairs', '<path d="M3 20h5v-4h4v-4h4V8h5"/>'], ['Lift', '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 9l3-3 3 3M9 15l3 3 3-3"/>']];
+  // Stairs made simple (2026-11-25): "No stairs" is already picked at both ends, so most people tap nothing here.
+  var ACC = [['No stairs', '<path d="M3 20h18M5 20V10l7-5 7 5v10"/><path d="M10 20v-5h4v5"/>'], ['Stairs', '<path d="M3 20h5v-4h4v-4h4V8h5"/>'], ['Lift', '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 9l3-3 3 3M9 15l3 3 3-3"/>']];
   function iso(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
   function renderAccess() {
     var adv = crewAdvice();
-    var C = [['1', 'mover1', '1 mover + big van', 'Like most single-item jobs. You help load and unload the heavy items.', 'From $' + R.f + ' for 30 min'],
-             ['2', 'mover2', '2 movers + big van', 'We do all the lifting, wrapping and carrying.', 'Extra fee, confirmed by text']];
+    var C = [['1', 'mover1', '1 mover + big van', 'Great for one or two items. You lend a hand with anything heavy.'],
+             ['2', 'mover2', '2 movers + big van', 'We do all the lifting, wrapping and carrying.']];
     q('[data-q-crew]').innerHTML = C.map(function (c) { return '<button type="button" class="txq-crewc ' + (st.crew === c[0] ? 'on' : '') + '" data-v="' + c[0] + '">' + (adv.rec === c[0] ? '<span class="rec">RECOMMENDED</span>' : '') + icon(c[1]) +
-      '<div><b>' + c[2] + '</b><span class="d">' + c[3] + '</span><span class="fee">' + c[4] + '</span></div><span class="radio"></span></button>'; }).join('');
+      '<div><b>' + c[2] + '</b><span class="d">' + c[3] + '</span></div><span class="radio"></span></button>'; }).join('');
     q('[data-q-crewhint]').textContent = adv.why;
-    q('[data-q-ackwrap]').hidden = st.crew !== '1'; q('[data-q-ack]').checked = !!st.ack;
-    q('[data-q-acca]').textContent = st.from ? st.from.text : ''; q('[data-q-accb]').textContent = st.to ? st.to.text : '';
     ['A', 'B'].forEach(function (end) {
       var seg = q('[data-q-seg="' + end + '"]'), k = 'access' + end;
+      if (!st[k] || st[k] === 'Ground floor') st[k] = 'No stairs';
       seg.innerHTML = ACC.map(function (a) { return '<button type="button" class="' + (st[k] === a[0] ? 'on' : '') + '" data-a="' + a[0] + '"><svg viewBox="0 0 24 24">' + a[1] + '</svg>' + a[0] + '</button>'; }).join('');
-      var fl = q('[data-q-fl="' + end + '"]'); fl.hidden = st[k] !== 'Stairs'; fl.querySelector('span:nth-child(2), .txq-step span').textContent = st['flights' + end];
+      var fl = q('[data-q-fl="' + end + '"]'); fl.hidden = st[k] !== 'Stairs';
+      fl.innerHTML = '<span>How many flights?</span><div class="txq-flc">' + [1, 2, 3, 4].map(function (n) { return '<button type="button" data-n="' + n + '" class="' + (st['flights' + end] === n ? 'on' : '') + '">' + (n === 4 ? '4+' : n) + '</button>'; }).join('') + '</div>';
     });
     q('[data-q-dis]').classList.toggle('on', !!st.dis);
     renderWhen();
   }
   q('[data-q-crew]').addEventListener('click', function (e) { var b = e.target.closest('.txq-crewc'); if (!b) return; st.crew = b.getAttribute('data-v'); save(); renderAccess(); validate(); });
-  q('[data-q-ack]').addEventListener('change', function () { st.ack = this.checked; save(); validate(); });
   ['A', 'B'].forEach(function (end) {
     q('[data-q-seg="' + end + '"]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st['access' + end] = b.getAttribute('data-a'); save(); renderAccess(); validate(); });
-    q('[data-q-fl="' + end + '"] .txq-step').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return;
-      st['flights' + end] = Math.max(1, Math.min(10, st['flights' + end] + (b.textContent === '+' ? 1 : -1))); save(); renderAccess(); });
+    q('[data-q-fl="' + end + '"]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st['flights' + end] = +b.getAttribute('data-n') || 1; save(); renderAccess(); });
   });
   q('[data-q-dis]').addEventListener('click', function () { st.dis = !st.dis; save(); renderAccess(); });
   function renderWhen() {
     var open = todayOpen();
     if (st.today && !open) st.today = false;
     qa('[data-q-when] button').forEach(function (b) { var t = b.getAttribute('data-w') === 'today'; b.classList.toggle('on', t ? !!st.today : !st.today); if (t) b.disabled = !open; });
-    q('[data-q-todaymsg]').textContent = open ? '' : 'Unavailable after ' + tTxt(LAST - 45);
+    q('[data-q-todaymsg]').textContent = open ? '' : 'Too late for today';
     var dates = q('[data-q-dates]'); dates.hidden = !!st.today;
     if (!st.today) {
       var now = new Date(), html = '';
@@ -439,121 +455,61 @@
         html += '<button type="button" data-d="' + v + '" class="' + (st.date === v ? 'on' : '') + '"><small>' + (i === 1 ? 'Tmrw' : d.toLocaleDateString('en-AU', { weekday: 'short' })) + '</small><b>' + d.getDate() + '</b><span>' + d.toLocaleDateString('en-AU', { month: 'short' }) + '</span></button>'; }
       dates.innerHTML = html;
     }
-    var start = st.today ? earliestToday() : FIRST, opts = '<option value="">Choose a time</option>';
-    if (tMin(st.time) < start) st.time = '';
-    for (var m = start; m <= LAST; m += 15) { var t = tTxt(m); opts += '<option value="' + t + '"' + (st.time === t ? ' selected' : '') + '>' + t + (m >= 17 * 60 ? ' (after-hours rate)' : '') + '</option>'; }
+    var start = st.today ? earliestToday() : FIRST, opts = '<option value="">Any time (flexible)</option>';
+    if (st.time && tMin(st.time) < start) st.time = '';
+    for (var m = start; m <= LAST; m += 30) { var t = tTxt(m); opts += '<option value="' + t + '"' + (st.time === t ? ' selected' : '') + '>Around ' + t + '</option>'; }
     q('[data-q-timesel]').innerHTML = opts; q('[data-q-timesel]').value = st.time || '';
-    renderSvc();
-  }
-  function renderSvc() {
-    var el = q('[data-q-svc]');
-    if (!st.time || (!st.today && !st.date)) { el.innerHTML = ''; renderEst(); return; }
-    var after = isAfter(), fast = !after && !!st.today; if (!fast) st.svc = 'std';
-    var day = st.today ? 'Today' : new Date(st.date + 'T00:00').toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' });
-    var keys = fast ? ['std', 'pri', 'exp'] : ['std'];
-    el.innerHTML = '<div class="txq-svc"><div class="txq-svchd">* Pickup from ' + st.time + ' ' + (st.today ? 'Today' : 'on ' + day) + '</div>' +
-      keys.map(function (k) { var r = rateOf(k);
-        return '<button type="button" class="txq-svcr' + (st.svc === k ? ' on' : '') + '" data-svc="' + k + '">' +
-          (k === 'std' ? '<span class="bv">BEST<br>VALUE</span>' : '<span class="ic ' + k + '">' + (k === 'pri' ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' : '<svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>') + '</span>') +
-          '<span class="nm"><b>' + SVC[k][0] + '</b><small>' + (st.today ? 'Today' : day.split(' ')[0].replace(',', '')) + ' ' + st.time + '</small></span>' +
-          '<span class="ds">' + (after ? 'Weekend / evening rate' : !st.today ? 'Booked for your day and time' : SVC[k][1]) + '</span><span class="pr">From ' + money(r.f) + ' *</span></button>'; }).join('') + '</div>' +
-      (!st.today && !after ? '<div class="txq-norush"><b>Need it sooner?</b> Priority (within 4 hours) and Express (ASAP) are available when you book for <b>Today</b>.</div>' : '') +
-      (st.svc !== 'std' ? '<div class="txq-norush"><b>No rush?</b> Choose <b>Standard</b> for the best price on same day delivery.</div>' : '') +
-      '<p class="txq-tip">Tip: if your job is time critical, please call us on <a href="tel:' + PHONE.replace(/\s/g, '') + '">' + esc(PHONE) + '</a> so we can make sure we can help.</p>' +
-      '<p class="txq-foot2"><b>* The price covers the first 30 minutes,</b> with any extra time charged in 30-minute blocks at ' + money(rateOf(st.svc).b) + '. Tolls and paid parking are extra.</p>';
-    renderEst();
   }
   q('[data-q-when]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b || b.disabled) return; st.today = b.getAttribute('data-w') === 'today'; if (st.today) st.date = ''; save(); renderWhen(); validate(); });
   q('[data-q-dates]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.date = b.getAttribute('data-d'); save(); renderWhen(); validate(); });
-  q('[data-q-timesel]').addEventListener('change', function () { st.time = this.value; save(); renderSvc(); validate(); });
-  q('[data-q-svc]').addEventListener('click', function (e) { var b = e.target.closest('[data-svc]'); if (!b) return; st.svc = b.getAttribute('data-svc'); save(); renderSvc(); validate(); });
-  q('[data-q-wininfo]').addEventListener('click', function () { var t = q('[data-q-wininfotxt]'); t.hidden = !t.hidden; });
+  q('[data-q-timesel]').addEventListener('change', function () { st.time = this.value; save(); validate(); });
 
   // ---------- step 5: details ----------
   ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#txq-' + k).addEventListener('input', function () { st[k] = this.value; save(); validate(); }); });
 
-  // ---------- step 6: review + submit ----------
-  var crewTxt = function () { return { '1': '1 mover + big van (customer helps)', '2': '2 movers + big van (extra fee)' }[st.crew] || 'Not chosen'; };
-  var accTxt = function (e) { return st['access' + e] === 'Stairs' ? 'Stairs, ' + st['flights' + e] + ' flight' + (st['flights' + e] > 1 ? 's' : '') : (st['access' + e] || 'Not chosen'); };
+  // ---------- step 6: review + send ----------
+  var crewTxt = function () { return { '1': '1 mover + big van (customer helps with heavy items)', '2': '2 movers + big van' }[st.crew] || 'Not chosen'; };
+  var accTxt = function (e) { var n = st['flights' + e]; return st['access' + e] === 'Stairs' ? 'Stairs, ' + (n >= 4 ? '4 or more flights' : n + ' flight' + (n > 1 ? 's' : '')) : (st['access' + e] || 'No stairs'); };
   var fmtDate = function (v) { if (!v) return 'Not chosen'; var p = v.split('-'); return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
   var itemsTxt = function () { return Object.keys(st.items).map(function (id) { var it = st.items[id]; return it.q + ' x ' + it.n + (it.v ? ' (' + it.v + ')' : ''); }); };
-  function fillWallet() {
-    var w = q('[data-q-wallet]'); if (!w) return;
-    var J = jobInfo(), P = { 'Name': st.name.trim(), 'Mobile': st.phone.trim(), 'Email': st.email.trim(), 'Pickup': J.pickup, 'Drop-off': J.dropoff,
-      'Items': itemsTxt().join(', '), 'Crew': crewTxt(), 'Access': J.access, 'When': J.when };
-    if (st.dis) P['Extra'] = 'Dismantling / assembly';
-    if (st.notes.trim()) P['Notes'] = st.notes.trim();
-    if (st.route) P['Route'] = st.route.km + ' km, about ' + st.route.min + ' min drive';
-    P['_Time guide (not shown)'] = J.estLine;
-    q('[data-q-wprops]').innerHTML = Object.keys(P).map(function (k) { return '<input type="hidden" name="properties[' + esc(k) + ']" value="' + esc(P[k]) + '">'; }).join('');
-    w.classList.toggle('locked', !st.terms);
-  }
   function renderReview() {
     var its = Object.keys(st.items).map(function (id) { return st.items[id]; });
     var row = function (l, v) { return '<div class="r"><span class="mu">' + l + '</span><span>' + v + '</span></div>'; };
-    var e = estimate();
     q('[data-q-review]').innerHTML =
-      rateBox(e, ' txq-estc--big') + howHtml(e) +
-      (DEP_V ? '<div class="txq-note"><span><b>' + money(DEP) + ' deposit to lock it in.</b> Your details are already filled in on the next page, so you just add your card or tap Google Pay or Apple Pay. It comes off your final bill, and the rest is charged by time on the day. <button type="button" class="txq-nopay" data-q-nopay>Or send the request without paying</button></span></div>' : '') +
-      '<label class="txq-ack txq-terms"><input type="checkbox" data-q-terms' + (st.terms ? ' checked' : '') + '><span>I understand the price is by time, from ' + money(e.f) + ' for the first 30 minutes, and the final amount depends on the actual time.</span></label>' +
+      '<div class="txq-note txq-note--ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span><b>Free quote, no obligation.</b> We check your details and text you a fixed price. Nothing to pay now.</span></div>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Route</b><button type="button" data-go="1">Edit</button></div>' +
         '<div class="r"><span class="txq-pin txq-pin--a" style="width:22px;height:22px;font-size:11px">A</span><span>' + esc(st.from.text) + (st.unitA ? '<br><small>' + esc(st.unitA) + '</small>' : '') + (st.awayA ? '<br><small>' + esc(contactTxt('A')) + '</small>' : '') + '</span></div>' +
         '<div class="r"><span class="txq-pin txq-pin--b" style="width:22px;height:22px;font-size:11px">B</span><span>' + esc(st.to.text) + (st.unitB ? '<br><small>' + esc(st.unitB) + '</small>' : '') + (st.awayB ? '<br><small>' + esc(contactTxt('B')) + '</small>' : '') + '</span></div>' +
         (st.route ? '<div class="r"><span class="mu">Distance</span><span>' + st.route.km + ' km, about ' + st.route.min + ' min</span></div>' : '') + '</div>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Items · ' + count() + '</b><button type="button" data-go="3">Edit</button></div><div>' +
-        its.map(function (it) { return '<span class="txq-pill">' + it.q + ' × ' + esc(it.n) + (it.v ? ' · ' + esc(it.v) : '') + '</span>'; }).join('') + '</div></div>' +
-      '<div class="txq-card txq-rv"><div class="h"><b>Crew, access and time</b><button type="button" data-go="4">Edit</button></div>' +
-        row('Crew', crewTxt()) + row('Pickup', accTxt('A')) + row('Drop-off', accTxt('B')) + row('When', esc(whenTxt())) + (st.dis ? row('Extra', 'Dismantling / assembly') : '') + '</div>' +
+        its.map(function (it) { return '<span class="txq-pill">' + it.q + ' × ' + esc(it.n) + (it.v ? ' · ' + esc(it.v) : '') + '</span>'; }).join('') + '</div>' +
+        (st.photos.length ? '<div class="txq-rvph">' + st.photos.map(function (u, i) { return '<img src="' + esc(u) + '" alt="Your photo ' + (i + 1) + '" loading="lazy">'; }).join('') + '</div>' : '') + '</div>' +
+      '<div class="txq-card txq-rv"><div class="h"><b>Movers, stairs and day</b><button type="button" data-go="4">Edit</button></div>' +
+        row('Movers', crewTxt()) + row('Pickup', accTxt('A')) + row('Drop-off', accTxt('B')) + row('When', esc(whenTxt())) + (st.dis ? row('Extra', 'Dismantling / assembly') : '') + '</div>' +
       '<div class="txq-card txq-rv"><div class="h"><b>Your details</b><button type="button" data-go="5">Edit</button></div>' +
         row('Name', esc(st.name)) + row('Mobile', esc(st.phone)) + row('Email', esc(st.email)) + (st.notes ? row('Notes', esc(st.notes)) : '') + '</div>';
     qa('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go'), true); }); });
-    q('[data-q-terms]').addEventListener('change', function () { st.terms = this.checked; save(); validate(); fillWallet(); });
-    fillWallet();
-    var alt = q('[data-q-nopay]'); if (alt) alt.addEventListener('click', function () { if (!st.terms) return toast('Please tick the box above first'); submit(); });
   }
-  var DEP_V = (root.getAttribute('data-deposit-variant') || '').trim(), DEP = +root.getAttribute('data-deposit') || 99;
   function jobInfo() {
     var pickup = st.from.text + (st.unitA ? ' (' + st.unitA + ')' : '') + (st.awayA ? ' - customer not there, ' + contactTxt('A') : ''),
         dropoff = st.to.text + (st.unitB ? ' (' + st.unitB + ')' : '') + (st.awayB ? ' - customer not there, ' + contactTxt('B') : '');
-    var access = 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B');
-    var when = whenTxt() + ' (' + (rateOf(st.svc).after ? 'after-hours' : 'weekday') + ' rate, from ' + money(rateOf(st.svc).f) + ')';
-    var e = estimate(), estLine = estTxt(e) + ' (about ' + hm(e.mins) + ', ' + (e.after ? 'weekend / evening' : 'weekday') + ' rate' + (st.crew === '2' ? ', plus second-mover fee' : '') + ')';
-    return { pickup: pickup, dropoff: dropoff, access: access, when: when, e: e, estLine: estLine };
-  }
-  // Pay a deposit through Shopify checkout; the job details travel as line item properties on the order (2026-11-24)
-  function payBook() {
-    var J = jobInfo();
-    var props = { 'Name': st.name.trim(), 'Mobile': st.phone.trim(), 'Email': st.email.trim(), 'Pickup': J.pickup, 'Drop-off': J.dropoff, 'Items': itemsTxt().join(', '),
-      'Crew': crewTxt(), 'Access': J.access, 'When': J.when };
-    if (st.dis) props['Extra'] = 'Dismantling / assembly';
-    if (st.notes.trim()) props['Notes'] = st.notes.trim();
-    if (st.route) props['Route'] = st.route.km + ' km, about ' + st.route.min + ' min drive';
-    props['_Time guide (not shown)'] = J.estLine;
-    // Straight to a pre-filled Shopify checkout (cart permalink): name, email, phone and billing suburb are filled in,
-    // the job details go on the order as "Additional details" (2026-11-24, user: simpler checkout straight from the form)
-    var nm = st.name.trim().split(/\s+/), first = nm.shift() || '', last = nm.join(' ');
-    var pt = (st.from && st.from.text) || '', pc = /(?:^|,\s*)([^,]*?)\s*,?\s*(?:NSW|New South Wales)\s+(\d{4})\s*$/i.exec(pt), street = pt.split(',')[0].trim();
-    var Q = [['checkout[email]', st.email.trim()], ['checkout[billing_address][first_name]', first], ['checkout[billing_address][last_name]', last],
-      ['checkout[billing_address][phone]', st.phone.trim()], ['checkout[billing_address][country]', 'AU'], ['checkout[billing_address][province]', 'NSW']];
-    if (pc) { Q.push(['checkout[billing_address][city]', pc[1].replace(/^.*,\s*/, '')], ['checkout[billing_address][zip]', pc[2]]); if (/^\d/.test(street)) Q.push(['checkout[billing_address][address1]', street]); }
-    // name, email and phone are already in the checkout boxes; the private time guide never goes into the web address
-    Object.keys(props).forEach(function (k) { if (k.charAt(0) !== '_' && ['Name', 'Mobile', 'Email'].indexOf(k) < 0) Q.push(['attributes[' + k + ']', props[k]]); });
-    Q.push(['note', 'Instant quote booking. ' + J.when]);
-    next.disabled = true; next.textContent = 'OPENING SECURE CHECKOUT…';
-    try { sessionStorage.setItem('tx-quote-paid', '1'); } catch (x) {}
-    location.href = '/cart/' + DEP_V + ':1?' + Q.map(function (x) { return encodeURIComponent(x[0]) + '=' + encodeURIComponent(x[1]); }).join('&');
+    return { pickup: pickup, dropoff: dropoff, access: 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B'), when: whenTxt(), estLine: 'about ' + hm(estimate().mins) + ' for the whole job' };
   }
   function submit() {
     var f = q('[data-q-form]'); if (!f) return;
+    // photos still uploading: finish them first, then send
+    if (phBusy) { next.disabled = true; next.textContent = 'FINISHING PHOTOS…'; phQueue.then(function () { setTimeout(submit, 50); }); return; }
     var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
-    var J = jobInfo(), pickup = J.pickup, dropoff = J.dropoff, access = J.access, when = J.when, e = J.e, estLine = J.estLine;
-    set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', pickup); set('dropoff', dropoff);
-    set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', access); set('when', when); set('date', jobDate());
-    set('estimate', 'Not shown to customer. Our guide: ' + estLine);
-    set('body', ['Pickup: ' + pickup, 'Drop-off: ' + dropoff, 'Items: ' + itemsTxt().join(', '), 'Crew: ' + crewTxt() + (st.crew === '1' ? ', customer agreed to help load and unload' : ''), 'Access: ' + access,
-      'When: ' + when, 'Customer saw the rates only (from ' + money(e.f) + '). Our guide, not shown: ' + estLine, 'Customer agreed to the hourly terms', st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '', st.notes ? 'Notes: ' + st.notes.trim() : ''].filter(Boolean).join('\n'));
+    var J = jobInfo(), ph = st.photos.slice();
+    set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
+    set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', J.access); set('when', J.when); set('date', jobDate());
+    set('photos', ph.length ? ph.join('\n') : 'None added');
+    set('estimate', 'Not shown to customer: ' + J.estLine);
+    set('body', ['QUOTE REQUEST', 'Pickup: ' + J.pickup, 'Drop-off: ' + J.dropoff, 'Items: ' + itemsTxt().join(', '), 'Movers: ' + crewTxt(), 'Stairs: ' + J.access,
+      'When: ' + J.when, st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '',
+      ph.length ? 'Photos (' + ph.length + '):\n' + ph.join('\n') : 'Photos: none added', st.notes ? 'Notes: ' + st.notes.trim() : '', 'Our time guide (not shown to customer): ' + J.estLine].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'SENDING…';
-    try { sessionStorage.setItem('tx-quote-sent', '1'); } catch (e) {}
+    try { sessionStorage.setItem('tx-quote-sent', '1'); sessionStorage.setItem('tx-quote-photos', String(ph.length)); } catch (e) {}
     // requestSubmit fires the submit event, so Shopify's spam check (hCaptcha) can add its token; plain submit() skips it (2026-11-24)
     if (f.requestSubmit) f.requestSubmit(); else f.querySelector('[type=submit]') ? f.querySelector('[type=submit]').click() : f.submit();
   }
@@ -561,7 +517,8 @@
   // ---------- start ----------
   if (st.from) setAddr('from', st.from); if (st.to) setAddr('to', st.to);
   var posted = q('[data-q-posted]'), sent = false; try { sent = sessionStorage.getItem('tx-quote-sent') === '1'; } catch (e) {}
-  if (posted && sent) { try { sessionStorage.removeItem('tx-quote-sent'); localStorage.removeItem(KEY); } catch (e) {} st = blank(); open(); go(7); }
+  if (posted && sent) { var hadPh = 0; try { hadPh = +sessionStorage.getItem('tx-quote-photos') || 0; sessionStorage.removeItem('tx-quote-sent'); sessionStorage.removeItem('tx-quote-photos'); localStorage.removeItem(KEY); } catch (e) {}
+    st = blank(); open(); go(7); var dp = q('[data-q-donephoto]'); if (dp && hadPh) dp.hidden = true; }
   else if (q('[data-q-errors]') && sent) { try { sessionStorage.removeItem('tx-quote-sent'); } catch (e) {} open(); go(5); toast(q('[data-q-errors]').textContent || 'Please check your details'); }
   else if (location.hash === '#instant-quote') open();
 })();
