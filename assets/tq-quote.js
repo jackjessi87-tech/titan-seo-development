@@ -484,7 +484,7 @@
         (st.route ? '<div class="r"><span class="mu">Distance</span><span>' + st.route.km + ' km, about ' + st.route.min + ' min</span></div>' : '') + '</div>' +
       '<div class="tqf-card tqf-rv"><div class="h"><b>Items · ' + count() + '</b><button type="button" data-go="3">Edit</button></div><div>' +
         its.map(function (it) { return '<span class="tqf-pill">' + it.q + ' × ' + esc(it.n) + (it.v ? ' · ' + esc(it.v) : '') + '</span>'; }).join('') + '</div>' +
-        (st.photos.length ? '<div class="tqf-rvph">' + st.photos.map(function (u, i) { return '<img src="' + esc(u) + '" alt="Your photo ' + (i + 1) + '" loading="lazy">'; }).join('') + '</div>' : '') + '</div>' +
+        (st.photos.length ? '<div class="tqf-rvph">' + st.photos.map(function (u, i) { return '<img src="' + esc(u) + '" alt="Your photo ' + (i + 1) + '" loading="lazy">'; }).join('') + '</div>' : PH_V ? '<button type="button" class="tqf-rvadd" data-go="3">+ Add photos (optional)</button>' : '') + '</div>' +
       '<div class="tqf-card tqf-rv"><div class="h"><b>Movers, stairs and day</b><button type="button" data-go="4">Edit</button></div>' +
         row('Movers', crewTxt()) + row('Pickup', accTxt('A')) + row('Drop-off', accTxt('B')) + row('When', esc(whenTxt())) + (st.dis ? row('Extra', 'Dismantling / assembly') : '') + '</div>' +
       '<div class="tqf-card tqf-rv"><div class="h"><b>Your details</b><button type="button" data-go="5">Edit</button></div>' +
