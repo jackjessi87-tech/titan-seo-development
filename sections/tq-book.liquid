@@ -11,7 +11,7 @@
   assign bg = images[s.photo_file]
   assign g1 = images['titan-fridge-trolley-ramp.webp']
   assign g2 = images['titan-mattress-delivery-truck.webp']
-  assign g3 = images['titan-sofa-truck-loading.webp']
+  assign g3 = images['titan-dining-table-two-movers.webp']
 -%}
 <section class="tqb{% if bg != blank %} tqb--photo{% endif %}" aria-labelledby="tqb-h-{{ section.id }}"{% if bg != blank %} style="--tqb-photo: url('{{ bg | image_url: width: 1100 }}'); --tqb-photo-lg: url('{{ bg | image_url: width: 2000 }}');"{% endif %}>
   <div class="tqb__in">
@@ -56,7 +56,7 @@
       <ul class="tqb__gal">
         <li><img src="{{ g1 | image_url: width: 420 }}" alt="Two Titan Express removalists moving a wrapped fridge down the truck ramp on a trolley" width="420" height="420" loading="lazy"><span>{{ s.cap_1 }}</span></li>
         <li><img src="{{ g2 | image_url: width: 420 }}" alt="Titan Express removalists unloading a covered mattress from the truck" width="420" height="420" loading="lazy"><span>{{ s.cap_2 }}</span></li>
-        <li><img src="{{ g3 | image_url: width: 420 }}" alt="Two Titan Express removalists loading a wrapped sofa into the truck" width="420" height="420" loading="lazy"><span>{{ s.cap_3 }}</span></li>
+        <li><img src="{{ g3 | image_url: width: 420 }}" alt="Two Titan Express removalists carrying a wrapped dining table" width="420" height="420" loading="lazy"><span>{{ s.cap_3 }}</span></li>
       </ul>
     </div>
     {%- endif -%}
@@ -89,7 +89,7 @@
   .tqb { position: relative; background: linear-gradient(180deg, #0b1b44 0%, #17357f 100%); color: #fff; padding: 20px 16px clamp(30px, 6vw, 60px); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   .tqb *, .tqb *::before, .tqb *::after { box-sizing: border-box; }
   /* team photo behind the top of the card: clear at the top, fading into navy where the text starts */
-  .tqb--photo { background: linear-gradient(180deg, rgba(11,27,68,.28) 0, rgba(11,27,68,.18) 90px, rgba(11,27,68,.72) 190px, #0b1b44 262px, #17357f 100%), var(--tqb-photo) center top / 100% auto no-repeat, #0b1b44; }
+  .tqb--photo { background: linear-gradient(180deg, rgba(11,27,68,.28) 0, rgba(11,27,68,.18) 90px, rgba(11,27,68,.72) 190px, #0b1b44 262px, #17357f 100%), var(--tqb-photo) center -34px / 100% auto no-repeat, #0b1b44; }
   .tqb__in { max-width: 560px; margin: 0 auto; text-align: center; }
   .tqb__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; min-height: 48px; }
   .tqb--photo .tqb__top { margin-bottom: 118px; }
@@ -166,7 +166,7 @@
   "class": "section-tq-book",
   "settings": [
     { "type": "checkbox", "id": "show_logo", "label": "Show Titan badge at top", "info": "Use when this section is the first thing on the page.", "default": false },
-    { "type": "text", "id": "photo_file", "label": "Background photo (file name)", "info": "A photo in Content > Files. Leave empty for plain navy.", "default": "titan-dining-table-two-movers.webp" },
+    { "type": "text", "id": "photo_file", "label": "Background photo (file name)", "info": "A photo in Content > Files. Leave empty for plain navy.", "default": "titan-sofa-truck-loading.webp" },
     { "type": "text", "id": "chip_1", "label": "Badge 1", "default": "5.0 on Google" },
     { "type": "text", "id": "chip_2", "label": "Badge 2", "default": "10+ years' experience" },
     { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Sydney removalists & delivery" },
@@ -183,7 +183,7 @@
     { "type": "text", "id": "team_text", "label": "Team text", "default": "Trained, careful and on time. We wrap your furniture, bring the right gear and treat your home with respect." },
     { "type": "text", "id": "cap_1", "label": "Photo 1 caption", "default": "Fridges & appliances" },
     { "type": "text", "id": "cap_2", "label": "Photo 2 caption", "default": "Beds & mattresses" },
-    { "type": "text", "id": "cap_3", "label": "Photo 3 caption", "default": "Sofas & furniture" },
+    { "type": "text", "id": "cap_3", "label": "Photo 3 caption", "default": "Tables & furniture" },
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
     { "type": "text", "id": "quote_url", "label": "Fallback quote page", "default": "/pages/furniture-pickup-delivery-sydney" }
   ],
