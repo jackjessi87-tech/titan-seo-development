@@ -1,0 +1,30 @@
+{%- comment -%}
+  Homepage colour match (2026-11-25). One colour per action on the whole homepage:
+  red (#e1261c, the logo red) = get a quote, blue = call, navy (#071a3d) = dark bands and the footer.
+  Before this the same "get a quote" action was green in some sections, blue in others and red on the Quote card.
+  Also: on phones the ten service cards sit in one swipe row instead of a list about 2,000 px long.
+  Nothing here changes any wording. Remove this section to go back to the old colours.
+{%- endcomment -%}
+<style>
+  .tho-qbtn:not(.tho-qbtn--ghost), .tho-card--pro .tho-qbtn:not(.tho-qbtn--ghost), .rj-btn--q,
+  .thh-btn--ghost, .thh-btn--light {
+    background: #e1261c !important; background-image: none !important; border-color: #e1261c !important; color: #fff !important;
+    box-shadow: 0 10px 22px rgba(225, 38, 28, .28) !important;
+  }
+  .tho-qbtn:not(.tho-qbtn--ghost):hover, .rj-btn--q:hover, .thh-btn--ghost:hover, .thh-btn--light:hover { background: #c71e15 !important; }
+  @media (max-width: 749px) {
+    .thh-grid--svc { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 12px; padding-bottom: 12px; }
+    .thh-grid--svc::-webkit-scrollbar { display: none; }
+    .thh-grid--svc > .thh-card { flex: 0 0 80%; scroll-snap-align: start; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Homepage colour match",
+  "tag": "div",
+  "class": "section-tq-home-style",
+  "settings": [],
+  "presets": [{ "name": "Homepage colour match" }]
+}
+{% endschema %}

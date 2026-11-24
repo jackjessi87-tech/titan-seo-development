@@ -61,9 +61,15 @@
   q('[data-q-close]').addEventListener('click', close);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen) { if (q('[data-q-bsheet]').classList.contains('on')) closeSheet(); else close(); } });
   window.addEventListener('popstate', function () { if (!isOpen) return; if (st.step > 1 && st.step < 7) { goBack(); try { history.pushState({ tqf: 1 }, '', '#quote-form'); } catch (e) {} } else close(); });
+  // Links that open this form: [data-tq-open-quote], anything ending in #quote-form, and the homepage's older "#instant-quote"
+  // buttons whenever the old form and the TX form are not on the page (2026-11-25).
+  var legacy = !document.getElementById('instant-quote') && !document.getElementById('txq');
   document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('[data-tq-open-quote], a[href$="#quote-form"]');
-    if (!a) return; e.preventDefault(); open();
+    var a = e.target.closest && e.target.closest('[data-tq-open-quote], a[href$="#quote-form"]' + (legacy ? ', a[href$="#instant-quote"]' : ''));
+    if (!a) return; e.preventDefault();
+    // crew buttons ("Quote two movers") carry data-crew: we do not ask about movers, but the email says which button they tapped
+    var c = a.getAttribute('data-crew'); if (c) { st.crewPref = c; save(); }
+    open();
   });
   // ---------- hero card (tq-book): suburb suggestions as you type, then straight to the route map ----------
   function lookup(text, limit) {
@@ -523,7 +529,7 @@
   ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#tqf-' + k).addEventListener('input', function () { st[k] = this.value; save(); validate(); }); });
 
   // ---------- step 6: review + send ----------
-  var crewTxt = function () { var a = crewAdvice(); return 'Not asked, Titan decides. Our guide: ' + (a.rec === '2' ? '2 movers' : '1 mover') + ' (' + a.why + ')'; };
+  var crewTxt = function () { var a = crewAdvice(); return (st.crewPref ? 'Customer tapped "' + st.crewPref + '" on the homepage. ' : 'Not asked, Titan decides. ') + 'Our guide: ' + (a.rec === '2' ? '2 movers' : '1 mover') + ' (' + a.why + ')'; };
   var accTxt = function (e) { var n = st['flights' + e]; return st['access' + e] === 'Stairs' ? 'Stairs, ' + (n >= 4 ? '4 or more flights' : n + ' flight' + (n > 1 ? 's' : '')) : (st['access' + e] || 'No stairs'); };
   var fmtDate = function (v) { if (!v) return 'Not chosen'; var p = v.split('-'); return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
   var itemsTxt = function () { return Object.keys(st.items).map(function (id) { var it = st.items[id]; return it.q + ' x ' + it.n + (it.v ? ' (' + it.v + ')' : ''); }); };

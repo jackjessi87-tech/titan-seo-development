@@ -12,7 +12,9 @@
     "tq_book": {
       "type": "tq-book",
       "settings": {
-        "show_logo": true
+        "show_logo": true,
+        "show_nav": true,
+        "h1_text": "Sydney Removalists & Same-Day Furniture Pickup & Delivery"
       }
     },
     "17820952195463b177": {
@@ -1071,7 +1073,7 @@
         "street": "48 Dudley St",
         "locality": "Punchbowl",
         "postcode": "2196",
-        "quote_url": "/pages/furniture-pickup-delivery-sydney",
+        "quote_url": "#quote-form",
         "qa_eyebrow": "In short",
         "qa_heading": "Furniture Pickup and Delivery Across Sydney",
         "qa_text": "<p>Titan Express is a Sydney furniture pickup and delivery service based in Punchbowl. Two careful movers and a large van collect single items, Facebook Marketplace and Gumtree buys, and store orders from IKEA, Bunnings and other retailers, then deliver them anywhere in Greater Sydney, often the same day. You get a fixed price before we start. We are rated 5.0 on Google.</p>",
@@ -1170,7 +1172,7 @@
       ],
       "settings": {
         "phone": "0469 717 535",
-        "quote_anchor": "#instant-quote",
+        "quote_anchor": "#quote-form",
         "open_hour": 7,
         "close_hour": 19,
         "live_open": "Taking same-day bookings now",
@@ -1181,27 +1183,24 @@
         "image": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
         "image_alt": "Titan Express van loaded with wrapped furniture for a Sydney pickup and delivery",
         "badge_title": "Same-day pickup & delivery",
-        "badge_text": "Anywhere in Greater Sydney, 7 days"
-      }
-    },
-    "titan_home_quote": {
-      "type": "titan-home-quote",
-      "settings": {
-        "phone": "0469 717 535",
-        "eyebrow": "Instant quote",
-        "heading": "Request Your Fixed Price in 60 Seconds",
-        "subheading": "Furniture pickup and delivery, single items, store collection from IKEA and Bunnings, and Facebook Marketplace pickups across Sydney. Tell us the job and we send a fixed price, no hourly meter."
+        "badge_text": "Anywhere in Greater Sydney, 7 days",
+        "show_bar": false,
+        "show_top": false,
+        "show_jobs": false
       }
     },
     "tq_quote": {
       "type": "tq-quote",
+      "settings": {}
+    },
+    "tq_home_style": {
+      "type": "tq-home-style",
       "settings": {}
     }
   },
   "order": [
     "tq_book",
     "titan_home_hero",
-    "titan_home_quote",
     "17820952195463b177",
     "17855470940f586504",
     "blocks_pp44rW",
@@ -1215,6 +1214,7 @@
     "17821252068f79aa64",
     "17835921926aecae97",
     "178359242106600ace",
+    "tq_home_style",
     "tq_quote"
   ]
 }

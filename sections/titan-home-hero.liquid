@@ -62,6 +62,7 @@
 {%- capture callbtn -%}<a class="tho-call tho-shine" href="tel:{{ phone_intl }}"><span class="tho-ringer">{{ i_phone }}</span><span class="tho-call__txt"><span class="tho-call__lbl">%%LBL%%</span><span class="tho-call__num" aria-label="{{ s.phone }}">{{ digits }}</span></span>{{ i_thin }}</a>{%- endcapture -%}
 
 <div class="tho" id="tho-{{ section.id }}">
+  {%- if s.show_bar -%}
   <div class="tho-bar">
     <div class="tho-wrap tho-bar__in">
       <a class="tho-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
@@ -81,6 +82,9 @@
     </div>
   </div>
 
+  {%- endif -%}
+
+  {%- if s.show_top -%}
   <section class="tho-hero">
     <svg class="tho-art" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
@@ -131,6 +135,8 @@
       <span>{{ i_phone }}CALL {{ s.phone }} FOR FURNITURE PICKUP &amp; DELIVERY</span><span>REMOVALISTS &amp; TRUCKS</span><span>MARKETPLACE &amp; IKEA PICKUPS</span><span>SAME-DAY PICKUP</span><span>FIXED PRICE ON THE PHONE</span><span>2 OR 3 MOVERS + TRUCK</span><span>7 DAYS</span>
     {%- endfor -%}
   </div></div>
+
+  {%- endif -%}
 
   {%- render 'titan-travels-showcase', uid: section.id -%}
 
@@ -239,6 +245,7 @@
     </div>
   </section>
 
+  {%- if s.show_jobs -%}
   <section class="tho-sec">
     <div class="tho-wrap">
       <p class="tho-eyebrow">Pick your job</p>
@@ -255,6 +262,7 @@
       </ul>
     </div>
   </section>
+  {%- endif -%}
 
   <svg class="tho-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 240 70, 480 0, 720 26 S 1200 60, 1440 20 V60 H0z" fill="#f5f8ff"/></svg>
   <section class="tho-sec tho-sec--soft">
@@ -575,6 +583,9 @@
   "settings": [
     { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
     { "type": "text", "id": "quote_anchor", "label": "Quote button link", "default": "#instant-quote" },
+    { "type": "checkbox", "id": "show_bar", "label": "Show the logo and menu bar", "default": true },
+    { "type": "checkbox", "id": "show_top", "label": "Show the top block (heading, old quote form)", "info": "Switch off when the Quote card sits above this section.", "default": true },
+    { "type": "checkbox", "id": "show_jobs", "label": "Show the What do you need moved tiles", "default": true },
     { "type": "range", "id": "open_hour", "label": "Open from (hour)", "min": 0, "max": 23, "step": 1, "default": 7 },
     { "type": "range", "id": "close_hour", "label": "Open until (hour)", "min": 1, "max": 24, "step": 1, "default": 19 },
     { "type": "text", "id": "live_open", "label": "Status during hours", "default": "Taking same-day bookings now" },
