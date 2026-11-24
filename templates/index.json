@@ -9,6 +9,12 @@
  */
 {
   "sections": {
+    "tx_book": {
+      "type": "tx-book",
+      "settings": {
+        "show_logo": true
+      }
+    },
     "17820952195463b177": {
       "type": "_blocks",
       "settings": {
@@ -437,7 +443,7 @@
       "type": "_blocks",
       "blocks": {
         "google_reviews_rocket_app_block_KF9U3w": {
-          "type": "shopify://apps/entangle-google-reviews/blocks/app-block/d11c8893-a181-4aff-a280-7446d42cec3b",
+          "type": "shopify://apps/ec-google-reviews/blocks/app-block/d11c8893-a181-4aff-a280-7446d42cec3b",
           "settings": {
             "widget_layout": "map-badge"
           }
@@ -1186,9 +1192,14 @@
         "heading": "Request Your Fixed Price in 60 Seconds",
         "subheading": "Furniture pickup and delivery, single items, store collection from IKEA and Bunnings, and Facebook Marketplace pickups across Sydney. Tell us the job and we send a fixed price, no hourly meter."
       }
+    },
+    "tx_quote": {
+      "type": "tx-quote",
+      "settings": {}
     }
   },
   "order": [
+    "tx_book",
     "titan_home_hero",
     "titan_home_quote",
     "17820952195463b177",
@@ -1203,6 +1214,7 @@
     "titan_home_hub",
     "17821252068f79aa64",
     "17835921926aecae97",
-    "178359242106600ace"
+    "178359242106600ace",
+    "tx_quote"
   ]
 }
