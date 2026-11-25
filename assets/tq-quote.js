@@ -304,6 +304,8 @@
     else pmap.setView([-33.84, 151.1], 10);
   }
   q('[data-q-go1]').addEventListener('click', function () {
+    // the box was edited after a suburb was picked: forget the old pick so the new text is used
+    ['from', 'to'].forEach(function (k) { var v = q('#tqf-' + k).value.trim(); if (st[k] && v !== st[k].text) st[k] = null; });
     if (st.from && st.to) {
       var bad = !contactOk('A') ? 'A' : !contactOk('B') ? 'B' : '';
       if (!bad) return go(3);
