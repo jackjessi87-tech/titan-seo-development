@@ -137,25 +137,47 @@
   });
 
   // ---------- navigation ----------
-  var LBL = { 1: 'Step 1 of 4 · Where', 2: 'Step 1 of 4 · Check the route', 3: 'Step 2 of 4 · What', 4: 'Step 3 of 4 · When', 5: 'Step 4 of 4 · Your details', 6: 'Step 4 of 4 · Review', 7: 'Quote request sent' };
+  var LBL = { 1: 'Step 1 of 4', 2: 'Step 1 of 4', 3: 'Step 2 of 4', 4: 'Step 3 of 4', 5: 'Step 4 of 4', 6: 'Step 4 of 4', 7: 'Sent' };
   // Easy version (2026-11-25): Where -> What -> When -> Your details. Screens 2 (big map) and 6 (review) are no longer in the path.
-  var COMMON = ['sofa', 'bed', 'mattress', 'fridge', 'washer', 'dining', 'chair', 'tvunit', 'wardrobe', 'desk', 'box'];
+  var COMMON = ['sofa', 'fridge', 'washer', 'bed', 'mattress', 'dining', 'chair', 'wardrobe', 'tvunit', 'desk', 'box'];
+  // Landing-card look (2026-11-25): home sizes as one-tap tiles, and two-tone icons drawn for this form
+  [{ k: 'mvstudio', n: 'Studio or small apartment move', t: 'Studio / small', c: 'move' }, { k: 'mv1bed', n: '1 bedroom apartment move', t: '1 bedroom', c: 'move' }, { k: 'mv2bed', n: '2 bedroom apartment move', t: '2 bedroom', c: 'move' }]
+    .forEach(function (m) { ITEMS.push(m); BYK[m.k] = m; HEAVY.push(m.k); });
+  var DUO = {
+    sofa: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="9" y="12" width="30" height="16" rx="5"/><path d="M11 24v-7a5 5 0 0 1 5-5h16a5 5 0 0 1 5 5v7M24 12v12"/><path d="M5 27a4 4 0 0 1 8 0v4h22v-4a4 4 0 0 1 8 0v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M10 37v3M38 37v3"/></svg>',
+    bed: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="6" y="24" width="36" height="10" rx="2"/><path d="M6 38V12M6 34h36M42 38V28a4 4 0 0 0-4-4H6M6 38v2M42 38v2"/><rect class="a" x="10" y="18" width="11" height="6" rx="3"/></svg>',
+    mattress: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="5" y="16" width="38" height="16" rx="6"/><rect x="5" y="16" width="38" height="16" rx="6"/><path d="M5 24h38"/><path class="s2" d="M14 20h.01M24 20h.01M34 20h.01M14 28h.01M24 28h.01M34 28h.01"/></svg>',
+    fridge: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="13" y="5" width="22" height="38" rx="4"/><rect x="13" y="5" width="22" height="38" rx="4"/><path d="M13 19h22"/><path class="s2" d="M18.500 10v5M18.500 24v8"/></svg>',
+    washer: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="9" y="6" width="30" height="36" rx="4"/><rect x="9" y="6" width="30" height="36" rx="4"/><circle cx="24" cy="27.500" r="9"/><path class="s2" d="M18 28c2-2.200 4-2.200 6 0s4 2.200 6 0"/><path d="M14 12h.01M19 12h.01M34 12h-5"/></svg>',
+    dining: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="4" y="14" width="40" height="7" rx="2"/><path d="M4 14h40v7H4zM10 21v19M38 21v19"/><path class="s2" d="M10 30h28"/></svg>',
+    chair: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M15 6h18v20H15z"/><path d="M15 26V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v18M12 26h24v5H12zM15 31v11M33 31v11"/><path class="s2" d="M21 11v10M27 11v10"/></svg>',
+    tvunit: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="9" y="7" width="30" height="18" rx="2.500"/><rect x="9" y="7" width="30" height="18" rx="2.500"/><path d="M24 25v4M5 29h38v10H5zM24 29v10M10 39v3M38 39v3"/><path class="s2" d="M12 34h5M31 34h5"/></svg>',
+    wardrobe: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><rect class="f" x="10" y="5" width="28" height="34" rx="3"/><rect x="10" y="5" width="28" height="34" rx="3"/><path d="M24 5v34M14 39v4M34 39v4"/><path class="s2" d="M20 20v5M28 20v5"/></svg>',
+    desk: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M4 13h40v6H4z"/><path d="M4 13h40v6H4zM8 19v21M40 19v21M26 19v14h14"/><path class="s2" d="M31 26h4"/></svg>',
+    box: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M24 5l17 9v20l-17 9-17-9V14z"/><path d="M24 5l17 9v20l-17 9-17-9V14zM7 14l17 9 17-9M24 23v20"/><path class="s2" d="M15.500 9.500l17 9v6"/></svg>',
+    mvstudio: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M9 22L24 9l15 13v19H9z"/><path d="M5 24L24 8l19 16M9 21v20h30V21"/><path class="s2" d="M20 41V30h8v11"/></svg>',
+    mv1bed: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M9 22L24 9l15 13v19H9z"/><path d="M5 24L24 8l19 16M9 21v20h30V21"/><text x="24" y="36.500" text-anchor="middle" font-size="16" font-weight="900" font-family="Inter, Arial, sans-serif" style="fill:#ff9d0a;stroke:none">1</text></svg>',
+    mv2bed: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M9 22L24 9l15 13v19H9z"/><path d="M5 24L24 8l19 16M9 21v20h30V21"/><text x="24" y="36.500" text-anchor="middle" font-size="16" font-weight="900" font-family="Inter, Arial, sans-serif" style="fill:#ff9d0a;stroke:none">2</text></svg>',
+    more: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><circle class="f" cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="17"/><path class="s2" d="M24 16v16M16 24h16"/></svg>',
+    other: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M24 5l17 9v20l-17 9-17-9V14z"/><path d="M24 5l17 9v20l-17 9-17-9V14zM7 14l17 9 17-9M24 23v20"/><path class="s2" d="M30 30l5-2.500"/></svg>'
+  };
   var PROG = [0, 1, 1, 2, 3, 4, 4, 4];
   var next = q('[data-q-next]');
   function go(n, back) {
-    st.step = n; save();
+    st.step = n; save(); root.setAttribute('data-step', n);
     qa('.tqf-s').forEach(function (s) { var on = +s.getAttribute('data-s') === n; s.hidden = !on; s.classList.toggle('back', !!back); });
     qa('.tqf-prog i').forEach(function (b, i) { b.classList.toggle('on', i < PROG[n]); });
     q('[data-q-steplbl]').textContent = LBL[n];
     q('[data-q-back]').toggleAttribute('data-hide', n === 1 || n === 7);
     q('[data-q-foot]').hidden = n === 1 || n === 2 || n === 7;
     q('[data-q-sum]').hidden = n !== 3;
-    next.textContent = n === 5 || n === 6 ? 'SEND MY QUOTE REQUEST' : 'NEXT';
+    next.textContent = n === 5 || n === 6 ? 'Get my free quote' : 'Next';
     root.classList.toggle('tqf-white', n === 1 || n === 3);
     if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); preRoute(); }
     if (n === 2) setTimeout(drawMap, 40);
-    if (n === 3) { renderGrid(); renderList(); renderPhotos(); }
+    if (n === 3) { renderGrid(); renderList(); renderPhotos(); q('[data-q-note]').value = st.itemNote || ''; }
     if (n === 4) renderAccess();
+    if (n === 5) renderRecap();
     if (n === 5) ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#tqf-' + k).value = st[k]; });
     if (n === 6) renderReview();
     validate();
@@ -166,8 +188,8 @@
   function validate() {
     var ok = true, s = st.step;
     if (s === 1) ok = !!(st.from && st.to);
-    if (s === 3) ok = count() > 0 || st.photos.length > 0 || !!q('[data-q-custom]').value.trim();
-    if (s === 4) ok = !!(st.today || st.date);
+    if (s === 3) ok = count() > 0 || st.photos.length > 0 || !!(st.itemNote || '').trim() || !!q('[data-q-custom]').value.trim();
+    if (s === 4) ok = !!(st.today || st.date || st.week);
     if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim());
     next.disabled = !ok;
     q('[data-q-sumn]').textContent = count();
@@ -188,6 +210,7 @@
   // distance line and route on the small map, so there is no separate map screen to confirm
   function preRoute() {
     var el = q('[data-q-rline]'); if (!el) return;
+    var pw = q('.tqf-premap'); if (pw) { pw.classList.toggle('show', !!(st.from && st.to)); if (st.from && st.to) setTimeout(drawPre, 60); }
     if (!st.from || !st.to) { el.hidden = true; return; }
     var show = function () { el.textContent = st.route.km + ' km, about ' + st.route.min + ' min drive'; el.hidden = false; drawPre(); };
     if (st.route) return show();
@@ -275,7 +298,7 @@
     if (st.from) { pts.push([st.from.lat, st.from.lon]); L.marker(pts[pts.length - 1], { icon: pin('A', '#17357f') }).addTo(player); }
     if (st.to) { pts.push([st.to.lat, st.to.lon]); L.marker(pts[pts.length - 1], { icon: pin('B', '#e1261c') }).addTo(player); }
     if (pts.length === 2 && st.route && st.route.line) { L.polyline(st.route.line, { color: '#fff', weight: 9, opacity: .95 }).addTo(player); L.polyline(st.route.line, { color: '#17357f', weight: 5 }).addTo(player); }
-    if (pts.length === 2) pmap.fitBounds(pts, { paddingTopLeft: [50, 40], paddingBottomRight: [50, 130], maxZoom: 14 });
+    if (pts.length === 2) pmap.fitBounds(pts, { paddingTopLeft: [34, 34], paddingBottomRight: [34, 52], maxZoom: 14 });
     else if (pts.length) pmap.setView(pts[0], 13);
     else pmap.setView([-33.84, 151.1], 10);
   }
@@ -344,22 +367,35 @@
   var chip = function (attr, k, name, n) {
     return '<button type="button" class="tqf-chip' + (n ? ' on' : '') + '" ' + attr + '><span class="ci">' + icon(k) + '</span><span class="cn">' + name + '</span>' + (n ? '<span class="q">' + n + '</span>' : '') + '</button>';
   };
+  function tile(attr, k, name, n) {
+    return '<button type="button" class="tqf-chip tqf-tile' + (n ? ' on' : '') + '" ' + attr + '><span class="ti">' + (DUO[k] || icon(k)) + '</span><span class="cn">' + name + '</span>' +
+      (n ? '<span class="q">' + n + '</span><span class="mn" data-minus role="button" aria-label="One less">&minus;</span>' : '') + '</button>';
+  }
   function renderGrid() {
     var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0; });
-    grid.innerHTML = ITEMS.filter(function (i) { return !i.custom && (st.more || COMMON.indexOf(i.k) > -1 || qtyOf(i.k)); }).map(function (i) { return chip('data-k="' + i.k + '"', i.k, i.n, qtyOf(i.k)); }).join('') +
-      own.map(function (id) { var it = st.items[id]; return chip('data-own="' + esc(id) + '"', 'other', esc(it.n), it.q); }).join('') +
-      '<button type="button" class="tqf-chip tqf-chip--more" data-more><span class="cn">' + (st.more ? 'Show fewer' : 'More items') + '</span></button>' +
-      '<button type="button" class="tqf-chip tqf-chip--own" data-k="other"><span class="cn">+ Something else</span></button>';
+    var mv = ITEMS.filter(function (i) { return i.c === 'move'; });
+    var rest = ITEMS.filter(function (i) { return !i.custom && i.c !== 'move' && (st.more || COMMON.indexOf(i.k) > -1 || qtyOf(i.k)); });
+    rest.sort(function (x, y) { var ix = COMMON.indexOf(x.k), iy = COMMON.indexOf(y.k); return (ix < 0 ? 99 : ix) - (iy < 0 ? 99 : iy); });
+    grid.innerHTML = '<p class="tqf-hint tqf-hint--first">Moving home?</p><div class="tqf-tiles tqf-tiles--mv">' + mv.map(function (i) { return tile('data-k="' + i.k + '"', i.k, i.t, qtyOf(i.k) ? '✓' : 0); }).join('') + '</div>' +
+      '<p class="tqf-hint">Or just a few items? Tap all that apply</p><div class="tqf-tiles">' +
+      rest.map(function (i) { return tile('data-k="' + i.k + '"', i.k, i.n, qtyOf(i.k)); }).join('') +
+      own.map(function (id) { var it = st.items[id]; return tile('data-own="' + esc(id) + '"', 'other', esc(it.n), it.q); }).join('') +
+      '<button type="button" class="tqf-chip tqf-tile tqf-tile--more" data-more><span class="ti">' + DUO.more + '</span><span class="cn">' + (st.more ? 'Show fewer' : 'More items') + '</span></button></div>';
   }
   function renderTiles() { renderGrid(); }
   grid.addEventListener('click', function (e) {
     var t = e.target.closest('.tqf-chip'); if (!t) return;
+    var less = !!e.target.closest('[data-minus]');
     if (t.hasAttribute('data-more')) { st.more = !st.more; save(); return renderGrid(); }
-    var oid = t.getAttribute('data-own'); if (oid) { var o = st.items[oid]; if (o) addItem(oid, o.k, o.n, o.v, 1); return; }
-    var it = BYK[t.getAttribute('data-k')];
-    if (it.custom) { q('[data-q-custom]').focus(); return toast('Type the item name, then tap Add'); }
-    if (it.v) return openSheet(it);
-    addItem(it.k, it.k, it.n, '', 1); if (navigator.vibrate) navigator.vibrate(8);
+    var oid = t.getAttribute('data-own'); if (oid) { var o = st.items[oid]; if (o) addItem(oid, o.k, o.n, o.v, less ? -1 : 1); return; }
+    var it = BYK[t.getAttribute('data-k')]; if (!it) return;
+    if (it.c === 'move') { // pick one home size, tap again to clear it
+      var had = qtyOf(it.k); ITEMS.forEach(function (m) { if (m.c === 'move') delete st.items[m.k]; });
+      if (!had) st.items[it.k] = { k: it.k, n: it.n, v: '', q: 1 };
+      save(); renderGrid(); renderList(); return validate();
+    }
+    if (less) { var ids = Object.keys(st.items).filter(function (id) { return st.items[id].k === it.k; }); if (ids.length) { var x = st.items[ids[ids.length - 1]]; addItem(ids[ids.length - 1], x.k, x.n, x.v, -1); } return; }
+    addItem(it.k, it.k, it.n, '', 1); try { if (navigator.vibrate) navigator.vibrate(8); } catch (err) {}
   });
   function renderList() {
     var ids = Object.keys(st.items), n = count();
@@ -392,6 +428,7 @@
     addItem('custom:' + n.toLowerCase(), 'other', n, '', cq); cq = 1; q('[data-q-cq]').textContent = 1;
   }
   q('[data-q-custom]').addEventListener('input', validate);
+  q('[data-q-note]').addEventListener('input', function () { st.itemNote = this.value; save(); validate(); });
   q('[data-q-cadd]').addEventListener('click', addCustom);
   q('[data-q-custom]').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addCustom(); } });
   function openSheet(it) {
@@ -416,6 +453,7 @@
     bed: 12, mattress: 6, wardrobe: 15, dresser: 10, bedside: 3, cot: 8, bunkbed: 18, dining: 10, chair: 2, fridge: 12, washer: 12, dryer: 10, dishwasher: 12,
     microwave: 3, barstool: 2, desk: 10, officechair: 3, filing: 8, monitor: 3, outdoor: 12, bbq: 12, bike: 4, treadmill: 18, plant: 3, pooltable: 40, pram: 3,
     box: 2, suitcase: 1.5, tub: 2, piano: 12, other: 8 };
+  MIN.mvstudio = 90; MIN.mv1bed = 150; MIN.mv2bed = 240;
   function itemMin(it) {
     var m = MIN[it.k] || 8, v = it.v || '';
     if (it.k === 'sofa') m = { '3 seater': 14, 'L-shape / modular': 22, 'Sofa bed': 18 }[v] || m;
@@ -435,7 +473,7 @@
   function earliestToday() { var d = new Date(), n = d.getHours() * 60 + d.getMinutes() + 45; return Math.max(FIRST, Math.ceil(n / 30) * 30); }
   function todayOpen() { return earliestToday() <= LAST; }
   function jobDate() { return st.today ? iso(new Date()) : st.date; }
-  var whenTxt = function () { return (st.today ? 'Today' : fmtDate(st.date)) + ', ' + (st.time ? 'around ' + st.time : 'any time'); };
+  var whenTxt = function () { return (st.today ? 'Today' : st.week ? 'This week' : fmtDate(st.date)) + ', ' + (st.time ? 'around ' + st.time : 'any time'); };
   var hm = function (m) { m = Math.round(m / 5) * 5; var h = Math.floor(m / 60), r = m % 60; return (h ? h + ' hr' + (r ? ' ' : '') : '') + (r ? r + ' min' : ''); };
   function estimate() {
     var h = 0; for (var id in st.items) h += itemMin(st.items[id]) * st.items[id].q;
@@ -538,10 +576,10 @@
     if (st.today && !open) st.today = false;
     var tmv = tmrwIso();
     qa('[data-q-when] button').forEach(function (b) { var w = b.getAttribute('data-w');
-      b.classList.toggle('on', w === 'today' ? !!st.today : w === 'tmrw' ? (!st.today && st.date === tmv) : (!st.today && (!!st.pick || (!!st.date && st.date !== tmv))));
+      b.classList.toggle('on', w === 'today' ? !!st.today : w === 'week' ? (!st.today && !!st.week) : w === 'tmrw' ? (!st.today && !st.week && st.date === tmv) : (!st.today && !st.week && (!!st.pick || (!!st.date && st.date !== tmv))));
       if (w === 'today') b.disabled = !open; });
     q('[data-q-todaymsg]').textContent = open ? '' : 'Too late for today';
-    var dates = q('[data-q-dates]'); dates.hidden = !!st.today || !(st.pick || (st.date && st.date !== tmv));
+    var dates = q('[data-q-dates]'); dates.hidden = !!st.today || !!st.week || !(st.pick || (st.date && st.date !== tmv));
     if (!dates.hidden) {
       var now = new Date(), html = '';
       for (var i = 1; i < 15; i++) { var d = new Date(now); d.setDate(now.getDate() + i); var v = iso(d);
@@ -553,8 +591,8 @@
     for (var m = start; m <= LAST; m += 30) { var t = tTxt(m); opts += '<option value="' + t + '"' + (st.time === t ? ' selected' : '') + '>Around ' + t + '</option>'; }
     q('[data-q-timesel]').innerHTML = opts; q('[data-q-timesel]').value = st.time || '';
   }
-  q('[data-q-when]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b || b.disabled) return; var w = b.getAttribute('data-w'); st.today = w === 'today'; st.pick = w === 'sched';
-    if (w === 'today') st.date = ''; if (w === 'tmrw') st.date = tmrwIso(); if (w === 'sched' && st.date === tmrwIso()) st.date = '';
+  q('[data-q-when]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b || b.disabled) return; var w = b.getAttribute('data-w'); st.today = w === 'today'; st.pick = w === 'sched'; st.week = w === 'week';
+    if (w === 'today' || w === 'week') st.date = ''; if (w === 'tmrw') st.date = tmrwIso(); if (w === 'sched' && st.date === tmrwIso()) st.date = '';
     save(); renderWhen(); validate(); });
   q('[data-q-dates]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.date = b.getAttribute('data-d'); save(); renderWhen(); validate(); });
   q('[data-q-timesel]').addEventListener('change', function () { st.time = this.value; save(); validate(); });
@@ -567,6 +605,13 @@
   var accTxt = function (e) { var n = st['flights' + e]; return st['access' + e] === 'Stairs' ? 'Stairs, ' + (n >= 4 ? '4 or more flights' : n + ' flight' + (n > 1 ? 's' : '')) : (st['access' + e] || 'No stairs'); };
   var fmtDate = function (v) { if (!v) return 'Not chosen'; var p = v.split('-'); return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
   var itemsTxt = function () { return Object.keys(st.items).map(function (id) { var it = st.items[id]; return it.q + ' x ' + it.n + (it.v ? ' (' + it.v + ')' : ''); }); };
+  // one-line recap above the contact boxes, like the landing card
+  function renderRecap() {
+    var el = q('[data-q-recaptxt]'); if (!el) return; var n = count();
+    var a = st.from ? st.from.text.split(',')[0] : '', b = st.to ? st.to.text.split(',')[0] : '';
+    el.textContent = a + ' to ' + b + ' · ' + (n ? n + ' item' + (n === 1 ? '' : 's') : st.photos.length ? 'photos added' : 'details added');
+  }
+  (function () { var ed = q('[data-q-edit]'); if (ed) ed.addEventListener('click', function () { go(1, true); }); })();
   function renderReview() {
     var its = Object.keys(st.items).map(function (id) { return st.items[id]; });
     var row = function (l, v) { return '<div class="r"><span class="mu">' + l + '</span><span>' + v + '</span></div>'; };
@@ -593,18 +638,19 @@
   function submit() {
     var f = q('[data-q-form]'); if (!f) return;
     // photos still uploading: finish them first, then send
-    if (phBusy) { next.disabled = true; next.textContent = 'FINISHING PHOTOS…'; phQueue.then(function () { setTimeout(submit, 50); }); return; }
+    if (phBusy) { next.disabled = true; next.textContent = 'Finishing photos…'; phQueue.then(function () { setTimeout(submit, 50); }); return; }
     var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
     var J = jobInfo(), ph = st.photos.slice();
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
-    var IT = itemsTxt().join(', ') || 'Not listed, see the photos';
+    var NOTE = (st.itemNote || '').trim();
+    var IT = [itemsTxt().join(', '), NOTE ? 'Details: ' + NOTE : ''].filter(Boolean).join(' | ') || 'Not listed, see the photos';
     set('items', IT); set('crew', crewTxt()); set('access', J.access); set('when', J.when); set('date', jobDate());
     set('photos', ph.length ? ph.join('\n') : 'None added');
     set('estimate', 'Not shown to customer: ' + J.estLine);
     set('body', ['QUOTE REQUEST', 'Pickup: ' + J.pickup, 'Drop-off: ' + J.dropoff, 'Items: ' + IT, 'Movers: ' + crewTxt(), 'Stairs: ' + J.access,
       'When: ' + J.when, st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '',
       ph.length ? 'Photos (' + ph.length + '):\n' + ph.join('\n') : 'Photos: none added', st.notes ? 'Notes: ' + st.notes.trim() : '', 'Our time guide (not shown to customer): ' + J.estLine].filter(Boolean).join('\n'));
-    next.disabled = true; next.textContent = 'SENDING…';
+    next.disabled = true; next.textContent = 'Sending…';
     try { sessionStorage.setItem('tq-quote-sent', '1'); sessionStorage.setItem('tq-quote-photos', String(ph.length)); } catch (e) {}
     // requestSubmit fires the submit event, so Shopify's spam check (hCaptcha) can add its token; plain submit() skips it (2026-11-24)
     if (f.requestSubmit) f.requestSubmit(); else f.querySelector('[type=submit]') ? f.querySelector('[type=submit]').click() : f.submit();
