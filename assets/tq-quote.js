@@ -177,7 +177,7 @@
     if (n === 2) setTimeout(drawMap, 40);
     if (n === 3) { renderGrid(); renderList(); renderPhotos(); q('[data-q-note]').value = st.itemNote || ''; }
     if (n === 4 || n === 5) renderAccess();
-    if (n === 5) { renderRecap(); showEmail(!!st.email); }
+    if (n === 5) renderRecap();
     if (n === 5) ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#tqf-' + k).value = st[k]; });
     if (n === 6) renderReview();
     validate();
@@ -190,7 +190,7 @@
     if (s === 1) ok = !!(st.from && st.to);
     if (s === 3) ok = count() > 0 || st.photos.length > 0 || !!(st.itemNote || '').trim() || !!q('[data-q-custom]').value.trim();
     if (s === 4) ok = !!(st.today || st.date || st.week);
-    if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && (!st.email.trim() || /.+@.+\..+/.test(st.email.trim())) && !!(st.today || st.date || st.week);
+    if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim()) && !!(st.today || st.date || st.week);
     next.disabled = !ok;
     q('[data-q-sumn]').textContent = count();
   }
@@ -662,7 +662,7 @@
     if (phBusy) { next.disabled = true; next.textContent = 'Finishing photos…'; phQueue.then(function () { setTimeout(submit, 50); }); return; }
     var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
     var J = jobInfo(), ph = st.photos.slice();
-    var EM = st.email.trim(); set('name', st.name.trim()); set('email', EM || (st.phone.replace(/\D/g, '') || 'customer') + '@no-email.titanexpress.com.au'); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
+    set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
     var NOTE = (st.itemNote || '').trim();
     var IT = [itemsTxt().join(', '), NOTE ? 'Details: ' + NOTE : ''].filter(Boolean).join(' | ') || 'Not listed, see the photos';
     set('items', IT); set('crew', crewTxt()); set('access', J.access); set('when', J.when); set('date', jobDate());
@@ -670,7 +670,7 @@
     set('estimate', 'Not shown to customer: ' + J.estLine);
     set('body', ['QUOTE REQUEST', 'Pickup: ' + J.pickup, 'Drop-off: ' + J.dropoff, 'Items: ' + IT, 'Movers: ' + crewTxt(), 'Stairs: ' + J.access,
       'When: ' + J.when, st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '',
-      ph.length ? 'Photos (' + ph.length + '):\n' + ph.join('\n') : 'Photos: none added', EM ? '' : 'Email: not given (the address on this message is a placeholder, reply by text)', st.notes ? 'Notes: ' + st.notes.trim() : '', 'Our time guide (not shown to customer): ' + J.estLine].filter(Boolean).join('\n'));
+      ph.length ? 'Photos (' + ph.length + '):\n' + ph.join('\n') : 'Photos: none added', st.notes ? 'Notes: ' + st.notes.trim() : '', 'Our time guide (not shown to customer): ' + J.estLine].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'Sending…';
     try { sessionStorage.setItem('tq-quote-sent', '1'); sessionStorage.setItem('tq-quote-photos', String(ph.length)); } catch (e) {}
     // requestSubmit fires the submit event, so Shopify's spam check (hCaptcha) can add its token; plain submit() skips it (2026-11-24)
