@@ -537,3 +537,10 @@ textarea.tqf-inp { resize: vertical; min-height: 84px; }
 .tqf--card .tqf-tile { min-height: 94px; }
 .tqf--card .tqf-tiles--mv .tqf-tile { min-height: 88px; }
 .tqf--card .tqf-when button { grid-template-columns: 1fr; justify-content: stretch; }
+
+/* easiest version (2026-11-25): three steps, one stairs question, optional email */
+.tqf--card .tqf-seg--4 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 420px) { .tqf--card .tqf-seg--4 { grid-template-columns: repeat(4, 1fr); } }
+.tqf--card .tqf-field--email[hidden], .tqf--card .tqf-emailbtn[hidden] { display: none; }
+.tqf--card .tqf-emailbtn { display: inline-block; margin: -2px 0 2px; }
+.tqf--card .tqf-field { margin-bottom: 10px; }

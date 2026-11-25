@@ -29,8 +29,8 @@
   <div class="tqf-body">
    <div class="tqf-cardwrap">
     <div class="tqf-meta">
-      <div class="tqf-prog" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <div class="tqf-metarow"><p class="tqf-steplbl" data-q-steplbl aria-live="polite">Step 1 of 4</p><p class="tqf-sub">About a minute &middot; No obligation</p></div>
+      <div class="tqf-prog" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="tqf-metarow"><p class="tqf-steplbl" data-q-steplbl aria-live="polite">Step 1 of 3</p><p class="tqf-sub">Under a minute &middot; No obligation</p></div>
     </div>
 
     <!-- 1 route (same layout as the landing-page quote card, 2026-11-25) -->
@@ -39,14 +39,14 @@
       <div class="tqf-route">
         <div class="tqf-loc" data-row="from">
           <label class="tqf-flbl" for="tqf-from">Pickup suburb</label>
-          <input class="tqf-inp tqf-locinp" id="tqf-from" autocomplete="off" autocapitalize="words" enterkeyhint="next" placeholder="e.g. Pyrmont">
+          <input class="tqf-inp tqf-locinp" id="tqf-from" autocomplete="off" autocapitalize="words" enterkeyhint="next" placeholder="Type a suburb, e.g. Pyrmont">
           <div data-q-slot="from"></div>
           <input class="tqf-inp tqf-co" data-q-unita placeholder="Unit, level or company name" aria-label="Pickup unit, level or company name" hidden>
           <div class="tqf-cor"><button class="tqf-cobtn" type="button" data-q-cobtn="a">+ Add unit or company</button></div>
         </div>
         <div class="tqf-loc tqf-loc--to" data-row="to">
           <label class="tqf-flbl" for="tqf-to">Delivery suburb</label>
-          <input class="tqf-inp tqf-locinp" id="tqf-to" autocomplete="off" autocapitalize="words" enterkeyhint="next" placeholder="e.g. Chatswood">
+          <input class="tqf-inp tqf-locinp" id="tqf-to" autocomplete="off" autocapitalize="words" enterkeyhint="next" placeholder="Type a suburb, e.g. Chatswood">
           <div data-q-slot="to"></div>
           <input class="tqf-inp tqf-co" data-q-unitb placeholder="Unit, level or company name" aria-label="Delivery unit, level or company name" hidden>
           <div class="tqf-cor"><button class="tqf-cobtn" type="button" data-q-cobtn="b">+ Add unit or company</button></div>
@@ -95,9 +95,18 @@
       </div>
     </section>
 
-    <!-- 4 access and timing -->
-    <section class="tqf-s" data-s="4" hidden>
-      <h2 class="tqf-lg">Access and timing</h2>
+    <!-- 4 old access screen: out of the path, kept because the script still fills these -->
+    <section class="tqf-s tqf-legacy" data-s="4" hidden>
+      <div class="tqf-seg" data-q-seg="A"></div><div class="tqf-fl" data-q-fl="A" hidden></div>
+      <div class="tqf-seg" data-q-seg="B"></div><div class="tqf-fl" data-q-fl="B" hidden></div>
+      <button class="tqf-sw" type="button" data-q-dis aria-label="Dismantling or assembly"></button>
+      <select data-q-timesel aria-label="Preferred time"></select>
+      <span data-q-recaptxt></span><button type="button" data-q-edit>Edit</button>
+    </section>
+
+    <!-- 5 last step: day, stairs, name and mobile -->
+    <section class="tqf-s" data-s="5" hidden>
+      <h2 class="tqf-lg">Last step: when, and who do we text?</h2>
       <p class="tqf-hint tqf-hint--first">When do you need it?</p>
       <div class="tqf-when" data-q-when>
         <button type="button" data-w="today"><b>Today</b><small data-q-todaymsg></small></button>
@@ -106,18 +115,14 @@
         <button type="button" data-w="sched"><b>Pick a date</b></button>
       </div>
       <div class="tqf-dates" data-q-dates hidden></div>
-      <select class="tqf-inp tqf-timesel" data-q-timesel aria-label="Preferred time"></select>
-      <p class="tqf-hint">Stairs or lift at pickup?</p>
-      <div class="tqf-seg" data-q-seg="A"></div><div class="tqf-fl" data-q-fl="A" hidden></div>
-      <p class="tqf-hint">Stairs or lift at delivery?</p>
-      <div class="tqf-seg" data-q-seg="B"></div><div class="tqf-fl" data-q-fl="B" hidden></div>
-      <div class="tqf-tog"><div><b>Dismantling or assembly?</b><small>Bed frames, tables, wardrobes</small></div><button class="tqf-sw" type="button" data-q-dis aria-label="Dismantling or assembly"></button></div>
-    </section>
-
-    <!-- 5 contact -->
-    <section class="tqf-s" data-s="5" hidden>
-      <h2 class="tqf-lg">Where should we send your price?</h2>
-      <div class="tqf-recap"><span data-q-recaptxt></span><button type="button" data-q-edit>Edit</button></div>
+      <p class="tqf-hint">Any stairs?</p>
+      <div class="tqf-seg tqf-seg--4" data-q-st4>
+        <button type="button" data-st="none">No stairs</button>
+        <button type="button" data-st="a">At pickup</button>
+        <button type="button" data-st="b">At delivery</button>
+        <button type="button" data-st="both">Both</button>
+      </div>
+      <p class="tqf-hint">Where should we send your price?</p>
       {%- comment -%} The details boxes sit inside Shopify's contact form: tapping one loads Shopify's invisible spam check (hCaptcha),
       which the form needs before it can send. Job details travel in the hidden fields. {%- endcomment -%}
       {%- form 'contact', id: 'tqf-form', class: 'tqf-cform', data-q-form: '' -%}
@@ -140,10 +145,11 @@
   
       <div class="tqf-field"><label for="tqf-name">Your name</label><input class="tqf-inp" id="tqf-name" autocomplete="name" placeholder="First name is fine"></div>
       <div class="tqf-field"><label for="tqf-phone">Mobile</label><input class="tqf-inp" id="tqf-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="04xx xxx xxx"></div>
-      <div class="tqf-field"><label for="tqf-email">Email</label><input class="tqf-inp" id="tqf-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+      <div class="tqf-field tqf-field--email" data-q-emailf hidden><label for="tqf-email">Email <span>(optional)</span></label><input class="tqf-inp" id="tqf-email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+      <button type="button" class="tqf-cobtn tqf-emailbtn" data-q-emailbtn>+ Add email (optional)</button>
       <div class="tqf-field tqf-legacy" hidden><label for="tqf-notes">Anything else? <span>(optional)</span></label><textarea class="tqf-inp" id="tqf-notes" rows="3" placeholder="e.g. narrow hallway, parking in the driveway"></textarea></div>
       {%- endform -%}
-      <p class="tqf-fine">We only use your details to quote your job.</p>
+      <p class="tqf-fine">We text you one fixed price. We only use your details to quote your job.</p>
     </section>
 
     <!-- 6 review -->
