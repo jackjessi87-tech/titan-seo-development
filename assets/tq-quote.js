@@ -52,7 +52,7 @@
       if (prefill.from && !st.from) { q('#tqf-from').value = prefill.from; search('from', prefill.from); q('#tqf-from').focus(); }
       else if (prefill.to && !st.to) { q('#tqf-to').value = prefill.to; search('to', prefill.to); }
       if (prefill.to && !st.to) q('#tqf-to').value = prefill.to;
-    } else { go(st.step === 7 || st.step === 2 ? 1 : st.step === 6 ? 5 : st.step, true); }
+    } else { go(st.step === 7 || st.step === 2 ? 1 : st.step === 6 || st.step === 4 ? 5 : st.step, true); }
   }
   function close() {
     if (!isOpen) return; root.hidden = true; isOpen = false; document.documentElement.classList.remove('tqf-open');
@@ -137,7 +137,7 @@
   });
 
   // ---------- navigation ----------
-  var LBL = { 1: 'Step 1 of 4', 2: 'Step 1 of 4', 3: 'Step 2 of 4', 4: 'Step 3 of 4', 5: 'Step 4 of 4', 6: 'Step 4 of 4', 7: 'Sent' };
+  var LBL = { 1: 'Step 1 of 3', 2: 'Step 1 of 3', 3: 'Step 2 of 3', 4: 'Step 3 of 3', 5: 'Step 3 of 3', 6: 'Step 3 of 3', 7: 'Sent' };
   // Easy version (2026-11-25): Where -> What -> When -> Your details. Screens 2 (big map) and 6 (review) are no longer in the path.
   var COMMON = ['sofa', 'fridge', 'washer', 'bed', 'mattress', 'dining', 'chair', 'wardrobe', 'tvunit', 'desk', 'box'];
   // Landing-card look (2026-11-25): home sizes as one-tap tiles, and two-tone icons drawn for this form
@@ -161,7 +161,7 @@
     more: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><circle class="f" cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="17"/><path class="s2" d="M24 16v16M16 24h16"/></svg>',
     other: '<svg class="tqf-duo" viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M24 5l17 9v20l-17 9-17-9V14z"/><path d="M24 5l17 9v20l-17 9-17-9V14zM7 14l17 9 17-9M24 23v20"/><path class="s2" d="M30 30l5-2.500"/></svg>'
   };
-  var PROG = [0, 1, 1, 2, 3, 4, 4, 4];
+  var PROG = [0, 1, 1, 2, 3, 3, 3, 3];
   var next = q('[data-q-next]');
   function go(n, back) {
     st.step = n; save(); root.setAttribute('data-step', n);
@@ -176,28 +176,28 @@
     if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); preRoute(); }
     if (n === 2) setTimeout(drawMap, 40);
     if (n === 3) { renderGrid(); renderList(); renderPhotos(); q('[data-q-note]').value = st.itemNote || ''; }
-    if (n === 4) renderAccess();
-    if (n === 5) renderRecap();
+    if (n === 4 || n === 5) renderAccess();
+    if (n === 5) { renderRecap(); showEmail(!!st.email); }
     if (n === 5) ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#tqf-' + k).value = st[k]; });
     if (n === 6) renderReview();
     validate();
     q('.tqf-body').scrollTop = 0;
   }
-  function goBack() { go(Math.max(1, st.step === 3 || st.step === 2 ? 1 : st.step - 1), true); }
+  function goBack() { go(st.step >= 4 ? 3 : 1, true); }
   q('[data-q-back]').addEventListener('click', goBack);
   function validate() {
     var ok = true, s = st.step;
     if (s === 1) ok = !!(st.from && st.to);
     if (s === 3) ok = count() > 0 || st.photos.length > 0 || !!(st.itemNote || '').trim() || !!q('[data-q-custom]').value.trim();
     if (s === 4) ok = !!(st.today || st.date || st.week);
-    if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim());
+    if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && (!st.email.trim() || /.+@.+\..+/.test(st.email.trim())) && !!(st.today || st.date || st.week);
     next.disabled = !ok;
     q('[data-q-sumn]').textContent = count();
   }
   next.addEventListener('click', function () {
     if (next.disabled) return;
     var s = st.step;
-    if (s === 1) return go(3); if (s === 3) { takeTyped(); return go(4); } if (s === 4) return go(5); if (s === 5 || s === 6) return submit();
+    if (s === 1) return go(3); if (s === 3) { takeTyped(); return go(5); } if (s === 4) return go(5); if (s === 5 || s === 6) return submit();
   });
 
   // ---------- step 1: addresses ----------
@@ -210,8 +210,9 @@
   // distance line and route on the small map, so there is no separate map screen to confirm
   function preRoute() {
     var el = q('[data-q-rline]'); if (!el) return;
-    var pw = q('.tqf-premap'); if (pw) { pw.classList.toggle('show', !!(st.from && st.to)); if (st.from && st.to) setTimeout(drawPre, 60); }
-    if (!st.from || !st.to) { el.hidden = true; return; }
+    var geo = !!(st.from && st.to && st.from.lat != null && st.to.lat != null);
+    var pw = q('.tqf-premap'); if (pw) { pw.classList.toggle('show', geo); if (geo) setTimeout(drawPre, 60); }
+    if (!geo) { el.hidden = true; return; }
     var show = function () { el.textContent = st.route.km + ' km, about ' + st.route.min + ' min drive'; el.hidden = false; drawPre(); };
     if (st.route) return show();
     el.hidden = true; var a = st.from, b = st.to;
@@ -295,8 +296,8 @@
     pmap.invalidateSize();
     if (player) player.remove(); player = L.layerGroup().addTo(pmap);
     var pts = [];
-    if (st.from) { pts.push([st.from.lat, st.from.lon]); L.marker(pts[pts.length - 1], { icon: pin('A', '#17357f') }).addTo(player); }
-    if (st.to) { pts.push([st.to.lat, st.to.lon]); L.marker(pts[pts.length - 1], { icon: pin('B', '#e1261c') }).addTo(player); }
+    if (st.from && st.from.lat != null) { pts.push([st.from.lat, st.from.lon]); L.marker(pts[pts.length - 1], { icon: pin('A', '#17357f') }).addTo(player); }
+    if (st.to && st.to.lat != null) { pts.push([st.to.lat, st.to.lon]); L.marker(pts[pts.length - 1], { icon: pin('B', '#e1261c') }).addTo(player); }
     if (pts.length === 2 && st.route && st.route.line) { L.polyline(st.route.line, { color: '#fff', weight: 9, opacity: .95 }).addTo(player); L.polyline(st.route.line, { color: '#17357f', weight: 5 }).addTo(player); }
     if (pts.length === 2) pmap.fitBounds(pts, { paddingTopLeft: [34, 34], paddingBottomRight: [34, 52], maxZoom: 14 });
     else if (pts.length) pmap.setView(pts[0], 13);
@@ -309,8 +310,14 @@
       q('[data-q-cn="' + bad + '"]').focus();
       return toast(bad === 'A' ? 'Add the pickup contact name and number' : 'Add the drop-off contact name and number');
     }
-    var miss = st.from ? 'to' : 'from'; q('#tqf-' + miss).focus();
-    toast(miss === 'from' ? 'Type the pickup and pick it from the list' : 'Type the drop-off and pick it from the list');
+    // typed but not picked from the list: match it quietly, or take what they typed (easiest version, 2026-11-25)
+    var keys = ['from', 'to'].filter(function (k) { return !st[k]; });
+    var empty = keys.filter(function (k) { return q('#tqf-' + k).value.trim().length < 3; })[0];
+    if (empty) { q('#tqf-' + empty).focus(); return toast(empty === 'from' ? 'Type the pickup suburb' : 'Type the delivery suburb'); }
+    var btn = this; btn.disabled = true; sugg.hidden = true; seq++;
+    Promise.all(keys.map(function (k) { var v = q('#tqf-' + k).value.trim(), plain = { text: v, lat: null, lon: null };
+      return lookup(v, 3).then(function (r) { if (!r[0]) return plain; var a = addrOf(r[0]); a.typed = v; return a; }).catch(function () { return plain; })
+        .then(function (a) { setAddr(k, a); }); })).then(function () { btn.disabled = false; go(3); });
   });
 
   // ---------- step 2: map ----------
@@ -564,8 +571,19 @@
       fl.innerHTML = '<span>How many flights?</span><div class="tqf-flc">' + [1, 2, 3, 4].map(function (n) { return '<button type="button" data-n="' + n + '" class="' + (st['flights' + end] === n ? 'on' : '') + '">' + (n === 4 ? '4+' : n) + '</button>'; }).join('') + '</div>';
     });
     q('[data-q-dis]').classList.toggle('on', !!st.dis);
-    renderWhen();
+    renderSt4(); renderWhen();
   }
+  // one stairs question on the last step: none, pickup, delivery or both
+  function renderSt4() {
+    var a = st.accessA === 'Stairs', b = st.accessB === 'Stairs', v = a && b ? 'both' : a ? 'a' : b ? 'b' : 'none';
+    qa('[data-q-st4] button').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-st') === v); });
+  }
+  (function () { var el = q('[data-q-st4]'); if (!el) return; el.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return; var v = b.getAttribute('data-st');
+    st.accessA = v === 'a' || v === 'both' ? 'Stairs' : 'No stairs'; st.accessB = v === 'b' || v === 'both' ? 'Stairs' : 'No stairs'; st.simple = true; save(); renderSt4(); }); })();
+  // email is optional and tucked behind a link
+  function showEmail(on) { var f = q('[data-q-emailf]'), b = q('[data-q-emailbtn]'); if (!f || !b) return; f.hidden = !on; b.hidden = !!on; }
+  (function () { var b = q('[data-q-emailbtn]'); if (b) b.addEventListener('click', function () { showEmail(true); q('#tqf-email').focus(); }); })();
   ['A', 'B'].forEach(function (end) {
     q('[data-q-seg="' + end + '"]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st['access' + end] = b.getAttribute('data-a'); save(); renderAccess(); validate(); });
     q('[data-q-fl="' + end + '"]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st['flights' + end] = +b.getAttribute('data-n') || 1; save(); renderAccess(); });
@@ -602,7 +620,7 @@
 
   // ---------- step 6: review + send ----------
   var crewTxt = function () { var a = crewAdvice(); return (st.crewPref ? 'Customer tapped "' + st.crewPref + '" on the homepage. ' : 'Not asked, Titan decides. ') + 'Our guide: ' + (a.rec === '2' ? '2 movers' : '1 mover') + ' (' + a.why + ')'; };
-  var accTxt = function (e) { var n = st['flights' + e]; return st['access' + e] === 'Stairs' ? 'Stairs, ' + (n >= 4 ? '4 or more flights' : n + ' flight' + (n > 1 ? 's' : '')) : (st['access' + e] || 'No stairs'); };
+  var accTxt = function (e) { var n = st['flights' + e]; if (st.simple && st['access' + e] === 'Stairs') return 'Stairs (flights not asked)'; return st['access' + e] === 'Stairs' ? 'Stairs, ' + (n >= 4 ? '4 or more flights' : n + ' flight' + (n > 1 ? 's' : '')) : (st['access' + e] || 'No stairs'); };
   var fmtDate = function (v) { if (!v) return 'Not chosen'; var p = v.split('-'); return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
   var itemsTxt = function () { return Object.keys(st.items).map(function (id) { var it = st.items[id]; return it.q + ' x ' + it.n + (it.v ? ' (' + it.v + ')' : ''); }); };
   // one-line recap above the contact boxes, like the landing card
@@ -631,8 +649,9 @@
     qa('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go'), true); }); });
   }
   function jobInfo() {
-    var pickup = st.from.text + (st.unitA ? ' (' + st.unitA + ')' : '') + (st.awayA ? ' - customer not there, ' + contactTxt('A') : ''),
-        dropoff = st.to.text + (st.unitB ? ' (' + st.unitB + ')' : '') + (st.awayB ? ' - customer not there, ' + contactTxt('B') : '');
+    var typed = function (a) { return a.typed && a.text.toLowerCase().indexOf(a.typed.toLowerCase()) !== 0 ? ' [customer typed: ' + a.typed + ']' : ''; };
+    var pickup = st.from.text + typed(st.from) + (st.unitA ? ' (' + st.unitA + ')' : '') + (st.awayA ? ' - customer not there, ' + contactTxt('A') : ''),
+        dropoff = st.to.text + typed(st.to) + (st.unitB ? ' (' + st.unitB + ')' : '') + (st.awayB ? ' - customer not there, ' + contactTxt('B') : '');
     return { pickup: pickup, dropoff: dropoff, access: 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B'), when: whenTxt(), estLine: 'about ' + hm(estimate().mins) + ' for the whole job' };
   }
   function submit() {
@@ -641,7 +660,7 @@
     if (phBusy) { next.disabled = true; next.textContent = 'Finishing photos…'; phQueue.then(function () { setTimeout(submit, 50); }); return; }
     var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
     var J = jobInfo(), ph = st.photos.slice();
-    set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
+    var EM = st.email.trim(); set('name', st.name.trim()); set('email', EM || (st.phone.replace(/\D/g, '') || 'customer') + '@no-email.titanexpress.com.au'); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
     var NOTE = (st.itemNote || '').trim();
     var IT = [itemsTxt().join(', '), NOTE ? 'Details: ' + NOTE : ''].filter(Boolean).join(' | ') || 'Not listed, see the photos';
     set('items', IT); set('crew', crewTxt()); set('access', J.access); set('when', J.when); set('date', jobDate());
@@ -649,7 +668,7 @@
     set('estimate', 'Not shown to customer: ' + J.estLine);
     set('body', ['QUOTE REQUEST', 'Pickup: ' + J.pickup, 'Drop-off: ' + J.dropoff, 'Items: ' + IT, 'Movers: ' + crewTxt(), 'Stairs: ' + J.access,
       'When: ' + J.when, st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '',
-      ph.length ? 'Photos (' + ph.length + '):\n' + ph.join('\n') : 'Photos: none added', st.notes ? 'Notes: ' + st.notes.trim() : '', 'Our time guide (not shown to customer): ' + J.estLine].filter(Boolean).join('\n'));
+      ph.length ? 'Photos (' + ph.length + '):\n' + ph.join('\n') : 'Photos: none added', EM ? '' : 'Email: not given (the address on this message is a placeholder, reply by text)', st.notes ? 'Notes: ' + st.notes.trim() : '', 'Our time guide (not shown to customer): ' + J.estLine].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'Sending…';
     try { sessionStorage.setItem('tq-quote-sent', '1'); sessionStorage.setItem('tq-quote-photos', String(ph.length)); } catch (e) {}
     // requestSubmit fires the submit event, so Shopify's spam check (hCaptcha) can add its token; plain submit() skips it (2026-11-24)
