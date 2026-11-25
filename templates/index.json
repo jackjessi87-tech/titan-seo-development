@@ -433,46 +433,67 @@
         "padding-block-end": 0
       }
     },
-    "17821329949be321d4": {
-      "type": "_blocks",
+    "titan_home_area": {
+      "type": "titan-home-area",
       "blocks": {
-        "google_reviews_rocket_app_block_KF9U3w": {
-          "type": "shopify://apps/ec-google-reviews/blocks/app-block/d11c8893-a181-4aff-a280-7446d42cec3b",
+        "review_1": {
+          "type": "review",
           "settings": {
-            "widget_layout": "map-badge"
+            "name": "Murray G.",
+            "tag": "Fridge move, short notice",
+            "text": "Sam was brilliant - communication, punctuality, service all excellent. Seamless fridge move at short notice and a great price. Will use again."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "name": "Carl A.",
+            "tag": "Sofa delivery",
+            "text": "Excellent furniture delivery service in Sydney. Fast, reliable, and professional from pickup to delivery. My sofa arrived safely, and the driver was friendly and punctual. Highly recommend for furniture delivery, Marketplace pickups, and same-day man and van services."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "name": "Sudha V.",
+            "tag": "Pickup & delivery",
+            "text": "Bilal was fantastic! Great communication, prompt updates, and a smooth pickup and delivery. He was very careful with the item and highly professional throughout. Highly recommend!"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "name": "Saif K.",
+            "tag": "Fridge delivery",
+            "text": "Very timely and co operative. Reasonable prices and handled the fridge very well. Wrapped it up and ensured was delivered without any problems. 5 stars and would use his service again. 100% reliable and honest service"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "name": "Karleene H.",
+            "tag": "Furniture delivery",
+            "text": "Super efficient, accurate delivery quote, on time and absolutely had to hardest, smallest kitchen to get into. I will definitely use them again and have no hesitation in recommending them to family and friends."
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "name": "Chandan P.",
+            "tag": "Lounge pickup",
+            "text": "He showed up right on time, picked up and delivered the lounge seamlessly, and provided incredibly prompt service. Highly recommend his top-notch work!"
           }
         }
       },
       "block_order": [
-        "google_reviews_rocket_app_block_KF9U3w"
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6"
       ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
+      "settings": {}
     },
     "1782099501ccad0658": {
       "type": "_blocks",
@@ -1074,7 +1095,7 @@
         "fact_3": "Same-day pickups, 7 days",
         "fact_4": "No minimum job size",
         "fact_5": "Fully insured, blankets and straps",
-        "fact_6": "5.0 on Google · 59 reviews",
+        "fact_6": "5.0 on Google · 67 reviews",
         "services_eyebrow": "Our services",
         "services_heading": "What We Pick Up and Deliver",
         "services_intro": "From one couch to a small move, these are the jobs we do every day across Sydney.",
@@ -1196,7 +1217,7 @@
     "blocks_pp44rW",
     "178152505238a9bab5",
     "17815179558092b9ce",
-    "17821329949be321d4",
+    "titan_home_area",
     "1782099501ccad0658",
     "1782123485603199c3",
     "17821243135a5f6c20",
