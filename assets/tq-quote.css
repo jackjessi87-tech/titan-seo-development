@@ -402,3 +402,13 @@ textarea.tqf-inp { resize: vertical; min-height: 84px; }
 .tqf-team b { display: block; font-size: .98rem; line-height: 1.25; }
 .tqf-team span { display: block; margin-top: 3px; font-size: .84rem; color: var(--mu); line-height: 1.4; }
 .tqf-donep { width: 100%; max-width: 420px; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 60%; border-radius: 16px; margin: 4px auto 16px; display: block; }
+
+/* Easy version (2026-11-25): four screens */
+.tqf-rline { position: absolute; left: 50%; transform: translateX(-50%); bottom: 100px; z-index: 600; margin: 0; width: max-content; max-width: calc(100% - 32px); padding: 8px 16px; border-radius: 999px; background: #fff; color: var(--n); font-weight: 800; font-size: .95rem; box-shadow: 0 4px 14px rgba(16,27,61,.2); }
+.tqf-rline[hidden] { display: none; }
+.tqf-chip--more { border-style: dashed; border-color: var(--n); color: var(--n); box-shadow: none; }
+.tqf-when--3 { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tqf-when--3 button { justify-content: center; text-align: center; min-height: 60px; padding: 12px 6px; }
+.tqf-when--3 button b { font-size: 1.02rem; }
+.tqf-when--3 button svg { display: none; }
+.tqf-when--3 button small { left: 0; right: 0; bottom: 4px; text-align: center; }

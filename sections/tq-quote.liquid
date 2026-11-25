@@ -15,11 +15,11 @@
     <div class="tqf-row">
       <button class="tqf-ib" type="button" data-q-back aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <img class="tqf-logo" src="{{ 'titan-favicon-192.png' | asset_url }}" alt="Titan Express" width="40" height="40">
-      <div class="tqf-brand"><b id="tqf-title">Free quote</b><small data-q-steplbl>Step 1 of 5</small></div>
+      <div class="tqf-brand"><b id="tqf-title">Free quote</b><small data-q-steplbl>Step 1 of 4</small></div>
       <a class="tqf-help" href="tel:{{ s.phone | remove: ' ' | remove_first: '0' | prepend: '+61' }}"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call us</a>
       <button class="tqf-ib" type="button" data-q-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
-    <div class="tqf-prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="tqf-prog" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   </header>
 
   <div class="tqf-body">
@@ -43,7 +43,8 @@
       <div class="tqf-card tqf-sugg" data-q-sugg hidden></div>
       <div class="tqf-premap">
         <div class="tqf-map" data-q-premap></div>
-        <button class="tqf-cta tqf-confirm1" type="button" data-q-go1>CONFIRM LOCATIONS</button>
+        <p class="tqf-rline" data-q-rline hidden></p>
+        <button class="tqf-cta tqf-confirm1" type="button" data-q-go1>NEXT</button>
       </div>
     </section>
 
@@ -71,7 +72,7 @@
         <p class="tqf-phmsg" data-q-phmsg hidden></p>
       </div>
       <div class="tqf-ibox">
-        <input data-q-custom placeholder="Item name…" aria-label="Type an item" autocomplete="off">
+        <input data-q-custom placeholder="Or type it, e.g. 3 seater sofa" aria-label="Type an item" autocomplete="off">
         <div class="tqf-ibq"><button type="button" data-q-cm aria-label="Fewer">−</button><span data-q-cq>1</span><button type="button" data-q-cp aria-label="More">+</button></div>
         <button class="tqf-iadd" type="button" data-q-cadd>Add</button>
       </div>
@@ -82,26 +83,27 @@
 
     <!-- 4 crew, access, time -->
     <section class="tqf-s" data-s="4" hidden>
-      <p class="tqf-eb">Step 3</p><h2 class="tqf-h">Stairs and day</h2>
+      <p class="tqf-eb">Step 3</p><h2 class="tqf-h">Day and stairs</h2>
       <p class="tqf-lede">Two quick questions and you're nearly done.</p>
       {%- if ph_gear != blank -%}
       <div class="tqf-team"><img src="{{ ph_gear | image_url: width: 240 }}" alt="Titan Express removalists moving a wrapped fridge on a trolley" width="240" height="240">
         <div><b>We send the right team for your job</b><span>{{ s.team_line }}</span></div></div>
       {%- endif -%}
+      <h3 class="tqf-h3 tqf-h3--q">When do you need it?</h3>
+      <div class="tqf-when tqf-when--sm tqf-when--3" data-q-when>
+        <button type="button" data-w="today"><b>Today</b><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><small data-q-todaymsg></small></button>
+        <button type="button" data-w="tmrw"><b>Tomorrow</b></button>
+        <button type="button" data-w="sched"><b>Pick a day</b><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14l1.5 1.5 3-3M13.5 15.5h3"/></svg></button>
+      </div>
+      <div class="tqf-dates" data-q-dates hidden></div>
+      <div class="tqf-lbl tqf-lbl--big">Preferred time</div>
+      <select class="tqf-inp tqf-timesel" data-q-timesel aria-label="Preferred time"></select>
       <h3 class="tqf-h3 tqf-h3--q">Any stairs?</h3>
       <div class="tqf-card tqf-stairs">
         <div class="tqf-strow"><div class="tqf-stl"><span class="tqf-pin tqf-pin--a">A</span><b>Pickup</b></div><div class="tqf-seg" data-q-seg="A"></div><div class="tqf-fl" data-q-fl="A" hidden></div></div>
         <div class="tqf-strow"><div class="tqf-stl"><span class="tqf-pin tqf-pin--b">B</span><b>Drop-off</b></div><div class="tqf-seg" data-q-seg="B"></div><div class="tqf-fl" data-q-fl="B" hidden></div></div>
       </div>
       <div class="tqf-card tqf-tog"><div><b>Dismantling or assembly</b><small>Bed frames, tables, wardrobes</small></div><button class="tqf-sw" type="button" data-q-dis aria-label="Dismantling or assembly"></button></div>
-      <h3 class="tqf-h3 tqf-h3--q">When do you need it?</h3>
-      <div class="tqf-when tqf-when--sm" data-q-when>
-        <button type="button" data-w="today"><b>Today</b><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><small data-q-todaymsg></small></button>
-        <button type="button" data-w="sched"><b>Pick a day</b><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14l1.5 1.5 3-3M13.5 15.5h3"/></svg></button>
-      </div>
-      <div class="tqf-dates" data-q-dates hidden></div>
-      <div class="tqf-lbl tqf-lbl--big">Preferred time</div>
-      <select class="tqf-inp tqf-timesel" data-q-timesel aria-label="Preferred time"></select>
     </section>
 
     <!-- 5 details -->
