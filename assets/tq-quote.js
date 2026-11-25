@@ -52,7 +52,7 @@
       if (prefill.from && !st.from) { q('#tqf-from').value = prefill.from; search('from', prefill.from); q('#tqf-from').focus(); }
       else if (prefill.to && !st.to) { q('#tqf-to').value = prefill.to; search('to', prefill.to); }
       if (prefill.to && !st.to) q('#tqf-to').value = prefill.to;
-    } else { go(st.step === 7 ? 1 : (st.step === 2 && !(st.from && st.to) ? 1 : st.step), true); }
+    } else { go(st.step === 7 || st.step === 2 ? 1 : st.step === 6 ? 5 : st.step, true); }
   }
   function close() {
     if (!isOpen) return; root.hidden = true; isOpen = false; document.documentElement.classList.remove('tqf-open');
@@ -61,9 +61,15 @@
   q('[data-q-close]').addEventListener('click', close);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen) { if (q('[data-q-bsheet]').classList.contains('on')) closeSheet(); else close(); } });
   window.addEventListener('popstate', function () { if (!isOpen) return; if (st.step > 1 && st.step < 7) { goBack(); try { history.pushState({ tqf: 1 }, '', '#quote-form'); } catch (e) {} } else close(); });
+  // Links that open this form: [data-tq-open-quote], anything ending in #quote-form, and the homepage's older "#instant-quote"
+  // buttons whenever the old form and the TX form are not on the page (2026-11-25).
+  var legacy = !document.getElementById('instant-quote') && !document.getElementById('txq');
   document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('[data-tq-open-quote], a[href$="#quote-form"]');
-    if (!a) return; e.preventDefault(); open();
+    var a = e.target.closest && e.target.closest('[data-tq-open-quote], a[href$="#quote-form"]' + (legacy ? ', a[href$="#instant-quote"]' : ''));
+    if (!a) return; e.preventDefault();
+    // crew buttons ("Quote two movers") carry data-crew: we do not ask about movers, but the email says which button they tapped
+    var c = a.getAttribute('data-crew'); if (c) { st.crewPref = c; save(); }
+    open();
   });
   // ---------- hero card (tq-book): suburb suggestions as you type, then straight to the route map ----------
   function lookup(text, limit) {
@@ -124,15 +130,17 @@
       Promise.all(need).then(function (r) {
         if (btn) btn.disabled = false; if (lbl) lbl.textContent = lblTxt;
         if (r[0]) setAddr('from', addrOf(r[0])); if (r[1]) setAddr('to', addrOf(r[1]));
-        if (r[0] && r[1]) { open(); go(2); }
+        if (r[0] && r[1]) { open(); go(1); }
         else open({ from: r[0] ? '' : txt.from, to: r[1] ? '' : txt.to });
       });
     });
   });
 
   // ---------- navigation ----------
-  var LBL = { 1: 'Step 1 of 5 · Route', 2: 'Step 1 of 5 · Check the route', 3: 'Step 2 of 5 · Items', 4: 'Step 3 of 5 · Stairs and day', 5: 'Step 4 of 5 · Your details', 6: 'Step 5 of 5 · Review', 7: 'Quote request sent' };
-  var PROG = [0, 1, 1, 2, 3, 4, 5, 6];
+  var LBL = { 1: 'Step 1 of 4 · Where', 2: 'Step 1 of 4 · Check the route', 3: 'Step 2 of 4 · What', 4: 'Step 3 of 4 · When', 5: 'Step 4 of 4 · Your details', 6: 'Step 4 of 4 · Review', 7: 'Quote request sent' };
+  // Easy version (2026-11-25): Where -> What -> When -> Your details. Screens 2 (big map) and 6 (review) are no longer in the path.
+  var COMMON = ['sofa', 'bed', 'mattress', 'fridge', 'washer', 'dining', 'chair', 'tvunit', 'wardrobe', 'desk', 'box'];
+  var PROG = [0, 1, 1, 2, 3, 4, 4, 4];
   var next = q('[data-q-next]');
   function go(n, back) {
     st.step = n; save();
@@ -142,9 +150,9 @@
     q('[data-q-back]').toggleAttribute('data-hide', n === 1 || n === 7);
     q('[data-q-foot]').hidden = n === 1 || n === 2 || n === 7;
     q('[data-q-sum]').hidden = n !== 3;
-    next.textContent = n === 6 ? 'SEND QUOTE REQUEST' : n === 1 ? 'SEE ROUTE' : 'NEXT';
+    next.textContent = n === 5 || n === 6 ? 'SEND MY QUOTE REQUEST' : 'NEXT';
     root.classList.toggle('tqf-white', n === 1 || n === 3);
-    if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); }
+    if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); preRoute(); }
     if (n === 2) setTimeout(drawMap, 40);
     if (n === 3) { renderGrid(); renderList(); renderPhotos(); }
     if (n === 4) renderAccess();
@@ -153,12 +161,12 @@
     validate();
     q('.tqf-body').scrollTop = 0;
   }
-  function goBack() { go(Math.max(1, st.step === 3 ? 2 : st.step === 2 ? 1 : st.step - 1), true); }
+  function goBack() { go(Math.max(1, st.step === 3 || st.step === 2 ? 1 : st.step - 1), true); }
   q('[data-q-back]').addEventListener('click', goBack);
   function validate() {
     var ok = true, s = st.step;
     if (s === 1) ok = !!(st.from && st.to);
-    if (s === 3) ok = count() > 0;
+    if (s === 3) ok = count() > 0 || st.photos.length > 0 || !!q('[data-q-custom]').value.trim();
     if (s === 4) ok = !!(st.today || st.date);
     if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim());
     next.disabled = !ok;
@@ -167,7 +175,7 @@
   next.addEventListener('click', function () {
     if (next.disabled) return;
     var s = st.step;
-    if (s === 1) return go(2); if (s === 3) return go(4); if (s === 4) return go(5); if (s === 5) return go(6); if (s === 6) return submit();
+    if (s === 1) return go(3); if (s === 3) { takeTyped(); return go(4); } if (s === 4) return go(5); if (s === 5 || s === 6) return submit();
   });
 
   // ---------- step 1: addresses ----------
@@ -175,7 +183,22 @@
   var pinSvg = '<svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
   function setAddr(key, val) {
     st[key] = val; st.route = null; q('#tqf-' + key).value = val ? val.text : '';
-    q('[data-row="' + key + '"]').classList.toggle('done', !!val); save(); validate(); drawPre();
+    q('[data-row="' + key + '"]').classList.toggle('done', !!val); save(); validate(); drawPre(); preRoute();
+  }
+  // distance line and route on the small map, so there is no separate map screen to confirm
+  function preRoute() {
+    var el = q('[data-q-rline]'); if (!el) return;
+    if (!st.from || !st.to) { el.hidden = true; return; }
+    var show = function () { el.textContent = st.route.km + ' km, about ' + st.route.min + ' min drive'; el.hidden = false; drawPre(); };
+    if (st.route) return show();
+    el.hidden = true; var a = st.from, b = st.to;
+    Promise.all([snap(a), snap(b)]).then(function (s) {
+      return fetch('https://router.project-osrm.org/route/v1/driving/' + s[0][0] + ',' + s[0][1] + ';' + s[1][0] + ',' + s[1][1] + '?overview=full&geometries=geojson').then(function (r) { return r.json(); });
+    }).then(function (j) {
+      if (st.from !== a || st.to !== b || !j.routes || !j.routes[0]) return;
+      var r = j.routes[0]; st.route = { km: +(r.distance / 1000).toFixed(1), min: Math.round(r.duration / 60), line: r.geometry.coordinates.map(function (c) { return [+c[1].toFixed(5), +c[0].toFixed(5)]; }) };
+      save(); show();
+    }).catch(function () {});
   }
   function label(p) {
     var street = [p.housenumber, p.street].filter(Boolean).join(' ');
@@ -251,14 +274,15 @@
     var pts = [];
     if (st.from) { pts.push([st.from.lat, st.from.lon]); L.marker(pts[pts.length - 1], { icon: pin('A', '#17357f') }).addTo(player); }
     if (st.to) { pts.push([st.to.lat, st.to.lon]); L.marker(pts[pts.length - 1], { icon: pin('B', '#e1261c') }).addTo(player); }
-    if (pts.length === 2) pmap.fitBounds(pts, { padding: [50, 60], maxZoom: 14 });
+    if (pts.length === 2 && st.route && st.route.line) { L.polyline(st.route.line, { color: '#fff', weight: 9, opacity: .95 }).addTo(player); L.polyline(st.route.line, { color: '#17357f', weight: 5 }).addTo(player); }
+    if (pts.length === 2) pmap.fitBounds(pts, { paddingTopLeft: [50, 40], paddingBottomRight: [50, 130], maxZoom: 14 });
     else if (pts.length) pmap.setView(pts[0], 13);
     else pmap.setView([-33.84, 151.1], 10);
   }
   q('[data-q-go1]').addEventListener('click', function () {
     if (st.from && st.to) {
       var bad = !contactOk('A') ? 'A' : !contactOk('B') ? 'B' : '';
-      if (!bad) return go(2);
+      if (!bad) return go(3);
       q('[data-q-cn="' + bad + '"]').focus();
       return toast(bad === 'A' ? 'Add the pickup contact name and number' : 'Add the drop-off contact name and number');
     }
@@ -322,13 +346,15 @@
   };
   function renderGrid() {
     var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0; });
-    grid.innerHTML = ITEMS.filter(function (i) { return !i.custom; }).map(function (i) { return chip('data-k="' + i.k + '"', i.k, i.n, qtyOf(i.k)); }).join('') +
+    grid.innerHTML = ITEMS.filter(function (i) { return !i.custom && (st.more || COMMON.indexOf(i.k) > -1 || qtyOf(i.k)); }).map(function (i) { return chip('data-k="' + i.k + '"', i.k, i.n, qtyOf(i.k)); }).join('') +
       own.map(function (id) { var it = st.items[id]; return chip('data-own="' + esc(id) + '"', 'other', esc(it.n), it.q); }).join('') +
+      '<button type="button" class="tqf-chip tqf-chip--more" data-more><span class="cn">' + (st.more ? 'Show fewer' : 'More items') + '</span></button>' +
       '<button type="button" class="tqf-chip tqf-chip--own" data-k="other"><span class="cn">+ Something else</span></button>';
   }
   function renderTiles() { renderGrid(); }
   grid.addEventListener('click', function (e) {
     var t = e.target.closest('.tqf-chip'); if (!t) return;
+    if (t.hasAttribute('data-more')) { st.more = !st.more; save(); return renderGrid(); }
     var oid = t.getAttribute('data-own'); if (oid) { var o = st.items[oid]; if (o) addItem(oid, o.k, o.n, o.v, 1); return; }
     var it = BYK[t.getAttribute('data-k')];
     if (it.custom) { q('[data-q-custom]').focus(); return toast('Type the item name, then tap Add'); }
@@ -359,6 +385,13 @@
     if (hit) addItem(hit.k, hit.k, hit.n, '', cq); else addItem('custom:' + n.toLowerCase(), 'other', n, '', cq);
     toast('Added ' + cq + ' × ' + (hit ? hit.n : n)); cq = 1; q('[data-q-cq]').textContent = 1;
   }
+  // typed but did not tap Add: take it as an item when they move on
+  function takeTyped() {
+    var v = q('[data-q-custom]').value.trim(); if (!v) return;
+    var n = v.charAt(0).toUpperCase() + v.slice(1); q('[data-q-custom]').value = '';
+    addItem('custom:' + n.toLowerCase(), 'other', n, '', cq); cq = 1; q('[data-q-cq]').textContent = 1;
+  }
+  q('[data-q-custom]').addEventListener('input', validate);
   q('[data-q-cadd]').addEventListener('click', addCustom);
   q('[data-q-custom]').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addCustom(); } });
   function openSheet(it) {
@@ -463,7 +496,7 @@
       if (files.length > room) { files = files.slice(0, Math.max(0, room)); phMsg('Up to ' + PH_MAX + ' photos. You can text us any others.'); }
       files.forEach(function (file) {
         phBusy++;
-        phQueue = phQueue.then(function () { return uploadOne(file); }).then(function (url) { st.photos.push(url); save(); },
+        phQueue = phQueue.then(function () { return uploadOne(file); }).then(function (url) { st.photos.push(url); save(); validate(); },
           function () { phMsg('A photo did not upload. No problem, you can text it to ' + PHONE + ' after sending.'); })
           .then(function () { phBusy--; renderPhotos(); });
       });
@@ -483,6 +516,7 @@
   // Stairs made simple (2026-11-25): "No stairs" is already picked at both ends, so most people tap nothing here.
   var ACC = [['No stairs', '<path d="M3 20h18M5 20V10l7-5 7 5v10"/><path d="M10 20v-5h4v5"/>'], ['Stairs', '<path d="M3 20h5v-4h4v-4h4V8h5"/>'], ['Lift', '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 9l3-3 3 3M9 15l3 3 3-3"/>']];
   function iso(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function tmrwIso() { var d = new Date(); d.setDate(d.getDate() + 1); return iso(d); }
   function renderAccess() {
     ['A', 'B'].forEach(function (end) {
       var seg = q('[data-q-seg="' + end + '"]'), k = 'access' + end;
@@ -502,10 +536,13 @@
   function renderWhen() {
     var open = todayOpen();
     if (st.today && !open) st.today = false;
-    qa('[data-q-when] button').forEach(function (b) { var t = b.getAttribute('data-w') === 'today'; b.classList.toggle('on', t ? !!st.today : !st.today); if (t) b.disabled = !open; });
+    var tmv = tmrwIso();
+    qa('[data-q-when] button').forEach(function (b) { var w = b.getAttribute('data-w');
+      b.classList.toggle('on', w === 'today' ? !!st.today : w === 'tmrw' ? (!st.today && st.date === tmv) : (!st.today && (!!st.pick || (!!st.date && st.date !== tmv))));
+      if (w === 'today') b.disabled = !open; });
     q('[data-q-todaymsg]').textContent = open ? '' : 'Too late for today';
-    var dates = q('[data-q-dates]'); dates.hidden = !!st.today;
-    if (!st.today) {
+    var dates = q('[data-q-dates]'); dates.hidden = !!st.today || !(st.pick || (st.date && st.date !== tmv));
+    if (!dates.hidden) {
       var now = new Date(), html = '';
       for (var i = 1; i < 15; i++) { var d = new Date(now); d.setDate(now.getDate() + i); var v = iso(d);
         html += '<button type="button" data-d="' + v + '" class="' + (st.date === v ? 'on' : '') + '"><small>' + (i === 1 ? 'Tmrw' : d.toLocaleDateString('en-AU', { weekday: 'short' })) + '</small><b>' + d.getDate() + '</b><span>' + d.toLocaleDateString('en-AU', { month: 'short' }) + '</span></button>'; }
@@ -516,7 +553,9 @@
     for (var m = start; m <= LAST; m += 30) { var t = tTxt(m); opts += '<option value="' + t + '"' + (st.time === t ? ' selected' : '') + '>Around ' + t + '</option>'; }
     q('[data-q-timesel]').innerHTML = opts; q('[data-q-timesel]').value = st.time || '';
   }
-  q('[data-q-when]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b || b.disabled) return; st.today = b.getAttribute('data-w') === 'today'; if (st.today) st.date = ''; save(); renderWhen(); validate(); });
+  q('[data-q-when]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b || b.disabled) return; var w = b.getAttribute('data-w'); st.today = w === 'today'; st.pick = w === 'sched';
+    if (w === 'today') st.date = ''; if (w === 'tmrw') st.date = tmrwIso(); if (w === 'sched' && st.date === tmrwIso()) st.date = '';
+    save(); renderWhen(); validate(); });
   q('[data-q-dates]').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.date = b.getAttribute('data-d'); save(); renderWhen(); validate(); });
   q('[data-q-timesel]').addEventListener('change', function () { st.time = this.value; save(); validate(); });
 
@@ -524,7 +563,7 @@
   ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#tqf-' + k).addEventListener('input', function () { st[k] = this.value; save(); validate(); }); });
 
   // ---------- step 6: review + send ----------
-  var crewTxt = function () { var a = crewAdvice(); return 'Not asked, Titan decides. Our guide: ' + (a.rec === '2' ? '2 movers' : '1 mover') + ' (' + a.why + ')'; };
+  var crewTxt = function () { var a = crewAdvice(); return (st.crewPref ? 'Customer tapped "' + st.crewPref + '" on the homepage. ' : 'Not asked, Titan decides. ') + 'Our guide: ' + (a.rec === '2' ? '2 movers' : '1 mover') + ' (' + a.why + ')'; };
   var accTxt = function (e) { var n = st['flights' + e]; return st['access' + e] === 'Stairs' ? 'Stairs, ' + (n >= 4 ? '4 or more flights' : n + ' flight' + (n > 1 ? 's' : '')) : (st['access' + e] || 'No stairs'); };
   var fmtDate = function (v) { if (!v) return 'Not chosen'; var p = v.split('-'); return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
   var itemsTxt = function () { return Object.keys(st.items).map(function (id) { var it = st.items[id]; return it.q + ' x ' + it.n + (it.v ? ' (' + it.v + ')' : ''); }); };
@@ -558,10 +597,11 @@
     var set = function (n, v) { var el = f.querySelector('[data-f="' + n + '"]'); if (el) el.value = v; };
     var J = jobInfo(), ph = st.photos.slice();
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
-    set('items', itemsTxt().join(', ')); set('crew', crewTxt()); set('access', J.access); set('when', J.when); set('date', jobDate());
+    var IT = itemsTxt().join(', ') || 'Not listed, see the photos';
+    set('items', IT); set('crew', crewTxt()); set('access', J.access); set('when', J.when); set('date', jobDate());
     set('photos', ph.length ? ph.join('\n') : 'None added');
     set('estimate', 'Not shown to customer: ' + J.estLine);
-    set('body', ['QUOTE REQUEST', 'Pickup: ' + J.pickup, 'Drop-off: ' + J.dropoff, 'Items: ' + itemsTxt().join(', '), 'Movers: ' + crewTxt(), 'Stairs: ' + J.access,
+    set('body', ['QUOTE REQUEST', 'Pickup: ' + J.pickup, 'Drop-off: ' + J.dropoff, 'Items: ' + IT, 'Movers: ' + crewTxt(), 'Stairs: ' + J.access,
       'When: ' + J.when, st.dis ? 'Needs dismantling / assembly' : '', st.route ? 'Route: ' + st.route.km + ' km, about ' + st.route.min + ' min drive' : '',
       ph.length ? 'Photos (' + ph.length + '):\n' + ph.join('\n') : 'Photos: none added', st.notes ? 'Notes: ' + st.notes.trim() : '', 'Our time guide (not shown to customer): ' + J.estLine].filter(Boolean).join('\n'));
     next.disabled = true; next.textContent = 'SENDING…';
