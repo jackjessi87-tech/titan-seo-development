@@ -376,34 +376,23 @@
   var chip = function (attr, k, name, n) {
     return '<button type="button" class="tqf-chip' + (n ? ' on' : '') + '" ' + attr + '><span class="ci">' + icon(k) + '</span><span class="cn">' + name + '</span>' + (n ? '<span class="q">' + n + '</span>' : '') + '</button>';
   };
-  function tile(attr, k, name, n) {
-    return '<button type="button" class="tqf-chip tqf-tile' + (n ? ' on' : '') + '" ' + attr + '><span class="ti">' + (DUO[k] || icon(k)) + '</span><span class="cn">' + name + '</span>' +
-      (n ? '<span class="q">' + n + '</span><span class="mn" data-minus role="button" aria-label="One less">&minus;</span>' : '') + '</button>';
+  // simple version: the item's name on a button, tap on and tap off
+  function tile(attr, k, name, on) {
+    return '<button type="button" class="tqf-chip tqf-pill' + (on ? ' on' : '') + '" ' + attr + ' aria-pressed="' + (on ? 'true' : 'false') + '"><span class="ti">' + (DUO[k] || DUO.other) + '</span><span class="cn">' + name + '</span></button>';
   }
   function renderGrid() {
-    var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0; });
-    var mv = ITEMS.filter(function (i) { return i.c === 'move'; });
-    var rest = ITEMS.filter(function (i) { return !i.custom && i.c !== 'move' && (st.more || COMMON.indexOf(i.k) > -1 || qtyOf(i.k)); });
-    rest.sort(function (x, y) { var ix = COMMON.indexOf(x.k), iy = COMMON.indexOf(y.k); return (ix < 0 ? 99 : ix) - (iy < 0 ? 99 : iy); });
-    grid.innerHTML = '<p class="tqf-hint tqf-hint--first">Moving home?</p><div class="tqf-tiles tqf-tiles--mv">' + mv.map(function (i) { return tile('data-k="' + i.k + '"', i.k, i.t, qtyOf(i.k) ? '✓' : 0); }).join('') + '</div>' +
-      '<p class="tqf-hint">Or just a few items? Tap all that apply</p><div class="tqf-tiles">' +
-      rest.map(function (i) { return tile('data-k="' + i.k + '"', i.k, i.n, qtyOf(i.k)); }).join('') +
-      own.map(function (id) { var it = st.items[id]; return tile('data-own="' + esc(id) + '"', 'other', esc(it.n), it.q); }).join('') +
-      '<button type="button" class="tqf-chip tqf-tile tqf-tile--more" data-more><span class="ti">' + DUO.more + '</span><span class="cn">' + (st.more ? 'Show fewer' : 'More items') + '</span></button></div>';
+    var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0 || COMMON.indexOf(st.items[id].k) < 0; });
+    grid.innerHTML = '<p class="tqf-hint tqf-hint--first">Tap what you are moving</p><div class="tqf-pills">' +
+      COMMON.map(function (k) { return tile('data-k="' + k + '"', k, BYK[k].n, qtyOf(k)); }).join('') +
+      own.map(function (id) { var it = st.items[id]; return tile('data-own="' + esc(id) + '"', 'other', esc(it.t || it.n), 1); }).join('') + '</div>';
   }
   function renderTiles() { renderGrid(); }
   grid.addEventListener('click', function (e) {
     var t = e.target.closest('.tqf-chip'); if (!t) return;
-    var less = !!e.target.closest('[data-minus]');
-    if (t.hasAttribute('data-more')) { st.more = !st.more; save(); return renderGrid(); }
-    var oid = t.getAttribute('data-own'); if (oid) { var o = st.items[oid]; if (o) addItem(oid, o.k, o.n, o.v, less ? -1 : 1); return; }
+    var oid = t.getAttribute('data-own');
+    if (oid) { delete st.items[oid]; save(); renderGrid(); renderList(); return validate(); }
     var it = BYK[t.getAttribute('data-k')]; if (!it) return;
-    if (it.c === 'move') { // pick one home size, tap again to clear it
-      var had = qtyOf(it.k); ITEMS.forEach(function (m) { if (m.c === 'move') delete st.items[m.k]; });
-      if (!had) st.items[it.k] = { k: it.k, n: it.n, v: '', q: 1 };
-      save(); renderGrid(); renderList(); return validate();
-    }
-    if (less) { var ids = Object.keys(st.items).filter(function (id) { return st.items[id].k === it.k; }); if (ids.length) { var x = st.items[ids[ids.length - 1]]; addItem(ids[ids.length - 1], x.k, x.n, x.v, -1); } return; }
+    if (qtyOf(it.k)) { Object.keys(st.items).forEach(function (id) { if (st.items[id].k === it.k) delete st.items[id]; }); save(); renderGrid(); renderList(); return validate(); }
     addItem(it.k, it.k, it.n, '', 1); try { if (navigator.vibrate) navigator.vibrate(8); } catch (err) {}
   });
   function renderList() {

@@ -544,3 +544,12 @@ textarea.tqf-inp { resize: vertical; min-height: 84px; }
 .tqf--card .tqf-field--email[hidden], .tqf--card .tqf-emailbtn[hidden] { display: none; }
 .tqf--card .tqf-emailbtn { display: inline-block; margin: -2px 0 2px; }
 .tqf--card .tqf-field { margin-bottom: 10px; }
+
+/* simple items (2026-11-25): names on one-tap buttons */
+.tqf--card .tqf-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.tqf--card .tqf-pill { display: inline-flex; flex-direction: row; align-items: center; gap: 8px; min-height: 50px; padding: 8px 16px 8px 10px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; box-shadow: none; font-size: .96rem; font-weight: 700; color: var(--b9); transition: border-color .15s, background-color .15s, transform .12s; }
+.tqf--card .tqf-pill .ti { display: grid; place-items: center; width: 28px; height: 28px; flex: none; }
+.tqf--card .tqf-pill .ti svg { width: 28px; height: 28px; display: block; color: var(--b6); }
+.tqf--card .tqf-pill.on { padding-left: 10px; border-color: var(--b6); background: var(--b6); color: #fff; box-shadow: 0 6px 16px rgba(11,92,255,.28); }
+.tqf--card .tqf-pill.on .ti svg { color: #fff; }
+.tqf--card .tqf-pill:active { transform: scale(.97); }
