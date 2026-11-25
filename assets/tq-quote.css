@@ -553,3 +553,7 @@ textarea.tqf-inp { resize: vertical; min-height: 84px; }
 .tqf--card .tqf-pill.on { padding-left: 10px; border-color: var(--b6); background: var(--b6); color: #fff; box-shadow: 0 6px 16px rgba(11,92,255,.28); }
 .tqf--card .tqf-pill.on .ti svg { color: #fff; }
 .tqf--card .tqf-pill:active { transform: scale(.97); }
+
+/* write-only items (2026-11-25) */
+.tqf--card .tqf-chips:empty { display: none; }
+.tqf--card .tqf-s3 textarea.tqf-inp { min-height: 104px; font-size: 17px; }

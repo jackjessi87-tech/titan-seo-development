@@ -175,7 +175,7 @@
     root.classList.toggle('tqf-white', n === 1 || n === 3);
     if (n === 1) { setTimeout(drawPre, 40); setTimeout(drawPre, 450); preRoute(); }
     if (n === 2) setTimeout(drawMap, 40);
-    if (n === 3) { renderGrid(); renderList(); renderPhotos(); q('[data-q-note]').value = st.itemNote || ''; }
+    if (n === 3) { renderGrid(); renderList(); renderPhotos(); q('[data-q-note]').value = st.itemNote || ''; setTimeout(function () { try { q('[data-q-note]').focus(); } catch (e) {} }, 350); }
     if (n === 4 || n === 5) renderAccess();
     if (n === 5) renderRecap();
     if (n === 5) ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#tqf-' + k).value = st[k]; });
@@ -188,7 +188,7 @@
   function validate() {
     var ok = true, s = st.step;
     if (s === 1) ok = !!(st.from && st.to);
-    if (s === 3) ok = count() > 0 || st.photos.length > 0 || !!(st.itemNote || '').trim() || !!q('[data-q-custom]').value.trim();
+    if (s === 3) ok = count() > 0 || st.photos.length > 0 || (st.itemNote || '').trim().length > 1 || !!q('[data-q-custom]').value.trim();
     if (s === 4) ok = !!(st.today || st.date || st.week);
     if (s === 5) ok = st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length >= 9 && /.+@.+\..+/.test(st.email.trim()) && !!(st.today || st.date || st.week);
     next.disabled = !ok;
@@ -381,10 +381,9 @@
     return '<button type="button" class="tqf-chip tqf-pill' + (on ? ' on' : '') + '" ' + attr + ' aria-pressed="' + (on ? 'true' : 'false') + '"><span class="ti">' + (DUO[k] || DUO.other) + '</span><span class="cn">' + name + '</span></button>';
   }
   function renderGrid() {
-    var own = Object.keys(st.items).filter(function (id) { return id.indexOf('custom:') === 0 || COMMON.indexOf(st.items[id].k) < 0; });
-    grid.innerHTML = '<p class="tqf-hint tqf-hint--first">Tap what you are moving</p><div class="tqf-pills">' +
-      COMMON.map(function (k) { return tile('data-k="' + k + '"', k, BYK[k].n, qtyOf(k)); }).join('') +
-      own.map(function (id) { var it = st.items[id]; return tile('data-own="' + esc(id) + '"', 'other', esc(it.t || it.n), 1); }).join('') + '</div>';
+    // write-only version: no item buttons. Anything tapped in an older version is dropped so the email matches what the customer sees.
+    if (Object.keys(st.items).length) { st.items = {}; save(); }
+    grid.innerHTML = '';
   }
   function renderTiles() { renderGrid(); }
   grid.addEventListener('click', function (e) {
@@ -610,7 +609,7 @@
   ['name', 'phone', 'email', 'notes'].forEach(function (k) { q('#tqf-' + k).addEventListener('input', function () { st[k] = this.value; save(); validate(); }); });
 
   // ---------- step 6: review + send ----------
-  var crewTxt = function () { var a = crewAdvice(); return (st.crewPref ? 'Customer tapped "' + st.crewPref + '" on the homepage. ' : 'Not asked, Titan decides. ') + 'Our guide: ' + (a.rec === '2' ? '2 movers' : '1 mover') + ' (' + a.why + ')'; };
+  var crewTxt = function () { var a = crewAdvice(); var pre = st.crewPref ? 'Customer tapped "' + st.crewPref + '" on the homepage. ' : 'Not asked, Titan decides. '; if (!count()) return pre.trim(); return pre + 'Our guide: ' + (a.rec === '2' ? '2 movers' : '1 mover') + ' (' + a.why + ')'; };
   var accTxt = function (e) { var n = st['flights' + e]; if (st.simple && st['access' + e] === 'Stairs') return 'Stairs (flights not asked)'; return st['access' + e] === 'Stairs' ? 'Stairs, ' + (n >= 4 ? '4 or more flights' : n + ' flight' + (n > 1 ? 's' : '')) : (st['access' + e] || 'No stairs'); };
   var fmtDate = function (v) { if (!v) return 'Not chosen'; var p = v.split('-'); return new Date(+p[0], p[1] - 1, +p[2]).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
   var itemsTxt = function () { return Object.keys(st.items).map(function (id) { var it = st.items[id]; return it.q + ' x ' + it.n + (it.v ? ' (' + it.v + ')' : ''); }); };
@@ -643,7 +642,7 @@
     var typed = function (a) { return a.typed && a.text.toLowerCase().indexOf(a.typed.toLowerCase()) !== 0 ? ' [customer typed: ' + a.typed + ']' : ''; };
     var pickup = st.from.text + typed(st.from) + (st.unitA ? ' (' + st.unitA + ')' : '') + (st.awayA ? ' - customer not there, ' + contactTxt('A') : ''),
         dropoff = st.to.text + typed(st.to) + (st.unitB ? ' (' + st.unitB + ')' : '') + (st.awayB ? ' - customer not there, ' + contactTxt('B') : '');
-    return { pickup: pickup, dropoff: dropoff, access: 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B'), when: whenTxt(), estLine: 'about ' + hm(estimate().mins) + ' for the whole job' };
+    return { pickup: pickup, dropoff: dropoff, access: 'Pickup: ' + accTxt('A') + ' | Drop-off: ' + accTxt('B'), when: whenTxt(), estLine: count() ? 'about ' + hm(estimate().mins) + ' for the whole job' : 'not worked out, the items were written in' };
   }
   function submit() {
     var f = q('[data-q-form]'); if (!f) return;
@@ -653,7 +652,7 @@
     var J = jobInfo(), ph = st.photos.slice();
     set('name', st.name.trim()); set('email', st.email.trim()); set('phone', st.phone.trim()); set('pickup', J.pickup); set('dropoff', J.dropoff);
     var NOTE = (st.itemNote || '').trim();
-    var IT = [itemsTxt().join(', '), NOTE ? 'Details: ' + NOTE : ''].filter(Boolean).join(' | ') || 'Not listed, see the photos';
+    var IT = [itemsTxt().join(', '), NOTE ? (count() ? 'Details: ' : '') + NOTE : ''].filter(Boolean).join(' | ') || 'Not listed, see the photos';
     set('items', IT); set('crew', crewTxt()); set('access', J.access); set('when', J.when); set('date', jobDate());
     set('photos', ph.length ? ph.join('\n') : 'None added');
     set('estimate', 'Not shown to customer: ' + J.estLine);
