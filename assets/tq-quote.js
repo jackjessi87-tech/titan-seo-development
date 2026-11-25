@@ -228,6 +228,7 @@
   // "I won't be at the pickup / drop-off location" -> contact name and number (like Yellow Express, 2026-11-24)
   ['A', 'B'].forEach(function (e) {
     var ck = q('[data-q-awayck="' + e + '"]'), box = q('[data-q-awayf="' + e + '"]'), cn = q('[data-q-cn="' + e + '"]'), cp = q('[data-q-cp2="' + e + '"]');
+    if (!ck || !box || !cn || !cp) { st['away' + e] = false; return; }   // option removed from the form (2026-11-25)
     ck.checked = !!st['away' + e]; box.hidden = !ck.checked; cn.value = st['cn' + e] || ''; cp.value = st['cp' + e] || '';
     ck.addEventListener('change', function () { st['away' + e] = ck.checked; box.hidden = !ck.checked; save(); if (ck.checked) cn.focus(); });
     cn.addEventListener('input', function () { st['cn' + e] = cn.value; save(); });
