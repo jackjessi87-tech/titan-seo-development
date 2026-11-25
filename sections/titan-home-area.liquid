@@ -171,7 +171,7 @@
       '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/>';
     var pins = map.querySelector('[data-tha-pins]');
     var html = '<span class="tha-pin tha-pin--cbd" style="left:' + cx + 'px;top:' + cy + 'px"><i></i><span>Sydney CBD</span></span>';
-    var boxes = [[0, 0, 230, 54], [cx - 48, cy - 40, cx + 48, cy + 12]];
+    var boxes = [[0, 0, 230, 54], [cx - 46, cy - 38, cx + 46, cy - 10], [cx - 11, cy - 11, cx + 11, cy + 11]];
     function hit(b){ for (var k = 0; k < boxes.length; k++) { var o = boxes[k]; if (b[0] < o[2] && b[2] > o[0] && b[1] < o[3] && b[3] > o[1]) return true; } return false; }
     (PINS || '').split(';').forEach(function(p){
       var a = p.split('|'); if (a.length < 3) return;
