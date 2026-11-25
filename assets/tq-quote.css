@@ -536,3 +536,4 @@ textarea.tqf-inp { resize: vertical; min-height: 84px; }
 .tqf--card .tqf-tile .ti svg { width: 44px; height: 44px; }
 .tqf--card .tqf-tile { min-height: 94px; }
 .tqf--card .tqf-tiles--mv .tqf-tile { min-height: 88px; }
+.tqf--card .tqf-when button { grid-template-columns: 1fr; justify-content: stretch; }
