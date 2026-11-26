@@ -378,7 +378,7 @@
                 <label class="tll-chip"><input type="checkbox" value="Other items"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Other</span></label>
               </div>
               <label class="tll-field"><span data-details-label>What are you moving?</span>
-                <textarea name="contact[body]" rows="2" placeholder="e.g. 3-seater leather sofa and a queen bed" required data-details></textarea></label>
+                <textarea name="contact[body]" rows="2" placeholder="e.g. 3-seater sofa, queen bed" required data-details></textarea></label>
               <input type="hidden" value="" data-body-out>
               <input type="hidden" name="contact[crew]" value="" disabled data-crew-out>
             </fieldset>
@@ -1139,7 +1139,7 @@
       if (!m) [].slice.call(form.querySelectorAll('[name="tll-boxes"]')).forEach(function (r) { r.checked = false; });
       if (itemsLegend) itemsLegend.textContent = m ? 'Tell us about your move' : 'What are we moving?';
       if (itemsLabel) itemsLabel.textContent = m ? 'Big items coming with you (tap all that apply)' : 'Or just a few items? Tap all that apply';
-      if (details) details.placeholder = m ? 'e.g. queen bed, 3-seater sofa, fridge and about 15 boxes' : 'e.g. 3-seater leather sofa and a queen bed';
+      if (details) details.placeholder = m ? 'e.g. queen bed, sofa, 15 boxes' : 'e.g. 3-seater sofa, queen bed';
     }
     homes.forEach(function (c) {
       c.addEventListener('change', function () {
@@ -1185,6 +1185,7 @@
     function show(i, focus) {
       current = i;
       steps.forEach(function (st, n) { st.hidden = n !== i; });
+      if (details && details.value) grow();
       var last = i === steps.length - 1;
       back.hidden = i === 0;
       next.hidden = last;
@@ -1243,7 +1244,7 @@
         return d.step || 0;
       } catch (e) { return -1; }
     }
-    function grow() { if (!details) return; try { details.style.height = 'auto'; details.style.height = (details.scrollHeight + 3) + 'px'; } catch (e) {} }
+    function grow() { if (!details || !details.offsetParent) return; try { details.style.height = 'auto'; details.style.height = (details.scrollHeight + 3) + 'px'; } catch (e) {} }
     if (details) details.addEventListener('input', grow);
     next.addEventListener('click', function () { if (check(current)) show(current + 1, true); });
     back.addEventListener('click', function () { clearErr(); show(current - 1, true); });
@@ -1837,7 +1838,7 @@
     .tll-hq .tll-chip span { min-height:58px; gap:3px; padding:6px 4px; }
     .tll-hq .tll-items--home .tll-chip span { min-height:56px; }
     .tll .tll-hq .tll-chip svg { width:22px; height:22px; }
-    .tll-hq.tll-hq .tll-form.is-stepped .tll-field textarea { height:54px; min-height:54px; }
+    .tll-hq.tll-hq .tll-form.is-stepped .tll-field textarea { height:54px; min-height:54px; overflow-y:hidden; resize:none; }
   }
   .tll-photo-cta { display:flex; align-items:center; gap:12px; width:100%; box-sizing:border-box; padding:12px 14px; border-radius:14px; border:1.5px solid #bfd3ff; background:#eef4ff; color:var(--b9); text-decoration:none; }
   .tll .tll-photo-cta svg { flex:none; width:28px; height:28px; color:var(--b6); }
