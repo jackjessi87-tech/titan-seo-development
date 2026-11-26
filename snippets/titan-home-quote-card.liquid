@@ -22,6 +22,7 @@
         <div class="thq-done__icon" aria-hidden="true">&#10003;</div>
         <h3>Thanks, your request is in</h3>
         <p>We'll text your fixed price shortly. Need it moved today? Call <a href="tel:{{ phone_intl }}">{{ phone }}</a>.</p>
+        <a class="thq-done__photo" href="sms:{{ phone_intl }}?&body={{ 'Hi Sam, here is a photo of the items for my quote.' | url_encode | replace: '+', '%20' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.6"/></svg><span><b>Text us a photo of your items</b><small>A photo helps us confirm your price faster</small></span></a>
       </div>
     {%- else -%}
       {%- if form.errors -%}<div class="thq-error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
@@ -130,10 +131,11 @@
     var card = document.querySelector('[data-thq]');
     if (!card) return;
     var form = card.querySelector('form'), steps = card.querySelectorAll('.thq-step');
-    if (!form || !steps.length) { var d = card.querySelector('.thq-done'); if (d) d.focus(); return; }
+    var KEY = 'thq-quote-v1';
+    if (!form || !steps.length) { var d = card.querySelector('.thq-done'); if (d) { d.focus(); try { sessionStorage.removeItem(KEY); } catch (e) {} } return; }
     card.classList.add('is-js');
     var bar = card.querySelector('[data-thq-bar]'), live = document.querySelector('[data-thq-live]');
-    var cur = 0, picked = [];
+    var cur = 0, picked = [], ready = false;
     function q(sel) { return form.querySelector(sel); }
     function radio(n) { var el = q('[name="contact[' + n + ']"]:checked'); return el ? el.value : ''; }
     function sum(k, v) { var el = live && live.querySelector('[data-sum="' + k + '"]'); if (el) el.textContent = v; }
@@ -155,11 +157,47 @@
     function show(i) {
       steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
       cur = i; bar.style.width = ((i + 1) / steps.length * 100) + '%';
+      if (ready) save();
     }
-    function ok(i) {
+    function ok(i, quiet) {
       var fields = steps[i].querySelectorAll('input, textarea, select');
-      for (var k = 0; k < fields.length; k++) { if (!fields[k].checkValidity()) { fields[k].reportValidity(); return false; } }
+      for (var k = 0; k < fields.length; k++) { if (!fields[k].checkValidity()) { if (!quiet) fields[k].reportValidity(); return false; } }
+      if (i === 0 && body.value.trim().length < 2 && !(radio('move_type') === 'House or unit move' && radio('bedrooms'))) {
+        if (!quiet) { det.textContent = 'Please tell us what needs moving, e.g. a sofa and a fridge.'; det.classList.remove('is-on'); det.classList.add('is-err'); try { body.focus(); } catch (e) {} }
+        return false;
+      }
       return true;
+    }
+    /* After Next or Back, bring the step and its button onto the screen */
+    function settle() {
+      try {
+        var anchor = card.querySelector('.thq-progress') || card;
+        var nav = steps[cur].querySelector('.thq-nav') || steps[cur].querySelector('[data-next]');
+        var h = window.innerHeight || document.documentElement.clientHeight;
+        if (anchor.getBoundingClientRect().top < 0 || (nav && nav.getBoundingClientRect().bottom > h - 6)) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (e) {}
+    }
+    /* Remember the answers in this tab, so a reload or a failed send never wipes the form */
+    function eachField(fn) {
+      [].slice.call(form.elements).forEach(function (el) {
+        if (!el.type || /hidden|submit|button|fieldset/.test(el.type) || !el.name || el.name.indexOf('contact[') !== 0) return;
+        fn(el, el.name, el.type === 'checkbox' || el.type === 'radio');
+      });
+    }
+    function save() {
+      try {
+        var d = { t: Date.now(), step: cur, v: {}, c: [] };
+        eachField(function (el, k, tick) { if (tick) { if (el.checked) d.c.push(k + '=' + el.value); } else if (el.value) d.v[k] = el.value; });
+        sessionStorage.setItem(KEY, JSON.stringify(d));
+      } catch (e) {}
+    }
+    function restore() {
+      try {
+        var d = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+        if (!d || !d.v || !d.c || Date.now() - d.t > 432e5) return -1;
+        eachField(function (el, k, tick) { if (tick) el.checked = d.c.indexOf(k + '=' + el.value) > -1; else if (d.v[k] != null) el.value = d.v[k]; });
+        return d.step || 0;
+      } catch (e) { return -1; }
     }
     card.addEventListener('click', function (e) {
       var chip = e.target.closest('[data-item]');
@@ -169,8 +207,8 @@
         picked = on ? picked.concat(v) : picked.filter(function (x) { return x !== v; });
         refresh();
       }
-      if (e.target.closest('[data-next]')) { if (ok(cur)) { show(cur + 1); var f1 = steps[cur].querySelector('input'); if (f1) f1.focus({ preventScroll: true }); } }
-      if (e.target.closest('[data-back]')) show(cur - 1);
+      if (e.target.closest('[data-next]')) { if (ok(cur)) { show(cur + 1); var f1 = steps[cur].querySelector('input'); if (f1) f1.focus({ preventScroll: true }); settle(); } }
+      if (e.target.closest('[data-back]')) { show(cur - 1); settle(); }
     });
     var body = q('[data-thq-body]'), ph = card.querySelector('[data-thq-ph]'), det = card.querySelector('[data-thq-detected]');
     var EX = ['3 bedroom house move from Bankstown to Parramatta, fridge and washer too', 'Just a 3-seater sofa I bought on Marketplace', 'Queen bed, mattress and a wardrobe, second floor no lift', 'IKEA order to collect from Tempe, 6 boxes and a desk', 'Fridge and washing machine to my new unit tomorrow'];
@@ -191,13 +229,14 @@
       var v = body.value, found = [];
       KW.forEach(function (k) {
         var chip = card.querySelector('[data-item="' + k[0] + '"]');
-        if (k[1].test(v)) { found.push(k[0]); if (chip && chip.getAttribute('aria-pressed') !== 'true') { chip.setAttribute('aria-pressed', 'true'); chip.dataset.auto = '1'; picked.push(k[0]); } }
+        if (k[1].test(k[0] === 'Bed & mattress' ? v.replace(/(sofa|day)[ -]?beds?/ig, ' ') : v)) { found.push(k[0]); if (chip && chip.getAttribute('aria-pressed') !== 'true') { chip.setAttribute('aria-pressed', 'true'); chip.dataset.auto = '1'; picked.push(k[0]); } }
         else if (chip && chip.dataset.auto === '1') { chip.setAttribute('aria-pressed', 'false'); delete chip.dataset.auto; picked = picked.filter(function (x) { return x !== k[0]; }); }
       });
       var house = /\b(\d|one|two|three|four)\s*(bed|bedroom|br)\b|house|unit move|apartment move|whole|full move|shifting/i.test(v);
       if (house) { var hm = q('input[name="contact[move_type]"][value="House or unit move"]'); if (hm && !hm.checked && !body.dataset.typeTouched) { hm.checked = true; } }
       det.innerHTML = found.length ? 'Spotted: <b>' + found.join('</b> · <b>') + '</b>' : "Type it your way. We'll pick out the items for you.";
       det.classList.toggle('is-on', found.length > 0);
+      det.classList.remove('is-err');
     }
     body.addEventListener('input', function () { detect(); refresh(); });
     card.querySelectorAll('input[name="contact[move_type]"]').forEach(function (r) {
@@ -212,11 +251,21 @@
     form.addEventListener('input', refresh);
     form.addEventListener('change', refresh);
     form.addEventListener('submit', function () {
+      save();
       var b = q('[data-thq-body]');
       var head = 'Move: ' + radio('move_type') + (radio('bedrooms') && radio('move_type') === 'House or unit move' ? ' (' + radio('bedrooms') + ')' : '') + ' | Crew: ' + radio('crew') + (picked.length ? ' | Items: ' + picked.join(', ') : '');
       if (b.value.indexOf('Move:') !== 0) b.value = head + (b.value ? ' | Customer wrote: ' + b.value : '');
     });
-    refresh(); show(0);
+    var saved = restore(), start = 0;
+    if (saved > -1) {
+      if (body.value) { body.dataset.typeTouched = '1'; detect(); }
+      start = card.querySelector('.thq-error') ? steps.length - 1 : Math.min(saved, steps.length - 1);
+      for (var s0 = 0; s0 < start; s0++) { if (!ok(s0, true)) { start = s0; break; } }
+    }
+    refresh(); show(start);
+    ready = true;
+    form.addEventListener('input', save);
+    form.addEventListener('change', save);
     var sec = card;
     if (sec) {
       var ticking = false;

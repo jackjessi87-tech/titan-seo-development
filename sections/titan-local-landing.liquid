@@ -322,6 +322,7 @@
               {{ icon_shield }}
               <h3>Request received!</h3>
               <p>{{ s.form_success }}</p>
+              <a class="tll-photo-cta" href="sms:{{ phone_intl }}?&body={{ 'Hi Sam, here is a photo of the items for my quote.' | url_encode | replace: '+', '%20' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.6"/></svg><span><b>Text us a photo of your items</b><small>A photo helps us confirm your price faster</small></span></a>
               <a class="tll-btn tll-btn--call tll-shine" href="tel:{{ phone_intl }}"><span class="tll-btn__icon tll-ringer">{{ icon_phone }}</span><span class="tll-btn__label"><small>Need {{ svc_esc }} today?</small><span class="tll-dial" aria-label="{{ s.phone }}">{{ dial }}</span></span>{{ icon_thin }}</a>
             </div>
           {%- else -%}
@@ -1064,6 +1065,8 @@
     /* Hero quote form: one question per step */
     var form = root.querySelector('.tll-form');
     var card = root.querySelector('.tll-hq');
+    var KEY = 'tll-quote-v1';
+    if (form && form.querySelector('.tll-form__success')) { try { sessionStorage.removeItem(KEY); } catch (e) {} }
     var quoteLinks = [].slice.call(root.querySelectorAll('a[href="#tll-quote-{{ uid }}"]'));
     function toCard() {
       if (!card) return;
@@ -1099,7 +1102,7 @@
     var dateInput = dateWrap ? dateWrap.querySelector('input') : null;
     var recap = form.querySelector('[data-recap]');
     var recapText = form.querySelector('[data-recap-text]');
-    var current = 0;
+    var current = 0, quiet = false, ready = false;
     form.classList.add('is-stepped');
     form.setAttribute('novalidate', '');
 
@@ -1145,6 +1148,7 @@
       });
     });
     function fail(msg, el) {
+      if (quiet) return false;
       if (err) { err.textContent = msg; err.hidden = false; }
       if (el) { try { el.focus(); } catch (e) {} }
       return false;
@@ -1199,9 +1203,48 @@
       if (focus) {
         var f = steps[i].querySelector('input:not([type="hidden"]), textarea');
         if (f && f.type !== 'checkbox' && f.type !== 'radio') { try { f.focus({ preventScroll: true }); } catch (e) {} }
-        if (card && card.getBoundingClientRect().top < 0) { try { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} }
+        settle();
       }
+      if (ready) save();
     }
+    /* After Next or Back, bring the step and its button onto the screen */
+    function settle() {
+      try {
+        var anchor = (bar && bar.parentNode) || card || form;
+        var nav = form.querySelector('.tll-form__nav');
+        var h = window.innerHeight || document.documentElement.clientHeight;
+        if (anchor.getBoundingClientRect().top < 0 || (nav && nav.getBoundingClientRect().bottom > h - 6)) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (e) {}
+    }
+    /* Remember the answers in this tab, so a reload or a failed send never wipes the form */
+    function fkey(el) {
+      if (el === details) return 'details';
+      var n = el.name || (el.type === 'checkbox' ? 'chip' : '');
+      return (n === 'chip' || n === 'tll-boxes' || n.indexOf('contact[') === 0) ? n : '';
+    }
+    function eachField(fn) {
+      [].slice.call(form.elements).forEach(function (el) {
+        if (!el.type || /hidden|submit|button|fieldset/.test(el.type)) return;
+        var k = fkey(el); if (k) fn(el, k, el.type === 'checkbox' || el.type === 'radio');
+      });
+    }
+    function save() {
+      try {
+        var d = { t: Date.now(), step: current, v: {}, c: [] };
+        eachField(function (el, k, tick) { if (tick) { if (el.checked) d.c.push(k + '=' + el.value); } else if (el.value) d.v[k] = el.value; });
+        sessionStorage.setItem(KEY, JSON.stringify(d));
+      } catch (e) {}
+    }
+    function restore() {
+      try {
+        var d = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+        if (!d || !d.v || !d.c || Date.now() - d.t > 432e5) return -1;
+        eachField(function (el, k, tick) { if (tick) el.checked = d.c.indexOf(k + '=' + el.value) > -1; else if (d.v[k] != null) el.value = d.v[k]; });
+        return d.step || 0;
+      } catch (e) { return -1; }
+    }
+    function grow() { if (!details) return; try { details.style.height = 'auto'; details.style.height = (details.scrollHeight + 3) + 'px'; } catch (e) {} }
+    if (details) details.addEventListener('input', grow);
     next.addEventListener('click', function () { if (check(current)) show(current + 1, true); });
     back.addEventListener('click', function () { clearErr(); show(current - 1, true); });
     var edit = form.querySelector('[data-edit]');
@@ -1223,6 +1266,7 @@
         if (d) parts.push(d);
         bodyOut.value = parts.join('. ');
       }
+      save();
       submit.classList.add('is-sending');
     });
 
@@ -1242,8 +1286,20 @@
     if (card && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (en) { root.classList.toggle('is-quoting', en[0].isIntersecting && en[0].intersectionRatio > 0.2); }, { threshold: [0, 0.2, 0.5] }).observe(card);
     }
+    var saved = restore(), start = 0;
+    if (dateWrap && saved > -1) dateWrap.hidden = picked('when') !== 'Pick a date';
     syncMove();
-    show(0, false);
+    if (saved > -1) {
+      start = form.querySelector('.tll-form__error') ? steps.length - 1 : Math.min(saved, steps.length - 1);
+      quiet = true;
+      for (var s0 = 0; s0 < start; s0++) { if (!check(s0)) { start = s0; break; } }
+      quiet = false; clearErr();
+      if (details && details.value) setTimeout(grow, 0);
+    }
+    show(start, false);
+    ready = true;
+    form.addEventListener('input', save);
+    form.addEventListener('change', save);
   })();
 </script>
 
@@ -1774,6 +1830,20 @@
     .tlh-crew__grid::-webkit-scrollbar { display:none; }
     .tlh-card { scroll-snap-align:center; }
   }
+  /* 2026-11-27 smoother quote steps: tighter item tiles on phones, the step lands on screen, photo prompt after sending */
+  .tll-hq .tll-progress { scroll-margin-top:14px; }
+  @media (min-width: 900px) { .tll-hq .tll-progress { scroll-margin-top:84px; } }
+  @media (max-width: 899px) {
+    .tll-hq .tll-chip span { min-height:58px; gap:3px; padding:6px 4px; }
+    .tll-hq .tll-items--home .tll-chip span { min-height:56px; }
+    .tll .tll-hq .tll-chip svg { width:22px; height:22px; }
+    .tll-hq.tll-hq .tll-form.is-stepped .tll-field textarea { height:54px; min-height:54px; }
+  }
+  .tll-photo-cta { display:flex; align-items:center; gap:12px; width:100%; box-sizing:border-box; padding:12px 14px; border-radius:14px; border:1.5px solid #bfd3ff; background:#eef4ff; color:var(--b9); text-decoration:none; }
+  .tll .tll-photo-cta svg { flex:none; width:28px; height:28px; color:var(--b6); }
+  .tll-photo-cta span { display:grid; gap:2px; line-height:1.25; }
+  .tll-photo-cta b { font-size:.98rem; font-weight:800; color:var(--b9); }
+  .tll-photo-cta small { font-size:.8rem; font-weight:600; color:var(--mut); }
 {% endstylesheet %}
 
 {% schema %}
