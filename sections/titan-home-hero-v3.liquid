@@ -1,0 +1,598 @@
+{%- doc -%}
+  Titan Express homepage hero. Holds the page's only H1, the main keyword
+  copy, an animated call button, a ticker, job tiles, call steps and a
+  sticky phone call bar. Deep blue and white call-first design.
+  Effects are pure CSS and inline SVG. Motion is switched off for visitors
+  who ask for reduced motion. The LCP photo and H1 are never faded in, so
+  the animations do not delay Largest Contentful Paint.
+  The small script only switches the live status text by Sydney time.
+{%- enddoc -%}
+
+{%- liquid
+  assign s = section.settings
+  assign phone_digits = s.phone | remove: ' '
+  assign phone_intl = phone_digits | remove_first: '0' | prepend: '+61'
+  assign chips = section.blocks | where: 'type', 'chip'
+  assign hero_img = images['titan-two-movers-truck-hero.webp']
+  assign hero_alt = 'Two Titan Express movers loading a wrapped sofa into a furniture truck in Sydney'
+  if hero_img == blank
+    assign hero_img = s.image
+    assign hero_alt = s.image_alt
+  endif
+  assign sms_base = 'sms:' | append: phone_intl | append: '?&body='
+-%}
+{%- capture i_chat -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>{%- endcapture -%}
+{%- capture i_bolt -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>{%- endcapture -%}
+{%- capture i_close -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>{%- endcapture -%}
+{%- capture i_stairs -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h5v-5h5v-5h5V5h3"/></svg>{%- endcapture -%}
+{%- capture i_wallet -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h13v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M16 14h.01"/></svg>{%- endcapture -%}
+
+{%- capture i_phone -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>{%- endcapture -%}
+{%- capture i_arrow -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>{%- endcapture -%}
+{%- capture i_star -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>{%- endcapture -%}
+{%- capture i_shield -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>{%- endcapture -%}
+{%- capture i_team -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.2A5 5 0 0 1 21 19"/></svg>{%- endcapture -%}
+{%- capture i_clock -%}<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>{%- endcapture -%}
+{%- capture i_truck -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>{%- endcapture -%}
+{%- capture i_box -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg>{%- endcapture -%}
+{%- capture i_tag -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>{%- endcapture -%}
+{%- capture i_store -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9M10 21v-5h4v5"/></svg>{%- endcapture -%}
+{%- capture i_sofa -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zM5 19v2M19 19v2"/></svg>{%- endcapture -%}
+{%- capture i_fridge -%}<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14M9 5v2M9 13v3"/></svg>{%- endcapture -%}
+{%- capture i_pin -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>{%- endcapture -%}
+{%- capture i_check -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>{%- endcapture -%}
+
+{%- capture i_bed -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V6M3 13h18v5M21 13a3 3 0 0 0-3-3h-8v3"/><circle cx="7" cy="10" r="1.8"/></svg>{%- endcapture -%}
+{%- capture i_home -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></svg>{%- endcapture -%}
+{%- comment -%} Duotone removalist icons: soft fill (.d), bold strokes, one accent (.a) {%- endcomment -%}
+{%- capture j_sofa -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M9 22v-5a6 6 0 0 1 6-6h18a6 6 0 0 1 6 6v5"/><path class="d" d="M5 26a4 4 0 0 1 8 0v4h22v-4a4 4 0 0 1 8 0v8a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M9 22v-5a6 6 0 0 1 6-6h18a6 6 0 0 1 6 6v5M5 26a4 4 0 0 1 8 0v4h22v-4a4 4 0 0 1 8 0v8a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4zM10 38v3M38 38v3"/><path class="a" d="M2 15h4M1 20h3"/></svg>{%- endcapture -%}
+{%- capture j_tag -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M8 10h16l16 16-14 14L8 24z"/><path d="M8 10h16l16 16-14 14L8 24zM24 10l-4-4"/><circle class="a" cx="16" cy="18" r="2.5"/><path class="a" d="M24 30l6-6"/><path d="M34 40h10M39 35v10"/></svg>{%- endcapture -%}
+{%- capture j_store -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M8 20h32v20H8z"/><path d="M6 18l3-10h30l3 10M6 18a6 6 0 0 0 12 0 6 6 0 0 0 12 0 6 6 0 0 0 12 0M8 22v18h32V22"/><path class="d" d="M20 40v-9h8v9"/><path d="M20 40v-9h8v9"/><path class="a" d="M14 8l-1 10M34 8l1 10"/></svg>{%- endcapture -%}
+{%- capture j_box -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M24 6 40 14v20l-16 8-16-8V14z"/><path d="M24 6 40 14v20l-16 8-16-8V14zM8 14l16 8 16-8M24 22v20"/><path class="a" d="M16 10l16 8v6"/></svg>{%- endcapture -%}
+{%- capture j_fridge -%}<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="d" x="13" y="4" width="20" height="34" rx="3"/><rect x="13" y="4" width="20" height="34" rx="3"/><path d="M13 17h20M18 9v4M18 22v6"/><path class="a" d="M37 10v30h-8M33 44a2.5 2.5 0 1 0 0-.01"/><circle class="a" cx="33" cy="42" r="2.5"/></svg>{%- endcapture -%}
+{%- capture j_bed -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M6 26h36v10H6z"/><path d="M6 12v28M6 26h36v14M42 26a6 6 0 0 0-6-6H20v6"/><circle class="d" cx="13" cy="20" r="4"/><circle cx="13" cy="20" r="4"/><path class="a" d="M24 10h4l-4 5h4M31 6h3l-3 4h3"/></svg>{%- endcapture -%}
+{%- capture j_truck -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M6 12h22v20H6zM28 18h8l6 7v7H28z"/><path d="M6 12h22v20H6zM28 18h8l6 7v7H28"/><circle cx="14" cy="35" r="4"/><circle cx="34" cy="35" r="4"/><path class="a" d="M1 18h3M0 24h4M2 30h2"/><path d="M12 20h10M12 25h6"/></svg>{%- endcapture -%}
+{%- capture j_home -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M8 22 24 8l16 14v18H8z"/><path d="M4 24 24 7l20 17M8 21v19h32V21"/><rect class="d" x="18" y="26" width="12" height="10" rx="1"/><rect x="18" y="26" width="12" height="10" rx="1"/><path class="a" d="M18 31h12M24 26v-3"/></svg>{%- endcapture -%}
+{%- capture j_shield -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M24 4 39 10v12c0 11-15 20-15 20S9 33 9 22V10z"/><path d="M24 4 39 10v12c0 11-15 20-15 20S9 33 9 22V10z"/><path class="a" d="m17 24 5 5 9-10"/></svg>{%- endcapture -%}
+{%- capture j_clock -%}<svg viewBox="0 0 48 48" aria-hidden="true"><circle class="d" cx="24" cy="25" r="17"/><circle cx="24" cy="25" r="17"/><path class="a" d="M24 15v10l7 5"/><path d="M19 4h10M24 4v4"/></svg>{%- endcapture -%}
+{%- capture j_wallet -%}<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="d" x="5" y="13" width="38" height="28" rx="5"/><rect x="5" y="13" width="38" height="28" rx="5"/><path d="M10 13l20-7 4 7"/><path class="d" d="M31 22h12v10H31a5 5 0 0 1 0-10z"/><path d="M31 22h12v10H31a5 5 0 0 1 0-10z"/><circle class="a" cx="32" cy="27" r="2"/></svg>{%- endcapture -%}
+{%- capture j_stairs -%}<svg viewBox="0 0 48 48" aria-hidden="true"><path class="d" d="M5 42h10v-9h9v-9h9v-9h10v27z"/><path d="M5 42h10v-9h9v-9h9v-9h10"/><path class="a" d="M10 26l6-6M16 20h-5M16 20v5"/></svg>{%- endcapture -%}
+{%- capture i_thin -%}<svg class="tho-thin" viewBox="0 0 30 14" aria-hidden="true"><path d="M1 7h27M22 1l6 6-6 6"/></svg>{%- endcapture -%}
+{%- capture digits -%}{%- assign chars = s.phone | split: '' -%}{%- for c in chars -%}{%- if c == ' ' -%}&nbsp;{%- else -%}<span style="animation-delay:{{ forloop.index0 | times: 0.09 }}s">{{ c }}</span>{%- endif -%}{%- endfor -%}{%- endcapture -%}
+{%- capture callbtn -%}<a class="tho-call tho-shine" href="tel:{{ phone_intl }}"><span class="tho-ringer">{{ i_phone }}</span><span class="tho-call__txt"><span class="tho-call__lbl">%%LBL%%</span><span class="tho-call__num" aria-label="{{ s.phone }}">{{ digits }}</span></span>{{ i_thin }}</a>{%- endcapture -%}
+
+<div class="tho" id="tho-{{ section.id }}">
+  <div class="tho-bar">
+    <div class="tho-wrap tho-bar__in">
+      <a class="tho-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+        {%- if settings.logo -%}
+          {%- assign logo_w = settings.logo.aspect_ratio | times: 44 | round -%}
+          {{ settings.logo | image_url: width: 360 | image_tag: alt: 'Titan Express furniture pickup and delivery Sydney', height: 44, width: logo_w, loading: 'eager' }}
+        {%- else -%}<span>Titan Express</span>{%- endif -%}
+      </a>
+      <nav class="tho-nav" aria-label="Main">
+        <a href="/pages/furniture-pickup-delivery-sydney">Pickup &amp; Delivery</a>
+        <a href="/pages/single-item-delivery-sydney">Single Item</a>
+        <a href="/pages/facebook-marketplace-pickup-delivery-sydney">Marketplace</a>
+        <a href="/pages/ikea-pickup-delivery-sydney">Store Collection</a>
+        <a href="/pages/areas-we-serve">Areas</a>
+      </nav>
+      <a class="tho-hcall" href="tel:{{ phone_intl }}">{{ i_phone }}<span>Call for delivery</span></a>
+    </div>
+  </div>
+
+  <section class="tho-hero">
+    <svg class="tho-art" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <pattern id="tho-topo-{{ section.id }}" width="160" height="160" patternUnits="userSpaceOnUse">
+          <path d="M0 40 C40 20 80 60 160 40 M0 80 C50 60 90 100 160 80 M0 120 C40 100 100 140 160 120" stroke="rgba(255,255,255,.06)" stroke-width="1.2" fill="none"/>
+        </pattern>
+        <radialGradient id="tho-glow-{{ section.id }}" cx="85%" cy="10%" r="60%">
+          <stop offset="0" stop-color="#2f7bff" stop-opacity=".55"/><stop offset="1" stop-color="#2f7bff" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="640" fill="url(#tho-topo-{{ section.id }})"/>
+      <rect width="1200" height="640" fill="url(#tho-glow-{{ section.id }})"/>
+      <g class="tho-art__rings" fill="none" stroke="rgba(143,180,255,.35)" stroke-width="1.5">
+        <circle cx="1080" cy="90" r="40"/><circle cx="1080" cy="90" r="80"/><circle cx="1080" cy="90" r="120"/>
+      </g>
+      <path class="tho-art__route" d="M-20 560 C 200 460, 320 600, 520 500 S 860 360, 1080 90" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2.5" stroke-dasharray="2 14" stroke-linecap="round"/>
+      <path class="tho-art__run" d="M-20 560 C 200 460, 320 600, 520 500 S 860 360, 1080 90" fill="none" stroke="#8fb4ff" stroke-width="3" stroke-linecap="round" pathLength="100"/>
+      <g fill="#8fb4ff"><circle cx="520" cy="500" r="6"/><circle cx="1080" cy="90" r="8"/></g>
+      <g fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5"><path d="M60 120h40M80 100v40M980 520h30M995 505v30M640 80h24M652 68v24"/></g>
+    </svg>
+    <div class="tho-wrap tho-hero__grid tho-hero__grid--quote">
+      <div class="tho-copy">
+        <p class="tho-kicker"><i></i>Two men &amp; a mini truck &middot; 7 days</p>
+        <h1 class="tho-h1">Two Men &amp; a Mini Truck for <em>Small Moves</em>, Furniture Pickup &amp; Delivery in Sydney</h1>
+        <p class="tho-sub">Sydney&rsquo;s small-move removalists. <strong>Two careful movers and a mini truck</strong> for couches, fridges, beds, Marketplace and store pickups, and studio or 1-bedroom moves. Wrapped in blankets, fixed price before we start, often today.</p>
+      </div>
+      <div class="tho-topcall">{{ callbtn | replace: '%%LBL%%', 'Call now &middot; fixed price on the phone' }}</div>
+      <div class="thq tho-quote" id="instant-quote">
+        {%- render 'titan-home-quote-card', phone: s.phone, phone_intl: phone_intl, uid: section.id -%}
+      </div>
+      <div class="tho-more">
+        {{ callbtn | replace: '%%LBL%%', 'Call your Sydney removalist team' }}
+        <div class="tho-ctas2">
+          <a class="tho-qbtn tho-qbtn--ghost" href="#tho-crew">{{ i_team }}<span>Compare crews and trucks</span></a>
+        </div>
+        <p class="tho-for">Couches &middot; beds &middot; fridges &middot; Marketplace &amp; IKEA pickups &middot; small moves</p>
+        <ul class="tho-proof">
+          <li><span class="tho-stars">{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}{{ i_star }}</span><strong>5.0</strong>&nbsp;&middot; 67 Google reviews</li>
+          <li>{{ i_check }}Fully insured</li>
+          <li>{{ i_check }}7 days</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="tho-ticker" aria-hidden="true"><div>
+    {%- for i in (1..2) -%}
+      <span>{{ i_phone }}CALL {{ s.phone }} FOR FURNITURE PICKUP &amp; DELIVERY</span><span>REMOVALISTS &amp; TRUCKS</span><span>MARKETPLACE &amp; IKEA PICKUPS</span><span>SAME-DAY PICKUP</span><span>FIXED PRICE ON THE PHONE</span><span>2 OR 3 MOVERS + TRUCK</span><span>7 DAYS</span>
+    {%- endfor -%}
+  </div></div>
+
+  {%- render 'titan-travels-showcase', uid: section.id -%}
+
+  <section class="tho-sec tho-crew" id="tho-crew">
+    <div class="tho-wrap">
+      <p class="tho-eyebrow">Choose your crew</p>
+      <h2 class="tho-h2">Removalists, trucks and crews sized to your job</h2>
+      <p class="tho-crew__lead">Every job is a fixed price agreed before we start. No hourly meter, no surprises.</p>
+      <p class="tho-crew__swipe" aria-hidden="true">Swipe to compare all three &rarr;</p>
+      <div class="tho-crew__grid">
+        <article class="tho-card tho-card--pro">
+          <span class="tho-card__badge">Most popular</span>
+          <svg class="tho-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <defs><linearGradient id="tho-gt-{{ section.id }}" x1="0" x2="1"><stop offset="0" stop-color="#2f7bff"/><stop offset="1" stop-color="#0b5cff"/></linearGradient></defs>
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="184" y="40" width="96" height="96" rx="8" fill="url(#tho-gt-{{ section.id }})"/>
+            <path d="M280 70h18l16 24v42h-34z" fill="#0a2a63"/><rect x="286" y="78" width="14" height="14" rx="2" fill="#8fb4ff"/>
+            <rect x="194" y="52" width="76" height="6" rx="3" fill="rgba(255,255,255,.35)"/>
+            <circle cx="208" cy="140" r="13" fill="#071a3d"/><circle cx="208" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="292" cy="140" r="13" fill="#071a3d"/><circle cx="292" cy="140" r="5" fill="#cfe0ff"/>
+            <rect class="tho-ill__sofa" x="58" y="92" width="92" height="30" rx="8" fill="#5a6782"/><rect class="tho-ill__sofa" x="62" y="82" width="84" height="16" rx="6" fill="#6b7896"/>
+            <path class="tho-ill__sofa" d="M58 92h92" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-dasharray="4 6"/>
+            <g fill="#0b5cff"><circle cx="40" cy="70" r="9"/><rect x="31" y="80" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="32" y="112" width="6" height="34" rx="3"/><rect x="42" y="112" width="6" height="34" rx="3"/></g>
+            <g fill="#0b5cff"><circle cx="166" cy="70" r="9"/><rect x="157" y="80" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="158" y="112" width="6" height="34" rx="3"/><rect x="168" y="112" width="6" height="34" rx="3"/></g>
+            <path d="M48 92l12 4M158 92l-10 4" stroke="#0b5cff" stroke-width="6" stroke-linecap="round"/>
+            <g class="tho-ill__spark" fill="#fbbf24"><circle cx="100" cy="58" r="3"/><circle cx="118" cy="46" r="2"/><circle cx="84" cy="44" r="2"/></g>
+          </svg>
+          <h3 class="tho-card__t">{{ i_team }}Two Men &amp; Truck</h3>
+          <p class="tho-card__d">Full service for heavy and bulky furniture. We do all the lifting, stairs and tight corners.</p>
+          <ul class="tho-card__l">
+            <li>{{ i_check }}Sofas, fridges, wardrobes and full rooms</li>
+            <li>{{ i_check }}Stairs, lifts and narrow hallways handled</li>
+            <li>{{ i_check }}Blankets, straps and trolleys included</li>
+            <li>{{ i_check }}You don't lift a thing</li>
+          </ul>
+          <div class="tho-card__foot">
+            <span class="tho-card__price">Fixed price<small>quoted in minutes</small></span>
+            <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-crew="Two men and truck">{{ i_bolt }}<span>Quote two movers</span></a>
+          </div>
+        </article>
+        <article class="tho-card tho-card--big">
+          <span class="tho-card__badge tho-card__badge--big">Full moves</span>
+          <svg class="tho-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="120" y="22" width="150" height="114" rx="8" fill="#071a3d"/>
+            <rect x="132" y="34" width="126" height="6" rx="3" fill="rgba(255,255,255,.28)"/>
+            <rect x="150" y="60" width="90" height="42" rx="9" fill="#0b5cff"/>
+            <text x="195" y="91" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="900" fill="#ffffff" stroke="none">8T</text>
+            <path d="M270 58h22l20 30v48h-42z" fill="#0b5cff"/><rect x="278" y="66" width="18" height="18" rx="2" fill="#cfe0ff"/>
+            <circle cx="150" cy="140" r="13" fill="#071a3d"/><circle cx="150" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="236" cy="140" r="13" fill="#071a3d"/><circle cx="236" cy="140" r="5" fill="#cfe0ff"/>
+            <circle cx="294" cy="140" r="13" fill="#071a3d"/><circle cx="294" cy="140" r="5" fill="#cfe0ff"/>
+            <g fill="#0b5cff"><circle cx="30" cy="74" r="8"/><rect x="22" y="83" width="16" height="32" rx="6"/><circle cx="62" cy="74" r="8"/><rect x="54" y="83" width="16" height="32" rx="6"/><circle cx="94" cy="74" r="8"/><rect x="86" y="83" width="16" height="32" rx="6"/></g>
+            <g fill="#071a3d"><rect x="23" y="113" width="6" height="33" rx="3"/><rect x="31" y="113" width="6" height="33" rx="3"/><rect x="55" y="113" width="6" height="33" rx="3"/><rect x="63" y="113" width="6" height="33" rx="3"/><rect x="87" y="113" width="6" height="33" rx="3"/><rect x="95" y="113" width="6" height="33" rx="3"/></g>
+          </svg>
+          <h3 class="tho-card__t">{{ i_truck }}Three Men &amp; 8 Tonne Truck</h3>
+          <p class="tho-card__d">For apartment and house moves and big loads. Everything goes in one trip, wrapped and strapped.</p>
+          <ul class="tho-card__l">
+            <li>{{ i_check }}Apartment, unit and house moves</li>
+            <li>{{ i_check }}Mirrors, glass and marble wrapped with care</li>
+            <li>{{ i_check }}Lifts, loading docks and stairs handled</li>
+            <li>{{ i_check }}Blankets, shrink wrap and straps included</li>
+          </ul>
+          <div class="tho-card__foot">
+            <span class="tho-card__price">Fixed quote<small>for your whole move</small></span>
+            <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-crew="Three men and 8 tonne truck">{{ i_bolt }}<span>Quote a full move</span></a>
+          </div>
+        </article>
+        <article class="tho-card tho-card--eco">
+          <span class="tho-card__badge tho-card__badge--eco">Budget friendly</span>
+          <svg class="tho-ill" viewBox="0 0 320 170" aria-hidden="true">
+            <rect x="8" y="150" width="304" height="4" rx="2" fill="#cfe0ff"/>
+            <rect x="140" y="62" width="104" height="74" rx="8" fill="#0a2a63"/>
+            <path d="M244 82h20l16 20v34h-36z" fill="#2f7bff"/><rect x="250" y="88" width="14" height="12" rx="2" fill="#cfe0ff"/>
+            <rect x="150" y="72" width="84" height="5" rx="2.5" fill="rgba(255,255,255,.25)"/>
+            <circle cx="170" cy="140" r="12" fill="#071a3d"/><circle cx="170" cy="140" r="4.5" fill="#cfe0ff"/>
+            <circle cx="258" cy="140" r="12" fill="#071a3d"/><circle cx="258" cy="140" r="4.5" fill="#cfe0ff"/>
+            <rect x="74" y="72" width="40" height="64" rx="4" fill="#e8f0ff" stroke="#8fb4ff" stroke-width="2"/>
+            <path d="M74 96h40M84 80v8M84 102v10" stroke="#8fb4ff" stroke-width="2" stroke-linecap="round"/>
+            <path class="tho-ill__trolley" d="M66 60v82h52" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="118" cy="146" r="6" fill="#071a3d"/>
+            <g fill="#2f7bff"><circle cx="44" cy="74" r="9"/><rect x="35" y="84" width="18" height="34" rx="7"/></g>
+            <g fill="#071a3d"><rect x="36" y="116" width="6" height="30" rx="3"/><rect x="46" y="116" width="6" height="30" rx="3"/></g>
+            <path d="M52 94l14-30" stroke="#2f7bff" stroke-width="6" stroke-linecap="round"/>
+            <g fill="#22c55e"><circle cx="292" cy="40" r="16" opacity=".15"/><path d="M285 40l5 5 9-10" stroke="#22c55e" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </svg>
+          <h3 class="tho-card__t">{{ i_truck }}One Man &amp; Mini Truck or Van</h3>
+          <p class="tho-card__d">The budget option for single items and light loads. You give a hand at both ends and save.</p>
+          <ul class="tho-card__l">
+            <li>{{ i_check }}Single items and Marketplace pickups</li>
+            <li>{{ i_check }}Appliances moved upright on a trolley</li>
+            <li>{{ i_check }}Ground floor or a helper on the stairs</li>
+            <li>{{ i_check }}Lowest price for small jobs</li>
+          </ul>
+          <div class="tho-card__foot">
+            <span class="tho-card__price">Budget friendly<small>best value for small jobs</small></span>
+            <a class="tho-qbtn" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-crew="One man and mini truck">{{ i_bolt }}<span>Quote one man</span></a>
+          </div>
+        </article>
+      </div>
+      <ul class="tho-crew__trust">
+        <li><span class="tho-ti">{{ j_shield }}</span>Fully insured</li><li><span class="tho-ti">{{ j_clock }}</span>7 days, 7am to 7pm</li><li><span class="tho-ti">{{ j_wallet }}</span>Fixed price, pay on the day</li><li><span class="tho-ti">{{ j_stairs }}</span>Stairs and lifts no problem</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="tho-sec">
+    <div class="tho-wrap">
+      <p class="tho-eyebrow">Pick your job</p>
+      <h2 class="tho-h2">What do you need moved?</h2>
+      <ul class="tho-jobs">
+          <li><a class="tho-job" href="/pages/couch-delivery-sydney"><span class="tho-job__ic">{{ j_sofa }}</span><span class="tho-job__t">Couch &amp; sofa</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/facebook-marketplace-pickup-delivery-sydney"><span class="tho-job__ic">{{ j_tag }}</span><span class="tho-job__t">Marketplace pickup</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/ikea-pickup-delivery-sydney"><span class="tho-job__ic">{{ j_store }}</span><span class="tho-job__t">IKEA &amp; Bunnings</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/single-item-delivery-sydney"><span class="tho-job__ic">{{ j_box }}</span><span class="tho-job__t">Single item</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/fridge-washing-machine-delivery-sydney"><span class="tho-job__ic">{{ j_fridge }}</span><span class="tho-job__t">Fridge &amp; washer</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/bed-mattress-delivery-sydney"><span class="tho-job__ic">{{ j_bed }}</span><span class="tho-job__t">Bed &amp; mattress</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/man-with-a-van-sydney"><span class="tho-job__ic">{{ j_truck }}</span><span class="tho-job__t">Van &amp; mini truck</span>{{ i_thin }}</a></li>
+          <li><a class="tho-job" href="/pages/small-removals-sydney"><span class="tho-job__ic">{{ j_home }}</span><span class="tho-job__t">Home &amp; unit moves</span>{{ i_thin }}</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <svg class="tho-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 240 70, 480 0, 720 26 S 1200 60, 1440 20 V60 H0z" fill="#f5f8ff"/></svg>
+  <section class="tho-sec tho-sec--soft">
+    <div class="tho-wrap">
+      <p class="tho-eyebrow">How it works</p>
+      <h2 class="tho-h2">Booked in one call</h2>
+      <ol class="tho-steps">
+        <li><span class="tho-n">1</span><div><strong>Call {{ s.phone }}</strong><p>Tell us what furniture needs moving and the two suburbs. About 2 minutes.</p></div></li>
+        <li><span class="tho-n">2</span><div><strong>Fixed price on the phone</strong><p>No hourly meter. The price we say is the price you pay.</p></div></li>
+        <li><span class="tho-n">3</span><div><strong>We pick it up, often today</strong><p>Two movers wrap, strap and carry it into the room you choose.</p></div></li>
+      </ol>
+      <div class="tho-steps__cta">{{ callbtn | replace: '%%LBL%%', 'Call to book your furniture pickup' }}</div>
+    </div>
+  </section>
+
+  <div class="tho-msg" data-tho-msg>
+    <div class="tho-msg__panel" id="tho-msg-panel-{{ section.id }}" role="dialog" aria-label="Message us for a quote" hidden>
+      <div class="tho-msg__head">
+        <span class="tho-msg__av">{{ i_truck }}<i></i></span>
+        <div><strong>Titan Express</strong><small>Typically replies in minutes</small></div>
+        <button type="button" class="tho-msg__x" data-tho-msg-close aria-label="Close">{{ i_close }}</button>
+      </div>
+      <div class="tho-msg__body">
+        <p class="tho-msg__bubble">Hi! What would you like moved? Tap an option and send us a text. We'll reply with a fixed price.</p>
+        <div class="tho-msg__chips">
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for two movers and a truck. Items: ' | url_encode | replace: '+', '%20' }}">Two men &amp; truck</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I would like a quote for one man and a mini truck. Item: ' | url_encode | replace: '+', '%20' }}">One man &amp; mini truck</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a Marketplace pickup. From suburb: ' | url_encode | replace: '+', '%20' }}">Marketplace pickup</a>
+          <a href="{{ sms_base }}{{ 'Hi Titan Express, I need a fridge or washing machine moved. From: ' | url_encode | replace: '+', '%20' }}">Fridge or washer</a>
+        </div>
+        <a class="tho-msg__form" href="{{ s.quote_anchor | default: '#instant-quote' }}" data-tho-msg-close>Or use the 60-second quote form</a>
+      </div>
+    </div>
+    <button type="button" class="tho-msg__btn" data-tho-msg-open aria-expanded="false" aria-controls="tho-msg-panel-{{ section.id }}">{{ i_chat }}<span>Message us for a quote</span><i class="tho-msg__dot"></i></button>
+  </div>
+  <script>
+    (function () {
+      var w = document.querySelector('[data-tho-msg]'); if (!w) return;
+      var p = w.querySelector('.tho-msg__panel'), b = w.querySelector('[data-tho-msg-open]');
+      function set(open) { p.hidden = !open; b.setAttribute('aria-expanded', open); w.classList.toggle('is-open', open); }
+      b.addEventListener('click', function () { set(p.hidden); });
+      w.querySelectorAll('[data-tho-msg-close]').forEach(function (x) { x.addEventListener('click', function () { set(false); }); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+      setTimeout(function () { w.classList.add('is-nudge'); }, 6000);
+      document.querySelectorAll('[data-crew]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          var crew = a.getAttribute('data-crew');
+          setTimeout(function () {
+            var r = document.querySelector('#instant-quote input[name="contact[crew]"][value="' + crew + '"]');
+            if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
+          }, 400);
+        });
+      });
+    })();
+  </script>
+
+  <div class="tho-callbar">{{ callbtn | replace: '%%LBL%%', 'Furniture pickup &amp; delivery &middot; tap to call' }}</div>
+</div>
+
+{% stylesheet %}
+  .tho { --b9:#071a3d; --b8:#0a2a63; --b6:#0b5cff; --b5:#2f7bff; --b1:#e8f0ff; --b0:#f5f8ff; --ink:#0b1630; --mut:#5a6782; --line:#dfe6f3;
+    font-family: Inter, var(--font-body--family, sans-serif); color:var(--ink); background:#fff; }
+  .tho svg { fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .tho-wrap { max-width:1180px; margin:0 auto; padding:0 16px; }
+
+  /* Top bar */
+  .tho-bar { background:var(--b9); color:#fff; }
+  .tho-bar__in { display:flex; align-items:center; gap:16px; min-height:64px; }
+  .tho-logo { flex-shrink:0; text-decoration:none; }
+  .tho-logo img { display:block; height:42px; width:auto; border-radius:6px; }
+  .tho-logo span { font-weight:800; color:#fff; }
+  .tho-nav { display:none; gap:2px; margin-left:20px; }
+  .tho-nav a { padding:8px 12px; border-radius:8px; color:#cfe0ff; text-decoration:none; font-weight:600; font-size:.92rem; }
+  .tho-nav a:hover { background:rgba(255,255,255,.08); color:#fff; }
+  .tho-hcall { margin-left:auto; display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:999px; background:#fff; color:var(--b6); font-weight:800; font-size:.95rem; text-decoration:none; }
+  .tho-hcall svg { width:17px; height:17px; animation:tho-shake 2.4s infinite; }
+
+  /* Hero */
+  .tho-hero { color:#fff; padding:20px 0 30px; background:linear-gradient(180deg, var(--b8), var(--b9)); }
+  .tho-hero { position:relative; overflow:hidden; isolation:isolate; }
+  .tho .tho-art, .tho .tho-wave { stroke:none; }
+  .tho-art { position:absolute; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
+  .tho-art__run { stroke-dasharray:14 86; animation:tho-run 5s linear infinite; }
+  @keyframes tho-run { from { stroke-dashoffset:100; } to { stroke-dashoffset:0; } }
+  .tho-art__rings circle { transform-origin:1080px 90px; animation:tho-rings 3s ease-out infinite; }
+  .tho-art__rings circle:nth-child(2) { animation-delay:1s; } .tho-art__rings circle:nth-child(3) { animation-delay:2s; }
+  @keyframes tho-rings { 0% { opacity:0; transform:scale(.6); } 40% { opacity:1; } 100% { opacity:0; transform:scale(1.25); } }
+  .tho-hero__grid { position:relative; display:grid; gap:22px; }
+  .tho-wave { display:block; width:100%; height:40px; margin-bottom:-1px; background:#fff; }
+  .tho-sec:not(.tho-sec--soft) { background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 10v8M10 14h8' stroke='%230b5cff' stroke-opacity='.08' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  .tho-sec--soft { background:var(--b0) radial-gradient(rgba(11,92,255,.07) 1.2px, transparent 1.2px) 0 0/20px 20px; }
+  .tho-photo { position:relative; border-radius:22px; overflow:hidden; border:3px solid rgba(255,255,255,.22); aspect-ratio:16/10; box-shadow:0 24px 60px rgba(0,0,0,.45), 0 0 0 6px rgba(11,92,255,.18); }
+  .tho-photo::after { content:""; position:absolute; inset:auto 0 0 0; height:38%; background:linear-gradient(180deg, transparent, rgba(7,26,61,.55)); pointer-events:none; }
+  .tho-photo::before { content:""; position:absolute; left:0; top:0; bottom:0; width:6px; background:linear-gradient(180deg, var(--b5), var(--b6)); z-index:2; }
+  .tho-ribbon { position:absolute; top:22px; right:-52px; z-index:3; transform:rotate(35deg); padding:7px 58px; background:linear-gradient(90deg, var(--b6), var(--b5)); color:#fff; font-size:.7rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; box-shadow:0 6px 16px rgba(0,0,0,.3); white-space:nowrap; }
+  .tho-corner { position:absolute; z-index:3; width:34px; height:34px; border-color:#fff; border-style:solid; opacity:.9; pointer-events:none; }
+  .tho-corner--tl { top:12px; left:16px; border-width:3px 0 0 3px; border-top-left-radius:10px; }
+  .tho-corner--br { bottom:12px; right:12px; border-width:0 3px 3px 0; border-bottom-right-radius:10px; }
+  .tho-tag { z-index:3; }
+  .tho-img { display:block; width:100%; height:100%; object-fit:cover; }
+  .tho-tag { position:absolute; left:10px; bottom:10px; display:flex; align-items:center; gap:7px; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,.95); color:var(--b9); font-size:.8rem; font-weight:700; }
+  .tho-tag i { width:8px; height:8px; border-radius:50%; background:#22c55e; animation:tho-pulse 2s infinite; }
+  @keyframes tho-pulse { 0% { box-shadow:0 0 0 0 rgba(34,197,94,.6); } 70% { box-shadow:0 0 0 9px rgba(34,197,94,0); } 100% { box-shadow:0 0 0 0 rgba(34,197,94,0); } }
+  .tho-h1 { margin:0 0 10px; font-size:clamp(1.9rem,7.4vw,3.4rem); line-height:1.06; font-weight:900; letter-spacing:-.02em; color:#fff; text-wrap:balance; }
+  .tho-h1 em { font-style:normal; color:#8fb4ff; }
+  .tho-sub { margin:0 0 20px; font-size:1.02rem; line-height:1.5; color:#cfe0ff; max-width:560px; }
+  .tho-proof { display:flex; flex-wrap:wrap; gap:8px 18px; list-style:none; padding:0; margin:16px 0 0; font-size:.87rem; font-weight:600; color:#dbe7ff; }
+  .tho-proof li { display:flex; align-items:center; gap:6px; }
+  .tho-proof > li > svg { width:16px; height:16px; stroke-width:3; color:#8fb4ff; }
+  .tho-stars { display:inline-flex; gap:1px; color:#fbbf24; margin-right:4px; }
+  .tho-stars svg { width:14px; height:14px; fill:currentColor; stroke:none; }
+
+  /* Animated call button */
+  .tho-call { position:relative; overflow:hidden; display:flex; align-items:center; gap:14px; max-width:440px; padding:12px 18px 12px 12px; border-radius:18px; background:#fff; color:var(--b6); text-decoration:none; box-shadow:0 16px 40px rgba(0,0,0,.3); transition:transform .2s; }
+  .tho-call:hover { transform:translateY(-2px); }
+  .tho-ringer { position:relative; display:grid; place-items:center; flex:0 0 50px; height:50px; border-radius:50%; background:var(--b6); color:#fff; }
+  .tho-ringer svg { width:23px; height:23px; animation:tho-shake 2.4s infinite; }
+  .tho-ringer::before, .tho-ringer::after { content:""; position:absolute; inset:0; border-radius:50%; border:2px solid var(--b5); opacity:0; animation:tho-wave 2.4s infinite; }
+  .tho-ringer::after { animation-delay:.8s; }
+  @keyframes tho-wave { 0% { transform:scale(1); opacity:.7; } 100% { transform:scale(1.9); opacity:0; } }
+  @keyframes tho-shake { 0%,60%,100% { transform:rotate(0); } 64% { transform:rotate(-16deg); } 68% { transform:rotate(14deg); } 72% { transform:rotate(-10deg); } 76% { transform:rotate(8deg); } 80% { transform:rotate(0); } }
+  .tho-call__txt { display:flex; flex-direction:column; min-width:0; }
+  .tho-call__lbl { font-size:.8rem; font-weight:800; color:var(--b6); line-height:1.25; }
+  .tho-for { margin:12px 0 0; font-size:.86rem; font-weight:600; color:#a9c3f5; }
+  .tho-call__num { font-size:1.45rem; font-weight:900; letter-spacing:.02em; line-height:1.15; color:var(--b9); white-space:nowrap; }
+  .tho-call__num span { display:inline-block; animation:tho-hop 2.4s ease-in-out infinite; }
+  @keyframes tho-hop { 0%,30%,100% { transform:translateY(0); opacity:1; } 12% { transform:translateY(-4px); opacity:.55; } }
+  .tho .tho-thin { flex:0 0 30px; width:30px; height:14px; margin-left:auto; stroke-width:1.4; animation:tho-nudge 1.6s ease-in-out infinite; }
+  @keyframes tho-nudge { 0%,100% { transform:translateX(0); } 50% { transform:translateX(6px); } }
+  .tho-shine::after { content:""; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(100deg, transparent, rgba(11,92,255,.14), transparent); transform:skewX(-20deg); animation:tho-sweep 3s ease-in-out infinite; pointer-events:none; }
+  @keyframes tho-sweep { 0%,50% { left:-60%; } 100% { left:130%; } }
+
+  /* Ticker */
+  .tho-ticker { overflow:hidden; white-space:nowrap; background:var(--b6); color:#fff; }
+  .tho-ticker > div { display:inline-flex; gap:30px; padding:11px 0; animation:tho-tick 22s linear infinite; font-weight:800; font-size:.85rem; letter-spacing:.05em; }
+  .tho-ticker span { display:inline-flex; align-items:center; gap:8px; }
+  .tho-ticker svg { width:15px; height:15px; }
+  @keyframes tho-tick { to { transform:translateX(-50%); } }
+
+  /* Sections */
+  .tho-sec { padding:34px 0; }
+  .tho-eyebrow { margin:0 0 6px; font-size:.75rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--b6); }
+  .tho-h2 { margin:0 0 16px; font-size:clamp(1.45rem,5.6vw,2.2rem); line-height:1.12; font-weight:900; letter-spacing:-.015em; color:var(--b9); }
+  .tho-jobs { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; list-style:none; padding:0; margin:0; }
+  .tho-job { display:flex; align-items:center; gap:10px; min-height:64px; padding:12px; border-radius:14px; background:#fff; border:1px solid var(--line); color:var(--ink); text-decoration:none; font-weight:800; font-size:.9rem; line-height:1.2; transition:border-color .2s, transform .2s, box-shadow .2s; }
+  .tho-job:hover { border-color:var(--b6); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,92,255,.12); }
+  .tho-job__ic { position:relative; display:grid; place-items:center; flex:0 0 48px; height:48px; border-radius:14px; background:linear-gradient(145deg, #eef4ff, #dbe8ff); color:var(--b8); box-shadow:inset 0 1px 0 #fff, 0 6px 14px rgba(11,92,255,.14); transition:transform .25s, background .25s; }
+  .tho-job__ic::after { content:""; position:absolute; inset:0; border-radius:inherit; border:1px solid rgba(11,92,255,.14); }
+  .tho .tho-job__ic svg, .tho .tho-ti svg { width:30px; height:30px; stroke-width:2.4; }
+  .tho .tho-job__ic svg .d, .tho .tho-ti svg .d { fill:#9cc0ff; stroke:none; opacity:.55; }
+  .tho .tho-job__ic svg .a, .tho .tho-ti svg .a { stroke:#16a34a; }
+  .tho .tho-job__ic svg circle.a, .tho .tho-ti svg circle.a { fill:#16a34a; stroke:none; }
+  .tho-job:hover .tho-job__ic { transform:rotate(-6deg) scale(1.06); background:linear-gradient(145deg, #2f7bff, #0b5cff); color:#fff; }
+  .tho .tho-job:hover .tho-job__ic svg .d { fill:#fff; opacity:.25; }
+  .tho .tho-job:hover .tho-job__ic svg .a { stroke:#86efac; }
+  .tho-ti { display:grid; place-items:center; flex:0 0 40px; height:40px; border-radius:12px; background:linear-gradient(145deg, #eef4ff, #dbe8ff); color:var(--b8); }
+  .tho .tho-ti svg { width:26px; height:26px; }
+  .tho-job__t { min-width:0; }
+  .tho .tho-job .tho-thin { flex:0 0 16px; width:16px; height:10px; color:var(--b6); animation:none; }
+  .tho .tho-job:hover .tho-thin { animation:tho-nudge 1.2s ease-in-out infinite; }
+  .tho-steps { display:grid; gap:10px; list-style:none; padding:0; margin:0; }
+  .tho-steps li { display:flex; gap:14px; align-items:flex-start; padding:16px; border-radius:14px; background:#fff; border:1px solid var(--line); }
+  .tho-n { display:grid; place-items:center; flex:0 0 34px; height:34px; border-radius:50%; background:var(--b6); color:#fff; font-weight:900; }
+  .tho-steps strong { display:block; margin-bottom:3px; color:var(--b9); }
+  .tho-steps p { margin:0; font-size:.9rem; line-height:1.45; color:var(--mut); }
+  .tho-steps__cta { margin-top:18px; }
+  .tho-steps__cta .tho-call { background:var(--b9); box-shadow:0 14px 32px rgba(7,26,61,.3); }
+  .tho-steps__cta .tho-call__num { color:#fff; }
+  .tho-steps__cta .tho-call__lbl { color:#a9c3f5; }
+  .tho-steps__cta .tho-thin { color:#fff; }
+
+  /* Hero quote buttons */
+  .tho-sub strong { color:#fff; }
+  .tho-ctas2 { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .tho-qbtn { display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:14px; background:linear-gradient(135deg, #22c55e, #16a34a); color:#fff; font-weight:800; font-size:.95rem; text-decoration:none; box-shadow:0 10px 24px rgba(22,163,74,.35); transition:transform .2s, box-shadow .2s; }
+  .tho-qbtn:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(22,163,74,.45); }
+  .tho-qbtn svg { width:18px; height:18px; fill:currentColor; stroke:none; }
+  .tho-qbtn--ghost { background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.35); box-shadow:none; }
+  .tho-qbtn--ghost svg { fill:none; stroke:currentColor; }
+
+  /* Choose your crew */
+  .tho-crew { background:linear-gradient(180deg, #f5f8ff, #fff); }
+  .tho-crew__lead { margin:-6px 0 20px; color:var(--mut); font-size:1rem; }
+  .tho-crew__grid { display:grid; gap:16px; }
+  .tho-card { position:relative; display:flex; flex-direction:column; padding:20px; border-radius:22px; background:#fff; border:1px solid var(--line); box-shadow:0 18px 44px rgba(11,40,99,.08); overflow:hidden; transition:transform .25s, box-shadow .25s; }
+  .tho-card:hover { transform:translateY(-4px); box-shadow:0 26px 60px rgba(11,40,99,.14); }
+  .tho-card--pro { border:2px solid var(--b6); background:linear-gradient(180deg, #fff, #f5f8ff); }
+  .tho-card--pro::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, var(--b5), var(--b6)); }
+  .tho-card--eco::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, #22c55e, #16a34a); }
+  .tho-card__badge { position:absolute; top:16px; right:16px; padding:5px 12px; border-radius:999px; background:var(--b6); color:#fff; font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+  .tho-card__badge--eco { background:#16a34a; }
+  .tho .tho-ill { display:block; width:100%; height:auto; max-height:170px; margin:6px 0 10px; stroke:none; }
+  .tho-ill__sofa { animation:tho-lift 3.2s ease-in-out infinite; }
+  @keyframes tho-lift { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+  .tho-ill__spark circle { animation:tho-twinkle 2.2s ease-in-out infinite; } .tho-ill__spark circle:nth-child(2) { animation-delay:.6s; } .tho-ill__spark circle:nth-child(3) { animation-delay:1.2s; }
+  @keyframes tho-twinkle { 0%,100% { opacity:.2; } 50% { opacity:1; } }
+  .tho-card__t { display:flex; align-items:center; gap:10px; margin:0 0 6px; font-size:1.3rem; font-weight:900; color:var(--b9); }
+  .tho-card__t svg { width:26px; height:26px; padding:5px; box-sizing:content-box; border-radius:10px; background:var(--b1); color:var(--b6); }
+  .tho-card--eco .tho-card__t svg { background:#dcfce7; color:#16a34a; }
+  .tho-card__d { margin:0 0 12px; color:var(--mut); line-height:1.5; }
+  .tho-card__l { display:grid; gap:7px; list-style:none; padding:0; margin:0 0 18px; }
+  .tho-card__l li { display:flex; gap:8px; align-items:flex-start; font-weight:600; font-size:.93rem; color:var(--ink); }
+  .tho-card__l svg { flex:0 0 18px; width:18px; height:18px; stroke-width:3; color:var(--b6); margin-top:1px; }
+  .tho-card--eco .tho-card__l svg { color:#16a34a; }
+  .tho-card__foot { margin-top:auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding-top:14px; border-top:1px dashed var(--line); }
+  .tho-card__price { display:flex; flex-direction:column; font-size:1.35rem; font-weight:900; color:var(--b9); line-height:1.1; }
+  .tho-card__price small { font-size:.75rem; font-weight:600; color:var(--mut); }
+  .tho-card--pro .tho-qbtn { background:linear-gradient(135deg, var(--b5), var(--b6)); box-shadow:0 10px 24px rgba(11,92,255,.3); }
+  .tho-crew__trust { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; list-style:none; padding:0; margin:20px 0 0; }
+  .tho-crew__trust li { display:flex; align-items:center; gap:8px; padding:12px; border-radius:14px; background:#fff; border:1px solid var(--line); font-weight:700; font-size:.88rem; color:var(--b9); }
+  .tho-crew__trust li { gap:10px; }
+
+  /* Message-us bubble (Google Ads style) */
+  .tho-msg { position:fixed; right:16px; bottom:96px; z-index:70; display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
+  .tho-msg__btn { position:relative; display:inline-flex; align-items:center; gap:9px; padding:12px 18px 12px 14px; border:0; border-radius:999px; background:linear-gradient(135deg, #1a73e8, #0b5cff); color:#fff; font:800 .92rem Inter, sans-serif; cursor:pointer; box-shadow:0 14px 34px rgba(11,92,255,.45); }
+  .tho-msg__btn svg { width:22px; height:22px; }
+  .tho-msg__dot { position:absolute; top:6px; right:8px; width:10px; height:10px; border-radius:50%; background:#22c55e; border:2px solid #fff; animation:tho-pulse 2s infinite; }
+  .tho-msg.is-nudge:not(.is-open) .tho-msg__btn { animation:tho-bob 1.4s ease-in-out 3; }
+  @keyframes tho-bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+  .tho-msg__panel { width:min(340px, calc(100vw - 32px)); border-radius:20px; background:#fff; box-shadow:0 30px 70px rgba(7,26,61,.35); overflow:hidden; border:1px solid var(--line); }
+  .tho-msg__panel[hidden] { display:none; }
+  .tho-msg__head { display:flex; align-items:center; gap:10px; padding:14px; background:linear-gradient(135deg, var(--b8), var(--b9)); color:#fff; }
+  .tho-msg__head strong { display:block; font-size:.98rem; } .tho-msg__head small { color:#a9c3f5; font-size:.76rem; }
+  .tho-msg__av { position:relative; display:grid; place-items:center; flex:0 0 40px; height:40px; border-radius:50%; background:#fff; color:var(--b6); }
+  .tho-msg__av svg { width:22px; height:22px; } .tho-msg__av i { position:absolute; right:0; bottom:0; width:10px; height:10px; border-radius:50%; background:#22c55e; border:2px solid #fff; }
+  .tho-msg__x { margin-left:auto; display:grid; place-items:center; width:32px; height:32px; border:0; border-radius:50%; background:rgba(255,255,255,.12); color:#fff; cursor:pointer; }
+  .tho-msg__x svg { width:16px; height:16px; }
+  .tho-msg__body { padding:14px; background:var(--b0); }
+  .tho-msg__bubble { margin:0 0 12px; padding:12px 14px; border-radius:4px 16px 16px 16px; background:#fff; border:1px solid var(--line); font-size:.92rem; line-height:1.45; color:var(--ink); }
+  .tho-msg__chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .tho-msg__chips a { padding:9px 13px; border-radius:999px; background:#fff; border:1.5px solid var(--b6); color:var(--b6); font-weight:800; font-size:.85rem; text-decoration:none; transition:background .2s, color .2s; }
+  .tho-msg__chips a:hover { background:var(--b6); color:#fff; }
+  .tho-msg__form { display:block; margin-top:12px; font-size:.84rem; font-weight:700; color:var(--b6); text-align:center; }
+
+  /* Sticky phone call bar (phones only) */
+  .tho-callbar { position:fixed; left:0; right:0; bottom:0; z-index:60; padding:8px 12px calc(8px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.96); border-top:1px solid var(--line); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+  .tho-callbar .tho-call { max-width:none; padding:8px 16px 8px 8px; background:var(--b6); box-shadow:0 8px 22px rgba(11,92,255,.35); }
+  .tho-callbar .tho-ringer { flex-basis:44px; height:44px; background:#fff; color:var(--b6); }
+  .tho-callbar .tho-ringer::before, .tho-callbar .tho-ringer::after { border-color:#fff; }
+  .tho-callbar .tho-call__lbl { color:#cfe0ff; }
+  .tho-callbar .tho-call__num { color:#fff; font-size:1.3rem; }
+  .tho-callbar .tho-thin { color:#fff; }
+  body:has(.tho-callbar) { padding-bottom:76px; }
+  /* The new call bar replaces the floating lead card on phones; card turns blue on desktop */
+  @media (max-width: 899px) { body:has(.tho-callbar) div[class^="titan-facebook-card-"] { display:none !important; } }
+  body:has(.tho-msg) [class^="titan-facebook-card-"] { display:none !important; }
+  [class*="titan-facebook-card-button-call-"] { background-color:#0b5cff !important; }
+  [class*="titan-facebook-card-quote-btn-"] { border-color:#0b5cff !important; }
+
+  @media (min-width: 900px) {
+    .tho-nav { display:flex; }
+    .tho-hero { padding:56px 0 64px; }
+    .tho-hero__grid { grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+    .tho-photo { order:2; aspect-ratio:4/3.4; box-shadow:0 40px 80px rgba(0,0,0,.4); }
+    .tho-jobs { grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; }
+    .tho-crew__grid { grid-template-columns:1fr 1fr; gap:24px; }
+    .tho-card { padding:28px; }
+    .tho-crew__trust { grid-template-columns:repeat(4, 1fr); }
+    .tho-msg { bottom:24px; right:24px; }
+    .tho-steps { grid-template-columns:repeat(3, 1fr); }
+    .tho-sec { padding:60px 0; }
+    .tho-callbar { display:none; }
+    body:has(.tho-callbar) { padding-bottom:0; }
+  }
+  @media (max-width: 380px) { .tho-call__num { font-size:1.25rem; } .tho-call__lbl { font-size:.74rem; } }
+  @media (max-width: 340px) { .tho-hcall span { display:none; } }
+  @media (max-width: 480px) { .tho-msg__btn span { display:none; } .tho-msg__btn { padding:14px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .tho *, .tho *::before, .tho *::after { animation:none !important; transition:none !important; }
+  }
+  /* Three crews (2026-11-20) */
+  .tho-card--big { border:2px solid var(--b9); }
+  .tho-card--big::before { content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg, var(--b9), var(--b6)); }
+  .tho-card__badge--big { background:var(--b9); }
+  @media (min-width: 1040px) { .tho-crew__grid { grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; } .tho-card { padding:22px; } }
+  /* Quote form in the hero beside the headline (2026-11-20) */
+  .tho-hero__grid--quote { grid-template-areas:"copy" "quote" "more"; gap:16px; }
+  .tho-hero__grid--quote .tho-copy { grid-area:copy; min-width:0; }
+  .tho-hero__grid--quote .tho-more { grid-area:more; min-width:0; }
+  .tho-hero__grid--quote .tho-sub { margin:0; }
+  .tho-hero .tho-quote { grid-area:quote; min-width:0; padding:0; background:none; scroll-margin-top:84px; }
+  .tho-hero .tho-quote .thq-card { box-shadow:0 24px 60px rgba(0,0,0,.4), 0 0 0 5px rgba(143,180,255,.22); }
+  .tho-kicker { display:inline-flex; align-items:center; gap:8px; margin:0 0 12px; padding:6px 13px; border-radius:999px; border:1px solid rgba(143,180,255,.4); background:rgba(255,255,255,.06); color:#cfe0ff; font-size:.76rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; }
+  .tho-kicker i { width:8px; height:8px; border-radius:50%; background:#22c55e; }
+  .tho-topcall { display:none; }
+  @media (max-width: 899px) {
+    .tho-hero__grid--quote .tho-copy { display:contents; }
+    .tho-hero__grid--quote { grid-template-areas:"kicker" "h1" "call" "quote" "sub" "more"; }
+    /* Compact call button above the quote form, phones only (2026-11-21) */
+    .tho-topcall { display:block; grid-area:call; min-width:0; }
+    .tho-topcall .tho-call { max-width:none; gap:12px; padding:8px 14px 8px 8px; border-radius:16px; }
+    .tho-topcall .tho-ringer { flex-basis:42px; height:42px; }
+    .tho-topcall .tho-call__num { font-size:1.3rem; }
+    .tho-hero__grid--quote .tho-kicker { grid-area:kicker; justify-self:start; margin:0; }
+    .tho-hero__grid--quote .tho-h1 { grid-area:h1; margin:0 0 4px; }
+    .tho-hero__grid--quote .tho-sub { grid-area:sub; }
+  }
+  @media (min-width: 900px) {
+    .tho-hero__grid--quote { grid-template-columns:minmax(0, 1fr) minmax(0, 1.02fr); grid-template-rows:auto 1fr; grid-template-areas:"copy quote" "more quote"; gap:22px 48px; align-items:start; }
+    .tho-hero__grid--quote .tho-h1 { font-size:clamp(2.2rem, 4.1vw, 3.3rem); }
+    .tho-hero .thq-photo { height:290px; }
+  }
+  /* Phones: the three crew cards sit side by side and swipe, instead of a very long stack (2026-11-20) */
+  .tho-crew__swipe { display:none; margin:-8px 0 12px; font-size:.82rem; font-weight:800; color:var(--b6); }
+  @media (max-width: 699px) {
+    .tho-crew__swipe { display:block; }
+    .tho-crew__grid { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:86%; gap:12px; margin:0 -16px; padding:4px 16px 16px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .tho-crew__grid::-webkit-scrollbar { display:none; }
+    .tho-card { scroll-snap-align:center; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Titan home hero",
+  "tag": "section",
+  "class": "section-titan-home-hero",
+  "settings": [
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "quote_anchor", "label": "Quote button link", "default": "#instant-quote" },
+    { "type": "range", "id": "open_hour", "label": "Open from (hour)", "min": 0, "max": 23, "step": 1, "default": 7 },
+    { "type": "range", "id": "close_hour", "label": "Open until (hour)", "min": 1, "max": 24, "step": 1, "default": 19 },
+    { "type": "text", "id": "live_open", "label": "Status during hours", "default": "Taking same-day bookings now" },
+    { "type": "text", "id": "live_closed", "label": "Status after hours", "default": "Book now for tomorrow from 7am" },
+    { "type": "text", "id": "live_fallback", "label": "Status without JavaScript", "default": "Same-day pickups available" },
+    { "type": "inline_richtext", "id": "heading", "label": "H1 (italic shows in red)", "default": "Same-Day Furniture Pickup &amp; Delivery in <em>Sydney</em>" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "image_alt", "label": "Photo alt text" },
+    { "type": "text", "id": "badge_title", "label": "Route card title" },
+    { "type": "text", "id": "badge_text", "label": "Route card text" }
+  ],
+  "blocks": [
+    { "type": "chip", "name": "Service link", "settings": [
+      { "type": "text", "id": "label", "label": "Label" },
+      { "type": "text", "id": "url", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "Titan home hero" }]
+}
+{% endschema %}
