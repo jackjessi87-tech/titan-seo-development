@@ -133,8 +133,8 @@
         "faq_6": {
           "type": "faq",
           "settings": {
-            "question": "Is the item insured while you move it?",
-            "answer": "<p>Yes. It's covered while it's in our care.</p>"
+            "question": "How do you protect my item?",
+            "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "link_1": {
@@ -252,7 +252,7 @@
         "heading": "Second Hand Furniture Delivery <em>Sydney</em>",
         "subheading": "Bought used furniture on Marketplace, Gumtree or from a friend? We collect it from the seller and deliver it to your place, wrapped and strapped, often the same day.",
         "rating_text": "5.0 on Google · 67 reviews",
-        "trust_1": "Fully insured",
+        "trust_1": "Wrapped and strapped",
         "trust_2": "Same-day available",
         "hero_image": "shopify://shop_images/titan-sofa-truck-loading.webp",
         "hero_alt": "Titan Express movers loading a second hand sofa for delivery in Sydney",

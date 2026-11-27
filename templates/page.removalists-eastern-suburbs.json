@@ -133,8 +133,8 @@
         "faq_6": {
           "type": "faq",
           "settings": {
-            "question": "Is my furniture insured?",
-            "answer": "<p>Yes. Items are covered while in our care.</p>"
+            "question": "How do you protect my furniture?",
+            "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "link_1": {
@@ -261,7 +261,7 @@
         "heading": "Removalists <em>Eastern Suburbs</em>",
         "subheading": "Man and van, small moves and furniture delivery from Bondi to Randwick. Units, terraces and tight streets handled by two careful movers, at a fixed price.",
         "rating_text": "5.0 on Google · 67 reviews",
-        "trust_1": "Fully insured",
+        "trust_1": "Wrapped and strapped",
         "trust_2": "Same-day available",
         "hero_image": "shopify://shop_images/1000013354.jpg",
         "hero_alt": "Titan Express van for an Eastern Suburbs furniture move",

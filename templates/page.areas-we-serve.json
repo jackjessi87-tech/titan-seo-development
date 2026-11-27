@@ -32,7 +32,7 @@
             "rating_filter_keywords": "",
             "fallback_trust_text": "Rated 5.0 on Google by Sydney customers.",
             "badge_1": "Titan Express · Sydney-wide removalists",
-            "badge_2": "Fully insured",
+            "badge_2": "Wrapped and strapped",
             "badge_3": "Same-day where scheduling allows",
             "badge_4": "Fixed-price quotes",
             "badge_5": "7 days a week",
@@ -375,8 +375,8 @@
             "faq-6": {
               "type": "_faq-item",
               "settings": {
-                "question": "Is my furniture insured while you move it?",
-                "answer": "<p>Yes, your items are covered while they're in our care, and every item is wrapped in protective blankets and strapped in the van.</p>"
+                "question": "How do you protect my furniture?",
+                "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
               }
             },
             "faq-7": {

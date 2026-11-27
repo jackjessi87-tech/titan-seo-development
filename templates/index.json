@@ -148,7 +148,7 @@
             "button_text_color": "#ffffff",
             "button_border_radius": 10,
             "trust_item_1": "Same Day Available",
-            "trust_item_2": "Fully Insured",
+            "trust_item_2": "Wrapped & Strapped",
             "trust_item_3": "Sydney Wide",
             "trust_item_4": "5-Star Rated",
             "trust_text_color": "#4b5563",
@@ -304,7 +304,7 @@
             "tag_text_color": "#ffffff",
             "tag_font_size": 10,
             "trust_point_1": "Same Day Service Available",
-            "trust_point_2": "Fully Insured Transport",
+            "trust_point_2": "Careful Transport",
             "trust_point_3": "Professional Removalist Team",
             "trust_point_4": "Furniture Protected With Blankets & Straps",
             "trust_point_5": "Marketplace Pickups & Deliveries",
@@ -1030,8 +1030,8 @@
         "faq_7": {
           "type": "faq",
           "settings": {
-            "question": "Is my furniture insured?",
-            "answer": "<p>Yes. Items are covered while in our care, and everything is wrapped in blankets and strapped in the van.</p>"
+            "question": "How do you protect my furniture?",
+            "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "faq_8": {
@@ -1094,7 +1094,7 @@
         "fact_2": "Fixed price before we start",
         "fact_3": "Same-day pickups, 7 days",
         "fact_4": "No minimum job size",
-        "fact_5": "Fully insured, blankets and straps",
+        "fact_5": "Blankets and straps on every job",
         "fact_6": "5.0 on Google · 67 reviews",
         "services_eyebrow": "Our services",
         "services_heading": "What We Pick Up and Deliver",

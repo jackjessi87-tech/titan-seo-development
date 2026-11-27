@@ -1,0 +1,124 @@
+{%- comment -%}
+  Titan Express: separate "request insurance for my belongings" form (2026-11-27).
+  Insurance is not included in any price. A customer who wants it asks here, before the job.
+  Plain Shopify contact form; the enquiry email arrives with source "Insurance request form".
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign phone_intl = s.phone | remove: ' ' | remove_first: '0' | prepend: '+61'
+-%}
+<section class="tir" aria-labelledby="tir-h-{{ section.id }}">
+  <div class="tir-wrap">
+    <p class="tir-kicker">{{ s.kicker }}</p>
+    <h1 class="tir-h" id="tir-h-{{ section.id }}">{{ s.heading }}</h1>
+    <div class="tir-intro">{{ s.intro }}</div>
+
+    <ul class="tir-points" role="list">
+      <li>{{ s.point_1 }}</li>
+      <li>{{ s.point_2 }}</li>
+      <li>{{ s.point_3 }}</li>
+    </ul>
+
+    <div class="tir-card">
+      {%- form 'contact', id: 'InsuranceRequest', class: 'tir-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="tir-done" role="status" tabindex="-1" autofocus>
+            <h2>Thanks, your request is in</h2>
+            <p>{{ s.success_text }}</p>
+            <p><a class="tir-btn tir-btn--ghost" href="tel:{{ phone_intl }}">Call {{ s.phone }}</a></p>
+          </div>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="tir-error" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <input type="hidden" name="contact[source]" value="Insurance request form">
+
+          <div class="tir-row">
+            <label class="tir-field"><span>Your name</span>
+              <input type="text" name="contact[name]" autocomplete="name" autocapitalize="words" required></label>
+            <label class="tir-field"><span>Mobile</span>
+              <input type="tel" name="contact[phone]" autocomplete="tel" inputmode="tel" placeholder="04xx xxx xxx" required></label>
+          </div>
+          <label class="tir-field"><span>Email</span>
+            <input type="email" name="contact[email]" autocomplete="email" inputmode="email" required></label>
+
+          <div class="tir-row">
+            <label class="tir-field"><span>Pickup suburb</span>
+              <input type="text" name="contact[pickup_suburb]" autocapitalize="words" required></label>
+            <label class="tir-field"><span>Delivery suburb</span>
+              <input type="text" name="contact[delivery_suburb]" autocapitalize="words" required></label>
+          </div>
+          <label class="tir-field"><span>Job date</span>
+            <input type="date" name="contact[job_date]" required></label>
+
+          <label class="tir-field"><span>Items you want insured, and what each is worth</span>
+            <textarea name="contact[body]" rows="4" placeholder="e.g. 3 seater leather sofa $2,500, fridge $1,800" required></textarea></label>
+          <label class="tir-field"><span>Total value to insure ($)</span>
+            <input type="text" name="contact[total_value]" inputmode="decimal" placeholder="e.g. 4300" required></label>
+
+          <label class="tir-check">
+            <input type="checkbox" name="contact[understood_request_only]" value="Yes" required>
+            <span>{{ s.ack_text }}</span>
+          </label>
+
+          <button type="submit" class="tir-btn">{{ s.button }}</button>
+          <p class="tir-fine">{{ s.fine_print }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .tir { --tir-navy:#071a3d; --tir-blue:#0b5cff; --tir-soft:#f5f8ff; --tir-line:#d5deee; --tir-mut:#56627a; padding:32px 0 56px; background:var(--tir-soft); color:var(--tir-navy); }
+  .tir-wrap { max-width:720px; margin:0 auto; padding:0 16px; }
+  .tir-kicker { margin:0 0 8px; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--tir-blue); }
+  .tir-h { margin:0 0 12px; font-size:clamp(1.7rem, 5vw, 2.4rem); font-weight:900; line-height:1.12; letter-spacing:-.01em; color:var(--tir-navy); }
+  .tir-intro { font-size:1.05rem; line-height:1.55; color:var(--tir-navy); }
+  .tir-intro p { margin:0 0 10px; }
+  .tir-points { display:grid; gap:8px; margin:14px 0 22px; padding:0; list-style:none; }
+  .tir-points li { position:relative; padding:10px 12px 10px 38px; border-radius:12px; background:#fff; border:1px solid var(--tir-line); font-weight:600; line-height:1.4; }
+  .tir-points li::before { content:""; position:absolute; left:13px; top:15px; width:12px; height:12px; border-radius:50%; background:var(--tir-blue); }
+  .tir-card { padding:20px 16px; border-radius:20px; background:#fff; box-shadow:0 18px 44px rgba(7,26,61,.12), 0 0 0 1px var(--tir-line); }
+  .tir-form { display:grid; gap:14px; }
+  .tir-row { display:grid; gap:14px; }
+  .tir-field { display:grid; gap:6px; font-weight:700; font-size:.95rem; }
+  .tir-field input, .tir-field textarea { box-sizing:border-box; width:100%; min-height:52px; padding:13px 14px; border:1.5px solid var(--tir-line); border-radius:14px; background:#fff; font:inherit; font-size:16px; font-weight:500; color:var(--tir-navy); }
+  .tir-field textarea { resize:vertical; }
+  .tir-field input:focus, .tir-field textarea:focus { border-color:var(--tir-blue); box-shadow:0 0 0 4px rgba(11,92,255,.12); outline:none; }
+  .tir-check { display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:start; padding:12px; border-radius:14px; background:var(--tir-soft); border:1px solid var(--tir-line); font-size:.92rem; font-weight:600; line-height:1.45; }
+  .tir-check input { width:22px; height:22px; margin:1px 0 0; accent-color:var(--tir-blue); }
+  .tir-btn { display:inline-flex; align-items:center; justify-content:center; width:100%; min-height:54px; padding:0 22px; border:0; border-radius:14px; background:linear-gradient(135deg, #2f7bff, #0b5cff); color:#fff; font:inherit; font-weight:900; font-size:1rem; text-decoration:none; cursor:pointer; box-shadow:0 10px 24px rgba(11,92,255,.3); }
+  .tir-btn--ghost { width:auto; background:var(--tir-soft); color:var(--tir-navy); box-shadow:none; border:1.5px solid var(--tir-line); }
+  .tir-fine { margin:0; font-size:.82rem; line-height:1.5; color:var(--tir-mut); }
+  .tir-error { padding:12px 14px; border-radius:12px; background:#fef2f2; color:#991b1b; font-weight:700; }
+  .tir-done h2 { margin:0 0 8px; font-size:1.4rem; font-weight:900; color:var(--tir-navy); }
+  .tir-done p { margin:0 0 12px; line-height:1.5; }
+  @media (min-width: 640px) {
+    .tir { padding:48px 0 72px; }
+    .tir-card { padding:28px; }
+    .tir-row { grid-template-columns:1fr 1fr; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Titan insurance request",
+  "tag": "div",
+  "class": "section-titan-insurance-request",
+  "settings": [
+    { "type": "text", "id": "phone", "label": "Phone", "default": "0469 717 535" },
+    { "type": "text", "id": "kicker", "label": "Small line above heading", "default": "Optional extra" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Request insurance for my belongings" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Insurance for your items is not included in our prices. If you would like your belongings insured for your move or delivery, please send this form before your job.</p>" },
+    { "type": "text", "id": "point_1", "label": "Point 1", "default": "Send this request before your job, as early as you can." },
+    { "type": "text", "id": "point_2", "label": "Point 2", "default": "We reply with what can be arranged and what it costs." },
+    { "type": "text", "id": "point_3", "label": "Point 3", "default": "Your items are only insured once we confirm it to you in writing." },
+    { "type": "textarea", "id": "ack_text", "label": "Tick box wording", "default": "I understand this is a request only. My items are not insured until Titan Express confirms it to me in writing before the job and any cost is paid." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Send my insurance request" },
+    { "type": "textarea", "id": "fine_print", "label": "Small print under the button", "default": "Sending this form does not put insurance in place. If you do not hear back from us in writing before your job, your items are moved without insurance cover." },
+    { "type": "textarea", "id": "success_text", "label": "Message after sending", "default": "We have your request and will reply with what can be arranged and the cost. This is a request only: your items are not insured until we confirm it to you in writing." }
+  ],
+  "presets": [{ "name": "Titan insurance request" }]
+}
+{% endschema %}

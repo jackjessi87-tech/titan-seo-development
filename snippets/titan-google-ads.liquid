@@ -26,7 +26,7 @@
 
       // Quote form: Shopify reloads the page with ?contact_posted=true after a successful send.
       try {
-        if (/[?&]contact_posted=true/.test(window.location.search)) {
+        if (/[?&]contact_posted=true/.test(window.location.search) && !/insurance-request/.test(window.location.pathname)) {
           var key = 'titan_quote_conv:' + window.location.pathname + window.location.search;
           if (!sessionStorage.getItem(key)) {
             sessionStorage.setItem(key, '1');
@@ -34,7 +34,7 @@
           }
         }
       } catch (err) {
-        if (/[?&]contact_posted=true/.test(window.location.search)) {
+        if (/[?&]contact_posted=true/.test(window.location.search) && !/insurance-request/.test(window.location.pathname)) {
           gtag('event', 'conversion', { send_to: QUOTE });
         }
       }

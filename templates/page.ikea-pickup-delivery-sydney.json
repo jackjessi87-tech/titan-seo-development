@@ -133,8 +133,8 @@
         "faq_6": {
           "type": "faq",
           "settings": {
-            "question": "Is my order insured?",
-            "answer": "<p>Yes. Your items are covered while they're in our care and strapped securely in the van.</p>"
+            "question": "How do you protect my order?",
+            "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "link_1": {
@@ -252,7 +252,7 @@
         "heading": "IKEA Delivery &amp; Pickup <em>Sydney</em>",
         "subheading": "IKEA delivery from Tempe or Rhodes by two men and a mini truck. We collect your IKEA order or click and collect, carry it inside and place it in the room you choose. Fixed price, often same day. We are an independent delivery service, not IKEA.",
         "rating_text": "5.0 on Google · 67 reviews",
-        "trust_1": "Fully insured",
+        "trust_1": "Wrapped and strapped",
         "trust_2": "Same-day available",
         "hero_image": "shopify://shop_images/titan-two-movers-truck-hero.webp",
         "hero_alt": "Two Titan Express movers loading a wrapped sofa into the truck for an IKEA delivery in Sydney",

@@ -133,8 +133,8 @@
         "faq_6": {
           "type": "faq",
           "settings": {
-            "question": "Is my furniture insured?",
-            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped and strapped in the van.</p>"
+            "question": "How do you protect my furniture?",
+            "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "link_1": {
@@ -252,7 +252,7 @@
         "heading": "Man and Van <em>Blacktown</em>",
         "subheading": "Single items, small moves and IKEA Marsden Park pickups across Blacktown, Seven Hills, The Ponds and the new north-west estates. Fixed prices, careful movers.",
         "rating_text": "5.0 on Google · 67 reviews",
-        "trust_1": "Fully insured",
+        "trust_1": "Wrapped and strapped",
         "trust_2": "Same-day available",
         "hero_image": "shopify://shop_images/WhatsApp_Image_2026-03-30_at_10.01.35_PM.jpg",
         "hero_alt": "Titan Express van with appliances loaded for a Blacktown delivery",

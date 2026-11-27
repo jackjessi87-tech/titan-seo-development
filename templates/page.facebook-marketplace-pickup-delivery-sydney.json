@@ -68,7 +68,7 @@
             "rating_filter_keywords": "marketplace, gumtree, pickup, collection",
             "fallback_trust_text": "Trusted by Sydney buyers for careful Marketplace and Gumtree collections.",
             "badge_1": "Titan Express · Facebook Marketplace & Gumtree",
-            "badge_2": "Fully insured",
+            "badge_2": "Wrapped and strapped",
             "badge_3": "Same-day availability where scheduling allows",
             "badge_4": "No hidden fees",
             "badge_5": "Sydney-wide service",
@@ -481,8 +481,8 @@
             "faq-5": {
               "type": "_faq-item",
               "settings": {
-                "question": "Is my item insured during transport?",
-                "answer": "<p>Yes, your item is covered while it's in our care, and we use protective blankets, straps and trolleys to keep it safe in transit.</p>"
+                "question": "How do you protect my item?",
+                "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
               },
               "blocks": {}
             },
@@ -736,7 +736,7 @@
           "settings": {
             "service_name": "Facebook Marketplace Furniture Pickup & Delivery Sydney",
             "service_type": "Facebook Marketplace furniture pickup and delivery",
-            "description": "Furniture and large item pickup and delivery from Facebook Marketplace, Gumtree and private sellers across Sydney, including direct seller coordination, protective handling and insured transport.",
+            "description": "Furniture and large item pickup and delivery from Facebook Marketplace, Gumtree and private sellers across Sydney, including direct seller coordination, protective handling and careful transport.",
             "areas_served": "Innerwest, Eastern Suburbs, Northern Beaches, North Shore, Western Sydney, Outer West, Southern Sydney, Hills District"
           },
           "blocks": {}

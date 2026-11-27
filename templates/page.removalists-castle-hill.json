@@ -140,8 +140,8 @@
         "faq_7": {
           "type": "faq",
           "settings": {
-            "question": "Is my furniture insured during the move?",
-            "answer": "<p>Yes. Your items are covered while they're in our care, and every piece is wrapped in protective blankets and strapped in the van.</p>"
+            "question": "How do you protect my furniture?",
+            "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "faq_8": {
@@ -221,9 +221,9 @@
         "live_fallback": "Same-day removals available in Castle Hill",
         "kicker": "Castle Hill · Hills District",
         "heading": "Removalists <em>Castle Hill</em>",
-        "subheading": "Furniture removals, man with a van and same-day furniture delivery across Castle Hill and the Hills District. Fixed prices, careful movers, fully insured.",
+        "subheading": "Furniture removals, man with a van and same-day furniture delivery across Castle Hill and the Hills District. Fixed prices, careful movers, wrapped and strapped.",
         "rating_text": "5.0 on Google · 67 reviews",
-        "trust_1": "Fully insured",
+        "trust_1": "Wrapped and strapped",
         "trust_2": "Same-day available",
         "hero_image": "shopify://shop_images/titan-express-enhanced-web-optimized_23.jpg",
         "hero_alt": "Titan Express van loaded with wrapped furniture ready for a Castle Hill delivery",

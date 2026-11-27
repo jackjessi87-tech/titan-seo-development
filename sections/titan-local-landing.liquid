@@ -313,7 +313,7 @@
           {{ s.hero_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 900px) 42vw, 92vw', widths: '450, 700, 900', alt: hero_alt, class: 'tll-hero__img' }}
         {%- endif -%}
         <span class="tlh-tag"><i></i>Same-day pickups today</span>
-        <span class="tlh-ribbon">Insured &middot; Wrapped &middot; Strapped</span>
+        <span class="tlh-ribbon">Wrapped &middot; Strapped &middot; Fixed price</span>
       </div>
         {%- form 'contact', id: form_id, class: 'tll-form' -%}
           <input type="hidden" name="contact[source]" value="{{ page.title }} – local page quote">
@@ -545,7 +545,7 @@
         </article>
       </div>
       <ul class="tlh-trust" role="list">
-        <li><span class="tlh-ti">{{ tlj_shield }}</span>Fully insured</li>
+        <li><span class="tlh-ti">{{ tlj_shield }}</span>Wrapped and strapped</li>
         <li><span class="tlh-ti">{{ tlj_clock }}</span>7 days, 7am to 7pm</li>
         <li><span class="tlh-ti">{{ tlj_wallet }}</span>Fixed price, pay on the day</li>
         <li><span class="tlh-ti">{{ tlj_stairs }}</span>Stairs and lifts no problem</li>
@@ -1873,7 +1873,7 @@
     { "type": "inline_richtext", "id": "heading", "label": "H1 (italic text shows in red)", "default": "Removalists <em>Castle Hill</em>" },
     { "type": "textarea", "id": "subheading", "label": "Subheading" },
     { "type": "text", "id": "rating_text", "label": "Rating text (must be real)", "default": "5.0 on Google · 59 reviews" },
-    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Fully insured" },
+    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Wrapped and strapped" },
     { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Same-day available" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero photo" },
     { "type": "text", "id": "hero_alt", "label": "Hero photo alt text" },

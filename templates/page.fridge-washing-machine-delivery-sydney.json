@@ -133,8 +133,8 @@
         "faq_6": {
           "type": "faq",
           "settings": {
-            "question": "Is my appliance insured?",
-            "answer": "<p>Yes. It's covered while it's in our care, wrapped and strapped in the van.</p>"
+            "question": "How do you protect my appliance?",
+            "answer": "<p>Your appliance is wrapped in blankets and strapped upright in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "link_1": {
@@ -252,7 +252,7 @@
         "heading": "Fridge &amp; Washing Machine Delivery <em>Sydney</em>",
         "subheading": "Fridge transport, washing machine and dryer delivery across Sydney by two men and a mini truck. Moved upright on an appliance trolley, strapped in and placed where you want it. Fixed price, often same day.",
         "rating_text": "5.0 on Google · 67 reviews",
-        "trust_1": "Fully insured",
+        "trust_1": "Wrapped and strapped",
         "trust_2": "Same-day available",
         "hero_image": "shopify://shop_images/titan-fridge-trolley-ramp.webp",
         "hero_alt": "Titan Express movers wheeling a wrapped fridge up the truck ramp on a trolley in Sydney",

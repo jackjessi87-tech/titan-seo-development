@@ -133,8 +133,8 @@
         "faq_6": {
           "type": "faq",
           "settings": {
-            "question": "Are my things insured?",
-            "answer": "<p>Yes. Your items are covered while they're in our care, wrapped and strapped in the van.</p>"
+            "question": "How do you protect my things?",
+            "answer": "<p>Every item is wrapped in moving blankets and strapped in the truck. Insurance for your items is not included in our prices. If you would like it, please request it before your job using our <a href=\"/pages/insurance-request\">insurance request form</a>.</p>"
           }
         },
         "link_1": {
@@ -252,7 +252,7 @@
         "heading": "Removalists <em>Glebe</em>",
         "subheading": "Local removalists in Glebe for small moves, apartments, single items and Marketplace pickups around Ultimo, Forest Lodge and nearby. Fixed price, careful handling, often same day.",
         "rating_text": "5.0 on Google · 67 reviews",
-        "trust_1": "Fully insured",
+        "trust_1": "Wrapped and strapped",
         "trust_2": "Same-day available",
         "hero_image": "shopify://shop_images/titan-sofa-truck-loading.webp",
         "hero_alt": "Titan Express removalists loading a wrapped sofa for a move in Glebe",
